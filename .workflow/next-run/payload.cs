@@ -1,87 +1,83 @@
+using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 var payload = PayloadContext.Create();
 
-payload.Files.ReplaceFromStaged(
-    "staged/docs/planning/ValidateNativeDwfAdoption.cs",
-    "docs/planning/ValidateNativeDwfAdoption.cs");
-payload.Files.ReplaceFromStaged(
-    "staged/docs/planning/decisions/m0-w01-c02.md",
-    "docs/planning/decisions/m0-w01-c02.md");
+payload.Files.ReplaceFromStaged("staged/docs/planning/backlog.json", "docs/planning/backlog.json");
+payload.Files.ReplaceFromStaged("staged/docs/planning/ValidateTransferProvenance.cs", "docs/planning/ValidateTransferProvenance.cs");
+payload.Files.ReplaceFromStaged("staged/docs/planning/evidence/M0-W02-C01-provenance-audit.json", "docs/planning/evidence/M0-W02-C01-provenance-audit.json");
+payload.Files.ReplaceFromStaged("staged/docs/planning/evidence/M0-W02-C01-transfer-boundary.json", "docs/planning/evidence/M0-W02-C01-transfer-boundary.json");
+payload.Files.ReplaceFromStaged("staged/docs/planning/decisions/m0-w02-c01-source-rights.md", "docs/planning/decisions/m0-w02-c01-source-rights.md");
 
-ConvergeC02(payload);
+RunDotNet(payload.RepositoryRoot, "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
+ConvergeNativeProgress(payload);
 
 return payload.Complete();
 
-static void ConvergeC02(PayloadContext payload)
+static void ConvergeNativeProgress(PayloadContext payload)
 {
     var ids = new[]
     {
-        "M0",
-        "M0-W01",
-        "M0-W01-C02",
-        "M0-W01-C02-T1",
-        "M0-W01-C02-T1-A",
-        "M0-W01-C02-T1-B",
-        "M0-W01-C02-T1-C",
-        "M0-W01-C02-T2",
-        "M0-W01-C02-T2-A",
-        "M0-W01-C02-T2-B",
-        "M0-W01-C02-T2-C"
+        "M0", "M0-W02", "M0-W02-C01",
+        "M0-W02-C01-T1", "M0-W02-C01-T1-A", "M0-W02-C01-T1-B", "M0-W02-C01-T1-C",
+        "M0-W02-C01-T2", "M0-W02-C01-T2-A", "M0-W02-C01-T2-B", "M0-W02-C01-T2-C"
     };
     var states = ReadStates(payload.RepositoryRoot, ids);
 
     var baseline =
         states["M0"] == "in-progress" &&
-        states["M0-W01"] == "in-progress" &&
-        states["M0-W01-C02"] == "ready" &&
-        states["M0-W01-C02-T1"] == "ready" &&
-        states["M0-W01-C02-T1-A"] == "ready" &&
-        states["M0-W01-C02-T1-B"] == "not-ready" &&
-        states["M0-W01-C02-T1-C"] == "not-ready" &&
-        states["M0-W01-C02-T2"] == "not-ready" &&
-        states["M0-W01-C02-T2-A"] == "not-ready" &&
-        states["M0-W01-C02-T2-B"] == "not-ready" &&
-        states["M0-W01-C02-T2-C"] == "not-ready";
+        states["M0-W02"] == "not-ready" &&
+        states["M0-W02-C01"] == "not-ready" &&
+        ids.Skip(3).All(id => states[id] == "not-ready");
 
     var target =
         states["M0"] == "in-progress" &&
-        states["M0-W01"] == "done" &&
-        ids.Skip(2).All(id => states[id] == "done");
+        states["M0-W02"] == "in-progress" &&
+        states["M0-W02-C01"] == "in-progress" &&
+        states["M0-W02-C01-T1"] == "blocked" &&
+        states["M0-W02-C01-T1-A"] == "done" &&
+        states["M0-W02-C01-T1-B"] == "done" &&
+        states["M0-W02-C01-T1-C"] == "blocked" &&
+        states["M0-W02-C01-T2"] == "done" &&
+        states["M0-W02-C01-T2-A"] == "done" &&
+        states["M0-W02-C01-T2-B"] == "done" &&
+        states["M0-W02-C01-T2-C"] == "done";
 
     if (target)
     {
-        payload.ProjectPlan.RequireNodeState("M0", "in-progress");
-        payload.ProjectPlan.RequireNodeState("M0-W01", "done");
-        foreach (var id in ids.Skip(2))
-            payload.ProjectPlan.RequireNodeState(id, "done");
+        foreach (var id in ids)
+            payload.ProjectPlan.RequireNodeState(id, states[id]);
         return;
     }
 
     if (!baseline)
-        throw new InvalidOperationException("M0-W01-C02 is neither the declared RS002 baseline nor exact completed target.");
+        throw new InvalidOperationException("M0-W02-C01 native progress is neither the declared RS003 baseline nor exact target.");
 
-    payload.ProjectPlan.ActivateReadyContinuation("M0-W01-C02-T1-A");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02-T1-A");
+    payload.ProjectPlan.TransitionNode("M0-W02", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-A", "not-ready", "ready");
+    payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T1-A");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T1-A");
 
-    CompleteReadySibling(payload, "M0-W01-C02-T1-B");
-    CompleteReadySibling(payload, "M0-W01-C02-T1-C");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02-T1");
+    CompleteSibling(payload, "M0-W02-C01-T1-B");
 
-    payload.ProjectPlan.TransitionNode("M0-W01-C02-T2", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M0-W01-C02-T2-A", "not-ready", "ready");
-    payload.ProjectPlan.ActivateReadyContinuation("M0-W01-C02-T2-A");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02-T2-A");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-C", "not-ready", "ready");
+    payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T1-C");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-C", "in-progress", "blocked");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1", "in-progress", "blocked");
 
-    CompleteReadySibling(payload, "M0-W01-C02-T2-B");
-    CompleteReadySibling(payload, "M0-W01-C02-T2-C");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02-T2");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W01");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T2", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T2-A", "not-ready", "ready");
+    payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T2-A");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T2-A");
+    CompleteSibling(payload, "M0-W02-C01-T2-B");
+    CompleteSibling(payload, "M0-W02-C01-T2-C");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T2");
 }
 
-static void CompleteReadySibling(PayloadContext payload, string id)
+static void CompleteSibling(PayloadContext payload, string id)
 {
     payload.ProjectPlan.TransitionNode(id, "not-ready", "ready");
     payload.ProjectPlan.ActivateReadyContinuation(id);
@@ -114,8 +110,39 @@ static void Visit(JsonNode? node, IReadOnlySet<string> wanted, IDictionary<strin
             Visit(property.Value, wanted, result);
         return;
     }
-
     if (node is JsonArray array)
         foreach (var item in array)
             Visit(item, wanted, result);
+}
+
+static void RunDotNet(string repositoryRoot, params string[] arguments)
+{
+    using var process = new Process
+    {
+        StartInfo = new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            WorkingDirectory = repositoryRoot,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        }
+    };
+    process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
+    process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
+    foreach (var argument in arguments) process.StartInfo.ArgumentList.Add(argument);
+    if (!process.Start()) throw new InvalidOperationException("Failed to start dotnet planning generation.");
+    var stdoutTask = process.StandardOutput.ReadToEndAsync();
+    var stderrTask = process.StandardError.ReadToEndAsync();
+    if (!process.WaitForExit(180_000))
+    {
+        process.Kill(entireProcessTree: true);
+        throw new TimeoutException("dotnet planning generation exceeded 180 seconds.");
+    }
+    var stdout = stdoutTask.GetAwaiter().GetResult();
+    var stderr = stderrTask.GetAwaiter().GetResult();
+    if (!string.IsNullOrWhiteSpace(stdout)) Console.Write(stdout);
+    if (!string.IsNullOrWhiteSpace(stderr)) Console.Error.Write(stderr);
+    if (process.ExitCode != 0)
+        throw new InvalidOperationException("dotnet planning generation failed with exit code " + process.ExitCode + ".");
 }
