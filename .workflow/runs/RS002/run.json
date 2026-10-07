@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "RS002",
+  "title": "Qualify native DWF roadmap adoption",
+  "state": "prepared",
+  "commitMessage": "docs: qualify native DWF roadmap adoption",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M0",
+    "M0-W01",
+    "M0-W01-C02",
+    "M0-W01-C02-T1",
+    "M0-W01-C02-T1-A",
+    "M0-W01-C02-T1-B",
+    "M0-W01-C02-T1-C",
+    "M0-W01-C02-T2",
+    "M0-W01-C02-T2-A",
+    "M0-W01-C02-T2-B",
+    "M0-W01-C02-T2-C"
+  ],
+  "contribution": {
+    "summary": "Qualify the accepted product roadmap as native DWF execution authority by validating stable hierarchy/dependency mapping, the bounded RS001 historical exception, and payload-owned lifecycle progression for M0-W01-C02.",
+    "value": "Turns the previously thin bootstrap into a faithful, machine-checkable executable roadmap while preserving product meaning and proving that every future run can advance DWF progress in the same controlled payload as its work.",
+    "debtChanges": [
+      "The six pre-DWF C01 RED/GREEN/verification subtasks remain intentionally unbackfilled because their individual lifecycle transitions were never observed; this is documented rather than reconstructed.",
+      "The older French product-planning corpus remains canonical-language migration debt and must be translated from source with generated projections regenerated, not hand-edited."
+    ],
+    "nextAction": "After durable RS002 success, normalize the canonical planning corpus to English from its source and generated projections, then refine the next admissible M0-W02 provenance/licensing scope without starting AURA extraction.",
+    "achievements": [
+      {
+        "projectNode": "M0-W01-C02-T1-A",
+        "achievement": "The DWF adoption question is bounded against active guidance and the accepted product roadmap, with the authority split and mapping criteria fixed."
+      },
+      {
+        "projectNode": "M0-W01-C02-T1-B",
+        "achievement": "A bounded structural observation proves native-plan identity, hierarchy, dependency parity, RS001 evidence continuity, and the documented historical C01 exception."
+      },
+      {
+        "projectNode": "M0-W01-C02-T1-C",
+        "achievement": "The product-to-DWF mapping decision is recorded with its alternatives, limits, validation boundary, and continuation contract."
+      },
+      {
+        "projectNode": "M0-W01-C02-T1",
+        "achievement": "The native DWF roadmap mapping contract is qualified against the accepted product plan and durable RS001 evidence."
+      },
+      {
+        "projectNode": "M0-W01-C02-T2-A",
+        "achievement": "The DWF authority and recovery boundary is explicitly framed: no fabricated workflow authority, filler bootstrap run, or manual recovery choreography."
+      },
+      {
+        "projectNode": "M0-W01-C02-T2-B",
+        "achievement": "Observed preparation and validation contracts confirm read-only qualification, payload-owned progress mutation, and same-run correction semantics."
+      },
+      {
+        "projectNode": "M0-W01-C02-T2-C",
+        "achievement": "The adoption-boundary decision records generation versus validation responsibilities, correction/recovery ownership, and non-goals."
+      },
+      {
+        "projectNode": "M0-W01-C02-T2",
+        "achievement": "The DWF adoption limits and integration boundaries are qualified without authorizing external repository or provider work."
+      },
+      {
+        "projectNode": "M0-W01-C02",
+        "achievement": "M0-W01-C02 qualifies the native DWF adoption and product mapping with a faithful executable roadmap projection and explicit historical exception."
+      },
+      {
+        "projectNode": "M0-W01",
+        "achievement": "The M0-W01 toolchain work package is complete: the reproducible .NET foundation and DWF adoption/mapping phases are both durably qualified."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m0-w01-c02.md",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
