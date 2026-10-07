@@ -1,53 +1,52 @@
-# Coordination Math / AURA / Decision / MCDM
+# Math / AURA / Decision / MCDM coordination
 
-Ce document est le protocole produit canonique. Une note de réception côté AURA renvoie ici ; les prompts complets restent dans Math pour permettre à DWF de travailler seul.
+This document is the canonical product protocol. An AURA-side acknowledgement note may link here; complete prompts remain in Math so DWF can work independently.
 
-## Autorité
+## Authority
 
-Le run DWF Math écrit uniquement sous la racine Math. Sont interdits : mutation d'un sibling, git -C vers un autre dépôt en écriture, ProjectReference traversant la racine, script d'installation qui patche AURA, symlink/junction utilisé pour sortir du scope.
-Une lecture source n'est possible que si explicitement accessible et autorisée ; aucun chemin local de l'inventaire n'est requis à l'exécution.
-L'agent prépare un fichier de demande, le propriétaire le transmet. Aucun message réseau, issue ou PR externe n'est émis implicitement.
+A Math DWF run writes only under the Math repository root. Forbidden actions include mutating a sibling repository, write-mode git -C against another repository, ProjectReference escaping the root, installer scripts that patch AURA, or symlink/junction use to escape scope.
+Source may be read only when explicitly accessible and authorized; no local path from the inventory is required at execution time.
+The agent prepares a request file and the owner transmits it. No network message, external issue, or PR is emitted implicitly.
 
-## Chaîne de transfert sans verrou circulaire
+## Transfer chain without circular locking
 
-1. **Baseline** : l'agent AURA exporte/liste les sources et tests avec commit, hashes et droits ; l'agent Math constate cette entrée.
-2. **Disponibilité Math** : Math implémente et qualifie le package à partir d'un snapshot contrôlé, sans toucher AURA. Un sample sans AURA suffit pour la gate locale.
-3. **Demande d'adoption** : package/version/hash/feed utilisable, changements proposés, preuves et rollback sont transmis à l'agent AURA.
-4. **Adoption consommateur** : son agent modifie références/façades et exécute ses tests sur sa branche. Les données, contrats, autorisations et ressources restent sous son contrôle.
-5. **Accusé attesté** : retour avec commit, version consommée, résultats et limites. Math conserve une copie durable de la réponse dans docs/coordination/responses/.
-6. **Retrait de la duplication** : AURA retire les sources devenues redondantes seulement après validation de ses consommateurs et possibilité de rollback. Math ne le fait jamais lui-même.
+1. **Baseline**: the AURA agent exports/lists sources and tests with commit, hashes, and rights; the Math agent records that input.
+2. **Math availability**: Math implements and qualifies a package from a controlled snapshot without touching AURA. An AURA-free sample is enough for the local gate.
+3. **Adoption request**: usable package/version/hash/feed, proposed changes, evidence, and rollback are sent to the AURA agent.
+4. **Consumer adoption**: its agent changes references/facades and runs tests on its branch. Data, contracts, permissions, and resources remain under its control.
+5. **Attested acknowledgement**: response includes commit, consumed version, results, and limits. Math stores a durable copy under docs/coordination/responses/.
+6. **Duplicate removal**: AURA removes redundant sources only after consumer qualification and proven rollback. Math never performs that removal itself.
 
-Dès le snapshot pris, un correctif urgent dans AURA impose une notification et une réconciliation explicite. La fenêtre de double code n'autorise pas deux trajectoires divergentes silencieuses.
-Un refus/besoin d'API bloque seulement la bascule concernée. Les travaux Math indépendants peuvent continuer selon leurs dépendances.
+After the snapshot, any urgent AURA fix requires explicit notification and reconciliation. The temporary double-code window never authorizes silent divergence.
+A rejection or API need blocks only the affected cutover. Independent Math work may continue according to dependencies.
 
-## États d'échange
+## Exchange states
 
-draft -> ready_for_owner -> sent -> acknowledged -> accepted ou rejected -> implemented -> verified.
-Les transitions sent/acknowledged/accepted réclament une preuve humaine ou une réponse externe ; un fichier Markdown ne les crée pas.
-L'état de la fonctionnalité Math (planned/ready/in_progress/blocked/done) reste distinct. Une requête produite peut clôturer son chunk documentaire, jamais une intégration externe.
+draft -> ready_for_owner -> sent -> acknowledged -> accepted or rejected -> implemented -> verified.
+Transitions sent/acknowledged/accepted require human evidence or an external response; a Markdown file alone cannot create them.
+Math feature state (planned/ready/in_progress/blocked/done) remains separate. Producing a request may close its documentation chunk, never the external integration itself.
 
-## Contenu d'une demande
+## Request contents
 
-Identité stable, auteur/destinataire, statut, contexte, baseline source, contrat et package proposé, liste indicative de fichiers chez le destinataire, actions demandées, non-objectifs, recettes mathématiques et tests hôte, effets versions/données/skill, rollback, preuves et format de réponse.
-Ne pas remplir un SHA, une version ou une réussite par supposition. Les champs marqués À FOURNIR doivent être renseignés avant ready_for_owner.
+Stable identity, author/recipient, status, context, source baseline, proposed contract/package, indicative recipient files, requested actions, non-goals, mathematical recipes and host tests, version/data/skill effects, rollback, evidence, and response format.
+Never invent a SHA, version, or success. Fields marked TO PROVIDE must be completed before ready_for_owner.
 
-## Particularités AURA
+## AURA specifics
 
-Traiter simultanément graphe de compilation et packages transitifs : core.math, kernel, nutrition, données structurées, SQLite et tests consommateurs.
-Préserver erreurs publiques, configuration, fractions exactes, catalogue, culture, affine température, limites et worker policies.
-Le changement de propriétaire n'accorde aucune nouvelle ressource. Si commandes/help/defaults/capabilities changent, modifier la source versionnée du skill et régénérer ses pages ; jamais éditer seulement le généré.
-Mettre à jour conception canonique, programme/backlog, roadmap, exécution et guidance d'AURA dans son dépôt.
-Validation : pure math + action/worker ciblé + scénario CLI et consommateurs impactés ; pas toute la solution par défaut.
+Treat compilation graph and transitive packages together: core.math, kernel, nutrition, structured data, SQLite, and consumer tests.
+Preserve public errors, configuration, exact fractions, catalog, culture, affine temperature, limits, and worker policies.
+Ownership transfer grants no new resources. If commands/help/defaults/capabilities change, modify the versioned skill source and regenerate its pages; never edit generated output alone.
+Update AURA canonical design, program/backlog, roadmap, execution, and guidance in its own repository.
+Validation: pure math + targeted action/worker + CLI scenario and affected consumers; not the whole solution by default.
 
-## Particularités Decision / MCDM
+## Decision / MCDM specifics
 
-Decision expose déjà des versions 1.x : préserver API, erreurs, conventions de quantile, seed/PRNG et garanties existantes ou proposer une évolution majeure motivée.
-MCDM conserve rangs, ties, orientation, préférences et quantification des flux. Une variation d'accumulation flottante peut changer un classement : les oracles métier restent déterminants.
-Ne pas introduire de dépendance Math pour une abstraction sans usage. Proposer une primitive seulement après comparaison de comportement et coût.
+Decision already exposes 1.x versions: preserve APIs, errors, quantile conventions, seed/PRNG, and existing guarantees, or propose a reasoned major evolution.
+MCDM retains ranks, ties, orientation, preferences, and flow quantization. A floating accumulation change may alter ranking; domain oracles remain decisive.
+Do not add a Math dependency for an abstraction without a concrete use. Propose a primitive only after behavior and cost comparison.
 
 ## Rollback
 
-Le consommateur conserve baseline et dépendances précédentes dans son historique, verrouille version et hash adoptés, et peut revenir au package/source antérieur sans migration de données cachée.
-Si le format persisté change, un plan autonome de migration/rollback validé par son agent est requis avant adoption.
-Pas de double publication sous même PackageId/version avec bytes différents. Le transfert d'identité et propriétaire de feed est attesté avant publication.
-
+The consumer retains its previous baseline and dependencies in history, pins the adopted version/hash, and can return to the prior package/source without hidden data migration.
+If persisted format changes, its agent must validate a standalone migration/rollback plan before adoption.
+Never publish different bytes under the same PackageId/version. Feed ownership and identity transfer are attested before publication.

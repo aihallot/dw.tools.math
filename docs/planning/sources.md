@@ -1,30 +1,29 @@
-# Sources et qualification des providers
+# Sources and provider qualification
 
-Consultation initiale : 2026-10-07. Les sources suivantes servent à construire des spikes, pas à annoncer des dépendances qualifiées.
+Initial consultation: 2026-10-07. The sources below inform spikes; they do not announce qualified dependencies.
 
-| Source primaire | Utilité | Décision actuelle |
+| Primary source | Use | Current decision |
 |---|---|---|
-| [Math.NET Numerics](https://numerics.mathdotnet.com/) | Algèbre linéaire, probabilités, interpolation, intégration et autres calculs ; le projet annonce MIT et des implémentations managées/natives | Candidat numérique prioritaire ; version, RID et transitives à qualifier en M3 |
-| [AngouriMath](https://github.com/asc-community/AngouriMath) | Bibliothèque symbolique C#/F#, dépôt annonçant MIT | Candidat CAS ; tester hypothèses, solutions, annulation et conversions |
-| [Math.NET Symbolics](https://symbolics.mathdotnet.com/) | Autre candidat symbolique de l'écosystème .NET | Comparer la couverture utile, ne pas supposer une interchangeabilité CAS |
-| [SymPy — gotchas](https://docs.sympy.org/latest/tutorials/intro-tutorial/gotchas.html) | Sémantique des expressions, égalité et pièges de conversion | Référence/oracle optionnel ; aucun Python dans le chemin obligatoire de DWF |
-| [OpenMath](https://openmath.org/standard/) | Objets et dictionnaires sémantiques | Comparaison IR avant modèle propre |
-| [MathML](https://www.w3.org/TR/mathml4/) | Distinction présentation/contenu et annotations sémantiques | Sous-ensemble et version de standard à figer ; ne pas confondre affichage et signification |
-| [UnitsNet](https://github.com/angularsen/UnitsNet) | Catalogue et calculs de quantités à examiner | Évaluer couverture et représentation numérique ; pas de remplacement automatique du rationnel exact |
-| [.NET file-based apps](https://learn.microsoft.com/en-us/dotnet/core/sdk/file-based-apps) | Exécution C# par SDK .NET | Support du validateur documentaire, sans dépendance NuGet |
+| [Math.NET Numerics](https://numerics.mathdotnet.com/) | Linear algebra, probability, interpolation, integration, and other computation; project advertises MIT and managed/native implementations | Priority numerical candidate; version, RID, and transitives to qualify in M3 |
+| [AngouriMath](https://github.com/asc-community/AngouriMath) | C#/F# symbolic library, repository advertises MIT | CAS candidate; test assumptions, solutions, cancellation, and conversions |
+| [Math.NET Symbolics](https://symbolics.mathdotnet.com/) | Another symbolic candidate in the .NET ecosystem | Compare useful coverage; do not assume CAS interchangeability |
+| [SymPy — gotchas](https://docs.sympy.org/latest/tutorials/intro-tutorial/gotchas.html) | Expression semantics, equality, and conversion pitfalls | Optional reference/oracle; no Python in the mandatory DWF path |
+| [OpenMath](https://openmath.org/standard/) | Semantic objects and content dictionaries | IR comparison before custom model |
+| [MathML](https://www.w3.org/TR/mathml4/) | Presentation/content distinction and semantic annotations | Pin subset and standard version; never confuse display with meaning |
+| [UnitsNet](https://github.com/angularsen/UnitsNet) | Quantity catalog and calculations to examine | Evaluate coverage and numeric representation; no automatic replacement of exact rational behavior |
+| [.NET file-based apps](https://learn.microsoft.com/en-us/dotnet/core/sdk/file-based-apps) | C# execution through the .NET SDK | Supports the documentation validator without NuGet dependency |
 
-Sources locales : source-baseline.json (hashes des fichiers lus), existing-code-inventory.md, cadrage brainstorming, planning et guidance active observée de Decision.
-Les GUID/versions de guidance DWF ne sont pas des contrats éternels : l'exécutable utilisé lors de l'adoption tranche sa compatibilité.
+Local sources: source-baseline.json (hashes of read files), existing-code-inventory.md, brainstorming framing, planning, and active Decision guidance observed at initialization.
+DWF guidance IDs/versions are not eternal contracts: the executable used at adoption decides compatibility.
 
-## Dossier d'admission obligatoire
+## Required admission dossier
 
-Pour chaque candidat sérieux : version immuable, URL source/commit, licence exacte et notices transitives/natives, droits de redistribution vérifiés, mainteneur/activité observée, TFM/RID, offline, installation, interfaces, erreurs, annulation, budgets, exactitude, précision, thread-safety et reproductibilité.
-Un choix de licence juridique incertain est une question propriétaire, pas une conclusion automatique tirée d'un README.
-Comparer au moins deux options plausibles par famille si disponibles ; sinon documenter pourquoi la seconde n'est pas pertinente.
-Une option inadéquate se termine par refus motivé ou réduction de périmètre proposée ; elle ne justifie pas la réimplémentation d'un CAS.
+For each serious candidate: immutable version, source URL/commit, exact license and transitive/native notices, verified redistribution rights, maintainer/activity observation, TFM/RID, offline behavior, installation, interfaces, errors, cancellation, budgets, exactness, precision, thread-safety, and reproducibility.
+An uncertain legal-license choice is an owner question, not an automatic conclusion from a README.
+Compare at least two plausible options per family when available; otherwise document why a second option is not relevant.
+An unsuitable option ends in reasoned rejection or proposed scope reduction; it does not justify reimplementing a CAS.
 
-## Séquence
+## Sequence
 
-M0 : provenance et droits du transfert ; M2 : IR/standards ; M3 : numérique ; M4 : symbolique ; M5 : codecs ; M6/M7 : nouvelles familles.
-Aucune version exacte de provider ni capacité transitive n'est figée sans un smoke sur le package réel.
-
+M0: transfer provenance and rights; M2: IR/standards; M3: numerical; M4: symbolic; M5: codecs; M6/M7: new families.
+No exact provider version or transitive capability is frozen without a smoke test on the real package.

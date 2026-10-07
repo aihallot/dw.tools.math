@@ -1,16 +1,15 @@
-# MATH-XR-NNN — Titre
+# MATH-XR-NNN — Title
 
-Statut : draft. Destinataire : agent propriétaire. Transmission : aucune.
-Chunk Math / raison / baseline source : À FOURNIR.
-Package, version, hash et emplacement accessible : À FOURNIR.
-Décision et périmètre demandés : À FOURNIR.
-Fichiers du destinataire concernés (indicatifs) : À FOURNIR.
-Contrats à préserver, différences voulues et non-objectifs : À FOURNIR.
-Recettes indépendantes et tests hôte attendus : À FOURNIR.
-Effets sur docs/backlog/version/skill/données persistées : À FOURNIR.
-Rollback et conditions de retrait du doublon : À FOURNIR.
-Preuves Math jointes : À FOURNIR.
+Status: draft. Recipient: owning agent. Transmission: none.
+Math chunk / reason / source baseline: TO PROVIDE.
+Package, version, hash, and accessible location: TO PROVIDE.
+Requested decision and scope: TO PROVIDE.
+Indicative recipient files: TO PROVIDE.
+Contracts to preserve, intended differences, and non-goals: TO PROVIDE.
+Independent recipes and expected host tests: TO PROVIDE.
+Effects on docs/backlog/version/skill/persisted data: TO PROVIDE.
+Rollback and duplicate-removal conditions: TO PROVIDE.
+Attached Math evidence: TO PROVIDE.
 
-Réponse attendue : accepted/rejected/needs_change ; motif ; révision source examinée ; commit résultat si réalisé ; version/hash consommés ; commandes et résultats ; limites ; impact données/API ; lien au reçu.
-Le rédacteur Math ne remplit pas cette réponse au nom du destinataire.
-
+Expected response: accepted/rejected/needs_change; reason; reviewed source revision; result commit if implemented; consumed version/hash; commands and results; limits; data/API impact; receipt link.
+The Math author does not fill in that response on behalf of the recipient.

@@ -1,11 +1,10 @@
-# MATH-XR-003 — Primitives numériques sans changement de classement
+# MATH-XR-003 — Numerical primitives without ranking change
 
-Statut : draft. Destinataire : agent MCDM. Non envoyé.
-Déclencheur : M3-W02-C04.
-Package/version/hash/feed et preuves : À FOURNIR avant transmission.
+Status: draft. Recipient: MCDM agent. Not sent.
+Trigger: M3-W02-C04.
+Package/version/hash/feed and evidence: TO PROVIDE before transmission.
 
-Dans MCDM uniquement, évalue d'abord CompensatedSum.cs comme primitive partageable. Compare SquareMatrix.cs à un besoin de matrice générique sans déplacer automatiquement les relations métier.
-Garde FlowQuantization, Normalization liée aux critères, préférences, PROMETHEE et autres méthodes multicritères sous responsabilité MCDM.
-Une accumulation différente peut affecter ties/rangs : conserve les oracles du métier, tolérances admises, résultats exacts attendus et politique de quantification. Propose une adoption uniquement si les invariants sont préservés et le coût justifié.
-Réponds par acceptation/refus motivé, baseline, API nécessaire, fichiers visés, tests de rang/ties, plan rollback, puis commit et résultats si implémenté. Ne modifie pas Math ; exprime les besoins à son agent.
-
+Inside MCDM only, evaluate CompensatedSum.cs first as a shareable primitive. Compare SquareMatrix.cs against a generic matrix need without automatically moving relation semantics.
+Keep FlowQuantization, criterion-related Normalization, preferences, PROMETHEE, and other multicriteria methods under MCDM ownership.
+A different accumulation may affect ties/ranks: retain business oracles, admitted tolerances, expected exact results, and quantization policy. Propose adoption only when invariants are preserved and cost is justified.
+Respond with reasoned acceptance/rejection, baseline, needed API, target files, rank/tie tests, rollback plan, then commit/results if implemented. Do not modify Math; express needs to its owning agent.

@@ -1,16 +1,17 @@
-# Premier prompt après initialisation DWF
+# First prompt after DWF initialization
 
-Le propriétaire peut transmettre ce prompt à ChatGPT dans le contexte du dépôt Math après avoir initialisé la version de DWF retenue. Ce fichier ne prépare aucun run et ne constitue pas une commande de bootstrap.
+The owner may give this prompt to ChatGPT in the Math repository context after initializing the selected DWF version. This file does not prepare a run and is not a bootstrap command.
 
-> Tu travailles uniquement dans aihallot/dw.tools.math. Lis AGENTS.md, PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md puis docs/planning/implementation-handoff.md et la guidance DWF active. Le backlog docs/planning/backlog.json est le plan produit ; docs/planning/dwf-map.json donne la correspondance des IDs, pas un plan natif à recopier.
+> Work only in aihallot/dw.tools.math. Read AGENTS.md, PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md, then docs/planning/implementation-handoff.md and the active DWF guidance. docs/planning/backlog.json is the product plan; docs/planning/dwf-map.json gives ID mapping, not native plan bytes to copy.
 >
-> Observe l'état Git, l'identité DWF et l'éventuel run pending avant toute action. Si le plan natif est vide sans run pending, suis la procédure d'initialisation du plan produit prévue par DWF, en préservant schemaVersion et project.id/title. Ne fabrique ni historique de succès ni état d'activation.
+> Observe Git state, DWF identity, and any pending run before acting. If the native plan is empty with no pending run, follow DWF's initial product-plan procedure while preserving schemaVersion and project.id/title. Invent no success history or activation state.
 >
-> Prépare le premier résultat borné M0-W01-C01 : socle .NET, runner, scripts reproductibles, pack et consommateur minimal isolé. Raffine ses fichiers exacts et toute la chaîne restore/build/test/pack/consumer ; sa commande de test proposée seule ne suffit pas à sa recette. N'entreprends pas l'extraction AURA avant ses gates de provenance et de frontière.
+> Prepare the first bounded M0-W01-C01 result: .NET foundation, runner, reproducible scripts, package, and minimal isolated consumer. Refine exact files and the complete restore/build/test/pack/consumer chain; the proposed test command alone is insufficient. Do not begin AURA extraction before provenance and boundary gates.
 >
-> Vérifie le planning par dotnet run --file docs/planning/ValidatePlan.cs. Si tu modifies le backlog, régénère ses projections avec -- --write dans le payload et déclare tous les fichiers modifiés. Ne place jamais cette génération dans une validation preparation-safe.
+> Validate planning with dotnet run --file docs/planning/ValidatePlan.cs -- --check. If the backlog changes, regenerate projections with -- --write in an appropriate mutating authoring step or payload and declare every modified file. Never put generation in a preparation-safe validation.
 >
-> Aucun accès en écriture aux autres dépôts. Pour tout besoin externe, prépare une demande dans docs/coordination/requests/ pour transmission par le propriétaire. N'annonce pas une requête comme envoyée ni une adoption comme effectuée.
+> No write access to other repositories. For any external need, prepare a request under docs/coordination/requests/ for owner transmission. Do not call a request sent or an adoption completed without external evidence.
 >
-> Arrête ce premier lot au socle vérifié. Rapporte preuves, limites et prochain chunk. L'opérateur garde la boucle normale prévue par sa version DWF, en général dwf run next ; ne lui transfère pas les corrections internes du workflow.
+> Stop the first slice at the verified foundation. Report evidence, limits, and the next chunk. The operator keeps the normal loop for the installed DWF version, generally dwf run next; do not transfer internal workflow repairs to the operator.
 
+Historical note: RS001 and RS002 have since completed the initial foundation and native DWF adoption. This prompt is retained as the original bootstrap instruction, not as current continuation state.

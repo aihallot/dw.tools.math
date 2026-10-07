@@ -1,18 +1,17 @@
-# MATH-XR-001 — Baseline puis adoption du socle exact
+# MATH-XR-001 — Baseline then exact-core adoption
 
-Statut : draft. Destinataire : agent AURA. Non envoyé.
-Déclencheur : M0-W02-C03 pour baseline ; une révision de la demande en M1-W03-C02 pour adoption.
+Status: draft. Recipient: AURA agent. Not sent.
+Trigger: M0-W02-C03 for baseline; revised request in M1-W03-C02 for adoption.
 
-## Prompt de baseline
+## Baseline prompt
 
-Lis ta politique de ressources et l'état courant du dépôt. Math prépare le transfert des bibliothèques dw.quantities, dw.quantities.expression et dw.quantities.standard. Vérifie le snapshot indiqué dans docs/planning/source-baseline.json de Math contre ta révision actuelle. Fournis un export contrôlé ou une liste de sources/tests avec hashes, provenance et décision propriétaire sur droits/licence. Signale les correctifs depuis la baseline ; ne supprime ni ne remplace encore les bibliothèques. Confirme la frontière localisation/catalogue et les consommateurs transitifs math, kernel, nutrition, data transforms, SQLite et JSON.
+Read your resource policy and current repository state. Math is preparing transfer of dw.quantities, dw.quantities.expression, and dw.quantities.standard. Verify the snapshot listed in Math docs/planning/source-baseline.json against your current revision. Provide a controlled export or source/test list with hashes, provenance, and owner decision on rights/license. Report fixes since baseline; do not remove or replace the libraries yet. Confirm the localization/catalog boundary and transitive math, kernel, nutrition, data-transform, SQLite, and JSON consumers.
 
-## Prompt d'adoption à activer après qualification Math
+## Adoption prompt to activate after Math qualification
 
-Package/version/hash/feed : À FOURNIR. Preuves de parité et consumer isolé : À FOURNIR.
-Dans AURA uniquement, planifie une bascule des références vers les packages Math qualifiés. Préserve façades, configuration, erreurs, workers, budgets, culture, données persistées et exactitude des nombres. Vérifie la parité fractions, binaire/décimal, températures, unités d'information et limites du parser, ainsi que les parcours nutrition/données impactés.
-Actualise conception, backlog, roadmap, statut et guidance. Si la surface publique change, modifie la source versionnée du skill puis régénère. Ne retire le code redondant qu'après qualification des consommateurs et rollback défini.
-Réponds par commit, version consommée, commandes/résultats, limites et besoins de contrat. Ne modifie pas Math ; demande à son agent toute correction nécessaire.
+Package/version/hash/feed: TO PROVIDE. Parity and isolated-consumer evidence: TO PROVIDE.
+Inside AURA only, plan a cutover of references to the qualified Math packages. Preserve facades, configuration, errors, workers, budgets, culture, persisted data, and numeric exactness. Verify parity for fractions, binary/decimal, temperatures, information units, parser limits, and affected nutrition/data paths.
+Update design, backlog, roadmap, status, and guidance. If the public surface changes, modify the versioned skill source then regenerate. Remove redundant code only after consumer qualification and defined rollback.
+Respond with commit, consumed version, commands/results, limits, and contract needs. Do not modify Math; request any Math correction from its owning agent.
 
-Rollback : références et sources de la révision AURA préalable ; aucun format persisté changé implicitement.
-
+Rollback: references and sources from the prior AURA revision; no implicit persisted-format change.

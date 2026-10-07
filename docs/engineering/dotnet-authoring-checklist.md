@@ -1,18 +1,17 @@
-# Préparation .NET et DWF
+# .NET and DWF authoring checklist
 
-Le planning utilise un fichier C# exécutable .NET 10 et la BCL. Aucun Python, package NuGet ou shell Unix n'est nécessaire au validateur.
-Le SDK 10.0.401 est observé localement, mais global.json, runner, versions MSTest et analyseurs produit restent à qualifier dans M0-W01-C01.
+Planning uses executable .NET 10 C# and the BCL. The validator requires no Python, NuGet package, or Unix shell.
+SDK 10.0.401 was observed locally and is now pinned by the delivered M0-W01-C01 foundation.
 
-- Chemins de projets et commandes lowercase ; namespaces nouveaux PascalCase. Les namespaces dw.quantities hérités se conservent au transfert initial sauf ADR justifiée.
-- Sorties compilées sous build/artifacts/, packages sous publish/. Ne pas ignorer tout build/ : des scripts sources pourraient y vivre.
-- Gestion centrale des packages, verrouillage, nullable et analyseurs configurés au bootstrap.
-- CancellationToken dernier argument public ; annulation contrôlée avant calcul puis aux points bornés.
-- Vérifier signatures réelles du runner/framework, notamment assertions relationnelles ; ne pas transposer xUnit/NUnit vers MSTest.
-- Si MSTest 4 retenu : TestMethod + DataRow, assertions de collections dédiées, helpers de bornes non ambigus.
-- Éviter les doublons ContainsKey/indexer, allocations répétées de tableaux constants et exceptions portant le nom d'un paramètre absent.
-- Restore/build/test partagent configuration et artifacts root. Ne pas lancer --no-build sur une sortie non construite.
-- DWF : chemins générés exacts, dotnet run --file, arguments structurés ; stagedFiles sous le staged/ du run courant.
-- Vérifications de préparation en lecture seule. Génération des projections dans le payload puis déclaration de tous les fichiers modifiés.
-- Payload rejouable depuis baseline ou résultat attendu ; refuse les troisièmes états, ne masque pas la dérive.
-- API publiques des providers vérifiées sur versions épinglées ; aucune hypothèse de disponibilité sur tous les RID.
-
+- Project paths and command-facing project/solution names are lowercase; new namespaces are PascalCase. Preserve inherited dw.quantities namespaces during initial transfer unless an ADR justifies change.
+- Compiled output lives under build/artifacts/, packages under publish/. Do not ignore all build/ because source scripts may live there.
+- Central package management, lock files, nullable, and analyzers are configured at bootstrap.
+- CancellationToken is the last public argument; check cancellation before computation and at bounded points.
+- Verify actual runner/framework signatures, especially relational assertions; do not transpose xUnit/NUnit assumptions into MSTest.
+- If MSTest 4 is used: TestMethod + DataRow, dedicated collection assertions, and unambiguous bound helpers.
+- Avoid ContainsKey/indexer double lookup, repeated constant-array allocation, and exceptions naming a parameter that does not exist.
+- Restore/build/test share configuration and artifact root. Do not run --no-build against output that has not been built.
+- DWF: use exact generated paths, dotnet run --file, structured arguments, and stagedFiles from the current run's staged tree.
+- Preparation validations are read-only. Projection generation belongs in a mutating payload or deliberate planning-authoring step with all mutations declared.
+- Payloads are replayable from declared baseline or exact target and refuse third states rather than masking drift.
+- Verify public provider APIs against pinned versions; assume no RID availability that has not been qualified.
