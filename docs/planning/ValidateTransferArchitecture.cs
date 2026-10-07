@@ -48,8 +48,8 @@ try
     Require(S(converter,"aura_owns").Contains("culture",StringComparison.OrdinalIgnoreCase),"AURA host boundary lost culture ownership.");
     Require(S(FindById(backlog,"chunks","M0-W02-C02"),"status")=="done","M0-W02-C02 must be done.");
     Require(S(FindById(backlog,"external_dependencies","EXT-LOCALIZATION"),"status")=="satisfied","EXT-LOCALIZATION must be satisfied.");
-    Require(S(FindById(backlog,"chunks","M0-W02-C03"),"status")=="ready","M0-W02-C03 must be ready.");
-    Console.WriteLine("transfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified; C03 ready");
+    Require(S(FindById(backlog,"chunks","M0-W02-C03"),"status") is "ready" or "done","M0-W02-C03 must be ready or done after transfer-architecture qualification.");
+    Console.WriteLine("transfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified");
     return 0;
 }
 catch(Exception ex){Console.Error.WriteLine("transfer architecture invalid: "+ex.Message);return 1;}
