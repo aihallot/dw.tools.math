@@ -1,15 +1,15 @@
-# Contrat d'exécution — dw.tools.math
+# Execution contract — dw.tools.math
 
-Lire PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md, docs/planning/implementation-handoff.md, docs/planning/resource-cost-policy.md et le backlog avant tout travail.
+Read PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md, docs/planning/implementation-handoff.md, docs/planning/resource-cost-policy.md, and the backlog before any work.
 
-- Périmètre d'écriture : ce dépôt uniquement, même si d'autres dossiers sont visibles. Ne pas modifier, committer, publier ou lancer une migration dans AURA, Decision, MCDM ou le brainstorming.
-- Préparer les demandes externes dans docs/coordination/requests/ selon le modèle. Ne pas envoyer de message sans autorisation explicite ; une demande rédigée n'est pas une acceptation.
-- Les décisions mathématiques sont vérifiées par des oracles indépendants et des contrats explicites. Un test historique vert ne prouve pas une spécification correcte.
-- Le backlog produit définit portée, identifiants, dépendances et recettes. Après adoption DWF, son plan natif gouverne l'exécution ; la correspondance et les statuts produit sont réconciliés à partir des preuves, sans inventer une seconde autorité d'exécution.
-- Ne pas écrire les fichiers gérés DWF avant son initialisation. Relire sa guidance active avant chaque préparation ; aucune copie figée de Decision n'est une autorité du runtime installé.
-- Le validateur est .NET, sans dépendance Python. La vérification ne génère rien ; la génération appartient au payload.
-- Zéro sous-agent par défaut ; travail et tests ciblés. Pas de boucle ouverte de revue.
-- À chaque checkpoint : code, tests, contrats, backlog, projections et preuves cohérents. Ne pas appeler une extraction livrée tant que provenance, droits et consommateur isolé ne sont pas qualifiés.
-- Pré-1.0 : pas de compatibilité artificielle des contrats abandonnés. Respecter néanmoins les engagements stables des consommateurs externes ; Decision a déjà des API 1.x.
-- Lire docs/engineering/dotnet-authoring-checklist.md avant du C# non trivial.
-
+- Canonical repository language is English for committed documentation, planning, ADRs, code comments, evidence, commit messages, and developer-facing text unless an external source must be quoted verbatim. Conversation with the owner may be in French; conversational language must not become canonical repository language by default. Existing French planning material is migration debt, not precedent.
+- Write scope: this repository only, even when other folders are visible. Do not modify, commit, publish, or start a migration in AURA, Decision, MCDM, or the brainstorming repository.
+- Prepare external requests under docs/coordination/requests/ using the repository template. Do not send a request without explicit authorization; a drafted request is not an accepted request.
+- Verify mathematical decisions with independent oracles and explicit contracts. A historically green test does not prove that a specification is correct.
+- The product backlog defines scope, identifiers, dependencies, and acceptance recipes. After DWF adoption, its native plan governs execution; mapping and product status are reconciled from evidence without inventing a second execution authority.
+- Do not write DWF-managed files before DWF initialization. Re-read active DWF guidance before every preparation; no frozen copy from Decision is authority for the installed runtime.
+- The planning validator is .NET-only, with no Python dependency. Validation does not generate; generation belongs in the payload.
+- Zero sub-agents by default; use targeted work and targeted tests. Do not open unbounded review loops.
+- At every checkpoint keep code, tests, contracts, backlog, projections, and evidence coherent. Do not call an extraction delivered until provenance, rights, and an isolated consumer are qualified.
+- Before 1.0, do not preserve abandoned contracts through artificial compatibility. Still respect stable commitments of external consumers; Decision already has 1.x APIs.
+- Read docs/engineering/dotnet-authoring-checklist.md before non-trivial C# work.

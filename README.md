@@ -1,37 +1,37 @@
 # dw.tools.math
 
-Socle de calcul et de représentation mathématiques indépendant d'AURA, destiné aux applications, aux bibliothèques scientifiques et aux agents.
+Independent mathematical computation and representation foundation for applications, scientific libraries, and agents, without an AURA dependency.
 
-**État au 2026-10-07 : planification initiale, aucun moteur implémenté dans ce dépôt.** Le code candidat à l'extraction existe dans AURA ; sa présence là-bas ne constitue pas une livraison Math.
+**Status on 2026-10-07: initial planning; no mathematical engine has been implemented in this repository yet.** Candidate extraction code exists in AURA; its presence there is not a Math delivery.
 
-Première priorité : reprendre et qualifier les rationnels exacts, quantités, unités et expressions déjà réutilisables dans AURA. Ensuite : représentation mathématique commune, providers numériques/symboliques, composition et formats d'échange. Les algorithmes décisionnels restent dans Decision ; les méthodes multicritères restent dans MCDM.
+The first priority is to recover and qualify the exact rationals, quantities, units, and expressions that are already reusable in AURA. Next come a common mathematical representation, numerical and symbolic providers, composition, and exchange formats. Decision algorithms remain in Decision; multicriteria methods remain in MCDM.
 
-- [Plan complet et versions](docs/planning/README.md)
-- [Architecture et contrats](docs/planning/architecture.md)
-- [Inventaire de l'existant](docs/planning/existing-code-inventory.md)
-- [Migration et coordination entre dépôts](docs/planning/cross-repository-coordination.md)
-- [Reprise par ChatGPT et DWF](docs/planning/implementation-handoff.md)
-- [Premier prompt après initialisation DWF](docs/planning/start-with-dwf.md)
-- [Backlog canonique](docs/planning/backlog.json)
-- [Constitution du projet](PROJECT-CONSTITUTION.md)
+- [Complete plan and versions](docs/planning/README.md)
+- [Architecture and contracts](docs/planning/architecture.md)
+- [Existing-code inventory](docs/planning/existing-code-inventory.md)
+- [Cross-repository migration and coordination](docs/planning/cross-repository-coordination.md)
+- [ChatGPT and DWF handoff](docs/planning/implementation-handoff.md)
+- [First prompt after DWF initialization](docs/planning/start-with-dwf.md)
+- [Canonical backlog](docs/planning/backlog.json)
+- [Project constitution](PROJECT-CONSTITUTION.md)
 
-## Validation documentaire
+## Documentation validation
 
-Depuis la racine, avec SDK .NET 10 (10.0.401 observé lors de l'initialisation) :
+From the repository root, with .NET 10 SDK (10.0.401 observed during initialization):
 
 ```powershell
 dotnet run --file docs/planning/ValidatePlan.cs
 ```
 
-Cette commande vérifie sans réécrire les documents. Après une modification volontaire du backlog, régénérer dans le payload ou lors de l'édition, puis vérifier :
+This command validates without rewriting documents. After an intentional backlog change, regenerate in the payload or during authoring, then validate:
 
 ```powershell
 dotnet run --file docs/planning/ValidatePlan.cs -- --write
 dotnet run --file docs/planning/ValidatePlan.cs
 ```
 
-Aucun Python requis pour le planning. Aucun SDK métier, provider, CI produit ni DWF n'est installé par cette préparation. Les futurs scripts build/test/publish sont des livrables M0, pas des commandes déjà disponibles.
+Planning requires no Python. This preparation does not install a domain SDK, provider, product CI, or DWF. Future build/test/publish scripts are M0 deliverables, not commands already available today.
 
-DWF travaillera uniquement dans ce dépôt. Les demandes à AURA, Decision et MCDM seront préparées en Markdown et transmises par le propriétaire aux agents responsables. Aucun accès en écriture aux autres dépôts n'est implicite.
+DWF works only in this repository. Requests to AURA, Decision, and MCDM are prepared as Markdown and transmitted by the owner to the responsible agents. No write access to other repositories is implied.
 
-Les noms de packages, licences de distribution et versions exactes des providers doivent être confirmés aux gates prévues ; aucune publication NuGet n'est annoncée.
+Package names, distribution licenses, and exact provider versions must be confirmed at their planned gates; no NuGet publication is claimed.
