@@ -60,6 +60,8 @@ static string Hash(byte[] bytes)=>Convert.ToHexString(SHA256.HashData(bytes)).To
 static string Json(JsonNode node)=>node.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n";
 static void Equal(string actual,string expected,string message)=>R(actual==expected,message);
 static bool Active(JsonObject o)=>S(o,"status") is "ready" or "in_progress" or "done";
+static bool RequiresActiveParent(JsonObject o)=>S(o,"status") is "ready" or "in_progress";
+static bool ParentCanContainCompletedChild(JsonObject o)=>S(o,"status") is "in_progress" or "blocked" or "done";
 static string Safe(string path)
 {
     R(!string.IsNullOrWhiteSpace(path)&&!Path.IsPathRooted(path)&&!path.Contains(':')&&!path.Contains('\\'),"Unsafe path "+path);
@@ -154,8 +156,14 @@ static void Validate(JsonObject p,string repo)
         {
             State(t);_ = S(t,"behavior");_ = S(t,"test_case");
             var sub=Objects(t,"subtasks").ToArray();R(sub.Length>0,"Empty subtasks "+id);
-            foreach(var s in sub){State(s);_ = S(s,"description");if(Active(s))R(Active(t),"Subtask active under inactive task");}
-            if(Active(t))R(Active(c),"Task active under inactive chunk");
+            foreach(var s in sub)
+            {
+                State(s);_ = S(s,"description");
+                if(RequiresActiveParent(s))R(Active(t),"Subtask active under inactive task");
+                if(S(s,"status")=="done")R(ParentCanContainCompletedChild(t),"Completed subtask under unstarted task");
+            }
+            if(RequiresActiveParent(t))R(Active(c),"Task active under inactive chunk");
+            if(S(t,"status")=="done")R(ParentCanContainCompletedChild(c),"Completed task under unstarted chunk");
             if(S(t,"status")=="done")R(sub.All(s=>S(s,"status")=="done"),"Incomplete task");
         }
         if(S(c,"status")=="done")
@@ -296,8 +304,21 @@ static void SelfTest(JsonObject p,string repo)
     Reject("ready without refinement",q=>q["chunks"]![0]!["status"]="ready");
     Reject("unsafe mutation path",q=>q["chunks"]![0]!["files"]!.AsArray().Add("../aura/README.md"));
     Reject("false provider admission",q=>q["external_dependencies"]![0]!["status"]="satisfied");
-    Reject("active child under planned parent",q=>q["chunks"]![0]!["tasks"]![0]!["subtasks"]![0]!["status"]="ready");
+    Reject("active child under planned parent",q=>q["chunks"]![2]!["tasks"]![0]!["subtasks"]![0]!["status"]="ready");
+    Reject("completed child under planned parent",q=>
+    {
+        q["chunks"]![2]!["tasks"]![0]!["subtasks"]![0]!["status"]="done";
+        q["chunks"]![2]!["tasks"]![0]!["subtasks"]![0]!["evidence"]=new JsonArray(".aura/workflow/reports/RS001/attempt-003.json");
+    });
+    var partialBlocked=p.DeepClone().AsObject();
+    partialBlocked["chunks"]![2]!["status"]="blocked";
+    partialBlocked["chunks"]![2]!["blocker"]="external decision pending";
+    partialBlocked["chunks"]![2]!["tasks"]![0]!["status"]="blocked";
+    partialBlocked["chunks"]![2]!["tasks"]![0]!["blocker"]="external decision pending";
+    partialBlocked["chunks"]![2]!["tasks"]![0]!["subtasks"]![0]!["status"]="done";
+    partialBlocked["chunks"]![2]!["tasks"]![0]!["subtasks"]![0]!["evidence"]=new JsonArray(".aura/workflow/reports/RS001/attempt-003.json");
+    Validate(partialBlocked,repo);
     var staleRejected=false;try{Equal("stale","current","projection stale");}catch(InvalidOperationException){staleRejected=true;}
     R(staleRejected,"Stale comparison");count++;
-    Console.WriteLine($"planning self-tests passed: {count} negative cases; no repository writes");
+    Console.WriteLine($"planning self-tests passed: {count} negative cases plus partial-blocked positive case; no repository writes");
 }
