@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "id": "RS001",
+  "title": "Establish reproducible .NET foundation",
+  "commitMessage": "feat: establish reproducible .NET foundation",
+  "projectNodes": [
+    "M0",
+    "M0-W01",
+    "M0-W01-C01",
+    "M0-W01-C01-T1"
+  ],
+  "contribution": {
+    "summary": "Establish the bounded M0-W01-C01 .NET 10 foundation with locked restore, targeted tests, package creation, helper boundary checks, and isolated local package consumption.",
+    "value": "Creates the first independently verifiable Math package/toolchain slice without AURA or math-provider dependencies and proves the repository can restore, build, test, pack, and consume its output reproducibly.",
+    "debtChanges": [
+      "CI automation remains deferred until the foundation chain is proven by the controlled run; no package publication or external repository mutation is introduced."
+    ],
+    "nextAction": "After durable success, reconcile M0-W01-C01 evidence and refine M0-W01-C02 without starting AURA extraction.",
+    "achievements": [
+      {
+        "projectNode": "M0-W01-C01-T1",
+        "achievement": "A reproducible .NET 10 foundation proves locked restore, build, targeted MSTest execution, dependency-free package creation, PowerShell helper boundaries, and isolated local package consumption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": "."
+  },
+  "mutationPaths": [
+    "global.json",
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "NuGet.config",
+    "dw.tools.math.slnx",
+    "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+    "src/projects/dw.tools.math.foundation/FoundationContract.cs",
+    "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj",
+    "tests/projects/dw.tools.math.foundation.tests/M0W01C01Tests.cs",
+    "tests/consumers/foundation-smoke/Directory.Build.props",
+    "tests/consumers/foundation-smoke/Directory.Packages.props",
+    "tests/consumers/foundation-smoke/foundation-smoke.csproj",
+    "tests/consumers/foundation-smoke/Program.cs",
+    "scripts/common.ps1",
+    "scripts/restore.ps1",
+    "scripts/build.ps1",
+    "scripts/test.ps1",
+    "scripts/pack.ps1",
+    "scripts/verify-consumer.ps1",
+    "scripts/verify-helpers.ps1",
+    "scripts/verify.ps1",
+    "src/projects/dw.tools.math.foundation/packages.lock.json",
+    "tests/projects/dw.tools.math.foundation.tests/packages.lock.json"
+  ],
+  "validations": [
+    {
+      "id": "sdk-10-0-401",
+      "classification": "preflight",
+      "fileName": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        ".workflow/runs/RS001/staged/checks/sdk-check.ps1"
+      ],
+      "workingDirectory": ".",
+      "packs": []
+    },
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs"
+      ],
+      "workingDirectory": ".",
+      "packs": []
+    },
+    {
+      "id": "foundation-chain",
+      "classification": "full",
+      "fileName": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "scripts/verify.ps1"
+      ],
+      "workingDirectory": ".",
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "global.json",
+      "sourcePath": "files/global.json"
+    },
+    {
+      "path": "Directory.Build.props",
+      "sourcePath": "files/Directory.Build.props"
+    },
+    {
+      "path": "Directory.Packages.props",
+      "sourcePath": "files/Directory.Packages.props"
+    },
+    {
+      "path": "NuGet.config",
+      "sourcePath": "files/NuGet.config"
+    },
+    {
+      "path": "dw.tools.math.slnx",
+      "sourcePath": "files/dw.tools.math.slnx"
+    },
+    {
+      "path": "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj"
+    },
+    {
+      "path": "src/projects/dw.tools.math.foundation/FoundationContract.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.foundation/FoundationContract.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj",
+      "sourcePath": "files/tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.foundation.tests/M0W01C01Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.foundation.tests/M0W01C01Tests.cs"
+    },
+    {
+      "path": "tests/consumers/foundation-smoke/Directory.Build.props",
+      "sourcePath": "files/tests/consumers/foundation-smoke/Directory.Build.props"
+    },
+    {
+      "path": "tests/consumers/foundation-smoke/Directory.Packages.props",
+      "sourcePath": "files/tests/consumers/foundation-smoke/Directory.Packages.props"
+    },
+    {
+      "path": "tests/consumers/foundation-smoke/foundation-smoke.csproj",
+      "sourcePath": "files/tests/consumers/foundation-smoke/foundation-smoke.csproj"
+    },
+    {
+      "path": "tests/consumers/foundation-smoke/Program.cs",
+      "sourcePath": "files/tests/consumers/foundation-smoke/Program.cs"
+    },
+    {
+      "path": "scripts/common.ps1",
+      "sourcePath": "files/scripts/common.ps1"
+    },
+    {
+      "path": "scripts/restore.ps1",
+      "sourcePath": "files/scripts/restore.ps1"
+    },
+    {
+      "path": "scripts/build.ps1",
+      "sourcePath": "files/scripts/build.ps1"
+    },
+    {
+      "path": "scripts/test.ps1",
+      "sourcePath": "files/scripts/test.ps1"
+    },
+    {
+      "path": "scripts/pack.ps1",
+      "sourcePath": "files/scripts/pack.ps1"
+    },
+    {
+      "path": "scripts/verify-consumer.ps1",
+      "sourcePath": "files/scripts/verify-consumer.ps1"
+    },
+    {
+      "path": "scripts/verify-helpers.ps1",
+      "sourcePath": "files/scripts/verify-helpers.ps1"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sourcePath": "files/scripts/verify.ps1"
+    },
+    {
+      "path": "checks/sdk-check.ps1",
+      "sourcePath": "checks/sdk-check.ps1"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/0/workPackages/0/phases/0/tasks/0/id",
+      "expectedValue": "M0-W01-C01-T1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/0/workPackages/0/phases/0/tasks/0/state",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.0"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/0/id",
+      "expectedValue": "M0-W01-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/0/status",
+      "expectedValue": "planned"
+    }
+  ]
+}
