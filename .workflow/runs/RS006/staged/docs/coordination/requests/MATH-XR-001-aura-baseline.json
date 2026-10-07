@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "MATH-XR-001-BASELINE",
+  "status": "draft",
+  "transmission": "none",
+  "recipient": "AURA owning agent",
+  "math_chunk": "M0-W02-C03",
+  "purpose": "Verify the pinned AURA mathematical source baseline and report source drift before Math begins M1 extraction.",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_manifest": "docs/planning/source-baseline.json",
+  "transfer_manifest": "docs/planning/evidence/M0-W02-C02-transfer-manifest.json",
+  "owner_rights_evidence": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+  "package_identities": [
+    "dw.quantities",
+    "dw.quantities.expression",
+    "dw.quantities.standard"
+  ],
+  "requested_actions": [
+    "Compare the pinned selected mathematical sources/tests against the recipient's current AURA revision and identify every changed selected file.",
+    "Confirm that the listed direct-transfer candidates still represent the mathematical core intended for extraction.",
+    "Confirm the retained host boundary for dw.localization, MathCultureResolver, UnitCatalog presentation/facade behavior, UnitLocalization, and UnitProjection.",
+    "Confirm the transitive AURA consumers that must be revalidated at later adoption: core math actions, kernel, nutrition, data transforms, SQLite, JSON, and worker/CLI paths.",
+    "Do not remove, replace, or migrate any AURA source during this baseline request."
+  ],
+  "non_goals": [
+    "No AURA code removal or reference cutover.",
+    "No Math package adoption yet.",
+    "No change to AURA permissions, worker policies, configuration, persisted formats, or public behavior.",
+    "No cross-repository write by the Math agent."
+  ],
+  "indicative_recipient_scope": {
+    "direct_transfer_sources": [
+      "lib/dw.quantities/dw.quantities.csproj",
+      "lib/dw.quantities/ApproximateEquivalence.cs",
+      "lib/dw.quantities/DimensionVector.cs",
+      "lib/dw.quantities/ExactBinaryNumber.cs",
+      "lib/dw.quantities/ExactDecimalFormatter.cs",
+      "lib/dw.quantities/ExactRational.cs",
+      "lib/dw.quantities/Quantity.cs",
+      "lib/dw.quantities/UnitDefinition.cs",
+      "lib/dw.quantities.expression/dw.quantities.expression.csproj",
+      "lib/dw.quantities.expression/ExpressionParser.cs",
+      "lib/dw.quantities.standard/dw.quantities.standard.csproj",
+      "lib/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+      "lib/dw.quantities.standard/StandardUnitCatalog.cs",
+      "tests/dw.quantities.tests/dw.quantities.tests.csproj",
+      "tests/dw.quantities.tests/ApproximateEquivalenceTests.cs",
+      "tests/dw.quantities.tests/ExactFractionTests.cs",
+      "tests/dw.quantities.tests/ExpressionEngineTests.cs",
+      "tests/dw.quantities.tests/ExtractedKernelTests.cs",
+      "tests/dw.quantities.tests/StandardExpressionUnitResolverTests.cs",
+      "tests/dw.quantities.tests/StandardUnitCatalogTests.cs"
+    ],
+    "behavioral_adaptation_sources": [
+      "src/aura.domains/core/aura.domains.core.math/UnitConverter.cs"
+    ],
+    "retained_host_sources": [
+      "lib/dw.localization/dw.localization.csproj",
+      "lib/dw.localization/LanguageTag.cs",
+      "lib/dw.localization/LocalizationPreferences.cs",
+      "lib/dw.localization/LocalizedText.cs",
+      "src/aura.domains/core/aura.domains.core.math/MathCultureResolver.cs",
+      "src/aura.domains/core/aura.domains.core.math/UnitCatalog.cs",
+      "src/aura.domains/core/aura.domains.core.math/UnitLocalization.cs",
+      "src/aura.domains/core/aura.domains.core.math/UnitProjection.cs"
+    ]
+  },
+  "host_validation": [
+    "Report current commit/revision examined.",
+    "Report exact changed selected files relative to the pinned source manifest.",
+    "Identify relevant pure-math tests and host-facing tests that must remain in AURA.",
+    "Identify any current consumer/reference not represented by the Math inventory.",
+    "Do not claim clean-tree state unless independently verified."
+  ],
+  "rollback": "Not applicable to baseline verification because this request asks for no AURA mutation.",
+  "expected_response": {
+    "decision": [
+      "accepted",
+      "rejected",
+      "needs_change"
+    ],
+    "fields": [
+      "reason",
+      "reviewed_source_revision",
+      "changed_selected_files",
+      "consumer_drift",
+      "test_drift",
+      "constraints",
+      "result_commit_if_any"
+    ],
+    "note": "A baseline acknowledgement does not equal later Math-package adoption."
+  }
+}
