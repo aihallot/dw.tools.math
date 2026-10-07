@@ -30,7 +30,7 @@ public sealed class M1W01C01Tests
         Assert.IsNotNull(add, "ExactRational must expose exact addition.");
         var sum = add.Invoke(null, [left, right]);
         Assert.IsNotNull(sum);
-        AssertRatio(sum, 1, 2);
+        AssertRatio(sum!, 1, 2);
     }
 
     [TestMethod]
@@ -61,7 +61,7 @@ public sealed class M1W01C01Tests
     {
         var mixed = TryParseMixed("-1 1/2") ?? TryCreateMixed(-1, 1, 2);
         Assert.IsNotNull(mixed, "ExactRational must expose a mixed-number construction or parse path.");
-        AssertRatio(mixed, -3, 2);
+        AssertRatio(mixed!, -3, 2);
     }
 
     private static Type ExactRationalType() =>
@@ -203,8 +203,7 @@ public sealed class M1W01C01Tests
 
     private static bool IsIntegralLike(Type type) =>
         type == typeof(BigInteger) ||
-        type == typeof(long) || type == typeof(int) || type == typeof(short) || type == typeof(sbyte) ||
-        type == typeof(ulong) || type == typeof(uint) || type == typeof(ushort) || type == typeof(byte);
+        type == typeof(long) || type == typeof(int) || type == typeof(short) || type == typeof(sbyte);
 
     private static object ConvertIntegral(long value, Type type)
     {
