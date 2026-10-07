@@ -38,7 +38,7 @@ try
         Require(!actual.ContainsKey(id), "Historical C01 subtask must not be backfilled: " + id + ".");
 
     RequireState(actual, "M0", "in-progress");
-    RequireState(actual, "M0-W01", "in-progress");
+    Require(State(actual, "M0-W01") is "in-progress" or "done", "M0-W01 must be in-progress before RS002 or done after RS002.");
     RequireState(actual, "M0-W01-C01", "done");
     RequireState(actual, "M0-W01-C01-T1", "done");
     RequireState(actual, "M0-W01-C01-T2", "done");
@@ -70,7 +70,8 @@ try
         State(actual, "M0-W01-C02-T2-B") == "not-ready" &&
         State(actual, "M0-W01-C02-T2-C") == "not-ready";
 
-    var target = c02Ids.All(id => State(actual, id) == "done");
+    var target = State(actual, "M0-W01") == "done" && c02Ids.All(id => State(actual, id) == "done");
+    baseline = State(actual, "M0-W01") == "in-progress" && baseline;
     Require(baseline || target, "M0-W01-C02 is neither the accepted RS002 baseline nor exact completed target.");
 
     Require(File.Exists(Path.Combine(root, "docs", "planning", "decisions", "native-dwf-roadmap-reconciliation.md")),

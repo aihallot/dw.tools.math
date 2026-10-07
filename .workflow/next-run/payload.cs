@@ -47,13 +47,13 @@ static void ConvergeC02(PayloadContext payload)
 
     var target =
         states["M0"] == "in-progress" &&
-        states["M0-W01"] == "in-progress" &&
+        states["M0-W01"] == "done" &&
         ids.Skip(2).All(id => states[id] == "done");
 
     if (target)
     {
         payload.ProjectPlan.RequireNodeState("M0", "in-progress");
-        payload.ProjectPlan.RequireNodeState("M0-W01", "in-progress");
+        payload.ProjectPlan.RequireNodeState("M0-W01", "done");
         foreach (var id in ids.Skip(2))
             payload.ProjectPlan.RequireNodeState(id, "done");
         return;
@@ -78,6 +78,7 @@ static void ConvergeC02(PayloadContext payload)
     CompleteReadySibling(payload, "M0-W01-C02-T2-C");
     payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02-T2");
     payload.ProjectPlan.ConvergeNodeToDone("M0-W01-C02");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W01");
 }
 
 static void CompleteReadySibling(PayloadContext payload, string id)
