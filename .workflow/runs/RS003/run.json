@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "RS003",
+  "title": "Audit transfer provenance and boundaries",
+  "state": "prepared",
+  "commitMessage": "docs: audit transfer provenance and boundaries",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M0",
+    "M0-W02",
+    "M0-W02-C01",
+    "M0-W02-C01-T1",
+    "M0-W02-C01-T1-A",
+    "M0-W02-C01-T1-B",
+    "M0-W02-C01-T1-C",
+    "M0-W02-C01-T2",
+    "M0-W02-C01-T2-A",
+    "M0-W02-C01-T2-B",
+    "M0-W02-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Audit the pinned source corpus and transfer exclusions, complete every locally decidable M0-W02-C01 boundary, and leave the redistribution decision explicitly blocked until written owner/AURA evidence exists.",
+    "value": "Creates a durable provenance and transfer-boundary record without copying source or inventing license rights, while keeping product backlog and native DWF progress synchronized in the same payload.",
+    "debtChanges": [
+      "EXT-SOURCE-RIGHTS remains blocked because the Math repository contains no written origin/redistribution decision for inherited AURA source.",
+      "No distributable AURA source is copied, no external repository is mutated, and no publication or package-identity decision is authorized."
+    ],
+    "nextAction": "Obtain written origin and redistribution evidence from the human owner or AURA maintainer; then resume M0-W02-C01-T1-C and complete the phase only if the pinned corpus still reconciles.",
+    "achievements": [
+      {
+        "projectNode": "M0-W02-C01-T1-A",
+        "achievement": "The provenance question and decision criterion are bounded to the pinned source manifest, exact file identity, and written redistribution authority."
+      },
+      {
+        "projectNode": "M0-W02-C01-T1-B",
+        "achievement": "A bounded observation records 54 selected files, repository heads, SHA-256 provenance scope, and the absence of written redistribution authority in Math."
+      },
+      {
+        "projectNode": "M0-W02-C01-T2-A",
+        "achievement": "The transfer-boundary question is fixed around mathematical source/tests only, with secrets, private data, binaries, host policies, and unrelated domains excluded."
+      },
+      {
+        "projectNode": "M0-W02-C01-T2-B",
+        "achievement": "Existing inventory, constitution, baseline, and coordination contracts provide bounded evidence for the allowed and excluded transfer classes."
+      },
+      {
+        "projectNode": "M0-W02-C01-T2-C",
+        "achievement": "The transfer-boundary decision is recorded: no source copy without rights evidence, no cross-repository mutation, and explicit reconciliation on source drift."
+      },
+      {
+        "projectNode": "M0-W02-C01-T2",
+        "achievement": "M0-W02-C01 transfer limits and integration boundaries are qualified while the separate redistribution-rights task remains honestly blocked."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateTransferProvenance.cs",
+    "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+    "docs/planning/evidence/M0-W02-C01-transfer-boundary.json",
+    "docs/planning/decisions/m0-w02-c01-source-rights.md",
+    "docs/planning/README.md",
+    "docs/planning/versions/M0.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-provenance",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferProvenance.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
