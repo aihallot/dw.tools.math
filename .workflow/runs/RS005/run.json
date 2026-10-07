@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "id": "RS005",
+  "title": "Freeze transfer architecture and localization boundary",
+  "state": "prepared",
+  "commitMessage": "docs: freeze transfer architecture and localization boundary",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M0",
+    "M0-W02",
+    "M0-W02-C02",
+    "M0-W02-C02-T1",
+    "M0-W02-C02-T1-A",
+    "M0-W02-C02-T1-B",
+    "M0-W02-C02-T1-C",
+    "M0-W02-C02-T2",
+    "M0-W02-C02-T2-A",
+    "M0-W02-C02-T2-B",
+    "M0-W02-C02-T2-C",
+    "M0-W02-C03",
+    "M0-W02-C03-T1",
+    "M0-W02-C03-T1-A"
+  ],
+  "contribution": {
+    "summary": "Freeze the initial Math transfer architecture: preserve inherited quantity package identities, replace the dw.localization dependency with passive BCL-only metadata, split pure UnitConverter semantics from AURA presentation, and ready the cross-agent exchange contract.",
+    "value": "Turns the authorized AURA source corpus into a deterministic transfer manifest without copying source yet, giving M1 exact package/file boundaries while keeping localization and host policy outside Math.",
+    "debtChanges": [
+      "Actual AURA source copying remains deferred to M1 and must re-check every pinned SHA-256 before transfer.",
+      "UnitConverter is a behavioral adaptation source rather than a mandatory raw-file copy; AURA-facing errors, culture, projection, permissions, and host policy remain external."
+    ],
+    "nextAction": "Use M0-W02-C03 to finalize the owner-mediated exchange/request protocol and AURA baseline request, then close M0 without performing cross-repository writes.",
+    "achievements": [
+      {
+        "projectNode": "M0-W02-C02-T1-A",
+        "achievement": "The transfer-architecture question is bounded to inherited package identities, standalone dependency structure, localization ownership, and UnitConverter separation."
+      },
+      {
+        "projectNode": "M0-W02-C02-T1-B",
+        "achievement": "Pinned AURA sources and tests are classified by exact SHA-256 into direct transfer, behavioral adaptation, and retained host-localization responsibilities."
+      },
+      {
+        "projectNode": "M0-W02-C02-T1-C",
+        "achievement": "The package and localization decision preserves dw.quantities identities, rejects a dw.localization dependency, and assigns pure conversion semantics to Math while host presentation remains AURA-owned."
+      },
+      {
+        "projectNode": "M0-W02-C02-T1",
+        "achievement": "The initial transfer contract is frozen with three inherited package identities, exact target roots, passive localization metadata, and a standalone package graph."
+      },
+      {
+        "projectNode": "M0-W02-C02-T2-A",
+        "achievement": "The integration-boundary question explicitly compares passive Math metadata with wholesale localization transfer and fixes external API preservation as a constraint."
+      },
+      {
+        "projectNode": "M0-W02-C02-T2-B",
+        "achievement": "The manifest proves 20 pinned direct transfer entries, eight localization/presentation files retained in AURA, and one UnitConverter behavioral adaptation source."
+      },
+      {
+        "projectNode": "M0-W02-C02-T2-C",
+        "achievement": "The boundary decision records no sibling checkout dependency, no dw.localization transfer, no Decision/MCDM API change, and mandatory source-drift reconciliation."
+      },
+      {
+        "projectNode": "M0-W02-C02-T2",
+        "achievement": "The localization and integration boundary is qualified without moving host presentation policy or changing external repositories."
+      },
+      {
+        "projectNode": "M0-W02-C02",
+        "achievement": "M0-W02-C02 is complete with package identities, localization treatment, UnitConverter ownership, and the exact transfer manifest frozen for later M1 extraction."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateTransferArchitecture.cs",
+    "docs/planning/evidence/M0-W02-C02-transfer-manifest.json",
+    "docs/planning/decisions/m0-w02-c02.md",
+    "docs/planning/README.md",
+    "docs/planning/versions/M0.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
