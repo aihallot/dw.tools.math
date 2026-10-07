@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.4",
+  "plan_version": "0.1.5",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -16,7 +16,7 @@
       "version": "0.1.0-preview",
       "title": "Foundations, provenance, and DWF preparation",
       "outcome": "Establish a reproducible .NET toolchain and an authorized transfer path without modifying AURA.",
-      "status": "in_progress",
+      "status": "done",
       "gate": "G-M0",
       "required_chunks": [
         "M0-W01-C01",
@@ -26,14 +26,22 @@
         "M0-W02-C03"
       ],
       "depends_on": [],
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS001/attempt-003.json",
+        ".aura/workflow/reports/RS002/attempt-001.json",
+        ".aura/workflow/reports/RS003/attempt-001.json",
+        ".aura/workflow/reports/RS004/attempt-001.json",
+        ".aura/workflow/reports/RS005/attempt-001.json",
+        "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+        "docs/coordination/requests/MATH-XR-001-aura-baseline.json"
+      ]
     },
     {
       "id": "M1",
       "version": "0.2.0-preview",
       "title": "Extract the exact AURA core",
       "outcome": "Deliver standalone exact-math packages and their AURA adoption dossier.",
-      "status": "planned",
+      "status": "ready",
       "gate": "G-M1",
       "required_chunks": [
         "M1-W01-C01",
@@ -197,19 +205,25 @@
       "id": "M0-W02",
       "release": "M0",
       "title": "Transfer authority and boundaries",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.migration/",
         "tests/projects/dw.tools.math.migration.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+        "docs/planning/evidence/M0-W02-C02-transfer-manifest.json",
+        "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+        "docs/coordination/requests/MATH-XR-001-aura-baseline.json"
+      ]
     },
     {
       "id": "M1-W01",
       "release": "M1",
       "title": "Exact numbers and quantities",
-      "status": "planned",
+      "status": "ready",
       "paths": [
         "src/projects/dw.quantities/",
         "tests/projects/dw.quantities.tests/",
@@ -940,7 +954,7 @@
       "title": "Cross-agent exchange contract",
       "kind": "document",
       "size": "M",
-      "status": "ready",
+      "status": "done",
       "depends_on": [
         "M0-W02-C02",
         "M0-W01-C02"
@@ -963,15 +977,24 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "Ready after M0-W02-C02. Bound the exchange contract to draft owner-mediated requests, attested external state transitions, explicit rollback, and no cross-repository writes.",
+      "refinement": "Cross-agent lifecycle, evidence requirements, rollback, and the AURA baseline request are fully specified; the request remains draft and untransmitted.",
       "files": [
         "docs/planning/cross-repository-coordination.md",
-        "docs/coordination/requests/MATH-XR-001-aura.md"
+        "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+        "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+        "docs/coordination/requests/MATH-XR-001-aura.md",
+        "docs/planning/decisions/m0-w02-c03.md",
+        "docs/planning/ValidateExchangeContract.cs"
       ],
       "commands": [
+        "dotnet run --file docs/planning/ValidateExchangeContract.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+        "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+        "docs/planning/decisions/m0-w02-c03.md"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -979,29 +1002,45 @@
           "title": "Contract and outcome",
           "behavior": "Define requests, acknowledgements, external states, cutover criteria, and rollback; prepare the AURA baseline request.",
           "test_case": "A request contains owner, source pin, target files, required tests, and expected response; status remains draft until transmitted.",
-          "status": "ready",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+            "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+            "docs/planning/decisions/m0-w02-c03.md"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C03-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Define requests, acknowledgements, external states, cutover criteria, and rollback; prepare the AURA baseline request.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             },
             {
               "id": "M0-W02-C03-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: A request contains owner, source pin, target files, required tests, and expected response; status remains draft until transmitted.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             },
             {
               "id": "M0-W02-C03-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C03-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             }
           ]
         },
@@ -1010,29 +1049,45 @@
           "title": "Boundaries and integration",
           "behavior": "Math may progress with a local corpus; do not fake integration done or create a circular wait with Math publication.",
           "test_case": "Math may progress with a local corpus; do not fake integration done or create a circular wait with Math publication.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+            "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+            "docs/planning/decisions/m0-w02-c03.md"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C03-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Math may progress with a local corpus; do not fake integration done or create a circular wait with Math publication.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             },
             {
               "id": "M0-W02-C03-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Math may progress with a local corpus; do not fake integration done or create a circular wait with Math publication.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             },
             {
               "id": "M0-W02-C03-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C03-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C03-exchange-contract.json",
+                "docs/coordination/requests/MATH-XR-001-aura-baseline.json",
+                "docs/planning/decisions/m0-w02-c03.md"
+              ]
             }
           ]
         }
@@ -1046,7 +1101,7 @@
       "title": "Exact rationals and transport",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M0-W02-C03"
       ],
@@ -1073,9 +1128,21 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
+      "refinement": "Ready after M0 closure. Transfer only the pinned dw.quantities project and ExactRational slice first; add independent M1W01C01 tests, retain inherited exact-rational parity tests with provenance, and qualify default/bounds before widening scope.",
+      "files": [
+        "dw.tools.math.slnx",
+        "src/projects/dw.quantities/dw.quantities.csproj",
+        "src/projects/dw.quantities/ExactRational.cs",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/M1W01C01Tests.cs",
+        "tests/projects/dw.quantities.tests/ExactFractionTests.cs",
+        "tests/projects/dw.quantities.tests/ExtractedKernelTests.cs"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --no-build --filter FullyQualifiedName~M1W01C01Tests"
+      ],
       "evidence": [],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1084,14 +1151,14 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
           "test_case": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

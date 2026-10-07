@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "M0-W02-C03-exchange-contract",
+  "authority": "Math prepares requests; the human owner transmits them; recipient repositories own their own changes.",
+  "states": [
+    "draft",
+    "ready_for_owner",
+    "sent",
+    "acknowledged",
+    "accepted",
+    "rejected",
+    "implemented",
+    "verified"
+  ],
+  "transition_evidence": {
+    "draft": "Math-local request content only; no external observation implied.",
+    "ready_for_owner": "All transmission prerequisites are filled and Math-local validation passes.",
+    "sent": "Human/operator transmission evidence is required.",
+    "acknowledged": "Recipient acknowledgement evidence is required.",
+    "accepted": "Recipient decision evidence is required.",
+    "rejected": "Recipient rejection evidence is required.",
+    "implemented": "Recipient result commit or equivalent durable implementation evidence is required.",
+    "verified": "Recipient validation evidence plus adopted version/hash or equivalent durable identity is required."
+  },
+  "invariants": [
+    "A Math run never writes to AURA, Decision, MCDM, or another sibling repository.",
+    "A Markdown or JSON request cannot by itself advance an external state beyond ready_for_owner.",
+    "Math product completion and external adoption state are independent.",
+    "A recipient may reject or request changes without invalidating independent Math work.",
+    "Duplicate source removal occurs only after recipient consumer qualification and defined rollback."
+  ],
+  "required_request_fields": [
+    "id",
+    "status",
+    "transmission",
+    "recipient",
+    "math_chunk",
+    "source_revision",
+    "source_manifest",
+    "requested_actions",
+    "non_goals",
+    "indicative_recipient_scope",
+    "host_validation",
+    "rollback",
+    "expected_response"
+  ],
+  "rollback_contract": [
+    "Recipient retains its prior source/references in history.",
+    "Adoption pins package/version/hash and may revert to the prior source/package without hidden data migration.",
+    "Persisted-format changes require a separate migration/rollback plan before adoption.",
+    "No same PackageId/version may be republished with different bytes."
+  ]
+}
