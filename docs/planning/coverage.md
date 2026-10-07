@@ -1,50 +1,50 @@
-# Couverture du cadrage et de la demande
+# Framing and request coverage
 
-Projection du backlog. Couverture signifie responsabilité planifiée, pas qualification acquise.
+Backlog projection. Coverage means planned responsibility, not acquired qualification.
 
-| Source | Besoin | Chunks |
+| Source | Need | Chunks |
 |---|---|---|
-| SEED-EXACT | Arithmétique exacte, nombres, arrondis | M1-W01-C01, M1-W01-C02, M6-W02-C01 |
-| SEED-UNITS | Quantités, unités et dimensions | M1-W01-C03, M1-W01-C04, M1-W02-C01 |
-| SEED-EXPRESSION | Grammaire existante et sélection | M1-W02-C02, M1-W02-C03 |
-| SEED-IR | IR, domaines, hypothèses, ensembles, équations, fonctions | M2-W01-C01, M2-W01-C02, M2-W01-C03, M4-W02-C02 |
-| SEED-COMPOSE | Appels directs, fluent, pipelines et graphe | M2-W02-C01, M2-W02-C02, M2-W02-C03, M7-W01-C03 |
-| SEED-NUMERIC | Algèbre linéaire, matrices, vecteurs, tenseurs | M3-W01-C01, M3-W01-C02, M3-W01-C03, M7-W01-C02 |
-| SEED-STATS | Statistiques, probabilités, régression, distributions, aléatoire | M3-W02-C01, M3-W02-C02, M3-W02-C03, M6-W01-C01 |
-| SEED-ANALYSIS | Calcul numérique, racines, interpolation et méthodes numériques | M6-W01-C01, M6-W01-C02, M6-W01-C03 |
-| SEED-SYMBOLIC | Simplification, algèbre, factorisation, calcul différentiel/intégral, résolution | M4-W01-C01, M4-W01-C02, M4-W01-C03, M4-W02-C01, M4-W02-C02, M4-W02-C03 |
-| SEED-FORMATS | LaTeX, MathML, Markdown, Unicode, Office, texte et JSON | M5-W01-C01, M5-W01-C02, M5-W01-C03, M5-W01-C04, M2-W01-C03 |
-| SEED-SCIENTIFIC | Géométrie, trigonométrie, combinatoire, suites, signaux, séries temporelles, finance, fonctions spéciales | M6-W02-C01, M6-W02-C02, M6-W02-C03, M6-W02-C04 |
-| SEED-PROOF | Dérivations, équivalence, vérification indépendante et preuve formelle | M4-W01-C03, M7-W02-C01 |
-| SEED-ADVANCED | Précision arbitraire, intervalles et incertitude mathématique | M7-W01-C01 |
-| SEED-PLOT | PlotModel et représentation graphique | M7-W01-C03 |
-| SEED-PROVIDER | Réutilisation, licences, indépendance et portabilité | M0-W02-C01, M3-W01-C01, M4-W01-C01, M5-W02-C02 |
-| SEED-V1 | Dix critères V1 du cadrage et consommation sans AURA | M5-W02-C01, M5-W02-C02, M5-W02-C03 |
-| USER-EXTRACT | Extraire l'existant AURA avant extension | M0-W02-C01, M0-W02-C02, M1-W03-C01, M1-W03-C02 |
-| USER-DWF | Hiérarchie complète, validation .NET et préparation observationnelle | M0-W01-C01, M0-W01-C02 |
-| USER-BOUNDARY | Prompts entre agents, pas d'écriture cross-repository | M0-W02-C03, M1-W03-C02, M3-W02-C04, M6-W02-C05 |
-| USER-CONSUMERS | Consommateurs transitifs nutrition/données/Decision/MCDM | M1-W03-C02, M3-W02-C04 |
+| SEED-EXACT | Exact arithmetic, numbers, and rounding | M1-W01-C01, M1-W01-C02, M6-W02-C01 |
+| SEED-UNITS | Quantities, units, and dimensions | M1-W01-C03, M1-W01-C04, M1-W02-C01 |
+| SEED-EXPRESSION | Existing grammar and selection | M1-W02-C02, M1-W02-C03 |
+| SEED-IR | IR, domains, assumptions, sets, equations, and functions | M2-W01-C01, M2-W01-C02, M2-W01-C03, M4-W02-C02 |
+| SEED-COMPOSE | Direct calls, fluent APIs, pipelines, and graph | M2-W02-C01, M2-W02-C02, M2-W02-C03, M7-W01-C03 |
+| SEED-NUMERIC | Linear algebra, matrices, vectors, and tensors | M3-W01-C01, M3-W01-C02, M3-W01-C03, M7-W01-C02 |
+| SEED-STATS | Statistics, probability, regression, distributions, and randomness | M3-W02-C01, M3-W02-C02, M3-W02-C03, M6-W01-C01 |
+| SEED-ANALYSIS | Calculus, roots, interpolation, and numerical methods | M6-W01-C01, M6-W01-C02, M6-W01-C03 |
+| SEED-SYMBOLIC | Simplification, algebra, factorization, differential/integral calculus, and solving | M4-W01-C01, M4-W01-C02, M4-W01-C03, M4-W02-C01, M4-W02-C02, M4-W02-C03 |
+| SEED-FORMATS | LaTeX, MathML, Markdown, Unicode, Office, text, and JSON | M5-W01-C01, M5-W01-C02, M5-W01-C03, M5-W01-C04, M2-W01-C03 |
+| SEED-SCIENTIFIC | Geometry, trigonometry, combinatorics, sequences, signals, time series, finance, and special functions | M6-W02-C01, M6-W02-C02, M6-W02-C03, M6-W02-C04 |
+| SEED-PROOF | Derivations, equivalence, independent verification, and formal proof | M4-W01-C03, M7-W02-C01 |
+| SEED-ADVANCED | Arbitrary precision, intervals, and mathematical uncertainty | M7-W01-C01 |
+| SEED-PLOT | PlotModel and graphical representation | M7-W01-C03 |
+| SEED-PROVIDER | Reuse, licenses, independence, and portability | M0-W02-C01, M3-W01-C01, M4-W01-C01, M5-W02-C02 |
+| SEED-V1 | Ten V1 framing criteria and consumption without AURA | M5-W02-C01, M5-W02-C02, M5-W02-C03 |
+| USER-EXTRACT | Extract existing AURA behavior before extension | M0-W02-C01, M0-W02-C02, M1-W03-C01, M1-W03-C02 |
+| USER-DWF | Complete hierarchy, .NET validation, and observational preparation | M0-W01-C01, M0-W01-C02 |
+| USER-BOUNDARY | Cross-agent prompts, no cross-repository writes | M0-W02-C03, M1-W03-C02, M3-W02-C04, M6-W02-C05 |
+| USER-CONSUMERS | Transitive nutrition/data/Decision/MCDM consumers | M1-W03-C02, M3-W02-C04 |
 
-## Critères V1 du cadrage
+## V1 framing criteria
 
-1. Parser une notation : M5-W01-C01/C02.
-2. Valider domaines/hypothèses : M2-W01-C02/C03.
-3. Calcul numérique et symbolique : M3 et M4.
-4. Composer : M2-W02-C02.
-5. Rejeter composition incompatible : M2-W02-C02.
-6. Préserver exclusions : M4-W01-C02/C03.
-7. Rendre notation : M5-W01-C01/C03/C04.
-8. Résultats/erreurs/provenance : M2-W02-C01.
-9. Replay qualifié : M2-W02-C03.
-10. Client sans AURA : M1-W03-C01 et M5-W02-C01.
+1. Parse notation: M5-W01-C01/C02.
+2. Validate domains/assumptions: M2-W01-C02/C03.
+3. Numerical and symbolic computation: M3 and M4.
+4. Compose: M2-W02-C02.
+5. Reject incompatible composition: M2-W02-C02.
+6. Preserve exclusions: M4-W01-C02/C03.
+7. Render notation: M5-W01-C01/C03/C04.
+8. Results/errors/provenance: M2-W02-C01.
+9. Qualified replay: M2-W02-C03.
+10. Client without AURA: M1-W03-C01 and M5-W02-C01.
 
-Gate M5-W02-C03 : confronter ces critères aux preuves réelles.
+Gate M5-W02-C03: confront these criteria with real evidence.
 
-## Frontières et exclusions
+## Boundaries and exclusions
 
-- **DIS-AURA — Host resources, capabilities and supervision** : externally_owned, propriétaire AURA. Not mathematical primitives; integration via request. Réexamen : Math package ready.
-- **DIS-DECISION — LP/MIP, CP-SAT, SMT decision problems, risk policies, EVPI, MDP and games** : externally_owned, propriétaire Decision. Retain decision semantics and stable API. Réexamen : Proven reusable primitive.
-- **DIS-MCDM — Preferences, PROMETHEE, ELECTRE, ORESTE, AHP, TOPSIS, SMAA and ROR** : externally_owned, propriétaire MCDM. Retain multicriteria semantics; no automatic extraction. Réexamen : Proven numerical duplication.
-- **DIS-FORMAL — Home-grown universal theorem prover** : excluded, propriétaire Math. Integrate qualified systems instead. Réexamen : Bounded formal interoperability need.
-- **DIS-UNBOUNDED — Universal natural-language parser, arbitrary macros and unlimited engine** : excluded, propriétaire Math. Ambiguity and resource guarantees require declared subset. Réexamen : Explicit scope decision.
-- **DIS-DOMAIN — Nutrition, record aggregation, storage, localization framework, market data** : externally_owned, propriétaire Respective domain maintainers. Only shared arithmetic primitive is a Math candidate. Réexamen : Consumer adoption.
+- **DIS-AURA — Host resources, capabilities and supervision** — externally_owned, owner: AURA: Not mathematical primitives; integration via request. Review trigger: Math package ready.
+- **DIS-DECISION — LP/MIP, CP-SAT, SMT decision problems, risk policies, EVPI, MDP and games** — externally_owned, owner: Decision: Retain decision semantics and stable API. Review trigger: Proven reusable primitive.
+- **DIS-MCDM — Preferences, PROMETHEE, ELECTRE, ORESTE, AHP, TOPSIS, SMAA and ROR** — externally_owned, owner: MCDM: Retain multicriteria semantics; no automatic extraction. Review trigger: Proven numerical duplication.
+- **DIS-FORMAL — Home-grown universal theorem prover** — excluded, owner: Math: Integrate qualified systems instead. Review trigger: Bounded formal interoperability need.
+- **DIS-UNBOUNDED — Universal natural-language parser, arbitrary macros and unlimited engine** — excluded, owner: Math: Ambiguity and resource guarantees require declared subset. Review trigger: Explicit scope decision.
+- **DIS-DOMAIN — Nutrition, record aggregation, storage, localization framework, market data** — externally_owned, owner: Respective domain maintainers: Only shared arithmetic primitive is a Math candidate. Review trigger: Consumer adoption.

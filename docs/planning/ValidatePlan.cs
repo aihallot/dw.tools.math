@@ -206,17 +206,17 @@ static Dictionary<string,string> Render(JsonObject p)
 {
     var pages=new Dictionary<string,string>(StringComparer.Ordinal);
     var rs=Objects(p,"releases").ToArray();var wps=Objects(p,"work_packages").ToArray();var cs=Objects(p,"chunks").ToArray();
-    var index=new StringBuilder("# Plan d'implémentation — dw.tools.math\n\n");
-    index.Append("**Objectif :** extraire le socle mathématique AURA puis construire une plateforme indépendante, typée et qualifiée.\n\n");
-    index.Append("Plan produit "+S(p,"plan_version")+". Les états viennent du [backlog canonique](backlog.json). Aucun statut documentaire ne prouve une capacité produit.\n\n");
-    index.Append("Hiérarchie : **release -> work package -> chunk -> task -> subtask**. Mêmes niveaux que Decision ; DWF les associe à milestone/workPackage/phase/task/subtask.\n\n");
-    index.Append("| Jalon | Version cible | Résultat | Statut |\n|---|---|---|---|\n");
+    var index=new StringBuilder("# Implementation plan — dw.tools.math\n\n");
+    index.Append("**Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.\n\n");
+    index.Append("Product plan "+S(p,"plan_version")+". States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.\n\n");
+    index.Append("Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.\n\n");
+    index.Append("| Milestone | Target version | Outcome | Status |\n|---|---|---|---|\n");
     foreach(var r in rs)index.Append($"| [{S(r,"id")}](versions/{S(r,"id")}.md) | {S(r,"version")} | {S(r,"outcome")} | {S(r,"status")} |\n");
-    index.Append("\nM1 fournit tôt le socle exact ; 1.0 arrive après la verticale numérique/symbolique M5. Les spikes M7 peuvent conclure au report : leurs décisions ne sont pas des fonctions livrées. Versions cibles indicatives, pas dates ni autorisation d'exécuter tout le programme.\n\n");
-    index.Append("- [Architecture](architecture.md) et [inventaire](existing-code-inventory.md)\n- [Couverture](coverage.md), [sources](sources.md) et [qualification](testing-and-quality.md)\n- [Coordination](cross-repository-coordination.md) et [reprise DWF](implementation-handoff.md)\n- [Politique de ressources](resource-cost-policy.md)\n\n");
-    index.Append($"Portée : {rs.Length} releases, {wps.Length} lots, {cs.Length} chunks, {cs.Sum(c=>A(c,"tasks").Count)} tâches, {cs.Sum(c=>Objects(c,"tasks").Sum(t=>A(t,"subtasks").Count))} sous-tâches, {A(p,"requirements").Count} exigences.\n\n");
-    index.Append("Vérifier : dotnet run --file docs/planning/ValidatePlan.cs. Régénérer après édition : même commande suivie de -- --write, exclusivement hors validation de préparation. Auto-tests : -- --self-test.\n\n");
-    index.Append("Dépendances fonctionnelles, pas de fan-out d'agents. Raffiner fichiers/commandes avant ready ; scinder L ; aucun package produit vide par anticipation.\n");
+    index.Append("\nM1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.\n\n");
+    index.Append("- [Architecture](architecture.md) and [inventory](existing-code-inventory.md)\n- [Coverage](coverage.md), [sources](sources.md), and [qualification](testing-and-quality.md)\n- [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)\n- [Resource policy](resource-cost-policy.md)\n\n");
+    index.Append($"Scope: {rs.Length} releases, {wps.Length} work packages, {cs.Length} chunks, {cs.Sum(c=>A(c,"tasks").Count)} tasks, {cs.Sum(c=>Objects(c,"tasks").Sum(t=>A(t,"subtasks").Count))} subtasks, {A(p,"requirements").Count} requirements.\n\n");
+    index.Append("Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.\n\n");
+    index.Append("Functional dependencies, no agent fan-out. Refine files/commands before ready; split L blocks; do not create empty product packages in advance.\n");
     pages["docs/planning/README.md"]=index.ToString();
     var map=new JsonObject {["schema_version"]=1,["kind"]="product-id-mapping-not-native-dwf-plan",["plan_version"]=S(p,"plan_version"),["nodes"]=new JsonArray()};
     var nodes=map["nodes"]!.AsArray();
@@ -224,25 +224,25 @@ static Dictionary<string,string> Render(JsonObject p)
     foreach(var r in rs)
     {
         var rid=S(r,"id");Node(rid,"milestone",null);
-        var text=new StringBuilder($"# {rid} — {S(r,"title")} / {S(r,"version")}\n\n[Index](../README.md) · [Backlog](../backlog.json) · [Reprise](../implementation-handoff.md)\n\n");
-        text.Append($"Objectif : {S(r,"outcome")}\n\nStatut : **{S(r,"status")}**. Gate : **{S(r,"gate")}**. Préalables : {string.Join(", ",Strings(r,"depends_on"))}.\n\n");
+        var text=new StringBuilder($"# {rid} — {S(r,"title")} / {S(r,"version")}\n\n[Index](../README.md) · [Backlog](../backlog.json) · [Handoff](../implementation-handoff.md)\n\n");
+        text.Append($"Objective: {S(r,"outcome")}\n\nStatus: **{S(r,"status")}**. Gate : **{S(r,"gate")}**. Prerequisites: {string.Join(", ",Strings(r,"depends_on"))}.\n\n");
         foreach(var w in wps.Where(w=>S(w,"release")==rid))
         {
             var wid=S(w,"id");Node(wid,"workPackage",rid);
-            text.Append($"## {wid} — {S(w,"title")}\n\nStatut : {S(w,"status")}. Ancrages proposés : {string.Join(", ",Strings(w,"paths"))}.\n\n");
+            text.Append($"## {wid} — {S(w,"title")}\n\nStatus: {S(w,"status")}. Proposed anchors: {string.Join(", ",Strings(w,"paths"))}.\n\n");
             foreach(var c in cs.Where(c=>S(c,"work_package")==wid))
             {
                 var cid=S(c,"id");Node(cid,"phase",wid);
-                text.Append($"### {cid} — {S(c,"title")}\n\nStatut : {S(c,"status")} ; taille : {S(c,"size")} ; nature : {S(c,"kind")}.\n\n");
-                text.Append($"Dépendances : {string.Join(", ",Strings(c,"depends_on"))}. Externes : {string.Join(", ",Strings(c,"external_dependencies"))}.\n\n");
-                text.Append($"Exigences : {string.Join(", ",Strings(c,"requirements"))}. Suites : {string.Join(", ",Strings(c,"test_suites"))}.\n\n");
-                text.Append($"**Livrable :** {S(c,"deliverables")}\n\n**Recette indépendante :** {S(c,"acceptance")}\n\n**Limites/intégration :** {S(c,"boundary_acceptance")}\n\n");
-                text.Append("Fichiers proposés, à raffiner : "+string.Join(", ",Strings(c,"proposed_files"))+".\n\n");
-                text.Append("Commandes proposées (runner/projet à qualifier) : "+string.Join(" ; ",Strings(c,"proposed_commands"))+".\n\n");
+                text.Append($"### {cid} — {S(c,"title")}\n\nStatus: {S(c,"status")}; size: {S(c,"size")}; kind: {S(c,"kind")}.\n\n");
+                text.Append($"Dependencies: {string.Join(", ",Strings(c,"depends_on"))}. External: {string.Join(", ",Strings(c,"external_dependencies"))}.\n\n");
+                text.Append($"Requirements: {string.Join(", ",Strings(c,"requirements"))}. Suites: {string.Join(", ",Strings(c,"test_suites"))}.\n\n");
+                text.Append($"**Deliverable:** {S(c,"deliverables")}\n\n**Independent acceptance:** {S(c,"acceptance")}\n\n**Boundaries/integration:** {S(c,"boundary_acceptance")}\n\n");
+                text.Append("Proposed files, to refine: "+string.Join(", ",Strings(c,"proposed_files"))+".\n\n");
+                text.Append("Proposed commands (runner/project still to qualify): "+string.Join(" ; ",Strings(c,"proposed_commands"))+".\n\n");
                 foreach(var t in Objects(c,"tasks"))
                 {
                     var tid=S(t,"id");Node(tid,"task",cid);
-                    text.Append($"#### {tid} — {S(t,"title")}\n\n{S(t,"behavior")}\n\nFalsification : {S(t,"test_case")}\n\n");
+                    text.Append($"#### {tid} — {S(t,"title")}\n\n{S(t,"behavior")}\n\nFalsification: {S(t,"test_case")}\n\n");
                     foreach(var s in Objects(t,"subtasks"))
                     {
                         Node(S(s,"id"),"subtask",tid);
@@ -255,10 +255,10 @@ static Dictionary<string,string> Render(JsonObject p)
         pages[$"docs/planning/versions/{rid}.md"]=text.ToString();
     }
     pages["docs/planning/dwf-map.json"]=Json(map);
-    var coverage=new StringBuilder("# Couverture du cadrage et de la demande\n\nProjection du backlog. Couverture signifie responsabilité planifiée, pas qualification acquise.\n\n| Source | Besoin | Chunks |\n|---|---|---|\n");
+    var coverage=new StringBuilder("# Framing and request coverage\n\nBacklog projection. Coverage means planned responsibility, not acquired qualification.\n\n| Source | Need | Chunks |\n|---|---|---|\n");
     foreach(var row in Objects(p,"source_coverage"))coverage.Append($"| {S(row,"source_id")} | {S(row,"title")} | {string.Join(", ",Strings(row,"targets"))} |\n");
-    coverage.Append("\n## Critères V1 du cadrage\n\n1. Parser une notation : M5-W01-C01/C02.\n2. Valider domaines/hypothèses : M2-W01-C02/C03.\n3. Calcul numérique et symbolique : M3 et M4.\n4. Composer : M2-W02-C02.\n5. Rejeter composition incompatible : M2-W02-C02.\n6. Préserver exclusions : M4-W01-C02/C03.\n7. Rendre notation : M5-W01-C01/C03/C04.\n8. Résultats/erreurs/provenance : M2-W02-C01.\n9. Replay qualifié : M2-W02-C03.\n10. Client sans AURA : M1-W03-C01 et M5-W02-C01.\n\nGate M5-W02-C03 : confronter ces critères aux preuves réelles.\n\n## Frontières et exclusions\n\n");
-    foreach(var d in Objects(p,"dispositions"))coverage.Append($"- **{S(d,"id")} — {S(d,"title")}** : {S(d,"status")}, propriétaire {S(d,"owner")}. {S(d,"reason")}. Réexamen : {S(d,"review_trigger")}.\n");
+    coverage.Append("\n## V1 framing criteria\n\n1. Parse notation: M5-W01-C01/C02.\n2. Validate domains/assumptions: M2-W01-C02/C03.\n3. Numerical and symbolic computation: M3 and M4.\n4. Compose: M2-W02-C02.\n5. Reject incompatible composition: M2-W02-C02.\n6. Preserve exclusions: M4-W01-C02/C03.\n7. Render notation: M5-W01-C01/C03/C04.\n8. Results/errors/provenance: M2-W02-C01.\n9. Qualified replay: M2-W02-C03.\n10. Client without AURA: M1-W03-C01 and M5-W02-C01.\n\nGate M5-W02-C03: confront these criteria with real evidence.\n\n## Boundaries and exclusions\n\n");
+    foreach(var d in Objects(p,"dispositions"))coverage.Append($"- **{S(d,"id")} — {S(d,"title")}** — {S(d,"status")}, owner: {S(d,"owner")}: {S(d,"reason")}. Review trigger: {S(d,"review_trigger")}.\n");
     pages["docs/planning/coverage.md"]=coverage.ToString();
     return pages;
 }
