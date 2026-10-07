@@ -194,9 +194,9 @@ static void Add(IDictionary<string, ExpectedNode> target, string id, string kind
 }
 
 static void RequireState(IReadOnlyDictionary<string, ActualNode> nodes, string id, string state) =>
-    RequireState(nodes[id], state);
+    RequireExactState(nodes[id], state);
 
-static void RequireState(ActualNode node, string state) =>
+static void RequireExactState(ActualNode node, string state) =>
     Require(node.State == state, $"State mismatch for {node.Id}: {node.State} != {state}.");
 
 static string State(IReadOnlyDictionary<string, ActualNode> nodes, string id) => nodes[id].State;
