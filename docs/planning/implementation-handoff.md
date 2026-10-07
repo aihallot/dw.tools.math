@@ -23,7 +23,7 @@ Use docs/planning/dwf-map.json as the stable level mapping, not as native DWF JS
 Preserve stable IDs and dependency meaning. Translate titles and developer-facing text to canonical English while preserving semantics.
 Do not force backlog-only fields into unrelated DWF fields. Use native dependsOn and completion conditions only where the mapping is truthful.
 
-The first bootstrap was intentionally thin so RS001 could start. That thin bootstrap is not the durable target. After durable RS001 success and before any successor implementation run, reconcile the complete currently accepted roadmap into the native DWF plan: 8 milestones, 17 work packages, 53 phases, 106 tasks, and 318 subtasks as currently represented by the accepted backlog. Future refinements may split legitimate large product work without changing historical IDs or meaning.
+The first bootstrap was intentionally thin so RS001 could start. That thin bootstrap is not the durable target. After durable RS001 success and before any successor implementation run, reconcile the accepted roadmap into the native DWF plan. The current native topology is 8 milestones, 17 work packages, 53 phases, 106 tasks, and 312 future/observed subtasks. The six accepted C01 RED/GREEN/verification subtasks are intentionally not backfilled because RS001 completed that phase before DWF observed those child transitions; see docs/planning/decisions/native-dwf-roadmap-reconciliation.md. Future refinements may split legitimate large product work without changing historical IDs or meaning.
 
 ## Run authoring rule
 
