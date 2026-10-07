@@ -22,8 +22,9 @@ try
 
     foreach (var pair in expected)
     {
-        Require(actual.TryGetValue(pair.Key, out var node), "Missing native DWF node " + pair.Key + ".");
-        Require(node!.Kind == pair.Value.Kind, $"Kind mismatch for {pair.Key}: {node.Kind} != {pair.Value.Kind}.");
+        Require(actual.TryGetValue(pair.Key, out var candidate), "Missing native DWF node " + pair.Key + ".");
+        var node = candidate ?? throw new InvalidOperationException("Missing native DWF node " + pair.Key + ".");
+        Require(node.Kind == pair.Value.Kind, $"Kind mismatch for {pair.Key}: {node.Kind} != {pair.Value.Kind}.");
         Require(node.ParentId == pair.Value.ParentId, $"Parent mismatch for {pair.Key}: {node.ParentId ?? "<root>"} != {pair.Value.ParentId ?? "<root>"}.");
         EqualSet(node.DependsOn, pair.Value.DependsOn, "Dependency mismatch for " + pair.Key + ".");
         Require(!string.IsNullOrWhiteSpace(node.Title), "Empty native DWF title for " + pair.Key + ".");
