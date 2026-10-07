@@ -1,50 +1,92 @@
-# Reprise par ChatGPT et DWF
+# ChatGPT and DWF implementation handoff
 
-## Situation
+## Current situation
 
-Le dépôt contient une planification, un outil documentaire .NET et des demandes externes draft. Pas de produit, pas de DWF initialisé, pas de publication. Tous les éléments produit sont planned.
-Lire AGENTS.md, PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md, architecture.md, existing-code-inventory.md, testing-and-quality.md et resource-cost-policy.md.
+The repository contains an accepted product roadmap, a .NET documentation validator, draft cross-repository requests, and an initialized DWF 0.1.58 / guidance 0.22 workflow.
+No AURA extraction has been delivered and no package has been publicly published.
+Canonical repository language is English. Existing French planning content is migration debt and must be normalized from canonical sources rather than hand-editing generated projections.
 
-## Premier échange après init
+Read AGENTS.md, PROJECT-MANTRA.md, PROJECT-CONSTITUTION.md, architecture.md, existing-code-inventory.md, testing-and-quality.md, resource-cost-policy.md, and the backlog before product work.
 
-1. Lire la version réelle de DWF et sa guidance active : bootstrap, constitution, agent-playbook, run-authoring et payload-authoring. Ne pas copier celle observée dans Decision comme contrat permanent.
-2. Qualifier l'adoption d'après les faits : nouveau produit avec historique documentaire, aucune histoire de run inventée. Préserver project.id/title et schemaVersion créés par init.
-3. Si le plan natif est vide et aucun run pending, écrire le premier vrai plan produit selon la procédure DWF d'initialisation. Ne pas écrire state.json à la main et ne pas créer un run de remplissage.
-4. Utiliser [dwf-map.json](dwf-map.json) comme correspondance d'identifiants, pas comme fichier natif prêt à copier. Mapper release -> milestone, work_package -> workPackage, chunk -> phase, task -> task, subtask -> subtask. Ces phases sont fonctionnelles, pas une phase par RS.
-5. Le premier résultat admissible est M0-W01-C01 : socle .NET, tests/pack et sample minimal. Raffiner ses fichiers/commandes avec la syntaxe du runner retenu, rendre ready le chemin natif nécessaire ; garder les suivants planned.
-6. Le chunk M0-W01-C02 qualifie ensuite cette adoption et ses invariants, il ne retarde pas l'autorité native nécessaire avant le premier run.
+## Product roadmap and native DWF plan
 
-La documentation produit expose 8 releases, mais le premier run ne doit pas implémenter tout M0. Conserver les IDs stables ; ne pas créer de nouvelle hiérarchie uniquement pour représenter chaque tentative.
+docs/planning/backlog.json is the accepted product roadmap. It owns product scope, stable IDs, dependencies, acceptance recipes, source coverage, and product-specific metadata.
+.aura/workflow/plan/project.json is DWF execution authority. It must be a faithful executable projection of the accepted roadmap, not a second independently invented plan.
 
-## Autorités après adoption
+Use docs/planning/dwf-map.json as the stable level mapping, not as native DWF JSON to copy:
+- release -> milestone
+- work_package -> workPackage
+- chunk -> phase
+- task -> task
+- subtask -> subtask
 
-Le backlog porte la portée et les recettes produit ; le plan natif porte l'autorité d'exécution DWF. Maintenir une correspondance vérifiée dans les mutations déclarées. Les statuts produit sont projetés depuis les preuves natives, jamais utilisés pour contourner une précondition DWF.
-Au checkpoint : lire reçu réel, réconcilier statuts et preuves du backlog, générer les pages, vérifier. Une incohérence reste visible et interdit la préparation du scope concerné.
-Le validateur local actuel ne lit pas les fichiers privés DWF et ne certifie pas la compatibilité native ; cette dernière appartient à M0-W01-C02 et à l'exécutable actif.
+Preserve stable IDs and dependency meaning. Translate titles and developer-facing text to canonical English while preserving semantics.
+Do not force backlog-only fields into unrelated DWF fields. Use native dependsOn and completion conditions only where the mapping is truthful.
 
-## Leçon Python et validations mutantes
+The first bootstrap was intentionally thin so RS001 could start. That thin bootstrap is not the durable target. After durable RS001 success and before any successor implementation run, reconcile the complete currently accepted roadmap into the native DWF plan: 8 milestones, 17 work packages, 53 phases, 106 tasks, and 318 subtasks as currently represented by the accepted backlog. Future refinements may split legitimate large product work without changing historical IDs or meaning.
 
-La version de Decision observée utilise déjà dotnet run --file docs/planning/ValidatePlan.cs. Son ancien Python n'est pas à reprendre.
-Dans Math, le C# vérifie par défaut et sort 0/1 sans modifier les fichiers versionnés. --write est une commande de génération explicitement mutante, interdite dans une validation preparation-safe.
-Exemple d'intention de validation (à adapter au schéma réel installé) : fileName=dotnet ; arguments=[run,--file,docs/planning/ValidatePlan.cs] ; workingDirectory=. ; classification=structural ; packs=[].
-La génération s'exécute dans le payload, puis la vérification dans la validation. Déclarer backlog, versions, README de planning, coverage, dwf-map et planning-validation parmi les mutations prévues.
-Un helper C# staged s'invoque par son vrai chemin .workflow/runs/<id>/staged/... avec --file. Ne jamais référencer un helper d'un ancien run ou ajouter staged/ deux fois.
-La sortie build temporaire du SDK n'est pas une permission d'écrire dans le produit ; les artefacts choisis restent ignorés et bornés.
+## Run authoring rule
 
-## Avant ready
+Before every run, derive and review the expected native-plan transition together with the product mutation:
+- identify the exact scoped DWF nodes;
+- record their baseline lifecycle states;
+- decide which nodes remain active and which complete;
+- ensure the payload performs those lifecycle transitions in the same controlled mutation;
+- ensure target re-entry accepts the exact completed plan state;
+- declare one contribution achievement for every node transitioned to done and no achievement for an incomplete node.
 
-Dépendances internes et gates préalables done avec preuves ; dépendances externes satisfied attestées ; taille L décomposée sans perte d'exigences ; oracle indépendant ; fichiers exacts existants ou à créer identifiés ; commandes du runner effectif ; budget et retour arrière ; tests de limite ; aucun path extérieur.
-Les noms de fichiers *Contract.cs du backlog sont des ancrages proposés. Les remplacer par responsabilités/types concrets lors du raffinement ; ne pas créer des classes nommées après les IDs pour cocher le plan.
-Les commandes proposed_commands sont des intentions VSTest à adapter au runner retenu, pas des commandes validées à lancer sur des projets encore absents.
+Do not execute product work first and repair DWF progress afterward.
+A run may span multiple product tasks when the bounded outcome genuinely proves them, but the native plan must still contain those stable product task identities so the reported completion is not an aggregate that erases accepted planning detail.
 
-## Décomposition et clôture
+## RS001 boundary
 
-Pour scinder L : garder le chunk comme agrégat, ajouter des chunks enfants avec parent_chunk, reporter ses exigences vers au moins un enfant, garder le parent dans la gate et ne le clôturer qu'après enfants. Régénérer le plan et mettre à jour la correspondance DWF sans perdre ses IDs historiques.
-Un chunk done exige tâches/sous-tâches done et preuves locales existantes ; un spike done signifie décision rendue, pas feature livrée. La gate release réclame toutes ses recettes, pas seulement un compteur.
-Remplir evidence/<id>.json avec les commandes réellement exécutées et artefacts, jamais avant exécution.
-Exécution normale opérateur : dwf run next, selon guidance active ; en échec corriger le même run, ne pas effacer l'état ni en préparer un autre pour l'éviter.
+The first bounded product result is M0-W01-C01: reproducible .NET foundation, targeted tests, package creation, helper boundaries, and an isolated local consumer.
+RS001 does not authorize AURA extraction.
+Its technical chain has already demonstrated restore/build/test/pack/consumer success during failed attempts; the current correction must preserve retained mutation provenance and close only the progress-contract mismatch.
 
-## Sortie de session
+After RS001 is durably pushed, reconcile the full accepted roadmap into DWF before preparing RS002. M0-W01-C02 then validates DWF adoption and product/native mapping; it does not invent a second roadmap.
 
-Rapporter résultat et limites, prochain chunk admissible, validations réelles, aucune estimation de facturation inventée. Les prompts externes restent dans Math jusqu'à transmission autorisée. Ne jamais modifier les autres dépôts pour débloquer une gate.
+## Planning generation and validation
 
+The planning validator is docs/planning/ValidatePlan.cs and uses .NET only.
+Default validation is observational:
+
+    dotnet run --file docs/planning/ValidatePlan.cs -- --check
+
+Generation is intentionally mutating and belongs in payloads or deliberate authoring steps:
+
+    dotnet run --file docs/planning/ValidatePlan.cs -- --write
+
+Never place --write in a preparation-safe validation.
+When backlog changes, declare every regenerated projection path in the mutation boundary and validate the resulting projection.
+
+## Readiness
+
+Before marking product scope ready, require completed internal dependencies, satisfied external gates with evidence, split size-L blocks where required, an independent oracle, exact mutation files, executable commands, bounded resource cost, rollback/failure behavior, edge tests, and no path outside this repository.
+Proposed *Contract.cs names in the backlog are anchors, not mandatory class names.
+Proposed commands are intentions until refined against the actual runner and project layout.
+
+## Completion and reconciliation
+
+A product chunk is done only when its accepted tasks/subtasks and acceptance evidence are satisfied.
+A spike being done means a decision was produced, not that a product capability exists.
+Release gates require their full accepted recipes.
+
+DWF completion is explicit: every native node transitioned to done during a run needs a matching contribution achievement.
+After a durable success, reconcile product status and generated documentation from the real DWF report/evidence before preparing dependent scope.
+Do not manufacture historical success or mark future native nodes done merely because current code appears to satisfy them.
+
+## Operator loop
+
+Normal operator execution remains:
+
+    dwf run next
+
+On failure, inspect durable evidence and correct the same run. Do not erase retained local mutation state and do not prepare a successor to hide failure.
+On success, verify the remote result, report, cleared pendingRun, native-plan transition, and product reconciliation before preparing later work.
+
+## Session output
+
+Report actual evidence and limits, the next admissible product scope, real validation results, and no invented billing estimate.
+External prompts remain in Math until the owner transmits them.
+Never write to AURA, Decision, MCDM, or another repository to satisfy a Math gate.
