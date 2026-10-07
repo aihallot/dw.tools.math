@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.1",
+  "plan_version": "0.1.2",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -197,7 +197,7 @@
       "id": "M0-W02",
       "release": "M0",
       "title": "Transfer authority and boundaries",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.migration/",
         "tests/projects/dw.tools.math.migration.tests/",
@@ -671,7 +671,7 @@
       "title": "Provenance, licensing, and transfer corpus",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M0-W01-C01"
       ],
@@ -693,10 +693,24 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS003 audits the pinned source corpus and transfer exclusions, records the missing-rights blocker, and leaves redistribution undecided until written owner/AURA attestation.",
+      "files": [
+        "docs/planning/source-baseline.json",
+        "docs/planning/existing-code-inventory.md",
+        "docs/planning/ValidateTransferProvenance.cs",
+        "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+        "docs/planning/evidence/M0-W02-C01-transfer-boundary.json",
+        "docs/planning/decisions/m0-w02-c01-source-rights.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateTransferProvenance.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+        "docs/planning/evidence/M0-W02-C01-transfer-boundary.json",
+        "docs/planning/decisions/m0-w02-c01-source-rights.md"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -704,60 +718,79 @@
           "title": "Contract and outcome",
           "behavior": "Pin the AURA source commit and SHA-256 values, classify tests and licenses, and obtain the inherited-code redistribution decision.",
           "test_case": "Every retained file has documented source, hash, destination, and rights; any source changed since the snapshot requires reconciliation.",
-          "status": "planned",
-          "evidence": [],
+          "status": "blocked",
+          "evidence": [
+            "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+            "docs/planning/decisions/m0-w02-c01-source-rights.md"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C01-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Pin the AURA source commit and SHA-256 values, classify tests and licenses, and obtain the inherited-code redistribution decision.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C01-provenance-audit.json"
+              ]
             },
             {
               "id": "M0-W02-C01-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Every retained file has documented source, hash, destination, and rights; any source changed since the snapshot requires reconciliation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C01-provenance-audit.json"
+              ]
             },
             {
               "id": "M0-W02-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "blocked",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c01-source-rights.md"
+              ],
+              "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
             }
-          ]
+          ],
+          "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
         },
         {
           "id": "M0-W02-C01-T2",
           "title": "Boundaries and integration",
           "behavior": "Import no secrets, private data, binaries, or policies; missing license evidence remains an open decision before copying.",
           "test_case": "Import no secrets, private data, binaries, or policies; missing license evidence remains an open decision before copying.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M0-W02-C01-transfer-boundary.json"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Import no secrets, private data, binaries, or policies; missing license evidence remains an open decision before copying.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C01-transfer-boundary.json"
+              ]
             },
             {
               "id": "M0-W02-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Import no secrets, private data, binaries, or policies; missing license evidence remains an open decision before copying.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C01-transfer-boundary.json"
+              ]
             },
             {
               "id": "M0-W02-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M0-W02-C01-transfer-boundary.json"
+              ]
             }
           ]
         }
@@ -6647,10 +6680,14 @@
     {
       "id": "EXT-SOURCE-RIGHTS",
       "owner": "Human owner / AURA maintainer",
-      "status": "unverified",
+      "status": "blocked",
       "qualified_by": "M0-W02-C01",
       "acceptance": "Written origin and redistribution decision; exact file provenance",
-      "evidence": []
+      "evidence": [
+        "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+        "docs/planning/decisions/m0-w02-c01-source-rights.md"
+      ],
+      "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
     },
     {
       "id": "EXT-LOCALIZATION",
