@@ -7,7 +7,6 @@ var payload = PayloadContext.Create();
 payload.Files.ReplaceFromStaged("staged/docs/planning/backlog.json", "docs/planning/backlog.json");
 payload.Files.ReplaceFromStaged("staged/docs/planning/ValidateTransferProvenance.cs", "docs/planning/ValidateTransferProvenance.cs");
 payload.Files.ReplaceFromStaged("staged/docs/planning/evidence/M0-W02-C01-provenance-audit.json", "docs/planning/evidence/M0-W02-C01-provenance-audit.json");
-payload.Files.ReplaceFromStaged("staged/docs/planning/evidence/M0-W02-C01-transfer-boundary.json", "docs/planning/evidence/M0-W02-C01-transfer-boundary.json");
 payload.Files.ReplaceFromStaged("staged/docs/planning/decisions/m0-w02-c01-source-rights.md", "docs/planning/decisions/m0-w02-c01-source-rights.md");
 
 RunDotNet(payload.RepositoryRoot, "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
@@ -20,29 +19,30 @@ static void ConvergeNativeProgress(PayloadContext payload)
     var ids = new[]
     {
         "M0", "M0-W02", "M0-W02-C01",
-        "M0-W02-C01-T1", "M0-W02-C01-T1-A", "M0-W02-C01-T1-B", "M0-W02-C01-T1-C",
-        "M0-W02-C01-T2", "M0-W02-C01-T2-A", "M0-W02-C01-T2-B", "M0-W02-C01-T2-C"
+        "M0-W02-C01-T1", "M0-W02-C01-T1-C",
+        "M0-W02-C02", "M0-W02-C02-T1", "M0-W02-C02-T1-A"
     };
     var states = ReadStates(payload.RepositoryRoot, ids);
 
     var baseline =
         states["M0"] == "in-progress" &&
-        states["M0-W02"] == "not-ready" &&
-        states["M0-W02-C01"] == "not-ready" &&
-        ids.Skip(3).All(id => states[id] == "not-ready");
+        states["M0-W02"] == "in-progress" &&
+        states["M0-W02-C01"] == "in-progress" &&
+        states["M0-W02-C01-T1"] == "blocked" &&
+        states["M0-W02-C01-T1-C"] == "blocked" &&
+        states["M0-W02-C02"] == "not-ready" &&
+        states["M0-W02-C02-T1"] == "not-ready" &&
+        states["M0-W02-C02-T1-A"] == "not-ready";
 
     var target =
         states["M0"] == "in-progress" &&
         states["M0-W02"] == "in-progress" &&
-        states["M0-W02-C01"] == "in-progress" &&
-        states["M0-W02-C01-T1"] == "blocked" &&
-        states["M0-W02-C01-T1-A"] == "done" &&
-        states["M0-W02-C01-T1-B"] == "done" &&
-        states["M0-W02-C01-T1-C"] == "blocked" &&
-        states["M0-W02-C01-T2"] == "done" &&
-        states["M0-W02-C01-T2-A"] == "done" &&
-        states["M0-W02-C01-T2-B"] == "done" &&
-        states["M0-W02-C01-T2-C"] == "done";
+        states["M0-W02-C01"] == "done" &&
+        states["M0-W02-C01-T1"] == "done" &&
+        states["M0-W02-C01-T1-C"] == "done" &&
+        states["M0-W02-C02"] == "ready" &&
+        states["M0-W02-C02-T1"] == "ready" &&
+        states["M0-W02-C02-T1-A"] == "ready";
 
     if (target)
     {
@@ -52,36 +52,18 @@ static void ConvergeNativeProgress(PayloadContext payload)
     }
 
     if (!baseline)
-        throw new InvalidOperationException("M0-W02-C01 native progress is neither the declared RS003 baseline nor exact target.");
+        throw new InvalidOperationException("M0-W02 rights closure is neither the declared RS004 baseline nor exact target.");
 
-    payload.ProjectPlan.TransitionNode("M0-W02", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-A", "not-ready", "ready");
-    payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T1-A");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T1-A");
-
-    CompleteSibling(payload, "M0-W02-C01-T1-B");
-
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-C", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1", "blocked", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-C", "blocked", "ready");
     payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T1-C");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1-C", "in-progress", "blocked");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T1", "in-progress", "blocked");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T1-C");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T1");
+    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01");
 
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T2", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M0-W02-C01-T2-A", "not-ready", "ready");
-    payload.ProjectPlan.ActivateReadyContinuation("M0-W02-C01-T2-A");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T2-A");
-    CompleteSibling(payload, "M0-W02-C01-T2-B");
-    CompleteSibling(payload, "M0-W02-C01-T2-C");
-    payload.ProjectPlan.ConvergeNodeToDone("M0-W02-C01-T2");
-}
-
-static void CompleteSibling(PayloadContext payload, string id)
-{
-    payload.ProjectPlan.TransitionNode(id, "not-ready", "ready");
-    payload.ProjectPlan.ActivateReadyContinuation(id);
-    payload.ProjectPlan.ConvergeNodeToDone(id);
+    payload.ProjectPlan.TransitionNode("M0-W02-C02", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C02-T1", "not-ready", "ready");
+    payload.ProjectPlan.TransitionNode("M0-W02-C02-T1-A", "not-ready", "ready");
 }
 
 static Dictionary<string, string> ReadStates(string repositoryRoot, IEnumerable<string> ids)

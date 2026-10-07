@@ -20,36 +20,48 @@ try
     Require(S(baseline, "scope").Contains("no source imported", StringComparison.OrdinalIgnoreCase),
         "Source baseline no longer states that no source was imported.");
 
-    Require(S(audit, "status") == "bounded-observation-complete-owner-rights-pending", "Unexpected provenance audit status.");
+    Require(S(audit, "status") == "qualified-owner-rights-satisfied", "Unexpected provenance audit status.");
     Require(audit["selected_file_count"]?.GetValue<int>() == 54, "Provenance audit file count mismatch.");
     var rights = audit["rights_decision"]?.AsObject() ?? throw new InvalidOperationException("Missing rights_decision.");
-    Require(S(rights, "state") == "blocked", "Rights decision must remain blocked.");
-    Require(rights["authorized_to_copy_distributable_source"]?.GetValue<bool>() == false,
-        "Audit must not authorize distributable source copying.");
+    Require(S(rights, "state") == "satisfied", "Rights decision must be satisfied.");
+    Require(rights["authorized_to_copy_distributable_source"]?.GetValue<bool>() == true,
+        "Audit must record owner authorization for distributable source copying.");
+    Require(S(rights, "ownership_model") == "owner-authorized proprietary code", "Unexpected ownership model.");
 
     Require(S(boundary, "status") == "qualified", "Transfer boundary is not qualified.");
     Require(A(boundary, "excluded_from_transfer").Count >= 5, "Transfer boundary exclusion list is incomplete.");
 
     var w02 = FindById(backlog, "work_packages", "M0-W02");
     var c01 = FindById(backlog, "chunks", "M0-W02-C01");
-    Require(S(w02, "status") == "in_progress", "M0-W02 must be in_progress in the RS003 target.");
-    Require(S(c01, "status") == "in_progress", "M0-W02-C01 must be in_progress in the RS003 target.");
+    Require(S(w02, "status") == "in_progress", "M0-W02 must remain in_progress.");
+    Require(S(c01, "status") == "done", "M0-W02-C01 must be done after owner-rights closure.");
     var tasks = A(c01, "tasks").Select(x => x!.AsObject()).ToDictionary(x => S(x, "id"), StringComparer.Ordinal);
-    Require(S(tasks["M0-W02-C01-T1"], "status") == "blocked", "T1 must be blocked on owner rights.");
-    Require(S(tasks["M0-W02-C01-T2"], "status") == "done", "T2 transfer boundary must be done.");
+    Require(S(tasks["M0-W02-C01-T1"], "status") == "done", "T1 must be done after owner authorization.");
+    Require(S(tasks["M0-W02-C01-T2"], "status") == "done", "T2 transfer boundary must remain done.");
 
     var ext = FindById(backlog, "external_dependencies", "EXT-SOURCE-RIGHTS");
-    Require(S(ext, "status") == "blocked", "EXT-SOURCE-RIGHTS must be blocked until written evidence exists.");
-    Require(S(ext, "blocker").Contains("written origin and redistribution decision", StringComparison.OrdinalIgnoreCase),
-        "EXT-SOURCE-RIGHTS blocker does not state the missing decision.");
+    Require(S(ext, "status") == "satisfied", "EXT-SOURCE-RIGHTS must be satisfied.");
+    Require(A(ext, "evidence").Any(x => string.Equals(x?.GetValue<string>(), "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json", StringComparison.Ordinal)),
+        "EXT-SOURCE-RIGHTS is missing the owner attestation evidence.");
+
+    var attestationPath = Path.Combine(root, "docs", "planning", "evidence", "M0-W02-C01-owner-rights-attestation.json");
+    Require(File.Exists(attestationPath), "Missing owner-rights attestation.");
+    var attestation = Load(attestationPath);
+    Require(S(attestation, "source_revision") == "82a6b435a387a7e116b47a6b2c433ae9e067bf21", "Owner attestation source revision mismatch.");
+    var authorization = attestation["authorization"]?.AsObject() ?? throw new InvalidOperationException("Missing authorization object.");
+    foreach (var key in new[] { "copy_into_dw_tools_math", "modify_in_dw_tools_math", "package_from_dw_tools_math", "redistribute_from_dw_tools_math" })
+        Require(authorization[key]?.GetValue<bool>() == true, "Owner attestation does not authorize " + key + ".");
 
     var decisionPath = Path.Combine(root, "docs", "planning", "decisions", "m0-w02-c01-source-rights.md");
     Require(File.Exists(decisionPath), "Missing source-rights decision record.");
     var decisionText = File.ReadAllText(decisionPath);
-    Require(decisionText.Contains("Blocked pending owner/AURA rights attestation", StringComparison.Ordinal),
-        "Source-rights decision does not preserve the blocker.");
+    Require(decisionText.Contains("Satisfied by owner attestation", StringComparison.Ordinal),
+        "Source-rights decision does not record satisfaction.");
 
-    Console.WriteLine("transfer provenance valid: 54 selected files; transfer boundary qualified; redistribution rights remain blocked");
+    var c02 = FindById(backlog, "chunks", "M0-W02-C02");
+    Require(S(c02, "status") == "ready", "M0-W02-C02 must be ready after C01 closure.");
+
+    Console.WriteLine("transfer provenance valid: 54 selected files; owner rights satisfied; M0-W02-C01 closed; M0-W02-C02 ready");
     return 0;
 }
 catch (Exception ex)
