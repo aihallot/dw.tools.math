@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "RS007",
+  "title": "Establish exact-rational RED contract",
+  "state": "prepared",
+  "commitMessage": "test: establish exact-rational RED contract",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C01",
+    "M1-W01-C01-T1",
+    "M1-W01-C01-T1-R",
+    "M1-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Create a standalone dw.quantities RED harness for the first exact-rational slice, prove the canonical ExactRational type is absent for the expected reason, and pin the authorized AURA source SHA-256 before GREEN.",
+    "value": "Starts M1 with an executable falsifiable contract while keeping the main solution green and avoiding any guessed or unverified source transfer.",
+    "debtChanges": [
+      "The authorized ExactRational source bytes are not materialized in Math yet; GREEN must import only bytes matching SHA-256 3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a or record explicit reconciliation.",
+      "The RED harness intentionally stays outside dw.tools.math.slnx until GREEN so the qualified M0 solution remains buildable."
+    ],
+    "nextAction": "Materialize the authorized ExactRational source bytes, verify the pinned SHA-256, replace the RED type-absence failure with behavioral GREEN tests, and complete M1-W01-C01-T1-G without widening to later quantity types.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C01-T1-R",
+        "achievement": "An executable isolated RED proves Dw.Quantities.ExactRational is absent in Math, records the accepted rational behavior cases, keeps the main solution green, and pins the authorized source SHA-256 required for GREEN."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/dw.quantities.csproj",
+    "src/projects/dw.quantities/packages.lock.json",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.quantities.tests/packages.lock.json",
+    "tests/projects/dw.quantities.tests/M1W01C01Tests.cs",
+    "docs/planning/ValidateM1W01C01Red.cs",
+    "docs/planning/evidence/M1-W01-C01-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "exact-rational-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM1W01C01Red.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "foundation-regression",
+      "classification": "structural",
+      "fileName": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "scripts/verify.ps1"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
