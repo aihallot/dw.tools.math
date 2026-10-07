@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.2",
+  "plan_version": "0.1.3",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -671,7 +671,7 @@
       "title": "Provenance, licensing, and transfer corpus",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M0-W01-C01"
       ],
@@ -693,14 +693,15 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS003 audits the pinned source corpus and transfer exclusions, records the missing-rights blocker, and leaves redistribution undecided until written owner/AURA attestation.",
+      "refinement": "RS003 qualified provenance and transfer boundaries; the human owner subsequently supplied explicit copy/modify/package/redistribute authorization for the mathematical AURA subset pinned at revision 82a6b435a387a7e116b47a6b2c433ae9e067bf21.",
       "files": [
         "docs/planning/source-baseline.json",
         "docs/planning/existing-code-inventory.md",
         "docs/planning/ValidateTransferProvenance.cs",
         "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
         "docs/planning/evidence/M0-W02-C01-transfer-boundary.json",
-        "docs/planning/decisions/m0-w02-c01-source-rights.md"
+        "docs/planning/decisions/m0-w02-c01-source-rights.md",
+        "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"
       ],
       "commands": [
         "dotnet run --file docs/planning/ValidateTransferProvenance.cs",
@@ -709,7 +710,8 @@
       "evidence": [
         "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
         "docs/planning/evidence/M0-W02-C01-transfer-boundary.json",
-        "docs/planning/decisions/m0-w02-c01-source-rights.md"
+        "docs/planning/decisions/m0-w02-c01-source-rights.md",
+        "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -718,10 +720,11 @@
           "title": "Contract and outcome",
           "behavior": "Pin the AURA source commit and SHA-256 values, classify tests and licenses, and obtain the inherited-code redistribution decision.",
           "test_case": "Every retained file has documented source, hash, destination, and rights; any source changed since the snapshot requires reconciliation.",
-          "status": "blocked",
+          "status": "done",
           "evidence": [
             "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
-            "docs/planning/decisions/m0-w02-c01-source-rights.md"
+            "docs/planning/decisions/m0-w02-c01-source-rights.md",
+            "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"
           ],
           "subtasks": [
             {
@@ -746,14 +749,13 @@
               "id": "M0-W02-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "blocked",
+              "status": "done",
               "evidence": [
-                "docs/planning/decisions/m0-w02-c01-source-rights.md"
-              ],
-              "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
+                "docs/planning/decisions/m0-w02-c01-source-rights.md",
+                "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"
+              ]
             }
-          ],
-          "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
+          ]
         },
         {
           "id": "M0-W02-C01-T2",
@@ -804,7 +806,7 @@
       "title": "Boundaries, identities, and localization",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M0-W02-C01"
       ],
@@ -826,9 +828,13 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
+      "refinement": "Ready after M0-W02-C01 closure. Bound the decision to inherited package/namespace identities, dw.localization treatment, UnitConverter separation, and a standalone package graph with no AURA sibling dependency.",
+      "files": [
+        "docs/planning/decisions/m0-w02-c02.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
       "evidence": [],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -837,14 +843,14 @@
           "title": "Contract and outcome",
           "behavior": "Decide inherited package/namespace identities, dw.localization treatment, and the UnitConverter boundary; freeze the transfer manifest.",
           "test_case": "The planned package graph depends on neither AURA nor a sibling path; the catalog is consumable by a sample without AURA localization.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M0-W02-C02-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Decide inherited package/namespace identities, dw.localization treatment, and the UnitConverter boundary; freeze the transfer manifest.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -6680,14 +6686,14 @@
     {
       "id": "EXT-SOURCE-RIGHTS",
       "owner": "Human owner / AURA maintainer",
-      "status": "blocked",
+      "status": "satisfied",
       "qualified_by": "M0-W02-C01",
       "acceptance": "Written origin and redistribution decision; exact file provenance",
       "evidence": [
         "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
-        "docs/planning/decisions/m0-w02-c01-source-rights.md"
-      ],
-      "blocker": "Awaiting written origin and redistribution decision from the human owner or AURA maintainer; no distributable source copy is authorized yet."
+        "docs/planning/decisions/m0-w02-c01-source-rights.md",
+        "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"
+      ]
     },
     {
       "id": "EXT-LOCALIZATION",

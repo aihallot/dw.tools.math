@@ -2,41 +2,43 @@
 
 ## Status
 
-**Blocked pending owner/AURA rights attestation.**
+**Satisfied by owner attestation.**
 
-RS003 can qualify the bounded provenance inventory and the transfer exclusions, but it cannot manufacture a legal or ownership decision that is absent from repository evidence.
+The human owner has expressly authorized `dw.tools.math` to copy, modify, package, and redistribute the selected mathematical AURA source covered by `docs/planning/source-baseline.json` at AURA revision `82a6b435a387a7e116b47a6b2c433ae9e067bf21`.
 
-## Established facts
+The durable attestation is:
 
-- `docs/planning/source-baseline.json` records 54 selected working-tree files with SHA-256 values and observed HEADs.
-- The baseline explicitly says it is not a clean-tree claim and that no source was imported.
-- AURA contributes 43 selected files, Decision 6, MCDM 4, and brainstorming 1.
-- The current Math repository contains no written decision authorizing redistribution of inherited AURA source.
-- Any source whose bytes differ from the pinned snapshot must be reconciled before transfer.
+- `docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json`
 
-## Decision boundary
+## Ownership and license model
 
-Until written evidence is supplied:
+The owner states that the selected AURA code belongs to the owner and that no separate third-party license requirement is being imposed for this transfer decision.
 
-- no distributable AURA source is copied into Math;
-- no license is inferred from repository visibility, prior use, or package identity;
-- no binary, secret, private data, host policy, or worker policy is imported;
-- no public package publication or source removal is authorized.
+This is recorded as **owner-authorized proprietary code**, not as an invented open-source license. Ownership is retained while Math is expressly authorized to:
 
-The product dependency `EXT-SOURCE-RIGHTS` therefore remains blocked.
+- copy the selected source into `dw.tools.math`;
+- modify it;
+- package it;
+- redistribute it.
 
-## Required owner/AURA evidence
+The owner requires no separate license file or notice for this inherited code under this decision. If third-party material is later discovered, its own terms must still be qualified independently.
 
-A short written record is sufficient if it identifies:
+## Scope
 
-1. the origin/ownership basis for the selected AURA source;
-2. whether Math may copy, modify, package, and redistribute it;
-3. the license/notices that must accompany redistribution;
-4. any excluded files or constraints;
-5. the source revision to which the decision applies.
+Authorization applies only to material that:
 
-Once that evidence exists, M0-W02-C01-T1-C can resume and the chunk may be completed if the pinned corpus still matches.
+1. concerns mathematical functionality;
+2. is traced to the pinned source manifest;
+3. remains within the Math ownership boundary.
 
-## Non-goals
+There are no additional owner exclusions. Existing project exclusions still apply to non-mathematical AURA material such as secrets, private data, host/worker policies, authorization logic, and unrelated domains.
 
-This decision does not start AURA extraction, select future provider licenses, change package identities, or transmit the draft AURA request.
+## Provenance condition
+
+The source manifest is still a byte-level baseline, not a clean-tree claim. Any selected source whose bytes differ from the pinned snapshot must be reconciled before transfer.
+
+## Result
+
+`EXT-SOURCE-RIGHTS` is satisfied.
+`M0-W02-C01-T1-C`, `M0-W02-C01-T1`, and `M0-W02-C01` may close.
+This decision authorizes transfer; it does not itself perform source extraction or external AURA mutation.
