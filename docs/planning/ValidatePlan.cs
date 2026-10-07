@@ -233,7 +233,7 @@ static Dictionary<string,string> Render(JsonObject p)
     {
         var rid=S(r,"id");Node(rid,"milestone",null);
         var text=new StringBuilder($"# {rid} — {S(r,"title")} / {S(r,"version")}\n\n[Index](../README.md) · [Backlog](../backlog.json) · [Handoff](../implementation-handoff.md)\n\n");
-        text.Append($"Objective: {S(r,"outcome")}\n\nStatus: **{S(r,"status")}**. Gate : **{S(r,"gate")}**. Prerequisites: {string.Join(", ",Strings(r,"depends_on"))}.\n\n");
+        text.Append($"Objective: {S(r,"outcome")}\n\nStatus: **{S(r,"status")}**. Gate: **{S(r,"gate")}**. Prerequisites: {string.Join(", ",Strings(r,"depends_on"))}.\n\n");
         foreach(var w in wps.Where(w=>S(w,"release")==rid))
         {
             var wid=S(w,"id");Node(wid,"workPackage",rid);
