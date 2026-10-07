@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "RS001",
+  "title": "Establish reproducible .NET foundation",
+  "state": "prepared",
+  "commitMessage": "feat: establish reproducible .NET foundation",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M0",
+    "M0-W01",
+    "M0-W01-C01",
+    "M0-W01-C01-T1"
+  ],
+  "contribution": {
+    "summary": "Establish the bounded M0-W01-C01 .NET 10 foundation with locked restore, targeted tests, package creation, helper boundary checks, and isolated local package consumption.",
+    "value": "Creates the first independently verifiable Math package/toolchain slice without AURA or math-provider dependencies and proves the repository can restore, build, test, pack, and consume its output reproducibly.",
+    "debtChanges": [
+      "CI automation remains deferred until the foundation chain is proven by the controlled run; no package publication or external repository mutation is introduced."
+    ],
+    "nextAction": "After durable success, reconcile M0-W01-C01 evidence and refine M0-W01-C02 without starting AURA extraction.",
+    "achievements": [
+      {
+        "projectNode": "M0-W01-C01-T1",
+        "achievement": "A reproducible .NET 10 foundation proves locked restore, build, targeted MSTest execution, dependency-free package creation, PowerShell helper boundaries, and isolated local package consumption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": "."
+  },
+  "mutationPaths": [
+    "global.json",
+    "Directory.Build.props",
+    "Directory.Packages.props",
+    "NuGet.config",
+    "dw.tools.math.slnx",
+    "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+    "src/projects/dw.tools.math.foundation/FoundationContract.cs",
+    "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj",
+    "tests/projects/dw.tools.math.foundation.tests/M0W01C01Tests.cs",
+    "tests/consumers/foundation-smoke/Directory.Build.props",
+    "tests/consumers/foundation-smoke/Directory.Packages.props",
+    "tests/consumers/foundation-smoke/foundation-smoke.csproj",
+    "tests/consumers/foundation-smoke/Program.cs",
+    "scripts/common.ps1",
+    "scripts/restore.ps1",
+    "scripts/build.ps1",
+    "scripts/test.ps1",
+    "scripts/pack.ps1",
+    "scripts/verify-consumer.ps1",
+    "scripts/verify-helpers.ps1",
+    "scripts/verify.ps1",
+    "src/projects/dw.tools.math.foundation/packages.lock.json",
+    "tests/projects/dw.tools.math.foundation.tests/packages.lock.json"
+  ],
+  "validations": [
+    {
+      "id": "sdk-10-0-401",
+      "classification": "preflight",
+      "fileName": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        ".workflow/runs/RS001/staged/checks/sdk-check.ps1"
+      ],
+      "workingDirectory": "."
+    },
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": "."
+    },
+    {
+      "id": "foundation-chain",
+      "classification": "full",
+      "fileName": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "scripts/verify.ps1"
+      ],
+      "workingDirectory": "."
+    }
+  ]
+}
