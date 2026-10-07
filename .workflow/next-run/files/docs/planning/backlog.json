@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.3",
+  "plan_version": "0.1.4",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -806,7 +806,7 @@
       "title": "Boundaries, identities, and localization",
       "kind": "spike",
       "size": "M",
-      "status": "ready",
+      "status": "done",
       "depends_on": [
         "M0-W02-C01"
       ],
@@ -828,14 +828,20 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "Ready after M0-W02-C01 closure. Bound the decision to inherited package/namespace identities, dw.localization treatment, UnitConverter separation, and a standalone package graph with no AURA sibling dependency.",
+      "refinement": "Package identities, passive localization metadata, UnitConverter ownership, and the exact transfer classification are frozen by M0-W02-C02.",
       "files": [
-        "docs/planning/decisions/m0-w02-c02.md"
+        "docs/planning/decisions/m0-w02-c02.md",
+        "docs/planning/evidence/M0-W02-C02-transfer-manifest.json",
+        "docs/planning/ValidateTransferArchitecture.cs"
       ],
       "commands": [
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/planning/decisions/m0-w02-c02.md",
+        "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -843,29 +849,41 @@
           "title": "Contract and outcome",
           "behavior": "Decide inherited package/namespace identities, dw.localization treatment, and the UnitConverter boundary; freeze the transfer manifest.",
           "test_case": "The planned package graph depends on neither AURA nor a sibling path; the catalog is consumable by a sample without AURA localization.",
-          "status": "ready",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/decisions/m0-w02-c02.md",
+            "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C02-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Decide inherited package/namespace identities, dw.localization treatment, and the UnitConverter boundary; freeze the transfer manifest.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             },
             {
               "id": "M0-W02-C02-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: The planned package graph depends on neither AURA nor a sibling path; the catalog is consumable by a sample without AURA localization.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             },
             {
               "id": "M0-W02-C02-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C02-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             }
           ]
         },
@@ -874,29 +892,41 @@
           "title": "Boundaries and integration",
           "behavior": "Compare a qualified shared package with passive metadata; do not copy all dw.localization; break no stable Decision API.",
           "test_case": "Compare a qualified shared package with passive metadata; do not copy all dw.localization; break no stable Decision API.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/decisions/m0-w02-c02.md",
+            "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+          ],
           "subtasks": [
             {
               "id": "M0-W02-C02-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Compare a qualified shared package with passive metadata; do not copy all dw.localization; break no stable Decision API.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             },
             {
               "id": "M0-W02-C02-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Compare a qualified shared package with passive metadata; do not copy all dw.localization; break no stable Decision API.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             },
             {
               "id": "M0-W02-C02-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M0-W02-C02-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m0-w02-c02.md",
+                "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+              ]
             }
           ]
         }
@@ -910,7 +940,7 @@
       "title": "Cross-agent exchange contract",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M0-W02-C02",
         "M0-W01-C02"
@@ -933,9 +963,14 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
+      "refinement": "Ready after M0-W02-C02. Bound the exchange contract to draft owner-mediated requests, attested external state transitions, explicit rollback, and no cross-repository writes.",
+      "files": [
+        "docs/planning/cross-repository-coordination.md",
+        "docs/coordination/requests/MATH-XR-001-aura.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
       "evidence": [],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -944,14 +979,14 @@
           "title": "Contract and outcome",
           "behavior": "Define requests, acknowledgements, external states, cutover criteria, and rollback; prepare the AURA baseline request.",
           "test_case": "A request contains owner, source pin, target files, required tests, and expected response; status remains draft until transmitted.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M0-W02-C03-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Define requests, acknowledgements, external states, cutover criteria, and rollback; prepare the AURA baseline request.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -6698,10 +6733,13 @@
     {
       "id": "EXT-LOCALIZATION",
       "owner": "Math maintainer",
-      "status": "unverified",
+      "status": "satisfied",
       "qualified_by": "M0-W02-C02",
       "acceptance": "Standalone catalogue with qualified dependency or passive metadata; no sibling dependency",
-      "evidence": []
+      "evidence": [
+        "docs/planning/decisions/m0-w02-c02.md",
+        "docs/planning/evidence/M0-W02-C02-transfer-manifest.json"
+      ]
     },
     {
       "id": "EXT-NUMERIC",
