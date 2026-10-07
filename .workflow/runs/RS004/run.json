@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "RS004",
+  "title": "Close source rights and ready transfer-boundary refinement",
+  "state": "prepared",
+  "commitMessage": "docs: close source rights and ready boundary refinement",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M0",
+    "M0-W02",
+    "M0-W02-C01",
+    "M0-W02-C01-T1",
+    "M0-W02-C01-T1-C",
+    "M0-W02-C02",
+    "M0-W02-C02-T1",
+    "M0-W02-C02-T1-A"
+  ],
+  "contribution": {
+    "summary": "Consume the durable human-owner rights attestation, close the remaining M0-W02-C01 rights decision without inventing an open-source license, and ready the first bounded M0-W02-C02 decision leaf.",
+    "value": "Converts the external owner decision into synchronized product and native-DWF progress, preserving proprietary ownership while explicitly authorizing Math copy/modify/package/redistribute actions and opening the next admissible transfer-boundary decision.",
+    "debtChanges": [
+      "No open-source license is asserted; the inherited AURA subset is recorded as owner-authorized proprietary code, with separate qualification required for any third-party material later identified.",
+      "Source extraction itself remains deferred to subsequent product work; this run closes authorization/provenance only and prepares C02 for bounded refinement."
+    ],
+    "nextAction": "Execute M0-W02-C02-T1-A to bound inherited package/namespace identities, dw.localization treatment, and the UnitConverter boundary before any AURA source extraction.",
+    "achievements": [
+      {
+        "projectNode": "M0-W02-C01-T1-C",
+        "achievement": "The owner-rights decision is durably recorded for AURA revision 82a6b435a387a7e116b47a6b2c433ae9e067bf21, authorizing Math copy, modification, packaging, and redistribution of the selected mathematical subset."
+      },
+      {
+        "projectNode": "M0-W02-C01-T1",
+        "achievement": "The provenance-and-rights contract is complete: source identity is pinned, owner authorization is explicit, proprietary ownership is retained, and source-drift reconciliation remains mandatory."
+      },
+      {
+        "projectNode": "M0-W02-C01",
+        "achievement": "M0-W02-C01 is complete with provenance, transfer exclusions, and owner redistribution authority qualified; no AURA source extraction or external mutation has yet occurred."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateTransferProvenance.cs",
+    "docs/planning/evidence/M0-W02-C01-provenance-audit.json",
+    "docs/planning/decisions/m0-w02-c01-source-rights.md",
+    "docs/planning/README.md",
+    "docs/planning/versions/M0.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-provenance",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferProvenance.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
