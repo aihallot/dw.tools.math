@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.5",
+  "plan_version": "0.1.6",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -41,7 +41,7 @@
       "version": "0.2.0-preview",
       "title": "Extract the exact AURA core",
       "outcome": "Deliver standalone exact-math packages and their AURA adoption dossier.",
-      "status": "ready",
+      "status": "in_progress",
       "gate": "G-M1",
       "required_chunks": [
         "M1-W01-C01",
@@ -223,7 +223,7 @@
       "id": "M1-W01",
       "release": "M1",
       "title": "Exact numbers and quantities",
-      "status": "ready",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.quantities/",
         "tests/projects/dw.quantities.tests/",
@@ -1101,7 +1101,7 @@
       "title": "Exact rationals and transport",
       "kind": "code",
       "size": "M",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [
         "M0-W02-C03"
       ],
@@ -1128,22 +1128,24 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C01Tests"
       ],
-      "refinement": "Ready after M0 closure. Transfer only the pinned dw.quantities project and ExactRational slice first; add independent M1W01C01 tests, retain inherited exact-rational parity tests with provenance, and qualify default/bounds before widening scope.",
+      "refinement": "RS007 establishes an executable RED against an intentionally empty standalone dw.quantities project. The oracle requires the canonical type Dw.Quantities.ExactRational to be absent now, retains the accepted behavior cases for GREEN, and pins the authorized AURA source SHA-256 before any source import.",
       "files": [
-        "dw.tools.math.slnx",
         "src/projects/dw.quantities/dw.quantities.csproj",
-        "src/projects/dw.quantities/ExactRational.cs",
+        "src/projects/dw.quantities/packages.lock.json",
         "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/packages.lock.json",
         "tests/projects/dw.quantities.tests/M1W01C01Tests.cs",
-        "tests/projects/dw.quantities.tests/ExactFractionTests.cs",
-        "tests/projects/dw.quantities.tests/ExtractedKernelTests.cs"
+        "docs/planning/ValidateM1W01C01Red.cs",
+        "docs/planning/evidence/M1-W01-C01-red.json"
       ],
       "commands": [
-        "dotnet restore dw.tools.math.slnx --locked-mode",
-        "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --no-build --filter FullyQualifiedName~M1W01C01Tests"
+        "dotnet restore tests/projects/dw.quantities.tests/dw.quantities.tests.csproj --locked-mode",
+        "dotnet run --file docs/planning/ValidateM1W01C01Red.cs -- --check",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C01-red.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -1151,21 +1153,25 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
           "test_case": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
-          "status": "ready",
-          "evidence": [],
+          "status": "in_progress",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C01-red.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C01-red.json"
+              ]
             },
             {
               "id": "M1-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
