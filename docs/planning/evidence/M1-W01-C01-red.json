@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C01-red",
+  "status": "expected-red-observed",
+  "source_repository": "AURA",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_path": "lib/dw.quantities/ExactRational.cs",
+  "expected_source_sha256": "3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a",
+  "math_source_materialized": false,
+  "test_project": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+  "test_filter": "FullyQualifiedName~M1W01C01Tests",
+  "observed_failure_marker": "M1-W01-C01 RED: Dw.Quantities.ExactRational is absent",
+  "test_exit_code_nonzero": true,
+  "main_solution_unchanged": true,
+  "green_acceptance_cases": [
+    "1/3 \u002B 1/6 = 1/2",
+    "-1 1/2 = -3/2",
+    "zero denominator is rejected",
+    "2/-4 canonicalizes to -1/2"
+  ],
+  "limits": [
+    "This RED proves the canonical ExactRational type is not implemented in Math yet.",
+    "It does not claim access to or parity with the authorized source bytes.",
+    "GREEN must materialize only source bytes whose SHA-256 matches the pinned manifest or record an explicit reconciliation."
+  ]
+}
