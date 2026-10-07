@@ -48,7 +48,11 @@ static void ConvergeNativeProgress(PayloadContext payload)
     if (!baseline)
         throw new InvalidOperationException("M1-W01-C01 RED is neither the declared RS007 baseline nor exact target.");
 
-    payload.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T1-R");
+    payload.ProjectPlan.TransitionNode("M1", "ready", "in-progress");
+    payload.ProjectPlan.TransitionNode("M1-W01", "ready", "in-progress");
+    payload.ProjectPlan.TransitionNode("M1-W01-C01", "ready", "in-progress");
+    payload.ProjectPlan.TransitionNode("M1-W01-C01-T1", "ready", "in-progress");
+    payload.ProjectPlan.TransitionNode("M1-W01-C01-T1-R", "ready", "in-progress");
     payload.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T1-R");
     payload.ProjectPlan.TransitionNode("M1-W01-C01-T1-G", "not-ready", "ready");
 }
