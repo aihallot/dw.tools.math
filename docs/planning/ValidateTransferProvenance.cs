@@ -33,7 +33,7 @@ try
 
     var w02 = FindById(backlog, "work_packages", "M0-W02");
     var c01 = FindById(backlog, "chunks", "M0-W02-C01");
-    Require(S(w02, "status") == "in_progress", "M0-W02 must remain in_progress.");
+    Require(S(w02, "status") is "in_progress" or "done", "M0-W02 must be in_progress or done after provenance qualification.");
     Require(S(c01, "status") == "done", "M0-W02-C01 must be done after owner-rights closure.");
     var tasks = A(c01, "tasks").Select(x => x!.AsObject()).ToDictionary(x => S(x, "id"), StringComparer.Ordinal);
     Require(S(tasks["M0-W02-C01-T1"], "status") == "done", "T1 must be done after owner authorization.");
@@ -59,9 +59,9 @@ try
         "Source-rights decision does not record satisfaction.");
 
     var c02 = FindById(backlog, "chunks", "M0-W02-C02");
-    Require(S(c02, "status") == "ready", "M0-W02-C02 must be ready after C01 closure.");
+    Require(S(c02, "status") is "ready" or "done", "M0-W02-C02 must be ready or done after C01 closure.");
 
-    Console.WriteLine("transfer provenance valid: 54 selected files; owner rights satisfied; M0-W02-C01 closed; M0-W02-C02 ready");
+    Console.WriteLine("transfer provenance valid: 54 selected files; owner rights satisfied; M0-W02-C01 closed");
     return 0;
 }
 catch (Exception ex)
