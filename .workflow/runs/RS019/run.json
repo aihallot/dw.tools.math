@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS019",
+  "title": "Qualify strict catalogue boundaries and preserve inherited source for parity",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded catalogue resolution and capture AURA parity sources",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C01",
+    "M1-W02-C01-T2",
+    "M1-W02-C01-T2-R",
+    "M1-W02-C01-T2-G",
+    "M1-W02-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Extend the standalone exact-unit resolver with bounded candidate discovery and canonical ID lookup; verify alias ambiguity, culture isolation, symbol case, token limits and BigInteger exact roundtrips; capture both full pinned AURA mathematical catalogue sources for a later explicit parity review.",
+    "value": "Adds a stronger deterministic unit-catalog boundary with eight independent qualification tests and durable full-source review material, without claiming unverified source parity or expression-parser compatibility.",
+    "debtChanges": [
+      "The AURA standard catalogue (11 KB) and expression resolver (3 KB) remain adaptation references; full approved source texts are captured in Math for parity review, not compiled or claimed equivalent to the 14-unit subset.",
+      "The inherited expression resolver depends on dw.quantities.expression and accepts a culture argument; later T2-V must explicitly reconcile that API and catalog IDs, aliases, constants and omissions.",
+      "Only M1-W02-C01-T2-G is completed; T2-V and the phase stay open pending source-by-source parity decisions. No sibling repository is modified."
+    ],
+    "nextAction": "Review both captured AURA catalogue sources, construct a defensible inherited-unit parity ledger, qualify or explicitly defer each relevant alias/profile family, and complete T2-V only when C01 acceptance is demonstrably satisfied.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C01-T2-G",
+        "achievement": "The standalone catalog adds bounded deterministic alias candidate discovery and exact canonical ID lookup; eight independent boundary tests, locked solution build, full quantities tests and foundation regressions pass, and both owner-authorized AURA source texts are captured by pinned SHA for transparent parity review."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+    "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+    "tests/projects/dw.quantities.tests/M1W02C01BoundaryTests.cs",
+    "docs/planning/evidence/M1-W02-C01-AURA-StandardUnitCatalog.txt",
+    "docs/planning/evidence/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt",
+    "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
