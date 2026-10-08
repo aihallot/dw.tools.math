@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "id": "RS020",
+  "title": "Qualify all inherited standard-unit mathematical definitions and close C01",
+  "commitMessage": "feat: qualify inherited exact standard unit catalogue parity",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C01",
+    "M1-W02-C01-T2",
+    "M1-W02-C01-T2-R",
+    "M1-W02-C01-T2-G",
+    "M1-W02-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Preserve all 58 inherited AURA 0.2.0 unit definitions in a separate BCL-only compiled catalogue, verify exact deterministic source adaptation from pinned SHA, qualify original constants and explicit-profile resolution with eleven independent tests, and complete M1-W02-C01.",
+    "value": "Replaces a 14-unit-only migration gap with full inherited mathematical unit-data coverage, exact BigInteger information-prefix scaling and original IDs, while retaining the already-qualified strict API and keeping AURA's presentation/localization and implicit culture priorities out of Math.",
+    "debtChanges": [
+      "The owner-authorized 11 KB AURA catalogue's mathematical data is transformed reproducibly; LocalizedText, FrenchName presentation and TryGetMetadata are intentionally retained as host-side policy rather than transferred into Math.",
+      "The original IExpressionUnitResolver.Resolve(token,culture) is not ported: passive exact Math resolution uses explicit profiles and canonical IDs. Bounded parser integration belongs to successor M1-W02-C02.",
+      "The earlier 14-unit strict catalogue includes an explicitly labelled Australian 570 mL beer-pint extension absent from the inherited AURA 0.2.0 catalogue; these surfaces remain distinct without pretending identical unit inventories."
+    ],
+    "nextAction": "Refine M1-W02-C02 bounded exact expression parsing against the pinned AURA ExpressionParser source, then integrate explicit unit resolution and its accepted resource guards.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C01-T2-V",
+        "achievement": "The full source-pinned AURA mathematical catalogue is deterministically adapted to 58 original unit definitions, with 11 independent parity tests passing exact original IDs, dimensions, constants, prefixes, aliases, temperature semantics, strict ambiguity and host isolation plus project and foundation regressions."
+      },
+      {
+        "projectNode": "M1-W02-C01-T2",
+        "achievement": "Standard unit resolution boundaries and inherited-data parity are verified; exact profiles and canonical IDs replace legacy implicit culture priority, with this deliberate semantic difference and parser ownership recorded in evidence."
+      },
+      {
+        "projectNode": "M1-W02-C01",
+        "achievement": "The standalone standard-unit catalogue chunk is complete: initial strict 14-unit Math surface, full separate 58-unit inherited mathematical data, BCL-only locale metadata, exact conversion, explicit profiles and durable qualification without sibling-repository modification."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs",
+    "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+    "tests/projects/dw.quantities.tests/M1W02C01SourceParityTests.cs",
+    "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs",
+      "sourcePath": "files/src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs"
+    },
+    {
+      "path": "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+      "sourcePath": "files/src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/M1W02C01SourceParityTests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M1W02C01SourceParityTests.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS019/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.18"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/9/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/9/tasks/1/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/9/tasks/1/subtasks/2/status",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/1/phases/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/1/phases/0/tasks/1/subtasks/2/state",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+      "jsonPointer": "/source_review/0/sha256",
+      "expectedValue": "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+      "jsonPointer": "/source_review/1/sha256",
+      "expectedValue": "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561"
+    }
+  ]
+}
