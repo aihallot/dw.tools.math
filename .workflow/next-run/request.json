@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "id": "RS014",
+  "title": "Characterize dimensions, quantities and units; establish C03 RED",
+  "commitMessage": "test: establish dimensions quantities and units RED",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T1-R",
+    "M1-W01-C03-T1-G"
+  ],
+  "contribution": {
+    "summary": "Verify three pinned authorized AURA mathematical sources, record bounded public declarations and candidate dependencies, establish independent missing-type RED for DimensionVector, Quantity and UnitDefinition, and ready C03 GREEN without speculative API claims.",
+    "value": "Removes the main transfer uncertainty for a three-source dimensions/quantities slice and establishes precise source provenance and a reproducible RED, enabling the next bounded run to integrate and qualify mathematical unit and temperature semantics.",
+    "debtChanges": [
+      "The C03 RED verifies that three Math types are absent, not arithmetic or affine-temperature behavior; these acceptance cases remain unqualified.",
+      "Source declaration excerpts are read-only evidence and cannot substitute for compilation and direct public API tests.",
+      "Dimension overflow and absolute/interval temperature semantics require explicit behavior qualification before C03 is complete."
+    ],
+    "nextAction": "Use the recorded three-source declarations, dependencies and pinned hashes to transfer and qualify the C03 quantities, dimensions and temperature slice through independent GREEN and boundary tests.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C03-T1-R",
+        "achievement": "The three owner-authorized AURA sources are individually SHA-256 verified and inspected for declarations/imports, and independently targeted tests observe that DimensionVector, Quantity and UnitDefinition are absent from Math before transfer."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+    "docs/planning/evidence/M1-W01-C03-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M1W01C03Tests.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS013/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.12"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/7/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/0/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/0/phases/2/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/head",
+      "expectedValue": "82a6b435a387a7e116b47a6b2c433ae9e067bf21"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/10/sha256",
+      "expectedValue": "2c2ebabbb800ff151309dbc4f2cbb611091f687f30dcc5fb742e99339406e5b9"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/15/sha256",
+      "expectedValue": "f9121bedc85e810a958f6d2f833652a59f5f7b66a81a8445e9d0c6cec7104e6f"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/16/sha256",
+      "expectedValue": "a8eaf48386ec10d6586a8f7be80765fb6e21c6a18acc5309d21a6d544dba676f"
+    }
+  ]
+}
