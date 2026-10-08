@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "RS008",
+  "title": "Transfer and verify ExactRational GREEN",
+  "state": "prepared",
+  "commitMessage": "feat: transfer and verify ExactRational",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C01",
+    "M1-W01-C01-T1",
+    "M1-W01-C01-T1-R",
+    "M1-W01-C01-T1-G",
+    "M1-W01-C01-T1-V",
+    "M1-W01-C01-T2",
+    "M1-W01-C01-T2-R"
+  ],
+  "contribution": {
+    "summary": "Install the exact authorized ExactRational source bytes from the pinned read-only AURA baseline, discover the actual compiled type and usable public API by bounded reflection, qualify the accepted rational behaviors, integrate dw.quantities into the main solution, and complete T1 verification.",
+    "value": "Moves the first M1 production slice from durable RED to source-defensible GREEN without guessing source bytes, namespace, constructor, parser, operator, or representation member names, and records the actual compiled type identity for durable verification.",
+    "debtChanges": [
+      "RS008 depends on the authorized read-only AURA baseline file remaining available at the observed root and matching SHA-256 3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a.",
+      "ExactRational boundary questions around default value, input/intermediate bounds, and no-double guarantees remain for M1-W01-C01-T2."
+    ],
+    "nextAction": "Execute M1-W01-C01-T2-R to falsify the default(ExactRational), bounded-input/intermediate, and no-double boundary contract before completing the chunk.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C01-T1-G",
+        "achievement": "The exact authorized AURA ExactRational.cs bytes are installed only after SHA-256 verification, and a bounded public-reflection oracle discovers the unique compiled ExactRational type plus usable construction, representation, mixed-number, and binary-operation paths without hard-coded API identities."
+      },
+      {
+        "projectNode": "M1-W01-C01-T1-V",
+        "achievement": "The exact-rational GREEN is durably verified in the main solution, the actual compiled type full name and source hash are recorded, the accepted behavioral oracle passes, and the complete M0 foundation verification chain still passes."
+      },
+      {
+        "projectNode": "M1-W01-C01-T1",
+        "achievement": "The ExactRational contract-and-outcome task is complete from durable RED through exact-source GREEN and integrated verification, without widening into decimal, binary, quantity, unit, or tolerance scope."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "dw.tools.math.slnx",
+    "src/projects/dw.quantities/ExactRational.cs",
+    "tests/projects/dw.quantities.tests/M1W01C01Tests.cs",
+    "docs/planning/ValidateM1W01C01Green.cs",
+    "docs/planning/evidence/M1-W01-C01-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "exact-rational-green",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM1W01C01Green.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 600
+    },
+    {
+      "id": "planning-structure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-adoption",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
