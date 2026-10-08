@@ -210,3 +210,11 @@ static (int Code,string Output) Run(string root,string exe,params string[] args)
     Console.WriteLine(output);
     return(proc.ExitCode,output);
 }
+
+static void RunRequired(string root,string exe,params string[] args)
+{
+    var result=Run(root,exe,args);
+    if(result.Code!=0)
+        throw new InvalidOperationException(
+            exe+" "+string.Join(" ",args)+" exited "+result.Code+": "+Significant(result.Output));
+}
