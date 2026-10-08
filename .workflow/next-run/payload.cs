@@ -37,6 +37,7 @@ var evidence = new JsonObject
     ["remaining_verification"] = "T2-V must verify integration, resource-budget behavior and test coverage; no arbitrary numeric size limit is claimed."
 };
 p.Files.WriteComplete(Evidence, evidence.ToJsonString(new JsonSerializerOptions {WriteIndented=true})+"\n");
+var baselineProgress = false;
 p.Json.EditObject("docs/planning/backlog.json", root =>
 {
     root["plan_version"] = "0.1.9";
@@ -46,7 +47,8 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
     var verify = task["subtasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01-C01-T2-V");
     var baseline = (string?)green["status"] == "ready" && (string?)verify["status"] == "planned";
     var target = (string?)green["status"] == "done" && (string?)verify["status"] == "ready";
-    if (!baseline && !target || (string?)task["status"] != "in_progress")
+    baselineProgress = baseline;
+    if ((!baseline && !target) || (string?)task["status"] != "in_progress")
         throw new InvalidOperationException("RS010 product status neither baseline nor target.");
     green["status"] = "done";
     green["evidence"] = p.Json.StringArray(Evidence);
@@ -56,9 +58,17 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
         evidenceList.Add((JsonNode?)JsonValue.Create(Evidence));
 });
 
-p.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T2-G");
-p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2-G");
-p.ProjectPlan.TransitionNode("M1-W01-C01-T2-V","not-ready","ready");
+if (baselineProgress)
+{
+    p.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T2-G");
+    p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2-G");
+    p.ProjectPlan.TransitionNode("M1-W01-C01-T2-V", "not-ready", "ready");
+}
+else
+{
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-G", "done");
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-V", "ready");
+}
 
 var render = Run(p.RepositoryRoot, "dotnet", "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
 if (render.Code != 0)
