@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C04-qualified",
+  "status": "qualified-with-declared-exact-comparison-scope",
+  "aura_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "imported_source_path": "src/projects/dw.quantities/ApproximateEquivalence.cs",
+  "imported_source_sha256": "34c1726fe637ea4ed3da41b793a5c9e9ef3f0088baf21d8e96c42aabd33949dc",
+  "comparison_policy": "src/projects/dw.quantities/ExactComparisonPolicy.cs",
+  "pretransfer_RED": "docs/planning/evidence/M1-W01-C04-red.json",
+  "tested_contracts": [
+    "Canonical rational equality is independent of numerator/denominator representation.",
+    "1 m and 101 cm are equivalent on inclusive 1 cm absolute-tolerance boundary; atol zero refuses.",
+    "Symmetric relative bound uses max of absolute operands; zero and large BigInteger values stay exact.",
+    "Mismatched quantity dimensions, negative tolerances and dimensional relative tolerances are rejected.",
+    "Dimensionless zero is admitted as absolute tolerance with explicit nonnegative relative tolerance.",
+    "Temperature comparisons use canonical base-scale tagged measurements; absolute tolerance is an interval, never an absolute temperature.",
+    "Mixed absolute/interval temperatures, negative tolerance and unknown temperature kinds are refused."
+  ],
+  "focused_filter": "FullyQualifiedName~M1W01C04",
+  "focused_tests_passed": true,
+  "dw_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "limitations": [
+    "The imported ApproximateEquivalence public API is transferred with exact source provenance, but these new behavioral tests qualify the independent ExactComparisonPolicy entry points rather than every inherited overload.",
+    "TemperatureMeasurement inputs must be normalized to a shared base such as Kelvin by callers using the typed UnitDefinition overload.",
+    "Bare Quantity still does not encode affine temperature point/interval kind.",
+    "No double fallback, global resource-budget guarantee, AURA adoption or other sibling repository mutation is claimed."
+  ]
+}

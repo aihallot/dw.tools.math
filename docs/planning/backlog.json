@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.15",
+  "plan_version": "0.1.16",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1530,7 +1530,7 @@
       "title": "Exact comparisons and tolerances",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M1-W01-C02",
         "M1-W01-C03"
@@ -1556,10 +1556,25 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C04Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS017 pin-verifies and transfers ApproximateEquivalence; records independent missing-API T1/T2 RED; implements explicit dimension-aware quantity and tagged temperature exact comparison; qualifies inclusive, zero, negative and incompatible tolerances with 8 independent oracles, full project and foundation regression.",
+      "files": [
+        "src/projects/dw.quantities/ApproximateEquivalence.cs",
+        "src/projects/dw.quantities/ExactComparisonPolicy.cs",
+        "tests/projects/dw.quantities.tests/M1W01C04RedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W01C04Tests.cs",
+        "docs/planning/evidence/M1-W01-C04-red.json",
+        "docs/planning/evidence/M1-W01-C04-qualified.json"
+      ],
+      "commands": [
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C04",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C04-red.json",
+        "docs/planning/evidence/M1-W01-C04-qualified.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -1567,29 +1582,38 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ApproximateEquivalence and specify contracts for quantities and temperature.",
           "test_case": "1/2=2/4 exactly; 1 m vs 101 cm with atol=1 cm is equivalent on the inclusive boundary; with atol=0 it is not.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C04-red.json",
+            "docs/planning/evidence/M1-W01-C04-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C04-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 1/2=2/4 exactly; 1 m vs 101 cm with atol=1 cm is equivalent on the inclusive boundary; with atol=0 it is not.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-red.json"
+              ]
             },
             {
               "id": "M1-W01-C04-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer ApproximateEquivalence and specify contracts for quantities and temperature.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C04-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C04-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-qualified.json"
+              ]
             }
           ]
         },
@@ -1598,29 +1622,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject negative or dimensional rtol; forbid absolute temperature as a tolerance; both zero values have zero relative difference.",
           "test_case": "Reject negative or dimensional rtol; forbid absolute temperature as a tolerance; both zero values have zero relative difference.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C04-red.json",
+            "docs/planning/evidence/M1-W01-C04-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C04-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject negative or dimensional rtol; forbid absolute temperature as a tolerance; both zero values have zero relative difference.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-red.json"
+              ]
             },
             {
               "id": "M1-W01-C04-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject negative or dimensional rtol; forbid absolute temperature as a tolerance; both zero values have zero relative difference.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C04-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C04-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C04-qualified.json"
+              ]
             }
           ]
         }
