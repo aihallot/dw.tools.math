@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.10",
+  "plan_version": "0.1.11",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1250,7 +1250,7 @@
       "title": "Decimal, binary, and rounding",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M1-W01-C01"
       ],
@@ -1276,10 +1276,20 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS012 independently pins and inspects both authorized source candidates, records T1 RED before transfer, and reserves behavior/boundary qualification for subsequent exact tests.",
+      "files": [
+        "src/projects/dw.quantities/ExactBinaryNumber.cs",
+        "src/projects/dw.quantities/ExactDecimalFormatter.cs",
+        "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
+        "docs/planning/evidence/M1-W01-C02-red.json"
+      ],
+      "commands": [
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C02Tests",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C02-red.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -1287,21 +1297,23 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
           "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
-          "status": "planned",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-red.json"
+              ]
             },
             {
               "id": "M1-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

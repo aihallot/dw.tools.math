@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS012",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-08T10:03:16.8859038+00:00",
+  "completedAtUtc": "2026-10-08T10:03:21.618669+00:00",
+  "durationMilliseconds": 4732,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C02",
+    "M1-W01-C02-T1",
+    "M1-W01-C02-T1-R",
+    "M1-W01-C02-T1-G"
+  ],
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
+    "docs/planning/evidence/M1-W01-C02-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M1.md",
+    "docs/planning/evidence/M1-W01-C02-red.json",
+    "tests/projects/dw.quantities.tests/M1W01C02Tests.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.58",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "0a5e2bc34631046f928533ea43be343cd43657d4d60a1859db1495716e32cbd4"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS012/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1200,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-9c1faef4157f48d38c82a3dea331b310\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1200000,
+      "DurationMilliseconds": 4640,
+      "StandardOutput": "[files.replace-from-staged] CHANGED path=tests/projects/dw.quantities.tests/M1W01C02Tests.cs bytes=664\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 85 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\dw.quantities.tests.csproj (in 231 ms).\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Failed TransferContractRemainsRedUntilBothTypesAreMaterialized [26 ms]\r\n  Error Message:\r\n   Assertion failed. Expected condition to be true.\r\nM1-W01-C02-T1 RED: ExactBinaryNumber and ExactDecimalFormatter are absent\r\n\r\nactual: false\r\n\r\nAssert.IsTrue(names.Contains(\u0022ExactBinaryNumber\u0022) \u0026\u0026 names.Contains(\u0022ExactDecimalFormatter\u0022))\r\n  Stack Trace:\r\n     at Dw.Quantities.Tests.M1W01C02Tests.TransferContractRemainsRedUntilBothTypesAreMaterialized() in D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\M1W01C02Tests.cs:line 16\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\r\n\r\nTotal tests: 1\r\n     Failed: 1\r\n Total time: 0,6701 Seconds\r\n\nTest Run Failed.\r\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M1-W01-C02-red.json bytes=1752\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C02 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C02-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C02-T1-R not-ready-\u003Eready\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M1-W01-C02-T1-R activated=M1-W01-C02,M1-W01-C02-T1,M1-W01-C02-T1-R\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C02-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C02-T1-G not-ready-\u003Eready\r\nplanning valid: 0.1.11 | 53 chunks | c70103e9a869de892452ec028c6c18045f08c039002d6b82f1067d0b3acddb2e | mode --write\r\n\n\r\n[payload] OK operations=9 changed=9 no-change=0 verified=0 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS012/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
+        "Status": 1,
+        "Summary": "bytes=664",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "90c2ee3a1039f96ac3d570b0727ab1cf6e0f6e754128647f43494e5e70322df3",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M1-W01-C02-red.json",
+        "Status": 1,
+        "Summary": "bytes=1752",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fffbdcea9accf33c3336dba495d7251b14b3f0da65754576dc2c723fce7baf5e",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "d4ab97c84b8db7b8cd48e6c1e2644eeff3d1171f2a7a1d34972b638a36837529",
+        "AfterSha256": "c70103e9a869de892452ec028c6c18045f08c039002d6b82f1067d0b3acddb2e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C02 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "abd4d9b9fc28e128c1e5f31641457066e82fcd7d31753d16961fd5b2be4c9675",
+        "AfterSha256": "39ab2f6cde13b20a39ffcc8d68c0b4e21fce3b4f720cc4079d68d5faaefca518",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C02-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "39ab2f6cde13b20a39ffcc8d68c0b4e21fce3b4f720cc4079d68d5faaefca518",
+        "AfterSha256": "d63a0d35608ed01c8e1f642702fca67796dcfd826cec3cff081a1c41cd313680",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C02-T1-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "d63a0d35608ed01c8e1f642702fca67796dcfd826cec3cff081a1c41cd313680",
+        "AfterSha256": "b0b3d73f117140ef5d584cf2efadad02cc71a86cdb33d71e0f7ac1236ae8da47",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M1-W01-C02-T1-R activated=M1-W01-C02,M1-W01-C02-T1,M1-W01-C02-T1-R",
+        "Details": null,
+        "BeforeSha256": "b0b3d73f117140ef5d584cf2efadad02cc71a86cdb33d71e0f7ac1236ae8da47",
+        "AfterSha256": "fdb91292d060103c3800795a0137722e2c9376040c9388fa8feef3e19b7aec77",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C02-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "fdb91292d060103c3800795a0137722e2c9376040c9388fa8feef3e19b7aec77",
+        "AfterSha256": "87f13e321a3df689f1abb19b0b4e2f989f599d949d2dc3ddd40c4eb85e0dca81",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C02-T1-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "87f13e321a3df689f1abb19b0b4e2f989f599d949d2dc3ddd40c4eb85e0dca81",
+        "AfterSha256": "32c03cab183910217622b544333e2c215f183053dc422209f386e2b44b2915c3",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-plan-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261008T100237Z-2b9d5255828a8aaa",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "a00cc1d17605bc454bd7e1b4ca864da41f098d4b",
+  "invocationStartedAtUtc": "2026-10-08T10:02:37.876809+00:00",
+  "invocationDurationMilliseconds": 43741,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS012",
+      "title": "Characterize exact binary and decimal source; establish C02 RED",
+      "projectNodes": [
+        "M1",
+        "M1-W01",
+        "M1-W01-C02",
+        "M1-W01-C02-T1",
+        "M1-W01-C02-T1-R",
+        "M1-W01-C02-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Pin and inspect both authorized AURA ExactBinaryNumber and ExactDecimalFormatter sources, record their actual declared public surfaces, install an independent missing-types RED contract, refine C02 product readiness and align typed native DWF progress.",
+      "value": "Creates grounded source-level evidence and a reproducible RED for the next substantial exact binary64 and decimal transfer, eliminating guessed APIs and preserving independent behavioral qualification.",
+      "debtChanges": [
+        "The RED test proves missing types, not binary64 or rounding correctness. The source-declaration inventory supplies the observed API for subsequent GREEN and boundary tests.",
+        "C02 T2 boundary checks for non-finite input, subnormals, signed zero and precision remain unqualified; no AURA source is mutated."
+      ],
+      "nextAction": "Use the recorded source declarations to transfer and qualify both exact binary and decimal types in one substantial GREEN and boundary-verification run.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M1-W01-C02-T1-R",
+          "achievement": "Both authorized binary/decimal source candidates are independently hash-verified and their declarations recorded, while the Math assembly\u0027s missing-type RED is observed before transfer."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/README.md",
+        "docs/planning/backlog.json",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M1-W01-C02-red.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M1.md",
+        "tests/projects/dw.quantities.tests/M1W01C02Tests.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-plan-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M1",
+        "objective": "Extract the exact AURA core",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M1 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M1-W01",
+        "objective": "Exact numbers and quantities",
+        "kind": "work-package",
+        "parentId": "M1",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M1-W01 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C02",
+        "objective": "Decimal, binary, and rounding",
+        "kind": "phase",
+        "parentId": "M1-W01",
+        "state": "in-progress",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M1-W01-C02 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C02-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M1-W01-C02",
+        "state": "in-progress",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C02-T1 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C02-T1",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C02-T1-R in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C02-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M1-W01-C02-T1",
+        "state": "ready",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C02-T1-G in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M1-W01-C02",
+        "objective": "Decimal, binary, and rounding",
+        "kind": "phase",
+        "parentId": "M1-W01",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M1-W01-C02 in docs/planning/backlog.json.",
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M1-W01-C02-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M1-W01-C02",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C02-T1 in docs/planning/backlog.json.",
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M1-W01-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C02-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C02-T1-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both authorized binary/decimal source candidates are independently hash-verified and their declarations recorded, while the Math assembly\u0027s missing-type RED is observed before transfer."
+      },
+      {
+        "id": "M1-W01-C02-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M1-W01-C02-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C02-T1-G in docs/planning/backlog.json.",
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M1-W01-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C02-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C02-T1-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both authorized binary/decimal source candidates are independently hash-verified and their declarations recorded, while the Math assembly\u0027s missing-type RED is observed before transfer."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS012",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS012",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "a00cc1d17605bc454bd7e1b4ca864da41f098d4b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "37bcbfddcb6822fbc0e2ed78512746e45a3e56607e4ecb7f4d7d0a1fa504b0e4"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: establish exact binary and decimal RED",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

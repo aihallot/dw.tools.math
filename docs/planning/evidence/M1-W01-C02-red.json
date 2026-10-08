@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C02-red",
+  "status": "expected-type-absence-observed",
+  "test_project": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+  "test_filter": "FullyQualifiedName~M1W01C02Tests.TransferContractRemainsRedUntilBothTypesAreMaterialized",
+  "observed_failure_marker": "M1-W01-C02-T1 RED: ExactBinaryNumber and ExactDecimalFormatter are absent",
+  "source_candidates": [
+    {
+      "path": "lib/dw.quantities/ExactBinaryNumber.cs",
+      "sha256": "cda9835b8a83f01239d344bd83b4144c7a6e9dcad59d9c2cc385103b76a2225d",
+      "declaration_lines": [
+        "namespace dw.quantities;",
+        "public static class ExactBinaryNumber",
+        "public static ExactRational FromDouble(double value)"
+      ],
+      "declaration_count_captured": 3
+    },
+    {
+      "path": "lib/dw.quantities/ExactDecimalFormatter.cs",
+      "sha256": "20499543d9635a291a54ff91763ece266176fa08bf67421d173caae5f59d45ce",
+      "declaration_lines": [
+        "namespace dw.quantities;",
+        "public enum DecimalRoundingMode",
+        "public static class ExactDecimalFormatter",
+        "public const int MaximumDecimalPlaces = 100;",
+        "public static string Format(ExactRational value, int decimalPlaces, DecimalRoundingMode rounding)"
+      ],
+      "declaration_count_captured": 5
+    }
+  ],
+  "accepted_future_oracles": [
+    "FromDouble(0.5) = 1/2",
+    "FromDouble(0.1) = 3602879701896397/36028797018963968",
+    "round \u002B/-1.25 to one digit under documented mode",
+    "reject NaN and infinity; test subnormal and signed-zero semantics"
+  ],
+  "limits": "RED proves absence only; source declarations are read-only discovery, not behavior or boundary qualification."
+}
