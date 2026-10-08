@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.7",
+  "plan_version": "0.1.8",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1113,7 +1113,7 @@
         "M1-W01-C01-R2"
       ],
       "deliverables": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-      "acceptance": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+      "acceptance": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
       "boundary_acceptance": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
       "test_suites": [
         "CONTRACT",
@@ -1152,7 +1152,8 @@
       ],
       "evidence": [
         "docs/planning/evidence/M1-W01-C01-red.json",
-        "docs/planning/evidence/M1-W01-C01-green.json"
+        "docs/planning/evidence/M1-W01-C01-green.json",
+        "docs/planning/evidence/M1-W01-C01-boundary-red.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1160,7 +1161,7 @@
           "id": "M1-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-          "test_case": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+          "test_case": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W01-C01-red.json",
@@ -1170,7 +1171,7 @@
             {
               "id": "M1-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+              "description": "Write and execute a targeted independent test: 1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C01-red.json"
@@ -1201,21 +1202,23 @@
           "title": "Boundaries and integration",
           "behavior": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
           "test_case": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C01-boundary-red.json"
+              ]
             },
             {
               "id": "M1-W01-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -1247,7 +1250,7 @@
         "M1-W01-C02-R2"
       ],
       "deliverables": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
+      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
       "boundary_acceptance": "Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
       "test_suites": [
         "CONTRACT",
@@ -1273,14 +1276,14 @@
           "id": "M1-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-          "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
+          "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
+              "description": "Write and execute a targeted independent test: FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
               "status": "planned",
               "evidence": []
             },
@@ -1351,8 +1354,8 @@
         "M1-W01-C03-R2"
       ],
       "deliverables": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-      "acceptance": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
-      "boundary_acceptance": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+      "acceptance": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+      "boundary_acceptance": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
       "test_suites": [
         "CONTRACT",
         "BOUNDARY",
@@ -1378,14 +1381,14 @@
           "id": "M1-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-          "test_case": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+          "test_case": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+              "description": "Write and execute a targeted independent test: 3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
               "status": "planned",
               "evidence": []
             },
@@ -1408,22 +1411,22 @@
         {
           "id": "M1-W01-C03-T2",
           "title": "Boundaries and integration",
-          "behavior": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-          "test_case": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+          "behavior": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+          "test_case": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C03-T2-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+              "description": "Write and execute a targeted independent test: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
               "status": "planned",
               "evidence": []
             },
             {
               "id": "M1-W01-C03-T2-G",
               "title": "GREEN",
-              "description": "Implement only: Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+              "description": "Implement only: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
               "status": "planned",
               "evidence": []
             },
@@ -1668,7 +1671,7 @@
         "M1-W02-C02-R2"
       ],
       "deliverables": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
-      "acceptance": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+      "acceptance": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
       "boundary_acceptance": "Characterize 4096 characters, 256 tokens, depth 32, magnitude 256 digits, and power/root 16 limits; execute no C# and allow no free variable.",
       "test_suites": [
         "CONTRACT",
@@ -1693,14 +1696,14 @@
           "id": "M1-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
-          "test_case": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+          "test_case": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+              "description": "Write and execute a targeted independent test: Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
               "status": "planned",
               "evidence": []
             },
@@ -2178,7 +2181,7 @@
         "M2-W01-C02-R2"
       ],
       "deliverables": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
-      "acceptance": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
+      "acceptance": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
       "boundary_acceptance": "NaN, infinity, complex values, and intervals have declared policies; no implicit widening; size and immutability are bounded.",
       "test_suites": [
         "CONTRACT",
@@ -2203,14 +2206,14 @@
           "id": "M2-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
-          "test_case": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
+          "test_case": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M2-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
+              "description": "Write and execute a targeted independent test: An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
               "status": "planned",
               "evidence": []
             },
@@ -2487,7 +2490,7 @@
         "M2-W02-C02-R2"
       ],
       "deliverables": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
-      "acceptance": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
+      "acceptance": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
       "boundary_acceptance": "Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
       "test_suites": [
         "CONTRACT",
@@ -2512,14 +2515,14 @@
           "id": "M2-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
-          "test_case": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
+          "test_case": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M2-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
+              "description": "Write and execute a targeted independent test: 5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
               "status": "planned",
               "evidence": []
             },
@@ -2796,7 +2799,7 @@
       ],
       "deliverables": "Introduce dense forms and an explicitly admitted sparse strategy, precision policy, and provider conversion.",
       "acceptance": "Verify 2x2 addition and multiplication by hand; reject incompatible shapes and allocation beyond budget.",
-      "boundary_acceptance": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+      "boundary_acceptance": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
       "test_suites": [
         "CONTRACT",
         "BOUNDARY",
@@ -2850,22 +2853,22 @@
         {
           "id": "M3-W01-C02-T2",
           "title": "Boundaries and integration",
-          "behavior": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
-          "test_case": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+          "behavior": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+          "test_case": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M3-W01-C02-T2-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+              "description": "Write and execute a targeted independent test: Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
               "status": "planned",
               "evidence": []
             },
             {
               "id": "M3-W01-C02-T2-G",
               "title": "GREEN",
-              "description": "Implement only: Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+              "description": "Implement only: Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
               "status": "planned",
               "evidence": []
             },
@@ -3515,7 +3518,7 @@
         "M4-W01-C02-R2"
       ],
       "deliverables": "Translate the IR/provider subset and restore results with domains and conditions.",
-      "acceptance": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
+      "acceptance": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
       "boundary_acceptance": "An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
       "test_suites": [
         "CONTRACT",
@@ -3540,14 +3543,14 @@
           "id": "M4-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Translate the IR/provider subset and restore results with domains and conditions.",
-          "test_case": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
+          "test_case": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M4-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: (x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
+              "description": "Write and execute a targeted independent test: (x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
               "status": "planned",
               "evidence": []
             },
@@ -3618,7 +3621,7 @@
         "M4-W01-C03-R2"
       ],
       "deliverables": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
-      "acceptance": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
+      "acceptance": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
       "boundary_acceptance": "Report unproved rules; reject contradictory assumptions; enforce node/time budgets and never invent success after interruption.",
       "test_suites": [
         "CONTRACT",
@@ -3643,14 +3646,14 @@
           "id": "M4-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
-          "test_case": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
+          "test_case": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M4-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
+              "description": "Write and execute a targeted independent test: Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
               "status": "planned",
               "evidence": []
             },
@@ -3721,7 +3724,7 @@
         "M4-W02-C01-R2"
       ],
       "deliverables": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
-      "acceptance": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+      "acceptance": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
       "boundary_acceptance": "Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
       "test_suites": [
         "CONTRACT",
@@ -3746,14 +3749,14 @@
           "id": "M4-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
-          "test_case": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+          "test_case": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M4-W02-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+              "description": "Write and execute a targeted independent test: d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
               "status": "planned",
               "evidence": []
             },
@@ -3824,7 +3827,7 @@
         "M4-W02-C02-R2"
       ],
       "deliverables": "Adapt subset equations/inequalities with domains and conditional solutions.",
-      "acceptance": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+      "acceptance": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
       "boundary_acceptance": "Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
       "test_suites": [
         "CONTRACT",
@@ -3849,14 +3852,14 @@
           "id": "M4-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt subset equations/inequalities with domains and conditional solutions.",
-          "test_case": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+          "test_case": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M4-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+              "description": "Write and execute a targeted independent test: x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
               "status": "planned",
               "evidence": []
             },
@@ -4031,7 +4034,7 @@
         "M5-W01-C01-R2"
       ],
       "deliverables": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
-      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
+      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
       "boundary_acceptance": "Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
       "test_suites": [
         "CONTRACT",
@@ -4056,14 +4059,14 @@
           "id": "M5-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
-          "test_case": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
+          "test_case": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M5-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
+              "description": "Write and execute a targeted independent test: Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
               "status": "planned",
               "evidence": []
             },
@@ -4443,7 +4446,7 @@
         "M5-W02-C01-R2"
       ],
       "deliverables": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
-      "acceptance": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+      "acceptance": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
       "boundary_acceptance": "No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
       "test_suites": [
         "CONTRACT",
@@ -4468,14 +4471,14 @@
           "id": "M5-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
-          "test_case": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+          "test_case": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M5-W02-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+              "description": "Write and execute a targeted independent test: For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
               "status": "planned",
               "evidence": []
             },
@@ -4751,7 +4754,7 @@
         "M6-W01-C01-R2"
       ],
       "deliverables": "Adapt linear/spline interpolation and least squares within the qualified scope.",
-      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
+      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
       "boundary_acceptance": "Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
       "test_suites": [
         "CONTRACT",
@@ -4776,14 +4779,14 @@
           "id": "M6-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt linear/spline interpolation and least squares within the qualified scope.",
-          "test_case": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
+          "test_case": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M6-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
+              "description": "Write and execute a targeted independent test: Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
               "status": "planned",
               "evidence": []
             },
@@ -4854,7 +4857,7 @@
         "M6-W01-C02-R2"
       ],
       "deliverables": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
-      "acceptance": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
+      "acceptance": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
       "boundary_acceptance": "Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
       "test_suites": [
         "CONTRACT",
@@ -4879,14 +4882,14 @@
           "id": "M6-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
-          "test_case": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
+          "test_case": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M6-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
+              "description": "Write and execute a targeted independent test: x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
               "status": "planned",
               "evidence": []
             },
@@ -4957,7 +4960,7 @@
         "M6-W01-C03-R2"
       ],
       "deliverables": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
-      "acceptance": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+      "acceptance": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
       "boundary_acceptance": "Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
       "test_suites": [
         "CONTRACT",
@@ -4982,14 +4985,14 @@
           "id": "M6-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
-          "test_case": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+          "test_case": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
           "status": "planned",
           "evidence": [],
           "subtasks": [
             {
               "id": "M6-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+              "description": "Write and execute a targeted independent test: d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
               "status": "planned",
               "evidence": []
             },
@@ -6135,7 +6138,7 @@
       "title": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
       "release": "M1",
       "owner": "M1-W01-C01",
-      "acceptance": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2."
+      "acceptance": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2."
     },
     {
       "id": "M1-W01-C01-R2",
@@ -6149,7 +6152,7 @@
       "title": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
       "release": "M1",
       "owner": "M1-W01-C02",
-      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode."
+      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode."
     },
     {
       "id": "M1-W01-C02-R2",
@@ -6163,14 +6166,14 @@
       "title": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
       "release": "M1",
       "owner": "M1-W01-C03",
-      "acceptance": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K."
+      "acceptance": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K."
     },
     {
       "id": "M1-W01-C03-R2",
-      "title": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+      "title": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
       "release": "M1",
       "owner": "M1-W01-C03",
-      "acceptance": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser."
+      "acceptance": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser."
     },
     {
       "id": "M1-W01-C04-R1",
@@ -6205,7 +6208,7 @@
       "title": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
       "release": "M1",
       "owner": "M1-W02-C02",
-      "acceptance": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode."
+      "acceptance": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode."
     },
     {
       "id": "M1-W02-C02-R2",
@@ -6275,7 +6278,7 @@
       "title": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
       "release": "M2",
       "owner": "M2-W01-C02",
-      "acceptance": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text."
+      "acceptance": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text."
     },
     {
       "id": "M2-W01-C02-R2",
@@ -6317,7 +6320,7 @@
       "title": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
       "release": "M2",
       "owner": "M2-W02-C02",
-      "acceptance": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation."
+      "acceptance": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation."
     },
     {
       "id": "M2-W02-C02-R2",
@@ -6363,10 +6366,10 @@
     },
     {
       "id": "M3-W01-C02-R2",
-      "title": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+      "title": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
       "release": "M3",
       "owner": "M3-W01-C02",
-      "acceptance": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time."
+      "acceptance": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time."
     },
     {
       "id": "M3-W01-C03-R1",
@@ -6457,7 +6460,7 @@
       "title": "Translate the IR/provider subset and restore results with domains and conditions.",
       "release": "M4",
       "owner": "M4-W01-C02",
-      "acceptance": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded."
+      "acceptance": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded."
     },
     {
       "id": "M4-W01-C02-R2",
@@ -6471,7 +6474,7 @@
       "title": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
       "release": "M4",
       "owner": "M4-W01-C03",
-      "acceptance": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain."
+      "acceptance": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain."
     },
     {
       "id": "M4-W01-C03-R2",
@@ -6485,7 +6488,7 @@
       "title": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
       "release": "M4",
       "owner": "M4-W02-C01",
-      "acceptance": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected."
+      "acceptance": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected."
     },
     {
       "id": "M4-W02-C01-R2",
@@ -6499,7 +6502,7 @@
       "title": "Adapt subset equations/inequalities with domains and conditional solutions.",
       "release": "M4",
       "owner": "M4-W02-C02",
-      "acceptance": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted."
+      "acceptance": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted."
     },
     {
       "id": "M4-W02-C02-R2",
@@ -6527,7 +6530,7 @@
       "title": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
       "release": "M5",
       "owner": "M5-W01-C01",
-      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved."
+      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved."
     },
     {
       "id": "M5-W01-C01-R2",
@@ -6583,7 +6586,7 @@
       "title": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
       "release": "M5",
       "owner": "M5-W02-C01",
-      "acceptance": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected."
+      "acceptance": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected."
     },
     {
       "id": "M5-W02-C01-R2",
@@ -6625,7 +6628,7 @@
       "title": "Adapt linear/spline interpolation and least squares within the qualified scope.",
       "release": "M6",
       "owner": "M6-W01-C01",
-      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2."
+      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2."
     },
     {
       "id": "M6-W01-C01-R2",
@@ -6639,7 +6642,7 @@
       "title": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
       "release": "M6",
       "owner": "M6-W01-C02",
-      "acceptance": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3."
+      "acceptance": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3."
     },
     {
       "id": "M6-W01-C02-R2",
@@ -6653,7 +6656,7 @@
       "title": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
       "release": "M6",
       "owner": "M6-W01-C03",
-      "acceptance": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance."
+      "acceptance": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance."
     },
     {
       "id": "M6-W01-C03-R2",
