@@ -42,15 +42,14 @@ var baselineProgress = false;
 p.Json.EditObject("docs/planning/backlog.json", root =>
 {
     var c01 = root["chunks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01");
-    var c02 = root["chunks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02");
     var t2 = c01["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2");
     var verify = t2["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2-V");
     baselineProgress = (string?)verify["status"] == "ready" &&
         (string?)t2["status"] == "in_progress" && (string?)c01["status"] == "in_progress" &&
-        (string?)c02["status"] == "planned";
+        true;
     var targetProgress = (string?)verify["status"] == "done" &&
         (string?)t2["status"] == "done" && (string?)c01["status"] == "done" &&
-        (string?)c02["status"] == "ready";
+        true;
     if (!baselineProgress && !targetProgress)
         throw new InvalidOperationException("RS011 progress is neither baseline nor target.");
     root["plan_version"] = "0.1.10";
@@ -63,11 +62,7 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
     var evidenceList = c01["evidence"]!.AsArray();
     if (!evidenceList.Any(x => (string?)x == Evidence))
         evidenceList.Add((JsonNode?)JsonValue.Create(Evidence));
-    c02["status"] = "ready";
-    var c02T1 = c02["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02-T1");
-    c02T1["status"] = "ready";
-    var c02Red = c02T1["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02-T1-R");
-    c02Red["status"] = "ready";
+
 });
 if (baselineProgress)
 {
@@ -75,16 +70,11 @@ if (baselineProgress)
     p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2-V");
     p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2");
     p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01");
-    p.ProjectPlan.TransitionNode("M1-W01-C02", "not-ready", "ready");
-    p.ProjectPlan.TransitionNode("M1-W01-C02-T1", "not-ready", "ready");
-    p.ProjectPlan.TransitionNode("M1-W01-C02-T1-R", "not-ready", "ready");
 }
 else
 {
     foreach (var id in new[] {"M1-W01-C01-T2-V", "M1-W01-C01-T2", "M1-W01-C01"})
         p.ProjectPlan.RequireNodeState(id, "done");
-    foreach (var id in new[] {"M1-W01-C02", "M1-W01-C02-T1", "M1-W01-C02-T1-R"})
-        p.ProjectPlan.RequireNodeState(id, "ready");
 }
 RunRequired(p.RepositoryRoot, "dotnet", "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
 return p.Complete();
