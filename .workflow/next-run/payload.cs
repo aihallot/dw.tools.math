@@ -220,5 +220,7 @@ static void RunRequired(string root, string executable, params string[] args)
     var output = stdout.GetAwaiter().GetResult() + "\n" + stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
     if (process.ExitCode != 0)
-        throw new InvalidOperationException(executable + " exited " + process.ExitCode + ": " + output);
+        throw new InvalidOperationException(
+            executable + " " + string.Join(" ", args) +
+            " exited " + process.ExitCode + ": " + output);
 }
