@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "id": "RS011",
+  "title": "Qualify exact-rational boundaries and close M1-W01-C01",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded exact-rational arithmetic",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C01",
+    "M1-W01-C01-T2",
+    "M1-W01-C01-T2-R",
+    "M1-W01-C01-T2-G",
+    "M1-W01-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Add explicitly budgeted exact rational Add/Multiply operations, verify canonical default and large exact integer cases, run the existing foundation chain, record bounded verification evidence and close the already GREEN exact-rational chunk.",
+    "value": "Completes a source-defensible ExactRational slice, with explicit opt-in bit budgeting that conservatively rejects unsafe inputs and intermediates without silently approximating or changing AURA.",
+    "debtChanges": [
+      "Unbudgeted ExactRational operators remain exact and unbounded. Budget enforcement is opt-in through ExactRationalBudget; callers must explicitly select it when resource limits matter.",
+      "M1-W01-C02 remains planned until its exact source/acceptance files, runner commands and refinement are independently prepared."
+    ],
+    "nextAction": "Refine M1-W01-C02 source and independent exact binary64/decimal/rounding RED contract, then ready the next bounded task.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C01-T2-V",
+        "achievement": "Canonical default, large-integer precision and opt-in bit-budget behavior are verified with exact tests and foundation regression, and the limits are durably documented."
+      },
+      {
+        "projectNode": "M1-W01-C01-T2",
+        "achievement": "ExactRational boundary RED, GREEN and verification are completed, including canonical default and explicit bounded Add/Multiply contracts without floating conversion."
+      },
+      {
+        "projectNode": "M1-W01-C01",
+        "achievement": "ExactRational source transfer and qualification now include accepted arithmetic, mixed numbers, canonical representation, default-value invariants and documented opt-in resource policy; the chunk is completed."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/ExactRationalBudget.cs",
+    "tests/projects/dw.quantities.tests/M1W01C01BudgetTests.cs",
+    "docs/planning/evidence/M1-W01-C01-boundary-verification.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
