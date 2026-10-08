@@ -138,7 +138,7 @@ var evidence=new JsonObject
         "Source captures are pinned and complete; declaration excerpts and numeric token occurrences are only discovery, not behavioral qualification.",
         "The AURA domain facade is excluded from extraction; the pure parser package alone is the candidate.")
 };
-p.Files.WriteComplete(Evidence,evidence.ToJsonString(new JsonSerializerOptions{WriteIndented:true})+"\n");
+p.Files.WriteComplete(Evidence,evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true })+"\n");
 
 p.Json.EditObject("docs/planning/backlog.json",product=>{
     var c=product["chunks"]!.AsArray().Select(n=>n!.AsObject()).Single(n=>(string?)n["id"]==Phase);
