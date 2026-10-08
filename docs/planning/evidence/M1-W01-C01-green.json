@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C01-green",
+  "status": "green-and-verification-qualified",
+  "source_repository": "AURA",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_path": "lib/dw.quantities/ExactRational.cs",
+  "target_path": "src/projects/dw.quantities/ExactRational.cs",
+  "source_sha256": "3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a",
+  "target_sha256": "3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a",
+  "materialized_type_full_name": "dw.quantities.ExactRational",
+  "source_bytes_materialized_exactly": true,
+  "main_solution_integrated": true,
+  "targeted_tests_passed": true,
+  "foundation_regression_passed": true,
+  "behavioral_oracle": [
+    "1/3 \u002B 1/6 = 1/2",
+    "-1 1/2 = -3/2 through a supported mixed-number parse/construction path",
+    "zero denominator is rejected",
+    "2/-4 canonicalizes to -1/2"
+  ],
+  "limits": [
+    "Only ExactRational.cs is transferred in this GREEN; ExactBinaryNumber, ExactDecimalFormatter, quantities, units, and tolerances remain outside this slice.",
+    "The independent test discovers the unique compiled ExactRational type and its usable public surface by bounded reflection; no namespace, constructor, parser, operator, or representation member name is assumed.",
+    "AURA is read only; no sibling repository mutation occurs."
+  ]
+}

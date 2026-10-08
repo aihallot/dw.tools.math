@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.6",
+  "plan_version": "0.1.7",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1128,23 +1128,31 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C01Tests"
       ],
-      "refinement": "RS007 establishes an executable RED against an intentionally empty standalone dw.quantities project. The oracle requires the canonical type Dw.Quantities.ExactRational to be absent now, retains the accepted behavior cases for GREEN, and pins the authorized AURA source SHA-256 before any source import.",
+      "refinement": "RS007 established the expected RED. RS008 installs the exact authorized ExactRational.cs bytes only after SHA-256 verification, integrates dw.quantities into the main solution, qualifies the accepted rational behaviors through an independent reflection oracle, and replays the complete M0 foundation chain.",
       "files": [
+        "dw.tools.math.slnx",
         "src/projects/dw.quantities/dw.quantities.csproj",
         "src/projects/dw.quantities/packages.lock.json",
+        "src/projects/dw.quantities/ExactRational.cs",
         "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
         "tests/projects/dw.quantities.tests/packages.lock.json",
         "tests/projects/dw.quantities.tests/M1W01C01Tests.cs",
         "docs/planning/ValidateM1W01C01Red.cs",
-        "docs/planning/evidence/M1-W01-C01-red.json"
+        "docs/planning/ValidateM1W01C01Green.cs",
+        "docs/planning/evidence/M1-W01-C01-red.json",
+        "docs/planning/evidence/M1-W01-C01-green.json"
       ],
       "commands": [
-        "dotnet restore tests/projects/dw.quantities.tests/dw.quantities.tests.csproj --locked-mode",
-        "dotnet run --file docs/planning/ValidateM1W01C01Red.cs -- --check",
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --no-restore --no-build --filter FullyQualifiedName~M1W01C01Tests",
+        "dotnet run --file docs/planning/ValidateM1W01C01Green.cs -- --check",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M1-W01-C01-red.json"
+        "docs/planning/evidence/M1-W01-C01-red.json",
+        "docs/planning/evidence/M1-W01-C01-green.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1153,9 +1161,10 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
           "test_case": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
-          "status": "in_progress",
+          "status": "done",
           "evidence": [
-            "docs/planning/evidence/M1-W01-C01-red.json"
+            "docs/planning/evidence/M1-W01-C01-red.json",
+            "docs/planning/evidence/M1-W01-C01-green.json"
           ],
           "subtasks": [
             {
@@ -1171,15 +1180,19 @@
               "id": "M1-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C01-green.json"
+              ]
             },
             {
               "id": "M1-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C01-green.json"
+              ]
             }
           ]
         },
@@ -1188,14 +1201,14 @@
           "title": "Boundaries and integration",
           "behavior": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
           "test_case": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
