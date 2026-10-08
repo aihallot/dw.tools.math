@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "RS009",
+  "title": "Establish ExactRational boundary RED",
+  "state": "prepared",
+  "commitMessage": "test: establish exact-rational boundary RED",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C01",
+    "M1-W01-C01-T2",
+    "M1-W01-C01-T2-R",
+    "M1-W01-C01-T2-G"
+  ],
+  "contribution": {
+    "summary": "Expose the existing ExactRational record-struct default-value defect with an independently falsifying RED test, retain a large-integer exact-arithmetic control, record boundary evidence, and ready T2 GREEN without changing production mathematics.",
+    "value": "Establishes a source-grounded boundary defect before changing the authorized mathematical implementation, preserving exact arithmetic and ensuring a clear next GREEN objective.",
+    "debtChanges": [
+      "The native record-struct default exposes a denominator of zero; the next GREEN must define and qualify the default-value policy while preserving no-double exactness and bounded input/intermediate behavior.",
+      "RS009 pre-attempt failures at retries 0\u20132 identified manual native-plan traversal, AOT-unsafe JsonArray.Add\u003CT\u003E, and invalid target re-entry; retry 3 uses typed operations and an exact baseline/target branch from product status."
+    ],
+    "nextAction": "Implement and verify an explicit default(ExactRational) policy and defensible input/intermediate budget handling without silent conversion to double.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C01-T2-R",
+        "achievement": "An independent targeted RED test exhibits default(ExactRational) with a zero denominator while a large-integer exact arithmetic control remains in the test contract; durable evidence captures the failure marker without modifying the implementation."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs",
+    "docs/planning/evidence/M1-W01-C01-boundary-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "product-plan",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-plan",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
