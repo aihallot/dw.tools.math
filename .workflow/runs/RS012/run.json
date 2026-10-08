@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "RS012",
+  "title": "Characterize exact binary and decimal source; establish C02 RED",
+  "state": "prepared",
+  "commitMessage": "test: establish exact binary and decimal RED",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C02",
+    "M1-W01-C02-T1",
+    "M1-W01-C02-T1-R",
+    "M1-W01-C02-T1-G"
+  ],
+  "contribution": {
+    "summary": "Pin and inspect both authorized AURA ExactBinaryNumber and ExactDecimalFormatter sources, record their actual declared public surfaces, install an independent missing-types RED contract, refine C02 product readiness and align typed native DWF progress.",
+    "value": "Creates grounded source-level evidence and a reproducible RED for the next substantial exact binary64 and decimal transfer, eliminating guessed APIs and preserving independent behavioral qualification.",
+    "debtChanges": [
+      "The RED test proves missing types, not binary64 or rounding correctness. The source-declaration inventory supplies the observed API for subsequent GREEN and boundary tests.",
+      "C02 T2 boundary checks for non-finite input, subnormals, signed zero and precision remain unqualified; no AURA source is mutated."
+    ],
+    "nextAction": "Use the recorded source declarations to transfer and qualify both exact binary and decimal types in one substantial GREEN and boundary-verification run.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C02-T1-R",
+        "achievement": "Both authorized binary/decimal source candidates are independently hash-verified and their declarations recorded, while the Math assembly\u0027s missing-type RED is observed before transfer."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
+    "docs/planning/evidence/M1-W01-C02-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-plan-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
