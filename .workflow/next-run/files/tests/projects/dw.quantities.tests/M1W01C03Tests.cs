@@ -88,68 +88,98 @@ public sealed class M1W01C03Tests
             "The absolute ToBase API is not an interval converter.");
     }
 
+
     private static UnitDefinition TemperatureUnit(
         string id, string symbol, ExactRational scale, ExactRational offset)
     {
-        var type = typeof(UnitDefinition);
-        var attempted = new List<string>();
-        foreach (var ctor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
+        var failures = new List<string>();
+        foreach (var ctor in typeof(UnitDefinition).GetConstructors(BindingFlags.Public | BindingFlags.Instance))
         {
             var parameters = ctor.GetParameters();
-            var values = new object?[parameters.Length];
+            var seed = new object?[parameters.Length];
+            var enumSlots = new List<int>();
             var supported = true;
+
             for (var i = 0; i < parameters.Length; i++)
             {
                 var parameter = parameters[i];
                 var name = parameter.Name ?? string.Empty;
-                var valueType = parameter.ParameterType;
-                if (valueType == typeof(string))
-                {
-                    values[i] = name.Contains("symbol", StringComparison.OrdinalIgnoreCase) ? symbol
-                        : name.Contains("name", StringComparison.OrdinalIgnoreCase) ? id
-                        : id;
-                }
-                else if (valueType == typeof(DimensionVector))
-                    values[i] = DimensionVector.TemperatureDimension;
-                else if (valueType == typeof(ExactRational))
-                    values[i] = name.Contains("offset", StringComparison.OrdinalIgnoreCase) ? offset : scale;
-                else if (valueType.IsEnum)
-                {
-                    var choices = Enum.GetNames(valueType);
-                    var preference = name.Contains("transform", StringComparison.OrdinalIgnoreCase)
-                        ? new[] { "Affine", "Offset", "Linear" }
-                        : new[] { "SI", "Metric", "Custom" };
-                    var chosen = preference.FirstOrDefault(n => choices.Contains(n, StringComparer.OrdinalIgnoreCase))
-                        ?? choices.FirstOrDefault();
-                    if (chosen is null) { supported = false; break; }
-                    values[i] = Enum.Parse(valueType, chosen);
-                }
-                else if (valueType == typeof(ImmutableArray<string>))
-                    values[i] = ImmutableArray<string>.Empty;
-                else if (valueType.IsAssignableFrom(typeof(string[])))
-                    values[i] = Array.Empty<string>();
+                var type = parameter.ParameterType;
+
+                if (type == typeof(string))
+                    seed[i] = name.Contains("symbol", StringComparison.OrdinalIgnoreCase) ? symbol : id;
+                else if (type == typeof(DimensionVector))
+                    seed[i] = DimensionVector.TemperatureDimension;
+                else if (type == typeof(ExactRational))
+                    seed[i] = name.Contains("offset", StringComparison.OrdinalIgnoreCase) ? offset : scale;
+                else if (type == typeof(ImmutableArray<string>))
+                    seed[i] = ImmutableArray<string>.Empty;
+                else if (type.IsAssignableFrom(typeof(string[])))
+                    seed[i] = Array.Empty<string>();
+                else if (type.IsEnum)
+                    enumSlots.Add(i);
                 else if (parameter.HasDefaultValue)
-                    values[i] = parameter.DefaultValue;
-                else { supported = false; break; }
-            }
-            if (!supported) { attempted.Add(ctor + " (unmapped parameter)"); continue; }
-            try
-            {
-                if (ctor.Invoke(values) is UnitDefinition unit)
+                    seed[i] = parameter.DefaultValue;
+                else
                 {
-                    if (unit.ScaleToBase == scale && unit.OffsetToBase == offset &&
+                    failures.Add(ctor + ": unsupported " + name + " of type " + type.FullName);
+                    supported = false;
+                    break;
+                }
+            }
+            if (!supported)
+                continue;
+
+            // The source declares UnitSystem and UnitTransformKind, but the RED
+            // did not establish their admissible combinations. Inspect the bounded
+            // public enum domain rather than guessing one constructor policy.
+            var candidates = new List<object?[]> { seed };
+            foreach (var slot in enumSlots)
+            {
+                var options = Enum.GetValues(parameters[slot].ParameterType).Cast<object>().ToArray();
+                if (options.Length == 0 || (long)candidates.Count * options.Length > 128)
+                {
+                    failures.Add(ctor + ": enum candidate surface exceeds 128 configurations");
+                    supported = false;
+                    break;
+                }
+                candidates = candidates
+                    .SelectMany(values => options.Select(option =>
+                    {
+                        var candidate = (object?[])values.Clone();
+                        candidate[slot] = option;
+                        return candidate;
+                    }))
+                    .ToList();
+            }
+            if (!supported)
+                continue;
+
+            foreach (var values in candidates)
+            {
+                try
+                {
+                    if (ctor.Invoke(values) is not UnitDefinition unit)
+                        continue;
+                    if (unit.ScaleToBase == scale &&
+                        unit.OffsetToBase == offset &&
                         unit.Dimension == DimensionVector.TemperatureDimension)
                         return unit;
+
+                    failures.Add(ctor + ": constructed different scale/offset/dimension");
+                }
+                catch (Exception ex) when (ex is TargetInvocationException or ArgumentException)
+                {
+                    var cause = ex is TargetInvocationException target ? target.InnerException ?? ex : ex;
+                    failures.Add(ctor + ": " + cause.GetType().Name + ": " + cause.Message);
                 }
             }
-            catch (TargetInvocationException ex)
-            {
-                attempted.Add(ctor + " (" + ex.InnerException?.GetType().Name + ")");
-                continue;
-            }
         }
+
         throw new AssertFailedException(
-            "No public UnitDefinition constructor could materialize a verified affine " +
-            "temperature unit. Constructors: " + string.Join(" | ", attempted));
+            "No public UnitDefinition constructor produced the requested affine fixture. " +
+            "Observed constructor outcomes: " +
+            string.Join(" | ", failures.Distinct(StringComparer.Ordinal).Take(12)));
     }
+
 }
