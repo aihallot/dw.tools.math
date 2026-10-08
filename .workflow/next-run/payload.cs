@@ -80,11 +80,26 @@ p.Files.ReplaceFromStaged("staged/" + TestPath, TestPath);
 RunRequired(root, "dotnet", "build",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
     "-c", "Release", "--verbosity", "normal");
-RunRequired(root, "dotnet", "test",
-    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "-c", "Release", "--no-build", "--no-restore",
-    "--filter", "FullyQualifiedName~M1W01C03Tests",
-    "--logger", "console;verbosity=normal");
+// Isolate each functional oracle after the first aborted test run. This prevents
+// a failing/crashing test host from hiding which contract needs correction.
+foreach (var testName in new[]
+{
+    "ThreeAuthorizedPublicTypesAreInstalled",
+    "AreaOfThreeMetresByFourMetresIsTwelveSquareMetres",
+    "TenKilometresPerThirtyMinutesIsExactlyFiftyNinthsMetresPerSecond",
+    "InformationDimensionRemainsIndependent",
+    "AdditionOfMassAndTimeIsRejectedAtThePublicQuantityBoundary",
+    "FahrenheitAndCelsiusAbsoluteConversionsAreExact",
+    "NineFahrenheitDegreesOfIntervalCorrespondToFiveKelvin"
+})
+{
+    Console.WriteLine("RS015 focused oracle: " + testName);
+    RunRequired(root, "dotnet", "test",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "-c", "Release", "--no-build", "--no-restore",
+        "--filter", "FullyQualifiedName~M1W01C03Tests." + testName,
+        "--logger", "console;verbosity=normal");
+}
 RunRequired(root, "dotnet", "test",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
     "-c", "Release", "--no-build", "--no-restore",
