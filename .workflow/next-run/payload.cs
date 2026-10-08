@@ -283,9 +283,6 @@ if(baseline)
         p.ProjectPlan.ConvergeNodeToDone(taskName);
     }
     p.ProjectPlan.ConvergeNodeToDone(Phase);
-    p.ProjectPlan.TransitionNode("M1-W03-C02","not-ready","ready");
-    p.ProjectPlan.TransitionNode("M1-W03-C02-T1","not-ready","ready");
-    p.ProjectPlan.TransitionNode("M1-W03-C02-T1-A","not-ready","ready");
 }
 else
 {
@@ -293,9 +290,7 @@ else
         T2+"-R",T2+"-G",T2+"-V",T2,Phase})
         p.ProjectPlan.RequireNodeState(id,"done");
     p.ProjectPlan.RequireNodeState(WorkPackage,"in-progress");
-    p.ProjectPlan.RequireNodeState("M1-W03-C02","ready");
-    p.ProjectPlan.RequireNodeState("M1-W03-C02-T1","ready");
-    p.ProjectPlan.RequireNodeState("M1-W03-C02-T1-A","ready");
+    p.ProjectPlan.RequireNodeState("M1-W03-C02","not-ready");
 }
 RunRequired(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 return p.Complete();
