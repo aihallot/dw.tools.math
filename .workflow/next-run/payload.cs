@@ -6,268 +6,221 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 const string Phase = "M1-W02-C01";
-const string T1 = "M1-W02-C01-T1";
-const string T2 = "M1-W02-C01-T2";
-const string RedTests = "tests/projects/dw.quantities.tests/M1W02C01RedTests.cs";
-const string GreenRedStage = "tests/projects/dw.quantities.tests/M1W02C01RedTests.green.cs";
-const string GreenTests = "tests/projects/dw.quantities.tests/M1W02C01Tests.cs";
-const string RedEvidence = "docs/planning/evidence/M1-W02-C01-red.json";
-const string Foundation = "docs/planning/evidence/M1-W02-C01-initial-catalog.json";
+const string Task = "M1-W02-C01-T2";
+const string Green = "M1-W02-C01-T2-G";
+const string Verify = "M1-W02-C01-T2-V";
 const string Catalog = "src/projects/dw.quantities.standard/StandardUnitCatalog.cs";
 const string Resolver = "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs";
-const string Converter = "src/projects/dw.quantities.standard/PureUnitConverter.cs";
-const string StandardProject = "src/projects/dw.quantities.standard/dw.quantities.standard.csproj";
-const string StandardLock = "src/projects/dw.quantities.standard/packages.lock.json";
+const string Tests = "tests/projects/dw.quantities.tests/M1W02C01BoundaryTests.cs";
+const string SnapshotCatalog = "docs/planning/evidence/source-review/M1-W02-C01-AURA-StandardUnitCatalog.txt";
+const string SnapshotResolver = "docs/planning/evidence/source-review/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt";
+const string Evidence = "docs/planning/evidence/M1-W02-C01-boundary-green.json";
 const string TestProject = "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj";
-const string TestLock = "tests/projects/dw.quantities.tests/packages.lock.json";
-const string Solution = "dw.tools.math.slnx";
-const string SourceCatalog = "lib/dw.quantities.standard/StandardUnitCatalog.cs";
-const string SourceResolver = "lib/dw.quantities.standard/StandardExpressionUnitResolver.cs";
-const string SourceCatalogSha = "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a";
-const string SourceResolverSha = "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561";
+const string OriginalCatalog = "lib/dw.quantities.standard/StandardUnitCatalog.cs";
+const string OriginalResolver = "lib/dw.quantities.standard/StandardExpressionUnitResolver.cs";
+const string PinnedCatalog = "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a";
+const string PinnedResolver = "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561";
 
 var p = PayloadContext.Create();
 var root = p.RepositoryRoot;
-var plan = JsonNode.Parse(File.ReadAllText(Path.Combine(root, "docs/planning/backlog.json")))!.AsObject();
-var chunk = plan["chunks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == Phase);
-var work1 = plan["work_packages"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01");
-var work2 = plan["work_packages"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W02");
-var tasks = chunk["tasks"]!.AsArray().Select(n => n!.AsObject()).ToArray();
-var first = tasks.Single(n => (string?)n["id"] == T1);
-var second = tasks.Single(n => (string?)n["id"] == T2);
-string Sub(JsonObject task, string suffix) =>
-    (string?)task["subtasks"]!.AsArray().Select(n => n!.AsObject())
-        .Single(n => (string?)n["id"] == (string?)task["id"] + "-" + suffix)["status"]
-        ?? "<missing>";
-
-var baseline = (string?)plan["plan_version"] == "0.1.16" &&
-    (string?)work1["status"] == "in_progress" && (string?)work2["status"] == "planned" &&
-    (string?)chunk["status"] == "planned" && tasks.All(t => (string?)t["status"] == "planned") &&
-    new[] { "R", "G", "V" }.All(s => Sub(first,s) == "planned" && Sub(second,s) == "planned");
-var target = (string?)plan["plan_version"] == "0.1.17" &&
-    (string?)work1["status"] == "done" && (string?)work2["status"] == "in_progress" &&
-    (string?)chunk["status"] == "in_progress" &&
-    (string?)first["status"] == "done" && (string?)second["status"] == "in_progress" &&
-    new[] { "R", "G", "V" }.All(s => Sub(first,s) == "done") &&
-    Sub(second,"R") == "done" && Sub(second,"G") == "ready" && Sub(second,"V") == "planned";
+var backlog = JsonNode.Parse(File.ReadAllText(Path.Combine(root, "docs/planning/backlog.json")))!.AsObject();
+var chunk = backlog["chunks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == Phase);
+var task = chunk["tasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == Task);
+var subtask = task["subtasks"]!.AsArray().Select(n => n!.AsObject()).ToArray();
+var greenState = (string?)subtask.Single(n => (string?)n["id"] == Green)["status"];
+var verifyState = (string?)subtask.Single(n => (string?)n["id"] == Verify)["status"];
+var redState = (string?)subtask.Single(n => (string?)n["id"] == Task + "-R")["status"];
+var baseline = (string?)backlog["plan_version"] == "0.1.17" &&
+    (string?)chunk["status"] == "in_progress" && (string?)task["status"] == "in_progress" &&
+    redState == "done" && greenState == "ready" && verifyState == "planned";
+var target = (string?)backlog["plan_version"] == "0.1.18" &&
+    (string?)chunk["status"] == "in_progress" && (string?)task["status"] == "in_progress" &&
+    redState == "done" && greenState == "done" && verifyState == "ready";
 if (!baseline && !target)
-    throw new InvalidOperationException("RS018 product hierarchy is neither accepted baseline nor target.");
+    throw new InvalidOperationException("RS019 product status is neither exact baseline nor completed GREEN target.");
 
-var sourceManifest = JsonNode.Parse(File.ReadAllText(Path.Combine(root, "docs/planning/source-baseline.json")))!.AsObject();
-var aura = sourceManifest["repositories"]!.AsArray().Select(n=>n!.AsObject())
-    .Single(n=>(string?)n["repository"]=="aura");
+var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(root, "docs/planning/source-baseline.json")))!.AsObject();
+var aura = manifest["repositories"]!.AsArray().Select(n => n!.AsObject())
+    .Single(n => (string?)n["repository"] == "aura");
 if ((string?)aura["head"] != "82a6b435a387a7e116b47a6b2c433ae9e067bf21")
-    throw new InvalidOperationException("AURA source revision authority drifted.");
-var sourceRoot = (string?)aura["observed_root"] ?? throw new InvalidOperationException("AURA root absent.");
-var sourceEntries = aura["files"]!.AsArray().Select(n=>n!.AsObject()).ToArray();
-JsonObject ObservePinnedSource(string source, string expected)
+    throw new InvalidOperationException("AURA source revision is not authorized.");
+var sourceRoot = (string?)aura["observed_root"]
+    ?? throw new InvalidOperationException("AURA source observed root is absent.");
+var entries = aura["files"]!.AsArray().Select(n => n!.AsObject()).ToArray();
+
+JsonObject Snapshot(string original, string expectedHash, string targetPath)
 {
-    var entry=sourceEntries.Single(n=>(string?)n["path"]==source);
-    if((string?)entry["sha256"]!=expected)
-        throw new InvalidOperationException("Pinned manifest hash differs for "+source);
-    var filename=Path.Combine(sourceRoot,source.Replace('/',Path.DirectorySeparatorChar));
-    var bytes=File.ReadAllBytes(filename);
-    var actual=Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
-    if(actual!=expected)
-        throw new InvalidOperationException("Source has changed since the approved AURA snapshot: "+source);
-    var lines=new UTF8Encoding(false,true).GetString(bytes).Replace("\r\n","\n",StringComparison.Ordinal).Split('\n');
-    var declarations=lines.Select(x=>x.Trim())
-        .Where(x=>x.StartsWith("namespace ",StringComparison.Ordinal) ||
-            x.StartsWith("public ",StringComparison.Ordinal) ||
-            x.StartsWith("using ",StringComparison.Ordinal))
-        .Take(100).ToArray();
-    return new JsonObject{
-        ["source"]=source,
-        ["source_sha256"]=actual,
-        ["bytes"]=bytes.Length,
-        ["captured_declarations"]=p.Json.StringArray(declarations),
-        ["disposition"]="Observation and owner-authorized behavioral adaptation; source is not copied verbatim."
+    var recorded = entries.Single(n => (string?)n["path"] == original);
+    if ((string?)recorded["sha256"] != expectedHash)
+        throw new InvalidOperationException("AURA recorded SHA drifted: " + original);
+    var bytes = File.ReadAllBytes(Path.Combine(sourceRoot, original.Replace('/', Path.DirectorySeparatorChar)));
+    var actual = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
+    if (actual != expectedHash)
+        throw new InvalidOperationException("AURA observed source SHA drifted: " + original);
+    var text = new UTF8Encoding(false, true).GetString(bytes);
+    p.Files.WriteComplete(targetPath, text);
+    return new JsonObject
+    {
+        ["source_path"] = original,
+        ["sha256"] = expectedHash,
+        ["observed_bytes"] = bytes.Length,
+        ["review_copy_path"] = targetPath,
+        ["review_copy_sha256"] = Convert.ToHexString(SHA256.HashData(
+            File.ReadAllBytes(Path.Combine(root, targetPath.Replace('/', Path.DirectorySeparatorChar)))))
+            .ToLowerInvariant(),
+        ["disposition"] = "Full reference text captured within Math for parity review; not compiled into Math and not claimed byte-identical when text encoding differs."
     };
 }
-var sources=p.Json.Array(
-    ObservePinnedSource(SourceCatalog,SourceCatalogSha),
-    ObservePinnedSource(SourceResolver,SourceResolverSha));
-var decision=JsonNode.Parse(File.ReadAllText(Path.Combine(root,
-    "docs/planning/evidence/M0-W02-C02-transfer-manifest.json")))!.AsObject();
-if((string?)decision["localization_decision"]?["selected_option"]!="passive_bcl_metadata")
-    throw new InvalidOperationException("Catalog localization decision no longer allows passive BCL metadata.");
 
-// Pre-transfer RED: source and test assembly have no materialized standard package.
-p.Files.ReplaceFromStaged("staged/"+RedTests,RedTests);
-if(baseline)
+// Capture full approved mathematical sources rather than inferring all aliases
+// from the brief declaration excerpts in RS018.
+var catalogSource = Snapshot(OriginalCatalog, PinnedCatalog, SnapshotCatalog);
+var resolverSource = Snapshot(OriginalResolver, PinnedResolver, SnapshotResolver);
+
+p.Files.ReplaceFromStaged("staged/" + Catalog, Catalog);
+p.Files.ReplaceFromStaged("staged/" + Resolver, Resolver);
+p.Files.ReplaceFromStaged("staged/" + Tests, Tests);
+
+RunRequired(root, "dotnet", "restore", "dw.tools.math.slnx", "--locked-mode");
+RunRequired(root, "dotnet", "build", "dw.tools.math.slnx", "-c", "Release", "--no-restore");
+foreach (var test in new[]
 {
-    var red=Run(root,"dotnet","test",TestProject,"-c","Release",
-        "--filter","FullyQualifiedName~M1W02C01RedTests",
-        "--logger","console;verbosity=normal");
-    foreach(var marker in new[]{
-        "M1-W02-C01-T1 RED: stand-alone dw.quantities.standard catalog has not been materialized.",
-        "M1-W02-C01-T2 RED: explicit-profile strict unit resolver has not been materialized."})
-        if(red.Code==0||!red.Output.Contains(marker,StringComparison.Ordinal))
-            throw new InvalidOperationException("C01 pre-transfer RED mismatch: "+marker+" "+Significant(red.Output));
-}
-var redEvidence=new JsonObject{
-    ["schema_version"]=1,["id"]="M1-W02-C01-red",
-    ["status"]="both-initial-absences-observed",
-    ["test_filter"]="FullyQualifiedName~M1W02C01RedTests",
-    ["scope"]="Absence of stand-alone standard package and its strict profile resolver, before any Math package graph change.",
-    ["source_candidates"]=sources.DeepClone()
+    "BoundedCandidateDiscoveryShowsAllAmbiguousProfiles",
+    "CatalogIdsAreUniqueAndLookupsAreCanonical",
+    "SymbolsAreCaseSensitiveWhereCaseChangesTheMeaning",
+    "BoundedTokensRejectExcessivelyLongOrEmptyInput",
+    "ExplicitAliasProfilesRejectUnresolvedAmbiguity",
+    "EveryAdmittedUnitConvertsExactlyToAndFromItsOwnBaseScale",
+    "CultureChangesCannotReorderOrChooseAmbiguousCandidates",
+    "ExplicitProfileDoesNotOverrideUniqueCanonicalIdWithDifferentProfile"
+})
+    RunRequired(root, "dotnet", "test", TestProject, "-c", "Release",
+        "--no-build", "--no-restore",
+        "--filter", "FullyQualifiedName~M1W02C01BoundaryTests." + test,
+        "--logger", "console;verbosity=normal");
+RunRequired(root, "dotnet", "test", TestProject, "-c", "Release",
+    "--no-build", "--no-restore", "--logger", "console;verbosity=minimal");
+RunRequired(root, "pwsh", "-NoProfile", "-NonInteractive", "-File", "scripts/verify.ps1");
+RunRequired(root, "dotnet", "run", "--file", "docs/planning/ValidateTransferArchitecture.cs");
+
+var evidence = new JsonObject
+{
+    ["schema_version"] = 1,
+    ["id"] = "M1-W02-C01-boundary-green",
+    ["status"] = "bounded-profile-discovery-qualified-inherited-source-parity-pending",
+    ["source_review"] = p.Json.Array(catalogSource, resolverSource),
+    ["product_files"] = p.Json.StringArray(Catalog, Resolver, Tests),
+    ["focused_filter"] = "FullyQualifiedName~M1W02C01BoundaryTests",
+    ["focused_passed"] = true,
+    ["full_quantities_tests_passed"] = true,
+    ["foundation_regression_passed"] = true,
+    ["locked_solution_build_passed"] = true,
+    ["transfer_architecture_passed"] = true,
+    ["tested_contracts"] = p.Json.StringArray(
+        "All explicit cup/pint profiles are discoverable without culture-dependent selection.",
+        "Ambiguous aliases are not guessed; exact profiles resolve to one explicitly admitted unit.",
+        "Symbols are case-sensitive while canonical IDs and named aliases match invariantly.",
+        "Unit IDs are unique and lookups are limited to 128 characters.",
+        "Token discovery is limited to 128 characters and rejects empty input.",
+        "All admitted units roundtrip exact large BigInteger rational values.",
+        "Ambient en-US, fr-BE, nl-BE and tr-TR cultures cannot alter candidate order.",
+        "Currencies and logarithmic units remain unsupported, and mismatched profiles cannot coerce a different unit."),
+    ["remaining_verification"] = p.Json.StringArray(
+        "T2-V must compare exact source text against the adapted catalogue to document inherited IDs, aliases and numerical constants that are retained, changed or deferred.",
+        "The original standard resolver uses dw.quantities.expression and an explicit culture argument; compatibility with the future expression layer is not qualified here.",
+        "The admitted BCL-only subset is not an exhaustive or byte-for-byte port of AURA.",
+        "No changes are made to AURA, Decision, MCDM or other sibling repositories.")
 };
-p.Files.WriteComplete(RedEvidence,redEvidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+p.Files.WriteComplete(Evidence,
+    evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
 
-foreach(var path in new[]{Catalog,Resolver,Converter,StandardProject,StandardLock,TestProject,TestLock,Solution,GreenTests})
-    p.Files.ReplaceFromStaged("staged/"+path,path);
-p.Files.ReplaceFromStaged("staged/"+GreenRedStage,RedTests);
-
-RunRequired(root,"dotnet","restore",Solution,"--locked-mode");
-RunRequired(root,"dotnet","build",Solution,"-c","Release","--no-restore");
-foreach(var name in new[]{
-    "CatalogHasStableExplicitVersionAndStandaloneNamespace",
-    "InchAndIecInformationUnitsUseExactHandComputableConstants",
-    "CupAndPintRequireExplicitProfileForAmbiguousTokens",
-    "UsUkAustralianVolumeProfilesHaveExplicitAndDifferentExactConstants",
-    "ProcessCultureCannotChangeResolutionOrConversion",
-    "MismatchedDimensionsAreRejectedAndNoUnsafeUnitKindsAreAdmitted",
-    "DecimalOrLocalizedAliasesNeverSelectAPintProfileImplicitly"})
-    RunRequired(root,"dotnet","test",TestProject,"-c","Release","--no-restore","--no-build",
-        "--filter","FullyQualifiedName~M1W02C01Tests."+name,"--logger","console;verbosity=normal");
-RunRequired(root,"dotnet","test",TestProject,"-c","Release","--no-restore","--no-build",
-    "--logger","console;verbosity=minimal");
-RunRequired(root,"pwsh","-NoProfile","-NonInteractive","-File","scripts/verify.ps1");
-RunRequired(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
-
-var evidence=new JsonObject{
-    ["schema_version"]=1,
-    ["id"]="M1-W02-C01-initial-catalog",
-    ["status"]="initial-standalone-catalog-and-tests-qualified-full-source-parity-pending",
-    ["aura_revision"]="82a6b435a387a7e116b47a6b2c433ae9e067bf21",
-    ["original_sources"]=sources.DeepClone(),
-    ["decision"]="docs/planning/decisions/m0-w02-c02.md",
-    ["catalog_version"]="2026-10-exact-v1",
-    ["package"]="dw.quantities.standard",
-    ["dependency_policy"]="Only dw.quantities project; no AURA, dw.localization or host-specific localization dependency.",
-    ["tests"]=p.Json.StringArray(
-        "1 inch=127/5000 m; 1 KiB=1024 B",
-        "Explicit US liquid, UK imperial and AU culinary cup and pint volume assumptions",
-        "Australian pint uses the labelled 570 mL beer-serving profile, not a universal legal volumetric standard",
-        "Ambiguous cup and pint require explicit profile; unresolved/unsupported currencies and logarithmic units rejected",
-        "Host culture en-US, fr-BE, nl-BE cannot select aliases or conversion behavior",
-        "Incompatible dimensions rejected; passive localized names only"),
-    ["focused_filter"]="FullyQualifiedName~M1W02C01Tests",
-    ["focused_passed"]=true,
-    ["quantities_tests_passed"]=true,
-    ["foundation_chain_passed"]=true,
-    ["transfer_architecture_check_passed"]=true,
-    ["limitations"]=p.Json.StringArray(
-        "This is a bounded pure standard catalogue adaptation, not a byte-identical or exhaustive port of either AURA standard source.",
-        "No expression-parser integration is claimed, and inherited aliases and coverage remain to be reconciled during T2.",
-        "The Australian 570 mL pint denotes a chosen beer-serving profile rather than a statutory universal definition.",
-        "No sibling repository is modified; package graph does not adopt dw.localization.")
-};
-p.Files.WriteComplete(Foundation,evidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
-
-p.Json.EditObject("docs/planning/backlog.json",product=>{
-    var w1=product["work_packages"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M1-W01");
-    var w2=product["work_packages"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M1-W02");
-    var c=product["chunks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
-    var t1=c["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==T1);
-    var t2=c["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==T2);
-    product["plan_version"]="0.1.17";
-    w1["status"]="done";
-    w1["evidence"]=p.Json.StringArray(
-        "docs/planning/evidence/M1-W01-C01-boundary-verification.json",
-        "docs/planning/evidence/M1-W01-C02-qualified.json",
-        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
-        "docs/planning/evidence/M1-W01-C04-qualified.json");
-    w2["status"]="in_progress";
-    var acceptedPaths=w2["paths"]!.AsArray();
-    foreach(var added in new[]{"src/projects/dw.quantities.standard/","tests/projects/dw.quantities.tests/"})
-        if(!acceptedPaths.Any(x=>(string?)x==added))
-            acceptedPaths.Add((JsonNode?)JsonValue.Create(added));
-    c["status"]="in_progress";
-    c["refinement"]="RS018 verifies pinned AURA source authority, creates a BCL-only dw.quantities.standard adaptation rather than a byte-identical imported file, independently records T1/T2 missing-package RED, and qualifies seven exact focused catalog tests. Full source parity and integrated grammar coverage remain T2.";
-    c["files"]=p.Json.StringArray(Catalog,Resolver,Converter,StandardProject,StandardLock,
-        TestProject,TestLock,Solution,RedTests,GreenTests,RedEvidence,Foundation);
-    c["commands"]=p.Json.StringArray(
+p.Json.EditObject("docs/planning/backlog.json", product =>
+{
+    var c = product["chunks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == Phase);
+    var t = c["tasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == Task);
+    var subs = t["subtasks"]!.AsArray().Select(n => n!.AsObject()).ToArray();
+    product["plan_version"] = "0.1.18";
+    c["status"] = "in_progress";
+    c["refinement"] = "RS018 delivered an independent BCL-only catalog adaptation with 14 admitted units. RS019 strengthens deterministic candidate discovery, token bounds, catalog uniqueness and exact roundtrips, and captures both full SHA-pinned AURA sources for substantive inherited-source parity review. T2-V remains ready; full inherited alias/constant coverage and expression integration are not yet claimed.";
+    c["files"] = p.Json.StringArray(
+        "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+        "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+        "src/projects/dw.quantities.standard/PureUnitConverter.cs",
+        "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+        "src/projects/dw.quantities.standard/packages.lock.json",
+        "tests/projects/dw.quantities.tests/M1W02C01RedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W02C01Tests.cs",
+        Tests, "docs/planning/evidence/M1-W02-C01-red.json",
+        "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
+        SnapshotCatalog, SnapshotResolver, Evidence);
+    c["commands"] = p.Json.StringArray(
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests",
-        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
-        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs");
-    c["evidence"]=p.Json.StringArray(RedEvidence,Foundation);
-    t1["status"]="done";
-    t1["evidence"]=p.Json.StringArray(RedEvidence,Foundation);
-    foreach(var sub in t1["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
-    {
-        sub["status"]="done";
-        sub["evidence"]=p.Json.StringArray((string?)sub["id"]==T1+"-R"?RedEvidence:Foundation);
-    }
-    t2["status"]="in_progress";
-    var sub2=t2["subtasks"]!.AsArray().Select(x=>x!.AsObject()).ToArray();
-    sub2.Single(x=>(string?)x["id"]==T2+"-R")["status"]="done";
-    sub2.Single(x=>(string?)x["id"]==T2+"-R")["evidence"]=p.Json.StringArray(RedEvidence);
-    sub2.Single(x=>(string?)x["id"]==T2+"-G")["status"]="ready";
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01BoundaryTests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1");
+    var ce = c["evidence"]!.AsArray();
+    if (!ce.Any(n => (string?)n == Evidence))
+        ce.Add((JsonNode?)JsonValue.Create(Evidence));
+    t["status"] = "in_progress";
+    t["evidence"] = p.Json.StringArray("docs/planning/evidence/M1-W02-C01-red.json", Evidence);
+    var g = subs.Single(n => (string?)n["id"] == Green);
+    var v = subs.Single(n => (string?)n["id"] == Verify);
+    g["status"] = "done";
+    g["evidence"] = p.Json.StringArray(Evidence);
+    v["status"] = "ready";
 });
-if(baseline)
+if (baseline)
 {
-    p.ProjectPlan.ConvergeNodeToDone("M1-W01");
-    p.ProjectPlan.TransitionNode("M1-W02","not-ready","ready");
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
-    p.ProjectPlan.TransitionNode(T1,"not-ready","ready");
-    p.ProjectPlan.TransitionNode(T1+"-R","not-ready","ready");
-    p.ProjectPlan.ActivateReadyContinuation(T1+"-R");
-    p.ProjectPlan.ConvergeNodeToDone(T1+"-R");
-    p.ProjectPlan.TransitionNode(T1+"-G","not-ready","ready");
-    p.ProjectPlan.ActivateReadyContinuation(T1+"-G");
-    p.ProjectPlan.ConvergeNodeToDone(T1+"-G");
-    p.ProjectPlan.TransitionNode(T1+"-V","not-ready","ready");
-    p.ProjectPlan.ActivateReadyContinuation(T1+"-V");
-    p.ProjectPlan.ConvergeNodeToDone(T1+"-V");
-    p.ProjectPlan.ConvergeNodeToDone(T1);
-    p.ProjectPlan.TransitionNode(T2,"not-ready","ready");
-    p.ProjectPlan.TransitionNode(T2+"-R","not-ready","ready");
-    p.ProjectPlan.ActivateReadyContinuation(T2+"-R");
-    p.ProjectPlan.ConvergeNodeToDone(T2+"-R");
-    p.ProjectPlan.TransitionNode(T2+"-G","not-ready","ready");
+    p.ProjectPlan.ActivateReadyContinuation(Green);
+    p.ProjectPlan.ConvergeNodeToDone(Green);
+    p.ProjectPlan.TransitionNode(Verify, "not-ready", "ready");
 }
 else
 {
-    foreach(var id in new[]{"M1-W01",T1+"-R",T1+"-G",T1+"-V",T1,T2+"-R"})
-        p.ProjectPlan.RequireNodeState(id,"done");
-    foreach(var id in new[]{T2+"-G"})
-        p.ProjectPlan.RequireNodeState(id,"ready");
-    foreach(var id in new[]{"M1-W02",Phase,T2})
-        p.ProjectPlan.RequireNodeState(id,"in-progress");
+    p.ProjectPlan.RequireNodeState(Green, "done");
+    p.ProjectPlan.RequireNodeState(Verify, "ready");
+    p.ProjectPlan.RequireNodeState(Task, "in-progress");
+    p.ProjectPlan.RequireNodeState(Phase, "in-progress");
 }
-RunRequired(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
+RunRequired(root, "dotnet", "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
 return p.Complete();
 
-static string Significant(string output)
+static string ImportantFailure(string output)
 {
-    var index=output.IndexOf("Error Message:",StringComparison.Ordinal);
-    if(index<0)index=output.IndexOf("error ",StringComparison.OrdinalIgnoreCase);
-    var result=index>=0?output[index..]:output;
-    return result.Length>1800?result[..1800]:result;
+    var n = output.IndexOf("Error Message:", StringComparison.Ordinal);
+    if (n < 0) n = output.IndexOf("error ", StringComparison.OrdinalIgnoreCase);
+    var useful = n < 0 ? output : output[n..];
+    return useful.Length > 2900 ? useful[..2900] : useful;
 }
-static (int Code,string Output) Run(string root,string executable,params string[] args)
+
+static (int Code, string Output) Run(string root, string exe, params string[] args)
 {
-    using var process=new Process{StartInfo=new ProcessStartInfo{
-        FileName=executable,WorkingDirectory=root,UseShellExecute=false,
-        RedirectStandardOutput=true,RedirectStandardError=true}};
-    foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
-    if(!process.Start())throw new InvalidOperationException("Cannot start "+executable);
-    var readOutput=process.StandardOutput.ReadToEndAsync();
-    var readError=process.StandardError.ReadToEndAsync();
-    if(!process.WaitForExit(420000)){
-        process.Kill(entireProcessTree:true);
-        throw new TimeoutException(executable+" timed out.");
+    using var proc = new Process { StartInfo = new ProcessStartInfo
+    {
+        FileName = exe, WorkingDirectory = root, UseShellExecute = false,
+        RedirectStandardOutput = true, RedirectStandardError = true
+    }};
+    proc.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
+    proc.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
+    foreach (var arg in args) proc.StartInfo.ArgumentList.Add(arg);
+    if (!proc.Start()) throw new InvalidOperationException("Cannot start " + exe);
+    var stdout = proc.StandardOutput.ReadToEndAsync();
+    var stderr = proc.StandardError.ReadToEndAsync();
+    if (!proc.WaitForExit(420000))
+    {
+        proc.Kill(entireProcessTree: true);
+        throw new TimeoutException(exe + " timed out");
     }
-    var output=readOutput.GetAwaiter().GetResult()+"\n"+readError.GetAwaiter().GetResult();
+    var output = stdout.GetAwaiter().GetResult() + "\n" + stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
-    return (process.ExitCode,output);
+    return (proc.ExitCode, output);
 }
-static void RunRequired(string root,string exe,params string[] args)
+
+static void RunRequired(string root, string exe, params string[] args)
 {
-    var r=Run(root,exe,args);
-    if(r.Code!=0)throw new InvalidOperationException(
-        exe+" "+string.Join(" ",args)+" exited "+r.Code+": "+Significant(r.Output));
+    var result = Run(root, exe, args);
+    if (result.Code != 0)
+        throw new InvalidOperationException(exe + " " + string.Join(" ", args) +
+            " exited " + result.Code + ": " + ImportantFailure(result.Output));
 }
