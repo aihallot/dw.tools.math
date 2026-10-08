@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.16",
+  "plan_version": "0.1.17",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -223,23 +223,31 @@
       "id": "M1-W01",
       "release": "M1",
       "title": "Exact numbers and quantities",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.quantities/",
         "tests/projects/dw.quantities.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C01-boundary-verification.json",
+        "docs/planning/evidence/M1-W01-C02-qualified.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+        "docs/planning/evidence/M1-W01-C04-qualified.json"
+      ]
     },
     {
       "id": "M1-W02",
       "release": "M1",
       "title": "Units and expressions",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.quantities.expression/",
         "tests/projects/dw.quantities.expression.tests/",
-        "docs/"
+        "docs/",
+        "src/projects/dw.quantities.standard/",
+        "tests/projects/dw.quantities.tests/"
       ],
       "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
     },
@@ -1667,7 +1675,7 @@
       "title": "Standard catalog and culture-aware resolution",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M1-W01-C03"
       ],
@@ -1696,10 +1704,32 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.expression.tests/dw.quantities.expression.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS018 verifies pinned AURA source authority, creates a BCL-only dw.quantities.standard adaptation rather than a byte-identical imported file, independently records T1/T2 missing-package RED, and qualifies seven exact focused catalog tests. Full source parity and integrated grammar coverage remain T2.",
+      "files": [
+        "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+        "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+        "src/projects/dw.quantities.standard/PureUnitConverter.cs",
+        "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+        "src/projects/dw.quantities.standard/packages.lock.json",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/packages.lock.json",
+        "dw.tools.math.slnx",
+        "tests/projects/dw.quantities.tests/M1W02C01RedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W02C01Tests.cs",
+        "docs/planning/evidence/M1-W02-C01-red.json",
+        "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W02-C01-red.json",
+        "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -1707,29 +1737,38 @@
           "title": "Contract and outcome",
           "behavior": "Transfer the catalog, its version, constants, and aliases under the M0 localization decision; expose pure conversion/discovery APIs.",
           "test_case": "1 inch=127/5000 m; 1 KiB=1024 B; US/UK/AU cup and pint follow the explicit profile and expose assumptions.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W02-C01-red.json",
+            "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W02-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 1 inch=127/5000 m; 1 KiB=1024 B; US/UK/AU cup and pint follow the explicit profile and expose assumptions.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-red.json"
+              ]
             },
             {
               "id": "M1-W02-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer the catalog, its version, constants, and aliases under the M0 localization decision; expose pure conversion/discovery APIs.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+              ]
             },
             {
               "id": "M1-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+              ]
             }
           ]
         },
@@ -1738,21 +1777,23 @@
           "title": "Boundaries and integration",
           "behavior": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
           "test_case": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
-          "status": "planned",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-red.json"
+              ]
             },
             {
               "id": "M1-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

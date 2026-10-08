@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C01-red",
+  "status": "both-initial-absences-observed",
+  "test_filter": "FullyQualifiedName~M1W02C01RedTests",
+  "scope": "Absence of stand-alone standard package and its strict profile resolver, before any Math package graph change.",
+  "source_candidates": [
+    {
+      "source": "lib/dw.quantities.standard/StandardUnitCatalog.cs",
+      "source_sha256": "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a",
+      "bytes": 11333,
+      "captured_declarations": [
+        "using System.Collections.Frozen;",
+        "using System.Collections.Immutable;",
+        "using System.Numerics;",
+        "using dw.localization;",
+        "namespace dw.quantities.standard;",
+        "public sealed record StandardUnitMetadata(UnitDefinition Unit, LocalizedText DisplayName);",
+        "public static class StandardUnitCatalog",
+        "public const string Version = \u00220.2.0\u0022;",
+        "public static ImmutableArray\u003CUnitDefinition\u003E All { get; } =",
+        "public static ImmutableArray\u003CStandardUnitMetadata\u003E Metadata { get; } =",
+        "public static bool TryGetById(string id, out UnitDefinition? unit) =\u003E",
+        "public static bool TryGetMetadata(string id, out StandardUnitMetadata? metadata) =\u003E"
+      ],
+      "disposition": "Observation and owner-authorized behavioral adaptation; source is not copied verbatim."
+    },
+    {
+      "source": "lib/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+      "source_sha256": "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561",
+      "bytes": 2988,
+      "captured_declarations": [
+        "using dw.quantities.expression;",
+        "namespace dw.quantities.standard;",
+        "public sealed class StandardExpressionUnitResolver : IExpressionUnitResolver",
+        "public static StandardExpressionUnitResolver Instance { get; } = new();",
+        "public ExpressionUnitResolution Resolve(string token, string culture)"
+      ],
+      "disposition": "Observation and owner-authorized behavioral adaptation; source is not copied verbatim."
+    }
+  ]
+}
