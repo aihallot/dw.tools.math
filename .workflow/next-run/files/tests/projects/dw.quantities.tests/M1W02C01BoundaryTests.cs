@@ -14,20 +14,20 @@ public sealed class M1W02C01BoundaryTests
     {
         var cups = StandardExpressionUnitResolver.FindCandidates("cup");
         var pints = StandardExpressionUnitResolver.FindCandidates("pint");
-        Assert.HasCount(3, cups);
-        Assert.HasCount(3, pints);
+        Assert.AreEqual(3, cups.Length);
+        Assert.AreEqual(3, pints.Length);
         CollectionAssert.AreEquivalent(
             new[] { UnitSystem.UsCustomary, UnitSystem.BritishImperial, UnitSystem.AustralianCulinary },
             cups.Select(x => x.System).ToArray());
-        Assert.HasCount(1, StandardExpressionUnitResolver.FindCandidates("cup", UnitSystem.UsCustomary));
-        Assert.IsEmpty(StandardExpressionUnitResolver.FindCandidates("cup", UnitSystem.Si));
+        Assert.AreEqual(1, StandardExpressionUnitResolver.FindCandidates("cup", UnitSystem.UsCustomary).Length);
+        Assert.AreEqual(0, StandardExpressionUnitResolver.FindCandidates("cup", UnitSystem.Si).Length);
     }
 
     [TestMethod]
     public void CatalogIdsAreUniqueAndLookupsAreCanonical()
     {
         var ids = StandardUnitCatalog.All.Select(unit => unit.Id).ToArray();
-        Assert.HasCount(ids.Length, ids.Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+        Assert.AreEqual(ids.Length, ids.Distinct(StringComparer.OrdinalIgnoreCase).Count());
         foreach (var unit in StandardUnitCatalog.All)
         {
             Assert.IsTrue(StandardUnitCatalog.TryGetById(unit.Id.ToUpperInvariant(), out var result));
@@ -70,7 +70,7 @@ public sealed class M1W02C01BoundaryTests
         {
             Assert.ThrowsExactly<InvalidOperationException>(() =>
                 StandardExpressionUnitResolver.Resolve(token));
-            Assert.HasCount(3, StandardExpressionUnitResolver.FindCandidates(token));
+            Assert.AreEqual(3, StandardExpressionUnitResolver.FindCandidates(token).Length);
         }
         Assert.AreEqual("us-liquid-cup",
             StandardExpressionUnitResolver.Resolve("cups", UnitSystem.UsCustomary).Id);
