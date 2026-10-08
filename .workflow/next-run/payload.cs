@@ -1,183 +1,118 @@
 using System.Diagnostics;
-using System.Security.Cryptography;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string SourceRelativePath = "lib/dw.quantities/ExactRational.cs";
-const string TargetRelativePath = "src/projects/dw.quantities/ExactRational.cs";
-const string ExpectedSha256 = "3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a7047bd974b1405a";
+const string Red = "M1-W01-C01-T2-R";
+const string Marker = "M1-W01-C01-T2 RED: default ExactRational exposes zero denominator; default policy is unresolved.";
+const string Evidence = "docs/planning/evidence/M1-W01-C01-boundary-red.json";
+var p = PayloadContext.Create();
+p.Files.ReplaceFromStaged("staged/tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs",
+    "tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs");
 
-var payload = PayloadContext.Create();
+var observed = Run(p.RepositoryRoot, "dotnet", "test",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "-c", "Release", "--no-restore",
+    "--filter", "FullyQualifiedName~M1W01C01BoundaryTests",
+    "--logger", "console;verbosity=normal");
+if (observed.Code == 0 || !observed.Text.Contains(Marker, StringComparison.Ordinal))
+    throw new InvalidOperationException("T2 RED not proven for the declared default-value failure: " + observed.Text);
 
-InstallAuthorizedSource(payload);
-payload.Files.ReplaceFromStaged("staged/dw.tools.math.slnx", "dw.tools.math.slnx");
-payload.Files.ReplaceFromStaged("staged/tests/projects/dw.quantities.tests/M1W01C01Tests.cs", "tests/projects/dw.quantities.tests/M1W01C01Tests.cs");
-payload.Files.ReplaceFromStaged("staged/docs/planning/ValidateM1W01C01Green.cs", "docs/planning/ValidateM1W01C01Green.cs");
-payload.Files.ReplaceFromStaged("staged/docs/planning/backlog.json", "docs/planning/backlog.json");
-
-RunDotNet(payload.RepositoryRoot, "run", "--file", "docs/planning/ValidateM1W01C01Green.cs", "--", "--capture");
-RunDotNet(payload.RepositoryRoot, "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
-ConvergeNativeProgress(payload);
-
-return payload.Complete();
-
-static void InstallAuthorizedSource(PayloadContext payload)
+var evidence = new JsonObject
 {
-    var repositoryRoot = payload.RepositoryRoot;
-    var baselinePath = Path.Combine(repositoryRoot, "docs", "planning", "source-baseline.json");
-    var baseline = JsonNode.Parse(File.ReadAllText(baselinePath))?.AsObject()
-        ?? throw new InvalidOperationException("Source baseline is empty.");
-
-    var aura = (baseline["repositories"] as JsonArray
-        ?? throw new InvalidOperationException("Source baseline has no repositories."))
-        .Select(x => x?.AsObject() ?? throw new InvalidOperationException("Null source repository."))
-        .Single(x => x["repository"]?.GetValue<string>() == "aura");
-
-    var sourceRoot = aura["observed_root"]?.GetValue<string>();
-    if (string.IsNullOrWhiteSpace(sourceRoot))
-        throw new InvalidOperationException("AURA observed_root is missing.");
-
-    var sourceEntry = (aura["files"] as JsonArray
-        ?? throw new InvalidOperationException("AURA baseline has no files."))
-        .Select(x => x?.AsObject() ?? throw new InvalidOperationException("Null AURA source file."))
-        .Single(x => x["path"]?.GetValue<string>() == SourceRelativePath);
-
-    var expected = sourceEntry["sha256"]?.GetValue<string>();
-    if (!string.Equals(expected, ExpectedSha256, StringComparison.Ordinal))
-        throw new InvalidOperationException("Pinned ExactRational source hash changed.");
-
-    var sourcePath = Path.Combine(sourceRoot, SourceRelativePath.Replace('/', Path.DirectorySeparatorChar));
-    if (!File.Exists(sourcePath))
-        throw new InvalidOperationException("Authorized ExactRational source is not available at the pinned observed root: " + sourcePath);
-
-    var bytes = File.ReadAllBytes(sourcePath);
-    var actual = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
-    if (!string.Equals(actual, ExpectedSha256, StringComparison.Ordinal))
-        throw new InvalidOperationException("Authorized ExactRational source bytes drifted from the pinned SHA-256.");
-
-    var targetPath = Path.Combine(repositoryRoot, TargetRelativePath.Replace('/', Path.DirectorySeparatorChar));
-    if (File.Exists(targetPath))
-    {
-        var existing = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(targetPath))).ToLowerInvariant();
-        if (!string.Equals(existing, ExpectedSha256, StringComparison.Ordinal))
-            throw new InvalidOperationException("Math ExactRational.cs exists with undeclared third-state bytes.");
-        payload.Files.WriteComplete(TargetRelativePath, new System.Text.UTF8Encoding(false, true).GetString(bytes));
-        return;
-    }
-
-    var content = new System.Text.UTF8Encoding(false, true).GetString(bytes);
-    payload.Files.WriteComplete(TargetRelativePath, content);
-    var installed = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(targetPath))).ToLowerInvariant();
-    if (!string.Equals(installed, ExpectedSha256, StringComparison.Ordinal))
-        throw new InvalidOperationException("Math ExactRational.cs did not preserve the pinned source bytes.");
-}
-
-static void ConvergeNativeProgress(PayloadContext payload)
+    ["schema_version"] = 1,
+    ["id"] = "M1-W01-C01-boundary-red",
+    ["status"] = "expected-red-observed",
+    ["compiled_type"] = "dw.quantities.ExactRational",
+    ["test_filter"] = "FullyQualifiedName~M1W01C01BoundaryTests",
+    ["observed_failure_marker"] = Marker,
+    ["observed_default_denominator"] = 0,
+    ["test_exit_code_nonzero"] = true,
+    ["source_unchanged"] = true,
+    ["meaning"] = "The record struct default exposes an invalid denominator; GREEN must decide and implement explicit default handling.",
+    ["scope_limit"] = "The bounded RED does not impose arbitrary integer size limits or approximate conversion."
+};
+p.Files.WriteComplete(Evidence, evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
+p.Json.EditObject("docs/planning/backlog.json", root =>
 {
-    var ids = new[]
-    {
-        "M1", "M1-W01", "M1-W01-C01",
-        "M1-W01-C01-T1", "M1-W01-C01-T1-R", "M1-W01-C01-T1-G", "M1-W01-C01-T1-V",
-        "M1-W01-C01-T2", "M1-W01-C01-T2-R"
-    };
-    var states = ReadStates(payload.RepositoryRoot, ids);
+    root["plan_version"] = "0.1.8";
+    var chunk = root["chunks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01");
+    var task = chunk["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2");
+    var red = task["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == Red);
+    var green = task["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2-G");
+    if ((string?)task["status"] is not ("ready" or "in_progress") ||
+        (string?)red["status"] is not ("ready" or "done") ||
+        (string?)green["status"] is not ("planned" or "ready"))
+        throw new InvalidOperationException("T2 product baseline/target mismatch.");
+    task["status"] = "in_progress";
+    red["status"] = "done";
+    red["evidence"] = p.Json.StringArray(Evidence);
+    green["status"] = "ready";
+    var chunkEvidence = chunk["evidence"]!.AsArray();
+    if (!chunkEvidence.Any(x => (string?)x == Evidence))
+        chunkEvidence.Add(JsonValue.Create(Evidence));
+});
 
-    var baseline =
-        states["M1"] == "in-progress" &&
-        states["M1-W01"] == "in-progress" &&
-        states["M1-W01-C01"] == "in-progress" &&
-        states["M1-W01-C01-T1"] == "in-progress" &&
-        states["M1-W01-C01-T1-R"] == "done" &&
-        states["M1-W01-C01-T1-G"] == "ready" &&
-        states["M1-W01-C01-T1-V"] == "not-ready" &&
-        states["M1-W01-C01-T2"] == "not-ready" &&
-        states["M1-W01-C01-T2-R"] == "not-ready";
-
-    var target =
-        states["M1"] == "in-progress" &&
-        states["M1-W01"] == "in-progress" &&
-        states["M1-W01-C01"] == "in-progress" &&
-        states["M1-W01-C01-T1"] == "done" &&
-        states["M1-W01-C01-T1-R"] == "done" &&
-        states["M1-W01-C01-T1-G"] == "done" &&
-        states["M1-W01-C01-T1-V"] == "done" &&
-        states["M1-W01-C01-T2"] == "ready" &&
-        states["M1-W01-C01-T2-R"] == "ready";
-
-    if (target)
-    {
-        foreach (var id in ids) payload.ProjectPlan.RequireNodeState(id, states[id]);
-        return;
-    }
-
-    if (!baseline)
-        throw new InvalidOperationException("M1-W01-C01 GREEN is neither the declared RS008 baseline nor exact target.");
-
-    payload.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T1-G");
-    payload.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T1-G");
-    payload.ProjectPlan.TransitionNode("M1-W01-C01-T1-V", "not-ready", "ready");
-    payload.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T1-V");
-    payload.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T1-V");
-    payload.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T1");
-    payload.ProjectPlan.TransitionNode("M1-W01-C01-T2", "not-ready", "ready");
-    payload.ProjectPlan.TransitionNode("M1-W01-C01-T2-R", "not-ready", "ready");
-}
-
-static Dictionary<string, string> ReadStates(string root, IEnumerable<string> ids)
+var plan = JsonNode.Parse(File.ReadAllText(Path.Combine(p.RepositoryRoot, ".aura/workflow/plan/project.json")))!;
+var states = new Dictionary<string, string>(StringComparer.Ordinal);
+Collect(plan, states);
+if (states["M1-W01-C01-T2"] == "ready" &&
+    states[Red] == "ready" && states["M1-W01-C01-T2-G"] == "not-ready")
 {
-    var wanted = ids.ToHashSet(StringComparer.Ordinal);
-    var result = new Dictionary<string, string>(StringComparer.Ordinal);
-    var node = JsonNode.Parse(File.ReadAllText(Path.Combine(root, ".aura", "workflow", "plan", "project.json")))
-        ?? throw new InvalidOperationException("Native DWF project plan is empty.");
-    Visit(node, wanted, result);
-    foreach (var id in wanted)
-        if (!result.ContainsKey(id))
-            throw new InvalidOperationException("Missing native node: " + id);
-    return result;
+    p.ProjectPlan.ActivateReadyContinuation(Red);
+    p.ProjectPlan.ConvergeNodeToDone(Red);
+    p.ProjectPlan.TransitionNode("M1-W01-C01-T2-G", "not-ready", "ready");
 }
+else if (states["M1-W01-C01-T2"] == "in-progress" &&
+    states[Red] == "done" && states["M1-W01-C01-T2-G"] == "ready")
+{
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2", "in-progress");
+    p.ProjectPlan.RequireNodeState(Red, "done");
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-G", "ready");
+}
+else throw new InvalidOperationException("T2 native baseline/target mismatch.");
 
-static void Visit(JsonNode? node, IReadOnlySet<string> wanted, IDictionary<string, string> result)
+var rendered = Run(p.RepositoryRoot, "dotnet", "run", "--file",
+    "docs/planning/ValidatePlan.cs", "--", "--write");
+if (rendered.Code != 0) throw new InvalidOperationException("Planning renderer failed: " + rendered.Text);
+return p.Complete();
+
+static void Collect(JsonNode? node, IDictionary<string, string> states)
 {
     if (node is JsonObject o)
     {
-        var id = o["id"]?.GetValue<string>();
-        if (id is not null && wanted.Contains(id))
-            result[id] = o["state"]?.GetValue<string>() ?? throw new InvalidOperationException("Node has no state: " + id);
-        foreach (var p in o) Visit(p.Value, wanted, result);
-        return;
+        var id = (string?)o["id"];
+        if (id is "M1-W01-C01-T2" or "M1-W01-C01-T2-R" or "M1-W01-C01-T2-G")
+            states[id] = (string?)o["state"] ?? throw new InvalidOperationException("Missing native state");
+        foreach (var item in o) Collect(item.Value, states);
     }
-    if (node is JsonArray a)
-        foreach (var x in a) Visit(x, wanted, result);
+    else if (node is JsonArray a)
+        foreach (var item in a) Collect(item, states);
 }
 
-static void RunDotNet(string root, params string[] args)
+static (int Code, string Text) Run(string root, string executable, params string[] args)
 {
-    using var p = new Process
+    using var proc = new Process
     {
         StartInfo = new ProcessStartInfo
         {
-            FileName = "dotnet",
+            FileName = executable,
             WorkingDirectory = root,
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true
         }
     };
-    p.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
-    p.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
-    foreach (var a in args) p.StartInfo.ArgumentList.Add(a);
-    if (!p.Start()) throw new InvalidOperationException("Failed to start dotnet.");
-    var stdout = p.StandardOutput.ReadToEndAsync();
-    var stderr = p.StandardError.ReadToEndAsync();
-    if (!p.WaitForExit(420_000))
+    foreach (var arg in args) proc.StartInfo.ArgumentList.Add(arg);
+    if (!proc.Start()) throw new InvalidOperationException("Cannot start " + executable);
+    var stdout = proc.StandardOutput.ReadToEndAsync();
+    var stderr = proc.StandardError.ReadToEndAsync();
+    if (!proc.WaitForExit(360000))
     {
-        p.Kill(entireProcessTree: true);
-        throw new TimeoutException("dotnet command exceeded 420 seconds.");
+        proc.Kill(entireProcessTree: true);
+        throw new TimeoutException("Command timed out: " + executable);
     }
-    var so = stdout.GetAwaiter().GetResult();
-    var se = stderr.GetAwaiter().GetResult();
-    if (!string.IsNullOrWhiteSpace(so)) Console.Write(so);
-    if (!string.IsNullOrWhiteSpace(se)) Console.Error.Write(se);
-    if (p.ExitCode != 0)
-        throw new InvalidOperationException("dotnet command failed with exit code " + p.ExitCode + ".");
+    var text = stdout.GetAwaiter().GetResult() + "\n" + stderr.GetAwaiter().GetResult();
+    Console.WriteLine(text);
+    return (proc.ExitCode, text);
 }
