@@ -1,5 +1,6 @@
 using dw.quantities;
 using dw.quantities.expression;
+using dw.quantities.standard;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Dw.Quantities.Tests;
@@ -44,6 +45,15 @@ public sealed class M1W02C02BoundaryRedTests
         }
         Assert.IsTrue(outcome is ExpressionEvaluationOutcome.Failure
             { Kind: ExpressionFailureKind.MagnitudeLimit }, AdditionMarker);
+    }
+
+    [TestMethod]
+    public void ExplicitProfileExpressionResolverMustBePubliclyInstalled()
+    {
+        var type = typeof(StandardExpressionUnitResolver).Assembly.GetType(
+            "dw.quantities.standard.ExplicitProfileExpressionUnitResolver");
+        Assert.IsNotNull(type,
+            "M1-W02-C02-T2 RED: explicit-profile expression resolver is not installed.");
     }
 
     private sealed class OneUnit(UnitDefinition unit) : IExpressionUnitResolver
