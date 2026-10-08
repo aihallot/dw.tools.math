@@ -76,13 +76,19 @@ foreach (var source in sources)
 
 p.Files.ReplaceFromStaged("staged/" + TestPath, TestPath);
 
+// Compile separately so a source/analyzer failure is reported by the build before test discovery.
+RunRequired(root, "dotnet", "build",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "-c", "Release", "--verbosity", "normal");
 RunRequired(root, "dotnet", "test",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "-c", "Release", "--filter", "FullyQualifiedName~M1W01C03Tests",
+    "-c", "Release", "--no-build", "--no-restore",
+    "--filter", "FullyQualifiedName~M1W01C03Tests",
     "--logger", "console;verbosity=normal");
 RunRequired(root, "dotnet", "test",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "-c", "Release", "--no-restore", "--logger", "console;verbosity=minimal");
+    "-c", "Release", "--no-build", "--no-restore",
+    "--logger", "console;verbosity=minimal");
 RunRequired(root, "pwsh", "-NoProfile", "-NonInteractive", "-File", "scripts/verify.ps1");
 
 var evidence = new JsonObject
