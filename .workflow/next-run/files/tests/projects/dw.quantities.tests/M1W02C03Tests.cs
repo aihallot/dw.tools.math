@@ -89,8 +89,7 @@ public sealed class M1W02C03Tests
         AssertFailure("1/0", ExpressionFailureKind.DivideByZero);
         AssertFailure("min(1 m,1 B)", ExpressionFailureKind.IncompatibleDimensions);
         AssertFailure("min(1 cup,2 cup)", ExpressionFailureKind.UnitAmbiguous);
-        AssertFailure("min(1 m,2 m,3 cm)", ExpressionFailureKind.UnitAmbiguous == ExpressionFailureKind.Syntax
-            ? ExpressionFailureKind.Syntax : ExpressionFailureKind.Syntax);
+        Assert.AreEqual(new ExactRational(3, 100), Success("min(1 m,2 m,3 cm)").Value);
     }
 
     [TestMethod]
