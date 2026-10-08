@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.22",
+  "plan_version": "0.1.23",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -241,7 +241,7 @@
       "id": "M1-W02",
       "release": "M1",
       "title": "Units and expressions",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.quantities.expression/",
         "tests/projects/dw.quantities.expression.tests/",
@@ -249,7 +249,12 @@
         "src/projects/dw.quantities.standard/",
         "tests/projects/dw.quantities.tests/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json",
+        "docs/planning/evidence/M1-W02-C02-boundary-qualified.json",
+        "docs/planning/evidence/M1-W02-C03-qualified.json"
+      ]
     },
     {
       "id": "M1-W03",
@@ -1986,7 +1991,7 @@
       "title": "Selection functions and errors",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M1-W02-C02",
         "M1-W01-C04"
@@ -2012,10 +2017,27 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.expression.tests/dw.quantities.expression.tests.csproj -c Release --filter FullyQualifiedName~M1W02C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS024 observes two public API absence REDs, adds exact indexed stable tie selection and bounded neutral diagnostic codes, verifies eleven selection/error oracles and full locked Math/foundation regressions, and closes C03 and M1-W02. Previously qualified abs/min/max, grammar bounds, AURA-neutral catalog and typed failure semantics remain in force.",
+      "files": [
+        "src/projects/dw.quantities.expression/ExpressionParser.cs",
+        "src/projects/dw.quantities.expression/ExactSelection.cs",
+        "src/projects/dw.quantities.expression/ExpressionDiagnostics.cs",
+        "tests/projects/dw.quantities.tests/M1W02C03RedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W02C03Tests.cs",
+        "docs/planning/evidence/M1-W02-C03-red.json",
+        "docs/planning/evidence/M1-W02-C03-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C03",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W02-C03-red.json",
+        "docs/planning/evidence/M1-W02-C03-qualified.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2023,29 +2045,38 @@
           "title": "Contract and outcome",
           "behavior": "Transfer abs/min/max, stable ties, and error classes; expose neutral codes and bounded diagnostics.",
           "test_case": "min(1 m,100 cm) retains the first operand; nested max remains exact; abs(-2 m)=2 m.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W02-C03-red.json",
+            "docs/planning/evidence/M1-W02-C03-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W02-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: min(1 m,100 cm) retains the first operand; nested max remains exact; abs(-2 m)=2 m.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-red.json"
+              ]
             },
             {
               "id": "M1-W02-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer abs/min/max, stable ties, and error classes; expose neutral codes and bounded diagnostics.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-qualified.json"
+              ]
             },
             {
               "id": "M1-W02-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-qualified.json"
+              ]
             }
           ]
         },
@@ -2054,29 +2085,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject abs(absolute temperature), wrong arity, incompatible dimensions, division by zero, and unknown functions; no dynamic registry.",
           "test_case": "Reject abs(absolute temperature), wrong arity, incompatible dimensions, division by zero, and unknown functions; no dynamic registry.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W02-C03-red.json",
+            "docs/planning/evidence/M1-W02-C03-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W02-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject abs(absolute temperature), wrong arity, incompatible dimensions, division by zero, and unknown functions; no dynamic registry.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-red.json"
+              ]
             },
             {
               "id": "M1-W02-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject abs(absolute temperature), wrong arity, incompatible dimensions, division by zero, and unknown functions; no dynamic registry.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-qualified.json"
+              ]
             },
             {
               "id": "M1-W02-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C03-qualified.json"
+              ]
             }
           ]
         }

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C03-qualified",
+  "status": "exact-selection-stable-ties-and-bounded-neutral-diagnostics-qualified",
+  "red": "docs/planning/evidence/M1-W02-C03-red.json",
+  "production_files": [
+    "src/projects/dw.quantities.expression/ExpressionParser.cs",
+    "src/projects/dw.quantities.expression/ExactSelection.cs",
+    "src/projects/dw.quantities.expression/ExpressionDiagnostics.cs"
+  ],
+  "changed_parser_sha256": "53a4ea633084ecbc4236851405c9f84ba6cca2905671e9efd132acf504eb9e28",
+  "focused_filter": "FullyQualifiedName~M1W02C03",
+  "red_tests_passed_after_green": true,
+  "independent_exact_tests_passed": 11,
+  "dw_quantities_suite_passed": true,
+  "foundation_chain_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "tested_contracts": [
+    "min(1 m,100 cm) returns the exact metre result; a public selection result exposes source index zero on exact ties.",
+    "Stable min/max preserve first equal input, choose later strictly better values, and reject fewer than two or incompatible operands.",
+    "Nested min/max and abs(-2 m) retain exact rational values and dimensional semantics.",
+    "abs(absolute temperature), unknown functions, wrong arity, incompatible quantities, ambiguous units and division by zero return typed errors.",
+    "Every accepted ExpressionFailureKind has a unique stable math.expression.* code; unknown enum values are refused.",
+    "Diagnostic messages are fixed, neutral and bounded to 160 characters, preserve returned positions and never echo untrusted expression text.",
+    "Previously qualified exact grammar, overflow hardening, resource limits, culture isolation, injected resolver and unit-profile behavior continue passing full regressions."
+  ],
+  "limitations": [
+    "The expression result still does not retain full parse-tree provenance; the separate ExactSelection API exposes selected operand index for callers that require it.",
+    "Messages are fixed neutral English strings for programmatic diagnostics, not localized user-facing presentation.",
+    "A general CPU/memory guarantee or AURA external consumer adoption is not claimed.",
+    "Selection and diagnostics use fixed functions and enum classification, not a dynamic or executable function registry."
+  ]
+}
