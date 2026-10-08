@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "RS010",
+  "title": "Resolve ExactRational default-value GREEN",
+  "state": "prepared",
+  "commitMessage": "fix: canonicalize default exact rational",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C01",
+    "M1-W01-C01-T2",
+    "M1-W01-C01-T2-R",
+    "M1-W01-C01-T2-G",
+    "M1-W01-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Implement a canonical default(ExactRational) zero through offset denominator storage, preserve exact BigInteger arithmetic and record targeted GREEN evidence; advance only T2-G while leaving integration and resource-budget verification to T2-V.",
+    "value": "Eliminates the durable RS009 zero-denominator default defect without relying on floating-point conversion, rewriting AURA, or imposing arbitrary numeric size limits.",
+    "debtChanges": [
+      "The T2-V verification must qualify resource-budget handling for unbounded BigInteger input/intermediates and broader integration. GREEN claims only the tested default invariant and exact arithmetic."
+    ],
+    "nextAction": "Verify canonical default equality, formatting, operators, large exact intermediates, integration and resource-budget policy before closing T2.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C01-T2-G",
+        "achievement": "Default ExactRational now represents canonical 0/1 and equals ExactRational.Zero through exact offset-denominator storage, while targeted BigInteger arithmetic and default-operation tests pass."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/ExactRational.cs",
+    "tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs",
+    "docs/planning/evidence/M1-W01-C01-boundary-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
