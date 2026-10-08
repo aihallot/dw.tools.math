@@ -33,6 +33,7 @@ var evidence = new JsonObject
     ["scope_limit"] = "The bounded RED does not impose arbitrary integer size limits or approximate conversion."
 };
 p.Files.WriteComplete(Evidence, evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
+var baselineProgress = false;
 p.Json.EditObject("docs/planning/backlog.json", root =>
 {
     root["plan_version"] = "0.1.8";
@@ -40,9 +41,13 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
     var task = chunk["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2");
     var red = task["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == Red);
     var green = task["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2-G");
-    if ((string?)task["status"] is not ("ready" or "in_progress") ||
-        (string?)red["status"] is not ("ready" or "done") ||
-        (string?)green["status"] is not ("planned" or "ready"))
+    baselineProgress = (string?)task["status"] == "ready" &&
+        (string?)red["status"] == "ready" &&
+        (string?)green["status"] == "planned";
+    var targetProgress = (string?)task["status"] == "in_progress" &&
+        (string?)red["status"] == "done" &&
+        (string?)green["status"] == "ready";
+    if (!baselineProgress && !targetProgress)
         throw new InvalidOperationException("T2 product baseline/target mismatch.");
     task["status"] = "in_progress";
     red["status"] = "done";
@@ -53,10 +58,19 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
         chunkEvidence.Add((JsonNode?)JsonValue.Create(Evidence));
 });
 
-p.ProjectPlan.TransitionNode("M1-W01-C01-T2", "ready", "in-progress");
-p.ProjectPlan.TransitionNode(Red, "ready", "in-progress");
-p.ProjectPlan.ConvergeNodeToDone(Red);
-p.ProjectPlan.TransitionNode("M1-W01-C01-T2-G", "not-ready", "ready");
+if (baselineProgress)
+{
+    p.ProjectPlan.TransitionNode("M1-W01-C01-T2", "ready", "in-progress");
+    p.ProjectPlan.TransitionNode(Red, "ready", "in-progress");
+    p.ProjectPlan.ConvergeNodeToDone(Red);
+    p.ProjectPlan.TransitionNode("M1-W01-C01-T2-G", "not-ready", "ready");
+}
+else
+{
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2", "in-progress");
+    p.ProjectPlan.RequireNodeState(Red, "done");
+    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-G", "ready");
+}
 
 var rendered = Run(p.RepositoryRoot, "dotnet", "run", "--file",
     "docs/planning/ValidatePlan.cs", "--", "--write");
