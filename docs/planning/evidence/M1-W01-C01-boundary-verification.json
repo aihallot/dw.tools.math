@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C01-boundary-verification",
+  "status": "verified-with-explicit-budget-policy",
+  "source": "src/projects/dw.quantities/ExactRationalBudget.cs",
+  "source_sha256": "833b53e74a2f327e39e8c527480c6df2f6a4db711b4ca677beedbca52f6438ed",
+  "typed_api": "dw.quantities.ExactRationalBudget.Add/Multiply",
+  "default_policy": "default(ExactRational) equals canonical zero 0/1.",
+  "precision": "Integer-only BigInteger arithmetic; no conversion to double.",
+  "resource_policy": "Callers explicitly select maxBits. Checked Add/Multiply conservatively reject oversized operands or intermediate products. Unbudgeted ExactRational operators remain unbounded; this is an opt-in API, not global enforcement.",
+  "scope": "M1-W01-C01 ExactRational boundary verification only.",
+  "focused_test_filter": "FullyQualifiedName~M1W01C01",
+  "foundation_chain": "scripts/verify.ps1",
+  "focused_tests_passed": true,
+  "foundation_chain_passed": true,
+  "external_aura_modified": false
+}
