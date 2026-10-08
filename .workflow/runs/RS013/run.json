@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "RS013",
+  "title": "Transfer and qualify exact binary64 and decimal formatting",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact binary64 conversion and decimal formatting",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C02",
+    "M1-W01-C02-T1",
+    "M1-W01-C02-T1-R",
+    "M1-W01-C02-T1-G",
+    "M1-W01-C02-T1-V",
+    "M1-W01-C02-T2",
+    "M1-W01-C02-T2-R",
+    "M1-W01-C02-T2-G",
+    "M1-W01-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Install both pinned owner-authorized AURA exact binary64 and decimal formatter sources; independently qualify exact binary values, floating-point boundaries and decimal precision; verify package tests and foundation regressions; complete C02 if every contract passes.",
+    "value": "Delivers a complete additional M1 math capability in one bounded run rather than spreading transfer, behavioral GREEN, boundary RED/GREEN and verification across several operator invocations.",
+    "debtChanges": [
+      "The C02 T2 RED demonstrates missing boundary APIs before transfer; actual nonfinite/subnormal/signed-zero and precision acceptance is determined only by post-transfer tests.",
+      "Canonical rational values cannot preserve the negative IEEE-754 zero sign bit; Math explicitly treats both signed zero inputs as exact zero.",
+      "Decimal rounding mode semantics are tested for supported declared cases; no global magnitude/allocation budget or universal locale behavior is claimed."
+    ],
+    "nextAction": "Refine M1-W01-C03 dimensions/quantity/temperature source contracts and prepare a substantive qualified implementation run; leave C03 planned until source and test readiness are evidenced.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C02-T1-G",
+        "achievement": "Exact owner-approved ExactBinaryNumber and ExactDecimalFormatter source bytes are installed after pinned hash verification, and accepted exact binary64 and decimal behavior tests pass."
+      },
+      {
+        "projectNode": "M1-W01-C02-T1-V",
+        "achievement": "Binary64-to-rational exactness and decimal formatting are verified with independent tests and full dw.quantities project tests, preserving source provenance and observed API identities."
+      },
+      {
+        "projectNode": "M1-W01-C02-T1",
+        "achievement": "The exact binary64 and decimal formatter contract is complete from durable missing-type RED through hash-pinned GREEN and verification."
+      },
+      {
+        "projectNode": "M1-W01-C02-T2-R",
+        "achievement": "A targeted independent boundary test is observed RED for missing exact conversion/formatting APIs before source materialization, without claiming any pretransfer boundary behavior."
+      },
+      {
+        "projectNode": "M1-W01-C02-T2-G",
+        "achievement": "Installed types pass explicit finite/nonfinite binary64, subnormal, signed-zero, decimal tie-display and precision-boundary tests without changing the exact input values."
+      },
+      {
+        "projectNode": "M1-W01-C02-T2-V",
+        "achievement": "The focused boundary tests, full dw.quantities test project and foundation verification chain pass, with accepted limits recorded in durable evidence."
+      },
+      {
+        "projectNode": "M1-W01-C02-T2",
+        "achievement": "The exact binary64 conversion and decimal formatter boundary contract is completed from missing-API RED through independently tested GREEN and integration verification."
+      },
+      {
+        "projectNode": "M1-W01-C02",
+        "achievement": "The C02 chunk is completed with source-pinned transfer, IEEE-754 exactness, decimal display policy, edge-case qualification and durable evidence while sibling repositories remain unchanged."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/ExactBinaryNumber.cs",
+    "src/projects/dw.quantities/ExactDecimalFormatter.cs",
+    "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
+    "docs/planning/evidence/M1-W01-C02-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
