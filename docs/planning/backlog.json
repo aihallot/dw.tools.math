@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.11",
+  "plan_version": "0.1.12",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1250,7 +1250,7 @@
       "title": "Decimal, binary, and rounding",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M1-W01-C01"
       ],
@@ -1276,19 +1276,23 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C02Tests"
       ],
-      "refinement": "RS012 independently pins and inspects both authorized source candidates, records T1 RED before transfer, and reserves behavior/boundary qualification for subsequent exact tests.",
+      "refinement": "RS012 pins source and establishes T1 RED; RS013 transfers exact bytes, observes T2 missing-boundary RED before transfer, then qualifies binary64 exactness, non-finite rejection, subnormal/signed zero behavior, decimal modes and precision bounds with independent tests.",
       "files": [
         "src/projects/dw.quantities/ExactBinaryNumber.cs",
         "src/projects/dw.quantities/ExactDecimalFormatter.cs",
         "tests/projects/dw.quantities.tests/M1W01C02Tests.cs",
-        "docs/planning/evidence/M1-W01-C02-red.json"
+        "docs/planning/evidence/M1-W01-C02-red.json",
+        "docs/planning/evidence/M1-W01-C02-qualified.json"
       ],
       "commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C02Tests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M1-W01-C02-red.json"
+        "docs/planning/evidence/M1-W01-C02-red.json",
+        "docs/planning/evidence/M1-W01-C02-qualified.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1297,8 +1301,11 @@
           "title": "Contract and outcome",
           "behavior": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
           "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C02-red.json",
+            "docs/planning/evidence/M1-W01-C02-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C02-T1-R",
@@ -1313,15 +1320,19 @@
               "id": "M1-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-qualified.json"
+              ]
             }
           ]
         },
@@ -1330,29 +1341,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
           "test_case": "Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C02-red.json",
+            "docs/planning/evidence/M1-W01-C02-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C02-qualified.json"
+              ]
             }
           ]
         }
