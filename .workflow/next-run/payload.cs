@@ -53,42 +53,15 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
         chunkEvidence.Add(JsonValue.Create(Evidence));
 });
 
-var plan = JsonNode.Parse(File.ReadAllText(Path.Combine(p.RepositoryRoot, ".aura/workflow/plan/project.json")))!;
-var states = new Dictionary<string, string>(StringComparer.Ordinal);
-Collect(plan, states);
-if (states["M1-W01-C01-T2"] == "ready" &&
-    states[Red] == "ready" && states["M1-W01-C01-T2-G"] == "not-ready")
-{
-    p.ProjectPlan.ActivateReadyContinuation(Red);
-    p.ProjectPlan.ConvergeNodeToDone(Red);
-    p.ProjectPlan.TransitionNode("M1-W01-C01-T2-G", "not-ready", "ready");
-}
-else if (states["M1-W01-C01-T2"] == "in-progress" &&
-    states[Red] == "done" && states["M1-W01-C01-T2-G"] == "ready")
-{
-    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2", "in-progress");
-    p.ProjectPlan.RequireNodeState(Red, "done");
-    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-G", "ready");
-}
-else throw new InvalidOperationException("T2 native baseline/target mismatch.");
+p.ProjectPlan.TransitionNode("M1-W01-C01-T2", "ready", "in-progress");
+p.ProjectPlan.TransitionNode(Red, "ready", "in-progress");
+p.ProjectPlan.ConvergeNodeToDone(Red);
+p.ProjectPlan.TransitionNode("M1-W01-C01-T2-G", "not-ready", "ready");
 
 var rendered = Run(p.RepositoryRoot, "dotnet", "run", "--file",
     "docs/planning/ValidatePlan.cs", "--", "--write");
 if (rendered.Code != 0) throw new InvalidOperationException("Planning renderer failed: " + rendered.Text);
 return p.Complete();
-
-static void Collect(JsonNode? node, IDictionary<string, string> states)
-{
-    if (node is JsonObject o)
-    {
-        var id = (string?)o["id"];
-        if (id is "M1-W01-C01-T2" or "M1-W01-C01-T2-R" or "M1-W01-C01-T2-G")
-            states[id] = (string?)o["state"] ?? throw new InvalidOperationException("Missing native state");
-        foreach (var item in o) Collect(item.Value, states);
-    }
-    else if (node is JsonArray a)
-        foreach (var item in a) Collect(item, states);
-}
 
 static (int Code, string Text) Run(string root, string executable, params string[] args)
 {
