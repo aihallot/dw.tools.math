@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "RS015",
+  "title": "Transfer and qualify dimension, quantity and affine unit behavior",
+  "state": "prepared",
+  "commitMessage": "feat: transfer and verify exact dimension and quantity contracts",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T1-R",
+    "M1-W01-C03-T1-G",
+    "M1-W01-C03-T1-V",
+    "M1-W01-C03-T2",
+    "M1-W01-C03-T2-R"
+  ],
+  "contribution": {
+    "summary": "Transfer the three hash-pinned AURA mathematical files for dimensions, quantities and unit definitions; verify exact area, speed, information dimension, mass/time rejection and Fahrenheit/Celsius absolute and scale-only interval arithmetic; complete T1 and ready T2.",
+    "value": "Delivers the usable dimension-and-quantity core as one bounded multi-file GREEN with independent mathematical oracles and foundation regressions, without claiming unverified exponent overflow or full absolute/interval enforcement.",
+    "debtChanges": [
+      "T2 exponent overflow and direct affine absolute-versus-interval misuse remain unqualified; its RED/GREEN/verification must resolve them before closing C03.",
+      "The public UnitDefinition constructor is discovered at test execution from its compiled signatures; the source declarations captured by RS014 did not establish its full signature.",
+      "No AURA, Decision, MCDM or brainstorming sibling repository is changed.",
+      "RS015 retry 2 isolated the Fahrenheit/Celsius exact-conversion test failure. Retry 3 enumerates bounded public UnitDefinition constructor enum combinations and reports the focused assertion before test-host paths; source bytes and mathematical oracle remain unchanged."
+    ],
+    "nextAction": "Qualify and correct dimension exponent overflow and explicit absolute/interval behavior at public APIs in one bounded T2 run before completing C03.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C03-T1-G",
+        "achievement": "All three authorized DimensionVector, Quantity and UnitDefinition source files are installed with exact pinned hashes, and accepted dimension/quantity and affine unit behavior tests pass."
+      },
+      {
+        "projectNode": "M1-W01-C03-T1-V",
+        "achievement": "The focused dimensions and quantities test corpus, entire dw.quantities test project and foundation verification chain pass, with source provenance and qualified limits recorded."
+      },
+      {
+        "projectNode": "M1-W01-C03-T1",
+        "achievement": "The dimensions and quantities functional transfer is complete from independently observed missing-type RED through exact-source GREEN and integrated verification; unqualified T2 boundaries remain open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/Quantity.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+    "docs/planning/evidence/M1-W01-C03-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
