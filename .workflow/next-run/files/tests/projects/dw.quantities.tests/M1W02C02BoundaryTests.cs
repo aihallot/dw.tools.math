@@ -108,7 +108,7 @@ public sealed class M1W02C02BoundaryTests
             ExpressionFailureKind.MagnitudeLimit);
         RequireFailure(ExpressionParser.Evaluate("1 huge * 1 m", resolver),
             ExpressionFailureKind.MagnitudeLimit);
-        RequireFailure(ExpressionParser.Evaluate("1 m / 1 huge", resolver),
+        RequireFailure(ExpressionParser.Evaluate("(1 huge)^-2", resolver),
             ExpressionFailureKind.MagnitudeLimit);
     }
 
