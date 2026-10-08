@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "RS014",
+  "title": "Characterize dimensions, quantities and units; establish C03 RED",
+  "state": "prepared",
+  "commitMessage": "test: establish dimensions quantities and units RED",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T1-R",
+    "M1-W01-C03-T1-G"
+  ],
+  "contribution": {
+    "summary": "Verify three pinned authorized AURA mathematical sources, record bounded public declarations and candidate dependencies, establish independent missing-type RED for DimensionVector, Quantity and UnitDefinition, and ready C03 GREEN without speculative API claims.",
+    "value": "Removes the main transfer uncertainty for a three-source dimensions/quantities slice and establishes precise source provenance and a reproducible RED, enabling the next bounded run to integrate and qualify mathematical unit and temperature semantics.",
+    "debtChanges": [
+      "The C03 RED verifies that three Math types are absent, not arithmetic or affine-temperature behavior; these acceptance cases remain unqualified.",
+      "Source declaration excerpts are read-only evidence and cannot substitute for compilation and direct public API tests.",
+      "Dimension overflow and absolute/interval temperature semantics require explicit behavior qualification before C03 is complete."
+    ],
+    "nextAction": "Use the recorded three-source declarations, dependencies and pinned hashes to transfer and qualify the C03 quantities, dimensions and temperature slice through independent GREEN and boundary tests.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C03-T1-R",
+        "achievement": "The three owner-authorized AURA sources are individually SHA-256 verified and inspected for declarations/imports, and independently targeted tests observe that DimensionVector, Quantity and UnitDefinition are absent from Math before transfer."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+    "docs/planning/evidence/M1-W01-C03-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
