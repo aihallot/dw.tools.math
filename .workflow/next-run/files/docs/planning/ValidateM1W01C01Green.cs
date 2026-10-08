@@ -2,6 +2,7 @@
 #:property NuGetAudit=false
 
 using System.Diagnostics;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -46,6 +47,7 @@ try
         ["test", TestProject, "-c", "Release", "--no-restore", "--no-build", "--filter", "FullyQualifiedName~M1W01C01Tests", "--logger", "console;verbosity=minimal"],
         180_000);
     Require(tests.ExitCode == 0, "ExactRational GREEN tests failed:\n" + tests.Combined);
+    var materializedTypeFullName = MaterializedExactRationalTypeFullName(root);
 
     var foundation = Run(root, "pwsh", ["-NoProfile", "-NonInteractive", "-File", "scripts/verify.ps1"], 360_000);
     Require(foundation.ExitCode == 0, "Foundation regression chain failed:\n" + foundation.Combined);
@@ -75,6 +77,7 @@ try
         ["target_path"] = TargetRelativePath,
         ["source_sha256"] = ExpectedSourceSha256,
         ["target_sha256"] = ExpectedSourceSha256,
+        ["materialized_type_full_name"] = materializedTypeFullName,
         ["source_bytes_materialized_exactly"] = true,
         ["main_solution_integrated"] = true,
         ["targeted_tests_passed"] = true,
@@ -86,7 +89,7 @@ try
             "2/-4 canonicalizes to -1/2"),
         ["limits"] = new JsonArray(
             "Only ExactRational.cs is transferred in this GREEN; ExactBinaryNumber, ExactDecimalFormatter, quantities, units, and tolerances remain outside this slice.",
-            "The independent test uses public reflection so it does not assume an unpublished compile-time signature.",
+            "The independent test discovers the unique compiled ExactRational type and its usable public surface by bounded reflection; no namespace, constructor, parser, operator, or representation member name is assumed.",
             "AURA is read only; no sibling repository mutation occurs.")
     };
 
@@ -110,6 +113,21 @@ catch (Exception ex)
 {
     Console.Error.WriteLine("M1-W01-C01 GREEN invalid: " + ex.Message);
     return 1;
+}
+
+static string MaterializedExactRationalTypeFullName(string root)
+{
+    var outputRoot = Path.Combine(root, "build", "artifacts", "bin", "dw.quantities", "Release");
+    Require(Directory.Exists(outputRoot), "dw.quantities Release output directory is missing after build.");
+    var assemblies = Directory.EnumerateFiles(outputRoot, "dw.quantities.dll", SearchOption.AllDirectories).ToArray();
+    Require(assemblies.Length == 1, "Expected exactly one built dw.quantities.dll; found " + assemblies.Length + ".");
+
+    var assembly = Assembly.LoadFrom(assemblies[0]);
+    var matches = assembly.GetTypes()
+        .Where(type => string.Equals(type.Name, "ExactRational", StringComparison.Ordinal))
+        .ToArray();
+    Require(matches.Length == 1, "Expected exactly one compiled type whose simple name is ExactRational; found " + matches.Length + ".");
+    return matches[0].FullName ?? matches[0].Name;
 }
 
 static string Hash(byte[] bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
