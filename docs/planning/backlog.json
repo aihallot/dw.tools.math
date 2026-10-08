@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.18",
+  "plan_version": "0.1.19",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1675,7 +1675,7 @@
       "title": "Standard catalog and culture-aware resolution",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M1-W01-C03"
       ],
@@ -1704,7 +1704,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.expression.tests/dw.quantities.expression.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests"
       ],
-      "refinement": "RS018 delivered an independent BCL-only catalog adaptation with 14 admitted units. RS019 strengthens deterministic candidate discovery, token bounds, catalog uniqueness and exact roundtrips, and captures both full SHA-pinned AURA sources for substantive inherited-source parity review. T2-V remains ready; full inherited alias/constant coverage and expression integration are not yet claimed.",
+      "refinement": "RS018 qualified a strict standalone 14-unit subset. RS019 qualified bounded profiles/aliases and captured pinned source snapshots. RS020 deterministically adapts all 58 inherited AURA mathematical unit definitions into a separate host-free catalogue, tests independent exact constants, IDs, ambiguities and temperature rules, and explicitly defers expression-parser integration to M1-W02-C02.",
       "files": [
         "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
         "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
@@ -1718,19 +1718,24 @@
         "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
         "docs/planning/evidence/M1-W02-C01-AURA-StandardUnitCatalog.txt",
         "docs/planning/evidence/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt",
-        "docs/planning/evidence/M1-W02-C01-boundary-green.json"
+        "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+        "src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs",
+        "tests/projects/dw.quantities.tests/M1W02C01SourceParityTests.cs",
+        "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01BoundaryTests",
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
-        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01SourceParityTests"
       ],
       "evidence": [
         "docs/planning/evidence/M1-W02-C01-red.json",
         "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
-        "docs/planning/evidence/M1-W02-C01-boundary-green.json"
+        "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+        "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1779,10 +1784,11 @@
           "title": "Boundaries and integration",
           "behavior": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
           "test_case": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
-          "status": "in_progress",
+          "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W02-C01-red.json",
-            "docs/planning/evidence/M1-W02-C01-boundary-green.json"
+            "docs/planning/evidence/M1-W02-C01-boundary-green.json",
+            "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json"
           ],
           "subtasks": [
             {
@@ -1807,8 +1813,10 @@
               "id": "M1-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C01-T2.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json"
+              ]
             }
           ]
         }

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C01-source-parity-qualified",
+  "status": "mathematical-source-structure-parity-qualified-with-explicit-host-exclusions",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_catalog_snapshot": "docs/planning/evidence/M1-W02-C01-AURA-StandardUnitCatalog.txt",
+  "source_catalog_sha256": "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a",
+  "source_resolver_snapshot": "docs/planning/evidence/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt",
+  "source_resolver_sha256": "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561",
+  "adapted_source": "src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs",
+  "adapted_source_sha256": "1b5384ce9e56cecd1746d8b1dc9f1bf3000501fdf787896df5dd2f08373c7108",
+  "transform_policy": [
+    "Keep every unit declaration and exact scale, dimension, symbol, alias and canonical ID from the pinned original catalogue.",
+    "Rename the catalogue to InheritedStandardUnitCatalog to preserve the already-qualified, separate 14-unit strict profile surface.",
+    "Remove only the dw.localization import, StandardUnitMetadata declaration, LocalizedText metadata construction, TryGetMetadata and FrenchName presentation projection.",
+    "Preserve the original version, all 58 unit definitions and their exact deterministic information-unit power generation."
+  ],
+  "unit_count": 58,
+  "prior_catalogue": "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+  "resolver": "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+  "inherited_resolution": "Explicit profile or canonical ID; never implicit host-culture selection.",
+  "deliberate_differences": [
+    "Original resolver IExpressionUnitResolver.Resolve(token,culture) is not copied: host culture priority must not decide Math values under the M0 localization decision.",
+    "The original LocalizedText metadata remains host-owned; the Math catalogue exposes pure unit data and passive labels only.",
+    "Initial 14-unit catalogue keeps its named AU beer-pint 570 mL extension; inherited 0.2.0 data has no AU pint and exposes an explicit metric-international pint.",
+    "Integration with the bounded expression parser is owned by M1-W02-C02 and is not claimed by this C01 qualification.",
+    "No silent equivalence is claimed between legacy culture-priority resolution and explicit profile resolution."
+  ],
+  "mathematical_oracles": [
+    "58 unique inherited source IDs with exact original version and no scalar pseudo-units.",
+    "All 58 inherited units have exact identity and source/base/self roundtrips.",
+    "Imperial inch, foot and pound, metric litre/millilitre, metric speed and US/AU tablespoon constants remain exact.",
+    "All eight decimal 1000^n and eight binary 1024^n information prefixes remain exact BigInteger values.",
+    "Cups and pints expose all original candidates and reject unresolved ambiguity; explicit profiles recover the source IDs.",
+    "Celsius/Fahrenheit absolute conversions and source aliases match independent exact oracles.",
+    "No localization/host assembly dependency and no ambient-culture routing."
+  ],
+  "focused_filter": "FullyQualifiedName~M1W02C01SourceParityTests",
+  "focused_passed": true,
+  "entire_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "transfer_architecture_passed": true,
+  "limits": "Parities here concern the original mathematical unit definitions and the declared exact transform; presentation metadata and legacy culture-priority expression resolution are deliberately excluded and independently owned."
+}
