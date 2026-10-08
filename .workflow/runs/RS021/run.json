@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS021",
+  "title": "Characterize pinned expression parser sources and establish independent RED",
+  "state": "prepared",
+  "commitMessage": "test: establish exact grammar RED and pin parser source contracts",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C02",
+    "M1-W02-C02-T1",
+    "M1-W02-C02-T1-R",
+    "M1-W02-C02-T1-G"
+  ],
+  "contribution": {
+    "summary": "Establish independent missing-assembly RED for the exact expression parser and capture the complete pinned AURA parser, its original project, inherited engine tests and excluded host parser facade, with source signatures and dependency observations.",
+    "value": "Provides a reproducible RED and full source-authority evidence for a substantial subsequent .NET 10 expression-parser transfer, avoiding guessed public APIs, accidental AURA host dependencies and fragile source adaptations.",
+    "debtChanges": [
+      "The RED demonstrates absence of the expression package; no exact arithmetic, roots, token limits or injection contracts are declared qualified until runnable parser tests execute.",
+      "Full source and test snapshots are inspection/provenance copies only; no expression package or facade is materialized in Math by this run.",
+      "The AURA domain/command parser facade remains host-owned under M0 decisions; only the pure dw.quantities.expression library is an authorized future transfer target.",
+      "Retry 1 failed at C# payload compilation: RunRequired was referenced but undeclared. Retry 2 defines this fail-closed subprocess helper; all existing gates, RED expectations and source SHA requirements remain unchanged."
+    ],
+    "nextAction": "Derive public constructors, resolver contracts and exact mathematical oracles from captured parser/project/test sources, then transfer and verify the complete pure parser and resource-budget boundaries in the fewest defensible runs.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C02-T1-R",
+        "achievement": "Two independent tests observe the missing standalone exact expression assembly and parser surface before transfer; the authorized parser, project, engine tests and excluded AURA host facade are SHA-256-verified, preserved as complete source review snapshots and structurally characterized."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    "tests/projects/dw.quantities.tests/M1W02C02RedTests.cs",
+    "docs/planning/evidence/M1-W02-C02-AURA-expression-project.txt",
+    "docs/planning/evidence/M1-W02-C02-AURA-ExpressionParser.txt",
+    "docs/planning/evidence/M1-W02-C02-AURA-ExpressionEngineTests.txt",
+    "docs/planning/evidence/M1-W02-C02-AURA-host-parser-facade.txt",
+    "docs/planning/evidence/M1-W02-C02-source-red.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
