@@ -220,7 +220,14 @@ static void RunRequired(string root, string executable, params string[] args)
     var output = stdout.GetAwaiter().GetResult() + "\n" + stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
     if (process.ExitCode != 0)
+    {
+        var errorOffset = output.IndexOf("Error Message:", StringComparison.Ordinal);
+        var useful = errorOffset >= 0 ? output[errorOffset..] : output;
+        // Keep the first decisive failure details ahead of long test-host paths
+        // so the bounded DWF durable error preserves the cause.
+        var detail = useful.Length > 3000 ? useful[..3000] : useful;
         throw new InvalidOperationException(
             executable + " " + string.Join(" ", args) +
-            " exited " + process.ExitCode + ": " + output);
+            " exited " + process.ExitCode + ": " + detail);
+    }
 }
