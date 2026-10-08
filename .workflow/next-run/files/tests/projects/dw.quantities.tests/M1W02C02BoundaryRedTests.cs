@@ -32,7 +32,16 @@ public sealed class M1W02C02BoundaryRedTests
         var length = new UnitDefinition("metre", "m", "metre", UnitSystem.Si,
             DimensionVector.LengthDimension, ExactRational.One, ExactRational.Zero,
             UnitTransformKind.Linear);
-        var outcome = ExpressionParser.Evaluate("1 huge * 1 m", new TwoUnits(huge, length));
+        ExpressionEvaluationOutcome? outcome = null;
+        try
+        {
+            outcome = ExpressionParser.Evaluate("1 huge * 1 m", new TwoUnits(huge, length));
+        }
+        catch (OverflowException)
+        {
+            // Before GREEN the checked DimensionVector addition leaks here.
+            // The failed assertion keeps a stable, recognizable RED oracle.
+        }
         Assert.IsTrue(outcome is ExpressionEvaluationOutcome.Failure
             { Kind: ExpressionFailureKind.MagnitudeLimit }, AdditionMarker);
     }
