@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "id": "RS024",
+  "title": "Qualify stable selection and bounded expression diagnostics",
+  "commitMessage": "feat: qualify stable exact selection and neutral expression diagnostics",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C03",
+    "M1-W02-C03-T1",
+    "M1-W02-C03-T1-R",
+    "M1-W02-C03-T1-G",
+    "M1-W02-C03-T1-V",
+    "M1-W02-C03-T2",
+    "M1-W02-C03-T2-R",
+    "M1-W02-C03-T2-G",
+    "M1-W02-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Observe two missing-public-API REDs; integrate indexed stable first-tie min/max selection and bounded neutral expression diagnostics, verify eleven new exact selection/error oracles and full regressions, and complete C03 and M1-W02.",
+    "value": "Finishes the autonomous exact units-and-expressions vertical with deterministic tie behavior, fixed error codes, bounded diagnostics that never echo user input and all prior exact grammar and explicit-profile qualifications.",
+    "debtChanges": [
+      "Evaluated quantities do not retain full parse-tree provenance; ExactSelection exposes the winning input index separately.",
+      "Fixed neutral English diagnostic messages are not localized user presentation, which remains host policy.",
+      "Public expression budget limits are qualified on tested input scopes, not a universal CPU/memory guarantee or AURA host adoption."
+    ],
+    "nextAction": "Advance M1-W03-C01 from the native roadmap, qualifying standalone Math package consumers and authority without modifying any sibling repository.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C03-T1-R",
+        "achievement": "Independent prechange RED observes the missing public stable selection-index contract."
+      },
+      {
+        "projectNode": "M1-W02-C03-T1-G",
+        "achievement": "ExactSelection implements stable indexed minimum and maximum, preserves the first equal operand and is used by the exact expression parser."
+      },
+      {
+        "projectNode": "M1-W02-C03-T1-V",
+        "achievement": "Direct tests verify min(1 m,100 cm), first-operand ties, nested min/max, abs(-2 m), incompatible dimensions and temperature constraints."
+      },
+      {
+        "projectNode": "M1-W02-C03-T1",
+        "achievement": "The functional selection contract progresses from independent RED through integrated exact selection and qualification."
+      },
+      {
+        "projectNode": "M1-W02-C03-T2-R",
+        "achievement": "Independent prechange RED observes the missing neutral bounded expression diagnostics contract."
+      },
+      {
+        "projectNode": "M1-W02-C03-T2-G",
+        "achievement": "Every defined expression failure maps to a stable unique neutral code and a fixed bounded message preserving returned position without echoing user input."
+      },
+      {
+        "projectNode": "M1-W02-C03-T2-V",
+        "achievement": "Wrong arity, unknown functions, incompatible dimensions, absolute-temperature abs, ambiguity and division by zero are qualified with eleven new focused oracles plus full locked Math/foundation regressions."
+      },
+      {
+        "projectNode": "M1-W02-C03-T2",
+        "achievement": "The diagnostic and error-boundary contract is completed from RED to a qualified public API with fixed bounded messages."
+      },
+      {
+        "projectNode": "M1-W02-C03",
+        "achievement": "The selection and error chunk completes with exact stable ties, selected-operand indices, neutral diagnostics and durable tested evidence."
+      },
+      {
+        "projectNode": "M1-W02",
+        "achievement": "All units-and-expressions chunks now carry validated evidence: inherited exact catalogue, bounded grammar and explicit profiles, and exact selection and neutral errors; the work package completes without external adoption claims."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.expression/ExpressionParser.cs",
+    "src/projects/dw.quantities.expression/ExactSelection.cs",
+    "src/projects/dw.quantities.expression/ExpressionDiagnostics.cs",
+    "tests/projects/dw.quantities.tests/M1W02C03RedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W02C03Tests.cs",
+    "docs/planning/evidence/M1-W02-C03-red.json",
+    "docs/planning/evidence/M1-W02-C03-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.quantities.expression/ExpressionParser.cs",
+      "sourcePath": "files/src/projects/dw.quantities.expression/ExpressionParser.cs"
+    },
+    {
+      "path": "src/projects/dw.quantities.expression/ExactSelection.cs",
+      "sourcePath": "files/src/projects/dw.quantities.expression/ExactSelection.cs"
+    },
+    {
+      "path": "src/projects/dw.quantities.expression/ExpressionDiagnostics.cs",
+      "sourcePath": "files/src/projects/dw.quantities.expression/ExpressionDiagnostics.cs"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/M1W02C03RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M1W02C03RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/M1W02C03Tests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M1W02C03Tests.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS023/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.22"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/11/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/11/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/11/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/3/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/1/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/1/phases/2/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M1-W02-C02-boundary-qualified.json",
+      "jsonPointer": "/modified_parser_sha256",
+      "expectedValue": "cc6f4467107fd5a3f53c8ee7ad252a224781f9485ac03d725b872a3a98320f27"
+    }
+  ]
+}
