@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C02-boundary-qualified",
+  "status": "bounded-parser-and-explicit-profile-unit-integration-qualified",
+  "baseline_source_sha256": "6f553e58c5e4e788932b3d02cfadae2f8abecf564e8595296c8a91d7c4bfd765",
+  "modified_parser_sha256": "cc6f4467107fd5a3f53c8ee7ad252a224781f9485ac03d725b872a3a98320f27",
+  "source_change_policy": "Constrained overflow hardening of AURA-origin parser after observed RED; original pinned source and RS022 exact transfer evidence remain preserved.",
+  "adapter": "src/projects/dw.quantities.standard/ExplicitProfileExpressionUnitResolver.cs",
+  "project_dependencies": "dw.quantities.standard -\u003E dw.quantities.expression -\u003E dw.quantities; no AURA/dw.localization and no circular package dependency.",
+  "independent_red": "docs/planning/evidence/M1-W02-C02-boundary-red.json",
+  "targeted_reds_passed_after_fix": true,
+  "boundary_oracles_passed": 8,
+  "dw_quantities_test_suite_passed": true,
+  "foundation_regressions_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "contracts": [
+    "Scale checks all eight dimensional exponents and cannot silently wrap int values.",
+    "Arithmetic dimension overflows are represented as typed MagnitudeLimit outcomes at public Evaluate, not uncaught exceptions.",
+    "Exact expression evaluation resolves 1 inch \u002B 1 cm to 177/5000 metres and 2 KiB to 2048 B.",
+    "Ambiguous cup and pint symbols produce typed UnitAmbiguous with complete sorted candidate IDs unless an explicit UnitSystem profile is selected.",
+    "Ambient culture and the parser-provided culture argument cannot silently change the selected unit profile.",
+    "The strict 14-unit and inherited 58-unit catalogues are intentionally separate consumer options.",
+    "Invalid currencies, logarithmic units, C# input and free variables remain typed refusals.",
+    "Original published length, token, nesting, magnitude and degree/power limits remain enforced in full exact regression."
+  ],
+  "limits": [
+    "OverflowException is intentionally translated to MagnitudeLimit with position 0; a more precise diagnostic position would require deeper parser refactoring.",
+    "Math does not promise a universal CPU/memory budget for all exact operations; accepted integer and grammar limits define only the qualified scope.",
+    "Legacy AURA culture-priority aliases are not emulated; Math requires explicit profiles.",
+    "No AURA facade adoption or sibling-repository modification is claimed."
+  ]
+}

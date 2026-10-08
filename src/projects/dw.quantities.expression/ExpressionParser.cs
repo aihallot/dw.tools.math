@@ -101,6 +101,11 @@ public static class ExpressionParser
         {
             return new ExpressionEvaluationOutcome.Failure(exception.Kind, exception.Position);
         }
+        catch (OverflowException)
+        {
+            // Public parser failures must not leak dimension integer overflow.
+            return new ExpressionEvaluationOutcome.Failure(ExpressionFailureKind.MagnitudeLimit, 0);
+        }
     }
 
     private static IReadOnlyList<Token> Tokenize(string expression)
@@ -495,10 +500,10 @@ public static class ExpressionParser
         }
 
         private static DimensionVector Scale(DimensionVector value, int factor) => new(
-            value.Length * factor, value.Mass * factor, value.Time * factor,
-            value.ElectricCurrent * factor, value.Temperature * factor,
-            value.AmountOfSubstance * factor, value.LuminousIntensity * factor,
-            value.Information * factor);
+            checked(value.Length * factor), checked(value.Mass * factor), checked(value.Time * factor),
+            checked(value.ElectricCurrent * factor), checked(value.Temperature * factor),
+            checked(value.AmountOfSubstance * factor), checked(value.LuminousIntensity * factor),
+            checked(value.Information * factor));
 
         private static DimensionVector Divide(DimensionVector value, int divisor) => new(
             value.Length / divisor, value.Mass / divisor, value.Time / divisor,
