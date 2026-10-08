@@ -12,7 +12,7 @@ p.Files.ReplaceFromStaged("staged/tests/projects/dw.quantities.tests/M1W01C01Bou
 
 var observed = Run(p.RepositoryRoot, "dotnet", "test",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "-c", "Release", "--no-restore",
+    "-c", "Release",
     "--filter", "FullyQualifiedName~M1W01C01BoundaryTests",
     "--logger", "console;verbosity=normal");
 if (observed.Code == 0 || !observed.Text.Contains(Marker, StringComparison.Ordinal))
