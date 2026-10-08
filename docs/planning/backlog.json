@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.20",
+  "plan_version": "0.1.21",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1856,23 +1856,32 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.expression.tests/dw.quantities.expression.tests.csproj -c Release --filter FullyQualifiedName~M1W02C02Tests"
       ],
-      "refinement": "RS021 captures and SHA-verifies the approved pure expression parser, its project and legacy tests together with the separately excluded AURA host facade, and establishes an independent missing-assembly RED. RS022 must derive the compiled public API and mathematical test oracles from these complete snapshots before claiming transfer or RED/GREEN verification.",
+      "refinement": "RS021 pinned four complete parser/project/test/host sources and qualified independent missing-assembly RED. RS022 transfers exact authorized pure ExpressionParser bytes into new locked standalone dw.quantities.expression, verifies eleven independent rational, root, injected-resolver and public budget oracles plus full project/foundation regressions, and leaves T2 integration/adversarial boundary qualification open.",
       "files": [
         "src/projects/dw.quantities.expression/ExpressionParser.cs",
         "src/projects/dw.quantities.expression/dw.quantities.expression.csproj",
+        "src/projects/dw.quantities.expression/packages.lock.json",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/packages.lock.json",
+        "dw.tools.math.slnx",
         "tests/projects/dw.quantities.tests/M1W02C02RedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W02C02Tests.cs",
         "docs/planning/evidence/M1-W02-C02-source-red.json",
-        "docs/planning/evidence/M1-W02-C02-AURA-expression-project.txt",
         "docs/planning/evidence/M1-W02-C02-AURA-ExpressionParser.txt",
-        "docs/planning/evidence/M1-W02-C02-AURA-ExpressionEngineTests.txt",
-        "docs/planning/evidence/M1-W02-C02-AURA-host-parser-facade.txt"
+        "docs/planning/evidence/M1-W02-C02-AURA-expression-project.txt",
+        "docs/planning/evidence/M1-W02-C02-green.json"
       ],
       "commands": [
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C02RedTests",
-        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C02Tests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
       ],
       "evidence": [
-        "docs/planning/evidence/M1-W02-C02-source-red.json"
+        "docs/planning/evidence/M1-W02-C02-source-red.json",
+        "docs/planning/evidence/M1-W02-C02-green.json"
       ],
       "readiness": "T1 RED qualified; approved pure parser/project and inherited test sources captured and hash-verified; T1 GREEN requires compiled dependency and public API qualification.",
       "tasks": [
@@ -1881,8 +1890,11 @@
           "title": "Contract and outcome",
           "behavior": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
           "test_case": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W02-C02-source-red.json",
+            "docs/planning/evidence/M1-W02-C02-green.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W02-C02-T1-R",
@@ -1897,15 +1909,19 @@
               "id": "M1-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C02-green.json"
+              ]
             },
             {
               "id": "M1-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C02-green.json"
+              ]
             }
           ]
         },
@@ -1914,14 +1930,14 @@
           "title": "Boundaries and integration",
           "behavior": "Characterize 4096 characters, 256 tokens, depth 32, magnitude 256 digits, and power/root 16 limits; execute no C# and allow no free variable.",
           "test_case": "Characterize 4096 characters, 256 tokens, depth 32, magnitude 256 digits, and power/root 16 limits; execute no C# and allow no free variable.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W02-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Characterize 4096 characters, 256 tokens, depth 32, magnitude 256 digits, and power/root 16 limits; execute no C# and allow no free variable.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

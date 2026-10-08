@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C02-green",
+  "status": "exact-parser-functional-green-verified-boundary-integration-pending",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_snapshot": "docs/planning/evidence/M1-W02-C02-AURA-ExpressionParser.txt",
+  "source_sha256": "6f553e58c5e4e788932b3d02cfadae2f8abecf564e8595296c8a91d7c4bfd765",
+  "installed_parser": "src/projects/dw.quantities.expression/ExpressionParser.cs",
+  "installed_parser_sha256": "6f553e58c5e4e788932b3d02cfadae2f8abecf564e8595296c8a91d7c4bfd765",
+  "source_project_sha256": "7c7c1d8bc7df4b69fc642af0b79c88721a38e9f8e706ff530973a8664f25f833",
+  "packaging": "Standalone dw.quantities.expression project references only dw.quantities; test consumer references both with NuGet locked-mode and compiles without AURA.",
+  "focused_filter": "FullyQualifiedName~M1W02C02Tests",
+  "focused_test_count": 11,
+  "focused_passed": true,
+  "complete_dw_quantities_suite_passed": true,
+  "foundation_chain_passed": true,
+  "transfer_architecture_passed": true,
+  "verified_oracles": [
+    "1/3 \u002B 1/6 = 1/2 exactly; arithmetic precedence, unary signs and min/max/abs exact.",
+    "root(81/16,2)=9/4 and root(65536,16)=2; irrational or unsupported-degree roots reject exact mode.",
+    "Powers preserve exact fractions and enforce an explicit \u002B/-16 exponent domain.",
+    "Injected IExpressionUnitResolver controls unit meaning; dimensions and information exponents remain correct.",
+    "Absolute-temperature arithmetic is rejected or yields interval semantics as declared.",
+    "4096-character, 256-token, depth-32, 256-digit and power/root-16 limits are tested at their actual public input boundary.",
+    "C# syntax and free variables reject as typed syntax errors; unknown units and incompatible dimensions return typed failure."
+  ],
+  "boundary_pending": [
+    "T2 must independently characterize integer dimension exponent overflow and adversarial overflow/resource paths, not just the ordinary exact grammar cases covered by T1.",
+    "T2 must integrate the previously qualified explicit-profile standard resolver without allowing process culture to choose ambiguous aliases.",
+    "No unconstrained CPU/memory resource bound or host facade adoption is claimed; exact source transfer alone does not prove such guarantees."
+  ]
+}
