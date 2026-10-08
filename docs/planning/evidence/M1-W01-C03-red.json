@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C03-red",
+  "status": "expected-absence-observed",
+  "aura_baseline": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_candidates": [
+    {
+      "source_path": "lib/dw.quantities/DimensionVector.cs",
+      "target_path": "src/projects/dw.quantities/DimensionVector.cs",
+      "sha256": "2c2ebabbb800ff151309dbc4f2cbb611091f687f30dcc5fb742e99339406e5b9",
+      "byte_count": 1777,
+      "line_count": 47,
+      "declaration_lines_captured": 10,
+      "declaration_capture_limit": 200,
+      "declarations": [
+        "namespace dw.quantities;",
+        "public readonly record struct DimensionVector(",
+        "public static DimensionVector Scalar { get; } = new(0, 0, 0, 0, 0, 0, 0);",
+        "public static DimensionVector LengthDimension { get; } = new(1, 0, 0, 0, 0, 0, 0);",
+        "public static DimensionVector MassDimension { get; } = new(0, 1, 0, 0, 0, 0, 0);",
+        "public static DimensionVector TimeDimension { get; } = new(0, 0, 1, 0, 0, 0, 0);",
+        "public static DimensionVector TemperatureDimension { get; } = new(0, 0, 0, 0, 1, 0, 0);",
+        "public static DimensionVector InformationDimension { get; } = new(0, 0, 0, 0, 0, 0, 0, 1);",
+        "public static DimensionVector operator \u002B(DimensionVector left, DimensionVector right) =\u003E",
+        "public static DimensionVector operator -(DimensionVector left, DimensionVector right) =\u003E"
+      ],
+      "imports": [],
+      "candidate_type_mentions": [
+        "DimensionVector"
+      ],
+      "observation_limit": "Public/internal and namespace/using declaration lines are captured. This is not proof that multi-line API signatures or transitive dependencies are complete."
+    },
+    {
+      "source_path": "lib/dw.quantities/Quantity.cs",
+      "target_path": "src/projects/dw.quantities/Quantity.cs",
+      "sha256": "f9121bedc85e810a958f6d2f833652a59f5f7b66a81a8445e9d0c6cec7104e6f",
+      "byte_count": 614,
+      "line_count": 23,
+      "declaration_lines_captured": 5,
+      "declaration_capture_limit": 200,
+      "declarations": [
+        "namespace dw.quantities;",
+        "public readonly record struct Quantity(ExactRational Value, DimensionVector Dimension)",
+        "public bool TryAdd(Quantity other, out Quantity result)",
+        "public Quantity Multiply(Quantity other) =\u003E",
+        "public Quantity Divide(Quantity other) =\u003E"
+      ],
+      "imports": [],
+      "candidate_type_mentions": [
+        "DimensionVector",
+        "Quantity",
+        "ExactRational"
+      ],
+      "observation_limit": "Public/internal and namespace/using declaration lines are captured. This is not proof that multi-line API signatures or transitive dependencies are complete."
+    },
+    {
+      "source_path": "lib/dw.quantities/UnitDefinition.cs",
+      "target_path": "src/projects/dw.quantities/UnitDefinition.cs",
+      "sha256": "a8eaf48386ec10d6586a8f7be80765fb6e21c6a18acc5309d21a6d544dba676f",
+      "byte_count": 1935,
+      "line_count": 70,
+      "declaration_lines_captured": 17,
+      "declaration_capture_limit": 200,
+      "declarations": [
+        "using System.Collections.Immutable;",
+        "namespace dw.quantities;",
+        "public enum UnitSystem",
+        "public enum UnitTransformKind",
+        "public sealed record UnitDefinition",
+        "public UnitDefinition(",
+        "public string Id { get; }",
+        "public string Symbol { get; }",
+        "public string Name { get; }",
+        "public UnitSystem System { get; }",
+        "public DimensionVector Dimension { get; }",
+        "public ExactRational ScaleToBase { get; }",
+        "public ExactRational OffsetToBase { get; }",
+        "public UnitTransformKind TransformKind { get; }",
+        "public ImmutableArray\u003Cstring\u003E Aliases { get; }",
+        "public ExactRational ToBase(ExactRational value) =\u003E value * ScaleToBase \u002B OffsetToBase;",
+        "public ExactRational FromBase(ExactRational value) =\u003E (value - OffsetToBase) / ScaleToBase;"
+      ],
+      "imports": [
+        "using System.Collections.Immutable;"
+      ],
+      "candidate_type_mentions": [
+        "DimensionVector",
+        "UnitDefinition",
+        "ExactRational"
+      ],
+      "observation_limit": "Public/internal and namespace/using declaration lines are captured. This is not proof that multi-line API signatures or transitive dependencies are complete."
+    }
+  ],
+  "test_project": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+  "test_filter": "FullyQualifiedName~M1W01C03Tests",
+  "observed_missing_type_markers": [
+    "M1-W01-C03 RED: DimensionVector is not materialized in Math.",
+    "M1-W01-C03 RED: Quantity is not materialized in Math.",
+    "M1-W01-C03 RED: UnitDefinition is not materialized in Math."
+  ],
+  "run_result": "The targeted tests failed for all three missing public types before source transfer.",
+  "accepted_future_cases": [
+    "3 m * 4 m = 12 m squared",
+    "10 km / 30 min = 50/9 m/s",
+    "32 degF = 0 degC",
+    "a 9 degF interval equals 5 K",
+    "reject addition of mass and time",
+    "bound dimension-exponent overflow and direct absolute/interval operations"
+  ],
+  "limitations": [
+    "No source is copied in this RED run.",
+    "Declaration lines and candidate imports are observations, not compiled API verification.",
+    "Physical units and affine temperature behavior remain unqualified until independent GREEN tests run."
+  ]
+}

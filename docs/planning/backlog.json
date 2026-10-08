@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.12",
+  "plan_version": "0.1.13",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1386,7 +1386,7 @@
       "title": "Dimensions, quantities, and temperatures",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M1-W01-C01"
       ],
@@ -1413,10 +1413,21 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS014 pins and inspects all three AURA sources and establishes independent missing-type RED. Subsequent GREEN must qualify exact dimensions, quantities, direct affine temperature behavior, and exponent boundaries against their observed APIs.",
+      "files": [
+        "src/projects/dw.quantities/DimensionVector.cs",
+        "src/projects/dw.quantities/Quantity.cs",
+        "src/projects/dw.quantities/UnitDefinition.cs",
+        "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+        "docs/planning/evidence/M1-W01-C03-red.json"
+      ],
+      "commands": [
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C03-red.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -1424,21 +1435,23 @@
           "title": "Contract and outcome",
           "behavior": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
           "test_case": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
-          "status": "planned",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-red.json"
+              ]
             },
             {
               "id": "M1-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
