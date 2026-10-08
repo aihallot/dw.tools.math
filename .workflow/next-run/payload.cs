@@ -4,91 +4,108 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Source = "src/projects/dw.quantities/ExactRational.cs";
-const string Tests = "tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs";
-const string Evidence = "docs/planning/evidence/M1-W01-C01-boundary-green.json";
+const string BudgetSource = "src/projects/dw.quantities/ExactRationalBudget.cs";
+const string BudgetTests = "tests/projects/dw.quantities.tests/M1W01C01BudgetTests.cs";
+const string Evidence = "docs/planning/evidence/M1-W01-C01-boundary-verification.json";
 var p = PayloadContext.Create();
+p.Files.ReplaceFromStaged("staged/" + BudgetSource, BudgetSource);
+p.Files.ReplaceFromStaged("staged/" + BudgetTests, BudgetTests);
 
-p.Files.ReplaceFromStaged("staged/src/projects/dw.quantities/ExactRational.cs", Source);
-p.Files.ReplaceFromStaged("staged/tests/projects/dw.quantities.tests/M1W01C01BoundaryTests.cs", Tests);
-
-var result = Run(p.RepositoryRoot, "dotnet", "test",
+RunRequired(p.RepositoryRoot, "dotnet", "test",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "-c", "Release", "--filter", "FullyQualifiedName~M1W01C01BoundaryTests",
+    "-c", "Release", "--filter", "FullyQualifiedName~M1W01C01",
     "--logger", "console;verbosity=minimal");
-if (result.Code != 0)
-    throw new InvalidOperationException("RS010 ExactRational boundary GREEN failed: " + result.Text);
+RunRequired(p.RepositoryRoot, "pwsh", "-NoProfile", "-NonInteractive", "-File", "scripts/verify.ps1");
 
-var sourceSha = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(p.RepositoryRoot,Source)))).ToLowerInvariant();
+var sha = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(p.RepositoryRoot, BudgetSource)))).ToLowerInvariant();
 var evidence = new JsonObject
 {
     ["schema_version"] = 1,
-    ["id"] = "M1-W01-C01-boundary-green",
-    ["status"] = "green-tested-verification-pending",
-    ["compiled_type"] = "dw.quantities.ExactRational",
-    ["source_path"] = Source,
-    ["source_sha256"] = sourceSha,
-    ["default_policy"] = "default(ExactRational) is canonical zero: numerator 0, denominator 1; equals ExactRational.Zero.",
-    ["storage"] = "The denominator is stored as denominator minus one; no double conversion.",
-    ["test_project"] = "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    ["test_filter"] = "FullyQualifiedName~M1W01C01BoundaryTests",
-    ["targeted_tests_passed"] = true,
-    ["source_aura_modified"] = false,
-    ["remaining_verification"] = "T2-V must verify integration, resource-budget behavior and test coverage; no arbitrary numeric size limit is claimed."
+    ["id"] = "M1-W01-C01-boundary-verification",
+    ["status"] = "verified-with-explicit-budget-policy",
+    ["source"] = BudgetSource,
+    ["source_sha256"] = sha,
+    ["typed_api"] = "dw.quantities.ExactRationalBudget.Add/Multiply",
+    ["default_policy"] = "default(ExactRational) equals canonical zero 0/1.",
+    ["precision"] = "Integer-only BigInteger arithmetic; no conversion to double.",
+    ["resource_policy"] = "Callers explicitly select maxBits. Checked Add/Multiply conservatively reject oversized operands or intermediate products. Unbudgeted ExactRational operators remain unbounded; this is an opt-in API, not global enforcement.",
+    ["scope"] = "M1-W01-C01 ExactRational boundary verification only.",
+    ["focused_test_filter"] = "FullyQualifiedName~M1W01C01",
+    ["foundation_chain"] = "scripts/verify.ps1",
+    ["focused_tests_passed"] = true,
+    ["foundation_chain_passed"] = true,
+    ["external_aura_modified"] = false
 };
-p.Files.WriteComplete(Evidence, evidence.ToJsonString(new JsonSerializerOptions {WriteIndented=true})+"\n");
+p.Files.WriteComplete(Evidence, evidence.ToJsonString(new JsonSerializerOptions {WriteIndented=true}) + "\n");
+
 var baselineProgress = false;
 p.Json.EditObject("docs/planning/backlog.json", root =>
 {
-    root["plan_version"] = "0.1.9";
-    var chunk = root["chunks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01-C01");
-    var task = chunk["tasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01-C01-T2");
-    var green = task["subtasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01-C01-T2-G");
-    var verify = task["subtasks"]!.AsArray().Select(n => n!.AsObject()).Single(n => (string?)n["id"] == "M1-W01-C01-T2-V");
-    var baseline = (string?)green["status"] == "ready" && (string?)verify["status"] == "planned";
-    var target = (string?)green["status"] == "done" && (string?)verify["status"] == "ready";
-    baselineProgress = baseline;
-    if ((!baseline && !target) || (string?)task["status"] != "in_progress")
-        throw new InvalidOperationException("RS010 product status neither baseline nor target.");
-    green["status"] = "done";
-    green["evidence"] = p.Json.StringArray(Evidence);
-    verify["status"] = "ready";
-    var evidenceList = chunk["evidence"]!.AsArray();
-    if (!evidenceList.Any(n => (string?)n == Evidence))
+    var c01 = root["chunks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01");
+    var c02 = root["chunks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02");
+    var t2 = c01["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2");
+    var verify = t2["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C01-T2-V");
+    baselineProgress = (string?)verify["status"] == "ready" &&
+        (string?)t2["status"] == "in_progress" && (string?)c01["status"] == "in_progress" &&
+        (string?)c02["status"] == "planned";
+    var targetProgress = (string?)verify["status"] == "done" &&
+        (string?)t2["status"] == "done" && (string?)c01["status"] == "done" &&
+        (string?)c02["status"] == "ready";
+    if (!baselineProgress && !targetProgress)
+        throw new InvalidOperationException("RS011 progress is neither baseline nor target.");
+    root["plan_version"] = "0.1.10";
+    verify["status"] = "done";
+    verify["evidence"] = p.Json.StringArray(Evidence);
+    t2["status"] = "done";
+    t2["evidence"] = p.Json.StringArray("docs/planning/evidence/M1-W01-C01-boundary-red.json",
+        "docs/planning/evidence/M1-W01-C01-boundary-green.json", Evidence);
+    c01["status"] = "done";
+    var evidenceList = c01["evidence"]!.AsArray();
+    if (!evidenceList.Any(x => (string?)x == Evidence))
         evidenceList.Add((JsonNode?)JsonValue.Create(Evidence));
+    c02["status"] = "ready";
+    var c02T1 = c02["tasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02-T1");
+    c02T1["status"] = "ready";
+    var c02Red = c02T1["subtasks"]!.AsArray().Select(x => x!.AsObject()).Single(x => (string?)x["id"] == "M1-W01-C02-T1-R");
+    c02Red["status"] = "ready";
 });
-
 if (baselineProgress)
 {
-    p.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T2-G");
-    p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2-G");
-    p.ProjectPlan.TransitionNode("M1-W01-C01-T2-V", "not-ready", "ready");
+    p.ProjectPlan.ActivateReadyContinuation("M1-W01-C01-T2-V");
+    p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2-V");
+    p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01-T2");
+    p.ProjectPlan.ConvergeNodeToDone("M1-W01-C01");
+    p.ProjectPlan.TransitionNode("M1-W01-C02", "not-ready", "ready");
+    p.ProjectPlan.TransitionNode("M1-W01-C02-T1", "not-ready", "ready");
+    p.ProjectPlan.TransitionNode("M1-W01-C02-T1-R", "not-ready", "ready");
 }
 else
 {
-    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-G", "done");
-    p.ProjectPlan.RequireNodeState("M1-W01-C01-T2-V", "ready");
+    foreach (var id in new[] {"M1-W01-C01-T2-V", "M1-W01-C01-T2", "M1-W01-C01"})
+        p.ProjectPlan.RequireNodeState(id, "done");
+    foreach (var id in new[] {"M1-W01-C02", "M1-W01-C02-T1", "M1-W01-C02-T1-R"})
+        p.ProjectPlan.RequireNodeState(id, "ready");
 }
-
-var render = Run(p.RepositoryRoot, "dotnet", "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
-if (render.Code != 0)
-    throw new InvalidOperationException("Planning regeneration failed: " + render.Text);
+RunRequired(p.RepositoryRoot, "dotnet", "run", "--file", "docs/planning/ValidatePlan.cs", "--", "--write");
 return p.Complete();
 
-static (int Code,string Text) Run(string root,string exe,params string[] args)
+static void RunRequired(string root, string executable, params string[] args)
 {
-    using var proc=new Process{StartInfo=new ProcessStartInfo{
-        FileName=exe, WorkingDirectory=root,UseShellExecute=false,
-        RedirectStandardOutput=true,RedirectStandardError=true}};
-    foreach(var a in args)proc.StartInfo.ArgumentList.Add(a);
-    if(!proc.Start())throw new InvalidOperationException("Cannot start "+exe);
-    var stdout=proc.StandardOutput.ReadToEndAsync();
-    var stderr=proc.StandardError.ReadToEndAsync();
-    if(!proc.WaitForExit(420000)){
-        proc.Kill(entireProcessTree:true);
-        throw new TimeoutException(exe+" timed out");
+    using var proc = new Process { StartInfo = new ProcessStartInfo
+    {
+        FileName = executable, WorkingDirectory = root, UseShellExecute = false,
+        RedirectStandardOutput = true, RedirectStandardError = true
+    }};
+    foreach (var arg in args) proc.StartInfo.ArgumentList.Add(arg);
+    if (!proc.Start()) throw new InvalidOperationException("Cannot start " + executable);
+    var stdout = proc.StandardOutput.ReadToEndAsync();
+    var stderr = proc.StandardError.ReadToEndAsync();
+    if (!proc.WaitForExit(420000))
+    {
+        proc.Kill(entireProcessTree: true);
+        throw new TimeoutException(executable + " timed out.");
     }
-    var output=stdout.GetAwaiter().GetResult()+"\n"+stderr.GetAwaiter().GetResult();
+    var output = stdout.GetAwaiter().GetResult() + "\n" + stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
-    return(proc.ExitCode,output);
+    if (proc.ExitCode != 0) throw new InvalidOperationException(executable + " failed: " + output);
 }
