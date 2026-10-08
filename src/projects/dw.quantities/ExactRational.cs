@@ -20,12 +20,16 @@ public readonly record struct ExactRational : IComparable<ExactRational>
 
         var divisor = BigInteger.GreatestCommonDivisor(BigInteger.Abs(numerator), denominator);
         Numerator = numerator / divisor;
-        Denominator = denominator / divisor;
+        _denominatorMinusOne = denominator / divisor - BigInteger.One;
     }
 
     public BigInteger Numerator { get; }
 
-    public BigInteger Denominator { get; }
+    // Store denominator minus one so default(ExactRational) is canonical zero (0/1).
+    // This also preserves value equality with ExactRational.Zero.
+    private readonly BigInteger _denominatorMinusOne;
+
+    public BigInteger Denominator => _denominatorMinusOne + BigInteger.One;
 
     public static ExactRational Zero { get; } = new(BigInteger.Zero, BigInteger.One);
 
