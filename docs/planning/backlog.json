@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.13",
+  "plan_version": "0.1.14",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1413,20 +1413,24 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests"
       ],
-      "refinement": "RS014 pins and inspects all three AURA sources and establishes independent missing-type RED. Subsequent GREEN must qualify exact dimensions, quantities, direct affine temperature behavior, and exponent boundaries against their observed APIs.",
+      "refinement": "RS014 captured pinned source declarations and missing-type RED; RS015 transfers the exact approved three-source surface, qualifies exact dimensions, quantity operations and affine temperature conversions, and leaves exponent-overflow and absolute/interval boundary policy for T2.",
       "files": [
         "src/projects/dw.quantities/DimensionVector.cs",
         "src/projects/dw.quantities/Quantity.cs",
         "src/projects/dw.quantities/UnitDefinition.cs",
         "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
-        "docs/planning/evidence/M1-W01-C03-red.json"
+        "docs/planning/evidence/M1-W01-C03-red.json",
+        "docs/planning/evidence/M1-W01-C03-green.json"
       ],
       "commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M1-W01-C03-red.json"
+        "docs/planning/evidence/M1-W01-C03-red.json",
+        "docs/planning/evidence/M1-W01-C03-green.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1435,8 +1439,11 @@
           "title": "Contract and outcome",
           "behavior": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
           "test_case": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C03-red.json",
+            "docs/planning/evidence/M1-W01-C03-green.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C03-T1-R",
@@ -1451,15 +1458,19 @@
               "id": "M1-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-green.json"
+              ]
             },
             {
               "id": "M1-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-green.json"
+              ]
             }
           ]
         },
@@ -1468,14 +1479,14 @@
           "title": "Boundaries and integration",
           "behavior": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
           "test_case": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M1-W01-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

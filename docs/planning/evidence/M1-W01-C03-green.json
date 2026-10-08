@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C03-green",
+  "status": "functional-green-verified-boundary-pending",
+  "aura_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "sources": [
+    {
+      "source_path": "lib/dw.quantities/DimensionVector.cs",
+      "target_path": "src/projects/dw.quantities/DimensionVector.cs",
+      "sha256": "2c2ebabbb800ff151309dbc4f2cbb611091f687f30dcc5fb742e99339406e5b9"
+    },
+    {
+      "source_path": "lib/dw.quantities/Quantity.cs",
+      "target_path": "src/projects/dw.quantities/Quantity.cs",
+      "sha256": "f9121bedc85e810a958f6d2f833652a59f5f7b66a81a8445e9d0c6cec7104e6f"
+    },
+    {
+      "source_path": "lib/dw.quantities/UnitDefinition.cs",
+      "target_path": "src/projects/dw.quantities/UnitDefinition.cs",
+      "sha256": "a8eaf48386ec10d6586a8f7be80765fb6e21c6a18acc5309d21a6d544dba676f"
+    }
+  ],
+  "actual_api": [
+    "DimensionVector LengthDimension, MassDimension, TimeDimension, TemperatureDimension, InformationDimension",
+    "Quantity(ExactRational, DimensionVector), Multiply, Divide, TryAdd",
+    "UnitDefinition(ToBase, FromBase, ScaleToBase, OffsetToBase) with reflected public constructor"
+  ],
+  "tested_oracles": [
+    "3 m multiplied by 4 m = 12 square metres with exact squared-length dimension",
+    "10 km divided by 30 minutes = 50/9 m/s",
+    "Information dimension remains independent of scalar and length",
+    "Adding mass to time is rejected at Quantity.TryAdd",
+    "32 degF and 0 degC convert to the same exact Kelvin absolute",
+    "A 9 degF interval has scale-only magnitude 5 K; absolute ToBase applies offset"
+  ],
+  "focused_filter": "FullyQualifiedName~M1W01C03Tests",
+  "focused_tests_passed": true,
+  "dw_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "source_aura_modified": false,
+  "limits": [
+    "T2 exponent overflow and direct absolute-versus-interval misuse remain unqualified.",
+    "Scale-only interval magnitude is not proof of a dedicated temperature interval API.",
+    "No AURA or sibling repository modification or external adoption is claimed."
+  ]
+}
