@@ -174,6 +174,10 @@ p.Json.EditObject("docs/planning/backlog.json",product=>{
     product["plan_version"]="0.1.17";
     w1["status"]="done";
     w2["status"]="in_progress";
+    var acceptedPaths=w2["paths"]!.AsArray();
+    foreach(var added in new[]{"src/projects/dw.quantities.standard/","tests/projects/dw.quantities.tests/"})
+        if(!acceptedPaths.Any(x=>(string?)x==added))
+            acceptedPaths.Add((JsonNode?)JsonValue.Create(added));
     c["status"]="in_progress";
     c["refinement"]="RS018 verifies pinned AURA source authority, creates a BCL-only dw.quantities.standard adaptation rather than a byte-identical imported file, independently records T1/T2 missing-package RED, and qualifies seven exact focused catalog tests. Full source parity and integrated grammar coverage remain T2.";
     c["files"]=p.Json.StringArray(Catalog,Resolver,Converter,StandardProject,StandardLock,
@@ -245,7 +249,6 @@ static (int Code,string Output) Run(string root,string executable,params string[
         FileName=executable,WorkingDirectory=root,UseShellExecute=false,
         RedirectStandardOutput=true,RedirectStandardError=true}};
     foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
-    var stdout=Task.FromResult(string.Empty);
     if(!process.Start())throw new InvalidOperationException("Cannot start "+executable);
     var readOutput=process.StandardOutput.ReadToEndAsync();
     var readError=process.StandardError.ReadToEndAsync();
