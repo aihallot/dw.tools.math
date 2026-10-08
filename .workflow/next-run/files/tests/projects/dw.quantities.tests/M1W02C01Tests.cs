@@ -11,7 +11,11 @@ public sealed class M1W02C01Tests
     [TestMethod]
     public void CatalogHasStableExplicitVersionAndStandaloneNamespace()
     {
-        Assert.AreEqual("2026-10-exact-v1", StandardUnitCatalog.CatalogVersion);
+        var versionField = typeof(StandardUnitCatalog).GetField(
+            nameof(StandardUnitCatalog.CatalogVersion),
+            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        Assert.IsNotNull(versionField, "The catalogue must expose a public version field.");
+        Assert.AreEqual("2026-10-exact-v1", versionField.GetRawConstantValue() as string);
         Assert.IsTrue(StandardUnitCatalog.Units.Length >= 14);
         Assert.AreEqual("dw.quantities.standard", typeof(StandardUnitCatalog).Namespace);
         Assert.IsTrue(StandardUnitCatalog.PassiveNames.ContainsKey("fr"));
