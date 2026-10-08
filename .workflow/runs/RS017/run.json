@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "RS017",
+  "title": "Transfer and qualify exact quantity and temperature comparison",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact quantity and temperature comparisons",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C04",
+    "M1-W01-C04-T1",
+    "M1-W01-C04-T1-R",
+    "M1-W01-C04-T1-G",
+    "M1-W01-C04-T1-V",
+    "M1-W01-C04-T2",
+    "M1-W01-C04-T2-R",
+    "M1-W01-C04-T2-G",
+    "M1-W01-C04-T2-V"
+  ],
+  "contribution": {
+    "summary": "Establish two independent pre-transfer RED contracts; copy pinned ApproximateEquivalence from AURA, add exact symmetric quantity and tagged temperature comparison policy, test inclusive and negative tolerance boundaries, and qualify the whole C04 slice in one run.",
+    "value": "Delivers exact, dimension-aware comparison behavior without floating-point fallback; handles zero, large BigInteger, symmetric relative bounds and affine temperature tolerances while preserving historical source provenance.",
+    "debtChanges": [
+      "Transferred AURA ApproximateEquivalence is hash-pinned, but its inherited overloads are not all behavior-qualified; the independent ExactComparisonPolicy API receives this run\u0027s mathematical oracles.",
+      "TemperatureMeasurement comparison assumes both operands were normalized to a common base scale by UnitDefinition\u0027s typed conversions; raw measurements from different units must never be compared.",
+      "Legacy scalar unit conversions remain callable and cannot encode affine point/interval semantics; Math\u0027s tagged temperature APIs must be used for that boundary."
+    ],
+    "nextAction": "Refine M1-W02-C01 catalog source and dependencies, then qualify a useful catalog and unit-resolution vertical in a bounded substantive run.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C04-T1-R",
+        "achievement": "Before installing comparison source and policy, an independent test records their absence and the authorized AURA source SHA, establishing the exact-comparison contract RED."
+      },
+      {
+        "projectNode": "M1-W01-C04-T1-G",
+        "achievement": "ApproximateEquivalence is transferred from owner-authorized AURA with exact pinned SHA and the new comparison entry points implement exact inclusive symmetric quantity tolerances."
+      },
+      {
+        "projectNode": "M1-W01-C04-T1-V",
+        "achievement": "Rational equality, 1 m versus 101 cm inclusive absolute tolerance, dimension compatibility, relative max-magnitude and exact large-integer comparisons pass independent focused tests and regressions."
+      },
+      {
+        "projectNode": "M1-W01-C04-T1",
+        "achievement": "The exact quantity-comparison transfer is completed from pre-transfer RED through source-pinned GREEN, independent exact oracles and regression evidence."
+      },
+      {
+        "projectNode": "M1-W01-C04-T2-R",
+        "achievement": "An independent pre-implementation RED test records that tagged temperature comparison is absent from Math."
+      },
+      {
+        "projectNode": "M1-W01-C04-T2-G",
+        "achievement": "Typed temperature comparisons admit interval-only absolute tolerances and reject negative, invalid-kind or mixed absolute/interval inputs without changing exact values."
+      },
+      {
+        "projectNode": "M1-W01-C04-T2-V",
+        "achievement": "Temperature boundary oracles, all C04 tests, the full dw.quantities test project and foundation chain pass, with normalization requirements and limits documented."
+      },
+      {
+        "projectNode": "M1-W01-C04-T2",
+        "achievement": "The tagged temperature tolerance boundary contract is completed from RED through GREEN and integrated qualification."
+      },
+      {
+        "projectNode": "M1-W01-C04",
+        "achievement": "The exact comparisons and tolerances chunk is complete with pinned import, precise quantity/temperature policies, independent boundary tests and durable evidence."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/ApproximateEquivalence.cs",
+    "src/projects/dw.quantities/ExactComparisonPolicy.cs",
+    "tests/projects/dw.quantities.tests/M1W01C04RedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W01C04Tests.cs",
+    "docs/planning/evidence/M1-W01-C04-red.json",
+    "docs/planning/evidence/M1-W01-C04-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
