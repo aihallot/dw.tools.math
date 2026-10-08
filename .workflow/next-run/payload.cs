@@ -50,7 +50,7 @@ p.Json.EditObject("docs/planning/backlog.json", root =>
     green["status"] = "ready";
     var chunkEvidence = chunk["evidence"]!.AsArray();
     if (!chunkEvidence.Any(x => (string?)x == Evidence))
-        chunkEvidence.Add(JsonValue.Create(Evidence));
+        chunkEvidence.Add((JsonNode?)JsonValue.Create(Evidence));
 });
 
 p.ProjectPlan.TransitionNode("M1-W01-C01-T2", "ready", "in-progress");
