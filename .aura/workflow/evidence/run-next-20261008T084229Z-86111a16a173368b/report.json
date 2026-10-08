@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "invocationId": "run-next-20261008T084229Z-86111a16a173368b",
+  "runId": "RS009",
+  "commandMode": "run-next",
+  "outcome": "failed",
+  "failureStage": "pre-attempt",
+  "failureClassification": "workflow-refusal",
+  "attemptAllocated": false,
+  "authorityBaselineCommit": "d895bc813a0f0c62f7553972c6f486d58678ccef",
+  "startedAtUtc": "2026-10-08T08:42:29.8837039\u002B00:00",
+  "completedAtUtc": "2026-10-08T08:42:39.0973742\u002B00:00",
+  "durationMilliseconds": 9213,
+  "workingTreeChanged": false,
+  "changedPaths": [],
+  "error": "Run preparation gate RS009 failed before attempt allocation. classification=payload-compilation. The pending C# payload failed compilation preflight before attempt allocation. No attempt was started, no payload was executed, and no repository mutation was authorized.\r\nStandard output:\r\n  Determining projects to restore...\r\n  Restored E:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-5950bdcc75d543a080b56143fdd7155c\\repository\\.workflow\\runs\\RS009\\payload.cs.csproj (in 246 ms).\r\nE:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-5950bdcc75d543a080b56143fdd7155c\\repository\\.workflow\\runs\\RS009\\payload.cs(53,9): error IL2026: Using member \u0027System.Text.Json.Nodes.JsonArray.Add\u003CT\u003E(T)\u0027 which has \u0027RequiresUnreferencedCodeAttribute\u0027 can break functionality when trimming application code. Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed.\r\nE:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-5950bdcc75d543a080b56143fdd7155c\\repository\\.workflow\\runs\\RS009\\payload.cs(53,9): error IL3050: Using member \u0027System.Text.Json.Nodes.JsonArray.Add\u003CT\u003E(T)\u0027 which has \u0027RequiresDynamicCodeAttribute\u0027 can break functionality when AOT compiling. Creating JsonValue instances with non-primitive types requires generating code at runtime.\r\nStandard error:\r\n\u003Cempty\u003E\r\nPayload SDK AOT-safe JSON array hint:\r\n  Avoid JsonArray.Add\u003CT\u003E(T) for payload-authored arrays; it can trigger IL2026/IL3050 under the strict compilation gate.\r\n  JsonArray Json.StringArray(String[] values)\r\n  JsonArray Json.Array(JsonNode[] nodes) The source repository remains unchanged and no durable attempt was created.",
+  "errorOriginalBytes": 1730,
+  "errorSha256": "d19890ad1ca58bb91706b7f7d47d80886527e46c029629ea0b6a4b46b01c44b5",
+  "errorTruncated": false,
+  "safeNextAction": "dwf run next",
+  "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs009/run-next-20261008T084229Z-86111a16a173368b"
+}
