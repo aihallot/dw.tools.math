@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "RS018",
+  "title": "Deliver standalone exact unit catalogue and strict profile resolution",
+  "state": "prepared",
+  "commitMessage": "feat: introduce standalone exact standard unit catalog",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W02",
+    "M1-W02-C01",
+    "M1-W02-C01-T1",
+    "M1-W02-C01-T1-R",
+    "M1-W02-C01-T1-G",
+    "M1-W02-C01-T1-V",
+    "M1-W02-C01-T2",
+    "M1-W02-C01-T2-R",
+    "M1-W02-C01-T2-G"
+  ],
+  "contribution": {
+    "summary": "Close the completed exact-quantity work package and create a standalone dw.quantities.standard catalogue with deterministic profiles, exact inch/IEC and US/UK/AU volume conversions, provenance-checked AURA adaptation, independent dual RED, and full solution regressions.",
+    "value": "Delivers an AURA-free mathematical catalog and exact conversion vertical in one substantial run, including explicit profiles, passive localized metadata, locked NuGet restore, new package integration and eight-oracle boundary checks; leaves inherited source parity and expression integration open.",
+    "debtChanges": [
+      "This is a bounded BCL-only adaptation, not a byte-for-byte or exhaustive transfer of AURA StandardUnitCatalog and StandardExpressionUnitResolver; source hashes and declarations are retained as provenance.",
+      "Australian 570 mL pint denotes an explicitly named beer-serving profile and is not claimed to be a universal statutory definition. All ambiguous cup/pint tokens demand a profile.",
+      "dw.quantities.standard presently depends on dw.quantities only; optional expression-layer integration and full inherited alias/source parity remain unfinished T2 work. No dw.localization dependency is added.",
+      "Retry 2 passed restore, build and focused regressions but plan rendering rejected the completed M1-W01 lacking an evidence array. Retry 3 attaches the four existing C01-C04 qualification reports to the completed work package."
+    ],
+    "nextAction": "Reconcile the inherited standard-source aliases and profile behavior against the pinned AURA files, qualify expression-layer integration and boundary coverage, and only then complete M1-W02-C01-T2 and C01.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01",
+        "achievement": "All four accepted exact-numbers-and-quantities chunks are complete and M1-W01 is advanced from in-progress to done before activating the new unit work package."
+      },
+      {
+        "projectNode": "M1-W02-C01-T1-R",
+        "achievement": "Two independently targeted pre-transfer tests observe the absence of the standalone standard unit package and strict explicit-profile resolver, with SHA-pinned source observations."
+      },
+      {
+        "projectNode": "M1-W02-C01-T1-G",
+        "achievement": "A buildable dw.quantities.standard package is introduced with versioned exact unit constants, pure source/base/target conversion, passive metadata and explicit US/UK/AU profile selection, without dw.localization."
+      },
+      {
+        "projectNode": "M1-W02-C01-T1-V",
+        "achievement": "Seven independent exact and culture-boundary catalog tests, the full dw.quantities tests, locked solution build and foundation chain pass with bounded source adaptation evidence."
+      },
+      {
+        "projectNode": "M1-W02-C01-T1",
+        "achievement": "The initial standalone exact catalog and pure conversion functional contract is qualified from missing-assembly RED through buildable implementation, exact oracles and regression evidence."
+      },
+      {
+        "projectNode": "M1-W02-C01-T2-R",
+        "achievement": "The pre-implementation strict-profile resolver absence is observed as an independent RED; inherited aliases, ambiguity and integration remain explicitly open for T2 GREEN/verification."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+    "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+    "src/projects/dw.quantities.standard/PureUnitConverter.cs",
+    "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+    "src/projects/dw.quantities.standard/packages.lock.json",
+    "tests/projects/dw.quantities.tests/M1W02C01RedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W02C01Tests.cs",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.quantities.tests/packages.lock.json",
+    "dw.tools.math.slnx",
+    "docs/planning/evidence/M1-W02-C01-red.json",
+    "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
