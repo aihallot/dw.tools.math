@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "RS016",
+  "title": "Qualify dimension overflow and typed affine temperature boundaries",
+  "state": "prepared",
+  "commitMessage": "feat: qualify dimension overflow and typed temperature semantics",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T2",
+    "M1-W01-C03-T2-R",
+    "M1-W01-C03-T2-G",
+    "M1-W01-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Capture independent prechange exponent-overflow RED, add checked arithmetic for all dimension components, introduce typed absolute/interval temperature conversion and arithmetic, verify exact regressions, and complete C03 with durable boundary evidence.",
+    "value": "Closes the dimensions and quantities capability with explicit integer-overflow behavior and tagged affine semantics, while preserving exact BigInteger values and legacy scalar unit APIs for compatibility.",
+    "debtChanges": [
+      "Legacy scalar UnitDefinition.ToBase/FromBase remains backward compatible and cannot distinguish absolute from interval values; callers must select the tagged TemperatureMeasurement overload.",
+      "Bare Quantity encodes physical dimensions but not temperature point/interval kind. Tagged TemperatureMeasurement is required at affine boundaries.",
+      "Checked int exponents prevent silent wraparound but are not a general CPU/memory budget policy. No sibling repository integration is implied."
+    ],
+    "nextAction": "Refine and qualify M1-W01-C04 exact comparison and tolerance semantics, using its authorized source provenance and independent boundary oracles.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C03-T2-R",
+        "achievement": "Before modifying the transferred Math sources, a targeted independent public API test observes that DimensionVector exponent overflow is unchecked, with durable RED evidence."
+      },
+      {
+        "projectNode": "M1-W01-C03-T2-G",
+        "achievement": "All eight dimension exponents use checked addition/subtraction, and a new tagged temperature API enforces exact affine point/interval conversion and rejects invalid point arithmetic."
+      },
+      {
+        "projectNode": "M1-W01-C03-T2-V",
+        "achievement": "Boundary RED turns GREEN, all C03 exact unit tests and the dw.quantities suite pass, foundation regressions pass, and compatibility limits are documented in durable evidence."
+      },
+      {
+        "projectNode": "M1-W01-C03-T2",
+        "achievement": "Direct DimensionVector overflow and tagged temperature absolute/interval boundary contracts are completed from independent RED through corrected implementation and verification."
+      },
+      {
+        "projectNode": "M1-W01-C03",
+        "achievement": "The dimensions, quantities and temperature chunk is complete with source-pinned functional qualification and verified overflow and affine boundary behavior, without claiming external AURA adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs",
+    "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+    "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-plan-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
