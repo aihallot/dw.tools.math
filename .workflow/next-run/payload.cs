@@ -83,6 +83,15 @@ if (baseline)
         throw new InvalidOperationException("T2 boundary RED did not fail for the expected absence: " + red.Output);
 }
 
+foreach (var pair in new[] { (BinaryTarget, BinaryHash), (DecimalTarget, DecimalHash) })
+{
+    var existing = Path.Combine(root, pair.Item1.Replace('/', Path.DirectorySeparatorChar));
+    if (!File.Exists(existing))
+        continue;
+    var hash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(existing))).ToLowerInvariant();
+    if (hash != pair.Item2)
+        throw new InvalidOperationException("Math source destination contains unapproved third-state bytes: " + pair.Item1);
+}
 payload.Files.WriteComplete(BinaryTarget, binary);
 payload.Files.WriteComplete(DecimalTarget, decimalText);
 
