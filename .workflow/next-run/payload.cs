@@ -9,7 +9,7 @@ const string ExpectedSha256 = "3c8d3beaa3b04884ca8424b5bbc6ee5f2d87b4adf1f6e329a
 
 var payload = PayloadContext.Create();
 
-InstallAuthorizedSource(payload.RepositoryRoot);
+InstallAuthorizedSource(payload);
 payload.Files.ReplaceFromStaged("staged/dw.tools.math.slnx", "dw.tools.math.slnx");
 payload.Files.ReplaceFromStaged("staged/tests/projects/dw.quantities.tests/M1W01C01Tests.cs", "tests/projects/dw.quantities.tests/M1W01C01Tests.cs");
 payload.Files.ReplaceFromStaged("staged/docs/planning/ValidateM1W01C01Green.cs", "docs/planning/ValidateM1W01C01Green.cs");
@@ -21,8 +21,9 @@ ConvergeNativeProgress(payload);
 
 return payload.Complete();
 
-static void InstallAuthorizedSource(string repositoryRoot)
+static void InstallAuthorizedSource(PayloadContext payload)
 {
+    var repositoryRoot = payload.RepositoryRoot;
     var baselinePath = Path.Combine(repositoryRoot, "docs", "planning", "source-baseline.json");
     var baseline = JsonNode.Parse(File.ReadAllText(baselinePath))?.AsObject()
         ?? throw new InvalidOperationException("Source baseline is empty.");
@@ -60,11 +61,15 @@ static void InstallAuthorizedSource(string repositoryRoot)
         var existing = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(targetPath))).ToLowerInvariant();
         if (!string.Equals(existing, ExpectedSha256, StringComparison.Ordinal))
             throw new InvalidOperationException("Math ExactRational.cs exists with undeclared third-state bytes.");
+        payload.Files.WriteComplete(TargetRelativePath, new System.Text.UTF8Encoding(false, true).GetString(bytes));
         return;
     }
 
-    Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-    File.WriteAllBytes(targetPath, bytes);
+    var content = new System.Text.UTF8Encoding(false, true).GetString(bytes);
+    payload.Files.WriteComplete(TargetRelativePath, content);
+    var installed = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(targetPath))).ToLowerInvariant();
+    if (!string.Equals(installed, ExpectedSha256, StringComparison.Ordinal))
+        throw new InvalidOperationException("Math ExactRational.cs did not preserve the pinned source bytes.");
 }
 
 static void ConvergeNativeProgress(PayloadContext payload)
