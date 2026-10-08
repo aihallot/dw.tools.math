@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.17",
+  "plan_version": "0.1.18",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1704,31 +1704,33 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.expression.tests/dw.quantities.expression.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests"
       ],
-      "refinement": "RS018 verifies pinned AURA source authority, creates a BCL-only dw.quantities.standard adaptation rather than a byte-identical imported file, independently records T1/T2 missing-package RED, and qualifies seven exact focused catalog tests. Full source parity and integrated grammar coverage remain T2.",
+      "refinement": "RS018 delivered an independent BCL-only catalog adaptation with 14 admitted units. RS019 strengthens deterministic candidate discovery, token bounds, catalog uniqueness and exact roundtrips, and captures both full SHA-pinned AURA sources for substantive inherited-source parity review. T2-V remains ready; full inherited alias/constant coverage and expression integration are not yet claimed.",
       "files": [
         "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
         "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
         "src/projects/dw.quantities.standard/PureUnitConverter.cs",
         "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
         "src/projects/dw.quantities.standard/packages.lock.json",
-        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-        "tests/projects/dw.quantities.tests/packages.lock.json",
-        "dw.tools.math.slnx",
         "tests/projects/dw.quantities.tests/M1W02C01RedTests.cs",
         "tests/projects/dw.quantities.tests/M1W02C01Tests.cs",
+        "tests/projects/dw.quantities.tests/M1W02C01BoundaryTests.cs",
         "docs/planning/evidence/M1-W02-C01-red.json",
-        "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+        "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
+        "docs/planning/evidence/M1-W02-C01-AURA-StandardUnitCatalog.txt",
+        "docs/planning/evidence/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt",
+        "docs/planning/evidence/M1-W02-C01-boundary-green.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01Tests",
-        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
-        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W02C01BoundaryTests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
       ],
       "evidence": [
         "docs/planning/evidence/M1-W02-C01-red.json",
-        "docs/planning/evidence/M1-W02-C01-initial-catalog.json"
+        "docs/planning/evidence/M1-W02-C01-initial-catalog.json",
+        "docs/planning/evidence/M1-W02-C01-boundary-green.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1778,7 +1780,10 @@
           "behavior": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
           "test_case": "Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
           "status": "in_progress",
-          "evidence": [],
+          "evidence": [
+            "docs/planning/evidence/M1-W02-C01-red.json",
+            "docs/planning/evidence/M1-W02-C01-boundary-green.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W02-C01-T2-R",
@@ -1793,14 +1798,16 @@
               "id": "M1-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Host culture has no effect; unresolved ambiguity is explicitly rejected; logarithmic units and currencies are outside the initial contract.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W02-C01-boundary-green.json"
+              ]
             },
             {
               "id": "M1-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W02-C01-T2.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]

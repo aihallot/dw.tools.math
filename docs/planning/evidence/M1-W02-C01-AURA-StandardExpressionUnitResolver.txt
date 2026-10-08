@@ -1,0 +1,54 @@
+using dw.quantities.expression;
+
+namespace dw.quantities.standard;
+
+public sealed class StandardExpressionUnitResolver : IExpressionUnitResolver
+{
+    private static readonly IReadOnlyDictionary<string, UnitSystem[]> SystemPriority =
+        new Dictionary<string, UnitSystem[]>(StringComparer.Ordinal)
+        {
+            ["metric-international"] = [UnitSystem.MetricInternational, UnitSystem.Si],
+            ["en-US"] = [UnitSystem.UsCustomary, UnitSystem.Si, UnitSystem.MetricInternational, UnitSystem.BritishImperial, UnitSystem.AustralianCulinary],
+            ["en-GB"] = [UnitSystem.BritishImperial, UnitSystem.Si, UnitSystem.MetricInternational, UnitSystem.UsCustomary, UnitSystem.AustralianCulinary],
+            ["en-AU"] = [UnitSystem.AustralianCulinary, UnitSystem.Si, UnitSystem.MetricInternational, UnitSystem.BritishImperial, UnitSystem.UsCustomary],
+            ["fr-BE"] = [UnitSystem.MetricInternational, UnitSystem.Si, UnitSystem.BritishImperial, UnitSystem.UsCustomary, UnitSystem.AustralianCulinary],
+            ["fr-FR"] = [UnitSystem.MetricInternational, UnitSystem.Si, UnitSystem.BritishImperial, UnitSystem.UsCustomary, UnitSystem.AustralianCulinary],
+        };
+
+    public static StandardExpressionUnitResolver Instance { get; } = new();
+
+    public ExpressionUnitResolution Resolve(string token, string culture)
+    {
+        if (!SystemPriority.TryGetValue(culture, out var priority))
+            return new(null, ExpressionUnitResolutionFailure.UnsupportedCulture, []);
+
+        if (StandardUnitCatalog.TryGetById(token, out var explicitUnit))
+            return new(explicitUnit, ExpressionUnitResolutionFailure.None, [explicitUnit!.Id]);
+
+        var candidates = StandardUnitCatalog.All.Where(unit => Matches(unit, token)).ToArray();
+        if (candidates.Length == 0)
+            return new(null, ExpressionUnitResolutionFailure.UnitNotFound, []);
+        if (candidates.Length == 1)
+            return new(candidates[0], ExpressionUnitResolutionFailure.None, [candidates[0].Id]);
+
+        foreach (var system in priority)
+        {
+            var matches = candidates.Where(unit => unit.System == system).ToArray();
+            if (matches.Length == 1)
+                return new(matches[0], ExpressionUnitResolutionFailure.None, [matches[0].Id]);
+            if (matches.Length > 1)
+                return Ambiguous(matches);
+        }
+
+        return Ambiguous(candidates);
+    }
+
+    private static ExpressionUnitResolution Ambiguous(IEnumerable<UnitDefinition> units) =>
+        new(null, ExpressionUnitResolutionFailure.AmbiguousUnit,
+            units.Select(unit => unit.Id).Order(StringComparer.Ordinal).ToArray());
+
+    private static bool Matches(UnitDefinition unit, string token) =>
+        string.Equals(unit.Symbol, token, StringComparison.Ordinal) ||
+        string.Equals(unit.Name, token, StringComparison.OrdinalIgnoreCase) ||
+        unit.Aliases.Any(alias => string.Equals(alias, token, StringComparison.OrdinalIgnoreCase));
+}

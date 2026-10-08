@@ -52,6 +52,23 @@ public static class StandardUnitCatalog
             ["fr"] = "unités physiques et culinaires standard"
         }.ToImmutableDictionary(StringComparer.Ordinal);
 
+
+    /// <summary>
+    /// Compatibility-oriented BCL-only catalogue discovery. This is the admitted
+    /// subset, not the complete AURA catalogue.
+    /// </summary>
+    public static ImmutableArray<UnitDefinition> All => Units;
+
+    public static bool TryGetById(string id, out UnitDefinition? unit)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        if (id.Length > 128)
+            throw new ArgumentOutOfRangeException(nameof(id), "Unit identifiers are limited to 128 characters.");
+        unit = Units.FirstOrDefault(candidate =>
+            string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase));
+        return unit is not null;
+    }
+
     private static UnitDefinition Define(string id, string symbol, string name, UnitSystem system,
         DimensionVector dimension, ExactRational scale, params string[] aliases) =>
         new(id, symbol, name, system, dimension, scale, ExactRational.Zero,

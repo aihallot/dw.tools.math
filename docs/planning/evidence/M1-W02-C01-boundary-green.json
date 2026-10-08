@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C01-boundary-green",
+  "status": "bounded-profile-discovery-qualified-inherited-source-parity-pending",
+  "source_review": [
+    {
+      "source_path": "lib/dw.quantities.standard/StandardUnitCatalog.cs",
+      "sha256": "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a",
+      "observed_bytes": 11333,
+      "review_copy_path": "docs/planning/evidence/M1-W02-C01-AURA-StandardUnitCatalog.txt",
+      "review_copy_sha256": "f588545e89f51c78dd82a0d7c08ea92ab90fa48d0f5862d18666a00d0f13249a",
+      "disposition": "Full reference text captured within Math for parity review; not compiled into Math and not claimed byte-identical when text encoding differs."
+    },
+    {
+      "source_path": "lib/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+      "sha256": "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561",
+      "observed_bytes": 2988,
+      "review_copy_path": "docs/planning/evidence/M1-W02-C01-AURA-StandardExpressionUnitResolver.txt",
+      "review_copy_sha256": "3e71ed4af6abc748665c3f382093d625974c002649a8353d82dc4b5ad02bb561",
+      "disposition": "Full reference text captured within Math for parity review; not compiled into Math and not claimed byte-identical when text encoding differs."
+    }
+  ],
+  "product_files": [
+    "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+    "src/projects/dw.quantities.standard/StandardExpressionUnitResolver.cs",
+    "tests/projects/dw.quantities.tests/M1W02C01BoundaryTests.cs"
+  ],
+  "focused_filter": "FullyQualifiedName~M1W02C01BoundaryTests",
+  "focused_passed": true,
+  "full_quantities_tests_passed": true,
+  "foundation_regression_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "tested_contracts": [
+    "All explicit cup/pint profiles are discoverable without culture-dependent selection.",
+    "Ambiguous aliases are not guessed; exact profiles resolve to one explicitly admitted unit.",
+    "Symbols are case-sensitive while canonical IDs and named aliases match invariantly.",
+    "Unit IDs are unique and lookups are limited to 128 characters.",
+    "Token discovery is limited to 128 characters and rejects empty input.",
+    "All admitted units roundtrip exact large BigInteger rational values.",
+    "Ambient en-US, fr-BE, nl-BE and tr-TR cultures cannot alter candidate order.",
+    "Currencies and logarithmic units remain unsupported, and mismatched profiles cannot coerce a different unit."
+  ],
+  "remaining_verification": [
+    "T2-V must compare exact source text against the adapted catalogue to document inherited IDs, aliases and numerical constants that are retained, changed or deferred.",
+    "The original standard resolver uses dw.quantities.expression and an explicit culture argument; compatibility with the future expression layer is not qualified here.",
+    "The admitted BCL-only subset is not an exhaustive or byte-for-byte port of AURA.",
+    "No changes are made to AURA, Decision, MCDM or other sibling repositories."
+  ]
+}
