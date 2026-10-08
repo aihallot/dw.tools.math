@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "id": "RS015",
+  "title": "Transfer and qualify dimension, quantity and affine unit behavior",
+  "commitMessage": "feat: transfer and verify exact dimension and quantity contracts",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T1-R",
+    "M1-W01-C03-T1-G",
+    "M1-W01-C03-T1-V",
+    "M1-W01-C03-T2",
+    "M1-W01-C03-T2-R"
+  ],
+  "contribution": {
+    "summary": "Transfer the three hash-pinned AURA mathematical files for dimensions, quantities and unit definitions; verify exact area, speed, information dimension, mass/time rejection and Fahrenheit/Celsius absolute and scale-only interval arithmetic; complete T1 and ready T2.",
+    "value": "Delivers the usable dimension-and-quantity core as one bounded multi-file GREEN with independent mathematical oracles and foundation regressions, without claiming unverified exponent overflow or full absolute/interval enforcement.",
+    "debtChanges": [
+      "T2 exponent overflow and direct affine absolute-versus-interval misuse remain unqualified; its RED/GREEN/verification must resolve them before closing C03.",
+      "The public UnitDefinition constructor is discovered at test execution from its compiled signatures; the source declarations captured by RS014 did not establish its full signature.",
+      "No AURA, Decision, MCDM or brainstorming sibling repository is changed."
+    ],
+    "nextAction": "Qualify and correct dimension exponent overflow and explicit absolute/interval behavior at public APIs in one bounded T2 run before completing C03.",
+    "achievements": [
+      {
+        "projectNode": "M1-W01-C03-T1-G",
+        "achievement": "All three authorized DimensionVector, Quantity and UnitDefinition source files are installed with exact pinned hashes, and accepted dimension/quantity and affine unit behavior tests pass."
+      },
+      {
+        "projectNode": "M1-W01-C03-T1-V",
+        "achievement": "The focused dimensions and quantities test corpus, entire dw.quantities test project and foundation verification chain pass, with source provenance and qualified limits recorded."
+      },
+      {
+        "projectNode": "M1-W01-C03-T1",
+        "achievement": "The dimensions and quantities functional transfer is complete from independently observed missing-type RED through exact-source GREEN and integrated verification; unqualified T2 boundaries remain open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/Quantity.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+    "docs/planning/evidence/M1-W01-C03-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M1W01C03Tests.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS014/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.13"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/7/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/7/tasks/0/subtasks/1/status",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/7/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/0/phases/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/workPackages/0/phases/2/tasks/0/subtasks/1/state",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/head",
+      "expectedValue": "82a6b435a387a7e116b47a6b2c433ae9e067bf21"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/10/sha256",
+      "expectedValue": "2c2ebabbb800ff151309dbc4f2cbb611091f687f30dcc5fb742e99339406e5b9"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/15/sha256",
+      "expectedValue": "f9121bedc85e810a958f6d2f833652a59f5f7b66a81a8445e9d0c6cec7104e6f"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/source-baseline.json",
+      "jsonPointer": "/repositories/0/files/16/sha256",
+      "expectedValue": "a8eaf48386ec10d6586a8f7be80765fb6e21c6a18acc5309d21a6d544dba676f"
+    }
+  ]
+}
