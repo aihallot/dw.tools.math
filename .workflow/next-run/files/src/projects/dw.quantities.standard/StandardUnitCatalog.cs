@@ -11,6 +11,8 @@ public static class StandardUnitCatalog
 {
     public const string CatalogVersion = "2026-10-exact-v1";
 
+    public static DimensionVector Volume { get; } = new(3, 0, 0, 0, 0, 0, 0);
+
     public static ImmutableArray<UnitDefinition> Units { get; } =
     [
         Define("metre", "m", "metre", UnitSystem.Si, DimensionVector.LengthDimension,
@@ -42,8 +44,6 @@ public static class StandardUnitCatalog
         Define("au-beer-pint-570ml", "pint", "Australian 570 mL beer-serving profile", UnitSystem.AustralianCulinary, Volume,
             new ExactRational(57, 100000), "pints")
     ];
-
-    public static DimensionVector Volume { get; } = new(3, 0, 0, 0, 0, 0, 0);
 
     public static ImmutableDictionary<string, string> PassiveNames { get; } =
         new Dictionary<string,string>(StringComparer.Ordinal)
