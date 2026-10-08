@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "M1-W01-C03-boundary-qualified",
+  "status": "qualified-with-explicit-typed-temperature-boundary",
+  "prior_transfer": "docs/planning/evidence/M1-W01-C03-green.json",
+  "independent_red": "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+  "changed_production_files": [
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs"
+  ],
+  "observed_contracts": [
+    "All eight DimensionVector exponent additions and subtractions detect int overflow, including operations through Quantity.",
+    "TemperatureMeasurement distinguishes exact absolute temperatures from temperature intervals.",
+    "UnitDefinition.ToBase/FromBase overloads for TemperatureMeasurement apply offsets only to absolutes and scale only to intervals.",
+    "Absolute \u002B absolute and interval - absolute are rejected at TemperatureMeasurement.Add/Subtract.",
+    "Absolute - absolute produces an interval and absolute \u002B/- interval preserves an absolute.",
+    "Invalid temperature kind and non-temperature dimension are rejected in typed temperature conversion.",
+    "Exact rational values remain BigInteger-based and are not converted to double."
+  ],
+  "focused_filter": "FullyQualifiedName~M1W01C03",
+  "focused_tests_passed": true,
+  "dw_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "limits": [
+    "The prior scalar UnitDefinition.ToBase(ExactRational)/FromBase(ExactRational) remain for compatibility; callers must use the tagged overload for safe absolute/interval semantics.",
+    "Bare Quantity carries dimensional exponents but cannot encode whether temperature is an affine point; TemperatureMeasurement is required at the affine boundary.",
+    "Checked int exponent overflow is a representational bound, not a general resource-budget guarantee.",
+    "This run changes only Math. No AURA, Decision, MCDM or brainstorming adoption is implied."
+  ]
+}

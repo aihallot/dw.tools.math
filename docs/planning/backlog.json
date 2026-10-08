@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.14",
+  "plan_version": "0.1.15",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -1386,7 +1386,7 @@
       "title": "Dimensions, quantities, and temperatures",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M1-W01-C01"
       ],
@@ -1413,24 +1413,30 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests"
       ],
-      "refinement": "RS014 captured pinned source declarations and missing-type RED; RS015 transfers the exact approved three-source surface, qualifies exact dimensions, quantity operations and affine temperature conversions, and leaves exponent-overflow and absolute/interval boundary policy for T2.",
+      "refinement": "RS014 established source-pinned RED. RS015 qualified functional dimension/quantity/affine conversion GREEN. RS016 observed exponent-overflow RED, implemented checked exponent arithmetic and typed absolute/interval temperature semantics, and verified the complete Math test project and foundation regression.",
       "files": [
         "src/projects/dw.quantities/DimensionVector.cs",
         "src/projects/dw.quantities/Quantity.cs",
         "src/projects/dw.quantities/UnitDefinition.cs",
         "tests/projects/dw.quantities.tests/M1W01C03Tests.cs",
+        "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs",
         "docs/planning/evidence/M1-W01-C03-red.json",
-        "docs/planning/evidence/M1-W01-C03-green.json"
+        "docs/planning/evidence/M1-W01-C03-green.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
       ],
       "commands": [
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03Tests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M1W01C03",
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
         "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
         "docs/planning/evidence/M1-W01-C03-red.json",
-        "docs/planning/evidence/M1-W01-C03-green.json"
+        "docs/planning/evidence/M1-W01-C03-green.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -1479,29 +1485,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
           "test_case": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-          "status": "ready",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+            "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W01-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-boundary-red.json"
+              ]
             },
             {
               "id": "M1-W01-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
+              ]
             },
             {
               "id": "M1-W01-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W01-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
+              ]
             }
           ]
         }

@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS016",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-08T13:04:34.4897496+00:00",
+  "completedAtUtc": "2026-10-08T13:05:09.3785975+00:00",
+  "durationMilliseconds": 34888,
+  "projectNodes": [
+    "M1",
+    "M1-W01",
+    "M1-W01-C03",
+    "M1-W01-C03-T1",
+    "M1-W01-C03-T2",
+    "M1-W01-C03-T2-R",
+    "M1-W01-C03-T2-G",
+    "M1-W01-C03-T2-V"
+  ],
+  "mutationPaths": [
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs",
+    "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+    "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M1.md",
+    "src/projects/dw.quantities/DimensionVector.cs",
+    "src/projects/dw.quantities/UnitDefinition.cs",
+    "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+    "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.58",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "0a5e2bc34631046f928533ea43be343cd43657d4d60a1859db1495716e32cbd4"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS016/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1200,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-f76e28e120de4f98af0bf39e50a70889\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1200000,
+      "DurationMilliseconds": 34795,
+      "StandardOutput": "[files.replace-from-staged] CHANGED path=tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs bytes=604\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 155 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\dw.quantities.tests.csproj (in 453 ms).\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Failed DimensionExponentOverflowIsRejectedAtDirectPublicOperator [70 ms]\r\n  Error Message:\r\n   Assertion failed. Expected exception of exact type OverflowException but no exception was thrown.\r\nM1-W01-C03-T2 RED: direct DimensionVector exponent overflow is unchecked\r\n\r\nAssert.ThrowsExactly\u003COverflowException\u003E(() =\u003E _ = largest \u002B DimensionVector.LengthDimension)\r\n  Stack Trace:\r\n     at Dw.Quantities.Tests.M1W01C03BoundaryRedTests.DimensionExponentOverflowIsRejectedAtDirectPublicOperator() in D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\M1W01C03BoundaryRedTests.cs:line 16\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\r\n\r\nTotal tests: 1\r\n     Failed: 1\r\n Total time: 1,9798 Seconds\r\n\nTest Run Failed.\r\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M1-W01-C03-boundary-red.json bytes=527\r\n[files.converge-from-staged] CHANGED path=src/projects/dw.quantities/DimensionVector.cs bytes=1921\r\n[files.converge-from-staged] CHANGED path=src/projects/dw.quantities/UnitDefinition.cs bytes=5475\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs bytes=5676\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:03.19\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed DimensionExponentOverflowIsRejectedAtDirectPublicOperator [13 ms]\r\n  Passed EveryDimensionComponentRejectsAdditionAndSubtractionOverflow [\u003C 1 ms]\r\n  Passed QuantityOperationsAlsoRejectOverflowRatherThanWrap [2 ms]\r\n  Passed AbsoluteAndIntervalConversionsDoNotShareOffsets [6 ms]\r\n  Passed TemperatureArithmeticRejectsInvalidAbsoluteCombinations [1 ms]\r\n  Passed InvalidTemperatureUnitAndKindAreRejectedAtTypedBoundary [1 ms]\r\n  Passed TemperatureScalingPreservesArbitrarilyLargeExactNumerators [3 ms]\r\n  Passed ThreeAuthorizedPublicTypesAreInstalled [1 ms]\r\n  Passed AreaOfThreeMetresByFourMetresIsTwelveSquareMetres [1 ms]\r\n  Passed TenKilometresPerThirtyMinutesIsExactlyFiftyNinthsMetresPerSecond [\u003C 1 ms]\r\n  Passed InformationDimensionRemainsIndependent [\u003C 1 ms]\r\n  Passed AdditionOfMassAndTimeIsRejectedAtThePublicQuantityBoundary [\u003C 1 ms]\r\n  Passed FahrenheitAndCelsiusAbsoluteConversionsAreExact [4 ms]\r\n  Passed NineFahrenheitDegreesOfIntervalCorrespondToFiveKelvin [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 14\r\n     Passed: 14\r\n Total time: 0,8740 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    32, Skipped:     0, Total:    32, Duration: 158 ms - dw.quantities.tests.dll (net10.0)\r\n\n\r\nPossible reasons for this include:\r\n  * You misspelled a built-in dotnet command.\r\n  * You intended to execute a .NET program, but dotnet---definitely-not-a-real-dotnet-option does not exist.\r\n  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.\r\nPowerShell helper UTF-8 and non-zero propagation contracts verified.\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 133 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\dw.quantities.tests.csproj (in 329 ms).\r\n  2 of 4 projects are up-to-date for restore.\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.77\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 49 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n  The package dw.tools.math.foundation.0.1.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\u0027.\r\nPackage contract verified: D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\foundation-smoke.csproj (in 245 ms).\r\n  foundation-smoke -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\bin\\Release\\net10.0\\foundation-smoke.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.24\r\nIsolated local-package consumer verified.\r\nM0-W01-C01 foundation chain verified.\r\n\nCould not execute because the specified command or file was not found.\r\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M1-W01-C03-boundary-qualified.json bytes=1979\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M1-W01-C03-T2-R activated=M1-W01-C03-T2,M1-W01-C03-T2-R\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2-G not-ready-\u003Eready\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M1-W01-C03-T2-G activated=M1-W01-C03-T2-G\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2-V not-ready-\u003Eready\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M1-W01-C03-T2-V activated=M1-W01-C03-T2-V\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M1-W01-C03 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\nplanning valid: 0.1.15 | 53 chunks | 14b3ab523f7daeb02517f5117381e8078f8778d5cb282f8bb7cfd4a79d3881cb | mode --write\r\n\n\r\n[payload] OK operations=17 changed=17 no-change=0 verified=0 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS016/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+        "Status": 1,
+        "Summary": "bytes=604",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d1ecf5051f69be2b1021c8d7952e12c80de915c02b02f34b900fe679151f7b27",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+        "Status": 1,
+        "Summary": "bytes=527",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "635cfc46084f3a47cca0d237d91ccdd5f104f3d2d7a78fd37087989e1ed11099",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "converge-from-staged",
+        "Path": "src/projects/dw.quantities/DimensionVector.cs",
+        "Status": 1,
+        "Summary": "bytes=1921",
+        "Details": null,
+        "BeforeSha256": "2c2ebabbb800ff151309dbc4f2cbb611091f687f30dcc5fb742e99339406e5b9",
+        "AfterSha256": "d558be25410547f6b77b1d0a15370f86475f087614b10dc3fb29eaee948fb5c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "converge-from-staged",
+        "Path": "src/projects/dw.quantities/UnitDefinition.cs",
+        "Status": 1,
+        "Summary": "bytes=5475",
+        "Details": null,
+        "BeforeSha256": "a8eaf48386ec10d6586a8f7be80765fb6e21c6a18acc5309d21a6d544dba676f",
+        "AfterSha256": "8b882bf0103e1568c8c5b5d6afa0ddb7e72876819de6c83f963bbc4c3337d199",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs",
+        "Status": 1,
+        "Summary": "bytes=5676",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bb1cacfe85bb2609ae0ce497898025d192ec233aeb8840908e7ffc0094c05de0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=1979",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "80d88564637d45cfe850a48c60a826e1f26723064a5de918959cd9a9b51d6356",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "99b4f4c8f11dfe756d7b75c2deb24dc273aecef6ef6c41a5c364e8548193c7fd",
+        "AfterSha256": "14b3ab523f7daeb02517f5117381e8078f8778d5cb282f8bb7cfd4a79d3881cb",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M1-W01-C03-T2-R activated=M1-W01-C03-T2,M1-W01-C03-T2-R",
+        "Details": null,
+        "BeforeSha256": "60d78c8674cbde7b1eed1f212adee0aff436782952c1e04f2391a39e54d8941b",
+        "AfterSha256": "ef9787ea2616271d4adda28d191bc6d2a2d06bbd1be97f984341d43a587830ee",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "ef9787ea2616271d4adda28d191bc6d2a2d06bbd1be97f984341d43a587830ee",
+        "AfterSha256": "ab255dcd4c8d05f02b1c5eb66a88b096db3af0009a1ad3c4387a5711c9d287b9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "ab255dcd4c8d05f02b1c5eb66a88b096db3af0009a1ad3c4387a5711c9d287b9",
+        "AfterSha256": "df34a01df58ed81e8c5c73e899a85de6270e1676fe4388a47667a98a742403c4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M1-W01-C03-T2-G activated=M1-W01-C03-T2-G",
+        "Details": null,
+        "BeforeSha256": "df34a01df58ed81e8c5c73e899a85de6270e1676fe4388a47667a98a742403c4",
+        "AfterSha256": "52ceb2c111b7d1994e66df41f7c971742f42e80c8ca4c6d735814f7ebdeb98d9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "52ceb2c111b7d1994e66df41f7c971742f42e80c8ca4c6d735814f7ebdeb98d9",
+        "AfterSha256": "9f2ceea40421e34760a67bb4a5f3cc1fc4f79767a26a530c733fed6f6d04d0bc",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2-V not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "9f2ceea40421e34760a67bb4a5f3cc1fc4f79767a26a530c733fed6f6d04d0bc",
+        "AfterSha256": "5834ddb9fbbc39d0b4a0ee24cd860c365659301c78077ebdb77e10c9eb608166",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M1-W01-C03-T2-V activated=M1-W01-C03-T2-V",
+        "Details": null,
+        "BeforeSha256": "5834ddb9fbbc39d0b4a0ee24cd860c365659301c78077ebdb77e10c9eb608166",
+        "AfterSha256": "d339c90630f1a18bf7e45c5d09e7c809c401021eee4e321d4c0260922a867d4c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "d339c90630f1a18bf7e45c5d09e7c809c401021eee4e321d4c0260922a867d4c",
+        "AfterSha256": "5e50460b4b8afad34df6f9978a97394c760e1399ca613c21c81bf48a2b49e3cc",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "5e50460b4b8afad34df6f9978a97394c760e1399ca613c21c81bf48a2b49e3cc",
+        "AfterSha256": "7500a5e7c1d0cca05cbacb0ed3424f3ab3e708f942d88ef6ec77887184009b5e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M1-W01-C03 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "7500a5e7c1d0cca05cbacb0ed3424f3ab3e708f942d88ef6ec77887184009b5e",
+        "AfterSha256": "7a9503baa7742af0d61a9e43cd29e674913fb3be5fe47032e3d64b9cc53d524e",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-plan-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261008T130227Z-a787a038537a1628",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "83fe68d1766cf5ec292a4552a3669847853a2aa5",
+  "invocationStartedAtUtc": "2026-10-08T13:02:27.4682623+00:00",
+  "invocationDurationMilliseconds": 161910,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS016",
+      "title": "Qualify dimension overflow and typed affine temperature boundaries",
+      "projectNodes": [
+        "M1",
+        "M1-W01",
+        "M1-W01-C03",
+        "M1-W01-C03-T1",
+        "M1-W01-C03-T2",
+        "M1-W01-C03-T2-R",
+        "M1-W01-C03-T2-G",
+        "M1-W01-C03-T2-V"
+      ]
+    },
+    "declared": {
+      "summary": "Capture independent prechange exponent-overflow RED, add checked arithmetic for all dimension components, introduce typed absolute/interval temperature conversion and arithmetic, verify exact regressions, and complete C03 with durable boundary evidence.",
+      "value": "Closes the dimensions and quantities capability with explicit integer-overflow behavior and tagged affine semantics, while preserving exact BigInteger values and legacy scalar unit APIs for compatibility.",
+      "debtChanges": [
+        "Legacy scalar UnitDefinition.ToBase/FromBase remains backward compatible and cannot distinguish absolute from interval values; callers must select the tagged TemperatureMeasurement overload.",
+        "Bare Quantity encodes physical dimensions but not temperature point/interval kind. Tagged TemperatureMeasurement is required at affine boundaries.",
+        "Checked int exponents prevent silent wraparound but are not a general CPU/memory budget policy. No sibling repository integration is implied."
+      ],
+      "nextAction": "Refine and qualify M1-W01-C04 exact comparison and tolerance semantics, using its authorized source provenance and independent boundary oracles.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M1-W01-C03-T2-R",
+          "achievement": "Before modifying the transferred Math sources, a targeted independent public API test observes that DimensionVector exponent overflow is unchecked, with durable RED evidence."
+        },
+        {
+          "projectNode": "M1-W01-C03-T2-G",
+          "achievement": "All eight dimension exponents use checked addition/subtraction, and a new tagged temperature API enforces exact affine point/interval conversion and rejects invalid point arithmetic."
+        },
+        {
+          "projectNode": "M1-W01-C03-T2-V",
+          "achievement": "Boundary RED turns GREEN, all C03 exact unit tests and the dw.quantities suite pass, foundation regressions pass, and compatibility limits are documented in durable evidence."
+        },
+        {
+          "projectNode": "M1-W01-C03-T2",
+          "achievement": "Direct DimensionVector overflow and tagged temperature absolute/interval boundary contracts are completed from independent RED through corrected implementation and verification."
+        },
+        {
+          "projectNode": "M1-W01-C03",
+          "achievement": "The dimensions, quantities and temperature chunk is complete with source-pinned functional qualification and verified overflow and affine boundary behavior, without claiming external AURA adoption."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/README.md",
+        "docs/planning/backlog.json",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-red.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M1.md",
+        "src/projects/dw.quantities/DimensionVector.cs",
+        "src/projects/dw.quantities/UnitDefinition.cs",
+        "tests/projects/dw.quantities.tests/M1W01C03BoundaryRedTests.cs",
+        "tests/projects/dw.quantities.tests/M1W01C03BoundaryTests.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-plan-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M1",
+        "objective": "Extract the exact AURA core",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M1 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M1-W01",
+        "objective": "Exact numbers and quantities",
+        "kind": "work-package",
+        "parentId": "M1",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M1-W01 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03",
+        "objective": "Dimensions, quantities, and temperatures",
+        "kind": "phase",
+        "parentId": "M1-W01",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M1-W01-C03 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M1-W01-C03",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C03-T1 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M1-W01-C03",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C03-T2 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-R in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-G in docs/planning/backlog.json."
+      },
+      {
+        "id": "M1-W01-C03-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-V in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M1-W01-C03",
+        "objective": "Dimensions, quantities, and temperatures",
+        "kind": "phase",
+        "parentId": "M1-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M1-W01-C03 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "The dimensions, quantities and temperature chunk is complete with source-pinned functional qualification and verified overflow and affine boundary behavior, without claiming external AURA adoption."
+      },
+      {
+        "id": "M1-W01-C03-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M1-W01-C03",
+        "beforeState": "ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C03-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Direct DimensionVector overflow and tagged temperature absolute/interval boundary contracts are completed from independent RED through corrected implementation and verification."
+      },
+      {
+        "id": "M1-W01-C03-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Before modifying the transferred Math sources, a targeted independent public API test observes that DimensionVector exponent overflow is unchecked, with durable RED evidence."
+      },
+      {
+        "id": "M1-W01-C03-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-G in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "All eight dimension exponents use checked addition/subtraction, and a new tagged temperature API enforces exact affine point/interval conversion and rejects invalid point arithmetic."
+      },
+      {
+        "id": "M1-W01-C03-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-V in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Boundary RED turns GREEN, all C03 exact unit tests and the dw.quantities suite pass, foundation regressions pass, and compatibility limits are documented in durable evidence."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M1-W01-C03",
+        "objective": "Dimensions, quantities, and temperatures",
+        "kind": "phase",
+        "parentId": "M1-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M1-W01-C03 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "The dimensions, quantities and temperature chunk is complete with source-pinned functional qualification and verified overflow and affine boundary behavior, without claiming external AURA adoption."
+      },
+      {
+        "id": "M1-W01-C03-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M1-W01-C03",
+        "beforeState": "ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M1-W01-C03-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Direct DimensionVector overflow and tagged temperature absolute/interval boundary contracts are completed from independent RED through corrected implementation and verification."
+      },
+      {
+        "id": "M1-W01-C03-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Before modifying the transferred Math sources, a targeted independent public API test observes that DimensionVector exponent overflow is unchecked, with durable RED evidence."
+      },
+      {
+        "id": "M1-W01-C03-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-G in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "All eight dimension exponents use checked addition/subtraction, and a new tagged temperature API enforces exact affine point/interval conversion and rejects invalid point arithmetic."
+      },
+      {
+        "id": "M1-W01-C03-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M1-W01-C03-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M1-W01-C03-T2-V in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Boundary RED turns GREEN, all C03 exact unit tests and the dw.quantities suite pass, foundation regressions pass, and compatibility limits are documented in durable evidence."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS016",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS016",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "83fe68d1766cf5ec292a4552a3669847853a2aa5",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "52010df6a605a9baf98f189cb5ab55119459ffdfcedf92bbaac718c3ec48db27"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: qualify dimension overflow and typed temperature semantics",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

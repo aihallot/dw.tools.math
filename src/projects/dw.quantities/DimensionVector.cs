@@ -24,23 +24,23 @@ public readonly record struct DimensionVector(
 
     public static DimensionVector operator +(DimensionVector left, DimensionVector right) =>
         new(
-            left.Length + right.Length,
-            left.Mass + right.Mass,
-            left.Time + right.Time,
-            left.ElectricCurrent + right.ElectricCurrent,
-            left.Temperature + right.Temperature,
-            left.AmountOfSubstance + right.AmountOfSubstance,
-            left.LuminousIntensity + right.LuminousIntensity,
-            left.Information + right.Information);
+            checked(left.Length + right.Length),
+            checked(left.Mass + right.Mass),
+            checked(left.Time + right.Time),
+            checked(left.ElectricCurrent + right.ElectricCurrent),
+            checked(left.Temperature + right.Temperature),
+            checked(left.AmountOfSubstance + right.AmountOfSubstance),
+            checked(left.LuminousIntensity + right.LuminousIntensity),
+            checked(left.Information + right.Information));
 
     public static DimensionVector operator -(DimensionVector left, DimensionVector right) =>
         new(
-            left.Length - right.Length,
-            left.Mass - right.Mass,
-            left.Time - right.Time,
-            left.ElectricCurrent - right.ElectricCurrent,
-            left.Temperature - right.Temperature,
-            left.AmountOfSubstance - right.AmountOfSubstance,
-            left.LuminousIntensity - right.LuminousIntensity,
-            left.Information - right.Information);
+            checked(left.Length - right.Length),
+            checked(left.Mass - right.Mass),
+            checked(left.Time - right.Time),
+            checked(left.ElectricCurrent - right.ElectricCurrent),
+            checked(left.Temperature - right.Temperature),
+            checked(left.AmountOfSubstance - right.AmountOfSubstance),
+            checked(left.LuminousIntensity - right.LuminousIntensity),
+            checked(left.Information - right.Information));
 }

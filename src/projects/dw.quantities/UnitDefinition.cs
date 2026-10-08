@@ -66,4 +66,85 @@ public sealed record UnitDefinition
     public ExactRational ToBase(ExactRational value) => value * ScaleToBase + OffsetToBase;
 
     public ExactRational FromBase(ExactRational value) => (value - OffsetToBase) / ScaleToBase;
+
+    /// <summary>
+    /// Converts a tagged absolute temperature or interval without applying an
+    /// affine offset to intervals. The legacy scalar conversion remains available
+    /// for existing callers; use this overload when temperature semantics matter.
+    /// </summary>
+    public TemperatureMeasurement ToBase(TemperatureMeasurement value)
+    {
+        RequireTemperatureConversion();
+        return value.Kind switch
+        {
+            TemperatureKind.Absolute => TemperatureMeasurement.Absolute(ToBase(value.Value)),
+            TemperatureKind.Interval => TemperatureMeasurement.Interval(value.Value * ScaleToBase),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), "Unknown temperature kind.")
+        };
+    }
+
+    public TemperatureMeasurement FromBase(TemperatureMeasurement value)
+    {
+        RequireTemperatureConversion();
+        return value.Kind switch
+        {
+            TemperatureKind.Absolute => TemperatureMeasurement.Absolute(FromBase(value.Value)),
+            TemperatureKind.Interval => TemperatureMeasurement.Interval(value.Value / ScaleToBase),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), "Unknown temperature kind.")
+        };
+    }
+
+    private void RequireTemperatureConversion()
+    {
+        if (Dimension != DimensionVector.TemperatureDimension)
+            throw new InvalidOperationException("Temperature conversion requires the temperature dimension.");
+        if (TransformKind == UnitTransformKind.Linear && OffsetToBase != ExactRational.Zero)
+            throw new InvalidOperationException("A linear temperature unit must have zero affine offset.");
+    }
+}
+
+public enum TemperatureKind
+{
+    Interval,
+    Absolute
+}
+
+/// <summary>
+/// Distinguishes affine temperature points from temperature differences.
+/// Arithmetic rejects absolute + absolute and interval - absolute.
+/// </summary>
+public readonly record struct TemperatureMeasurement(ExactRational Value, TemperatureKind Kind)
+{
+    public static TemperatureMeasurement Absolute(ExactRational value) => new(value, TemperatureKind.Absolute);
+    public static TemperatureMeasurement Interval(ExactRational value) => new(value, TemperatureKind.Interval);
+
+    public TemperatureMeasurement Add(TemperatureMeasurement other)
+    {
+        Validate();
+        other.Validate();
+        if (Kind == TemperatureKind.Absolute && other.Kind == TemperatureKind.Absolute)
+            throw new InvalidOperationException("Cannot add two absolute temperatures.");
+        return new TemperatureMeasurement(
+            Value + other.Value,
+            Kind == TemperatureKind.Absolute || other.Kind == TemperatureKind.Absolute
+                ? TemperatureKind.Absolute : TemperatureKind.Interval);
+    }
+
+    public TemperatureMeasurement Subtract(TemperatureMeasurement other)
+    {
+        Validate();
+        other.Validate();
+        if (Kind == TemperatureKind.Interval && other.Kind == TemperatureKind.Absolute)
+            throw new InvalidOperationException("Cannot subtract an absolute temperature from an interval.");
+        return new TemperatureMeasurement(
+            Value - other.Value,
+            Kind == TemperatureKind.Absolute && other.Kind == TemperatureKind.Interval
+                ? TemperatureKind.Absolute : TemperatureKind.Interval);
+    }
+
+    private void Validate()
+    {
+        if (Kind is not (TemperatureKind.Absolute or TemperatureKind.Interval))
+            throw new ArgumentOutOfRangeException(nameof(Kind), "Unknown temperature kind.");
+    }
 }
