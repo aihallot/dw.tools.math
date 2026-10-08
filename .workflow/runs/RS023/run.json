@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "RS023",
+  "title": "Qualify parser overflow hardening and explicit catalogue resolution",
+  "state": "prepared",
+  "commitMessage": "feat: harden exact expression bounds and integrate explicit unit profiles",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C02",
+    "M1-W02-C02-T1",
+    "M1-W02-C02-T2",
+    "M1-W02-C02-T2-R",
+    "M1-W02-C02-T2-G",
+    "M1-W02-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Observe three independent prechange parser boundary REDs, reject integer dimension exponent overflows through typed results, install a culture-independent explicit-profile bridge from the full inherited Math unit catalog, and qualify eight exact boundary oracles plus all regressions to complete M1-W02-C02.",
+    "value": "Makes dw.quantities.expression a usable standalone bounded exact evaluator with safe dimension arithmetic, typed refusal rather than unhandled overflow, and injectable deterministic unit semantics across the 58-unit inherited catalogue.",
+    "debtChanges": [
+      "OverflowException is mapped at the public parser boundary to MagnitudeLimit with position zero; precise operator-level positions remain an optional later refinement, not a claim of this run.",
+      "Accepted character/token/depth/power/number limits are defended by targeted tests; these are not a universal CPU/memory or cryptographic resource guarantee for arbitrary expressions.",
+      "The bridge requires an explicit UnitSystem for ambiguous tokens; it never emulates AURA\u0027s implicit culture-priority decision and does not modify any sibling repository."
+    ],
+    "nextAction": "Refine M1-W02-C03 selection and error taxonomy on the integrated exact grammar, then qualify the remaining unit-expression functional slice without reopening completed C01/C02 contracts.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C02-T2-R",
+        "achievement": "Three focused pre-change REDs observe unchecked exponent multiplication, leaked public dimension overflow and the absent explicit-profile expression bridge; the original parser SHA and source evidence are verified before mutation."
+      },
+      {
+        "projectNode": "M1-W02-C02-T2-G",
+        "achievement": "All eight dimension exponents are scaled using checked arithmetic, public Evaluate catches overflows as typed MagnitudeLimit, and a public injected resolver bridges the inherited or strict Math catalog with explicit profiles only, updating the locked standalone project graph."
+      },
+      {
+        "projectNode": "M1-W02-C02-T2-V",
+        "achievement": "Three REDs turn green and eight independent bridge/boundary oracles pass, including ambiguous cups, exact inch/IEC conversions, culture independence, typed unsafe syntax and negative-power overflows, together with full quantities, locked solution and foundation regressions."
+      },
+      {
+        "projectNode": "M1-W02-C02-T2",
+        "achievement": "Expression parser boundary and unit integration contracts are completed from observed RED through checked implementation and focused qualification, with unsupported host policies and resource limits explicitly recorded."
+      },
+      {
+        "projectNode": "M1-W02-C02",
+        "achievement": "The bounded exact grammar chunk is complete: SHA-pinned parser transfer and independent exact arithmetic/rational-root tests, checked dimension overflow and typed failures, public grammar resource limits, deterministic explicit-profile catalog resolution, and regression evidence."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.expression/ExpressionParser.cs",
+    "src/projects/dw.quantities.standard/ExplicitProfileExpressionUnitResolver.cs",
+    "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+    "src/projects/dw.quantities.standard/packages.lock.json",
+    "tests/projects/dw.quantities.tests/packages.lock.json",
+    "tests/projects/dw.quantities.tests/M1W02C02BoundaryRedTests.cs",
+    "tests/projects/dw.quantities.tests/M1W02C02BoundaryTests.cs",
+    "docs/planning/evidence/M1-W02-C02-boundary-red.json",
+    "docs/planning/evidence/M1-W02-C02-boundary-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
