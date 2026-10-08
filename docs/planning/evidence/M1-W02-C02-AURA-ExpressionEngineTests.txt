@@ -1,0 +1,62 @@
+using dw.quantities.expression;
+using FluentAssertions;
+
+namespace dw.quantities.tests;
+
+public sealed class ExpressionEngineTests
+{
+    [Fact]
+    public void Scalar_expressions_are_exact_without_a_unit_resolver()
+    {
+        var result = ExpressionParser.Evaluate("2 + 3 * 4").Should()
+            .BeOfType<ExpressionEvaluationOutcome.Success>().Subject.Quantity;
+
+        result.Value.Should().Be(new ExactRational(14, 1));
+        result.Dimension.Should().Be(DimensionVector.Scalar);
+    }
+
+    [Fact]
+    public void Unit_resolution_is_supplied_by_the_host()
+    {
+        var resolver = new StubResolver(new UnitDefinition(
+            "si.metre", "m", "metre", UnitSystem.Si,
+            DimensionVector.LengthDimension, ExactRational.One, ExactRational.Zero,
+            UnitTransformKind.Linear));
+
+        var result = ExpressionParser.Evaluate("1 m + 2 m", resolver).Should()
+            .BeOfType<ExpressionEvaluationOutcome.Success>().Subject.Quantity;
+
+        result.Value.Should().Be(new ExactRational(3, 1));
+        result.Dimension.Should().Be(DimensionVector.LengthDimension);
+    }
+
+    [Fact]
+    public void Resolver_failures_remain_stable_engine_results()
+    {
+        var outcome = ExpressionParser.Evaluate("1 unknown", new StubResolver(null));
+
+        outcome.Should().BeOfType<ExpressionEvaluationOutcome.Failure>()
+            .Which.Kind.Should().Be(ExpressionFailureKind.UnitNotFound);
+    }
+
+    [Fact]
+    public void Information_dimensions_participate_in_power_algebra()
+    {
+        var resolver = new StubResolver(new UnitDefinition(
+            "iec.byte", "B", "byte", UnitSystem.Si,
+            DimensionVector.InformationDimension, ExactRational.One, ExactRational.Zero,
+            UnitTransformKind.Linear));
+
+        var result = ExpressionParser.Evaluate("(2 B)^2", resolver).Should()
+            .BeOfType<ExpressionEvaluationOutcome.Success>().Subject.Quantity;
+
+        result.Dimension.Information.Should().Be(2);
+    }
+
+    private sealed class StubResolver(UnitDefinition? unit) : IExpressionUnitResolver
+    {
+        public ExpressionUnitResolution Resolve(string token, string culture) => unit is null
+            ? new(null, ExpressionUnitResolutionFailure.UnitNotFound, [])
+            : new(unit, ExpressionUnitResolutionFailure.None, [unit.Id]);
+    }
+}

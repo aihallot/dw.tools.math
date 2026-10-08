@@ -1,0 +1,31 @@
+namespace aura.domains.core.math;
+
+public static class ExpressionParser
+{
+    public static ExpressionEvaluationOutcome Evaluate(
+        string expression,
+        string culture = MathConversionDefaults.Culture) =>
+        dw.quantities.expression.ExpressionParser.Evaluate(
+            expression,
+            AuraExpressionUnitResolver.Instance,
+            culture);
+
+    private sealed class AuraExpressionUnitResolver : IExpressionUnitResolver
+    {
+        public static AuraExpressionUnitResolver Instance { get; } = new();
+
+        public ExpressionUnitResolution Resolve(string token, string culture)
+        {
+            var outcome = MathCultureResolver.Resolve(token, culture);
+            var failure = outcome.Failure switch
+            {
+                UnitResolutionFailure.None => ExpressionUnitResolutionFailure.None,
+                UnitResolutionFailure.UnsupportedCulture => ExpressionUnitResolutionFailure.UnsupportedCulture,
+                UnitResolutionFailure.UnitNotFound => ExpressionUnitResolutionFailure.UnitNotFound,
+                _ => ExpressionUnitResolutionFailure.AmbiguousUnit,
+            };
+
+            return new ExpressionUnitResolution(outcome.Unit, failure, outcome.CandidateIds);
+        }
+    }
+}

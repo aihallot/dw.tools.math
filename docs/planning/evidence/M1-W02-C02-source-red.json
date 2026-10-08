@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "id": "M1-W02-C02-source-red",
+  "status": "source-contract-characterized-with-observed-parser-absence",
+  "aura_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "missing_parser_test": "FullyQualifiedName~M1W02C02RedTests",
+  "red_failure_markers": [
+    "M1-W02-C02-T1 RED: standalone dw.quantities.expression assembly is absent from Math.",
+    "M1-W02-C02-T1 RED: no exported parser or expression contract is materialized."
+  ],
+  "source_observations": [
+    {
+      "source": "lib/dw.quantities.expression/dw.quantities.expression.csproj",
+      "source_sha256": "7c7c1d8bc7df4b69fc642af0b79c88721a38e9f8e706ff530973a8664f25f833",
+      "byte_count": 505,
+      "line_count": 15,
+      "review_snapshot": "docs/planning/evidence/M1-W02-C02-AURA-expression-project.txt",
+      "snapshot_sha256": "7c7c1d8bc7df4b69fc642af0b79c88721a38e9f8e706ff530973a8664f25f833",
+      "snapshot_matches_source_bytes": true,
+      "declarations_captured": [],
+      "textual_feature_mentions": [],
+      "disposition": "Owner-authorized Math extraction candidate: review its exact API and dependencies before transfer."
+    },
+    {
+      "source": "lib/dw.quantities.expression/ExpressionParser.cs",
+      "source_sha256": "6f553e58c5e4e788932b3d02cfadae2f8abecf564e8595296c8a91d7c4bfd765",
+      "byte_count": 20993,
+      "line_count": 570,
+      "review_snapshot": "docs/planning/evidence/M1-W02-C02-AURA-ExpressionParser.txt",
+      "snapshot_sha256": "6f553e58c5e4e788932b3d02cfadae2f8abecf564e8595296c8a91d7c4bfd765",
+      "snapshot_matches_source_bytes": true,
+      "declarations_captured": [
+        "using System.Numerics;",
+        "namespace dw.quantities.expression;",
+        "public enum ExpressionUnitResolutionFailure",
+        "public sealed record ExpressionUnitResolution(",
+        "public interface IExpressionUnitResolver",
+        "public static class ExpressionDefaults",
+        "public const string Culture = \u0022metric-international\u0022;",
+        "public static class MathExpressionLimits",
+        "public const int MaximumCharacters = 4096;",
+        "public const int MaximumTokens = 256;",
+        "public const int MaximumDepth = 32;",
+        "public const int MaximumMagnitudeDigits = 256;",
+        "public const int MaximumPower = 16;",
+        "public const int MaximumRootDegree = 16;",
+        "public enum TemperatureSemantics",
+        "public enum ExpressionFailureKind",
+        "public readonly record struct EvaluatedQuantity(",
+        "public abstract record ExpressionEvaluationOutcome",
+        "public sealed record Success(EvaluatedQuantity Quantity) : ExpressionEvaluationOutcome;",
+        "public sealed record Failure(ExpressionFailureKind Kind, int Position) : ExpressionEvaluationOutcome;",
+        "public static class ExpressionParser",
+        "public static ExpressionEvaluationOutcome Evaluate(string expression) =\u003E",
+        "public static ExpressionEvaluationOutcome Evaluate(",
+        "public EvaluatedQuantity Parse()",
+        "public ExpressionFailureKind Kind { get; } = kind;",
+        "public int Position { get; } = position;",
+        "public static MissingUnitResolver Instance { get; } = new();",
+        "public ExpressionUnitResolution Resolve(string token, string culture) =\u003E"
+      ],
+      "textual_feature_mentions": [
+        "4096",
+        "256",
+        "32",
+        "16",
+        "IExpressionUnitResolver",
+        "ExpressionUnitResolution",
+        "ExpressionParser",
+        "ExactRational"
+      ],
+      "disposition": "Owner-authorized Math extraction candidate: review its exact API and dependencies before transfer."
+    },
+    {
+      "source": "tests/dw.quantities.tests/ExpressionEngineTests.cs",
+      "source_sha256": "b19d74ca76930513b0dd8e3d324b1591a6662cfa8408a44fee8c676883219087",
+      "byte_count": 2318,
+      "line_count": 63,
+      "review_snapshot": "docs/planning/evidence/M1-W02-C02-AURA-ExpressionEngineTests.txt",
+      "snapshot_sha256": "b19d74ca76930513b0dd8e3d324b1591a6662cfa8408a44fee8c676883219087",
+      "snapshot_matches_source_bytes": true,
+      "declarations_captured": [
+        "using dw.quantities.expression;",
+        "using FluentAssertions;",
+        "namespace dw.quantities.tests;",
+        "public sealed class ExpressionEngineTests",
+        "public void Scalar_expressions_are_exact_without_a_unit_resolver()",
+        "public void Unit_resolution_is_supplied_by_the_host()",
+        "public void Resolver_failures_remain_stable_engine_results()",
+        "public void Information_dimensions_participate_in_power_algebra()",
+        "public ExpressionUnitResolution Resolve(string token, string culture) =\u003E unit is null"
+      ],
+      "textual_feature_mentions": [
+        "IExpressionUnitResolver",
+        "ExpressionUnitResolution",
+        "ExpressionParser",
+        "ExactRational"
+      ],
+      "disposition": "Independent legacy tests: characterization reservoir, not a Math product source."
+    },
+    {
+      "source": "src/aura.domains/core/aura.domains.core.math/ExpressionParser.cs",
+      "source_sha256": "9e53bc3bea0b48eb153e88f03b89607b14ded4e4aa838ad5b4602b72c93e4e08",
+      "byte_count": 1248,
+      "line_count": 32,
+      "review_snapshot": "docs/planning/evidence/M1-W02-C02-AURA-host-parser-facade.txt",
+      "snapshot_sha256": "9e53bc3bea0b48eb153e88f03b89607b14ded4e4aa838ad5b4602b72c93e4e08",
+      "snapshot_matches_source_bytes": true,
+      "declarations_captured": [
+        "namespace aura.domains.core.math;",
+        "public static class ExpressionParser",
+        "public static ExpressionEvaluationOutcome Evaluate(",
+        "public static AuraExpressionUnitResolver Instance { get; } = new();",
+        "public ExpressionUnitResolution Resolve(string token, string culture)"
+      ],
+      "textual_feature_mentions": [
+        "IExpressionUnitResolver",
+        "ExpressionUnitResolution",
+        "ExpressionParser"
+      ],
+      "disposition": "AURA command/domain facade: review only; not a Math transfer."
+    }
+  ],
+  "expected_independent_oracles": [
+    "1/3 \u002B 1/6 = 1/2 without binary64 conversion",
+    "Admitted exact square roots produce exact rationals; irrational roots reject exact-only mode",
+    "Length up to 4096 characters, 256 tokens, depth 32, 256 digit magnitude and power/root 16 must be characterized at public API boundaries",
+    "Expression input never executes arbitrary C# and never accepts free variables"
+  ],
+  "limits": [
+    "This RED proves the independent expression package is absent; no parser behavior or resource bounds have passed yet.",
+    "Source captures are pinned and complete; declaration excerpts and numeric token occurrences are only discovery, not behavioral qualification.",
+    "The AURA domain facade is excluded from extraction; the pure parser package alone is the candidate."
+  ]
+}
