@@ -173,6 +173,11 @@ p.Json.EditObject("docs/planning/backlog.json",product=>{
     var t2=c["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==T2);
     product["plan_version"]="0.1.17";
     w1["status"]="done";
+    w1["evidence"]=p.Json.StringArray(
+        "docs/planning/evidence/M1-W01-C01-boundary-verification.json",
+        "docs/planning/evidence/M1-W01-C02-qualified.json",
+        "docs/planning/evidence/M1-W01-C03-boundary-qualified.json",
+        "docs/planning/evidence/M1-W01-C04-qualified.json");
     w2["status"]="in_progress";
     var acceptedPaths=w2["paths"]!.AsArray();
     foreach(var added in new[]{"src/projects/dw.quantities.standard/","tests/projects/dw.quantities.tests/"})
