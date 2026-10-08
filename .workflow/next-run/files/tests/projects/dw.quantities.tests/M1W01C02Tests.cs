@@ -70,6 +70,34 @@ public sealed class M1W01C02Tests
                 "Rounding +1.25 at one place must produce either adjacent decimal tie.");
             Assert.IsTrue(displayedNegative is "-1.2" or "-1.3",
                 "Rounding -1.25 at one place must produce either adjacent decimal tie.");
+            var name = mode.ToString() ?? string.Empty;
+            // Assert the independent tie oracle when a rounding policy explicitly names its direction.
+            if (name.Contains("Even", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.AreEqual("1.2", displayedPositive, name);
+                Assert.AreEqual("-1.2", displayedNegative, name);
+            }
+            else if (name.Contains("AwayFromZero", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.AreEqual("1.3", displayedPositive, name);
+                Assert.AreEqual("-1.3", displayedNegative, name);
+            }
+            else if (name.Contains("TowardZero", StringComparison.OrdinalIgnoreCase) ||
+                     name.Contains("Truncat", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.AreEqual("1.2", displayedPositive, name);
+                Assert.AreEqual("-1.2", displayedNegative, name);
+            }
+            else if (name.Contains("Ceiling", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.AreEqual("1.3", displayedPositive, name);
+                Assert.AreEqual("-1.2", displayedNegative, name);
+            }
+            else if (name.Contains("Floor", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.AreEqual("1.2", displayedPositive, name);
+                Assert.AreEqual("-1.3", displayedNegative, name);
+            }
             Assert.AreEqual("1.25", Format(format, positive, 2, mode),
                 "Exact decimal display at sufficient precision must not change digits.");
             Assert.AreEqual("-1.25", Format(format, negative, 2, mode));
