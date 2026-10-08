@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "id": "RS022",
+  "title": "Transfer exact expression parser and qualify functions and published limits",
+  "state": "prepared",
+  "commitMessage": "feat: transfer and verify standalone exact expression parser",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W02",
+    "M1-W02-C02",
+    "M1-W02-C02-T1",
+    "M1-W02-C02-T1-R",
+    "M1-W02-C02-T1-G",
+    "M1-W02-C02-T1-V",
+    "M1-W02-C02-T2",
+    "M1-W02-C02-T2-R"
+  ],
+  "contribution": {
+    "summary": "Transfer the complete owner-authorized SHA-pinned exact ExpressionParser into a standalone locked dw.quantities.expression package, qualify fractions, rational roots, powers, selection, injected units, temperatures and six public input limits through eleven independent oracles, and prepare adversarial boundary T2.",
+    "value": "Delivers a real isolated .NET expression evaluation capability with exact BigInteger arithmetic, typed failures and injectable resolution rather than merely observing or documenting source, while leaving parser hardening and explicit-profile catalogue integration for the next substantive run.",
+    "debtChanges": [
+      "The AURA parser source is transferred byte-for-byte from its RS021 verified snapshot; M1-W02-C02-T2 still must check exponent overflow, adversarial resource use and explicit-profile catalog integration.",
+      "The parser takes an explicit injected IExpressionUnitResolver and does not choose host culture itself. An adapter for the qualified standard catalogue is intentionally deferred to T2.",
+      "Accepted grammar boundaries are tested at the public Evaluate API, but this does not prove global CPU/memory complexity or external AURA host adoption. M1-W02-C02 remains in progress."
+    ],
+    "nextAction": "Independently RED-test unsafe parser dimension-exponent arithmetic and strict inherited unit-resolution bridge; fix demonstrated gaps, qualify public adversarial boundaries and close M1-W02-C02 only if all T2 gates pass.",
+    "achievements": [
+      {
+        "projectNode": "M1-W02-C02-T1-G",
+        "achievement": "The authorized AURA exact ExpressionParser is copied and byte-verified into a locked standalone dw.quantities.expression project with only the dw.quantities dependency; eleven independent direct public-API exact, resolver and budget tests are materialized."
+      },
+      {
+        "projectNode": "M1-W02-C02-T1-V",
+        "achievement": "The parser passes fractions, powers, rational/irrational roots, selection functions, injected-unit and temperature algebra oracles, tests public 4096-character, 256-token, depth-32, 256-digit and power/root-16 boundaries, and passes full quantities and foundation regressions."
+      },
+      {
+        "projectNode": "M1-W02-C02-T1",
+        "achievement": "The exact grammar functional transfer is qualified from the RS021 independent absence RED through pinned binary-identical source installation, separate project compilation and eleven public behavior oracles, with T2 boundary/security integration explicitly open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities.expression/ExpressionParser.cs",
+    "src/projects/dw.quantities.expression/dw.quantities.expression.csproj",
+    "src/projects/dw.quantities.expression/packages.lock.json",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.quantities.tests/packages.lock.json",
+    "tests/projects/dw.quantities.tests/M1W02C02Tests.cs",
+    "dw.tools.math.slnx",
+    "docs/planning/evidence/M1-W02-C02-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
