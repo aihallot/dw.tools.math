@@ -356,6 +356,7 @@ public static class ExpressionParser
             }
 
             Require(TokenKind.Comma);
+            var candidates = new List<EvaluatedQuantity> { selected };
             do
             {
                 var candidate = ParseSum();
@@ -363,13 +364,13 @@ public static class ExpressionParser
                     throw new ExpressionException(ExpressionFailureKind.IncompatibleDimensions, operation.Position);
                 if (candidate.Temperature != selected.Temperature)
                     throw new ExpressionException(ExpressionFailureKind.TemperatureAlgebra, operation.Position);
-                var comparison = candidate.Value.CompareTo(selected.Value);
-                if (operation.Text == "min" ? comparison < 0 : comparison > 0)
-                    selected = candidate;
+                candidates.Add(candidate);
             }
             while (Match(TokenKind.Comma));
             Require(TokenKind.RightParenthesis);
-            return selected;
+            return (operation.Text == "min"
+                ? ExactSelection.Minimum(candidates)
+                : ExactSelection.Maximum(candidates)).Quantity;
         }
 
         private EvaluatedQuantity ParseRoot()
