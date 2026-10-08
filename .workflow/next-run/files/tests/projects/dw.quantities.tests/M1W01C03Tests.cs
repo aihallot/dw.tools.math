@@ -148,8 +148,8 @@ public sealed class M1W01C03Tests
                 continue;
             }
         }
-        Assert.Fail("No public UnitDefinition constructor could materialize a verified affine " +
+        throw new AssertFailedException(
+            "No public UnitDefinition constructor could materialize a verified affine " +
             "temperature unit. Constructors: " + string.Join(" | ", attempted));
-        throw new InvalidOperationException("Unreachable.");
     }
 }
