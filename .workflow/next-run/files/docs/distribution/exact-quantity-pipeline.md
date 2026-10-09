@@ -1,19 +1,23 @@
-# Exact typed composition pipeline — M2-W02-C02-T1
+# Exact typed composition pipeline — M2-W02-C02
 
-This phase builds on the qualified `math-composition/1` result and capability contracts, without introducing AURA, a provider registry, symbolic solvers, or an unrestricted expression runtime.
+The public `dw.tools.math.composition` contract composes bounded local **exact** rational quantities, not a general solver, AURA extension, provider executor, or unrestricted expression runtime.
 
-## One engine: direct and fluent
+## T1 — one typed execution path
 
-The public `ExactQuantityPipeline.Evaluate(IEnumerable<ExactPipelineStep>)` is the single evaluator. The immutable fluent `ExactQuantityPipeline.From(value, unit).ConvertTo(unit).DivideBy(value, unit).ConvertTo(unit).Evaluate()` constructs exactly the same steps and invokes that evaluator.
+The immutable direct and fluent APIs share `ExactQuantityPipeline.Evaluate`. The closed step vocabulary is `Start`, `Convert`, `Divide`, and `Add`. All units are explicitly supplied `UnitDefinition` values; only linear units with zero affine offset are admitted. There is no global catalog, culture inference, provider discovery, or implicit permission.
 
-The closed step vocabulary is `Start`, `Convert`, `Divide`, and `Add`. Every source/unit is explicitly injected as `dw.quantities.UnitDefinition`; no implicit culture, global unit catalog or provider lookup is performed. Quantities are stored in their canonical base units and represented as exact `ExactRational` values; display conversion is applied only to the explicitly requested final compatible unit.
+Canonical base-unit calculations retain `ExactRational` and `DimensionVector`. Example: `5 km` converted to metres, divided by `2 min`, and displayed in `km/h` is exactly `125/3 m/s = 150 km/h`. Incompatible dimensions (such as mass + time), zero divisors, invalid step order, and absolute affine temperatures are rejected during the complete preflight before arithmetic.
 
-Example: `5 km` converted to metres and divided by `2 min` yields `125/3 m/s`, or exactly `150 km/h`. Direct steps and fluent operations must agree on dimension, rational quantity, final presentation and step history. An attempted mass + time addition is rejected in the full pipeline pre-validation pass before any arithmetic.
+## T2 — resource, cancellation, provenance and integration boundaries
 
-## Explicit limits
+A pipeline contains at most **16 steps**. Both direct and fluent evaluation have `CancellationToken` overloads; a signalled token aborts with `OperationCanceledException` without returning partial results. Checks run before materialization and validation, during preflight and between evaluated steps. A custom blocking enumerator or an uninterruptible arbitrary-precision arithmetic operation is *not* forcibly preempted: this is cooperative cancellation, not a scheduler.
 
-A chain has at most 16 steps. Each step's dimensions and supported linear/non-affine units are validated before any quantity math. Zero divisors, incompatible dimensions, bad step order, affine temperatures and oversized exact numeral components are refused. Magnitude is checked again after each exact operation; the implementation does not silently switch to binary floating point. The recorded step-kind history is bounded, immutable and not an external execution trace.
+Numerator and denominator components are independently bounded at **256 decimal digits**, measured on the unsigned magnitude; the previous positive 257-digit acceptance boundary is deliberately falsified in a controlled RED and corrected. Input, unit scales, intermediate values, and final display magnitudes are checked. This is a numerical-size contract, not a hard memory or wall-clock guarantee.
 
-Controlled RED verifies the absence of the public shared evaluator before installing the source. Independent GREEN tests establish direct/fluent parity, the 5 km / 2 min -> 150 km/h acceptance, dimensional rejection, division by zero, immutable fluent appends, conversion precision, affine refusal, order and resource limits. Existing composition/IR/foundation regressions and locked NuGet packaging are separately re-run.
+`ExactPipelineResult.DetailedSteps` is an immutable, bounded series of snapshots containing the zero-based index, step kind, exact base quantity with physical dimension and optional explicit presentation-unit id. The legacy `Steps` collection remains, and its kinds correspond one-to-one with detailed snapshots. Snapshots are locally computed results, **not** provider execution telemetry, authorization records or external provenance.
 
-This delivers `M2-W02-C02-T1` only. `T2` remains planned for stronger operation/resource/cancellation/step provenance boundaries and integration. Neither the work package nor phase closes in this run.
+Ten independent T2 boundary tests cover positive and negative numeral size, cancellation before/during evaluation, direct/fluent parity, per-stage exact quantity and dimensions, 16-step observations, zero and exponent overflows, invalid later steps, result immutability, and absence of public provider identity. They run alongside T1 tests and composition/IR/foundation regressions, architecture validation and local NuGet package inspection.
+
+## Remaining limits
+
+M2-W02-C02 is closed by RS035 only after its RED/GREEN and package oracles pass. `M2-W02-C03` remains planned. No mathematical provider, AURA adoption, distributed scheduling, real-time cancellation guarantee, provider permission or symbolic execution is delivered.
