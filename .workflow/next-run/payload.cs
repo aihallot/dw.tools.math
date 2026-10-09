@@ -41,7 +41,6 @@ var packages=new[]{
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var plan=JsonNode.Parse(File.ReadAllText(Path.Combine(root,"docs/planning/backlog.json")))!.AsObject();
-var native=JsonNode.Parse(File.ReadAllText(Path.Combine(root,".aura/workflow/plan/project.json")))!.AsObject();
 var m2=plan["releases"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M2");
 var m1=plan["releases"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M1");
 var baseState=(string?)plan["plan_version"]=="0.1.36" && (string?)m2["status"]=="in_progress";
