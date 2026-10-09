@@ -73,10 +73,10 @@ public static class IrCanonicalJsonCodec
             ["unit"] = quantity.CanonicalUnitId,
             ["system"] = quantity.System.ToString(),
             ["dimensions"] = new JsonArray(
-                quantity.Dimension.Length, quantity.Dimension.Mass, quantity.Dimension.Time,
-                quantity.Dimension.ElectricCurrent, quantity.Dimension.Temperature,
-                quantity.Dimension.AmountOfSubstance, quantity.Dimension.LuminousIntensity,
-                quantity.Dimension.Information),
+                JsonValue.Create(quantity.Dimension.Length), JsonValue.Create(quantity.Dimension.Mass),
+                JsonValue.Create(quantity.Dimension.Time), JsonValue.Create(quantity.Dimension.ElectricCurrent),
+                JsonValue.Create(quantity.Dimension.Temperature), JsonValue.Create(quantity.Dimension.AmountOfSubstance),
+                JsonValue.Create(quantity.Dimension.LuminousIntensity), JsonValue.Create(quantity.Dimension.Information)),
             ["temperature"] = quantity.Temperature.ToString()
         },
         IrApply apply => new JsonObject
