@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "RS030",
+  "title": "Implement canonical mathematical IR JSON round trips",
+  "state": "prepared",
+  "commitMessage": "feat: qualify canonical versioned exact mathematical IR JSON codec",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M2",
+    "M2-W01",
+    "M2-W01-C03",
+    "M2-W01-C03-T1",
+    "M2-W01-C03-T1-R",
+    "M2-W01-C03-T1-G",
+    "M2-W01-C03-T1-V",
+    "M2-W01-C03-T2",
+    "M2-W01-C03-T2-R"
+  ],
+  "contribution": {
+    "summary": "Observe independent missing-codec REDs, install deterministic math-ir/1 JSON serialization and decoding of exact rationals, binary64 bits, units, symbols, matrices, operations and restrictions, and verify ten round-trip oracles and full regressions.",
+    "value": "Preserves exact quantities and scope/domain semantics across a reusable .NET JSON transport without implicit numeric widening or provider-specific AST dependencies.",
+    "debtChanges": [
+      "T2 remains open for adversarial JSON decoding, duplicate and unknown keys, scope integrity and distinct semantic/presentation hashes.",
+      "Canonical structural byte identity is not an algebraic equivalence proof; OpenMath/MathML adapters remain future work.",
+      "No external AURA adoption or publication is claimed."
+    ],
+    "nextAction": "Qualify M2-W01-C03-T2 with independent adversarial JSON decoder and hash tests before completing the codec chunk.",
+    "achievements": [
+      {
+        "projectNode": "M2-W01-C03-T1-R",
+        "achievement": "Independent REDs show missing public canonical IR JSON codec and missing Encode/Decode contract."
+      },
+      {
+        "projectNode": "M2-W01-C03-T1-G",
+        "achievement": "Versioned math-ir/1 codec carries exact BigInteger fractions, binary64 bits, quantities, symbol binding, matrices and domain restrictions in deterministic JSON."
+      },
+      {
+        "projectNode": "M2-W01-C03-T1-V",
+        "achievement": "Ten round-trip oracles plus existing IR, quantities, foundation and locked-build regressions qualify structural determinism and exact typed values."
+      },
+      {
+        "projectNode": "M2-W01-C03-T1",
+        "achievement": "The functional canonical codec contract closes with observed RED and executable GREEN; adversarial decoding and semantic/presentation hashing remain in T2."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+    "tests/projects/dw.tools.math.ir.tests/M2W01C03RedTests.cs",
+    "tests/projects/dw.tools.math.ir.tests/M2W01C03Tests.cs",
+    "docs/distribution/ir-canonical-json.md",
+    "docs/planning/evidence/M2-W01-C03-functional-red.json",
+    "docs/planning/evidence/M2-W01-C03-functional-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
