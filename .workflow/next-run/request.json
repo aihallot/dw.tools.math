@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "id": "RS033",
+  "title": "Qualify provider-independent public capability discovery and missing-result integration boundaries",
+  "commitMessage": "feat: qualify composition discovery and result boundaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C01",
+    "M2-W02-C01-T2",
+    "M2-W02-C01-T2-R",
+    "M2-W02-C01-T2-G",
+    "M2-W02-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Close M2-W02-C01 by falsifying absent provider-independent discovery, delivering immutable public capability enumeration without provider or permission binding, and verifying no-result, provenance and public-assembly boundaries with eight GREEN tests, prior T1 and IR regressions and local NuGet packaging.",
+    "value": "Consumers can enumerate stable inspectable composition descriptions and distinguish unrecognized operations or incomplete results without assuming installed providers, AURA permissions, or mathematical execution.",
+    "debtChanges": [
+      "M2-W02 remains in progress: M2-W02-C02 typed direct/fluent pipeline and M2-W02-C03 composition work are untouched.",
+      "Capabilities remain descriptive; neither Find nor Discover identifies provider availability, authorizes work, or performs execution.",
+      "Bounded provenance is metadata, not an execution log, permission token or external-provider attestation.",
+      "No mathematical solver, numerical provider, pipeline scheduler, AURA host linkage, external package publishing, or consumer adoption is introduced."
+    ],
+    "nextAction": "Proceed with a substantial M2-W02-C02-T1 contract and independent RED/GREEN for typed direct and fluent pipelines with unit dimension validation, without claiming execution across unavailable providers.",
+    "achievements": [
+      {
+        "projectNode": "M2-W02-C01-T2-R",
+        "achievement": "A targeted independently executable test observes controlled RED when the provider-independent public capability catalog is missing."
+      },
+      {
+        "projectNode": "M2-W02-C01-T2-G",
+        "achievement": "The composition assembly exposes immutable capability discovery and exact known-id lookup without provider, permission, executor, AURA or runtime binding."
+      },
+      {
+        "projectNode": "M2-W02-C01-T2-V",
+        "achievement": "Eight adversarial boundary tests, seven prior contract tests, IR and foundation regression, architecture verification and local package structure qualification demonstrate bounded semantics."
+      },
+      {
+        "projectNode": "M2-W02-C01-T2",
+        "achievement": "The independent public-provider, permission and no-final-value integration boundaries have been qualified; no external adoption or execution is inferred."
+      },
+      {
+        "projectNode": "M2-W02-C01",
+        "achievement": "Both contract task T1 and the completed T2 boundary/integration task satisfy the phase closure criteria while M2-W02 stays in progress."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/composition-results.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C01-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C01-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/MathCapabilityCatalog.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C01BoundaryTests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.composition/MathCapabilityCatalog.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.composition/MathCapabilityCatalog.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/M2W02C01BoundaryTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/M2W02C01BoundaryTests.cs"
+    },
+    {
+      "path": "docs/distribution/composition-results.md",
+      "sourcePath": "files/docs/distribution/composition-results.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M2-W02-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS032/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.31"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/6/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/0/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/0/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W02-C01-contract-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "provider-neutral-inspectable-result-and-capability-contract-qualified"
+    }
+  ]
+}
