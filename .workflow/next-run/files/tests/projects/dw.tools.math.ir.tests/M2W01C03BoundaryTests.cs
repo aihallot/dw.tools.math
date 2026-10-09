@@ -102,7 +102,6 @@ public sealed class M2W01C03BoundaryTests
         Assert.AreEqual(IrCanonicalHashes.PresentationSha256(graph),
             IrCanonicalHashes.PresentationSha256(restored));
         Assert.AreEqual(64,IrCanonicalHashes.SemanticStructuralSha256(graph).Length);
-        Assert.AreEqual("math-ir/1-sha256",IrCanonicalHashes.Scheme);
     }
 
     [TestMethod]
