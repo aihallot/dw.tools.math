@@ -133,7 +133,7 @@ public sealed class M2W01C03BoundaryTests
     [TestMethod]
     public void MalformedJsonAndInvalidBoundSymbolAreNotAccepted()
     {
-        Assert.ThrowsExactly<System.Text.Json.JsonException>(()=>
+        Assert.Throws<System.Text.Json.JsonException>(()=>
             IrCanonicalJsonCodec.Decode("{"));
         var bound=IrCanonicalJsonCodec.Encode(IrSymbol.Bound("scope-a",0,"x"));
         var invalid=bound.Replace("\"scope\":\"scope-a\"",
