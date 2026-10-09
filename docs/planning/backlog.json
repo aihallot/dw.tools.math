@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.31",
+  "plan_version": "0.1.32",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -2853,7 +2853,7 @@
       "title": "Inspectable results and capabilities",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M2-W01-C03"
       ],
@@ -2878,31 +2878,38 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C01Tests"
       ],
-      "refinement": "RS032 qualifies a standalone composition/1 result and capability contract: bounded matrix shapes, typed exact/approximate/unsupported/budget statuses, missing final value and versioned provenance. Seven contract tests and a controlled semantic RED verify T1. T2 remains planned; no provider execution or permission follows from discovery.",
+      "refinement": "RS032 T1 provides inspectable composition results and matrix capability contract; RS033 T2 adds explicit immutable provider-neutral discovery, denies public provider/permission/execution surface, qualifies missing-final-value and provenance boundaries with controlled semantic RED and eight independent GREEN tests. No AURA host authorization or provider execution.",
       "files": [
         "src/projects/dw.tools.math.composition/OperationContracts.cs",
+        "src/projects/dw.tools.math.composition/MathCapabilityCatalog.cs",
         "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
         "src/projects/dw.tools.math.composition/packages.lock.json",
         "tests/projects/dw.tools.math.composition.tests/M2W02C01Tests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C01BoundaryTests.cs",
         "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
         "tests/projects/dw.tools.math.composition.tests/packages.lock.json",
         "dw.tools.math.slnx",
         "docs/distribution/composition-results.md",
         "docs/planning/evidence/M2-W02-C01-contract-red.json",
-        "docs/planning/evidence/M2-W02-C01-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C01-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C01-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C01-boundary-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C01Tests",
+        "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C01BoundaryTests",
+        "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release",
         "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet pack src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M2-W02-C01-contract-red.json",
-        "docs/planning/evidence/M2-W02-C01-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C01-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C01-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C01-boundary-qualified.json"
       ],
-      "readiness": "active T1 qualified; refine and implement T2 independently before C01 closure",
+      "readiness": "closed: T1 and T2 independently qualified; M2-W02-C02 is next, still planned",
       "tasks": [
         {
           "id": "M2-W02-C01-T1",
@@ -2949,29 +2956,38 @@
           "title": "Boundaries and integration",
           "behavior": "Expose no provider type publicly; infer no AURA permission from discoverability; represent absence of a final result explicitly.",
           "test_case": "Expose no provider type publicly; infer no AURA permission from discoverability; represent absence of a final result explicitly.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W02-C01-boundary-red.json",
+            "docs/planning/evidence/M2-W02-C01-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Expose no provider type publicly; infer no AURA permission from discoverability; represent absence of a final result explicitly.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C01-boundary-red.json"
+              ]
             },
             {
               "id": "M2-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Expose no provider type publicly; infer no AURA permission from discoverability; represent absence of a final result explicitly.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C01-boundary-qualified.json"
+              ]
             },
             {
               "id": "M2-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W02-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C01-boundary-qualified.json"
+              ]
             }
           ]
         }
