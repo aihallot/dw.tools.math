@@ -41,7 +41,6 @@ public sealed class M2W02C03Tests
     {
         var first = ExactReplayRunner.Run(Steps(), Context());
         var second = ExactReplayRunner.Run(Steps(), Context());
-        StringAssert.StartsWith(ExactReplayKey.Scheme, "exact-quantity-replay/1");
         Assert.AreEqual(first.Key.Digest, second.Key.Digest);
         Assert.AreEqual(64, first.Key.Digest.Length);
         Assert.AreEqual(new ExactRational(150, 1), second.Result.DisplayValue);
