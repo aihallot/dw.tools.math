@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "M2-W01-C01-qualified",
+  "status": "typed-ir-adr-qualified-no-product-implementation",
+  "milestone": "M2",
+  "phase": "M2-W01-C01",
+  "source_m1_gate": "docs/planning/evidence/M1-W03-C02-gate.json",
+  "decision": "docs/planning/decisions/m2-w01-c01.md",
+  "decision_sha256": "8948088f0bc321cbf59591a9ad14b3506094cacec5ba6e608b3937450f08769a",
+  "mapping": "docs/planning/evidence/M2-W01-C01-mapping.json",
+  "mapping_sha256": "5a0c853f93acc4299c828732304ffda73ed630e9f4afc293137d66e9c1a348fe",
+  "read_only_validator": "docs/planning/ValidateM2IrDecision.cs",
+  "read_only_validator_sha256": "be7d092949c027973b4f9c5af139f40466c99562f35b462cd6dde62d2f0e9c21",
+  "source_aware_standards": [
+    "OpenMath 2.0 Revision 2 standard (https://openmath.org/standard/)",
+    "W3C MathML 4 Working Draft 2026-10-08 content markup (https://www.w3.org/TR/2026/WD-mathml4-20261008/)"
+  ],
+  "alternatives": [
+    "OpenMath content dictionaries as external semantics: not chosen as the internal data model.",
+    "Strict Content MathML as external semantic encoding: not chosen as native model or fixed release codec.",
+    "Typed immutable provider-neutral AST: selected for the admitted exact/approximate/quantity/binding/domain semantics.",
+    "Provider-owned AST: rejected as a public canonical contract due to coupling and semantic drift."
+  ],
+  "observed_cases": [
+    "rational",
+    "quantity",
+    "matrix",
+    "function",
+    "exclusion"
+  ],
+  "decision_reuse_exact_rational": true,
+  "decision_keep_binders_and_restrictions": true,
+  "decision_separate_exact_and_approximate": true,
+  "decision_defer_complex_and_intervals": true,
+  "resource_limits_proposed_not_enforced": true,
+  "product_ir_compiled": false,
+  "codec_implemented": false,
+  "adoption_transmitted": false,
+  "tests": [
+    "Read-only M1 release gate verified before product progression.",
+    "Transfer architecture validator passed.",
+    "All five structured IR mapping rows independently checked for exactness/loss/guard fields.",
+    "Read-only M2 IR ADR validator executed after native/product state convergence.",
+    "Canonical product planning validator executed with check-only mode after projection."
+  ],
+  "next_action": "M2-W01-C02: RED test typed exact-vs-approximate AST, binding identities, explicit assumptions and bounded immutable nodes before implementing dw.tools.math.ir.",
+  "limits": [
+    "This is an architecture spike: no IR project, executable AST, codec or OpenMath/MathML serializer is created.",
+    "Exact IR limits are prospective policy, not currently enforced as product code.",
+    "No arbitrary equivalence, automatic simplification, provider implementation, symbolic solver or external consumer adoption is claimed.",
+    "No AURA/Decision/MCDM sibling repository is changed."
+  ]
+}

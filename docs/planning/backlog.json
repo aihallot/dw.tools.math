@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.25",
+  "plan_version": "0.1.26",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -69,7 +69,7 @@
       "version": "0.3.0-preview",
       "title": "Semantic representation and composition",
       "outcome": "Define and verify a minimal IR compatible with quantities and future providers.",
-      "status": "planned",
+      "status": "in_progress",
       "gate": "G-M2",
       "required_chunks": [
         "M2-W01-C01",
@@ -283,7 +283,7 @@
       "id": "M2-W01",
       "release": "M2",
       "title": "Mathematical model",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.ir/",
         "tests/projects/dw.tools.math.ir.tests/",
@@ -2417,7 +2417,7 @@
       "title": "IR study and subset ADR",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M1-W03-C02"
       ],
@@ -2439,10 +2439,22 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS027 compares OpenMath 2.0 Revision 2, W3C Content MathML 4 Draft and native/provider ASTs. It chooses a bounded immutable typed provider-neutral model, reuses ExactRational, separates symbolic scopes/domains/assumptions, records five exact mapping/loss cases, prospective limits and deferred kinds. A read-only C# decision validator verifies the ADR; no implementation package or serializer is claimed.",
+      "files": [
+        "docs/planning/decisions/m2-w01-c01.md",
+        "docs/planning/evidence/M2-W01-C01-mapping.json",
+        "docs/planning/ValidateM2IrDecision.cs",
+        "docs/planning/evidence/M2-W01-C01-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM2IrDecision.cs -- --check",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M2-W01-C01-mapping.json",
+        "docs/planning/evidence/M2-W01-C01-qualified.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2450,29 +2462,38 @@
           "title": "Contract and outcome",
           "behavior": "Compare OpenMath, Content MathML, and candidate ASTs for numbers/units/domains/functions; choose a minimal IR.",
           "test_case": "Produce a loss/mapping table for rational, quantity, matrix, function, and x!=1 exclusion; publish a reasoned ADR and scope.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W01-C01-mapping.json",
+            "docs/planning/evidence/M2-W01-C01-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W01-C01-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Compare OpenMath, Content MathML, and candidate ASTs for numbers/units/domains/functions; choose a minimal IR.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m2-w01-c01.md"
+              ]
             },
             {
               "id": "M2-W01-C01-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Produce a loss/mapping table for rational, quantity, matrix, function, and x!=1 exclusion; publish a reasoned ADR and scope.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C01-mapping.json"
+              ]
             },
             {
               "id": "M2-W01-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M2-W01-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C01-qualified.json"
+              ]
             }
           ]
         },
@@ -2481,29 +2502,38 @@
           "title": "Boundaries and integration",
           "behavior": "Invent no universal engine; keep symbolic assumptions separate from historical syntax; decide BigRational extension versus inherited type.",
           "test_case": "Invent no universal engine; keep symbolic assumptions separate from historical syntax; decide BigRational extension versus inherited type.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W01-C01-mapping.json",
+            "docs/planning/evidence/M2-W01-C01-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W01-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Invent no universal engine; keep symbolic assumptions separate from historical syntax; decide BigRational extension versus inherited type.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/decisions/m2-w01-c01.md"
+              ]
             },
             {
               "id": "M2-W01-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Invent no universal engine; keep symbolic assumptions separate from historical syntax; decide BigRational extension versus inherited type.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C01-mapping.json"
+              ]
             },
             {
               "id": "M2-W01-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M2-W01-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C01-qualified.json"
+              ]
             }
           ]
         }
