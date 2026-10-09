@@ -70,7 +70,13 @@ foreach(var criterion in new[]{"OpenMath 2.0 revision 2","Content MathML","BigRa
     if(!decision.Contains(criterion,StringComparison.OrdinalIgnoreCase))
         throw new InvalidOperationException("IR architecture decision omits: "+criterion);
 
-RunRequired(root,"dotnet","run","--file","docs/planning/ValidateM1Gate.cs","--","--check");
+// ValidateM1Gate is pinned to the already-qualified 0.1.25 M1 gate.
+// DWF target re-entry receives plan version 0.1.26; rerunning that
+// release-specific validator there would be a false failure. The
+// immutable M1 gate evidence and AURA non-adoption status were checked
+// above for both baseline and target, while the M2 validator runs below.
+if(baseline)
+    RunRequired(root,"dotnet","run","--file","docs/planning/ValidateM1Gate.cs","--","--check");
 RunRequired(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
 var mappingBytes=File.ReadAllBytes(Path.Combine(root,Mapping));
@@ -137,7 +143,6 @@ p.Json.EditObject("docs/planning/backlog.json",backlog=>
     c["commands"]=p.Json.StringArray(
         "dotnet run --file docs/planning/ValidateM2IrDecision.cs -- --check",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
-        "dotnet run --file docs/planning/ValidateM1Gate.cs -- --check",
         "dotnet run --file docs/planning/ValidateTransferArchitecture.cs");
     c["evidence"]=p.Json.StringArray(Mapping,Evidence);
     foreach(var task in c["tasks"]!.AsArray().Select(x=>x!.AsObject()))
