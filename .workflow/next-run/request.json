@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "id": "RS035",
+  "title": "Qualify cancellable exact pipeline boundaries, immutable per-step provenance and numerical budgets",
+  "commitMessage": "feat: qualify exact pipeline cancellation and provenance boundaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C02",
+    "M2-W02-C02-T2",
+    "M2-W02-C02-T2-R",
+    "M2-W02-C02-T2-G",
+    "M2-W02-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Close M2-W02-C02 by demonstrating the existing 257-digit positive numerator budget defect with an independent behavioral RED, correcting magnitude validation, adding cooperative cancellation in shared direct/fluent evaluation and bounded immutable per-step exact quantity and dimension snapshots, and validating 10 independent boundary GREEN tests, prior pipeline and composition regressions, locked package, native plan and architecture.",
+    "value": "Exact typed pipelines now retain bounded step-by-step numerical provenance, reject resource-boundary violations, and abort cooperatively without returning an invented or partial result; provider-neutral operation semantics and dimensional prevalidation remain intact.",
+    "debtChanges": [
+      "M2-W02-C03 remains planned, so M2-W02 is in progress and no work-package achievement is claimed.",
+      "Cancellation checks are cooperative and do not forcibly preempt arbitrary blocking enumerators or an already running BigInteger operation.",
+      "Step snapshots describe local pure arithmetic only, not external provider execution telemetry, authorization or AURA host state.",
+      "No external AURA adoption, distributed scheduler, symbolic solver or provider execution is introduced."
+    ],
+    "nextAction": "Prepare M2-W02-C03-T1 as a substantive independently falsifiable composition operation contract; preserve cancellation, exactness and provider separation without closing M2-W02 prematurely.",
+    "achievements": [
+      {
+        "projectNode": "M2-W02-C02-T2-R",
+        "achievement": "An independent compiled behavioral RED demonstrates that the existing pipeline wrongly accepts a positive 257-digit exact numerator against its advertised 256-digit budget."
+      },
+      {
+        "projectNode": "M2-W02-C02-T2-G",
+        "achievement": "The shared direct/fluent exact evaluator now refuses excessive positive and negative magnitudes, supports cooperative cancellation and captures immutable bounded local numerical step snapshots."
+      },
+      {
+        "projectNode": "M2-W02-C02-T2-V",
+        "achievement": "Ten adversarial T2 boundary GREEN tests plus T1, composition, IR, foundation, architecture and local locked NuGet packaging checks qualify the revised pipeline."
+      },
+      {
+        "projectNode": "M2-W02-C02-T2",
+        "achievement": "Resource, cancellation, exact per-step provenance and non-provider integration boundaries are qualified without external authority claims."
+      },
+      {
+        "projectNode": "M2-W02-C02",
+        "achievement": "Both T1 exact direct/fluent contract and T2 operational boundaries are qualified; the C02 phase closes while M2-W02 remains in progress."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/exact-quantity-pipeline.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs"
+    },
+    {
+      "path": "docs/distribution/exact-quantity-pipeline.md",
+      "sourcePath": "files/docs/distribution/exact-quantity-pipeline.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M2-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M2-W02-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS034/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.33"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/6/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/19/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/1/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/1/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W02-C02-contract-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "bounded-exact-direct-fluent-quantity-pipeline-qualified"
+    }
+  ]
+}
