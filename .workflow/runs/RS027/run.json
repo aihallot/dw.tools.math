@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "id": "RS027",
+  "title": "Qualify typed IR ADR with phase-aware M1 baseline gate verification",
+  "state": "prepared",
+  "commitMessage": "docs: qualify minimal typed mathematical IR architecture and fidelity boundaries",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M2",
+    "M2-W01",
+    "M2-W01-C01",
+    "M2-W01-C01-T1",
+    "M2-W01-C01-T1-A",
+    "M2-W01-C01-T1-B",
+    "M2-W01-C01-T1-C",
+    "M2-W01-C01-T2",
+    "M2-W01-C01-T2-A",
+    "M2-W01-C01-T2-B",
+    "M2-W01-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Complete the first M2 architecture spike by comparing OpenMath 2.0 Revision 2, W3C Content MathML 4 and candidate ASTs, selecting a bounded immutable provider-neutral typed model, and qualifying a structured five-case exact semantic-loss ledger plus a read-only C# decision validator.",
+    "value": "Fixes the future IR\u0027s exact/approximate, unit, scope, assumption and matrix semantics before implementation, reusing the qualified ExactRational primitive and explicitly rejecting lossy silent simplification or provider coupling.",
+    "debtChanges": [
+      "No M2 IR library, parser, codec or OpenMath/Content MathML exporter is created by this spike; M2-W01-C02 owns compiled RED/GREEN contracts and package qualification.",
+      "Numeric resource budgets, symbolic substitution and canonical structural hashing are proposed policies, not demonstrated product capabilities; no dynamic provider registry is authorized.",
+      "External AURA adoption remains draft/untransmitted. All M1 exact unit and package contracts remain unchanged.",
+      "Retry 0 was a pre-attempt ProjectPlan refusal: M1 left no active hierarchy, so ActivateReadyContinuation was not admissible. Retry 1 initializes M2 by exact legal not-ready/ready/in-progress transitions without changing science, validators or scope.",
+      "Retry 1 reached DWF target re-entry but the historical ValidateM1Gate rejected the newer 0.1.26 plan. Retry 2 runs this 0.1.25-specific gate only on baseline; the target re-entry checks pinned M1 evidence plus the read-only M2 IR/plan validators."
+    ],
+    "nextAction": "Implement M2-W01-C02 with independent REDs for exact vs approximate values, distinct bound/free symbols and the real sqrt(x\u00B2) domain restriction; create the first real IR project only with runnable green consumer/tests.",
+    "achievements": [
+      {
+        "projectNode": "M2-W01-C01-T1-A",
+        "achievement": "The first study question freezes comparison criteria for OpenMath 2.0 Revision 2, W3C Content MathML 4 and native/provider ASTs, including rational/quantity/matrix/function/exclusion semantics."
+      },
+      {
+        "projectNode": "M2-W01-C01-T1-B",
+        "achievement": "A five-case structured fidelity-and-loss matrix records exact values, unit identities, two-dimensional matrix shape, named operation arity, and the x != 1 exclusion plus explicit unsupported mappings."
+      },
+      {
+        "projectNode": "M2-W01-C01-T1-C",
+        "achievement": "The ADR selects a minimal immutable provider-neutral typed AST and treats OpenMath/MathML as optional future adapters rather than adopting an unbounded interchange language as an internal engine."
+      },
+      {
+        "projectNode": "M2-W01-C01-T1",
+        "achievement": "The study contract completes with researched standards, a five-case guarded mapping, explicit scope and a reasoned bounded typed IR decision without claiming an implemented library."
+      },
+      {
+        "projectNode": "M2-W01-C01-T2-A",
+        "achievement": "Boundary questions require stable symbol binding, retained assumptions, exact/approximate distinction, explicit complex/NaN/interval policy and rejection of a second unqualified BigRational core."
+      },
+      {
+        "projectNode": "M2-W01-C01-T2-B",
+        "achievement": "Current ExactRational and DimensionVector semantics, source parser bounds and M1 release proof are reviewed; proposed IR limits are distinguished from implemented enforcement."
+      },
+      {
+        "projectNode": "M2-W01-C01-T2-C",
+        "achievement": "The architecture rejects implicit numeric widening, unsafe symbolic simplification and dynamic function registries; it chooses ExactRational reuse with explicit bindings, restrictions and deferred complex/interval semantics."
+      },
+      {
+        "projectNode": "M2-W01-C01-T2",
+        "achievement": "The IR boundary decision closes with validated immutable-scope/assumption policies, a prospective resource budget and read-only schema checks, without creating any empty project."
+      },
+      {
+        "projectNode": "M2-W01-C01",
+        "achievement": "The complete M2 IR architecture spike is qualified by a reasoned ADR, exact five-case OpenMath/MathML mapping ledger, and standalone read-only C# validator; the subsequent code chunk remains planned."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900
+  },
+  "mutationPaths": [
+    "docs/planning/decisions/m2-w01-c01.md",
+    "docs/planning/evidence/M2-W01-C01-mapping.json",
+    "docs/planning/ValidateM2IrDecision.cs",
+    "docs/planning/evidence/M2-W01-C01-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "ir-adr",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM2IrDecision.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
