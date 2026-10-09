@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "id": "RS032",
+  "title": "Qualify provider-neutral composition results and matrix capability contracts",
+  "commitMessage": "feat: add inspectable math composition result and capability contracts",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C01",
+    "M2-W02-C01-T1",
+    "M2-W02-C01-T1-R",
+    "M2-W02-C01-T1-G",
+    "M2-W02-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Activate M2-W02, introduce the independent versioned composition package, qualify exact/approximate/unsupported/budget result states, bound matrix inspection and provenance, and execute a controlled behavioral RED followed by seven GREEN tests and package/regression checks.",
+    "value": "Typed provider-neutral composition API consumers can inspect numeric shape and result completeness without executing providers, inventing results, widening exact values or mistaking capability discovery for authorization.",
+    "debtChanges": [
+      "M2-W02-C01-T2 remains planned: independent provider-visibility, authorization, no-result boundary and integration oracles must be qualified before C01 closure.",
+      "The new matrix capability describes admitted shape and precision only; it is not execution, AURA authority, scheduling or provider admission.",
+      "ComputationStatus labels supplied outcomes without an algorithm or provenance of actual execution; result factories validate type and presence but never calculate results.",
+      "New composition and test packages use locked NuGet dependencies and are packaged locally; no external publishing or repository modification is claimed."
+    ],
+    "nextAction": "Qualify M2-W02-C01-T2 with adversarial permission-independent discoverability, explicit absence of final results and public assembly surface tests; then close C01 only after T2 RED/GREEN and integration checks.",
+    "achievements": [
+      {
+        "projectNode": "M2-W02",
+        "achievement": "Operations-and-composition work package activated under M2 after qualified completion of M2-W01; remaining phases remain scoped for later runs."
+      },
+      {
+        "projectNode": "M2-W02-C01",
+        "achievement": "Inspectable-results chunk activated with an independently qualified first contract task, while integration task T2 remains planned."
+      },
+      {
+        "projectNode": "M2-W02-C01-T1-R",
+        "achievement": "A controlled RED observes failure when matrix inspection wrongly advertises scalar input, preserving a behavioral falsification test."
+      },
+      {
+        "projectNode": "M2-W02-C01-T1-G",
+        "achievement": "A standalone provider-neutral .NET composition package offers typed exact/approximate and missing-result statuses, matrix shape/capability inspection, and bounded versioned provenance."
+      },
+      {
+        "projectNode": "M2-W02-C01-T1-V",
+        "achievement": "Seven independent behavioral tests pass after RED, with full locked build, IR/foundation regressions, architecture check and qualified local NuGet package."
+      },
+      {
+        "projectNode": "M2-W02-C01-T1",
+        "achievement": "Result-and-capability contract completes without implying generic computation, provider admission, AURA permission or external adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/composition-results.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C01-contract-qualified.json",
+    "docs/planning/evidence/M2-W02-C01-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "dw.tools.math.slnx",
+    "src/projects/dw.tools.math.composition/OperationContracts.cs",
+    "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+    "src/projects/dw.tools.math.composition/packages.lock.json",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C01Tests.cs",
+    "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+    "tests/projects/dw.tools.math.composition.tests/packages.lock.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.composition/OperationContracts.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.composition/OperationContracts.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj"
+    },
+    {
+      "path": "src/projects/dw.tools.math.composition/packages.lock.json",
+      "sourcePath": "files/src/projects/dw.tools.math.composition/packages.lock.json"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/M2W02C01Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/M2W02C01Tests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/packages.lock.json",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/packages.lock.json"
+    },
+    {
+      "path": "dw.tools.math.slnx",
+      "sourcePath": "files/dw.tools.math.slnx"
+    },
+    {
+      "path": "docs/distribution/composition-results.md",
+      "sourcePath": "files/docs/distribution/composition-results.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS031/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.30"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/5/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/6/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/16/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "bounded-closed-ir-canonical-json-and-structural-hashes-qualified"
+    }
+  ]
+}
