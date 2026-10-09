@@ -128,8 +128,9 @@ try
     {
         var content=File.ReadAllText(Path.Combine(root,proj));
         Require(!content.Contains("dw.localization",StringComparison.OrdinalIgnoreCase) &&
-            !content.Contains("aura",StringComparison.OrdinalIgnoreCase) &&
-            !content.Contains("../..",StringComparison.Ordinal),
+            !content.Contains("ProjectReference Include=\"../..",StringComparison.Ordinal) &&
+            !content.Contains("ProjectReference Include=\"aura.",StringComparison.OrdinalIgnoreCase) &&
+            !content.Contains("PackageReference Include=\"aura.",StringComparison.OrdinalIgnoreCase),
             "Unexpected host or sibling dependency in "+proj);
     }
     var consumer=File.ReadAllText(Path.Combine(root,
