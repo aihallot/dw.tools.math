@@ -22,7 +22,7 @@ public sealed class M2W01C02BoundaryTests
     public void ExpandedDagCountsSharedNodesEachUse()
     {
         IrNode node = new IrExactScalar(ExactRational.One);
-        for (var i = 0; i < 8; i++) node = IrApply.Create(IrOperation.Add, [node, node]);
+        for (var i = 0; i < 9; i++) node = IrApply.Create(IrOperation.Add, [node, node]);
         IrGraphLimits.Validate(node);
         var atLimit = node;
         Assert.ThrowsExactly<ArgumentOutOfRangeException>(
