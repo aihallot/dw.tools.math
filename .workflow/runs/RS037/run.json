@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "RS037",
+  "title": "Qualify nonfinal replay status and bounded cache boundaries; complete M2 operations work package",
+  "state": "prepared",
+  "commitMessage": "feat: qualify nonfinal replay outcomes and close composition work package",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C03",
+    "M2-W02-C03-T2",
+    "M2-W02-C03-T2-R",
+    "M2-W02-C03-T2-G",
+    "M2-W02-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify explicit nonfinal replay outcome statuses, strict no-partial-final-result semantics, cache quota and invalid/cancelled-input nonadmission, version-separated identity and exact replay with a controlled missing-contract RED and thirteen independent GREEN tests; regress qualified composition/IR/foundation and local package contracts; close T2, C03 and M2-W02 without prematurely completing M2.",
+    "value": "Consumers can distinguish exact replay from unsupported, budget-exceeded and cancelled attempts without receiving fabricated final values, while completed cache entries remain bounded and isolated across version changes.",
+    "debtChanges": [
+      "The M2 milestone remains in progress pending a separate G-M2 gate and release evidence; its achievement is not claimed.",
+      "Nonfinal statuses represent no final value, not invented partial execution telemetry; the original throwing Run API remains supported.",
+      "Local cache remains optional/volatile FIFO of 1-32 completed results; no remote persistence, byte-level memory cap or guaranteed preemption.",
+      "Context labels are caller-supplied and do not prove provider availability, AURA authorization or cross-platform binary64 reproducibility."
+    ],
+    "nextAction": "After RS037 succeeds, separately qualify the M2 gate across all six completed chunks, release packaging/integration and nonclaims before any milestone closure or M3 activation.",
+    "achievements": [
+      {
+        "projectNode": "M2-W02-C03-T2-R",
+        "achievement": "Independent behavioral RED observes absence of a public explicit nonfinal replay outcome contract before the change."
+      },
+      {
+        "projectNode": "M2-W02-C03-T2-G",
+        "achievement": "A typed local replay facade preserves Exact, Unsupported, BudgetExceeded and Cancelled outcomes without fabricating partial final values or cache entries."
+      },
+      {
+        "projectNode": "M2-W02-C03-T2-V",
+        "achievement": "Thirteen adversarial boundary tests and previously qualified composition, IR, foundation, architecture and locked local NuGet checks verify cache quota, cancellation, identity separation and explicit incompleteness."
+      },
+      {
+        "projectNode": "M2-W02-C03-T2",
+        "achievement": "Replay and cache boundary/integration task is qualified, with explicit no-binary64-portability and no-provider-authority limits."
+      },
+      {
+        "projectNode": "M2-W02-C03",
+        "achievement": "Both replay contract T1 and nonfinal/quotas T2 meet the C03 closure criteria."
+      },
+      {
+        "projectNode": "M2-W02",
+        "achievement": "The three operations-and-composition phases C01, C02 and C03 have been independently qualified; work package closes without asserting the M2 release gate."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/exact-replay-cache.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C03-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C03-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryRedTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryTests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
