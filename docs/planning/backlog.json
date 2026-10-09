@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.32",
+  "plan_version": "0.1.33",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3001,7 +3001,7 @@
       "title": "Typed pipeline and direct/fluent API",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M2-W02-C01"
       ],
@@ -3026,40 +3026,67 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS034 T1 introduces the bounded exact linear quantity pipeline with single direct/fluent evaluator, full dimension pre-validation, immutable bounded step history, explicit UnitDefinition injection and 5 km / 2 min = exactly 150 km/h acceptance. Controlled RED, ten independent GREEN tests, IR/composition/foundation regressions and local NuGet packaging. T2 remains planned for deeper operational boundaries.",
+      "files": [
+        "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+        "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+        "tests/projects/dw.tools.math.composition.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02Tests.cs",
+        "docs/distribution/exact-quantity-pipeline.md",
+        "docs/planning/evidence/M2-W02-C02-contract-red.json",
+        "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C02",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet pack src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M2-W02-C02-contract-red.json",
+        "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+      ],
+      "readiness": "active T1 qualified; complete independent T2 boundaries before C02 closure",
       "tasks": [
         {
           "id": "M2-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
           "test_case": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W02-C02-contract-red.json",
+            "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W02-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-contract-red.json"
+              ]
             },
             {
               "id": "M2-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+              ]
             },
             {
               "id": "M2-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+              ]
             }
           ]
         },

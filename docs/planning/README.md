@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.32. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.33. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
