@@ -157,17 +157,25 @@ p.Json.EditObject("docs/planning/backlog.json",backlog=>
 });
 if(baseline)
 {
-    p.ProjectPlan.TransitionNode(Release,"not-ready","ready");
-    p.ProjectPlan.TransitionNode(WorkPackage,"not-ready","ready");
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
+    // RS026 completed M1 and left no active default hierarchy. The SDK's
+    // ActivateReadyContinuation requires an existing active ancestor prefix,
+    // so begin M2 with explicit canonical not-ready -> ready -> in-progress
+    // transitions. Every project-plan operation remains independently checked
+    // by the native planning contract; no workflow state is fabricated.
+    foreach(var id in new[]{Release,WorkPackage,Phase})
+    {
+        p.ProjectPlan.TransitionNode(id,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
+    }
     foreach(var id in new[]{T1,T2})
     {
         p.ProjectPlan.TransitionNode(id,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
         foreach(var part in new[]{"A","B","C"})
         {
             var sub=id+"-"+part;
             p.ProjectPlan.TransitionNode(sub,"not-ready","ready");
-            p.ProjectPlan.ActivateReadyContinuation(sub);
+            p.ProjectPlan.TransitionNode(sub,"ready","in-progress");
             p.ProjectPlan.ConvergeNodeToDone(sub);
         }
         p.ProjectPlan.ConvergeNodeToDone(id);
