@@ -208,8 +208,10 @@ p.Json.EditObject("docs/planning/backlog.json",plan=>
         "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M2W01C02BoundaryTests"})
         if(!c["commands"]!.AsArray().Any(x=>(string?)x==command))
             c["commands"]!.AsArray().Add((JsonNode?)JsonValue.Create(command));
-    c["evidence"]!.AsArray().Add((JsonNode?)JsonValue.Create(RedEvidence));
-    c["evidence"]!.AsArray().Add((JsonNode?)JsonValue.Create(GreenEvidence));
+    var evidenceEntries=c["evidence"]!.AsArray();
+    foreach(var evidencePath in new[]{RedEvidence,GreenEvidence})
+        if(!evidenceEntries.Any(x=>(string?)x==evidencePath))
+            evidenceEntries.Add((JsonNode?)JsonValue.Create(evidencePath));
     t["status"]="done";
     t["evidence"]=p.Json.StringArray(RedEvidence,GreenEvidence);
     foreach(var sub in t["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
