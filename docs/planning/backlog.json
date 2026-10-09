@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.35",
+  "plan_version": "0.1.36",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -300,13 +300,18 @@
       "id": "M2-W02",
       "release": "M2",
       "title": "Operations and composition",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.composition/",
         "tests/projects/dw.tools.math.composition.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M2-W02-C01-boundary-qualified.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+        "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
+      ]
     },
     {
       "id": "M3-W01",
@@ -3146,7 +3151,7 @@
       "title": "Bounded replay and semantic cache",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M2-W02-C02"
       ],
@@ -3171,16 +3176,20 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C03Tests"
       ],
-      "refinement": "RS036 T1 qualifies domain-separated deterministic SHA-256 exact replay identities for ordered typed quantity pipeline steps and explicit assumption, calculation, catalog, tolerance, provider version labels, plus an optional volatile FIFO cache of at most 32 successes. One controlled public-contract RED and 14 independent GREEN tests cover key separation, replay and cache behavior, with all local product regressions. T2 remains planned for deeper quota, partial replay and portability boundaries.",
+      "refinement": "RS036 T1 qualifies versioned deterministic exact replay identity and optional bounded FIFO cache. RS037 T2 adds explicit Exact/Unsupported/BudgetExceeded/Cancelled result statuses without a fabricated partial final value, cache quota/eviction, cancellation and invalid-input nonadmission, and independent RED/GREEN boundary tests. W02 is done; M2 is not asserted complete before its independent gate.",
       "files": [
         "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
         "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryRedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryTests.cs",
         "tests/projects/dw.tools.math.composition.tests/M2W02C03RedTests.cs",
         "tests/projects/dw.tools.math.composition.tests/M2W02C03Tests.cs",
         "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
         "docs/distribution/exact-replay-cache.md",
         "docs/planning/evidence/M2-W02-C03-contract-red.json",
-        "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C03-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C03-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
@@ -3191,9 +3200,11 @@
       ],
       "evidence": [
         "docs/planning/evidence/M2-W02-C03-contract-red.json",
-        "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C03-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C03-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
       ],
-      "readiness": "active T1 qualified; independently falsify T2 partial, quota and compatibility boundaries before phase closure",
+      "readiness": "closed: T1 and T2 qualified; M2 gate pending separate final review",
       "tasks": [
         {
           "id": "M2-W02-C03-T1",
@@ -3240,29 +3251,38 @@
           "title": "Boundaries and integration",
           "behavior": "Do not promise cross-platform bit-for-bit double reproducibility without qualification; retain cache quota and partial status.",
           "test_case": "Do not promise cross-platform bit-for-bit double reproducibility without qualification; retain cache quota and partial status.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W02-C03-boundary-red.json",
+            "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W02-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Do not promise cross-platform bit-for-bit double reproducibility without qualification; retain cache quota and partial status.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-boundary-red.json"
+              ]
             },
             {
               "id": "M2-W02-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Do not promise cross-platform bit-for-bit double reproducibility without qualification; retain cache quota and partial status.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
+              ]
             },
             {
               "id": "M2-W02-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W02-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
+              ]
             }
           ]
         }

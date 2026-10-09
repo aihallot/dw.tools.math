@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "M2-W02-C03-boundary-qualified",
+  "status": "explicit-nonfinal-exact-replay-cache-quota-and-portability-boundaries-qualified",
+  "prior_contract_evidence": "docs/planning/evidence/M2-W02-C03-contract-qualified.json",
+  "controlled_red_evidence": "docs/planning/evidence/M2-W02-C03-boundary-red.json",
+  "source": "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
+  "source_sha256": "411bcbbdef3c7d0d27880979334fb9881f39400de19cbbac7dbc04daa9291bc5",
+  "red_test": "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryRedTests.cs",
+  "red_test_sha256": "de199b2d164533207b28e1439cdecc34419497e6140eb0c5eee02e83a1d1227f",
+  "boundary_tests": "tests/projects/dw.tools.math.composition.tests/M2W02C03BoundaryTests.cs",
+  "boundary_tests_sha256": "a3f84a04268fff019eacdecb0c90fb18b7d946e570cc40d84ee6271d6ed67b72",
+  "replay_scheme": "exact-quantity-replay/1-sha256",
+  "independent_boundary_green_tests_passed": 13,
+  "prior_replay_green_tests_passed": 14,
+  "controlled_red_then_green": true,
+  "locked_solution_build_passed": true,
+  "composition_and_ir_regressions_passed": true,
+  "foundation_chain_passed": true,
+  "transfer_architecture_passed": true,
+  "local_package_qualified": true,
+  "cache_maximum_entries": 32,
+  "pipeline_maximum_steps": 16,
+  "package_id": "dw.tools.math.composition",
+  "package_version": "0.3.0-preview.1",
+  "package_dependencies": [
+    "dw.quantities",
+    "dw.tools.math.ir"
+  ],
+  "admission_contracts": [
+    "Exact replay attempt status is explicit: Exact, Unsupported, BudgetExceeded or Cancelled.",
+    "Only Exact contains one completed result receipt; rejected or cancelled work has no partial final numerical value.",
+    "Optional cache stores completed exact results only, with caller-owned volatile FIFO quota of at most 32 entries.",
+    "Cancellation, invalid dimensions, zero divisors, excessive steps, numerals and exponent overflow retain bounded failure reasons and no cached result.",
+    "Provider/catalog version changes invalidate exact cache identity independently of their values.",
+    "No binary64 cross-platform reproducibility or provider authorization is inferred."
+  ],
+  "nonclaims": [
+    "The caller owns semantic context version correctness; a hash is not an algebraic equivalence proof.",
+    "No binary64 bit-for-bit portability claim, provider execution, AURA permission or external adoption.",
+    "Cancellation remains cooperative, without forced preemption of blocking iterators or arithmetic.",
+    "Milestone M2 remains in progress pending its independent gate qualification."
+  ]
+}

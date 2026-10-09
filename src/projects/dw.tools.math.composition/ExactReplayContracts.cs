@@ -170,6 +170,36 @@ public sealed record ExactReplayReceipt
     public bool CacheHit { get; }
 }
 
+/// <summary>Public non-final replay status, never a partial final result.</summary>
+public enum ExactReplayStatus { Exact, Unsupported, BudgetExceeded, Cancelled }
+
+/// <summary>Typed local replay attempt, not a provider execution receipt.</summary>
+public sealed record ExactReplayAttempt
+{
+    private ExactReplayAttempt(ExactReplayStatus status, ExactReplayReceipt? receipt, string? reason)
+    {
+        Status = status;
+        Receipt = receipt;
+        Reason = reason;
+    }
+
+    public ExactReplayStatus Status { get; }
+    public ExactReplayReceipt? Receipt { get; }
+    public string? Reason { get; }
+    public bool HasFinalValue => Status == ExactReplayStatus.Exact && Receipt is not null;
+
+    internal static ExactReplayAttempt Completed(ExactReplayReceipt receipt) =>
+        new(ExactReplayStatus.Exact, receipt, null);
+
+    internal static ExactReplayAttempt Incomplete(ExactReplayStatus status, string reason)
+    {
+        if (status == ExactReplayStatus.Exact)
+            throw new ArgumentException("Incomplete result cannot be Exact.", nameof(status));
+        ArgumentException.ThrowIfNullOrWhiteSpace(reason);
+        return new(status, null, reason.Length > 256 ? reason[..256] : reason);
+    }
+}
+
 public static class ExactReplayRunner
 {
     /// <summary>Identical requests replay locally under identical context, with optional bounded cache.</summary>
@@ -192,5 +222,42 @@ public static class ExactReplayRunner
         cancellationToken.ThrowIfCancellationRequested();
         cache?.Store(key, computed);
         return new ExactReplayReceipt(key, computed, cacheHit: false);
+    }
+
+    /// <summary>
+    /// Maps admitted local failures to explicit non-final statuses; neither
+    /// an incomplete receipt nor a synthetic partial value enters the cache.
+    /// </summary>
+    public static ExactReplayAttempt TryRun(IEnumerable<ExactPipelineStep> steps,
+        ExactReplayContext context, ExactReplayCache? cache = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(steps);
+        ArgumentNullException.ThrowIfNull(context);
+        try
+        {
+            return ExactReplayAttempt.Completed(Run(steps, context, cache, cancellationToken));
+        }
+        catch (OperationCanceledException)
+        {
+            return ExactReplayAttempt.Incomplete(ExactReplayStatus.Cancelled,
+                "Replay was cooperatively cancelled.");
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            return ExactReplayAttempt.Incomplete(ExactReplayStatus.BudgetExceeded,
+                "Replay exceeded an admitted numeric or input bound.");
+        }
+        catch (OverflowException)
+        {
+            return ExactReplayAttempt.Incomplete(ExactReplayStatus.BudgetExceeded,
+                "Replay exceeded a dimensional integer bound.");
+        }
+        catch (Exception e) when (e is ArgumentException or InvalidOperationException
+            or DivideByZeroException or NotSupportedException)
+        {
+            return ExactReplayAttempt.Incomplete(ExactReplayStatus.Unsupported,
+                "Replay request violates the admitted exact local pipeline contract.");
+        }
     }
 }

@@ -1,21 +1,21 @@
-# Exact replay identity and bounded local cache — M2-W02-C03-T1
+# Exact replay identity and bounded local cache — M2-W02-C03
 
-The `dw.tools.math.composition` library builds an explicit deterministic identity for bounded exact local quantity pipelines. This contract does not create a provider, grant AURA permission, deploy an external cache, or promise numerical cross-platform floating-point reproducibility.
+`dw.tools.math.composition` provides exact local computation replay with caller-supplied semantic identity. This is not a provider implementation, an AURA permission system, or a cross-platform floating-point reproducibility guarantee.
 
-## Versioned key and replay
+## T1 — reproducible replay and optional in-memory cache
 
-`ExactReplayRunner.Run(steps, context, optionalCache, cancellationToken)` accepts only the previously qualified bounded `ExactPipelineStep` vocabulary. The versioned `exact-quantity-replay/1-sha256` key hashes a domain-separated, length-framed binary description of the exact sequence, step kinds, canonical rational values, unit identity, scales and dimensions, and five explicitly supplied context labels: assumptions, calculation policy, catalog, tolerance policy, and provider version.
+`ExactReplayRunner.Run` hashes length-framed exact step kinds, canonical rationals, unit ids/scales/dimensions, and explicit assumption, policy, catalog, tolerance and provider labels under `exact-quantity-replay/1-sha256`. The caller is responsible for supplying meaningful, current versions; changing any version or the exact input changes the key. Unknown provider labels are opaque text, never evidence of installation or authorization.
 
-Changing any one of these changes the identity. The provider version is an *opaque identity value*, not proof that the provider is installed, trusted, authorized, or used. The context is supplied by the caller, so equality promises apply only when callers accurately identify their own external policy changes. Unit presentation labels are not semantic input; unit ids/scales/dimensions are.
+`ExactReplayCache` is optional, caller-owned, volatile, first-in-first-out, and limited to 1–32 successfully computed results. A cache hit reuses the exact result, not a remote computation. Without a cache the pipeline evaluates again.
 
-A matching replay recomputes the same exact arithmetic through the already qualified `ExactQuantityPipeline`. For 5 km / 2 minutes, the result is always 125/3 m/s or exactly 150 km/h under the fixed unit and policy contract.
+## T2 — nonfinal outcomes, cache integrity and bounds
 
-## Optional cache
+`ExactReplayRunner.TryRun` is an optional typed facade over the *same* `Run` path. Its outcome status is one of `Exact`, `Unsupported`, `BudgetExceeded`, or `Cancelled`. `Exact` carries exactly one completed receipt; all other outcomes contain a short reason and **no** receipt, no final numerical value, no fictitious partial computation. Unsupported dimension/step requests, resource bound excess, and cooperative cancellation are explicitly distinguishable. The existing `Run` API retains its exception behavior.
 
-`ExactReplayCache` is a caller-owned, volatile, in-process, deterministic insertion-order cache. Capacity is bounded from 1 to 32 entries (default 16); it stores only successfully completed exact results and has an explicit `Clear()`. `CacheHit` is an observation about local reuse, not execution provenance. Without a cache, every call evaluates again. Invalid input and cancellation do not write entries, and cancellation is checked before returning a hit.
+Cancelled or rejected attempts are never inserted into the cache, cannot replace a valid result, and are never promoted to success merely because some intermediate work occurred. The 32-entry quota applies to successful completed entries; eviction is insertion-order FIFO. A caller-owned cache's memory usage is not a fixed byte quota and scheduling cannot forcibly interrupt arbitrary blocking enumerators or uninterruptible arbitrary-precision math.
 
-## Qualification and remaining work
+A controlled RED checks for the previously missing public nonfinal-status facade. Thirteen independent GREEN boundary tests exercise completed versus absent final values, unsuitable dimensions, zero divisor, exact-number and step limits, exponent overflow, cancellation, eviction at 32 entries, failed-attempt cache integrity, version changes, and absence of external authorization. T1 contract tests, composition/IR/foundation regressions, locked build, architecture verification and NuGet manifest checks remain mandatory.
 
-RS036 records one controlled RED for the missing exact replay identity public contract and executes 14 independent GREEN tests: identical exact replay, identity invalidation by input, assumptions, policy, catalog, tolerance and provider label, changed step order/unit scaling, optional cache hit/no-cache parity, FIFO eviction, invalid results not cached, cancellation, context and step quotas, oversized numerals, and provider independence. Existing composition, IR, foundation, architecture and local NuGet package regressions must also pass.
+## Qualification limits
 
-Only `M2-W02-C03-T1` may close. `T2` remains planned for rigorous partial-result and cache-quota boundaries, collisions, context normalization policies, cross-platform binary64 nonclaims and integration. No disk persistence, remote cache, execution authority, external adoption or floating-point bitwise portability is delivered.
+Only the exact rational and zero-offset linear pipeline is replayable. No bitwise binary64 portability is promised; approximate outcomes are not cached as exact values. No remote/disk cache, provider invocation, AURA authority, distributed scheduler or external adoption is claimed. A successful RS037 closes `M2-W02-C03` and `M2-W02`, **not** milestone M2; the M2 gate and evidence must be qualified independently.
