@@ -125,7 +125,9 @@ public sealed record IrApply : IrNode
             : operation is IrOperation.Min or IrOperation.Max or IrOperation.Add or IrOperation.Multiply ? -2 : 2;
         if (arity == -2 ? nodes.Length < 2 || nodes.Length > 32 : nodes.Length != arity)
             throw new ArgumentException("IR operation has an unsupported arity.", nameof(arguments));
-        return new(operation, nodes);
+        var expression = new IrApply(operation, nodes);
+        IrGraphLimits.Validate(expression);
+        return expression;
     }
 }
 
@@ -158,11 +160,17 @@ public sealed record IrAssumptionSet
         var items = conditions.Take(33).ToImmutableArray();
         if (items.Length > 32 || items.Any(x => x is null))
             throw new ArgumentException("IR assumptions must be non-null and have at most 32 entries.", nameof(conditions));
+        var unique = new HashSet<(string, IrScalarDomain, IrRelationKind, ExactRational)>();
+        foreach (var condition in items)
+            if (!unique.Add((condition.Symbol.Identity, condition.Symbol.Domain,
+                condition.Kind, condition.Right.Value)))
+                throw new ArgumentException("Duplicate IR assumptions are not admitted.", nameof(conditions));
         return new(items);
     }
 
     public bool DeclaresNonNegative(IrSymbol symbol) =>
         Conditions.Any(x => x.Symbol.Identity == symbol.Identity &&
+            x.Symbol.Domain == symbol.Domain &&
             x.Kind == IrRelationKind.GreaterOrEqual &&
             x.Right.Value == ExactRational.Zero);
 }
@@ -175,6 +183,7 @@ public sealed record IrRestrictedExpression : IrNode
         ArgumentNullException.ThrowIfNull(assumptions);
         Expression = expression;
         Assumptions = assumptions;
+        IrGraphLimits.Validate(this);
     }
     public IrNode Expression { get; }
     public IrAssumptionSet Assumptions { get; }
