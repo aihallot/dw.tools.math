@@ -139,37 +139,37 @@ try
 {
     var project=Path.Combine(consumer,"M2GateConsumer.csproj");
     File.WriteAllText(project,"""
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="dw.tools.math.composition" Version="0.3.0-preview.1" />
-  </ItemGroup>
-</Project>
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="dw.tools.math.composition" Version="0.3.0-preview.1" />
+      </ItemGroup>
+    </Project>
 """);
     File.WriteAllText(Path.Combine(consumer,"Program.cs"),"""
-using dw.quantities;
-using Dw.Tools.Math.Ir;
-using Dw.Tools.Math.Composition;
-var fraction = new ExactRational(1,3);
-var coded = IrCanonicalJsonCodec.Encode(new IrExactScalar(fraction));
-if (((IrExactScalar)IrCanonicalJsonCodec.Decode(coded)).Value != fraction)
-    throw new Exception("Independent IR/quantities NuGet roundtrip failed");
-var m = new UnitDefinition("m","m","metre",UnitSystem.Si,
-    DimensionVector.LengthDimension, ExactRational.One, ExactRational.Zero, UnitTransformKind.Linear);
-var steps = new[] { ExactPipelineStep.Start(new ExactRational(5,1),m) };
-var context = ExactReplayContext.Create("a/1","p/1","c/1","exact","none/1");
-var cache = new ExactReplayCache(2);
-var first = ExactReplayRunner.TryRun(steps,context,cache);
-var second = ExactReplayRunner.TryRun(steps,context,cache);
-if (!first.HasFinalValue || first.Receipt!.Result.DisplayValue != new ExactRational(5,1) ||
-    !second.Receipt!.CacheHit)
-    throw new Exception("Independent composition/replay NuGet consumer failed");
-Console.WriteLine("dw.tools.math/m2-gate-consumer/0.3 qualified");
+    using dw.quantities;
+    using Dw.Tools.Math.Ir;
+    using Dw.Tools.Math.Composition;
+    var fraction = new ExactRational(1,3);
+    var coded = IrCanonicalJsonCodec.Encode(new IrExactScalar(fraction));
+    if (((IrExactScalar)IrCanonicalJsonCodec.Decode(coded)).Value != fraction)
+        throw new Exception("Independent IR/quantities NuGet roundtrip failed");
+    var m = new UnitDefinition("m","m","metre",UnitSystem.Si,
+        DimensionVector.LengthDimension, ExactRational.One, ExactRational.Zero, UnitTransformKind.Linear);
+    var steps = new[] { ExactPipelineStep.Start(new ExactRational(5,1),m) };
+    var context = ExactReplayContext.Create("a/1","p/1","c/1","exact","none/1");
+    var cache = new ExactReplayCache(2);
+    var first = ExactReplayRunner.TryRun(steps,context,cache);
+    var second = ExactReplayRunner.TryRun(steps,context,cache);
+    if (!first.HasFinalValue || first.Receipt!.Result.DisplayValue != new ExactRational(5,1) ||
+        !second.Receipt!.CacheHit)
+        throw new Exception("Independent composition/replay NuGet consumer failed");
+    Console.WriteLine("dw.tools.math/m2-gate-consumer/0.3 qualified");
 """);
     Required(root,"dotnet","restore",project,"--source",feed);
     var output=Required(root,"dotnet","run","--project",project,"-c","Release","--no-restore");
