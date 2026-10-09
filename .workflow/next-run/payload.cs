@@ -50,6 +50,9 @@ var previous=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))!.AsObjec
 if((string?)previous["status"]!="versioned-exact-ir-json-codec-functional-qualified-boundary-hardening-pending" ||
    previous["independent_round_trip_oracles"]?.GetValue<int>()!=10)
     throw new InvalidOperationException("RS030 canonical codec GREEN evidence is not qualified.");
+if(baseline &&
+   Hash(File.ReadAllBytes(Path.Combine(root,Codec)))!=(string?)previous["source_sha256"])
+    throw new InvalidOperationException("RS030 qualified canonical codec source has drifted before independent RED.");
 var aura=JsonNode.Parse(File.ReadAllText(Path.Combine(root,
     "docs/coordination/requests/MATH-XR-002-aura-adoption.json")))!.AsObject();
 if((string?)aura["status"]!="draft" || (string?)aura["transmission"]!="none")
