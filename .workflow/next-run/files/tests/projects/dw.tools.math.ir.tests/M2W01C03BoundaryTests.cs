@@ -1,4 +1,3 @@
-using System.Text;
 using dw.quantities;
 using Dw.Tools.Math.Ir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
