@@ -6,19 +6,17 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Work="M2-W02", Phase="M2-W02-C02", Task="M2-W02-C02-T1";
-const string Red="M2-W02-C02-T1-R", Green="M2-W02-C02-T1-G", Verify="M2-W02-C02-T1-V";
+const string Work="M2-W02", Phase="M2-W02-C02", Task="M2-W02-C02-T2";
+const string Red="M2-W02-C02-T2-R", Green="M2-W02-C02-T2-G", Verify="M2-W02-C02-T2-V";
 const string Src="src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs";
 const string Proj="src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj";
 const string TestProj="tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj";
-const string TestLock="tests/projects/dw.tools.math.composition.tests/packages.lock.json";
-const string Test="tests/projects/dw.tools.math.composition.tests/M2W02C02Tests.cs";
-const string RedTest="tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs";
-const string Doc="docs/distribution/exact-quantity-pipeline.md";
-const string Solution="dw.tools.math.slnx";
-const string Prior="docs/planning/evidence/M2-W02-C01-boundary-qualified.json";
-const string RedProof="docs/planning/evidence/M2-W02-C02-contract-red.json";
-const string GreenProof="docs/planning/evidence/M2-W02-C02-contract-qualified.json";
+const string Test="tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs";
+const string RedTest="tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs";
+const string Doc="docs/distribution/exact-quantity-pipeline.md", Solution="dw.tools.math.slnx";
+const string Prior="docs/planning/evidence/M2-W02-C02-contract-qualified.json";
+const string RedProof="docs/planning/evidence/M2-W02-C02-boundary-red.json";
+const string GreenProof="docs/planning/evidence/M2-W02-C02-boundary-qualified.json";
 const string Version="0.3.0-preview.1";
 
 var p=PayloadContext.Create();
@@ -26,66 +24,64 @@ var root=p.RepositoryRoot;
 var backlog=JsonNode.Parse(File.ReadAllText(Path.Combine(root,"docs/planning/backlog.json")))!.AsObject();
 var work=backlog["work_packages"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Work);
 var phase=backlog["chunks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
-var t1=phase["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-var t2=phase["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M2-W02-C02-T2");
-string Sub(string id)=>(string?)t1["subtasks"]!.AsArray().Select(x=>x!.AsObject())
+var t1=phase["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]=="M2-W02-C02-T1");
+var t2=phase["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
+string Sub(string id)=>(string?)t2["subtasks"]!.AsArray().Select(x=>x!.AsObject())
     .Single(x=>(string?)x["id"]==id)["status"] ?? throw new InvalidOperationException("Missing "+id);
-var baseline=(string?)backlog["plan_version"]=="0.1.32" &&
-    (string?)work["status"]=="in_progress" && (string?)phase["status"]=="planned" &&
-    (string?)t1["status"]=="planned" && (string?)t2["status"]=="planned" &&
-    new[]{Red,Green,Verify}.All(x=>Sub(x)=="planned");
-var target=(string?)backlog["plan_version"]=="0.1.33" &&
+var baseline=(string?)backlog["plan_version"]=="0.1.33" &&
     (string?)work["status"]=="in_progress" && (string?)phase["status"]=="in_progress" &&
     (string?)t1["status"]=="done" && (string?)t2["status"]=="planned" &&
+    new[]{Red,Green,Verify}.All(x=>Sub(x)=="planned");
+var target=(string?)backlog["plan_version"]=="0.1.34" &&
+    (string?)work["status"]=="in_progress" && (string?)phase["status"]=="done" &&
+    (string?)t1["status"]=="done" && (string?)t2["status"]=="done" &&
     new[]{Red,Green,Verify}.All(x=>Sub(x)=="done");
 if(!baseline && !target)
-    throw new InvalidOperationException("RS034 expects 0.1.32 untouched C02 or 0.1.33 qualified T1.");
+    throw new InvalidOperationException("RS035 requires 0.1.33 C02 T2 baseline or 0.1.34 C02 done target.");
 
 var prior=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))!.AsObject();
-if((string?)prior["status"]!="provider-independent-discovery-no-permission-no-final-value-qualified" ||
-    prior["independent_boundary_tests_passed"]?.GetValue<int>()!=8)
-    throw new InvalidOperationException("RS033 qualified composition boundary proof absent.");
+if((string?)prior["status"]!="bounded-exact-direct-fluent-quantity-pipeline-qualified" ||
+    prior["independent_green_tests_passed"]?.GetValue<int>()!=10)
+    throw new InvalidOperationException("RS034 exact pipeline qualification missing.");
 var adoption=JsonNode.Parse(File.ReadAllText(Path.Combine(root,
     "docs/coordination/requests/MATH-XR-002-aura-adoption.json")))!.AsObject();
 if((string?)adoption["status"]!="draft" || (string?)adoption["transmission"]!="none")
-    throw new InvalidOperationException("RS034 cannot infer or transmit AURA adoption.");
+    throw new InvalidOperationException("RS035 does not grant or transmit AURA adoption.");
 
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
 p.ProjectPlan.RequireNodeState("M2-W02-C01","done");
-p.ProjectPlan.RequireNodeState(Phase,baseline?"not-ready":"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,baseline?"in-progress":"done");
+p.ProjectPlan.RequireNodeState("M2-W02-C02-T1","done");
 p.ProjectPlan.RequireNodeState("M2-W02-C03","not-ready");
-p.ProjectPlan.RequireNodeState("M2-W02-C02-T2","not-ready");
 
-foreach(var file in new[]{Proj,TestLock,RedTest})
-    p.Files.ReplaceFromStaged("staged/"+file,file);
-
+p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 if(baseline)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
     var red=Run(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M2W02C02RedTests.ExactQuantityPipelineMustExposeOneSharedDirectAndFluentEvaluator",
+        "--filter","FullyQualifiedName~M2W02C02BoundaryRedTests.Positive257DigitNumeratorMustBeRefusedBeforeEvaluation",
         "--logger","console;verbosity=normal");
     if(red.Code==0 || !red.Output.Contains(
-        "M2-W02-C02-T1 RED: public exact quantity pipeline direct/fluent contract is absent.",
+        "M2-W02-C02-T2 RED: 257-digit positive numerator wrongly passed the 256-digit bound.",
         StringComparison.Ordinal))
-        throw new InvalidOperationException("Controlled direct/fluent semantic RED absent: "+Relevant(red.Output));
+        throw new InvalidOperationException("Controlled numeral bound RED not observed: "+Relevant(red.Output));
     var redEvidence=new JsonObject
     {
-        ["schema_version"]=1, ["id"]="M2-W02-C02-contract-red",
-        ["status"]="controlled-shared-direct-fluent-pipeline-red-observed",
-        ["prior_composition_evidence"]=Prior,
-        ["oracle"]="A single public exact quantity pipeline supports both direct and fluent evaluation.",
-        ["red_setup"]="The independent compiled RED test checks for the absent shared public pipeline API before source installation.",
-        ["qualification_limit"]="Missing-contract RED does not prove arithmetic or dimensional safety."
+        ["schema_version"]=1, ["id"]="M2-W02-C02-boundary-red",
+        ["status"]="controlled-positive-257-digit-numeral-budget-red-observed",
+        ["prior_contract_evidence"]=Prior,
+        ["oracle"]="Exact numerator magnitude of 257 decimal digits must be rejected at the advertised 256-digit boundary.",
+        ["red_setup"]="An independent compiled test exercised the existing pipeline before applying the corrected magnitude bound.",
+        ["qualification_limit"]="The targeted RED alone does not qualify cancellation or provenance."
     };
     p.Files.WriteComplete(RedProof,redEvidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 else
 {
     var redEvidence=JsonNode.Parse(File.ReadAllText(Path.Combine(root,RedProof)))!.AsObject();
-    if((string?)redEvidence["status"]!="controlled-shared-direct-fluent-pipeline-red-observed")
-        throw new InvalidOperationException("Target re-entry needs controlled RED proof.");
+    if((string?)redEvidence["status"]!="controlled-positive-257-digit-numeral-budget-red-observed")
+        throw new InvalidOperationException("Target re-entry lacks controlled RED evidence.");
 }
 
 foreach(var file in new[]{Src,Test,Doc})
@@ -93,7 +89,7 @@ foreach(var file in new[]{Src,Test,Doc})
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 Required(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
-    "--filter","FullyQualifiedName~M2W02C02","--logger","console;verbosity=normal");
+    "--filter","FullyQualifiedName~M2W02C02Boundary","--logger","console;verbosity=normal");
 Required(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
     "--logger","console;verbosity=minimal");
 Required(root,"dotnet","test","tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
@@ -108,61 +104,69 @@ if(!File.Exists(nupkg))throw new InvalidOperationException("Composition package 
 using(var zip=ZipFile.OpenRead(nupkg))
 {
     if(zip.GetEntry("lib/net10.0/dw.tools.math.composition.dll") is null)
-        throw new InvalidOperationException("Composition DLL absent from NuGet package.");
+        throw new InvalidOperationException("Composition DLL absent.");
     var manifests=zip.Entries.Where(x=>x.FullName.EndsWith(".nuspec",StringComparison.OrdinalIgnoreCase)).ToArray();
     if(manifests.Length!=1)throw new InvalidOperationException("Unexpected NuGet manifest count.");
     using var stream=manifests[0].Open();
     var xml=XDocument.Load(stream);
     var meta=xml.Descendants().Single(x=>x.Name.LocalName=="metadata");
     var id=meta.Elements().Single(x=>x.Name.LocalName=="id").Value;
-    var version=meta.Elements().Single(x=>x.Name.LocalName=="version").Value;
+    var ver=meta.Elements().Single(x=>x.Name.LocalName=="version").Value;
     var deps=meta.Descendants().Where(x=>x.Name.LocalName=="dependency")
         .Select(x=>(string?)x.Attribute("id")??"")
         .OrderBy(x=>x,StringComparer.OrdinalIgnoreCase).ToArray();
-    if(id!="dw.tools.math.composition" || version!=Version ||
+    if(id!="dw.tools.math.composition" || ver!=Version ||
         !deps.SequenceEqual(new[]{"dw.quantities","dw.tools.math.ir"},StringComparer.OrdinalIgnoreCase))
-        throw new InvalidOperationException("Unexpected NuGet dependency graph.");
+        throw new InvalidOperationException("Composition package dependency graph changed.");
 }
 var proof=new JsonObject
 {
-    ["schema_version"]=1, ["id"]="M2-W02-C02-contract-qualified",
-    ["status"]="bounded-exact-direct-fluent-quantity-pipeline-qualified",
-    ["prior_composition_evidence"]=Prior, ["controlled_red_evidence"]=RedProof,
+    ["schema_version"]=1, ["id"]="M2-W02-C02-boundary-qualified",
+    ["status"]="bounded-cancellable-step-provenance-exact-pipeline-qualified",
+    ["prior_contract_evidence"]=Prior, ["controlled_red_evidence"]=RedProof,
     ["source"]=Src, ["source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Src))),
-    ["red_test"]=RedTest, ["red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,RedTest))),
-    ["tests"]=Test, ["tests_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Test))),
+    ["boundary_red_test"]=RedTest,["boundary_red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,RedTest))),
+    ["boundary_tests"]=Test,["boundary_tests_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Test))),
     ["contract_version"]="exact-quantity-pipeline/1",
-    ["independent_green_tests_passed"]=10, ["controlled_red_then_green"]=true,
-    ["direct_fluent_equivalence_qualified"]=true,
-    ["example"]="5 km / 2 min = 150 km/h exactly; base unit result 125/3 m/s",
-    ["locked_solution_build_passed"]=true,["prior_composition_and_ir_regressions_passed"]=true,
-    ["foundation_chain_passed"]=true, ["transfer_architecture_passed"]=true,
-    ["local_package_structure_qualified"]=true,
+    ["controlled_semantic_red_then_green"]=true, ["independent_boundary_green_tests_passed"]=10,
+    ["prior_pipeline_tests_passed"]=10, ["locked_solution_build_passed"]=true,
+    ["composition_and_ir_regressions_passed"]=true, ["foundation_chain_passed"]=true,
+    ["transfer_architecture_passed"]=true, ["local_package_qualified"]=true,
+    ["admission_limits"]=new JsonObject { ["maximum_steps"]=16, ["maximum_numeral_magnitude_digits"]=256 },
     ["package_id"]="dw.tools.math.composition", ["package_version"]=Version,
     ["package_dependencies"]=p.Json.StringArray("dw.quantities","dw.tools.math.ir"),
-    ["admission_limits"]=new JsonObject { ["maximum_steps"]=16, ["maximum_exact_numeral_digits"]=256 },
+    ["contracts"]=p.Json.StringArray(
+        "Direct and fluent cancellation-token overloads share the validated evaluator; cancellation throws without returning a partial result.",
+        "Finite immutable per-step snapshots retain index, kind, exact base quantity, dimensions and optional unit id.",
+        "Input, scale, intermediate and presentation rational magnitudes refuse 257-digit numerator or denominator.",
+        "No provider admission, AURA host permission, external execution or distributed scheduler is involved."),
     ["nonclaims"]=p.Json.StringArray(
-        "M2-W02-C02-T2 remains planned for deeper cancellation, resource and step-provenance boundaries.",
-        "No symbolic solver, expression parser, distributed scheduler, provider execution, AURA permission or adoption.",
-        "Only explicit linear, zero-offset unit definitions are admitted; absolute affine temperatures are refused.")
+        "Cancellation is cooperative; arbitrary blocking iterators and uninterrupted arithmetic cannot be forcibly preempted.",
+        "Provenance snapshots describe only local numerical state, not external provider telemetry or authorization.",
+        "M2-W02-C03 remains planned; no symbolic solver, provider dispatch or AURA adoption.")
 };
 p.Files.WriteComplete(GreenProof,proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 p.Json.EditObject("docs/planning/backlog.json",plan=>
 {
-    plan["plan_version"]="0.1.33";
+    plan["plan_version"]="0.1.34";
     var c=plan["chunks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
     var t=c["tasks"]!.AsArray().Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-    c["status"]="in_progress";
-    c["refinement"]="RS034 T1 introduces the bounded exact linear quantity pipeline with single direct/fluent evaluator, full dimension pre-validation, immutable bounded step history, explicit UnitDefinition injection and 5 km / 2 min = exactly 150 km/h acceptance. Controlled RED, ten independent GREEN tests, IR/composition/foundation regressions and local NuGet packaging. T2 remains planned for deeper operational boundaries.";
-    c["readiness"]="active T1 qualified; complete independent T2 boundaries before C02 closure";
-    c["files"]=p.Json.StringArray(Src,Proj,TestLock,RedTest,Test,Doc,RedProof,GreenProof);
+    c["status"]="done";
+    c["refinement"]="RS034 T1 qualifies the immutable direct/fluent exact rational quantity pipeline with unit/dimension prevalidation and 150 km/h acceptance. RS035 T2 adds cooperative cancellation, exact per-stage bounded immutable numerical provenance, correct magnitude bounds for positive 257-digit numerals, and independent RED/GREEN integration tests. Neither AURA authority nor external execution is inferred.";
+    c["readiness"]="closed: both T1 contract and T2 boundary/integration qualified; M2-W02-C03 remains planned";
+    c["files"]=p.Json.StringArray(Src,Proj,RedTest,Test,
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02Tests.cs",
+        TestProj,Doc,
+        "docs/planning/evidence/M2-W02-C02-contract-red.json",Prior,RedProof,GreenProof);
     c["commands"]=p.Json.StringArray(
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
         "dotnet test "+TestProj+" -c Release --filter FullyQualifiedName~M2W02C02",
         "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet pack "+Proj+" -c Release");
-    c["evidence"]=p.Json.StringArray(RedProof,GreenProof);
+    c["evidence"]=p.Json.StringArray("docs/planning/evidence/M2-W02-C02-contract-red.json",
+        Prior,RedProof,GreenProof);
     t["status"]="done";
     t["evidence"]=p.Json.StringArray(RedProof,GreenProof);
     foreach(var s in t["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -173,11 +177,8 @@ p.Json.EditObject("docs/planning/backlog.json",plan=>
 });
 if(baseline)
 {
-    foreach(var node in new[]{Phase,Task})
-    {
-        p.ProjectPlan.TransitionNode(node,"not-ready","ready");
-        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
-    }
+    p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Task,"ready","in-progress");
     foreach(var node in new[]{Red,Green,Verify})
     {
         p.ProjectPlan.TransitionNode(node,"not-ready","ready");
@@ -185,11 +186,11 @@ if(baseline)
         p.ProjectPlan.ConvergeNodeToDone(node);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
 else
 {
-    p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-    foreach(var node in new[]{Red,Green,Verify,Task})
+    foreach(var node in new[]{Red,Green,Verify,Task,Phase})
         p.ProjectPlan.RequireNodeState(node,"done");
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
