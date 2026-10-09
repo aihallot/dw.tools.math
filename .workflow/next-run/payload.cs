@@ -13,6 +13,7 @@ const string Proj="src/projects/dw.tools.math.composition/dw.tools.math.composit
 const string TestProj="tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj";
 const string Test="tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs";
 const string RedTest="tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs";
+const string LegacyRedTest="tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs";
 const string Doc="docs/distribution/exact-quantity-pipeline.md", Solution="dw.tools.math.slnx";
 const string Prior="docs/planning/evidence/M2-W02-C02-contract-qualified.json";
 const string RedProof="docs/planning/evidence/M2-W02-C02-boundary-red.json";
@@ -55,6 +56,7 @@ p.ProjectPlan.RequireNodeState("M2-W02-C02-T1","done");
 p.ProjectPlan.RequireNodeState("M2-W02-C03","not-ready");
 
 p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+p.Files.ReplaceFromStaged("staged/"+LegacyRedTest,LegacyRedTest);
 if(baseline)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
@@ -126,6 +128,8 @@ var proof=new JsonObject
     ["prior_contract_evidence"]=Prior, ["controlled_red_evidence"]=RedProof,
     ["source"]=Src, ["source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Src))),
     ["boundary_red_test"]=RedTest,["boundary_red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,RedTest))),
+    ["previous_t1_red_test_compatibility_fix"]=LegacyRedTest,
+    ["previous_t1_red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,LegacyRedTest))),
     ["boundary_tests"]=Test,["boundary_tests_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Test))),
     ["contract_version"]="exact-quantity-pipeline/1",
     ["controlled_semantic_red_then_green"]=true, ["independent_boundary_green_tests_passed"]=10,
@@ -136,6 +140,7 @@ var proof=new JsonObject
     ["package_id"]="dw.tools.math.composition", ["package_version"]=Version,
     ["package_dependencies"]=p.Json.StringArray("dw.quantities","dw.tools.math.ir"),
     ["contracts"]=p.Json.StringArray(
+        "Previously qualified reflection tests select exact direct/fluent method signatures to remain valid with cancellation overloads.",
         "Direct and fluent cancellation-token overloads share the validated evaluator; cancellation throws without returning a partial result.",
         "Finite immutable per-step snapshots retain index, kind, exact base quantity, dimensions and optional unit id.",
         "Input, scale, intermediate and presentation rational magnitudes refuse 257-digit numerator or denominator.",
@@ -155,7 +160,7 @@ p.Json.EditObject("docs/planning/backlog.json",plan=>
     c["refinement"]="RS034 T1 qualifies the immutable direct/fluent exact rational quantity pipeline with unit/dimension prevalidation and 150 km/h acceptance. RS035 T2 adds cooperative cancellation, exact per-stage bounded immutable numerical provenance, correct magnitude bounds for positive 257-digit numerals, and independent RED/GREEN integration tests. Neither AURA authority nor external execution is inferred.";
     c["readiness"]="closed: both T1 contract and T2 boundary/integration qualified; M2-W02-C03 remains planned";
     c["files"]=p.Json.StringArray(Src,Proj,RedTest,Test,
-        "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+        LegacyRedTest,
         "tests/projects/dw.tools.math.composition.tests/M2W02C02Tests.cs",
         TestProj,Doc,
         "docs/planning/evidence/M2-W02-C02-contract-red.json",Prior,RedProof,GreenProof);
