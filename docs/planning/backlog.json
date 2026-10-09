@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.29",
+  "plan_version": "0.1.30",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -283,13 +283,18 @@
       "id": "M2-W01",
       "release": "M2",
       "title": "Mathematical model",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.ir/",
         "tests/projects/dw.tools.math.ir.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M2-W01-C01-qualified.json",
+        "docs/planning/evidence/M2-W01-C02-boundary-qualified.json",
+        "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
+      ]
     },
     {
       "id": "M2-W02",
@@ -2701,7 +2706,7 @@
       "title": "Canonical IR codec and validation",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M2-W01-C02"
       ],
@@ -2726,25 +2731,35 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03Tests"
       ],
-      "refinement": "RS030 independently observes two missing-public-codec REDs and qualifies math-ir/1 canonical structural JSON encoding and decoding for huge exact rationals, finite binary64 bits, quantities, typed symbols, matrices, operations and restrictions. Ten direct round-trip oracles and full IR/quantity/foundation regressions pass. T2 owns adversarial malformed-input and hash semantics.",
+      "refinement": "RS030 qualifies math-ir/1 lossless deterministic IR transport from RED through 10 round-trip oracles. RS031 observes three public-boundary REDs and hardens the decoder against closed-schema/duplicate keys, unrelated restriction identities, invalid literals and adversarial sizes; it adds separate versioned structural/presentation SHA-256 APIs, eleven boundary oracles and complete regressions. This closes M2-W01 while deferring executable binder and algebraic-equivalence claims.",
       "files": [
         "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
         "tests/projects/dw.tools.math.ir.tests/M2W01C03RedTests.cs",
         "tests/projects/dw.tools.math.ir.tests/M2W01C03Tests.cs",
         "docs/distribution/ir-canonical-json.md",
         "docs/planning/evidence/M2-W01-C03-functional-red.json",
-        "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+        "docs/planning/evidence/M2-W01-C03-functional-qualified.json",
+        "src/projects/dw.tools.math.ir/IrCanonicalJsonGuard.cs",
+        "src/projects/dw.tools.math.ir/IrCanonicalHashes.cs",
+        "tests/projects/dw.tools.math.ir.tests/M2W01C03BoundaryRedTests.cs",
+        "tests/projects/dw.tools.math.ir.tests/M2W01C03BoundaryTests.cs",
+        "docs/planning/evidence/M2-W01-C03-boundary-red.json",
+        "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
         "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03Tests",
         "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release",
-        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03BoundaryRedTests",
+        "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03BoundaryTests"
       ],
       "evidence": [
         "docs/planning/evidence/M2-W01-C03-functional-red.json",
-        "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+        "docs/planning/evidence/M2-W01-C03-functional-qualified.json",
+        "docs/planning/evidence/M2-W01-C03-boundary-red.json",
+        "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
       ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
@@ -2793,29 +2808,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
           "test_case": "Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
-          "status": "ready",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W01-C03-boundary-red.json",
+            "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W01-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
-              "status": "ready",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-boundary-red.json"
+              ]
             },
             {
               "id": "M2-W01-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
+              ]
             },
             {
               "id": "M2-W01-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W01-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-boundary-qualified.json"
+              ]
             }
           ]
         }

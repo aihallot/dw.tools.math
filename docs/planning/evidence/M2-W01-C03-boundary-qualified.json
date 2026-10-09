@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "M2-W01-C03-boundary-qualified",
+  "status": "bounded-closed-ir-canonical-json-and-structural-hashes-qualified",
+  "previous_functional_evidence": "docs/planning/evidence/M2-W01-C03-functional-qualified.json",
+  "independent_boundary_red": "docs/planning/evidence/M2-W01-C03-boundary-red.json",
+  "schema_version_id": "math-ir/1",
+  "codec_source": "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+  "codec_sha256": "e82f19e9631bac5b862a2327c65342d67ae242fc770f3b1655ba2d4764e898f2",
+  "json_guard_source": "src/projects/dw.tools.math.ir/IrCanonicalJsonGuard.cs",
+  "json_guard_sha256": "ba9421e1637727ac4dc67d2d9fc3ce54b4584ff60f56326fec8eb8a1894f9643",
+  "hashes_source": "src/projects/dw.tools.math.ir/IrCanonicalHashes.cs",
+  "hashes_sha256": "18bf29cf31748615f49fd2548de4fc1cfda9a15e2190239f1c092741bc905c48",
+  "nuget_package_id": "dw.tools.math.ir",
+  "nuget_package_version": "0.3.0-preview.1",
+  "nuget_package_sha256": "b5d098b7a3cff0db8c20c17a3b8104c223668fdcfb92e470e0cc0a02ca856345",
+  "nuget_dependencies": [
+    "dw.quantities"
+  ],
+  "boundary_reds_green_after_fix": 3,
+  "independent_adversarial_tests_passed": 11,
+  "full_ir_and_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "admission_contracts": [
+    "JSON object shape is closed for envelope, every admitted node and relations; unknown and duplicate properties are refused before materialization.",
+    "Malformed syntax, unknown versions, unknown enums and nonfinite binary64 values are rejected.",
+    "Exact numerals remain canonical decimal BigInteger strings, bounded at 1024 numeral characters.",
+    "A restriction with a condition referring to a symbol absent from its expression is refused during decode.",
+    "The versioned SHA-256 structural semantic digest ignores passive symbol labels, while presentation digest includes them.",
+    "Changing symbol domain or exact quantity changes the structural digest; identical admitted round trips yield identical digests.",
+    "The existing exact rational, quantity, matrix, bound symbol and condition round-trip oracles remain qualified."
+  ],
+  "admission_limits": {
+    "maximum_json_characters": 262144,
+    "maximum_exact_numeral_characters": 1024,
+    "maximum_ir_expanded_nodes": 1024,
+    "maximum_ir_depth": 32,
+    "maximum_ir_assumptions": 32
+  },
+  "remaining_limits": [
+    "A bound symbol\u0027s declared scope metadata is preserved and internally validated; absent executable binder scopes cannot be globally proven against nonexistent declarations.",
+    "Semantic structural hashes identify canonical trees, not general algebraic equivalence or alpha-equivalence.",
+    "No network parser, symbolic solver, provider, OpenMath/MathML adapter or AURA host integration is claimed."
+  ],
+  "external_adoption_transmitted": false
+}

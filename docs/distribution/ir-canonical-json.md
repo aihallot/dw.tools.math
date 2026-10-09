@@ -1,7 +1,7 @@
 # Canonical Math IR JSON — admitted v1 transport
 
-**Status:** functional subset for `M2-W01-C03-T1`; adversarial decoding and
-separate semantic/presentation hashing remain pending in `T2`.
+**Status:** qualified v1 structural subset after the M2-W01-C03-T2
+adversarial suite, conditional on the RS031 success report.
 
 The `dw.tools.math.ir.IrCanonicalJsonCodec` provides
 `Encode(IrNode)` and `Decode(string)`, with version `math-ir/1`.
@@ -40,9 +40,22 @@ additional malformed-input and unbound-symbol corpus work reserved for T2.
 
 The T1 evidence contains two independently observed missing-public-API REDs,
 ten direct exact/round-trip oracles and full IR/quantity/foundation regression.
-T2 must independently harden parsing limits, unknown fields, duplicate
-keys, malformed numeric inputs, unbound/scope-invalid identifiers, and
-canonical semantic versus presentation hashing.
+T2 adds a strict closed-field validator before `JsonNode` materialization:
+unknown and duplicate properties at any admitted object level are refused;
+canonical exact numerals are limited to 1,024 characters; malformed syntax,
+unrecognized enum values and nonfinite binary64 bits remain refused.
+Restrictions referring to symbols absent from their expression are refused
+on decode. A valid free symbol is permitted, and the codec preserves a bound
+symbol's identity and scope metadata; this is **not** an executable binder or
+a proof that a scope has an external binder definition.
+
+`IrCanonicalHashes.SemanticStructuralSha256` hashes version-domain-separated
+canonical JSON with passive symbol display labels omitted.
+`IrCanonicalHashes.PresentationSha256` hashes version-domain-separated
+canonical JSON retaining those labels. Both return 64 lowercase hex digits
+and are structural digests, **not** universal mathematical-equivalence hashes.
+A changed exact value or declared symbol domain changes the structural hash;
+a display-label-only change leaves it unchanged but changes the presentation hash.
 
 A semantic structural hash, if provided later, must be versioned,
 independent of any presentation-only label policy, and must **not** be

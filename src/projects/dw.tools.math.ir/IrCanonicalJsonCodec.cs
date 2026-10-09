@@ -32,8 +32,16 @@ public static class IrCanonicalJsonCodec
         ArgumentException.ThrowIfNullOrWhiteSpace(json);
         if (json.Length > MaximumJsonCharacters)
             throw new ArgumentOutOfRangeException(nameof(json), "IR JSON input exceeds the bounded codec size.");
+        var options = new JsonDocumentOptions
+        {
+            MaxDepth = 64,
+            CommentHandling = JsonCommentHandling.Disallow,
+            AllowTrailingCommas = false
+        };
+        using (var syntax = JsonDocument.Parse(json, options))
+            IrCanonicalJsonGuard.Validate(syntax.RootElement);
         var doc = JsonNode.Parse(json, new JsonNodeOptions { PropertyNameCaseInsensitive = false },
-            new JsonDocumentOptions { MaxDepth = 64, CommentHandling = JsonCommentHandling.Disallow });
+            options);
         var envelope = RequireObject(doc);
         if (Text(envelope, "version") != Version)
             throw new NotSupportedException("Unknown IR JSON schema version.");
@@ -41,6 +49,7 @@ public static class IrCanonicalJsonCodec
             throw new FormatException("IR envelope has unexpected properties.");
         var node = ReadNode(envelope["root"]);
         IrGraphLimits.Validate(node);
+        IrCanonicalJsonGuard.ValidateRestrictions(node);
         return node;
     }
 
