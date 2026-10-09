@@ -36,14 +36,14 @@ internal static class IrCanonicalJsonGuard
                             case IrSymbol s:
                                 referenced.Add((s.Identity, s.Domain));
                                 break;
-                            case IrApply app:
-                                foreach (var arg in app.Arguments) pending.Push(arg);
+                            case IrApply nestedApply:
+                                foreach (var arg in nestedApply.Arguments) pending.Push(arg);
                                 break;
                             case IrRestrictedExpression inner:
                                 pending.Push(inner.Expression);
                                 break;
-                            case IrMatrix matrix:
-                                foreach (var cell in matrix.Elements) pending.Push(cell);
+                            case IrMatrix nestedMatrix:
+                                foreach (var cell in nestedMatrix.Elements) pending.Push(cell);
                                 break;
                         }
                     }
