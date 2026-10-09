@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "RS029",
-  "title": "Qualify bounded immutable IR graphs matrices and assumption domains",
+  "title": "Qualify bounded IR graphs, matrices and correct expanded DAG frontier",
   "commitMessage": "feat: qualify bounded immutable mathematical IR graphs and matrices",
   "timeoutSeconds": 1200,
   "projectNodes": [
@@ -19,7 +19,8 @@
     "debtChanges": [
       "A matrix shape may admit up to 4096 cells, but whole-graph evaluation applies the stricter 1024 expanded-node ceiling; tests prove that 1023 matrix cells plus the matrix node are admitted.",
       "The IR carries stable bound/free symbol identities but does not implement executable binder evaluation, alpha-equivalent substitution, or full unbound-variable validation. These remain explicit future capabilities.",
-      "Canonical JSON, semantic hashes, provider execution and OpenMath/Content MathML adapters remain out of scope until subsequent M2 chunks; no external AURA adoption is claimed."
+      "Canonical JSON, semantic hashes, provider execution and OpenMath/Content MathML adapters remain out of scope until subsequent M2 chunks; no external AURA adoption is claimed.",
+      "Retry 0 was a pre-attempt failure: the expanded DAG GREEN oracle treated 1023 admitted nodes as >1024. Retry 1 fixes both RED/GREEN to test 2047 rejected nodes, and makes evidence updates idempotent on DWF target re-entry."
     ],
     "nextAction": "Prepare M2-W01-C03 versioned canonical JSON codec with independent RED for lossless rationals, quantities, symbol binding and exclusions; reject unknown versions and malformed graphs without guessing semantic equivalence.",
     "achievements": [
