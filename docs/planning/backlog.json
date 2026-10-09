@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.33",
+  "plan_version": "0.1.34",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3001,7 +3001,7 @@
       "title": "Typed pipeline and direct/fluent API",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M2-W02-C01"
       ],
@@ -3026,16 +3026,20 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C02Tests"
       ],
-      "refinement": "RS034 T1 introduces the bounded exact linear quantity pipeline with single direct/fluent evaluator, full dimension pre-validation, immutable bounded step history, explicit UnitDefinition injection and 5 km / 2 min = exactly 150 km/h acceptance. Controlled RED, ten independent GREEN tests, IR/composition/foundation regressions and local NuGet packaging. T2 remains planned for deeper operational boundaries.",
+      "refinement": "RS034 T1 qualifies the immutable direct/fluent exact rational quantity pipeline with unit/dimension prevalidation and 150 km/h acceptance. RS035 T2 adds cooperative cancellation, exact per-stage bounded immutable numerical provenance, correct magnitude bounds for positive 257-digit numerals, and independent RED/GREEN integration tests. Neither AURA authority nor external execution is inferred.",
       "files": [
         "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
         "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
-        "tests/projects/dw.tools.math.composition.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
         "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
         "tests/projects/dw.tools.math.composition.tests/M2W02C02Tests.cs",
+        "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
         "docs/distribution/exact-quantity-pipeline.md",
         "docs/planning/evidence/M2-W02-C02-contract-red.json",
-        "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C02-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
@@ -3046,9 +3050,11 @@
       ],
       "evidence": [
         "docs/planning/evidence/M2-W02-C02-contract-red.json",
-        "docs/planning/evidence/M2-W02-C02-contract-qualified.json"
+        "docs/planning/evidence/M2-W02-C02-contract-qualified.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-qualified.json"
       ],
-      "readiness": "active T1 qualified; complete independent T2 boundaries before C02 closure",
+      "readiness": "closed: both T1 contract and T2 boundary/integration qualified; M2-W02-C03 remains planned",
       "tasks": [
         {
           "id": "M2-W02-C02-T1",
@@ -3095,29 +3101,38 @@
           "title": "Boundaries and integration",
           "behavior": "Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
           "test_case": "Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+            "docs/planning/evidence/M2-W02-C02-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W02-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-boundary-red.json"
+              ]
             },
             {
               "id": "M2-W02-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-boundary-qualified.json"
+              ]
             },
             {
               "id": "M2-W02-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W02-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C02-boundary-qualified.json"
+              ]
             }
           ]
         }

@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS035",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-09T17:03:09.306986+00:00",
+  "completedAtUtc": "2026-10-09T17:03:38.0648721+00:00",
+  "durationMilliseconds": 28757,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C02",
+    "M2-W02-C02-T2",
+    "M2-W02-C02-T2-R",
+    "M2-W02-C02-T2-G",
+    "M2-W02-C02-T2-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/exact-quantity-pipeline.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/exact-quantity-pipeline.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+    "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261009T165404Z-21c9ce8dad3c1686"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261009T165404Z-21c9ce8dad3c1686",
+        "runId": "RS035",
+        "scope": "preselection-rs035",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs035/run-next-20261009T165404Z-21c9ce8dad3c1686"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS035/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-73aee091ca714f9398a13967352475e5\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 28644,
+      "StandardOutput": "[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2-W02-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2-W02-C02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2-W02-C02-T1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2-W02-C03 state=not-ready\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs bytes=850\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs bytes=1183\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.23\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Failed Positive257DigitNumeratorMustBeRefusedBeforeEvaluation [33 ms]\r\n  Error Message:\r\n   Assertion failed. Expected exception of exact type ArgumentOutOfRangeException but no exception was thrown.\r\nM2-W02-C02-T2 RED: 257-digit positive numerator wrongly passed the 256-digit bound.\r\n\r\nAssert.ThrowsExactly\u003CArgumentOutOfRangeException\u003E(\u003Caction\u003E)\r\n  Stack Trace:\r\n     at Dw.Tools.Math.Composition.Tests.M2W02C02BoundaryRedTests.Positive257DigitNumeratorMustBeRefusedBeforeEvaluation() in D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.tools.math.composition.tests\\M2W02C02BoundaryRedTests.cs:line 18\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\r\n\r\nTotal tests: 1\r\n     Failed: 1\r\n Total time: 0,8755 Seconds\r\n\nTest Run Failed.\r\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M2-W02-C02-boundary-red.json bytes=572\r\n[files.replace-from-staged] CHANGED path=src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs bytes=9819\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs bytes=8201\r\n[files.replace-from-staged] CHANGED path=docs/distribution/exact-quantity-pipeline.md bytes=3129\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.45\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed Positive257DigitNumeratorMustBeRefusedBeforeEvaluation [16 ms]\r\n  Passed DirectAndFluentCancellationOverloadsPreserveExactResult [8 ms]\r\n  Passed CancellationBeforeValidationReturnsNoPartialResult [\u003C 1 ms]\r\n  Passed CancellationDuringFiniteInputMaterializationIsObserved [1 ms]\r\n  Passed EveryStepRecordsExactBaseQuantityDimensionAndPresentationIdentity [1 ms]\r\n  Passed AllSixteenStagesHaveBoundedImmutableObservations [\u003C 1 ms]\r\n  Passed ExactNumeralMagnitudeAtBoundaryIsAcceptedAndAboveIsRejected [\u003C 1 ms]\r\n  Passed InvalidLaterStepFailsBeforeAnyPublicResultIsReturned [\u003C 1 ms]\r\n  Passed ZeroDivisorAndExponentOverflowAreDetectedDuringPreflight [\u003C 1 ms]\r\n  Passed ResultsExposeNoPartialMutationOrExternalExecutionIdentity [\u003C 1 ms]\r\n  Passed NegativeMagnitudeAndOversizedScaleAreRefused [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 11\r\n     Passed: 11\r\n Total time: 0,6372 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    37, Skipped:     0, Total:    37, Duration: 92 ms - dw.tools.math.composition.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 137 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\n\r\nPossible reasons for this include:\r\n  * You misspelled a built-in dotnet command.\r\n  * You intended to execute a .NET program, but dotnet---definitely-not-a-real-dotnet-option does not exist.\r\n  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.\r\nPowerShell helper UTF-8 and non-zero propagation contracts verified.\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.45\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 28 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n  The package dw.tools.math.foundation.0.1.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\u0027.\r\nPackage contract verified: D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\foundation-smoke.csproj (in 215 ms).\r\n  foundation-smoke -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\bin\\Release\\net10.0\\foundation-smoke.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.07\r\nIsolated local-package consumer verified.\r\nM0-W01-C01 foundation chain verified.\r\n\nCould not execute because the specified command or file was not found.\r\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\n  The package dw.tools.math.composition.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\composition-package-feed\\dw.tools.math.composition.0.3.0-preview.1.nupkg\u0027.\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M2-W02-C02-boundary-qualified.json bytes=2762\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-R not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-R ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-G not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-G ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-V not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-V ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M2-W02-C02 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\nplanning valid: 0.1.34 | 53 chunks | 8e9e335933e558a52c6ec7480e67dc3f12deee4d8d47ce7ae7b0aad4a4b891be | mode --write\r\n\n\r\nnative DWF adoption valid: nodes=496 milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02=done\r\n\n\r\nplanning valid: 0.1.34 | 53 chunks | 8e9e335933e558a52c6ec7480e67dc3f12deee4d8d47ce7ae7b0aad4a4b891be | mode --check\r\n\n\r\n[payload] OK operations=26 changed=21 no-change=0 verified=5 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS035/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2-W02-C02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2-W02-C02-T1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2-W02-C03 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+        "Status": 1,
+        "Summary": "bytes=850",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "800cce52c157fbc3b736ba1a9779ef42e7f6570a2afbb8f371f91ddc405d58ac",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+        "Status": 1,
+        "Summary": "bytes=1183",
+        "Details": null,
+        "BeforeSha256": "1567af06576f9db19c221da68bafd0260f3ef34dc5c8a350b3e09a7ddae464c4",
+        "AfterSha256": "2cb4228adeba0fb975888fbe80e8e5d01410b26bfc1aa7d410213c9dcb05ae40",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+        "Status": 1,
+        "Summary": "bytes=572",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5ca193cffb0d2d0827c0b16e08a2b0b5c7ab392d2d757396523e8b201f6f743f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+        "Status": 1,
+        "Summary": "bytes=9819",
+        "Details": null,
+        "BeforeSha256": "6babb3639323a14ad7ce9700a865ba038e29a4a8129e489dfc683feaf7a295ad",
+        "AfterSha256": "f581d99c12c5387adbb3d64da8c26d900fe82b65a780a1f9ffb0105f6434b013",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
+        "Status": 1,
+        "Summary": "bytes=8201",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d4c8c1add476608cb9448ee8aee2693440a0c6593a4cea0a509719c7e73f6ebd",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/exact-quantity-pipeline.md",
+        "Status": 1,
+        "Summary": "bytes=3129",
+        "Details": null,
+        "BeforeSha256": "c693b43ceb94f30ae10f64e63ad6f3bef20d4ede65c7f7005082f8d7c0470da8",
+        "AfterSha256": "4a6a30246ad17d0f8cb4e29910586879eaba136fbc25059246944c5d791e4b08",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=2762",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d4e893f91e31ff7bf041592a1554badd750a2a3da1294b35ac731be57a0f01cf",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "cacebd260738ae228989239b3020abda43922bd7c56bdf669a8e8934712b05c2",
+        "AfterSha256": "8e9e335933e558a52c6ec7480e67dc3f12deee4d8d47ce7ae7b0aad4a4b891be",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "a58c29bd30dd7bab23808d865ef2b8c58c0d8ad6c38e3173cfdc5a39c66184f1",
+        "AfterSha256": "edb4c83f46f9f7f6209ff46e8eca30818291e6fed6276c1e5aa012abcbaf9d28",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "edb4c83f46f9f7f6209ff46e8eca30818291e6fed6276c1e5aa012abcbaf9d28",
+        "AfterSha256": "f324b61f7a7ae0fd5784e916583ac9b889b7aa1d64752873dee00a6008e4717a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "f324b61f7a7ae0fd5784e916583ac9b889b7aa1d64752873dee00a6008e4717a",
+        "AfterSha256": "cba2a2ae41d4ba553982e5ba9bd093f9f6e526ce17ce8fb5b7bbf3b0f7a5d2c4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-R ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "cba2a2ae41d4ba553982e5ba9bd093f9f6e526ce17ce8fb5b7bbf3b0f7a5d2c4",
+        "AfterSha256": "272ba137204142afeda0151387080133f626b15096d7ebe5d874632499112319",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "272ba137204142afeda0151387080133f626b15096d7ebe5d874632499112319",
+        "AfterSha256": "005b03c19232f3b1f7621128428c9a7dab42b78979771923cd33915b3debae4f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "005b03c19232f3b1f7621128428c9a7dab42b78979771923cd33915b3debae4f",
+        "AfterSha256": "a3f16e455f73457e8aab2d1eb857168cd000e61925d2a82329589974891c2ade",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-G ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "a3f16e455f73457e8aab2d1eb857168cd000e61925d2a82329589974891c2ade",
+        "AfterSha256": "1b7a67fa4b343968feff3551c21ad39e4bacbd5d25ff496c96b625a0aec5465b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "1b7a67fa4b343968feff3551c21ad39e4bacbd5d25ff496c96b625a0aec5465b",
+        "AfterSha256": "c77bac83d7985232532a2844e3d6589ac427335902dd9077f345e257faa8adb0",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-V not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "c77bac83d7985232532a2844e3d6589ac427335902dd9077f345e257faa8adb0",
+        "AfterSha256": "0a904c529ed0cb9e20d0b4fce492ac91b3902a59dfade7809cb7c86791aaf7e5",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-V ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "0a904c529ed0cb9e20d0b4fce492ac91b3902a59dfade7809cb7c86791aaf7e5",
+        "AfterSha256": "ef78bb2063e3600359a3cd1cf691fe29d12c4de098d072ee034ee8d1add5d836",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "ef78bb2063e3600359a3cd1cf691fe29d12c4de098d072ee034ee8d1add5d836",
+        "AfterSha256": "bdbdc38d373589d2e5557bf68bfa3796d690040cb3e3c964d34e20b2a5447096",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "bdbdc38d373589d2e5557bf68bfa3796d690040cb3e3c964d34e20b2a5447096",
+        "AfterSha256": "d7e800c750813d2fe378628c5fea64e910a86fdcd5e15ec1eb5450fcfebd5ef9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M2-W02-C02 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "d7e800c750813d2fe378628c5fea64e910a86fdcd5e15ec1eb5450fcfebd5ef9",
+        "AfterSha256": "172a1500aa49527b535a375c13cce2ded0beb58a4c63d1133729061b96cda6d3",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer-architecture",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261009T170116Z-be66a290c3c3647e",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "59a5916bd5f4503697257edfe01c67ffa7bc60cd",
+  "invocationStartedAtUtc": "2026-10-09T17:01:16.8291468+00:00",
+  "invocationDurationMilliseconds": 141235,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS035",
+      "title": "Qualify cancellable exact pipeline boundaries, immutable per-step provenance and numerical budgets",
+      "projectNodes": [
+        "M2",
+        "M2-W02",
+        "M2-W02-C02",
+        "M2-W02-C02-T2",
+        "M2-W02-C02-T2-R",
+        "M2-W02-C02-T2-G",
+        "M2-W02-C02-T2-V"
+      ]
+    },
+    "declared": {
+      "summary": "Close M2-W02-C02 by demonstrating the existing 257-digit positive numerator budget defect with an independent behavioral RED, correcting magnitude validation, adding cooperative cancellation in shared direct/fluent evaluation and bounded immutable per-step exact quantity and dimension snapshots, and validating 10 independent boundary GREEN tests, prior pipeline and composition regressions, locked package, native plan and architecture.",
+      "value": "Exact typed pipelines now retain bounded step-by-step numerical provenance, reject resource-boundary violations, and abort cooperatively without returning an invented or partial result; provider-neutral operation semantics and dimensional prevalidation remain intact.",
+      "debtChanges": [
+        "M2-W02-C03 remains planned, so M2-W02 is in progress and no work-package achievement is claimed.",
+        "Cancellation checks are cooperative and do not forcibly preempt arbitrary blocking enumerators or an already running BigInteger operation.",
+        "Step snapshots describe local pure arithmetic only, not external provider execution telemetry, authorization or AURA host state.",
+        "No external AURA adoption, distributed scheduler, symbolic solver or provider execution is introduced.",
+        "RS035 retry 0 failed pre-attempt before allocation: the previously qualified T1 reflection test matched Evaluate only by name and became ambiguous after T2 added cancellation overloads; retry 1 selects the exact original method signatures and re-runs the full test suite."
+      ],
+      "nextAction": "Prepare M2-W02-C03-T1 as a substantive independently falsifiable composition operation contract; preserve cancellation, exactness and provider separation without closing M2-W02 prematurely.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M2-W02-C02-T2-R",
+          "achievement": "An independent compiled behavioral RED demonstrates that the existing pipeline wrongly accepts a positive 257-digit exact numerator against its advertised 256-digit budget."
+        },
+        {
+          "projectNode": "M2-W02-C02-T2-G",
+          "achievement": "The shared direct/fluent exact evaluator now refuses excessive positive and negative magnitudes, supports cooperative cancellation and captures immutable bounded local numerical step snapshots."
+        },
+        {
+          "projectNode": "M2-W02-C02-T2-V",
+          "achievement": "Ten adversarial T2 boundary GREEN tests plus T1, composition, IR, foundation, architecture and local locked NuGet packaging checks qualify the revised pipeline."
+        },
+        {
+          "projectNode": "M2-W02-C02-T2",
+          "achievement": "Resource, cancellation, exact per-step provenance and non-provider integration boundaries are qualified without external authority claims."
+        },
+        {
+          "projectNode": "M2-W02-C02",
+          "achievement": "Both T1 exact direct/fluent contract and T2 operational boundaries are qualified; the C02 phase closes while M2-W02 remains in progress."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/distribution/exact-quantity-pipeline.md",
+        "docs/planning/README.md",
+        "docs/planning/backlog.json",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+        "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M2.md",
+        "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer-architecture",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M2",
+        "objective": "Semantic representation and composition",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M2 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M2-W02",
+        "objective": "Operations and composition",
+        "kind": "work-package",
+        "parentId": "M2",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M2-W02 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M2-W02-C02",
+        "objective": "Typed pipeline and direct/fluent API",
+        "kind": "phase",
+        "parentId": "M2-W02",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M2-W02-C02 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M2-W02-C02-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M2-W02-C02",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M2-W02-C02-T2 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M2-W02-C02-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-R in docs/planning/backlog.json."
+      },
+      {
+        "id": "M2-W02-C02-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-G in docs/planning/backlog.json."
+      },
+      {
+        "id": "M2-W02-C02-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-V in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M2-W02-C02",
+        "objective": "Typed pipeline and direct/fluent API",
+        "kind": "phase",
+        "parentId": "M2-W02",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M2-W02-C02 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both T1 exact direct/fluent contract and T2 operational boundaries are qualified; the C02 phase closes while M2-W02 remains in progress."
+      },
+      {
+        "id": "M2-W02-C02-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M2-W02-C02",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M2-W02-C02-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Resource, cancellation, exact per-step provenance and non-provider integration boundaries are qualified without external authority claims."
+      },
+      {
+        "id": "M2-W02-C02-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "An independent compiled behavioral RED demonstrates that the existing pipeline wrongly accepts a positive 257-digit exact numerator against its advertised 256-digit budget."
+      },
+      {
+        "id": "M2-W02-C02-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-G in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "The shared direct/fluent exact evaluator now refuses excessive positive and negative magnitudes, supports cooperative cancellation and captures immutable bounded local numerical step snapshots."
+      },
+      {
+        "id": "M2-W02-C02-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-V in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Ten adversarial T2 boundary GREEN tests plus T1, composition, IR, foundation, architecture and local locked NuGet packaging checks qualify the revised pipeline."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M2-W02-C02",
+        "objective": "Typed pipeline and direct/fluent API",
+        "kind": "phase",
+        "parentId": "M2-W02",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M2-W02-C02 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both T1 exact direct/fluent contract and T2 operational boundaries are qualified; the C02 phase closes while M2-W02 remains in progress."
+      },
+      {
+        "id": "M2-W02-C02-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M2-W02-C02",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M2-W02-C02-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Resource, cancellation, exact per-step provenance and non-provider integration boundaries are qualified without external authority claims."
+      },
+      {
+        "id": "M2-W02-C02-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-R in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "An independent compiled behavioral RED demonstrates that the existing pipeline wrongly accepts a positive 257-digit exact numerator against its advertised 256-digit budget."
+      },
+      {
+        "id": "M2-W02-C02-T2-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-G in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "The shared direct/fluent exact evaluator now refuses excessive positive and negative magnitudes, supports cooperative cancellation and captures immutable bounded local numerical step snapshots."
+      },
+      {
+        "id": "M2-W02-C02-T2-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M2-W02-C02-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M2-W02-C02-T2-V in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Ten adversarial T2 boundary GREEN tests plus T1, composition, IR, foundation, architecture and local locked NuGet packaging checks qualify the revised pipeline."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS035",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS035",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "59a5916bd5f4503697257edfe01c67ffa7bc60cd",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "0d1300b91a69dc9f317ca36616f0ba1d91dd0bf9a30771fd125a006931dbb4a5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: qualify exact pipeline cancellation and provenance boundaries",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

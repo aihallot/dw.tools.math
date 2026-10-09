@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "M2-W02-C02-boundary-qualified",
+  "status": "bounded-cancellable-step-provenance-exact-pipeline-qualified",
+  "prior_contract_evidence": "docs/planning/evidence/M2-W02-C02-contract-qualified.json",
+  "controlled_red_evidence": "docs/planning/evidence/M2-W02-C02-boundary-red.json",
+  "source": "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+  "source_sha256": "f581d99c12c5387adbb3d64da8c26d900fe82b65a780a1f9ffb0105f6434b013",
+  "boundary_red_test": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryRedTests.cs",
+  "boundary_red_test_sha256": "800cce52c157fbc3b736ba1a9779ef42e7f6570a2afbb8f371f91ddc405d58ac",
+  "previous_t1_red_test_compatibility_fix": "tests/projects/dw.tools.math.composition.tests/M2W02C02RedTests.cs",
+  "previous_t1_red_test_sha256": "2cb4228adeba0fb975888fbe80e8e5d01410b26bfc1aa7d410213c9dcb05ae40",
+  "boundary_tests": "tests/projects/dw.tools.math.composition.tests/M2W02C02BoundaryTests.cs",
+  "boundary_tests_sha256": "d4c8c1add476608cb9448ee8aee2693440a0c6593a4cea0a509719c7e73f6ebd",
+  "contract_version": "exact-quantity-pipeline/1",
+  "controlled_semantic_red_then_green": true,
+  "independent_boundary_green_tests_passed": 10,
+  "prior_pipeline_tests_passed": 10,
+  "locked_solution_build_passed": true,
+  "composition_and_ir_regressions_passed": true,
+  "foundation_chain_passed": true,
+  "transfer_architecture_passed": true,
+  "local_package_qualified": true,
+  "admission_limits": {
+    "maximum_steps": 16,
+    "maximum_numeral_magnitude_digits": 256
+  },
+  "package_id": "dw.tools.math.composition",
+  "package_version": "0.3.0-preview.1",
+  "package_dependencies": [
+    "dw.quantities",
+    "dw.tools.math.ir"
+  ],
+  "contracts": [
+    "Previously qualified reflection tests select exact direct/fluent method signatures to remain valid with cancellation overloads.",
+    "Direct and fluent cancellation-token overloads share the validated evaluator; cancellation throws without returning a partial result.",
+    "Finite immutable per-step snapshots retain index, kind, exact base quantity, dimensions and optional unit id.",
+    "Input, scale, intermediate and presentation rational magnitudes refuse 257-digit numerator or denominator.",
+    "No provider admission, AURA host permission, external execution or distributed scheduler is involved."
+  ],
+  "nonclaims": [
+    "Cancellation is cooperative; arbitrary blocking iterators and uninterrupted arithmetic cannot be forcibly preempted.",
+    "Provenance snapshots describe only local numerical state, not external provider telemetry or authorization.",
+    "M2-W02-C03 remains planned; no symbolic solver, provider dispatch or AURA adoption."
+  ]
+}
