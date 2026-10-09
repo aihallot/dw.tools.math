@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "id": "RS028",
+  "title": "Implement typed immutable mathematical IR and verify exact/domain contracts",
+  "commitMessage": "feat: implement typed immutable mathematical IR core and exact domain guards",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M2",
+    "M2-W01",
+    "M2-W01-C02",
+    "M2-W01-C02-T1",
+    "M2-W01-C02-T1-R",
+    "M2-W01-C02-T1-G",
+    "M2-W01-C02-T1-V",
+    "M2-W01-C02-T2",
+    "M2-W01-C02-T2-R"
+  ],
+  "contribution": {
+    "summary": "Create the first independent immutable dw.tools.math.ir package after two observed absence REDs. Qualify exact/finite binary64 separation, immutable symbols, scopes, explicit nonzero constraints, one sound real sqrt-square rule, quantity units and ten independently checked contracts plus a locked solution and NuGet package.",
+    "value": "Turns the accepted M2 IR architecture into a real provider-free .NET math model that keeps rational precision and symbol-domain restrictions intact instead of silently widening numeric values or applying unsound simplification.",
+    "debtChanges": [
+      "Only M2-W01-C02-T1 is claimed complete. T2 still owns adversarial whole-graph node/depth/matrix limits, binding safety and larger immutable input validation.",
+      "The sqrt(square(x)) normalization is one explicitly guarded real-domain rule, not a general CAS, substitution algorithm or equivalence proof.",
+      "Canonical JSON, semantic hashes and OpenMath/Content MathML import/export remain M2-W01-C03/future adapter work; no external AURA adoption is claimed."
+    ],
+    "nextAction": "Run M2-W01-C02-T2 with independent REDs and targeted GREEN for bounded node/depth/matrix and scope safety, then qualify C02 as a complete immutable typed model before starting the canonical JSON codec.",
+    "achievements": [
+      {
+        "projectNode": "M2-W01-C02-T1-R",
+        "achievement": "Two independent tests fail before implementation, proving the absence of both the dw.tools.math.ir assembly and its exact-scalar/bound-symbol public surface."
+      },
+      {
+        "projectNode": "M2-W01-C02-T1-G",
+        "achievement": "Install the first provider-free immutable Math IR package with ExactRational-backed exact scalar, finite binary64 bit-preserving kind, bound/free symbol identities, typed operations and explicit real-domain restrictions."
+      },
+      {
+        "projectNode": "M2-W01-C02-T1-V",
+        "achievement": "Ten independent IR tests qualify exact versus approximate numeric identity, nonfinite rejection, signed-zero bits, symbol scopes, sqrt(x²)=abs(x) domain rule, x!=1 exclusions, quantity metadata, collection immutability and invalid-input refusals; locked build, complete quantities/foundation regressions and nupkg contents also pass."
+      },
+      {
+        "projectNode": "M2-W01-C02-T1",
+        "achievement": "The admitted typed IR functional contract completes with a standalone locked package, independently observed RED/GREEN, guarded one-rule real algebra and durable compilation/package evidence, while T2 adversarial limits remain open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
+    "src/projects/dw.tools.math.ir/packages.lock.json",
+    "src/projects/dw.tools.math.ir/IrModel.cs",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.quantities.tests/packages.lock.json",
+    "tests/projects/dw.quantities.tests/M2W01C02RedTests.cs",
+    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+    "tests/projects/dw.tools.math.ir.tests/packages.lock.json",
+    "tests/projects/dw.tools.math.ir.tests/M2W01C02Tests.cs",
+    "dw.tools.math.slnx",
+    "docs/planning/evidence/M2-W01-C02-red.json",
+    "docs/planning/evidence/M2-W01-C02-functional-green.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj"
+    },
+    {
+      "path": "src/projects/dw.tools.math.ir/packages.lock.json",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/packages.lock.json"
+    },
+    {
+      "path": "src/projects/dw.tools.math.ir/IrModel.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/IrModel.cs"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/packages.lock.json",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/packages.lock.json"
+    },
+    {
+      "path": "tests/projects/dw.quantities.tests/M2W01C02RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.quantities.tests/M2W01C02RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+      "sourcePath": "files/tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.ir.tests/packages.lock.json",
+      "sourcePath": "files/tests/projects/dw.tools.math.ir.tests/packages.lock.json"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.ir.tests/M2W01C02Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.ir.tests/M2W01C02Tests.cs"
+    },
+    {
+      "path": "dw.tools.math.slnx",
+      "sourcePath": "files/dw.tools.math.slnx"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS027/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.26"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/5/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/14/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W01-C01-qualified.json",
+      "jsonPointer": "/product_ir_compiled",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M1-W03-C02-gate.json",
+      "jsonPointer": "/status",
+      "expectedValue": "local-exact-m1-gate-qualified-external-adoption-not-started"
+    }
+  ]
+}
