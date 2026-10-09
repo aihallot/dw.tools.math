@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "M1-W03-C01-qualified",
+  "status": "isolated-local-package-consumer-and-provenance-qualified",
+  "local_feed": "build/artifacts/math-package-feed",
+  "isolated_package_directory": "build/artifacts/math-isolated-packages",
+  "consumer_project": "tests/consumers/exact-math-smoke/exact-math-smoke.csproj",
+  "consumer_source": "tests/consumers/exact-math-smoke/Program.cs",
+  "consumer_nuget_config": "tests/consumers/exact-math-smoke/NuGet.Config",
+  "package_artifacts": [
+    {
+      "package_id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "sha256": "b78411b531bad82182de34adebb7d80b9eb52e03b4751bf3673ca7c5cf2ec728",
+      "bytes": 14738,
+      "assembly_path": "lib/net10.0/dw.quantities.dll",
+      "dependencies": [],
+      "artifact_scope": "Local ignored disposable output; package is not committed or publicly published."
+    },
+    {
+      "package_id": "dw.quantities.expression",
+      "version": "0.2.0-preview.1",
+      "sha256": "51716a1d6f72d55aebfeac6311f90404714d024bb25b3852392fbdefae9fa332",
+      "bytes": 13941,
+      "assembly_path": "lib/net10.0/dw.quantities.expression.dll",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "artifact_scope": "Local ignored disposable output; package is not committed or publicly published."
+    },
+    {
+      "package_id": "dw.quantities.standard",
+      "version": "0.2.0-preview.1",
+      "sha256": "d1a365a4d6864ce999c9226144be3da7a5480e44226e5cdd42b861cadc97d1ca",
+      "bytes": 13589,
+      "assembly_path": "lib/net10.0/dw.quantities.standard.dll",
+      "dependencies": [
+        "dw.quantities.expression",
+        "dw.quantities"
+      ],
+      "artifact_scope": "Local ignored disposable output; package is not committed or publicly published."
+    }
+  ],
+  "distribution_recipe": "docs/distribution/exact-math-packages.md",
+  "rights_reference": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+  "rights_model": "owner-authorized proprietary code; no open-source license asserted",
+  "owner_notice_separate_required": false,
+  "independent_red": "docs/planning/evidence/M1-W03-C01-red.json",
+  "sample_output": "dw.tools.math/exact-consumer/0.2 qualified",
+  "source_parity_evidence": [
+    "docs/planning/evidence/M1-W02-C01-source-parity-qualified.json",
+    "docs/planning/evidence/M1-W02-C02-boundary-qualified.json",
+    "docs/planning/evidence/M1-W02-C03-qualified.json"
+  ],
+  "documented_divergences": [
+    "AURA\u0027s historical culture-priority resolver intentionally differs from Math\u0027s explicit UnitSystem selection (M0-W02-C02).",
+    "Math\u0027s strict Australian 570mL beer-pint is a named extra profile, not a unit asserted to exist in the 58-unit inherited AURA catalogue.",
+    "Historical defects are not promoted to an oracle; independently checked conversion and exact arithmetic results remain authoritative."
+  ],
+  "locked_math_restore_passed": true,
+  "all_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "three_nupkg_contents_and_dependency_graph_qualified": true,
+  "local_only_consumer_restore_passed": true,
+  "isolated_consumer_execution_passed": true,
+  "limitations": [
+    "This run produces local NuGet artifacts in an ignored disposable build tree; no binary package is checked into main or published to a public feed.",
+    "SHA-256 values identify these exact observed package bytes. Bitwise identity across future SDK builds is not claimed.",
+    "The receipt is an independently executed consumption smoke test, not a release signature, third-party license audit or external AURA migration.",
+    "AURA and other sibling repository sources are not modified; any future adoption remains separately authorized."
+  ]
+}

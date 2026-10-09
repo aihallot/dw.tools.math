@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.23",
+  "plan_version": "0.1.24",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -260,11 +260,13 @@
       "id": "M1-W03",
       "release": "M1",
       "title": "Distribution and adoption",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.distribution/",
         "tests/projects/dw.tools.math.distribution.tests/",
-        "docs/"
+        "docs/",
+        "tests/consumers/exact-math-smoke/",
+        "docs/distribution/"
       ],
       "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
     },
@@ -2130,7 +2132,7 @@
       "title": "Parity and isolated consumption",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M1-W02-C03"
       ],
@@ -2155,10 +2157,29 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M1W03C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS025 observes an independent missing-local-package and missing-provenance RED, builds three exact Math NuGet packages with inspected assembly/dependency manifests and SHA-256s, restores and executes a package-only isolated consumer from a cleared local feed, verifies exact calculations/conversions/comparisons and reconciles inherited AURA divergences and owner-rights. M1-W03-C02 external adoption dossier remains future work.",
+      "files": [
+        "tests/consumers/exact-math-smoke/exact-math-smoke.csproj",
+        "tests/consumers/exact-math-smoke/Program.cs",
+        "tests/consumers/exact-math-smoke/NuGet.Config",
+        "docs/distribution/exact-math-packages.md",
+        "docs/planning/evidence/M1-W03-C01-red.json",
+        "docs/planning/evidence/M1-W03-C01-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release --no-restore --no-build -o build/artifacts/math-package-feed",
+        "dotnet pack src/projects/dw.quantities.expression/dw.quantities.expression.csproj -c Release --no-restore --no-build -o build/artifacts/math-package-feed",
+        "dotnet pack src/projects/dw.quantities.standard/dw.quantities.standard.csproj -c Release --no-restore --no-build -o build/artifacts/math-package-feed",
+        "dotnet restore tests/consumers/exact-math-smoke/exact-math-smoke.csproj --configfile tests/consumers/exact-math-smoke/NuGet.Config --source build/artifacts/math-package-feed",
+        "dotnet run --project tests/consumers/exact-math-smoke/exact-math-smoke.csproj -c Release --no-restore",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M1-W03-C01-red.json",
+        "docs/planning/evidence/M1-W03-C01-qualified.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2166,29 +2187,38 @@
           "title": "Contract and outcome",
           "behavior": "Qualify inherited and independent corpora, produce a local nupkg, and provide a sample that calculates/converts/compares without AURA.",
           "test_case": "Sample restores from a bounded local feed and authorized dependencies; no AURA checkout reference; parity fixtures agree.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W03-C01-red.json",
+            "docs/planning/evidence/M1-W03-C01-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W03-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Sample restores from a bounded local feed and authorized dependencies; no AURA checkout reference; parity fixtures agree.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-red.json"
+              ]
             },
             {
               "id": "M1-W03-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Qualify inherited and independent corpora, produce a local nupkg, and provide a sample that calculates/converts/compares without AURA.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-qualified.json"
+              ]
             },
             {
               "id": "M1-W03-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W03-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-qualified.json"
+              ]
             }
           ]
         },
@@ -2197,29 +2227,38 @@
           "title": "Boundaries and integration",
           "behavior": "If a historical defect is found, document divergence and request an owner decision; never change the oracle just to get green; include notices and hashes.",
           "test_case": "If a historical defect is found, document divergence and request an owner decision; never change the oracle just to get green; include notices and hashes.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M1-W03-C01-red.json",
+            "docs/planning/evidence/M1-W03-C01-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W03-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: If a historical defect is found, document divergence and request an owner decision; never change the oracle just to get green; include notices and hashes.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-red.json"
+              ]
             },
             {
               "id": "M1-W03-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: If a historical defect is found, document divergence and request an owner decision; never change the oracle just to get green; include notices and hashes.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-qualified.json"
+              ]
             },
             {
               "id": "M1-W03-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M1-W03-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C01-qualified.json"
+              ]
             }
           ]
         }
