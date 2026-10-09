@@ -35,15 +35,35 @@ public sealed record ExactPipelineStep
         unit ?? throw new ArgumentNullException(nameof(unit));
 }
 
+/// <summary>A bounded locally evaluated state, not provider execution telemetry.</summary>
+public sealed record ExactPipelineStepSnapshot
+{
+    internal ExactPipelineStepSnapshot(int index, ExactPipelineStepKind kind,
+        Quantity baseQuantity, string? presentationUnitId)
+    {
+        Index = index;
+        Kind = kind;
+        BaseQuantity = baseQuantity;
+        PresentationUnitId = presentationUnitId;
+    }
+
+    public int Index { get; }
+    public ExactPipelineStepKind Kind { get; }
+    public Quantity BaseQuantity { get; }
+    public string? PresentationUnitId { get; }
+}
+
 /// <summary>Exact base quantity, optional presentation, and bounded step provenance.</summary>
 public sealed record ExactPipelineResult
 {
     internal ExactPipelineResult(Quantity baseQuantity, UnitDefinition? presentationUnit,
-        ImmutableArray<ExactPipelineStepKind> steps)
+        ImmutableArray<ExactPipelineStepKind> steps,
+        ImmutableArray<ExactPipelineStepSnapshot> detailedSteps)
     {
         BaseQuantity = baseQuantity;
         PresentationUnit = presentationUnit;
         Steps = steps;
+        DetailedSteps = detailedSteps;
     }
 
     public Quantity BaseQuantity { get; }
@@ -51,6 +71,7 @@ public sealed record ExactPipelineResult
     public ExactRational DisplayValue => PresentationUnit is null
         ? BaseQuantity.Value : PresentationUnit.FromBase(BaseQuantity.Value);
     public ImmutableArray<ExactPipelineStepKind> Steps { get; }
+    public ImmutableArray<ExactPipelineStepSnapshot> DetailedSteps { get; }
 }
 
 /// <summary>
@@ -74,20 +95,36 @@ public sealed class ExactQuantityPipeline
     public ExactQuantityPipeline Add(ExactRational amount, UnitDefinition unit) =>
         Append(ExactPipelineStep.Add(amount, unit));
 
-    public ExactPipelineResult Evaluate() => Evaluate(_steps);
+    public ExactPipelineResult Evaluate() => Evaluate(_steps, CancellationToken.None);
 
-    /// <summary>Validates the complete chain before performing any quantity arithmetic.</summary>
-    public static ExactPipelineResult Evaluate(IEnumerable<ExactPipelineStep> steps)
+    public ExactPipelineResult Evaluate(CancellationToken cancellationToken) =>
+        Evaluate(_steps, cancellationToken);
+
+    public static ExactPipelineResult Evaluate(IEnumerable<ExactPipelineStep> steps) =>
+        Evaluate(steps, CancellationToken.None);
+
+    /// <summary>
+    /// Prevalidates all steps, checks cooperative cancellation and returns no
+    /// partial result on failure. Direct/fluent APIs share this implementation.
+    /// </summary>
+    public static ExactPipelineResult Evaluate(IEnumerable<ExactPipelineStep> steps,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(steps);
+        cancellationToken.ThrowIfCancellationRequested();
         var finite = steps.Take(MaximumSteps + 1).ToImmutableArray();
-        Validate(finite);
+        Validate(finite, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
         var quantity = new Quantity(finite[0].Unit.ToBase(finite[0].Amount),
             finite[0].Unit.Dimension);
         CheckMagnitude(quantity.Value);
         UnitDefinition? presentation = finite[0].Unit;
+        var observations = ImmutableArray.CreateBuilder<ExactPipelineStepSnapshot>(finite.Length);
+        observations.Add(new ExactPipelineStepSnapshot(0, ExactPipelineStepKind.Start,
+            quantity, presentation.Id));
         for (var i = 1; i < finite.Length; i++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             var step = finite[i];
             switch (step.Kind)
             {
@@ -110,9 +147,13 @@ public sealed class ExactQuantityPipeline
                     throw new InvalidOperationException("Unrecognized pipeline step.");
             }
             CheckMagnitude(quantity.Value);
+            observations.Add(new ExactPipelineStepSnapshot(i, step.Kind,
+                quantity, presentation?.Id));
         }
+        cancellationToken.ThrowIfCancellationRequested();
         var trace = finite.Select(step => step.Kind).ToImmutableArray();
-        var result = new ExactPipelineResult(quantity, presentation, trace);
+        var result = new ExactPipelineResult(quantity, presentation, trace,
+            observations.MoveToImmutable());
         CheckMagnitude(result.DisplayValue);
         return result;
     }
@@ -124,7 +165,8 @@ public sealed class ExactQuantityPipeline
         return new(_steps.Add(step));
     }
 
-    private static void Validate(ImmutableArray<ExactPipelineStep> steps)
+    private static void Validate(ImmutableArray<ExactPipelineStep> steps,
+        CancellationToken cancellationToken)
     {
         if (steps.IsDefaultOrEmpty || steps.Length > MaximumSteps ||
             steps[0] is null || steps[0].Kind != ExactPipelineStepKind.Start)
@@ -132,6 +174,7 @@ public sealed class ExactQuantityPipeline
         var dimension = steps[0].Unit.Dimension;
         for (var i = 0; i < steps.Length; i++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             var step = steps[i] ??
                 throw new ArgumentException("Null step is not admitted.", nameof(steps));
             ValidateUnit(step.Unit);
@@ -169,8 +212,8 @@ public sealed class ExactQuantityPipeline
 
     private static void CheckMagnitude(ExactRational value)
     {
-        if (value.Numerator.ToString(System.Globalization.CultureInfo.InvariantCulture).Length >
-                MaximumNumeralDigits + 1 ||
+        if (System.Numerics.BigInteger.Abs(value.Numerator)
+                .ToString(System.Globalization.CultureInfo.InvariantCulture).Length > MaximumNumeralDigits ||
             value.Denominator.ToString(System.Globalization.CultureInfo.InvariantCulture).Length >
                 MaximumNumeralDigits)
             throw new ArgumentOutOfRangeException(nameof(value), "Exact numerator/denominator budget exceeded.");
