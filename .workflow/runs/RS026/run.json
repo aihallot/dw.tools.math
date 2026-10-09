@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "id": "RS026",
+  "title": "Close M1 with independent package gate and draft AURA adoption dossier",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M1 exact Math extraction gate and AURA adoption dossier",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W03",
+    "M1-W03-C02",
+    "M1-W03-C02-T1",
+    "M1-W03-C02-T1-A",
+    "M1-W03-C02-T1-B",
+    "M1-W03-C02-T1-C",
+    "M1-W03-C02-T2",
+    "M1-W03-C02-T2-A",
+    "M1-W03-C02-T2-B",
+    "M1-W03-C02-T2-C"
+  ],
+  "contribution": {
+    "summary": "Qualify and close M1 by documenting the AURA adoption contract and seven-domain recipient matrix, re-running locked exact Math tests and standalone NuGet consumer from a local-only feed, validating all package SHA/dependency receipts, and enforcing a read-only C# release-gate validator.",
+    "value": "Delivers a defensible standalone Math 0.2.0-preview release gate with nine qualified product chunks, source rights, reproducible source-controlled consumer and an owner-transferable but untransmitted AURA migration/rollback request, without overstating external adoption.",
+    "debtChanges": [
+      "AURA recipient adoption is not performed or asserted; the MATH-XR-002 request remains draft with transmission none, and all seven AURA consumer/test domains remain unverified.",
+      "The M1 gate records locally observed package SHA-256s; output binaries remain ignored and unpublished, and cross-toolchain bit-for-bit reproduction is not claimed.",
+      "The original AURA culture-priority resolver differs intentionally from explicit Math unit profiles; future recipient adoption must independently approve and test this semantic difference before cutover."
+    ],
+    "nextAction": "Refine the first M2 Math IR chunk from native and product roadmap while preserving the closed M1 gate; deliver the owner-mediated MATH-XR-002 draft to AURA only through separately authorized external workflow.",
+    "achievements": [
+      {
+        "projectNode": "M1-W03-C02-T1-A",
+        "achievement": "The AURA adoption question is explicitly scoped: owner-pinned Math package identities and source rights, no automatic transmission, no source removal, and full recipient compatibility review."
+      },
+      {
+        "projectNode": "M1-W03-C02-T1-B",
+        "achievement": "Seven AURA consumer families are represented with pending call-site/test inventories and no invented recipient execution; the standalone package proof and observed local hashes are linked."
+      },
+      {
+        "projectNode": "M1-W03-C02-T1-C",
+        "achievement": "The recorded M1 local extraction decision qualifies Math package availability and a draft adoption request while withholding all external adoption/acknowledgement claims."
+      },
+      {
+        "projectNode": "M1-W03-C02-T1",
+        "achievement": "The adoption dossier task closes with an owner-transferable draft request, a complete indicative seven-domain test matrix and a versioned local Math package contract."
+      },
+      {
+        "projectNode": "M1-W03-C02-T2-A",
+        "achievement": "Release-boundary questions distinguish local Math validation from external AURA implementation, owner rights, preserved prior references and recipient-owned rollback."
+      },
+      {
+        "projectNode": "M1-W03-C02-T2-B",
+        "achievement": "The locked solution, complete quantity tests, foundation chain, three nupkg content/dependency hashes and package-only local consumer run are independently re-observed for M1."
+      },
+      {
+        "projectNode": "M1-W03-C02-T2-C",
+        "achievement": "The local M1 gate decision records observed packages/hashes, accepted source divergences, withheld external adoption and rollback responsibilities in durable audited evidence."
+      },
+      {
+        "projectNode": "M1-W03-C02-T2",
+        "achievement": "The extraction boundary and rollback task closes with a re-executed local gate, verified owner rights, neutral C# gate validator, and the recipient-only migration/rollback protocol."
+      },
+      {
+        "projectNode": "M1-W03-C02",
+        "achievement": "The AURA adoption dossier and local extraction gate chunk is completed with draft-only external request, seven-domain consumer matrix, executable gate evidence and no sibling repository mutations."
+      },
+      {
+        "projectNode": "M1-W03",
+        "achievement": "Distribution and adoption work package completes with the previously qualified package-only NuGet consumer and the independent documented M1 extraction/adoption boundary gate."
+      },
+      {
+        "projectNode": "M1",
+        "achievement": "All nine exact-core product chunks and all three work packages are qualified; locked tests, local NuGet packages and isolated consumer support M1 release availability, while AURA adoption remains unstarted."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    "docs/planning/decisions/m1-w03-c02.md",
+    "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+    "docs/coordination/matrices/m1-aura-adoption-consumers.json",
+    "docs/distribution/m1-release-gate.md",
+    "docs/planning/ValidateM1Gate.cs",
+    "docs/planning/evidence/M1-W03-C02-gate.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m1-gate",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM1Gate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}

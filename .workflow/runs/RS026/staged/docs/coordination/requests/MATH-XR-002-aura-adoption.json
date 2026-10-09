@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "MATH-XR-002-AURA-ADOPTION",
+  "status": "draft",
+  "transmission": "none",
+  "recipient": "AURA owning agent",
+  "math_chunk": "M1-W03-C02",
+  "purpose": "Request a separate, owner-authorized AURA-side review and staged adoption of the independently qualified Math exact-quantity packages; this draft is not evidence of any AURA migration.",
+  "math_release": "M1 / 0.2.0-preview",
+  "math_evidence": "docs/planning/evidence/M1-W03-C01-qualified.json",
+  "math_release_gate": "docs/planning/evidence/M1-W03-C02-gate.json",
+  "source_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "source_baseline": "docs/planning/source-baseline.json",
+  "rights_evidence": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+  "package_contract": [
+    {
+      "package_id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "depends_on": []
+    },
+    {
+      "package_id": "dw.quantities.expression",
+      "version": "0.2.0-preview.1",
+      "depends_on": [
+        "dw.quantities"
+      ]
+    },
+    {
+      "package_id": "dw.quantities.standard",
+      "version": "0.2.0-preview.1",
+      "depends_on": [
+        "dw.quantities",
+        "dw.quantities.expression"
+      ]
+    }
+  ],
+  "artifact_availability": {
+    "mode": "local-only",
+    "published_publicly": false,
+    "published_to_aura": false,
+    "publish_or_transfer_required_before_external_adoption": true,
+    "package_artifact_sha256_source": "docs/planning/evidence/M1-W03-C01-qualified.json",
+    "note": "These hashes describe the exact observed RS025 local packages; the AURA agent must pin the SHA of the actual transferred feed artifact and verify identity, not assume rebuilding yields the same bytes."
+  },
+  "consumer_matrix": "docs/coordination/matrices/m1-aura-adoption-consumers.json",
+  "requested_actions": [
+    "Independently inspect AURA's current repository revision and compare relevant selected-source hashes to the pinned Math transfer baseline; enumerate drift before proposing a cutover.",
+    "Obtain the authorized three NuGet artifacts from an approved feed or owner-controlled transfer, record PackageId/version/SHA-256 and validate nuspec dependency and net10.0 assembly graph.",
+    "Enumerate actual current transitive call sites and tests in core math actions, nutrition, data transformations, SQLite, JSON, kernel and worker/CLI before any edit.",
+    "On an AURA-owned branch, adapt only pure-math references and facade calls; keep localization, culture resolution, command errors, permissions, worker policies, configuration and data contracts owned by AURA.",
+    "Qualify exact independent oracles: 1/3+1/6=1/2, 1 inch=127/5000 m, 1 KiB=1024 B, 32°F=0°C, rational versus irrational roots, temperature intervals, explicit US/UK/AU cup/pint assumptions, checked exponents and parser bounds.",
+    "Assess and obtain owner decisions for any inherited behavior divergence, notably historical culture-priority unit selection versus explicit Math profiles, before changing public behavior.",
+    "Run and record current AURA pure-math, core action, nutrition, data-transform, SQLite, JSON, kernel, worker/CLI and affected end-to-end tests; include failures and exclusions rather than fabricating coverage.",
+    "Retain prior AURA sources/references and rollback instructions until package use, public contracts, data effects and CLI behavior are independently verified.",
+    "Return a structured AURA-side acknowledgement with reviewed commit, package hashes, consumer diffs, passing/failing tests, outstanding divergences, rollback receipt and adoption state; do not remove duplicate sources until verified."
+  ],
+  "non_goals": [
+    "No AURA, Decision or MCDM repository change is authorized from Math.",
+    "No automatic package publication, reference cutover, source deletion, data migration or private build artifact upload.",
+    "No assumption that a Math release gate is evidence of external consumer adoption.",
+    "No change to AURA permissions, localization, worker configuration or stable command/error contracts without explicit owner-side review."
+  ],
+  "rollback": {
+    "prerequisite": "Record the full pre-adoption AURA commit and previous package/source references before changes.",
+    "trigger": "Any failed numerical, compatibility, privacy, data, CLI, packaging or worker regression, or any unapproved behavior divergence.",
+    "procedure": "Restore previous AURA references and source/facade wiring on an AURA-owned branch, invalidate any changed package caches and rerun the impacted consumer and CLI regression matrix.",
+    "verification": "Produce the restored AURA commit and tests; Math never applies the rollback itself."
+  },
+  "expected_response": {
+    "allowed_decisions": [
+      "accepted",
+      "needs_change",
+      "rejected"
+    ],
+    "required_fields": [
+      "reviewed_aura_revision",
+      "selected_source_drift",
+      "actual_package_version_hashes",
+      "consumer_inventory",
+      "per_domain_test_results",
+      "semantic_divergences_and_owner_decisions",
+      "rollback_commit_or_references",
+      "result_commit_if_any",
+      "adoption_state"
+    ],
+    "adoption_state_options": [
+      "not_started",
+      "in_review",
+      "implemented",
+      "verified",
+      "rejected"
+    ],
+    "external_verified_only_if": "Recipient's own durable reference and test evidence establish verified adoption."
+  }
+}
