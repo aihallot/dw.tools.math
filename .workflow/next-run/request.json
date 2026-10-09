@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "id": "RS038",
+  "title": "Qualify M2 mathematical IR/composition preview with six-phase evidence, cross-layer tests and isolated local NuGet consumer",
+  "commitMessage": "feat: qualify M2 local IR and composition release gate",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2"
+  ],
+  "contribution": {
+    "summary": "Independently qualify the six completed M2 phases and twelve task contracts, run eight new cross-layer IR/composition tests and all composition/IR/quantities/foundation regressions, package three locked local Math NuGets, verify each manifest's dependency graph and SHA-256, then compile and execute an isolated .NET 10 NuGet-only consumer before closing the M2 milestone.",
+    "value": "A verified local preview of bounded typed IR and deterministic provider-neutral exact composition with reproducible exact replay, independent of AURA and from direct project references, can be consumed through transitive NuGet packages.",
+    "debtChanges": [
+      "M2 closure covers the accepted preview only; M3 numerical algorithms, M4 symbolic algorithms, M5 interoperability and external AURA adoption remain open/planned.",
+      "Structural hashes are canonical tree identities, not algebraic equivalence proofs; binary64 cross-platform bit-for-bit portability remains unqualified.",
+      "NuGet artifacts are verified local ignored outputs with observed SHA-256, not publicly published or installed in AURA.",
+      "Provider description, versioned identity and local replay do not grant provider execution, AURA permission or remote/distributed service guarantees."
+    ],
+    "nextAction": "After qualified M2 gate success, inspect DWF milestone transition and prepare the next substantial admissible M3-W01-C01 phase from its accepted backlog; keep M3 scientific scope and independent RED/GREEN evidence bounded.",
+    "achievements": [
+      {
+        "projectNode": "M2",
+        "achievement": "The M2 six-phase preview gate is qualified by complete native/product evidence, eight independent cross-layer contract tests, full local regressions, a locked three-package NuGet dependency graph with observed hashes, and a clean isolated consumer; M3 and external AURA adoption are not claimed."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/m2-release-gate.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m2-gate.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-gate.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "tests/projects/dw.tools.math.composition.tests/M2GateIntegrationTests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/projects/dw.tools.math.composition.tests/M2GateIntegrationTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.composition.tests/M2GateIntegrationTests.cs"
+    },
+    {
+      "path": "docs/distribution/m2-release-gate.md",
+      "sourcePath": "files/docs/distribution/m2-release-gate.md"
+    },
+    {
+      "path": "docs/planning/decisions/m2-gate.md",
+      "sourcePath": "files/docs/planning/decisions/m2-gate.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS037/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.36"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/1/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/5/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/6/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/14/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/16/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/17/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/18/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/19/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W02-C03-boundary-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "explicit-nonfinal-exact-replay-cache-quota-and-portability-boundaries-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+      "jsonPointer": "/status",
+      "expectedValue": "draft"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+      "jsonPointer": "/transmission",
+      "expectedValue": "none"
+    }
+  ]
+}
