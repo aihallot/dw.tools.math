@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "M2-W01-C02-functional-green",
+  "status": "immutable-typed-IR-functional-contract-qualified-adversarial-boundaries-pending",
+  "source_adr": "docs/planning/evidence/M2-W01-C01-qualified.json",
+  "independent_red": "docs/planning/evidence/M2-W01-C02-red.json",
+  "ir_assembly": "dw.tools.math.ir",
+  "package_id": "dw.tools.math.ir",
+  "package_version": "0.3.0-preview.1",
+  "package_sha256": "165720ca0299ac7eaaf34ab8320ce8312c8b807b33af8949c8919c867f7900ec",
+  "package_bytes": 13459,
+  "package_dependencies": [
+    "dw.quantities"
+  ],
+  "local_only_package": true,
+  "model_source": "src/projects/dw.tools.math.ir/IrModel.cs",
+  "model_sha256": "d9e1748e43d6dac8746c44a157c95ce12149e2c74babcdc4b304ae613aee3e4b",
+  "focused_tests": 10,
+  "independent_reds_now_green": 2,
+  "complete_ir_tests_passed": true,
+  "complete_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "adoption_transmitted": false,
+  "oracles": [
+    "Exact 1/3 and finite IEEE-754 0.1 have distinct types; no implicit widening or shared rounding-based equality.",
+    "Binary64 negative zero preserves its exact sign bit; non-finite NaN and infinity are rejected.",
+    "Free and bound symbols with identical labels have disjoint identities; bound scopes and slots remain stable.",
+    "sqrt(square(x)) over the real domain normalizes to abs(x) unless an explicit nonnegative assumption proves x \u003E= 0.",
+    "A bound x with the same label cannot borrow a free x positivity assumption.",
+    "(x^2-1)/(x-1) preserves x != 1 and its original divide node; no automatic unsound simplification.",
+    "Quantities preserve canonical unit ID, explicit UnitSystem, dimension and temperature tag.",
+    "Operation and assumption inputs are defensively copied; unsupported arity and invalid symbol identity are refused."
+  ],
+  "pending_boundary_work": [
+    "T2 must independently RED/GREEN resource quotas for maximum tree nodes, depth, matrix shape and identifier limits across whole graphs, not just local factory bounds.",
+    "T2 must verify immutability and reject unsafe cyclic/unbound or duplicate scopes, and qualify exact/approximate policies under adversarial inputs.",
+    "M2-W01-C03 owns the canonical versioned JSON codec; no serialization or universal symbolic engine is claimed here."
+  ],
+  "limits": "The admitted IR is a provider-neutral AST and one guarded sqrt-square rule; no general symbolic solver, automatic simplifier or OpenMath/MathML interchange codec is delivered."
+}

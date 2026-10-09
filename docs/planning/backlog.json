@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.26",
+  "plan_version": "0.1.27",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -2547,7 +2547,7 @@
       "title": "Typed objects and assumptions",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M2-W01-C01"
       ],
@@ -2572,10 +2572,33 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS028 establishes a two-case independent missing-IR RED, delivers a standalone provider-free immutable typed dw.tools.math.ir assembly referencing only ExactRational\u0027s quantity layer, and independently tests 10 exact/approximate, bound symbol, sqrt-square domain restriction, immutable collection and contract behaviors. T2 boundary quotas and package consumer hardening remain to be qualified before C02 closes.",
+      "files": [
+        "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
+        "src/projects/dw.tools.math.ir/packages.lock.json",
+        "src/projects/dw.tools.math.ir/IrModel.cs",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+        "tests/projects/dw.tools.math.ir.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.ir.tests/M2W01C02Tests.cs",
+        "tests/projects/dw.quantities.tests/M2W01C02RedTests.cs",
+        "dw.tools.math.slnx",
+        "docs/planning/evidence/M2-W01-C02-red.json",
+        "docs/planning/evidence/M2-W01-C02-functional-green.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M2W01C02RedTests",
+        "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C02Tests",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M2-W01-C02-red.json",
+        "docs/planning/evidence/M2-W01-C02-functional-green.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2583,29 +2606,38 @@
           "title": "Contract and outcome",
           "behavior": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
           "test_case": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W01-C02-red.json",
+            "docs/planning/evidence/M2-W01-C02-functional-green.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W01-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C02-red.json"
+              ]
             },
             {
               "id": "M2-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C02-functional-green.json"
+              ]
             },
             {
               "id": "M2-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W01-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C02-functional-green.json"
+              ]
             }
           ]
         },
@@ -2614,14 +2646,14 @@
           "title": "Boundaries and integration",
           "behavior": "NaN, infinity, complex values, and intervals have declared policies; no implicit widening; size and immutability are bounded.",
           "test_case": "NaN, infinity, complex values, and intervals have declared policies; no implicit widening; size and immutability are bounded.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M2-W01-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: NaN, infinity, complex values, and intervals have declared policies; no implicit widening; size and immutability are bounded.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
