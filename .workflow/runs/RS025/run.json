@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "id": "RS025",
+  "title": "Qualify isolated exact Math NuGet distribution and package consumer",
+  "state": "prepared",
+  "commitMessage": "feat: qualify standalone exact Math NuGet consumer and package provenance",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1",
+    "M1-W03",
+    "M1-W03-C01",
+    "M1-W03-C01-T1",
+    "M1-W03-C01-T1-R",
+    "M1-W03-C01-T1-G",
+    "M1-W03-C01-T1-V",
+    "M1-W03-C01-T2",
+    "M1-W03-C01-T2-R",
+    "M1-W03-C01-T2-G",
+    "M1-W03-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Build the three exact Math local NuGet packages, inspect every nuspec and artifact hash, and run a package-reference-only .NET consumer restoring solely from a bounded local feed. Qualify exact arithmetic, inch/IEC conversion, tolerance, parsing, temperatures, owner source rights and deliberate historical divergence.",
+    "value": "Demonstrates genuinely isolated AURA-free reuse of Math\u0027s three independently compiled packages through a reproducible local-only NuGet consumer and durable dependency/hash provenance rather than project-reference smoke tests.",
+    "debtChanges": [
+      "The three nupkg binaries remain under ignored disposable build outputs; durable source recipe and observed hashes are committed, but no binary is published to a public or sibling feed.",
+      "Artifact SHA-256 values identify the exact attempt\u0027s packages, not bit-for-bit reproducibility across SDK/toolchain environments or a third-party code-signing audit.",
+      "AURA\u0027s legacy culture-priority resolver and Math\u0027s explicit unit profiles intentionally differ under the accepted M0 decision; external AURA adoption and any historical defect resolution need their own review."
+    ],
+    "nextAction": "Prepare the M1-W03-C02 AURA adoption dossier, explicit external consumer and rollback matrix, and local M1 release gate, without modifying sibling repositories or claiming adoption before it is verified.",
+    "achievements": [
+      {
+        "projectNode": "M1-W03-C01-T1-R",
+        "achievement": "Before packaging, a package-only .NET consumer cannot restore the absent exact Math packages from the explicitly cleared, local-only NuGet feed. Its failure is observed without contacting remote sources."
+      },
+      {
+        "projectNode": "M1-W03-C01-T1-G",
+        "achievement": "Build and inspect three standalone exact Math NuGet packages; install a source-controlled package-only console consumer with local-only feed configuration and exact arithmetic, conversion, comparison, parser and temperature checks."
+      },
+      {
+        "projectNode": "M1-W03-C01-T1-V",
+        "achievement": "All three packages contain expected net10.0 assemblies, NuGet identities and allowed Math dependencies; locked Math build, full quantities tests, foundation chain and local-only consumer restore/build/run pass."
+      },
+      {
+        "projectNode": "M1-W03-C01-T1",
+        "achievement": "The full isolated mathematical package-consumption contract completes from observed absence through local feed production, NuGet-only restore and independently executed exact calculation and conversion oracles."
+      },
+      {
+        "projectNode": "M1-W03-C01-T2-R",
+        "achievement": "Before local build publication, the distribution rights/hashes receipt and package guidance are absent. Provenance requirements are recognized independently of the consumer\u0027s initial missing-package RED."
+      },
+      {
+        "projectNode": "M1-W03-C01-T2-G",
+        "achievement": "Inspect every generated nupkg manifest and SHA-256, verify the owner-authorized proprietary source rights and publish a bounded local-only distribution recipe documenting historical source divergences and no external package publication."
+      },
+      {
+        "projectNode": "M1-W03-C01-T2-V",
+        "achievement": "Verify the package dependency whitelist, artifact assembly contents, recorded hashes, owner attestation and exact consumer results; retain explicit differences from AURA culture-priority resolution without changing inherited mathematical oracles."
+      },
+      {
+        "projectNode": "M1-W03-C01-T2",
+        "achievement": "The distribution provenance and boundary contract completes with executable local feed evidence, rights notices, hashes, explicitly limited publication scope and accepted AURA divergence policy."
+      },
+      {
+        "projectNode": "M1-W03-C01",
+        "achievement": "The parity and isolated consumption chunk completes with three local NuGet package artifacts, hash/dependency receipts, a reproducible source-controlled package-only consumer, exact independent smoke oracles and no sibling repository writes."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    "tests/consumers/exact-math-smoke/exact-math-smoke.csproj",
+    "tests/consumers/exact-math-smoke/NuGet.Config",
+    "tests/consumers/exact-math-smoke/Program.cs",
+    "docs/distribution/exact-math-packages.md",
+    "docs/planning/evidence/M1-W03-C01-red.json",
+    "docs/planning/evidence/M1-W03-C01-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
