@@ -150,7 +150,7 @@ try
         <PackageReference Include="dw.tools.math.composition" Version="0.3.0-preview.1" />
       </ItemGroup>
     </Project>
-""");
+    """);
     File.WriteAllText(Path.Combine(consumer,"Program.cs"),"""
     using dw.quantities;
     using Dw.Tools.Math.Ir;
@@ -170,7 +170,7 @@ try
         !second.Receipt!.CacheHit)
         throw new Exception("Independent composition/replay NuGet consumer failed");
     Console.WriteLine("dw.tools.math/m2-gate-consumer/0.3 qualified");
-""");
+    """);
     Required(root,"dotnet","restore",project,"--source",feed);
     var output=Required(root,"dotnet","run","--project",project,"-c","Release","--no-restore");
     if(!output.Contains("dw.tools.math/m2-gate-consumer/0.3 qualified",StringComparison.Ordinal))
