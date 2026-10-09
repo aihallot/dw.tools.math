@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.24",
+  "plan_version": "0.1.25",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -41,7 +41,7 @@
       "version": "0.2.0-preview",
       "title": "Extract the exact AURA core",
       "outcome": "Deliver standalone exact-math packages and their AURA adoption dossier.",
-      "status": "in_progress",
+      "status": "done",
       "gate": "G-M1",
       "required_chunks": [
         "M1-W01-C01",
@@ -57,7 +57,12 @@
       "depends_on": [
         "M0"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/planning/evidence/M1-W01-C04-qualified.json",
+        "docs/planning/evidence/M1-W02-C03-qualified.json",
+        "docs/planning/evidence/M1-W03-C01-qualified.json",
+        "docs/planning/evidence/M1-W03-C02-gate.json"
+      ]
     },
     {
       "id": "M2",
@@ -260,7 +265,7 @@
       "id": "M1-W03",
       "release": "M1",
       "title": "Distribution and adoption",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.distribution/",
         "tests/projects/dw.tools.math.distribution.tests/",
@@ -268,7 +273,11 @@
         "tests/consumers/exact-math-smoke/",
         "docs/distribution/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M1-W03-C01-qualified.json",
+        "docs/planning/evidence/M1-W03-C02-gate.json"
+      ]
     },
     {
       "id": "M2-W01",
@@ -2272,7 +2281,7 @@
       "title": "AURA adoption dossier and extraction gate",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M1-W03-C01"
       ],
@@ -2294,10 +2303,28 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS026 creates a draft AURA adoption request and seven-domain consumer test matrix without transmission; independently rechecks locked Math solution and full tests, foundation chain and transfer architecture; builds/inspects three local NuGet packages and executes the isolated consumer; and qualifies the complete nine-chunk local M1 gate while explicitly excluding external adoption.",
+      "files": [
+        "docs/planning/decisions/m1-w03-c02.md",
+        "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+        "docs/coordination/matrices/m1-aura-adoption-consumers.json",
+        "docs/distribution/m1-release-gate.md",
+        "docs/planning/ValidateM1Gate.cs",
+        "docs/planning/evidence/M1-W03-C02-gate.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs",
+        "dotnet run --file docs/planning/ValidateM1Gate.cs -- --check",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/decisions/m1-w03-c02.md",
+        "docs/planning/evidence/M1-W03-C02-gate.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2305,29 +2332,38 @@
           "title": "Contract and outcome",
           "behavior": "Prepare identified packages, consumer matrix, and AURA adoption prompt; verify the local M1 gate.",
           "test_case": "All prior M1 chunks prove their recipes; the request covers math, nutrition, data transforms/SQLite/JSON, kernel, and worker tests.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/decisions/m1-w03-c02.md",
+            "docs/planning/evidence/M1-W03-C02-gate.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W03-C02-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Prepare identified packages, consumer matrix, and AURA adoption prompt; verify the local M1 gate.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/coordination/requests/MATH-XR-002-aura-adoption.json"
+              ]
             },
             {
               "id": "M1-W03-C02-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: All prior M1 chunks prove their recipes; the request covers math, nutrition, data transforms/SQLite/JSON, kernel, and worker tests.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/coordination/matrices/m1-aura-adoption-consumers.json"
+              ]
             },
             {
               "id": "M1-W03-C02-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M1-W03-C02-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C02-gate.json"
+              ]
             }
           ]
         },
@@ -2336,29 +2372,38 @@
           "title": "Boundaries and integration",
           "behavior": "Delete no AURA code; rollback uses prior references; external adoption remains separate from Math availability.",
           "test_case": "Delete no AURA code; rollback uses prior references; external adoption remains separate from Math availability.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/decisions/m1-w03-c02.md",
+            "docs/planning/evidence/M1-W03-C02-gate.json"
+          ],
           "subtasks": [
             {
               "id": "M1-W03-C02-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Delete no AURA code; rollback uses prior references; external adoption remains separate from Math availability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/coordination/requests/MATH-XR-002-aura-adoption.json"
+              ]
             },
             {
               "id": "M1-W03-C02-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Delete no AURA code; rollback uses prior references; external adoption remains separate from Math availability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/coordination/matrices/m1-aura-adoption-consumers.json"
+              ]
             },
             {
               "id": "M1-W03-C02-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M1-W03-C02-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M1-W03-C02-gate.json"
+              ]
             }
           ]
         }

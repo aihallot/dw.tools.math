@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "id": "M1-W03-C02-gate",
+  "status": "local-exact-m1-gate-qualified-external-adoption-not-started",
+  "milestone": "M1",
+  "release_version": "0.2.0-preview",
+  "plan_version": "0.1.25",
+  "checked_chunk_ids": [
+    "M1-W01-C01",
+    "M1-W01-C02",
+    "M1-W01-C03",
+    "M1-W01-C04",
+    "M1-W02-C01",
+    "M1-W02-C02",
+    "M1-W02-C03",
+    "M1-W03-C01",
+    "M1-W03-C02"
+  ],
+  "prior_package_receipt": "docs/planning/evidence/M1-W03-C01-qualified.json",
+  "source_baseline_revision": "82a6b435a387a7e116b47a6b2c433ae9e067bf21",
+  "owner_rights_evidence": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+  "newly_built_packages": [
+    {
+      "package_id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "sha256": "1f1e8902058110ad4ca3d409f07f81d164e6076c620462a11f6c9e2400c1955d",
+      "bytes": 14743,
+      "dependencies": [],
+      "assembly": "lib/net10.0/dw.quantities.dll",
+      "scope": "local ignored output; neither publicly published nor installed in AURA"
+    },
+    {
+      "package_id": "dw.quantities.expression",
+      "version": "0.2.0-preview.1",
+      "sha256": "9e22adb1c47e851e6853361b2e0a5d8289adb598c746990e718a9818a3f976da",
+      "bytes": 13935,
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "assembly": "lib/net10.0/dw.quantities.expression.dll",
+      "scope": "local ignored output; neither publicly published nor installed in AURA"
+    },
+    {
+      "package_id": "dw.quantities.standard",
+      "version": "0.2.0-preview.1",
+      "sha256": "5d03e0ba9d822c632192f6f634d1a09864114939bd267f9ebefd8e89b6ef8108",
+      "bytes": 13591,
+      "dependencies": [
+        "dw.quantities.expression",
+        "dw.quantities"
+      ],
+      "assembly": "lib/net10.0/dw.quantities.standard.dll",
+      "scope": "local ignored output; neither publicly published nor installed in AURA"
+    }
+  ],
+  "locked_solution_and_full_regressions_passed": true,
+  "packages_verified": true,
+  "local_consumer_execution_passed": true,
+  "local_consumer_output": "dw.tools.math/exact-consumer/0.2 qualified",
+  "aura_adoption_request": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+  "aura_consumer_matrix": "docs/coordination/matrices/m1-aura-adoption-consumers.json",
+  "aura_transmission": "none",
+  "external_adoption": "not_adopted",
+  "recipient_tests_run": false,
+  "gate_decision": "docs/planning/decisions/m1-w03-c02.md",
+  "release_recipe": "docs/distribution/m1-release-gate.md",
+  "validation_commands": [
+    "dotnet restore dw.tools.math.slnx --locked-mode",
+    "dotnet build dw.tools.math.slnx -c Release --no-restore",
+    "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --no-restore --no-build",
+    "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+    "dotnet run --file docs/planning/ValidateTransferArchitecture.cs",
+    "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+    "dotnet run --file docs/planning/ValidateM1Gate.cs -- --check"
+  ],
+  "limitations": [
+    "Local M1 availability is a release-gate result and is not an acknowledgement, adoption or integration of Math in AURA.",
+    "The AURA request is draft with transmission none; seven consumer domains remain not adopted and not tested externally.",
+    "SHA-256s identify only newly observed local ignored .nupkg output; a rebuild may generate different binary hashes.",
+    "No AURA/Decision/MCDM or other sibling repository source is modified.",
+    "AURA retains host policies, localization, command envelopes, worker and CLI contracts until recipient-side tested cutover."
+  ]
+}
