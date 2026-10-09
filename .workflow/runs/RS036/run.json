@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "id": "RS036",
+  "title": "Qualify versioned exact replay identities and optional bounded local semantic cache",
+  "state": "prepared",
+  "commitMessage": "feat: add versioned exact replay identity and local cache contracts",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M2",
+    "M2-W02",
+    "M2-W02-C03",
+    "M2-W02-C03-T1",
+    "M2-W02-C03-T1-R",
+    "M2-W02-C03-T1-G",
+    "M2-W02-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Activate M2-W02-C03 and qualify deterministic domain-separated SHA-256 replay keys over ordered exact quantity steps, canonical rational magnitudes, unit definition and five explicit context versions; expose repeatable local exact replay and optional caller-owned bounded 32-entry FIFO cache; record independently observed missing-contract RED, 14 GREEN tests and locked composition/IR/foundation regression/package verification.",
+    "value": "Consumers can identify reproducible exact arithmetic requests, invalidate identity on input or policy/version changes, replay without provider execution, and opt in to bounded in-memory reuse without confusing a cache hit with provider or AURA authorization.",
+    "debtChanges": [
+      "M2-W02-C03-T2 remains planned; independently qualify partial status, cache quotas and replay portability boundaries before C03 or M2-W02 closure.",
+      "Caller-supplied provider/catalog/assumption labels are opaque identity metadata; they do not attest to installed providers, correctness or authorization.",
+      "Cache is optional, volatile, FIFO and bounded; no persistent store, remote cache, mutable global registry or provider execution.",
+      "No binary64 cross-platform bitwise reproducibility, AURA integration, permission, symbolic engine or external adoption is claimed."
+    ],
+    "nextAction": "Qualify M2-W02-C03-T2 with adversarial cache-quota, partial-status and replay/version boundary tests; close C03 and M2-W02 only if all accepted evidence is satisfied.",
+    "achievements": [
+      {
+        "projectNode": "M2-W02-C03-T1-R",
+        "achievement": "A compiled independent RED verifies that no public versioned exact replay entrypoint existed before adding the new contract."
+      },
+      {
+        "projectNode": "M2-W02-C03-T1-G",
+        "achievement": "A domain-separated exact replay key includes typed numerical steps, unit semantics, assumptions/policy/catalog/tolerance/provider labels and supports optional caller-owned finite FIFO reuse without external execution."
+      },
+      {
+        "projectNode": "M2-W02-C03-T1-V",
+        "achievement": "Fourteen independent GREEN tests verify identity changes, deterministic exact replay, cancellation, cache hits/eviction, bounded inputs and no provider authority, alongside locked composition/IR/foundation and package regressions."
+      },
+      {
+        "projectNode": "M2-W02-C03-T1",
+        "achievement": "The bounded replay and semantic identity contract is qualified; cache integration and partial-status boundaries remain for T2, and C03 stays in progress."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/exact-replay-cache.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M2-W02-C03-contract-qualified.json",
+    "docs/planning/evidence/M2-W02-C03-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M2.md",
+    "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C03RedTests.cs",
+    "tests/projects/dw.tools.math.composition.tests/M2W02C03Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
