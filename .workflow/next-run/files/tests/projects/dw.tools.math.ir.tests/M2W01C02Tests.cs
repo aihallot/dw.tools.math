@@ -16,7 +16,8 @@ public sealed class M2W01C02Tests
         Assert.AreEqual("1/3", exact.Value.ToFractionString());
         Assert.IsFalse(typeof(IrExactScalar).GetMethods(BindingFlags.Public | BindingFlags.Static)
             .Any(method => method.Name is "op_Implicit" or "op_Explicit"));
-        Assert.IsFalse(exact is IrFiniteBinary64Scalar);
+        IrScalar exactNode = exact;
+        Assert.IsFalse(exactNode is IrFiniteBinary64Scalar);
     }
 
     [TestMethod]
@@ -24,7 +25,8 @@ public sealed class M2W01C02Tests
     {
         var binary = IrFiniteBinary64Scalar.FromDouble(0.1);
         Assert.AreEqual(BitConverter.DoubleToInt64Bits(0.1), binary.Ieee754Bits);
-        Assert.IsFalse(binary is IrExactScalar);
+        IrScalar approxNode = binary;
+        Assert.IsFalse(approxNode is IrExactScalar);
         Assert.AreNotEqual(binary, (object)new IrExactScalar(new ExactRational(1, 10)));
         var negativeZero = IrFiniteBinary64Scalar.FromDouble(-0.0);
         Assert.AreEqual(BitConverter.DoubleToInt64Bits(-0.0), negativeZero.Ieee754Bits);
