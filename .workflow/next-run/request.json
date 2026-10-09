@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "id": "RS029",
+  "title": "Qualify bounded immutable IR graphs matrices and assumption domains",
+  "commitMessage": "feat: qualify bounded immutable mathematical IR graphs and matrices",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M2",
+    "M2-W01",
+    "M2-W01-C02",
+    "M2-W01-C02-T2",
+    "M2-W01-C02-T2-R",
+    "M2-W01-C02-T2-G",
+    "M2-W01-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Observe four independent typed IR boundary REDs, harden all public application/restriction factories to enforce depth and expanded node quotas, add rectangular immutable homogeneous matrices and domain-correct assumptions, then qualify nine adversarial tests and all locked Math/package regressions to close M2-W01-C02.",
+    "value": "Makes the new provider-neutral .NET IR safely bounded on whole immutable graph representations rather than only local factory arity, while rejecting accidental numeric widening and assumption leakage across symbol domains.",
+    "debtChanges": [
+      "A matrix shape may admit up to 4096 cells, but whole-graph evaluation applies the stricter 1024 expanded-node ceiling; tests prove that 1023 matrix cells plus the matrix node are admitted.",
+      "The IR carries stable bound/free symbol identities but does not implement executable binder evaluation, alpha-equivalent substitution, or full unbound-variable validation. These remain explicit future capabilities.",
+      "Canonical JSON, semantic hashes, provider execution and OpenMath/Content MathML adapters remain out of scope until subsequent M2 chunks; no external AURA adoption is claimed."
+    ],
+    "nextAction": "Prepare M2-W01-C03 versioned canonical JSON codec with independent RED for lossless rationals, quantities, symbol binding and exclusions; reject unknown versions and malformed graphs without guessing semantic equivalence.",
+    "achievements": [
+      {
+        "projectNode": "M2-W01-C02-T2-R",
+        "achievement": "Four independently executed prechange REDs show unchecked total graph depth, shared-DAG expanded node budget, absent matrix type and domain-leaking assumptions."
+      },
+      {
+        "projectNode": "M2-W01-C02-T2-G",
+        "achievement": "Public IR factories enforce 1024 expanded node occurrences and depth 32, homogeneous immutable matrix shape, defensive copying, domain-aware assumptions and duplicate-guard rejection."
+      },
+      {
+        "projectNode": "M2-W01-C02-T2-V",
+        "achievement": "All four REDs turn green; nine adversarial tests check exact admission/rejection boundaries, shared subgraphs, matrix shapes, immutable data, distinct symbol domains, scopes and nonfinite policies, plus full IR/quantity/foundation regressions and package inspection."
+      },
+      {
+        "projectNode": "M2-W01-C02-T2",
+        "achievement": "IR adversarial boundaries and immutable collection integration are qualified, including explicit distinct 4096-cell local matrix shape and stricter global 1024-node budget, with future binder/codec limitations recorded."
+      },
+      {
+        "projectNode": "M2-W01-C02",
+        "achievement": "The admitted immutable typed IR chunk is qualified through exact/approximate scalars, real-domain restrictions, stable symbol identity, public whole-graph quotas and homogeneous matrices; canonical JSON remains the next independent chunk."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    "src/projects/dw.tools.math.ir/IrModel.cs",
+    "src/projects/dw.tools.math.ir/IrGraphLimits.cs",
+    "src/projects/dw.tools.math.ir/IrMatrix.cs",
+    "tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryRedTests.cs",
+    "tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryTests.cs",
+    "docs/planning/evidence/M2-W01-C02-boundary-red.json",
+    "docs/planning/evidence/M2-W01-C02-boundary-qualified.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    ".aura/workflow/plan/project.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.ir/IrModel.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/IrModel.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.ir/IrGraphLimits.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/IrGraphLimits.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.ir/IrMatrix.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.ir/IrMatrix.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryRedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryRedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.ir.tests/M2W01C02BoundaryTests.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS028/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.27"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/tasks/1/status",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/15/tasks/1/subtasks/0/status",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/phases/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/workPackages/0/phases/1/tasks/1/state",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-W01-C02-functional-green.json",
+      "jsonPointer": "/status",
+      "expectedValue": "immutable-typed-IR-functional-contract-qualified-adversarial-boundaries-pending"
+    }
+  ]
+}
