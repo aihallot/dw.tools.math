@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "M2-W01-C02-boundary-qualified",
+  "status": "immutable-bounded-typed-IR-chunk-qualified",
+  "prior_exact_contract": "docs/planning/evidence/M2-W01-C02-functional-green.json",
+  "independent_red": "docs/planning/evidence/M2-W01-C02-boundary-red.json",
+  "modified_model_source": "src/projects/dw.tools.math.ir/IrModel.cs",
+  "model_sha256": "50da7f35bd9d550dbca928d6b88c2c9259c93d6b67a287366718e3fed46b9fca",
+  "graph_validator_source": "src/projects/dw.tools.math.ir/IrGraphLimits.cs",
+  "graph_validator_sha256": "9296ec953f00d0fb203802c2ddf6cdd447bb092355144ee6cdd050d5fa65479d",
+  "matrix_source": "src/projects/dw.tools.math.ir/IrMatrix.cs",
+  "matrix_sha256": "5e391c8d406ce84c0d2599f5d734dcd5e21928dfb2b57587fd02a85d618bb5cf",
+  "package_id": "dw.tools.math.ir",
+  "package_version": "0.3.0-preview.1",
+  "package_sha256": "4120fb3e8ae7d380cff5ec1f83487bc82096f5c98b3de6682b823d5602c96a72",
+  "package_dependencies": [
+    "dw.quantities"
+  ],
+  "focused_reds_now_green": 4,
+  "independent_boundary_tests_passed": 9,
+  "full_ir_test_suite_passed": true,
+  "full_quantities_suite_passed": true,
+  "foundation_chain_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "accepted_contracts": [
+    "All public IrApply and IrRestrictedExpression constructions validate whole graph depth \u003C=32.",
+    "Expanded IR node occurrences \u003C=1024 are enforced even when a subgraph is referenced more than once.",
+    "Immutable rectangular homogeneous exact/approximate scalar matrices carry shape and defensive copied cells.",
+    "Matrix source shapes have at most 4096 cells; expanded whole-graph quota can be stricter (at most 1023 scalar cells plus one matrix node).",
+    "Exact and approximate cells cannot be combined by silent numeric widening.",
+    "IR nonnegative assumptions require both stable symbol identity and matching scalar domain; free and bound scopes remain distinct.",
+    "Duplicate identical assumptions and oversized assumption collections are rejected.",
+    "Finite IEEE754 and exact rational identities and admitted real sqrt-square transformations survive full regressions."
+  ],
+  "qualified_limits": {
+    "maximum_expanded_nodes": 1024,
+    "maximum_tree_depth": 32,
+    "maximum_matrix_shape_cells": 4096,
+    "maximum_assumptions": 32,
+    "maximum_identifier_characters": 128
+  },
+  "remaining_ownership": [
+    "An executable binder, alpha-equivalent substitution and unbound-symbol validation are not implemented; stable bound symbol identities are carried as data only.",
+    "IR codec, semantic hashing and versioned interchange are owned by M2-W01-C03 and not claimed here.",
+    "The limits apply to admitted immutable in-memory IR factories; no arbitrary input parser, CAS, complex numbers or external AURA adoption is qualified."
+  ],
+  "external_adoption_transmitted": false
+}
