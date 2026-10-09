@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.34",
+  "plan_version": "0.1.35",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3146,7 +3146,7 @@
       "title": "Bounded replay and semantic cache",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M2-W02-C02"
       ],
@@ -3171,40 +3171,67 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS036 T1 qualifies domain-separated deterministic SHA-256 exact replay identities for ordered typed quantity pipeline steps and explicit assumption, calculation, catalog, tolerance, provider version labels, plus an optional volatile FIFO cache of at most 32 successes. One controlled public-contract RED and 14 independent GREEN tests cover key separation, replay and cache behavior, with all local product regressions. T2 remains planned for deeper quota, partial replay and portability boundaries.",
+      "files": [
+        "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
+        "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C03RedTests.cs",
+        "tests/projects/dw.tools.math.composition.tests/M2W02C03Tests.cs",
+        "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+        "docs/distribution/exact-replay-cache.md",
+        "docs/planning/evidence/M2-W02-C03-contract-red.json",
+        "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj -c Release --filter FullyQualifiedName~M2W02C03",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet pack src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M2-W02-C03-contract-red.json",
+        "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+      ],
+      "readiness": "active T1 qualified; independently falsify T2 partial, quota and compatibility boundaries before phase closure",
       "tasks": [
         {
           "id": "M2-W02-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Define identities for inputs, policy, providers, and catalog; support explicit replay and an optional local cache.",
           "test_case": "Changing assumption, catalog, tolerance, or provider version invalidates the key; identical exact computation replays under a constant contract.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W02-C03-contract-red.json",
+            "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W02-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Changing assumption, catalog, tolerance, or provider version invalidates the key; identical exact computation replays under a constant contract.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-contract-red.json"
+              ]
             },
             {
               "id": "M2-W02-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Define identities for inputs, policy, providers, and catalog; support explicit replay and an optional local cache.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+              ]
             },
             {
               "id": "M2-W02-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W02-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W02-C03-contract-qualified.json"
+              ]
             }
           ]
         },
