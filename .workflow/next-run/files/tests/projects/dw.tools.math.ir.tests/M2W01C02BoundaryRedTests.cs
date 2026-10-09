@@ -11,7 +11,7 @@ public sealed class M2W01C02BoundaryRedTests
     public void PublicFactoriesMustBoundTotalDepth()
     {
         IrNode node = new IrExactScalar(ExactRational.One);
-        for (var i = 0; i < 33; i++)
+        for (var i = 0; i < 31; i++)
             node = IrApply.Create(IrOperation.Square, [node]);
         Assert.ThrowsExactly<ArgumentOutOfRangeException>(
             () => IrApply.Create(IrOperation.Square, [node]),
@@ -22,7 +22,7 @@ public sealed class M2W01C02BoundaryRedTests
     public void PublicFactoriesMustBoundExpandedNodeBudget()
     {
         IrNode node = new IrExactScalar(ExactRational.One);
-        for (var i = 0; i < 9; i++)
+        for (var i = 0; i < 8; i++)
             node = IrApply.Create(IrOperation.Add, [node, node]);
         Assert.ThrowsExactly<ArgumentOutOfRangeException>(
             () => IrApply.Create(IrOperation.Add, [node, node]),
