@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "M2-W01-C03-functional-qualified",
+  "status": "versioned-exact-ir-json-codec-functional-qualified-boundary-hardening-pending",
+  "prior_bounded_ir": "docs/planning/evidence/M2-W01-C02-boundary-qualified.json",
+  "independent_red": "docs/planning/evidence/M2-W01-C03-functional-red.json",
+  "source": "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+  "source_sha256": "80d2c57b348272e14aee0350cdec561e3aabc29a385d84ed378967aa585ccd44",
+  "schema_version_id": "math-ir/1",
+  "package_id": "dw.tools.math.ir",
+  "package_version": "0.3.0-preview.1",
+  "package_sha256": "3669be1cccbf65326b1e52bf530f4384ad3cd07827f5cd0181a89e19c56f8716",
+  "red_tests_green": 2,
+  "independent_round_trip_oracles": 10,
+  "full_ir_and_quantities_tests_passed": true,
+  "foundation_chain_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "contracts": [
+    "BigInteger numerator and denominator remain exact decimal JSON strings without binary64 widening.",
+    "Finite binary64 retains IEEE-754 bit patterns including negative zero.",
+    "Canonical unit ID, explicit system, all eight dimensions and temperature kind round trip.",
+    "Free and bound symbol identities and scope remain distinct.",
+    "Matrices, operations and x != 1 restrictions preserve structure.",
+    "Repeated encoding and encode-decode-encode are byte-identical for the admitted subset.",
+    "Unknown version, noncanonical rational and mismatched symbol identity are rejected."
+  ],
+  "pending": [
+    "T2 must reject duplicate and unknown fields, malformed shapes and unsafe scopes with independent RED/GREEN.",
+    "T2 must distinguish semantic structural hash from presentation hash; structural bytes do not establish algebraic equivalence.",
+    "No universal CAS, external OpenMath/MathML codec or AURA adoption is claimed."
+  ],
+  "adoption_transmitted": false
+}

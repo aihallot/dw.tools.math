@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.28",
+  "plan_version": "0.1.29",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -2701,7 +2701,7 @@
       "title": "Canonical IR codec and validation",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M2-W01-C02"
       ],
@@ -2726,10 +2726,26 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
+      "refinement": "RS030 independently observes two missing-public-codec REDs and qualifies math-ir/1 canonical structural JSON encoding and decoding for huge exact rationals, finite binary64 bits, quantities, typed symbols, matrices, operations and restrictions. Ten direct round-trip oracles and full IR/quantity/foundation regressions pass. T2 owns adversarial malformed-input and hash semantics.",
+      "files": [
+        "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+        "tests/projects/dw.tools.math.ir.tests/M2W01C03RedTests.cs",
+        "tests/projects/dw.tools.math.ir.tests/M2W01C03Tests.cs",
+        "docs/distribution/ir-canonical-json.md",
+        "docs/planning/evidence/M2-W01-C03-functional-red.json",
+        "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release --filter FullyQualifiedName~M2W01C03Tests",
+        "dotnet test tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M2-W01-C03-functional-red.json",
+        "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+      ],
       "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
       "tasks": [
         {
@@ -2737,29 +2753,38 @@
           "title": "Contract and outcome",
           "behavior": "Serialize the versioned JSON subset without numeric loss and with structural/semantic validation.",
           "test_case": "Encode/decode preserves rationals, units, assumptions, and binding; repeated canonical encoding is identical under the same policy.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M2-W01-C03-functional-red.json",
+            "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M2-W01-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Encode/decode preserves rationals, units, assumptions, and binding; repeated canonical encoding is identical under the same policy.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-functional-red.json"
+              ]
             },
             {
               "id": "M2-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Serialize the versioned JSON subset without numeric loss and with structural/semantic validation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+              ]
             },
             {
               "id": "M2-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M2-W01-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M2-W01-C03-functional-qualified.json"
+              ]
             }
           ]
         },
@@ -2768,14 +2793,14 @@
           "title": "Boundaries and integration",
           "behavior": "Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
           "test_case": "Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M2-W01-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject unknown version, excessive depth, unbound symbols, and invalid form; keep presentation hash separate from semantic hash.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
