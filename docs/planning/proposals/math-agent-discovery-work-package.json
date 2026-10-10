@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "kind": "proposed-product-roadmap-extension",
+  "status": "draft-not-merged-into-canonical-backlog-or-native-DWF",
+  "created_at": "2026-10-10",
+  "project": "aihallot/dw.tools.math",
+  "cross_repository_authority": {
+    "repository": "aihallot/dw.tools.decision",
+    "commit": "3c8a1b3a1ef818039a7c84ca5fa19666215c5a4b",
+    "protocol": "dw.discovery/1.0.0-draft.1",
+    "manifest_schema": 2,
+    "pinned_schema": "docs/discovery/interop/decision-1.0.0-draft.1/manifest.schema.json",
+    "pinned_cases": "docs/discovery/interop/decision-1.0.0-draft.1/conformance.json"
+  },
+  "placement": {
+    "milestone": "M3",
+    "work_package": "M3-W03",
+    "title": "Cross-agent capability discovery and skills",
+    "release_version": "0.4.0-preview",
+    "rationale": "Distinct work package, not a redefinition of numerical matrix/vector C02; M2 qualification remains immutable.",
+    "depends_on": [
+      "M2"
+    ],
+    "competing_active_path": "M3-W01-C02",
+    "scheduling_note": "Requires authorized native-DWF structural expansion and safe active-hierarchy selection; do not invent status or start an unadmitted parallel run."
+  },
+  "work_package": {
+    "id": "M3-W03",
+    "release": "M3",
+    "title": "Cross-agent capability discovery and skills",
+    "status": "planned",
+    "paths": [
+      "src/projects/dw.tools.math.discovery/",
+      "tests/projects/dw.tools.math.discovery.tests/",
+      "tools/dw.tools.math.skillgen/",
+      ".agents/skills/dw-tools-math/",
+      "docs/discovery/",
+      "docs/"
+    ],
+    "path_policy": "Only deliberately selected agent-facing functions are skill-published; ordinary .NET helpers remain internal to the audit. No dependency on Decision or AURA."
+  },
+  "chunks": [
+    {
+      "id": "M3-W03-C01",
+      "tag": "discovery",
+      "release": "M3",
+      "work_package": "M3-W03",
+      "title": "Portable Discovery protocol and introspected seed",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M2-W02-C03"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M3-W03-C01-R1",
+        "M3-W03-C01-R2"
+      ],
+      "deliverables": "Package dw.tools.math.discovery with explicit opt-in exposure, canonical CLR binding fingerprints, portable dw.discovery draft-1 schema validation, and independently qualified Math seed.",
+      "acceptance": "All 13 pinned Decision fixtures produce identical expected acceptance decisions; no public helpers or Documented-only APIs leak; 3 selected Math static methods resolve by exact CLR signatures and compiled examples.",
+      "boundary_acceptance": "Do not infer BrokerReady, serializable request DTOs, AURA permission, native provider availability or cross-repository interoperability from copying files; do not mutate stable M2/M3 contracts just to attach attributes.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/discovery/",
+        "src/projects/dw.tools.math.discovery/",
+        "tools/dw.tools.math.skillgen/"
+      ],
+      "readiness": "planned; requires topology rebaseline and exact staged files/commands before DWF ready",
+      "refinement": "Proposed cross-repository compatibility contract only; neither success nor product capability is claimed.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M3-W03-C01-T1",
+          "title": "Protocol and conformance",
+          "behavior": "Implement an independent C# parser/validator for dw.discovery schema 2 with deterministic canonical fingerprint; verify exact pinned Decision draft-1 fixtures.",
+          "test_case": "2 accepted and 11 rejected Decision fixtures, including stale signature, duplicate ID, missing limits, owner mismatch, Documented leak, premature BrokerReady and authorization claim.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C01-T1-R",
+              "title": "RED",
+              "description": "Independently falsify: 2 accepted and 11 rejected Decision fixtures, including stale signature, duplicate ID, missing limits, owner mismatch, Documented leak, premature BrokerReady and authorization claim.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C01-T1-G",
+              "title": "GREEN",
+              "description": "Implement only: Implement an independent C# parser/validator for dw.discovery schema 2 with deterministic canonical fingerprint; verify exact pinned Decision draft-1 fixtures.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C01-T1.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M3-W03-C01-T2",
+          "title": "Selected CLR seed",
+          "behavior": "Bind a minimal, intentionally selected set of qualified Math static operations to actual signatures with explicit semantic metadata and compiled C# examples.",
+          "test_case": "Reflection resolves each admitted signature; direct compilation of examples succeeds; no overload ambiguity, invented provider execution, or implicit helper selection.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C01-T2-R",
+              "title": "RED",
+              "description": "Independently falsify: Reflection resolves each admitted signature; direct compilation of examples succeeds; no overload ambiguity, invented provider execution, or implicit helper selection.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C01-T2-G",
+              "title": "GREEN",
+              "description": "Implement only: Bind a minimal, intentionally selected set of qualified Math static operations to actual signatures with explicit semantic metadata and compiled C# examples.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C01-T2-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C01-T2.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M3-W03-C02",
+      "tag": "discovery",
+      "release": "M3",
+      "work_package": "M3-W03",
+      "title": "Hierarchical agent skill and deterministic generation",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M3-W03-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M3-W03-C02-R1",
+        "M3-W03-C02-R2"
+      ],
+      "deliverables": "Generate .agents/skills/dw-tools-math with compact SKILL.md, capability families and pages, invocation examples, manifest.json and skill-version.json; generator generate/check/list/explain.",
+      "acceptance": "Two independently repeated generations produce byte-identical manifests and skill pages; check detects stale/missing generated files and version/CLR binding drift; Math seed appears exclusively by intentional agent selection.",
+      "boundary_acceptance": "Markdown is progressive reading context, never AURA's broker protocol; serialization shape must not be invented; separate library/package/protocol/generator/bundle versions.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/discovery/",
+        "src/projects/dw.tools.math.discovery/",
+        "tools/dw.tools.math.skillgen/"
+      ],
+      "readiness": "planned; requires topology rebaseline and exact staged files/commands before DWF ready",
+      "refinement": "Proposed cross-repository compatibility contract only; neither success nor product capability is claimed.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M3-W03-C02-T1",
+          "title": "Deterministic skill generator",
+          "behavior": "Create a C# generator deriving catalogue, typed signatures and metadata from actual Math assemblies; output progressive pages and a broker-consumable manifest without touching unrelated paths.",
+          "test_case": "generate/check/list/explain deterministic; duplicate capability ID or member/signature mismatch fails; exact catalog equals opted-in AgentCallable operations.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C02-T1-R",
+              "title": "RED",
+              "description": "Independently falsify: generate/check/list/explain deterministic; duplicate capability ID or member/signature mismatch fails; exact catalog equals opted-in AgentCallable operations.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C02-T1-G",
+              "title": "GREEN",
+              "description": "Implement only: Create a C# generator deriving catalogue, typed signatures and metadata from actual Math assemblies; output progressive pages and a broker-consumable manifest without touching unrelated paths.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C02-T1-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C02-T1.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M3-W03-C02-T2",
+          "title": "Version and provenance qualification",
+          "behavior": "Qualify manifest/skill rebuild using compiled examples, stable source provenance, version matrices and drift detection; document no BrokerReady claims.",
+          "test_case": "Missing page, stale fingerprint, unsupported owner/schema/version and helper/catalogue-only publication fail independently.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C02-T2-R",
+              "title": "RED",
+              "description": "Independently falsify: Missing page, stale fingerprint, unsupported owner/schema/version and helper/catalogue-only publication fail independently.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C02-T2-G",
+              "title": "GREEN",
+              "description": "Implement only: Qualify manifest/skill rebuild using compiled examples, stable source provenance, version matrices and drift detection; document no BrokerReady claims.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C02-T2-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C02-T2.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M3-W03-C03",
+      "tag": "discovery",
+      "release": "M3",
+      "work_package": "M3-W03",
+      "title": "API coverage rules and broker-neutral boundaries",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M3-W03-C02"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M3-W03-C03-R1",
+        "M3-W03-C03-R2"
+      ],
+      "deliverables": "Complete explicit Math external-surface classification and progressive annotation/selection strategy for new APIs; prepare broker-neutral DTO envelope only where verified.",
+      "acceptance": "Public helpers are absent from the skill; every selected function has domain, numeric model, limits, statuses, examples and actual signature; no BrokerReady without JSON reconstruction/adapter conformance.",
+      "boundary_acceptance": "Existing unselected APIs may be classified without blocking unrelated runs; AURA retains routing, authorization, execution and confirmation; no dependency Math -> Decision/AURA.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/discovery/",
+        "src/projects/dw.tools.math.discovery/",
+        "tools/dw.tools.math.skillgen/"
+      ],
+      "readiness": "planned; requires topology rebaseline and exact staged files/commands before DWF ready",
+      "refinement": "Proposed cross-repository compatibility contract only; neither success nor product capability is claimed.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M3-W03-C03-T1",
+          "title": "Internal inventory and native attribute policy",
+          "behavior": "Inventory public Math assemblies internally, classify helpers/Documented/AgentCallable/BrokerReady, and add native opt-in metadata to selected operations without rewriting historic M2 scientific contracts.",
+          "test_case": "Report includes coverage and exclusion reasons for public methods; newly selected APIs require current metadata and regenerated skill, historic gaps measured but not automatically blocking.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C03-T1-R",
+              "title": "RED",
+              "description": "Independently falsify: Report includes coverage and exclusion reasons for public methods; newly selected APIs require current metadata and regenerated skill, historic gaps measured but not automatically blocking.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C03-T1-G",
+              "title": "GREEN",
+              "description": "Implement only: Inventory public Math assemblies internally, classify helpers/Documented/AgentCallable/BrokerReady, and add native opt-in metadata to selected operations without rewriting historic M2 scientific contracts.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C03-T1-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C03-T1.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M3-W03-C03-T2",
+          "title": "Broker boundary and qualified handoff",
+          "behavior": "Define DTO/JSON binding admission and an invocation envelope contract for future brokers, with explicit authorization=runtime-only and provider availability unknown until broker checks.",
+          "test_case": "No non-serializable type is BrokerReady; malformed invocation is rejected, no actual provider call or authorization is inferred, and Math/Decision portable fixtures match independently.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M3-W03-C03-T2-R",
+              "title": "RED",
+              "description": "Independently falsify: No non-serializable type is BrokerReady; malformed invocation is rejected, no actual provider call or authorization is inferred, and Math/Decision portable fixtures match independently.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C03-T2-G",
+              "title": "GREEN",
+              "description": "Implement only: Define DTO/JSON binding admission and an invocation envelope contract for future brokers, with explicit authorization=runtime-only and provider availability unknown until broker checks.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M3-W03-C03-T2-V",
+              "title": "Verify and document",
+              "description": "Run qualified tests and record bounded evidence for M3-W03-C03-T2.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "M3-W03-C01-R1",
+      "release": "M3",
+      "owner": "M3-W03-C01",
+      "title": "Package dw.tools.math.discovery with explicit opt-in exposure, canonical CLR binding fingerprints, portable dw.discovery draft-1 schema validation, and independently qualified Math seed.",
+      "acceptance": "All 13 pinned Decision fixtures produce identical expected acceptance decisions; no public helpers or Documented-only APIs leak; 3 selected Math static methods resolve by exact CLR signatures and compiled examples."
+    },
+    {
+      "id": "M3-W03-C01-R2",
+      "release": "M3",
+      "owner": "M3-W03-C01",
+      "title": "Do not infer BrokerReady, serializable request DTOs, AURA permission, native provider availability or cross-repository interoperability from copying files; do not mutate stable M2/M3 contracts just to attach attributes.",
+      "acceptance": "Do not infer BrokerReady, serializable request DTOs, AURA permission, native provider availability or cross-repository interoperability from copying files; do not mutate stable M2/M3 contracts just to attach attributes."
+    },
+    {
+      "id": "M3-W03-C02-R1",
+      "release": "M3",
+      "owner": "M3-W03-C02",
+      "title": "Generate .agents/skills/dw-tools-math with compact SKILL.md, capability families and pages, invocation examples, manifest.json and skill-version.json; generator generate/check/list/explain.",
+      "acceptance": "Two independently repeated generations produce byte-identical manifests and skill pages; check detects stale/missing generated files and version/CLR binding drift; Math seed appears exclusively by intentional agent selection."
+    },
+    {
+      "id": "M3-W03-C02-R2",
+      "release": "M3",
+      "owner": "M3-W03-C02",
+      "title": "Markdown is progressive reading context, never AURA's broker protocol; serialization shape must not be invented; separate library/package/protocol/generator/bundle versions.",
+      "acceptance": "Markdown is progressive reading context, never AURA's broker protocol; serialization shape must not be invented; separate library/package/protocol/generator/bundle versions."
+    },
+    {
+      "id": "M3-W03-C03-R1",
+      "release": "M3",
+      "owner": "M3-W03-C03",
+      "title": "Complete explicit Math external-surface classification and progressive annotation/selection strategy for new APIs; prepare broker-neutral DTO envelope only where verified.",
+      "acceptance": "Public helpers are absent from the skill; every selected function has domain, numeric model, limits, statuses, examples and actual signature; no BrokerReady without JSON reconstruction/adapter conformance."
+    },
+    {
+      "id": "M3-W03-C03-R2",
+      "release": "M3",
+      "owner": "M3-W03-C03",
+      "title": "Existing unselected APIs may be classified without blocking unrelated runs; AURA retains routing, authorization, execution and confirmation; no dependency Math -> Decision/AURA.",
+      "acceptance": "Existing unselected APIs may be classified without blocking unrelated runs; AURA retains routing, authorization, execution and confirmation; no dependency Math -> Decision/AURA."
+    }
+  ],
+  "gate_changes": {
+    "release": "M3",
+    "append_required_chunks": [
+      "M3-W03-C01",
+      "M3-W03-C02",
+      "M3-W03-C03"
+    ],
+    "must_update": [
+      "docs/planning/backlog.json",
+      ".aura/workflow/plan/project.json",
+      "docs/planning/ValidateNativeDwfAdoption.cs",
+      "docs/planning/dwf-map.json",
+      "docs/planning/planning-validation.json",
+      "docs/planning/versions/M3.md",
+      "docs/planning/README.md"
+    ],
+    "cannot_relabel": [
+      "M3-W01-C02",
+      "M3-W01-C03"
+    ],
+    "do_not_mark_done": [
+      "M3",
+      "M3-W03",
+      "M3-W03-C01",
+      "M3-W03-C02",
+      "M3-W03-C03"
+    ]
+  },
+  "workflow_authoring_limitation": "Current compiled Payload SDK exposes EnsurePhaseWithTasks for existing work packages, not a typed EnsureWorkPackage or milestone builder; native validator hardcodes 496 nodes/17 WPs/53 phases. Reconcile using an explicitly admitted native-plan authoring operation, not hand-mutated ProjectPlan JSON inside an execution payload.",
+  "release_policy": "Do not claim Math/Decision interoperability until Math independently runs the identical pinned protocol and fixtures; do not claim BrokerReady without verified serializer and runtime adapter."
+}
