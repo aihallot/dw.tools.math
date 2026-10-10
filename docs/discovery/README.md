@@ -24,6 +24,8 @@ Instance methods such as `FiniteMatrix64.Multiply` and `FiniteVector64.Dot` are 
 
 See the [dedicated proposed backlog extension](../planning/proposals/math-agent-discovery-work-package.json). Its stable proposed identifiers are `M3-W03-C01` (portable protocol and seed), `M3-W03-C02` (versioned generator and skill), and `M3-W03-C03` (API coverage and broker-neutral admission). The proposal does **not** modify the canonical `docs/planning/backlog.json`, the active native DWF plan, or existing M3 numerical scopes.
 
+The generic native-DWF authoring and safe sibling-continuation request is tracked in [Workflow issue #139](https://github.com/aihallot/dw.tools.workflow/issues/139). The issue is feedback, not a delivered SDK feature.
+
 Current DWF state after RS040: M3 and M3-W01 are in progress, `M3-W01-C02` is the active numerical phase, and its T2 boundary work is still planned. Introducing `M3-W03` requires an explicitly supported topology authoring/reconciliation step. The current SDK has a typed `EnsurePhaseWithTasks` for an **existing** work package, not a typed new-work-package builder; the Math native-plan validator currently fixes 8 milestones, 17 work packages, 53 phases and 496 mapped nodes. Do not hand-write a fake native `ProjectPlan` transition or smuggle Discovery into a numerical task.
 
 **Next safe execution path:** qualify a supported native-DWF roadmap extension first (or request a workflow feedback capability from the owning Workflow project). Only then select the Discovery C01 run with its own native project nodes and RED/GREEN evidence. Keep M2 qualification immutable and do not claim cross-repo interoperability until Math executes the pinned Decision suite itself.
