@@ -1,8 +1,31 @@
 # Math / Decision — agent discovery interoperability decision
 
-**Status:** Math-side architectural alignment proposal, 2026-10-10. No discovery implementation, native DWF scope transition, package publication, cross-repository adoption, or AURA integration is implied.
+**Status:** Math-side architectural alignment decision, updated 2026-10-10 after Decision RS041. Math has not yet implemented or qualified Discovery, and no native DWF scope transition, cross-repository adoption, or AURA integration is implied.
 
 **Authorities inspected:** `aihallot/dw.tools.math` main at RS040 success `55d861036b7f53d0ff139eb2b85c49e2e9ffce26`; `aihallot/dw.tools.decision` main at `52ebabd55c1fd7497380712f78b95f96c30828dd`, where `docs/planning/backlog.json` version `2026-10-07.37` and `docs/planning/versions/D6.md` plan `D6 — Découverte introspectable et skill agent`.
+
+## Verified Decision RS041 alignment — 2026-10-10
+
+**New remote authorities.** Decision `main` at commit `3c8a1b3a1ef818039a7c84ca5fa19666215c5a4b` (`feat: harmonize agent discovery contracts with Math`); completed `.aura/workflow/reports/RS041/attempt-001.json`, `outcome=succeeded`, first attempt with no reported mutation boundary violation. Canonical Decision backlog version `2026-10-10.39` now marks `D6-W01-C05` (Math/Decision harmonization) `done`. Decision's previous C01/C02 seed and GameTheory extensions are also `done`.
+
+**Actual protocol candidate** (not merely a backlog description):
+
+- Protocol id `dw.discovery`, version **`1.0.0-draft.1`**; manifest schema **2**. Decision preserved its historical manifest schema 1 in `docs/discovery/legacy/decision-manifest-v1.schema.json`; it must not reinterpret existing v1 as schema 2.
+- Decision Discovery package and skill bundle **`1.6.0-preview.3`**, generator **`1.1.0`**. Math will have its own package/version; these numbers are **not** Math release versions.
+- Normative candidate files to pin and independently qualify in Math: `docs/discovery/manifest.schema.json` and `docs/discovery/conformance.json` in the exact Decision commit above. Use the same expected accept/reject outcomes including valid Math/Decision owners, unknown schema/protocol, Documented leakage, wrong owner, stale binding fingerprint/signature, absent limits, premature BrokerReady, metadata authorization, invalid versions, duplicate IDs and catalogue-only leakage.
+- Additional implementation references (not dependencies): `src/projects/dw.tools.decision.discovery/DiscoveryPublication.cs`, `tools/dw.tools.decision.skillgen/Alignment.cs`, `docs/discovery/agent-surface.json`, and generated `.agents/skills/dw-tools-decision/references/manifest.json`.
+- Six deliberately selected Decision direct-.NET `AgentCallable` capabilities are in the generated skill, **zero `BrokerReady`**. `Documented` and catalogue-only scientific methods remain outside the agent-facing skill. This is verified Decision behavior, **not** evidence that the matching Math toolchain works.
+
+**Implications for Math authoring.**
+
+1. Adopt *that exact pinned draft protocol and portable conformance suite* as the reference for Math's first independently tested implementation. Any proposed semantic divergence must be recorded and resolved explicitly with Decision before announcing a stable shared contract; do not fork the schema silently.
+2. First run an internal Math public-surface audit; publish only intentionally selected, bound and qualified operations. The inventory of helpers or `Documented` members never auto-appears in the skill or broker-ready manifest.
+3. Begin with public **static** methods already available with complete CLR signatures. Decision's initial binding implementation selects public static methods; Math instance methods such as `FiniteMatrix64.Multiply` or `FiniteVector64.Dot` must either await qualified instance construction/serialization or be exposed by deliberately designed static agent-facing façades. Do not misrepresent an instance member as a static binding.
+4. Example eligible static seed *candidates*, subject to formal admission: `ExactQuantityPipeline.Evaluate(IEnumerable<ExactPipelineStep>)`, `IrCanonicalJsonCodec.Encode(IrNode)`, `IrCanonicalHashes.SemanticStructuralSha256(IrNode)`, and `NumericalMatrixTransport.ToApproximateIr(FiniteMatrix64)`. These use different CLR types and guarantees. They are **not** automatically broker-ready DTO operations.
+5. Preserve Math's current M2/M3 product evidence. The first Math Discovery work should introduce explicitly accepted backlog/native-DWF scope rather than modifying or renaming the existing `M3-W01-C02` numerical contract; the active Numerical T2 remains independently owed.
+6. Keep the common schema ownership decision separate. If the neutral `dw.discovery` module is later established in `aihallot/dw.tools`, extract only common protocol/attributes/conformance. Neither Math nor Decision should depend on the other's analytical assembly.
+
+**Convergence gate:** identical expected results from the pinned Decision fixtures, deterministic `generate/check`, verified C# signatures and actual compiled examples, stable owner-prefixed capability IDs, no helper/documented leakage, no fabricated serialization, no authorization claims. A successful Math run establishes two independent implementations of a **draft** protocol; a stable shared schema still needs an explicit owner/version decision.
 
 ## Decision
 
@@ -15,7 +38,7 @@ Math should adopt the **same conceptual discovery protocol** as Decision D6, rat
 5. Checked `generate`, `check`, `list`, `explain` modes, drift detection, source provenance, invalid-signature/duplicate-ID refusal, and separate versions for package/schema/generator/skill bundle.
 6. No inverse dependency on AURA, no inferred provider availability, execution permission or broker authority.
 
-The normative schema and attribute vocabulary should be coordinated **before either project freezes its v1**. Decision's D6 is currently a *ready plan*, not an implemented common schema. For a truly shared owner, `aihallot/dw.tools` could host a separate future `dw.discovery/` project, subject to an explicit cross-project ownership decision. Until that choice is made, independent package implementations must not claim wire-format equivalence without shared schema fixtures and compatibility tests. No code or files in Decision or `dw.tools` are changed by this note.
+The normative schema and attribute vocabulary must be coordinated **before a stable shared protocol is frozen**. Decision has now qualified a local *draft candidate* (RS041), but it does not establish Math interoperability without independent conformance. A neutral `dw.discovery/` project in `aihallot/dw.tools` remains a future explicit cross-project ownership decision. Until then, Math must not depend on Decision's product assembly or claim wire equivalence without running the same pinned schema and fixtures. No code or files in Decision or `dw.tools` are changed by this note.
 
 ## Critical distinction: inventory, catalogue, skill and invocability
 
