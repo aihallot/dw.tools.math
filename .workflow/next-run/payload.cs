@@ -267,7 +267,7 @@ static (int Code,string Output) Run(string root,string executable,params string[
 {
     using var process=new Process{StartInfo=new ProcessStartInfo{
         FileName=executable,WorkingDirectory=root,UseShellExecute=false,
-        RedirectStandardOutput=true,RedirectStandardError:true}};
+        RedirectStandardOutput=true,RedirectStandardError=true}};
     process.StartInfo.Environment["DOTNET_NOLOGO"]="1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
     foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
