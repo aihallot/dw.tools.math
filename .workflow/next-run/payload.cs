@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
@@ -11,6 +10,8 @@ using Dw.Tools.Workflow.Payloads;
 const string Solution="dw.tools.math.slnx";
 const string TestProject="tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj";
 const string GateTests="tests/projects/dw.tools.math.composition.tests/M2GateIntegrationTests.cs";
+const string ConsumerProject="tests/consumers/m2-gate/M2GateConsumer.csproj";
+const string ConsumerSource="tests/consumers/m2-gate/Program.cs";
 const string Recipe="docs/distribution/m2-release-gate.md";
 const string Decision="docs/planning/decisions/m2-gate.md";
 const string Evidence="docs/planning/evidence/M2-gate.json";
@@ -77,7 +78,7 @@ if((string?)external["status"]!="draft" || (string?)external["transmission"]!="n
 p.ProjectPlan.RequireNodeState("M2",baseState?"in-progress":"done");
 p.ProjectPlan.RequireNodeState("M3","not-ready");
 
-foreach(var file in new[]{GateTests,Recipe,Decision})
+foreach(var file in new[]{GateTests,Recipe,Decision,ConsumerProject,ConsumerSource})
     p.Files.ReplaceFromStaged("staged/"+file,file);
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
@@ -98,8 +99,7 @@ Required(root,"pwsh","-NoProfile","-NonInteractive","-File","scripts/verify.ps1"
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
 var feed=Path.Combine(root,"build","artifacts","m2-gate-local-feed");
-Directory.CreateDirectory(feed);
-var observed=new JsonArray();
+var observed=new List<JsonNode>();
 foreach(var (id,version,project,deps) in packages)
 {
     Required(root,"dotnet","pack",project,"-c","Release","--no-build","--no-restore","-o",feed);
@@ -133,53 +133,28 @@ foreach(var (id,version,project,deps) in packages)
     });
 }
 
-var consumer=Path.Combine(Path.GetTempPath(),"dw-tools-math-m2-gate-"+Guid.NewGuid().ToString("N"));
-Directory.CreateDirectory(consumer);
-try
-{
-    var project=Path.Combine(consumer,"M2GateConsumer.csproj");
-    File.WriteAllText(project,"""
-    <Project Sdk="Microsoft.NET.Sdk">
-      <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="dw.tools.math.composition" Version="0.3.0-preview.1" />
-      </ItemGroup>
-    </Project>
-    """);
-    File.WriteAllText(Path.Combine(consumer,"Program.cs"),"""
-    using dw.quantities;
-    using Dw.Tools.Math.Ir;
-    using Dw.Tools.Math.Composition;
-    var fraction = new ExactRational(1,3);
-    var coded = IrCanonicalJsonCodec.Encode(new IrExactScalar(fraction));
-    if (((IrExactScalar)IrCanonicalJsonCodec.Decode(coded)).Value != fraction)
-        throw new Exception("Independent IR/quantities NuGet roundtrip failed");
-    var m = new UnitDefinition("m","m","metre",UnitSystem.Si,
-        DimensionVector.LengthDimension, ExactRational.One, ExactRational.Zero, UnitTransformKind.Linear);
-    var steps = new[] { ExactPipelineStep.Start(new ExactRational(5,1),m) };
-    var context = ExactReplayContext.Create("a/1","p/1","c/1","exact","none/1");
-    var cache = new ExactReplayCache(2);
-    var first = ExactReplayRunner.TryRun(steps,context,cache);
-    var second = ExactReplayRunner.TryRun(steps,context,cache);
-    if (!first.HasFinalValue || first.Receipt!.Result.DisplayValue != new ExactRational(5,1) ||
-        !second.Receipt!.CacheHit)
-        throw new Exception("Independent composition/replay NuGet consumer failed");
-    Console.WriteLine("dw.tools.math/m2-gate-consumer/0.3 qualified");
-    """);
-    Required(root,"dotnet","restore",project,"--source",feed);
-    var output=Required(root,"dotnet","run","--project",project,"-c","Release","--no-restore");
-    if(!output.Contains("dw.tools.math/m2-gate-consumer/0.3 qualified",StringComparison.Ordinal))
-        throw new InvalidOperationException("Isolated M2 NuGet consumer receipt missing.");
-}
-finally
-{
-    Directory.Delete(consumer,recursive:true);
-}
+// The persistent consumer fixture is installed via the typed Payload SDK above.
+// Its only PackageReference points to the local composition NuGet. It has no
+// ProjectReference, and is deliberately excluded from the main solution.
+var consumerProject=Path.Combine(root,ConsumerProject);
+var consumerSource=Path.Combine(root,ConsumerSource);
+var consumerXml=XDocument.Load(consumerProject);
+var packageReferences=consumerXml.Descendants()
+    .Where(e=>e.Name.LocalName=="PackageReference").ToArray();
+if(packageReferences.Length!=1 ||
+   (string?)packageReferences[0].Attribute("Include")!="dw.tools.math.composition" ||
+   (string?)packageReferences[0].Attribute("Version")!=Version ||
+   consumerXml.Descendants().Any(e=>e.Name.LocalName=="ProjectReference") ||
+   !File.ReadAllText(consumerSource).Contains(
+       "dw.tools.math/m2-gate-consumer/0.3 qualified",StringComparison.Ordinal))
+    throw new InvalidOperationException("Consumer is not a NuGet-only exact M2 fixture.");
+Required(root,"dotnet","restore",consumerProject,"--source",feed);
+Required(root,"dotnet","build",consumerProject,"-c","Release","--no-restore");
+var consumerOutput=Required(root,"dotnet","run","--project",consumerProject,"-c","Release",
+    "--no-build","--no-restore");
+if(!consumerOutput.Contains("dw.tools.math/m2-gate-consumer/0.3 qualified",
+    StringComparison.Ordinal))
+    throw new InvalidOperationException("Independent NuGet-only M2 consumer receipt missing.");
 var sdk=Required(root,"dotnet","--version").Trim();
 var proof=new JsonObject
 {
@@ -194,7 +169,11 @@ var proof=new JsonObject
     ["foundation_verification_passed"]=true,["locked_solution_build_passed"]=true,
     ["transfer_architecture_passed"]=true,["isolated_local_nuget_consumer_passed"]=true,
     ["isolated_consumer_receipt"]="dw.tools.math/m2-gate-consumer/0.3 qualified",
-    ["observed_local_packages"]=observed,
+    ["observed_local_packages"]=p.Json.Array(observed.ToArray()),
+    ["nuget_consumer_project"]=ConsumerProject,
+    ["nuget_consumer_source"]=ConsumerSource,
+    ["nuget_consumer_project_sha256"]=Hash(File.ReadAllBytes(consumerProject)),
+    ["nuget_consumer_source_sha256"]=Hash(File.ReadAllBytes(consumerSource)),
     ["runtime_os"]=RuntimeInformation.OSDescription,
     ["runtime_architecture"]=RuntimeInformation.ProcessArchitecture.ToString(),
     ["dotnet_sdk"]=sdk,
