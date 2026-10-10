@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.38",
+  "plan_version": "0.1.39",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3433,7 +3433,7 @@
       "title": "Matrix and vector contracts",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W01-C01"
       ],
@@ -3460,40 +3460,73 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj -c Release --filter FullyQualifiedName~M3W01C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS040 T1 adds a standalone .NET 10 provider-neutral dw.tools.math.numerics package: bounded finite binary64 dense matrices and vectors, explicit canonical sparse coordinate strategy, shape-safe 2x2 addition/multiplication, matrix-vector oracles, approximate IR-only transport and copied provider arrays. One independently observed missing-contract RED, seventeen GREEN tests, a real managed Math.NET copied-array smoke, prior Math regressions and locked NuGet package are qualified. T2 remains planned for explicit rational-to-binary64 and stronger alias/provider-loading boundaries.",
+      "files": [
+        "src/projects/dw.tools.math.numerics/NumericalMatrices.cs",
+        "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+        "src/projects/dw.tools.math.numerics/packages.lock.json",
+        "tests/projects/dw.tools.math.numerics.tests/M3W01C02Tests.cs",
+        "tests/projects/dw.tools.math.numerics.tests/M3W01C02RedTests.cs",
+        "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
+        "tests/projects/dw.tools.math.numerics.tests/packages.lock.json",
+        "dw.tools.math.slnx",
+        "tests/providers/m3-w01-c02/MathNetInteropSmoke.csproj",
+        "tests/providers/m3-w01-c02/Program.cs",
+        "docs/distribution/numerical-matrices.md",
+        "docs/planning/evidence/M3-W01-C02-contract-red.json",
+        "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj -c Release --filter FullyQualifiedName~M3W01C02",
+        "dotnet run --project tests/providers/m3-w01-c02/MathNetInteropSmoke.csproj -c Release",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
+        "dotnet pack src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W01-C02-contract-red.json",
+        "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+      ],
+      "readiness": "active T1 qualified; refine T2 exact/approximate conversion and copy/provider availability boundaries before C02 closure",
       "tasks": [
         {
           "id": "M3-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Introduce dense forms and an explicitly admitted sparse strategy, precision policy, and provider conversion.",
           "test_case": "Verify 2x2 addition and multiplication by hand; reject incompatible shapes and allocation beyond budget.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W01-C02-contract-red.json",
+            "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W01-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Verify 2x2 addition and multiplication by hand; reject incompatible shapes and allocation beyond budget.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C02-contract-red.json"
+              ]
             },
             {
               "id": "M3-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Introduce dense forms and an explicitly admitted sparse strategy, precision policy, and provider conversion.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+              ]
             },
             {
               "id": "M3-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W01-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+              ]
             }
           ]
         },
