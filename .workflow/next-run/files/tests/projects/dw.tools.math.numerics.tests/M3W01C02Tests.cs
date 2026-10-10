@@ -84,7 +84,8 @@ public sealed class M3W01C02Tests
     {
         var square = FiniteMatrix64.Create(64, 64, Enumerable.Repeat(1d, 4096));
         Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => square.Multiply(square));
-        Assert.AreEqual(65536, FiniteMatrix64.MaximumScalarProducts);
+        var accepted = FiniteMatrix64.Create(32, 32, Enumerable.Repeat(1d, 1024));
+        Assert.AreEqual(32d, accepted.Multiply(accepted).At(0, 0));
     }
 
     [TestMethod]
