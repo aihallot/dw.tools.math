@@ -1,6 +1,6 @@
 # Feedback — native DWF roadmap extension for agent Discovery
 
-**Status:** feedback only, not a workflow implementation request, not a prepared DWF run. Created 2026-10-10.
+**Status:** feedback transmitted to the Workflow owner as [issue #139](https://github.com/aihallot/dw.tools.workflow/issues/139). No Workflow source change, implementation promise, or Math DWF run is implied.
 
 ## Product need
 
