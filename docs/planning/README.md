@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.36. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.37. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -10,7 +10,7 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 |---|---|---|---|
 | [M0](versions/M0.md) | 0.1.0-preview | Establish a reproducible .NET toolchain and an authorized transfer path without modifying AURA. | done |
 | [M1](versions/M1.md) | 0.2.0-preview | Deliver standalone exact-math packages and their AURA adoption dossier. | done |
-| [M2](versions/M2.md) | 0.3.0-preview | Define and verify a minimal IR compatible with quantities and future providers. | in_progress |
+| [M2](versions/M2.md) | 0.3.0-preview | Define and verify a minimal IR compatible with quantities and future providers. | done |
 | [M3](versions/M3.md) | 0.4.0-preview | Deliver the first numerical families behind clean provider-neutral contracts. | planned |
 | [M4](versions/M4.md) | 0.5.0-preview | Preserve domains and assumptions across bounded symbolic operations. | planned |
 | [M5](versions/M5.md) | 1.0.0 | Qualify the first coherent numerical/symbolic platform usable without AURA. | planned |

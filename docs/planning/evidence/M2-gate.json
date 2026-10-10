@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "id": "M2-gate",
+  "status": "local-m2-typed-ir-composition-and-isolated-consumer-qualified",
+  "milestone": "M2",
+  "release_version": "0.3.0-preview",
+  "plan_version": "0.1.37",
+  "checked_chunk_ids": [
+    "M2-W01-C01",
+    "M2-W01-C02",
+    "M2-W01-C03",
+    "M2-W02-C01",
+    "M2-W02-C02",
+    "M2-W02-C03"
+  ],
+  "qualified_phase_evidence": [
+    "docs/planning/evidence/M2-W01-C01-qualified.json",
+    "docs/planning/evidence/M2-W01-C02-boundary-qualified.json",
+    "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C01-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+    "docs/planning/evidence/M2-W02-C03-boundary-qualified.json"
+  ],
+  "gate_tests": "tests/projects/dw.tools.math.composition.tests/M2GateIntegrationTests.cs",
+  "gate_tests_sha256": "3e6447d6fd09e5ffe0410f39a6b66870f0ce7e44db54302a15c25ef960eea3f4",
+  "gate_tests_passed": 8,
+  "full_composition_ir_and_quantities_regressions_passed": true,
+  "foundation_verification_passed": true,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "isolated_local_nuget_consumer_passed": true,
+  "isolated_consumer_receipt": "dw.tools.math/m2-gate-consumer/0.3 qualified",
+  "observed_local_packages": [
+    {
+      "id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "bytes": 14737,
+      "sha256": "a9fcfdbe62e0fa1fffdcd3a7eeee988c6385363ff3ca42ed4584f26aad8e77c6",
+      "dependencies": [],
+      "assembly": "lib/net10.0/dw.quantities.dll",
+      "scope": "local-ignored-artifact-not-publicly-published"
+    },
+    {
+      "id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "bytes": 21908,
+      "sha256": "ef3b93d78dda7b86e346c4af6595203292040f3e7a1f77ef6a0631acbfff928f",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "assembly": "lib/net10.0/dw.tools.math.ir.dll",
+      "scope": "local-ignored-artifact-not-publicly-published"
+    },
+    {
+      "id": "dw.tools.math.composition",
+      "version": "0.3.0-preview.1",
+      "bytes": 17079,
+      "sha256": "7e5b1fd742996acbbaae0e6e0b661ece02070a9decfa92420579fee0a1fe83fd",
+      "dependencies": [
+        "dw.quantities",
+        "dw.tools.math.ir"
+      ],
+      "assembly": "lib/net10.0/dw.tools.math.composition.dll",
+      "scope": "local-ignored-artifact-not-publicly-published"
+    }
+  ],
+  "nuget_consumer_project": "tests/consumers/m2-gate/M2GateConsumer.csproj",
+  "nuget_consumer_source": "tests/consumers/m2-gate/Program.cs",
+  "nuget_consumer_project_sha256": "5ad6057f44a4dbf2c0152f2c2b2d9234ea4997e2da8c1fbe4722bba6830fd836",
+  "nuget_consumer_source_sha256": "f00dfb83e4968b08bcda31ebda90e926cc22397cb22c441bddd85d35cd24deea",
+  "runtime_os": "Microsoft Windows 10.0.26100",
+  "runtime_architecture": "X64",
+  "dotnet_sdk": "10.0.401",
+  "release_recipe": "docs/distribution/m2-release-gate.md",
+  "decision": "docs/planning/decisions/m2-gate.md",
+  "external_adoption_request": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+  "aura_transmission": "none",
+  "nonclaims": [
+    "No external AURA adoption, consumer-side AURA testing, permission or package publication.",
+    "Structural hashes do not demonstrate general mathematical equivalence.",
+    "No symbolic solver, numerical provider execution, cross-platform double portability, or M3/M4 results.",
+    "Package hashes represent observed local build bytes, not anticipated reproducible archives."
+  ]
+}
