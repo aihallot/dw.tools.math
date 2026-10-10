@@ -27,6 +27,19 @@
 
 **Convergence gate:** identical expected results from the pinned Decision fixtures, deterministic `generate/check`, verified C# signatures and actual compiled examples, stable owner-prefixed capability IDs, no helper/documented leakage, no fabricated serialization, no authorization claims. A successful Math run establishes two independent implementations of a **draft** protocol; a stable shared schema still needs an explicit owner/version decision.
 
+## Math preparation checkpoint — pinned fixtures and separate native scope
+
+Following the user instruction to continue without local operator action, Math now contains:
+
+- [Pinned Decision schema and 13 reference cases](../../discovery/README.md), copied byte-identically from Decision RS041. The [pin record](../../discovery/interop/decision-1.0.0-draft.1/source.json) records exact commit and Git blob identities.
+- [Explicit proposed Math agent-facing seed and helper exclusions](../../discovery/agent-surface-candidates.json). It proposes four direct C# operations and zero `BrokerReady`; instance numerical operations remain deferred.
+- [Proposed separate M3-W03 Discovery work package](../proposals/math-agent-discovery-work-package.json) with three phases, six tasks and 18 subtasks. This is **not** yet incorporated into the canonical backlog/native DWF plan and none of its nodes is active.
+- [Workflow-authoring feedback](../feedback/discovery-native-scope-authoring.md) explaining the missing typed operation for adding a work package and the Math validator's fixed topology. No workflow repository was modified.
+
+The current DWF operational state remains the RS040 result: active `M3/M3-W01/M3-W01-C02`, T1 done, T2 planned, no pending run. Do not select a Discovery DWF run or claim Math protocol qualification until its own scope exists in both canonical plans under a supported authoring transaction. A temporary document or staged source file is not a substitute for native project-node ownership.
+
+Once that prerequisite is resolved, Discovery C01 must independently execute the **same pinned** Decision fixtures with a Math C# validator and selected, resolved CLR signatures before advancing to skill generation. This checkpoint is design preparation, not a product release.
+
 ## Decision
 
 Math should adopt the **same conceptual discovery protocol** as Decision D6, rather than inventing a Math-specific alternative:
