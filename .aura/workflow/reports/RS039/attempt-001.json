@@ -1,0 +1,1098 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS039",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-10T07:18:48.6586023+00:00",
+  "completedAtUtc": "2026-10-10T07:19:12.0623463+00:00",
+  "durationMilliseconds": 23403,
+  "projectNodes": [
+    "M3",
+    "M3-W01",
+    "M3-W01-C01",
+    "M3-W01-C01-T1",
+    "M3-W01-C01-T1-A",
+    "M3-W01-C01-T1-B",
+    "M3-W01-C01-T1-C",
+    "M3-W01-C01-T2",
+    "M3-W01-C01-T2-A",
+    "M3-W01-C01-T2-B",
+    "M3-W01-C01-T2-C"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "docs/planning/decisions/m3-w01-c01.md",
+    "docs/planning/decisions/m3-w01-c01-candidates.json",
+    "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+    "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+    "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+    "tests/providers/m3-w01-c01/Program.cs"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "docs/planning/decisions/m3-w01-c01-candidates.json",
+    "docs/planning/decisions/m3-w01-c01.md",
+    "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+    "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+    "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+    "tests/providers/m3-w01-c01/Program.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS039/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-26d56081eccb4780aff28326bff8dc68\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 23323,
+      "StandardOutput": "[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02 state=not-ready\r\n[files.replace-from-staged] CHANGED path=tests/providers/m3-w01-c01/MathNetSmoke.csproj bytes=643\r\n[files.replace-from-staged] CHANGED path=tests/providers/m3-w01-c01/Program.cs bytes=2247\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m3-w01-c01.md bytes=5047\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m3-w01-c01-candidates.json bytes=1186\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\providers\\m3-w01-c01\\MathNetSmoke.csproj (in 206 ms).\r\n\n\r\n  MathNetSmoke -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\MathNetSmoke\\Release\\net10.0\\MathNetSmoke.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.83\r\n\n\r\nsmoke-managed-provider:pass:ManagedLinearAlgebraProvider\r\nsmoke-matrix:pass\r\nsmoke-statistics:pass\r\nsmoke-integration:pass\r\nsmoke-independent-parallel:pass\r\nsmoke-mathnet-assembly:5.0.0.0\r\nsmoke-net10-managed:M3-W01-C01:qualified\r\n\n\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.78\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    74, Skipped:     0, Total:    74, Duration: 139 ms - dw.tools.math.composition.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 107 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   109, Skipped:     0, Total:   109, Duration: 280 ms - dw.quantities.tests.dll (net10.0)\r\n\n\r\nPossible reasons for this include:\r\n  * You misspelled a built-in dotnet command.\r\n  * You intended to execute a .NET program, but dotnet---definitely-not-a-real-dotnet-option does not exist.\r\n  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.\r\nPowerShell helper UTF-8 and non-zero propagation contracts verified.\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.16\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 24 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n  The package dw.tools.math.foundation.0.1.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\u0027.\r\nPackage contract verified: D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\foundation-smoke.csproj (in 195 ms).\r\n  foundation-smoke -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\bin\\Release\\net10.0\\foundation-smoke.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.82\r\nIsolated local-package consumer verified.\r\nM0-W01-C01 foundation chain verified.\r\n\nCould not execute because the specified command or file was not found.\r\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\n10.0.401\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M3-W01-C01-provider-qualified.json bytes=1761\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M3-W01-C01-boundary-qualified.json bytes=1426\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-A not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-A ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-B not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-B ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-C not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-C ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T1 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-A not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-A ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-B not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-B ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-C not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-C ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3-W01-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C02 state=not-ready\r\nplanning valid: 0.1.38 | 53 chunks | 052a2662471fdea293bb5c0858011b1954b9f9b537d0fbfd06b6a79a3908e59f | mode --write\r\n\n\r\nnative DWF adoption valid: nodes=496 milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02=done\r\n\n\r\nplanning valid: 0.1.38 | 53 chunks | 052a2662471fdea293bb5c0858011b1954b9f9b537d0fbfd06b6a79a3908e59f | mode --check\r\n\n\r\n[payload] OK operations=45 changed=38 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS039/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+        "Status": 1,
+        "Summary": "bytes=643",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4ae710ff78f33cc254105823ca45fa7d4e245a0a334cd41e37f26f3dd9161d6c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/providers/m3-w01-c01/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=2247",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "765fca4e7147f67e414189aae9a100623d3a99985ea26f052962c48a7063f19a",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m3-w01-c01.md",
+        "Status": 1,
+        "Summary": "bytes=5047",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b8a27b3588c0c6e513e9eb3fde507d4ef55fd5be4d9959ef0537ada5f44f9461",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m3-w01-c01-candidates.json",
+        "Status": 1,
+        "Summary": "bytes=1186",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "db45c0093b4abca3f31588deed81ff14f60f80da9cc391f6b12d075696b57aad",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=1761",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fc950c69ba91f8cf3b8cfe2e6c2f7c46e2d82300dd20e820b78179459c347c56",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=1426",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "01d8b4f57ea6ea5aa2390193604552c6de90790835f6c6dd5bab64a33b33a3a8",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "77237f6945914ea924cf8dcabfcd913e6579fd5fcd213387b56d880bd14b2fc6",
+        "AfterSha256": "052a2662471fdea293bb5c0858011b1954b9f9b537d0fbfd06b6a79a3908e59f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "bf1ed2017eeaabf9dce7f4b6eb5151bddc66ec50fc8b4cfc09aa4f495454a5f2",
+        "AfterSha256": "84bdd66e88b338a8855fc201583f92f388d9dd7d89baaade7e6915b629e6ba17",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "84bdd66e88b338a8855fc201583f92f388d9dd7d89baaade7e6915b629e6ba17",
+        "AfterSha256": "a3e2b15476344395e4a657ab1b5d0fc89f6e541843c6322e63ef0da9af6f4df4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "a3e2b15476344395e4a657ab1b5d0fc89f6e541843c6322e63ef0da9af6f4df4",
+        "AfterSha256": "4ec285546c9f02e5e8d5c9ba1676456cdd3ee6739447b5e25cc192cd5b051d56",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "4ec285546c9f02e5e8d5c9ba1676456cdd3ee6739447b5e25cc192cd5b051d56",
+        "AfterSha256": "5a52dae7f681878fd05de2c4815824c7adcbe0ce42af6ab7a21502ccaf44e757",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "5a52dae7f681878fd05de2c4815824c7adcbe0ce42af6ab7a21502ccaf44e757",
+        "AfterSha256": "45f4c64da43e9ec5d9aee2d06a51707101f3d5bf0f81f12a552c1fd10d19ee51",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "45f4c64da43e9ec5d9aee2d06a51707101f3d5bf0f81f12a552c1fd10d19ee51",
+        "AfterSha256": "befaff08ee47123fefa969592941442271231f6cf05d4635458f4ce42b31952e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "befaff08ee47123fefa969592941442271231f6cf05d4635458f4ce42b31952e",
+        "AfterSha256": "712adc9a0169b70c7f2e569baac9653e83b1130445c6ffe87f87be446a788d18",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "712adc9a0169b70c7f2e569baac9653e83b1130445c6ffe87f87be446a788d18",
+        "AfterSha256": "aaf656ea7fae8cf6433d3cfd835f0e3327d9435872269e75cf4a02f92e82e491",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-A not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "aaf656ea7fae8cf6433d3cfd835f0e3327d9435872269e75cf4a02f92e82e491",
+        "AfterSha256": "723dd72f054c91e0635cc7d74aa4f4a34a47953606aeecee8502065b7894e684",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-A ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "723dd72f054c91e0635cc7d74aa4f4a34a47953606aeecee8502065b7894e684",
+        "AfterSha256": "0fadf308ff7ac9bda6bf17193b2bce27799a2b59dd1072988fa37ab05e44ffa1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "0fadf308ff7ac9bda6bf17193b2bce27799a2b59dd1072988fa37ab05e44ffa1",
+        "AfterSha256": "bd5ec05b9bd1b52ef75ec8fc2130a733b9b869e8d471d30fe93bd52ed7cbf993",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-B not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "bd5ec05b9bd1b52ef75ec8fc2130a733b9b869e8d471d30fe93bd52ed7cbf993",
+        "AfterSha256": "1292cf3f2cc99abdef6ea12cad0e6ee198b6a61dc3191fcfa7943879be3847b1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-B ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "1292cf3f2cc99abdef6ea12cad0e6ee198b6a61dc3191fcfa7943879be3847b1",
+        "AfterSha256": "3e6e64f9eb15c3745e8b595930528900ea584c6caab8345e9c53b69cf1290dfa",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "3e6e64f9eb15c3745e8b595930528900ea584c6caab8345e9c53b69cf1290dfa",
+        "AfterSha256": "b8ca1a921fdb797944ba699230d553fad9331750a25fec48fae8f009c434f1e8",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-C not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "b8ca1a921fdb797944ba699230d553fad9331750a25fec48fae8f009c434f1e8",
+        "AfterSha256": "26e69b9c900e3002650d4d0a2b683eb40cf369ccfbc5e5ea7fd26048eaa6bc82",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-C ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "26e69b9c900e3002650d4d0a2b683eb40cf369ccfbc5e5ea7fd26048eaa6bc82",
+        "AfterSha256": "4a03358ccb3c1c75189b64d9f8a5576cc6a2dfc10d3349ec71c6d7fcfb2be6bb",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "4a03358ccb3c1c75189b64d9f8a5576cc6a2dfc10d3349ec71c6d7fcfb2be6bb",
+        "AfterSha256": "1b8e782e1fd3a3097483337641a439b0a64b1d9f2bada446545039db4fb7a3ea",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T1 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "1b8e782e1fd3a3097483337641a439b0a64b1d9f2bada446545039db4fb7a3ea",
+        "AfterSha256": "5b193b8c934774daa429b292bfde67b9f5ef6ff1c15596b7abb0d3befa283120",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "5b193b8c934774daa429b292bfde67b9f5ef6ff1c15596b7abb0d3befa283120",
+        "AfterSha256": "fb0862d1d92f15917d8f71a38f6df487896fe62ded74c475edba741b816b7b42",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "fb0862d1d92f15917d8f71a38f6df487896fe62ded74c475edba741b816b7b42",
+        "AfterSha256": "e8cf887423da75d5a5a5e00dd6467bddf57933aad2b27850a00316e1adf3a0d7",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-A not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "e8cf887423da75d5a5a5e00dd6467bddf57933aad2b27850a00316e1adf3a0d7",
+        "AfterSha256": "8cd422061db32342c5671a962ac19efa023d75fffe8a1cd2e48adb624b4d40e6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-A ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "8cd422061db32342c5671a962ac19efa023d75fffe8a1cd2e48adb624b4d40e6",
+        "AfterSha256": "13e58733a2228e9bffd14891a55f388288af5bd3cd95acfca212bfa5b83b0572",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "13e58733a2228e9bffd14891a55f388288af5bd3cd95acfca212bfa5b83b0572",
+        "AfterSha256": "4441252ecdd7e5abecf688580450422a8ee6469be96e664d28804fbe7686b224",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-B not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "4441252ecdd7e5abecf688580450422a8ee6469be96e664d28804fbe7686b224",
+        "AfterSha256": "73c83a6ecb649b805b30c4cf1b3a1a8db16b99c1d1d390a14db92d6ed7899f04",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-B ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "73c83a6ecb649b805b30c4cf1b3a1a8db16b99c1d1d390a14db92d6ed7899f04",
+        "AfterSha256": "9b5ad9894b8d1f49d557ae58050a0f3ba78b664a292484d7ba4c76efe8e80af2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "9b5ad9894b8d1f49d557ae58050a0f3ba78b664a292484d7ba4c76efe8e80af2",
+        "AfterSha256": "ce872794e089acdbc4282133e8360a71d83a8bed83f9bd0cde9f2b533bdd7578",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-C not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "ce872794e089acdbc4282133e8360a71d83a8bed83f9bd0cde9f2b533bdd7578",
+        "AfterSha256": "20577d2bdc4e4f928cf15071f6fe5696ffd76afd5edb5ff7935ea3b0c0e1fd3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-C ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "20577d2bdc4e4f928cf15071f6fe5696ffd76afd5edb5ff7935ea3b0c0e1fd3b",
+        "AfterSha256": "f88c67cbe1f48d775de931ce86b3bc57488eb7a79ff59440d373e1334826ece2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "f88c67cbe1f48d775de931ce86b3bc57488eb7a79ff59440d373e1334826ece2",
+        "AfterSha256": "d3bb84f48a4eb6edf5906fc625117564db8413048ab8f60acaf7bc1aab28fc70",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "d3bb84f48a4eb6edf5906fc625117564db8413048ab8f60acaf7bc1aab28fc70",
+        "AfterSha256": "8dc2ea30ab00234da4010a63407c6c5e4999ec1bf83e27ab2e5d201ebe247654",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3-W01-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "8dc2ea30ab00234da4010a63407c6c5e4999ec1bf83e27ab2e5d201ebe247654",
+        "AfterSha256": "6b2c990b0178c85871903fe86cf4ac569c2bca0b8480394be3ad1a67748ced3d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6b2c990b0178c85871903fe86cf4ac569c2bca0b8480394be3ad1a67748ced3d",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer-architecture",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261010T071720Z-1bbdd2d636c72bef",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "4db3ed0c9d08a839329522c6d662a090152d6d7e",
+  "invocationStartedAtUtc": "2026-10-10T07:17:20.7531254+00:00",
+  "invocationDurationMilliseconds": 111309,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS039",
+      "title": "Qualify managed numerical provider via real-package matrix, statistics and quadrature smoke",
+      "projectNodes": [
+        "M3",
+        "M3-W01",
+        "M3-W01-C01",
+        "M3-W01-C01-T1",
+        "M3-W01-C01-T1-A",
+        "M3-W01-C01-T1-B",
+        "M3-W01-C01-T1-C",
+        "M3-W01-C01-T2",
+        "M3-W01-C01-T2-A",
+        "M3-W01-C01-T2-B",
+        "M3-W01-C01-T2-C"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify the M3-W01-C01 provider-selection spike in one substantial run covering both accepted tasks: exact Math.NET Numerics 5.0.0 NuGet-only managed runtime smoke, independent matrix solve/residual, variance and integration oracles, a relevant Meta.Numerics 4.2.0 metadata comparison, restored dependency and MIT license/hash observations, and explicit native BLAS/RID/thread/cancellation deferrals. Regress Math M2 and satisfy EXT-NUMERIC only on durable evidence.",
+      "value": "Establish one executable and license-checked numerical backend candidate for future provider-neutral matrix/statistics work without embedding third-party types in the Math core or claiming AURA/native adoption.",
+      "debtChanges": [
+        "Math.NET 5.0.0 is the provisional managed candidate, not a public Math adapter; M3-W01-C02 and M3-W02-C01 remain planned.",
+        "Meta.Numerics 4.2.0 MS-PL is metadata-compared only; no alternative runtime smoke or performance ranking is claimed.",
+        "Only the executing OS/RID and 32 independent managed solves are observed; no blanket thread safety, native BLAS, CUDA or unexecuted-platform claims.",
+        "Third-party numerical kernels have no qualified cancellation or exact rational semantics; no implicit rational-to-binary64 widening is authorized.",
+        "EXT-NUMERIC is satisfied only if the actual MIT package, exact version, SHA-256, dependency graph, numerical smoke and boundary evidence are verified."
+      ],
+      "nextAction": "After RS039 success, prepare M3-W01-C02-T1 as a substantive independent RED/GREEN numerical matrix and vector contract with bounded shapes, explicit approximation and zero provider-type leakage.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M3-W01-C01-T1-A",
+          "achievement": "Select exact managed Math.NET and MS-PL Meta.Numerics candidate versions and document numerical, licensing and package acceptance criteria."
+        },
+        {
+          "projectNode": "M3-W01-C01-T1-B",
+          "achievement": "Run the real managed Math.NET package and record independent solve/statistics/quadrature oracles plus package hash, license, transitive graph and host RID."
+        },
+        {
+          "projectNode": "M3-W01-C01-T1-C",
+          "achievement": "Record evidence-bound candidate selection and a reasoned deferred alternative; keep provider types out of Math public APIs."
+        },
+        {
+          "projectNode": "M3-W01-C01-T1",
+          "achievement": "Managed Math.NET Numerics 5.0.0 selected only after real NuGet smoke of matrix solve/residual, population/sample variance and Gauss-Legendre quadrature and exact package/graph/license checks; Meta.Numerics 4.2.0 is compared at metadata level only."
+        },
+        {
+          "projectNode": "M3-W01-C01-T2-A",
+          "achievement": "Fix native BLAS, RID, threading, cancellation, and precision limitations as separate explicit admission criteria."
+        },
+        {
+          "projectNode": "M3-W01-C01-T2-B",
+          "achievement": "Observe forced managed backend and 32 independent parallel solves on the actual host while declining unexecuted OS/RID/native claims."
+        },
+        {
+          "projectNode": "M3-W01-C01-T2-C",
+          "achievement": "Decide managed-only scope, defer native integration, and qualify EXT-NUMERIC only with the two evidence receipts."
+        },
+        {
+          "projectNode": "M3-W01-C01-T2",
+          "achievement": "Managed backend is forced on the executing RID; independent parallel solves are observed without blanket thread-safety, cancellation, native BLAS or cross-platform capability claims."
+        },
+        {
+          "projectNode": "M3-W01-C01",
+          "achievement": "Both numerical-provider spike tasks are completed by real managed Math.NET package/solver/statistics/integration evidence and explicit native/platform boundaries, without adding a numerical provider to public Math packages."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/README.md",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m3-w01-c01-candidates.json",
+        "docs/planning/decisions/m3-w01-c01.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+        "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M3.md",
+        "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+        "tests/providers/m3-w01-c01/Program.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer-architecture",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M3-W01",
+        "objective": "Numerical providers and matrices",
+        "kind": "work-package",
+        "parentId": "M3",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M3-W01 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01",
+        "objective": "Numerical provider qualification",
+        "kind": "phase",
+        "parentId": "M3-W01",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M3-W01-C01 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T1 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T1-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-A in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T1-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-B in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T1-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-C in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T2 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-A in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-B in docs/planning/backlog.json."
+      },
+      {
+        "id": "M3-W01-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-C in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate.",
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M3-W01",
+        "objective": "Numerical providers and matrices",
+        "kind": "work-package",
+        "parentId": "M3",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M3-W01 in docs/planning/backlog.json.",
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M3-W01-C01",
+        "objective": "Numerical provider qualification",
+        "kind": "phase",
+        "parentId": "M3-W01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M3-W01-C01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both numerical-provider spike tasks are completed by real managed Math.NET package/solver/statistics/integration evidence and explicit native/platform boundaries, without adding a numerical provider to public Math packages."
+      },
+      {
+        "id": "M3-W01-C01-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T1 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Managed Math.NET Numerics 5.0.0 selected only after real NuGet smoke of matrix solve/residual, population/sample variance and Gauss-Legendre quadrature and exact package/graph/license checks; Meta.Numerics 4.2.0 is compared at metadata level only."
+      },
+      {
+        "id": "M3-W01-C01-T1-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Select exact managed Math.NET and MS-PL Meta.Numerics candidate versions and document numerical, licensing and package acceptance criteria."
+      },
+      {
+        "id": "M3-W01-C01-T1-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Run the real managed Math.NET package and record independent solve/statistics/quadrature oracles plus package hash, license, transitive graph and host RID."
+      },
+      {
+        "id": "M3-W01-C01-T1-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Record evidence-bound candidate selection and a reasoned deferred alternative; keep provider types out of Math public APIs."
+      },
+      {
+        "id": "M3-W01-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Managed backend is forced on the executing RID; independent parallel solves are observed without blanket thread-safety, cancellation, native BLAS or cross-platform capability claims."
+      },
+      {
+        "id": "M3-W01-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Fix native BLAS, RID, threading, cancellation, and precision limitations as separate explicit admission criteria."
+      },
+      {
+        "id": "M3-W01-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Observe forced managed backend and 32 independent parallel solves on the actual host while declining unexecuted OS/RID/native claims."
+      },
+      {
+        "id": "M3-W01-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Decide managed-only scope, defer native integration, and qualify EXT-NUMERIC only with the two evidence receipts."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M3-W01-C01",
+        "objective": "Numerical provider qualification",
+        "kind": "phase",
+        "parentId": "M3-W01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M3-W01-C01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Both numerical-provider spike tasks are completed by real managed Math.NET package/solver/statistics/integration evidence and explicit native/platform boundaries, without adding a numerical provider to public Math packages."
+      },
+      {
+        "id": "M3-W01-C01-T1",
+        "objective": "Contract and outcome",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T1 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Managed Math.NET Numerics 5.0.0 selected only after real NuGet smoke of matrix solve/residual, population/sample variance and Gauss-Legendre quadrature and exact package/graph/license checks; Meta.Numerics 4.2.0 is compared at metadata level only."
+      },
+      {
+        "id": "M3-W01-C01-T1-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Select exact managed Math.NET and MS-PL Meta.Numerics candidate versions and document numerical, licensing and package acceptance criteria."
+      },
+      {
+        "id": "M3-W01-C01-T1-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Run the real managed Math.NET package and record independent solve/statistics/quadrature oracles plus package hash, license, transitive graph and host RID."
+      },
+      {
+        "id": "M3-W01-C01-T1-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T1-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Record evidence-bound candidate selection and a reasoned deferred alternative; keep provider types out of Math public APIs."
+      },
+      {
+        "id": "M3-W01-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M3-W01-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M3-W01-C01-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Managed backend is forced on the executing RID; independent parallel solves are observed without blanket thread-safety, cancellation, native BLAS or cross-platform capability claims."
+      },
+      {
+        "id": "M3-W01-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Fix native BLAS, RID, threading, cancellation, and precision limitations as separate explicit admission criteria."
+      },
+      {
+        "id": "M3-W01-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Observe forced managed backend and 32 independent parallel solves on the actual host while declining unexecuted OS/RID/native claims."
+      },
+      {
+        "id": "M3-W01-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M3-W01-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M3-W01-C01-T2-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Decide managed-only scope, defer native integration, and qualify EXT-NUMERIC only with the two evidence receipts."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS039",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS039",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "4db3ed0c9d08a839329522c6d662a090152d6d7e",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f12452903ad5fafb5f183ca85ec5e5b2ec72ff8b24ee884367d2026162d058cb"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: qualify managed Math.NET numerical provider candidate",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

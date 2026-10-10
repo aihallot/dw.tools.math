@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.37",
+  "plan_version": "0.1.38",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -93,7 +93,7 @@
       "version": "0.4.0-preview",
       "title": "Qualified numerical computation",
       "outcome": "Deliver the first numerical families behind clean provider-neutral contracts.",
-      "status": "planned",
+      "status": "in_progress",
       "gate": "G-M3",
       "required_chunks": [
         "M3-W01-C01",
@@ -321,7 +321,7 @@
       "id": "M3-W01",
       "release": "M3",
       "title": "Numerical providers and matrices",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.numerics/",
         "tests/projects/dw.tools.math.numerics.tests/",
@@ -3300,7 +3300,7 @@
       "title": "Numerical provider qualification",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M2-W02-C03"
       ],
@@ -3322,40 +3322,65 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS039 independently compares managed Math.NET Numerics 5.0.0 (MIT) to metadata-only Meta.Numerics 4.2.0 (MS-PL), qualifies a genuine .NET 10 real-package managed smoke of 2x2 solve/residual, mean/variance and Gauss-Legendre integration, pins observed NuGet graph/hash/license/runtime, and restricts thread and cancellation claims. Both spike tasks are complete, without creating a provider adapter or qualifying native BLAS.",
+      "files": [
+        "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+        "tests/providers/m3-w01-c01/Program.cs",
+        "docs/planning/decisions/m3-w01-c01.md",
+        "docs/planning/decisions/m3-w01-c01-candidates.json",
+        "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+        "dotnet build tests/providers/m3-w01-c01/MathNetSmoke.csproj -c Release --no-restore",
+        "dotnet run --project tests/providers/m3-w01-c01/MathNetSmoke.csproj -c Release --no-build --no-restore",
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+      ],
+      "readiness": "closed: managed Math.NET package selected for a future optional adapter, with explicit native and RID nonclaims",
       "tasks": [
         {
           "id": "M3-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Compare managed Math.NET with a relevant alternative; pin version, transitives, license, thread-safety, and platforms.",
           "test_case": "Run real-package smoke for matrix solve, statistics, and integration; document exact/approximate behavior and cancellation.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W01-C01-provider-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W01-C01-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Compare managed Math.NET with a relevant alternative; pin version, transitives, license, thread-safety, and platforms.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-provider-qualified.json"
+              ]
             },
             {
               "id": "M3-W01-C01-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Run real-package smoke for matrix solve, statistics, and integration; document exact/approximate behavior and cancellation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-provider-qualified.json"
+              ]
             },
             {
               "id": "M3-W01-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M3-W01-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-provider-qualified.json"
+              ]
             }
           ]
         },
@@ -3364,29 +3389,37 @@
           "title": "Boundaries and integration",
           "behavior": "Qualify optional native BLAS separately; make no claim for unexecuted RID; absence of a candidate blocks adaptation.",
           "test_case": "Qualify optional native BLAS separately; make no claim for unexecuted RID; absence of a candidate blocks adaptation.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W01-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Qualify optional native BLAS separately; make no claim for unexecuted RID; absence of a candidate blocks adaptation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+              ]
             },
             {
               "id": "M3-W01-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Qualify optional native BLAS separately; make no claim for unexecuted RID; absence of a candidate blocks adaptation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+              ]
             },
             {
               "id": "M3-W01-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M3-W01-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+              ]
             }
           ]
         }
@@ -7447,10 +7480,13 @@
     {
       "id": "EXT-NUMERIC",
       "owner": "Math maintainer",
-      "status": "unverified",
+      "status": "satisfied",
       "qualified_by": "M3-W01-C01",
       "acceptance": "Pinned package/version/RID/license and numerical smoke",
-      "evidence": []
+      "evidence": [
+        "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "docs/planning/evidence/M3-W01-C01-boundary-qualified.json"
+      ]
     },
     {
       "id": "EXT-SYMBOLIC",
