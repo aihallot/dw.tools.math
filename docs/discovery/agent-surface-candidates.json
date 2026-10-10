@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "kind": "non-authoritative-public-API-classification-seed",
+  "status": "proposed-not-implemented-not-admitted",
+  "source_repo": "aihallot/dw.tools.math",
+  "source_commit": "55d861036b7f53d0ff139eb2b85c49e2e9ffce26",
+  "protocol": "dw.discovery/1.0.0-draft.1",
+  "selection_policy": {
+    "inventory": "Public CLR methods may be inventoried internally but no public symbol is automatically agent-facing.",
+    "agent_skill": "Only explicitly selected AgentCallable or qualified BrokerReady methods with exact reflected binding and verified examples.",
+    "documented": "Documented and helpers remain internal/catalogue only, not published agent capabilities.",
+    "broker": "Zero BrokerReady until serializable DTOs, reconstruction and the broker adapter are independently qualified.",
+    "authorization": "Runtime/AURA owns availability, authorization and execution; metadata grants none."
+  },
+  "proposed_agent_callable_seed": [
+    {
+      "capabilityId": "math.quantity.exact-pipeline.evaluate",
+      "exposure": "AgentCallable",
+      "family": "quantities",
+      "package": "dw.tools.math.composition",
+      "packageVersion": "0.3.0-preview.1",
+      "assembly": "dw.tools.math.composition",
+      "type": "Dw.Tools.Math.Composition.ExactQuantityPipeline",
+      "member": "Evaluate",
+      "kind": "public static",
+      "parameterTypes": [
+        "System.Collections.Generic.IEnumerable<Dw.Tools.Math.Composition.ExactPipelineStep>"
+      ],
+      "resultType": "Dw.Tools.Math.Composition.ExactPipelineResult",
+      "bindingNote": "Overloaded name: bind precisely by parameter types; no parameterless/instance Evaluate alias.",
+      "oracle": "5 km / 2 min = exactly 150 km/h, dimensions and bounds checked",
+      "limits": "MaximumSteps=16 and MaximumNumeralDigits=256; only zero-offset linear units",
+      "precision": "exact rational",
+      "source": "src/projects/dw.tools.math.composition/ExactQuantityPipeline.cs",
+      "source_blob": "1d689d8dc66691de0c9a3b7f6e7c3751be68ec7d",
+      "evidence": "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+      "brokerReady": false
+    },
+    {
+      "capabilityId": "math.replay.try-evaluate",
+      "exposure": "AgentCallable",
+      "family": "replay",
+      "package": "dw.tools.math.composition",
+      "packageVersion": "0.3.0-preview.1",
+      "assembly": "dw.tools.math.composition",
+      "type": "Dw.Tools.Math.Composition.ExactReplayRunner",
+      "member": "TryRun",
+      "kind": "public static",
+      "parameterTypes": [
+        "System.Collections.Generic.IEnumerable<Dw.Tools.Math.Composition.ExactPipelineStep>",
+        "Dw.Tools.Math.Composition.ExactReplayContext",
+        "Dw.Tools.Math.Composition.ExactReplayCache",
+        "System.Threading.CancellationToken"
+      ],
+      "resultType": "Dw.Tools.Math.Composition.ExactReplayAttempt",
+      "bindingNote": "Optional cache and token remain explicit CLR parameters; success/unsupported/budget/cancelled statuses must be inspected.",
+      "oracle": "Reproducible exact result and cache isolation across context versions",
+      "limits": "Cache 1..32 entries, cooperative cancellation, immutable success/no partial result",
+      "precision": "exact rational and typed status",
+      "source": "src/projects/dw.tools.math.composition/ExactReplayContracts.cs",
+      "source_blob": "ffffe063ffdb698776d1bed82d683e4bd635dd40",
+      "evidence": "docs/planning/evidence/M2-W02-C03-boundary-qualified.json",
+      "brokerReady": false
+    },
+    {
+      "capabilityId": "math.ir.canonical.encode",
+      "exposure": "AgentCallable",
+      "family": "ir",
+      "package": "dw.tools.math.ir",
+      "packageVersion": "0.3.0-preview.1",
+      "assembly": "dw.tools.math.ir",
+      "type": "Dw.Tools.Math.Ir.IrCanonicalJsonCodec",
+      "member": "Encode",
+      "kind": "public static",
+      "parameterTypes": [
+        "Dw.Tools.Math.Ir.IrNode"
+      ],
+      "resultType": "System.String",
+      "bindingNote": "Typed C# IR input; not arbitrary symbolic evaluation. JSON output is schema math-ir/1.",
+      "oracle": "Canonical round-trip preserves exact rational and bounded structural IR",
+      "limits": "MaximumJsonCharacters=262144; IR graph depth/nodes bounded",
+      "precision": "exact and explicitly finite binary64, no silent mixing",
+      "source": "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+      "source_blob": "4e6e055d94480fb8ac449750b2e4f23eeeec09e9",
+      "evidence": "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+      "brokerReady": false
+    },
+    {
+      "capabilityId": "math.ir.hash.semantic",
+      "exposure": "AgentCallable",
+      "family": "ir",
+      "package": "dw.tools.math.ir",
+      "packageVersion": "0.3.0-preview.1",
+      "assembly": "dw.tools.math.ir",
+      "type": "Dw.Tools.Math.Ir.IrCanonicalHashes",
+      "member": "SemanticStructuralSha256",
+      "kind": "public static",
+      "parameterTypes": [
+        "Dw.Tools.Math.Ir.IrNode"
+      ],
+      "resultType": "System.String",
+      "bindingNote": "Structural digest, not proof of algebraic equivalence.",
+      "oracle": "Ignore passive labels but preserve domain and quantities; stable across canonical encode/decode",
+      "limits": "Only admitted bounded mathematical IR graph",
+      "precision": "typed IR structural identity",
+      "source": "src/projects/dw.tools.math.ir/IrCanonicalHashes.cs",
+      "source_blob": "8bbab3059acfad2ee6863a6fd98703798bac688d",
+      "evidence": "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+      "brokerReady": false
+    }
+  ],
+  "not_selected": [
+    {
+      "member": "Dw.Tools.Math.Composition.MathCapabilityCatalog.Discover",
+      "reason": "API catalogue helper; reflection inventory only, not a mathematical capability intended for agent execution"
+    },
+    {
+      "member": "Dw.Tools.Math.Composition.MathCapabilityCatalog.Find",
+      "reason": "Lookup helper, not a user-facing mathematical operation"
+    },
+    {
+      "member": "Dw.Tools.Math.Numerics.NumericalMatrixTransport.ToApproximateIr",
+      "reason": "Interop helper; not a mathematical operation itself"
+    },
+    {
+      "member": "Dw.Tools.Math.Numerics.NumericalMatrixTransport.FromApproximateIr",
+      "reason": "Interop helper; not a mathematical operation itself"
+    },
+    {
+      "member": "Dw.Tools.Math.Composition.ExactPipelineStep.Start/Convert/Divide/Add",
+      "reason": "Step constructors/builders for an admitted operation; documented within evaluate parameters, not independently published capabilities"
+    },
+    {
+      "member": "Dw.Tools.Math.Numerics.FiniteMatrix64.Create",
+      "reason": "Construction helper; do not publish merely because static and public"
+    },
+    {
+      "member": "Dw.Tools.Math.Numerics.SparseMatrix64.Create",
+      "reason": "Construction helper; not an independent externally selected computation"
+    }
+  ],
+  "deferred_agent_operations": [
+    {
+      "capabilityId": "math.numerics.matrix.multiply",
+      "reason": "Existing FiniteMatrix64.Multiply(FiniteMatrix64) is an instance method; Decision's initial static-only binder cannot resolve it. Provide an explicitly selected static typed façade or separately qualified instance binder.",
+      "evidence": "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+    },
+    {
+      "capabilityId": "math.numerics.vector.dot",
+      "reason": "Existing FiniteVector64.Dot(FiniteVector64) is an instance method; require a stable explicit binding or façade with appropriate precision semantics.",
+      "evidence": "docs/planning/evidence/M3-W01-C02-contract-qualified.json"
+    },
+    {
+      "capabilityId": "math.numerics.matrix.solve",
+      "reason": "Not implemented by Math product; RS039 only qualified a managed third-party package in a test-only executable. Do not advertise as a Math capability."
+    }
+  ],
+  "required_validation": [
+    "Reflect exact CLR method and overload using the current built assembly; no aliases based on method-name guessing",
+    "Compile and run one C# invocation example per selected operation",
+    "Generate all manifest fields from reflection plus admitted semantic metadata, and calculate canonical signature SHA-256",
+    "Pass all pinned Decision conformance cases in an independent Math C# implementation",
+    "No Documented/public-helper leakage and BrokerReady list initially empty",
+    "Stable version and drift checks for generated skill pages and manifest"
+  ],
+  "nonclaims": [
+    "This candidate inventory is not a generated manifest or runnable skill",
+    "No agent binding is yet qualified in Math",
+    "No AURA broker, authorization, provider runtime or JSON adapter is delivered"
+  ]
+}
