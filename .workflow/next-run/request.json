@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "id": "RS039",
+  "title": "Qualify managed numerical provider via real-package matrix, statistics and quadrature smoke",
+  "commitMessage": "docs: qualify managed Math.NET numerical provider candidate",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W01",
+    "M3-W01-C01",
+    "M3-W01-C01-T1",
+    "M3-W01-C01-T1-A",
+    "M3-W01-C01-T1-B",
+    "M3-W01-C01-T1-C",
+    "M3-W01-C01-T2",
+    "M3-W01-C01-T2-A",
+    "M3-W01-C01-T2-B",
+    "M3-W01-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Qualify the M3-W01-C01 provider-selection spike in one substantial run covering both accepted tasks: exact Math.NET Numerics 5.0.0 NuGet-only managed runtime smoke, independent matrix solve/residual, variance and integration oracles, a relevant Meta.Numerics 4.2.0 metadata comparison, restored dependency and MIT license/hash observations, and explicit native BLAS/RID/thread/cancellation deferrals. Regress Math M2 and satisfy EXT-NUMERIC only on durable evidence.",
+    "value": "Establish one executable and license-checked numerical backend candidate for future provider-neutral matrix/statistics work without embedding third-party types in the Math core or claiming AURA/native adoption.",
+    "debtChanges": [
+      "Math.NET 5.0.0 is the provisional managed candidate, not a public Math adapter; M3-W01-C02 and M3-W02-C01 remain planned.",
+      "Meta.Numerics 4.2.0 MS-PL is metadata-compared only; no alternative runtime smoke or performance ranking is claimed.",
+      "Only the executing OS/RID and 32 independent managed solves are observed; no blanket thread safety, native BLAS, CUDA or unexecuted-platform claims.",
+      "Third-party numerical kernels have no qualified cancellation or exact rational semantics; no implicit rational-to-binary64 widening is authorized.",
+      "EXT-NUMERIC is satisfied only if the actual MIT package, exact version, SHA-256, dependency graph, numerical smoke and boundary evidence are verified."
+    ],
+    "nextAction": "After RS039 success, prepare M3-W01-C02-T1 as a substantive independent RED/GREEN numerical matrix and vector contract with bounded shapes, explicit approximation and zero provider-type leakage.",
+    "achievements": [
+      {
+        "projectNode": "M3-W01-C01-T1-A",
+        "achievement": "Select exact managed Math.NET and MS-PL Meta.Numerics candidate versions and document numerical, licensing and package acceptance criteria."
+      },
+      {
+        "projectNode": "M3-W01-C01-T1-B",
+        "achievement": "Run the real managed Math.NET package and record independent solve/statistics/quadrature oracles plus package hash, license, transitive graph and host RID."
+      },
+      {
+        "projectNode": "M3-W01-C01-T1-C",
+        "achievement": "Record evidence-bound candidate selection and a reasoned deferred alternative; keep provider types out of Math public APIs."
+      },
+      {
+        "projectNode": "M3-W01-C01-T1",
+        "achievement": "Managed Math.NET Numerics 5.0.0 selected only after real NuGet smoke of matrix solve/residual, population/sample variance and Gauss-Legendre quadrature and exact package/graph/license checks; Meta.Numerics 4.2.0 is compared at metadata level only."
+      },
+      {
+        "projectNode": "M3-W01-C01-T2-A",
+        "achievement": "Fix native BLAS, RID, threading, cancellation, and precision limitations as separate explicit admission criteria."
+      },
+      {
+        "projectNode": "M3-W01-C01-T2-B",
+        "achievement": "Observe forced managed backend and 32 independent parallel solves on the actual host while declining unexecuted OS/RID/native claims."
+      },
+      {
+        "projectNode": "M3-W01-C01-T2-C",
+        "achievement": "Decide managed-only scope, defer native integration, and qualify EXT-NUMERIC only with the two evidence receipts."
+      },
+      {
+        "projectNode": "M3-W01-C01-T2",
+        "achievement": "Managed backend is forced on the executing RID; independent parallel solves are observed without blanket thread-safety, cancellation, native BLAS or cross-platform capability claims."
+      },
+      {
+        "projectNode": "M3-W01-C01",
+        "achievement": "Both numerical-provider spike tasks are completed by real managed Math.NET package/solver/statistics/integration evidence and explicit native/platform boundaries, without adding a numerical provider to public Math packages."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "docs/planning/decisions/m3-w01-c01.md",
+    "docs/planning/decisions/m3-w01-c01-candidates.json",
+    "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+    "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+    "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+    "tests/providers/m3-w01-c01/Program.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/providers/m3-w01-c01/MathNetSmoke.csproj",
+      "sourcePath": "files/tests/providers/m3-w01-c01/MathNetSmoke.csproj"
+    },
+    {
+      "path": "tests/providers/m3-w01-c01/Program.cs",
+      "sourcePath": "files/tests/providers/m3-w01-c01/Program.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m3-w01-c01.md",
+      "sourcePath": "files/docs/planning/decisions/m3-w01-c01.md"
+    },
+    {
+      "path": "docs/planning/decisions/m3-w01-c01-candidates.json",
+      "sourcePath": "files/docs/planning/decisions/m3-w01-c01-candidates.json"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS038/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.37"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/7/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/19/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/21/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/external_dependencies/2/status",
+      "expectedValue": "unverified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/0/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/0/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/2/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/0/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/0/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M2-gate.json",
+      "jsonPointer": "/status",
+      "expectedValue": "local-m2-typed-ir-composition-and-isolated-consumer-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+      "jsonPointer": "/status",
+      "expectedValue": "draft"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/coordination/requests/MATH-XR-002-aura-adoption.json",
+      "jsonPointer": "/transmission",
+      "expectedValue": "none"
+    }
+  ]
+}
