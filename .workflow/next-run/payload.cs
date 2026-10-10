@@ -15,6 +15,7 @@ const string ConsumerSource="tests/consumers/m2-gate/Program.cs";
 const string Recipe="docs/distribution/m2-release-gate.md";
 const string Decision="docs/planning/decisions/m2-gate.md";
 const string Evidence="docs/planning/evidence/M2-gate.json";
+const string CompositionVersion="0.3.0-preview.1";
 const string Adoption="docs/coordination/requests/MATH-XR-002-aura-adoption.json";
 var phases=new[]{
     ("M2-W01-C01","docs/planning/evidence/M2-W01-C01-qualified.json",
@@ -143,7 +144,7 @@ var packageReferences=consumerXml.Descendants()
     .Where(e=>e.Name.LocalName=="PackageReference").ToArray();
 if(packageReferences.Length!=1 ||
    (string?)packageReferences[0].Attribute("Include")!="dw.tools.math.composition" ||
-   (string?)packageReferences[0].Attribute("Version")!=Version ||
+   (string?)packageReferences[0].Attribute("Version")!=CompositionVersion ||
    consumerXml.Descendants().Any(e=>e.Name.LocalName=="ProjectReference") ||
    !File.ReadAllText(consumerSource).Contains(
        "dw.tools.math/m2-gate-consumer/0.3 qualified",StringComparison.Ordinal))
