@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "id": "MATH-DISCOVERY-PORTABLE-PREFLIGHT-20261011",
+  "status": "portable-envelope-preflight-13-of-13-passed-NOT-Math-CSharp-conformance",
+  "type": "independent-preliminary-protocol-check",
+  "date": "2026-10-11",
+  "source": {
+    "decision_repository": "aihallot/dw.tools.decision",
+    "decision_commit": "5d3af8580ea984425b314d589def18e031172c2c",
+    "protocol_id": "dw.discovery",
+    "protocol_version": "1.0.0-draft.1",
+    "manifest_schema_version": 2,
+    "schema_file": "docs/discovery/interop/decision-1.0.0-draft.1/manifest.schema.json",
+    "schema_sha256": "678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170",
+    "fixtures_file": "docs/discovery/interop/decision-1.0.0-draft.1/conformance.json",
+    "fixtures_sha256": "5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e",
+    "actual_utf8_content_hashes_checked": true
+  },
+  "execution": {
+    "engine": "self-contained independent JavaScript protocol semantic verifier executed via assistant isolated code tool",
+    "result": "succeeded",
+    "not_engine": "Not the Math C# verifier and not an execution through Math/DWF",
+    "fixture_patching": "Each scenario is applied to a deep clone of the pinned base envelope; duplicate capability case duplicates exact first capability.",
+    "checks": "owner namespace, version, exposure, signature fingerprint, unique aliases, parameter shape, semantics, effect/authorization, evidence, BrokerReady adapter and catalogOnly exclusion",
+    "total": 13,
+    "passed": 13,
+    "expected_accepts": 2,
+    "observed_accepts": 2,
+    "cases": [
+      {
+        "name": "valid-math-envelope",
+        "expected": "accept",
+        "observed": "accept",
+        "pass": true
+      },
+      {
+        "name": "valid-decision-envelope",
+        "expected": "accept",
+        "observed": "accept",
+        "pass": true
+      },
+      {
+        "name": "unknown-schema",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "unknown-protocol",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "documented-leak",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "wrong-owner",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "stale-signature",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "missing-limits",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "premature-broker-ready",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "metadata-authorization",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "bogus-version",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "duplicate-capability",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      },
+      {
+        "name": "catalogue-leak",
+        "expected": "reject",
+        "observed": "reject",
+        "pass": true
+      }
+    ]
+  },
+  "math_verifier_candidate": {
+    "source": "docs/discovery/qualification/ValidatePortableProtocol.cs",
+    "source_commit": "62fa84b994ad6954ab6fa3a8f25be66b9332c903",
+    "source_git_blob_sha": "cd589183991774d1560129139f903dc8112c74b3",
+    "implementation_language": "C# / .NET 10 file-based app, no Decision assembly reference",
+    "execution_state": "authored-not-compiled-or-executed-in-the-target-.NET-environment",
+    "expected_command": "dotnet run --file docs/discovery/qualification/ValidatePortableProtocol.cs"
+  },
+  "scope_and_nonclaims": [
+    "This receipt is a preparatory semantic-envelope preflight, not the full Math-versus-Decision interoperability receipt requested by Decision.",
+    "No claim that Math C# verifier compiled or passed its 13 tests: no .NET SDK is available in the assistant execution environment.",
+    "No qualified Math-generated manifest, no reflection binding evidence, no agent skill or BrokerReady operation.",
+    "No DWF run was selected or executed, because independent M3-W03 project nodes are not yet added to the native plan via an installed supported operation.",
+    "No Decision, AURA, or Workflow repository was mutated to produce this Math preflight."
+  ],
+  "blocking_prerequisite": "Complete Workflow issue #139: ship supported typed work-package extension, authorized sibling continuation and stable-to-Math adoption, then execute the C# Math-owned protocol gate under proper DWF scope.",
+  "full_receipt_status": "pending-CSharp-DWF-qualification"
+}
