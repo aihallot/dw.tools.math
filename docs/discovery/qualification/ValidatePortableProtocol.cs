@@ -1,6 +1,10 @@
 #:property NuGetAudit=false
 #:property PublishAot=false
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
