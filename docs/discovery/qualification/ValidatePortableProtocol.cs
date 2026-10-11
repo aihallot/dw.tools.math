@@ -32,10 +32,10 @@ try
     var casesHash = Hex(SHA256.HashData(casesBytes));
     Require(schemaHash == ExpectedSchemaSha256, "Pinned Decision schema SHA-256 does not match.");
     Require(casesHash == ExpectedCasesSha256, "Pinned Decision conformance SHA-256 does not match.");
-    var schema = JsonNode.Parse(schemaBytes)!.AsObject();
+    var schema = JsonNode.Parse(Encoding.UTF8.GetString(schemaBytes))!.AsObject();
     Require(Text(schema, "$id") == "urn:dw:discovery:manifest:2:draft-1",
         "Pinned JSON Schema identity changed.");
-    var protocol = JsonNode.Parse(casesBytes)!.AsObject();
+    var protocol = JsonNode.Parse(Encoding.UTF8.GetString(casesBytes))!.AsObject();
     Require(protocol["fixtureVersion"]?.GetValue<int>() == 1, "Fixture version changed.");
     var baseline = Object(protocol, "baseline");
     var cases = Array(protocol, "cases");
@@ -96,7 +96,7 @@ catch (Exception error)
 static void ApplyPatch(JsonObject root, JsonObject patch)
 {
     var pointer = Text(patch, "path");
-    Require(pointer.StartsWith('/', StringComparison.Ordinal), "Patch must use an absolute JSON pointer.");
+    Require(pointer.StartsWith("/", StringComparison.Ordinal), "Patch must use an absolute JSON pointer.");
     var segments = pointer[1..].Split('/').Select(s => s.Replace("~1", "/", StringComparison.Ordinal)
         .Replace("~0", "~", StringComparison.Ordinal)).ToArray();
     JsonNode? parent = root;
