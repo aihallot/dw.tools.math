@@ -4,13 +4,25 @@ Math's agent-facing Discovery must remain **opt-in**, broker-neutral, and compat
 
 ## Pinned interoperability authority
 
-The reference protocol is `dw.discovery/1.0.0-draft.1`, **manifest schema 2**, from `aihallot/dw.tools.decision` commit `3c8a1b3a1ef818039a7c84ca5fa19666215c5a4b` (RS041, succeeded).
+The reference protocol is `dw.discovery/1.0.0-draft.1`, **manifest schema 2**, confirmed at `aihallot/dw.tools.decision` commit `5d3af8580ea984425b314d589def18e031172c2c` (Decision 1.6 release candidate). The earlier RS041 alignment revision remains recorded in the pinned source metadata; the schema and fixture Git blobs did not change.
 
 - [Pinned schema](interop/decision-1.0.0-draft.1/manifest.schema.json)
 - [Pinned 13-case conformance suite](interop/decision-1.0.0-draft.1/conformance.json)
 - [Source/commit/blob and scope manifest](interop/decision-1.0.0-draft.1/source.json)
 
 The pinned files were independently fetched into Math and their Git blob identities matched Decision exactly. This **proves file identity, not Math protocol conformance**. The suite's expected outcomes are 2 accepted and 11 rejected cases.
+
+## Independent portable protocol verification
+
+[Standalone Math C# verifier](qualification/ValidatePortableProtocol.cs) contains the Math-owned, independently authored JSON envelope validator and the 13-case fixture runner. It validates exact SHA-256 source bytes before applying each accepted/rejected case. With .NET 10 available and a legally selected Math DWF run, its direct local command is:
+
+```powershell
+dotnet run --file docs/discovery/qualification/ValidatePortableProtocol.cs
+```
+
+The current [portable preflight receipt](qualification/portable-protocol-preflight.json) records what was independently **executed in the assistant environment**, with its own language and limitations clearly identified. A C# source file, a passed JavaScript preflight, and byte-identical fixtures are not proof that the Math C# program compiled, ran or produced a generated Math agent manifest.
+
+Do **not** label Math/Decision interoperability as qualified until the C# test executes under the accepted DWF contract, the durable run report is published, and actual selected Math CLR bindings plus a generated Math-owned manifest pass separate qualification. No new DWF run has been selected merely for documentation.
 
 ## Math API scope
 
