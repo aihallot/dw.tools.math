@@ -27,6 +27,19 @@
 
 **Convergence gate:** identical expected results from the pinned Decision fixtures, deterministic `generate/check`, verified C# signatures and actual compiled examples, stable owner-prefixed capability IDs, no helper/documented leakage, no fabricated serialization, no authorization claims. A successful Math run establishes two independent implementations of a **draft** protocol; a stable shared schema still needs an explicit owner/version decision.
 
+## Decision RS045 reference and Math's independent preflight — 2026-10-11
+
+Decision's independently qualified 1.6 release-candidate commit is `5d3af8580ea984425b314d589def18e031172c2c`, with `RS045/attempt-001.json` reporting `succeeded`. At that exact revision the protocol remains `dw.discovery/1.0.0-draft.1`, schema 2; the JSON schema and 13-case fixture files have the **same original Git blobs** as the RS041 protocol handoff.
+
+The exact UTF-8 content SHA-256 values have now been computed against those Decision sources (including their final newlines):
+
+- `manifest.schema.json`: `678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170`
+- `conformance.json`: `5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e`
+
+The [portable preliminary check](../../discovery/qualification/portable-protocol-preflight.json) independently exercised 13/13 synthetic envelope cases in an isolated JavaScript semantic verifier (two admitted, eleven refused), without executing any Decision code. Math now has an [independently authored C#/.NET fixture validator](../../discovery/qualification/ValidatePortableProtocol.cs) to be compiled and executed under a legitimate Math DWF run. **This C# program has not been run or qualified in the current assistant environment.** The portable preflight is neither Math/Decision implementation interoperability nor generated Math skill qualification.
+
+Do not distribute the preliminary receipt as the completed cross-repository conformance gate. A genuine final receipt needs the executed Math C# verdict log, its durable DWF report/commit, independent Math CLR binding resolution, and a Math-owned generated manifest passing the same schema. The accepted Discovery scope is still blocked on the typed native work-package authoring and sibling-resume contract from Workflow issue #139; product numerical M3-W01-C02-T2 stays outstanding.
+
 ## Math preparation checkpoint — pinned fixtures and separate native scope
 
 Following the user instruction to continue without local operator action, Math now contains:
