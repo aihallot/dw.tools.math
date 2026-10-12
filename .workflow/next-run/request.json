@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "id": "RS043",
+  "title": "Qualify numeric rank and pivot boundaries and close the first matrix work package",
+  "commitMessage": "feat: qualify 2x2 conditioning boundaries and close numerical matrix scope",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W01",
+    "M3-W01-C03",
+    "M3-W01-C03-T2",
+    "M3-W01-C03-T2-R",
+    "M3-W01-C03-T2-G",
+    "M3-W01-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Close the accepted M3-W01 numerical matrices work package by qualifying explicit LU pivot and unpivoted QR rank thresholds, a nullable 2x2 spectral condition estimate, absence of invented conditioning for unsupported inputs, and provider-free package boundaries. Observe an independent RED, 16 GREEN tests, 81 numerical regressions and managed Math.NET corroboration before completing T2, C03 and M3-W01.",
+    "value": "Expose truthful finite-binary64 solve diagnostics and bound rank/conditioning claims to observed numerical contracts. Preserve the existing LU/QR and 2x2 spectrum behavior, immutable provider copies, optional Math.NET smoke and local NuGet 0.4.0-preview.4 identity without exposing unsupported full SVD.",
+    "debtChanges": [
+      "The C03 work package closes only the admitted finite-binary64 dense LU, Householder QR, residual solve and 2x2 spectral subset. Full public SVD factors remain explicitly deferred in the scoped decision document.",
+      "The spectral 2x2 ratio is approximate and nullable; a small residual does not establish a universal forward-error bound or exact matrix rank.",
+      "Unpivoted QR and partial-pivot LU use declared relative rank/pivot thresholds. Ill-conditioned or extremely scaled cases may be refused, and numerical status is not an algebraic rank theorem.",
+      "Managed Math.NET 5.0.0 remains a separately qualified optional test consumer on its observed host; no native BLAS or unexecuted RID is admitted.",
+      "The numerical product has no dependency on Decision, Aura or a shared Discovery implementation. Neutral attributes, generated skills and BrokerReady require their own producer and host evidence.",
+      "No public NuGet feed publication is authorized. The new preview.4 package is a local qualified artifact and its NuGet manifest is verified without inventing binary provenance.",
+      "The next M3-W02 work package remains not-ready; do not make the still-open M3 milestone appear complete merely because M3-W01 has closed."
+    ],
+    "nextAction": "After durable success, make the next major-cycle selection between existing M3-W02 numerical/statistical coverage and separately qualified Math adoption of the neutral dw.discovery contract once the external DWF and package gates are met.",
+    "achievements": [
+      {
+        "projectNode": "M3-W01-C03-T2-R",
+        "achievement": "Demonstrate and retain an independent missing-contract RED for an optional spectral condition estimate on the existing solve result."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2-G",
+        "achievement": "Introduce nullable approximate 2x2 solve conditioning and explicit unknown outcomes, retaining the prior provider-neutral bounded LU/QR surface."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2-V",
+        "achievement": "Qualify 16 boundary GREEN tests, all 81 numerics tests, existing Math regressions, optional managed-provider smoke and versioned provider-free package structure."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2",
+        "achievement": "Finish pivot/rank policy, scale/condition diagnostics, inverse-free solve guarantees and the explicit bounded SVD deferral decision."
+      },
+      {
+        "projectNode": "M3-W01-C03",
+        "achievement": "Complete solving and decomposition phase C03 after separate scientific contract and numeric boundary evidence for both accepted tasks."
+      },
+      {
+        "projectNode": "M3-W01",
+        "achievement": "Close all three admitted numerical matrix/provider phases while preserving the in-progress M3 milestone and planned M3-W02 work package."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/bounded-linear-algebra.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w01-c03-svd-scope.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W01-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W01-C03-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.numerics/BoundedLinearAlgebra64.cs",
+    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.numerics/BoundedLinearAlgebra64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.numerics/BoundedLinearAlgebra64.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.numerics.tests/M3W01C03T2RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.numerics.tests/M3W01C03T2Tests.cs"
+    },
+    {
+      "path": "docs/distribution/bounded-linear-algebra.md",
+      "sourcePath": "files/docs/distribution/bounded-linear-algebra.md"
+    },
+    {
+      "path": "docs/planning/decisions/m3-w01-c03-svd-scope.md",
+      "sourcePath": "files/docs/planning/decisions/m3-w01-c03-svd-scope.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M3"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M3-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M3-W01-C03"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS042/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.41"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/7/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/20/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/21/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/22/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/23/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/tasks/1/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/tasks/1/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/0/phases/2/tasks/1/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C03-contract-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "bounded-dense-lu-qr-and-analytical-2x2-singular-spectrum-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C03-contract-qualified.json",
+      "jsonPointer": "/independent_green_tests_passed",
+      "expectedValue": 25
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+      "jsonPointer": "/selected_package_version",
+      "expectedValue": "5.0.0"
+    }
+  ]
+}
