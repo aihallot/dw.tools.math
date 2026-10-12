@@ -1,10 +1,10 @@
 # Bounded provider-neutral dense linear algebra — M3-W01-C03-T1
 
-**Status: RS042 candidate; not a delivered capability until DWF succeeds.**
+**Status: LU/QR and analytical 2x2 singular spectrum qualified by RS042. The RS043 scientific boundary extension is staged, not yet executed.**
 
 ## Contracts
 
-The `dw.tools.math.numerics` 0.4.0-preview.3 candidate adds
+The `dw.tools.math.numerics` 0.4.0-preview.4 candidate adds
 `BoundedLinearAlgebra64` on existing immutable `FiniteMatrix64` and
 `FiniteVector64`. All results are approximate finite IEEE 754 binary64, not
 exact rational. There is no runtime product dependency on Math.NET or Aura.
@@ -49,3 +49,46 @@ full-SVD adoption. Do not imply untested platforms, native BLAS,
 
 Discovery metadata and skill generation remain owned by the neutral
 `dw.discovery` project, not implemented inside this numerical run.
+
+## M3-W01-C03-T2 — condition availability and final admission boundary
+
+**Targeted by RS043.** Before C03 and M3-W01 can close, the numerical
+boundary run must show a controlled missing-contract RED, 16 targeted
+GREEN cases, all prior numerics tests, provider-free packaging and the
+existing independent managed Math.NET smoke. The final receipt determines
+admission; this document alone cannot claim a successful test.
+
+A successful finite 2x2 solve may now report
+`LinearSolveResult64.TwoByTwoSpectralConditionEstimate`. It is a nullable,
+approximate 2-norm condition ratio computed from the already admitted
+`SingularValues2x2` operation, not an exact number or a universal bound.
+The value is **null** when the solve is unsuccessful, the matrix is not
+2x2, or the available finite spectrum cannot provide a finite ratio.
+A successful solve with a small residual can therefore legitimately
+report an *unknown* condition ratio.
+
+The default LU pivot and unpivoted QR rank policies use a **relative
+threshold of 1e-12 against the largest absolute input entry**, with
+an explicit caller override bounded to (0, 1e-6]. Refusal under the
+chosen threshold reports `Singular` for LU and `RankDeficient` for QR;
+these are numerical **policy outcomes** for the finite data, not an
+universal algebraic proof of exact rank. Exact singularity and numerical
+ill-conditioning require separate reasoning. A successful triangular
+solve uses no explicit inverse, and factor products, matrix-vector
+residuals, and orthogonality are the independent oracles: individual
+QR/SVD column signs, singular-vector direction, or provider ordering
+are not acceptance criteria.
+
+The 16x16 dense budget is independent of the larger matrix storage
+budget. No provider assembly is required to load or invoke the public
+Math numerical assembly: Math.NET 5.0.0 is an optional **separate
+managed test consumer** pinned by prior evidence. No other native BLAS
+or RID is inferred. The 2x2 spectrum remains **singular values only**;
+full SVD factors, rank-revealing pivoted QR, pseudoinverses and high-
+accuracy condition estimates for extreme scales are explicitly outside
+this admitted Math surface and require a new independent qualification.
+
+No `BrokerReady` capability, shared `dw.discovery` package, generated
+skill, or real Aura execution is implied by the numerical work-package
+closure. Interop and skill generation remain a separately owned,
+qualified migration.
