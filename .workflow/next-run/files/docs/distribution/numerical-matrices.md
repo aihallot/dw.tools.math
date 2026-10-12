@@ -26,3 +26,15 @@ Numerical values are explicitly `FiniteBinary64` and **approximate**, even when 
 The first T1 run observes a compiled RED for the missing public numerical matrix contract before installing the GREEN implementation. Seventeen independent tests cover hand-computable operations, vectors, invalid shapes, storage and multiplication budgets, sparse semantics, non-finite arithmetic, exact-versus-approximate IR and copy behavior; prior IR/composition/quantities/foundation tests, locked build, transfer architecture and local NuGet manifest are also requalified.
 
 T1 is complete only after all those observations exist; **M3-W01-C02-T2 remains planned**, including fuller deep-copy/alias and explicit rational-to-double reporting, provider opt-in/load-time policies, precision and sparse algorithm integration. There is no native BLAS, symbolic solver, general-purpose numerical provider routing, AURA adoption, untested RID qualification, or claim of cross-platform bitwise floating reproducibility.
+
+## M3-W01-C02-T2 — explicit exact-to-approximate conversion
+
+The provider-neutral `dw.tools.math.numerics` package offers an **opt-in** rational to IEEE 754 binary64 boundary; nothing in the original exact IR or `FromApproximateIr` implicitly widens rationals. `RationalBinary64Conversion.TryConvert` uses bounded integer arithmetic (at most 4096 bits per reduced numerator/denominator), IEEE 754 **round-to-nearest, ties-to-even**, and returns an explicit `Exact`, `Rounded`, `Underflow`, `Overflow`, or `BudgetExceeded` outcome. It records exact absolute approximation error as `ExactRational` when a finite value is returned.
+
+`ExactMatrixBinary64Conversion.TryConvert` requires the caller to select `RequireExact` or `AllowRounded`. An exact-only request refuses the first rounded cell and never returns a partially populated matrix. A rounded request returns the number of rounded elements and largest exact absolute cell error; underflow, overflow and operand budget overrun also produce no partial matrix.
+
+Independent oracles include `1/2` (exact), `1/3` (rounded), `2^53+1` and `2^53+3` (ties to even), `2^-1074` (minimum subnormal), `2^-1075` (underflow), and `2^1024` (overflow). Provider array conversion is **copy in/copy out**, never view/alias. The `dw.tools.math.numerics` library has no Math.NET or AURA reference; the managed Math.NET test adapter remains an independently qualified, optional consumer.
+
+This boundary does not admit complex values, decimal floating transports, provider-owned mutable views, scalar units or automatic dimensional widening. A rounding result is not a guarantee of downstream linear solver conditioning, and an admitted approximate value is not exact mathematical equality. No external consumer, native BLAS runtime or AURA broker authorization is implied.
+
+**Scope:** only the independent Math RS041 DWF run may qualify these source and test candidates; staging alone does not establish the outcome.
