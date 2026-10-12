@@ -7,122 +7,114 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Work="M3-W01", Phase="M3-W01-C02", Task="M3-W01-C02-T1";
-const string Red="M3-W01-C02-T1-R", Green="M3-W01-C02-T1-G", Verify="M3-W01-C02-T1-V";
-const string Src="src/projects/dw.tools.math.numerics/NumericalMatrices.cs";
-const string Proj="src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj";
-const string ProdLock="src/projects/dw.tools.math.numerics/packages.lock.json";
-const string Test="tests/projects/dw.tools.math.numerics.tests/M3W01C02Tests.cs";
-const string RedTest="tests/projects/dw.tools.math.numerics.tests/M3W01C02RedTests.cs";
-const string TestProj="tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj";
-const string TestLock="tests/projects/dw.tools.math.numerics.tests/packages.lock.json";
-const string SmokeProj="tests/providers/m3-w01-c02/MathNetInteropSmoke.csproj";
-const string SmokeSource="tests/providers/m3-w01-c02/Program.cs";
-const string Doc="docs/distribution/numerical-matrices.md", Solution="dw.tools.math.slnx";
-const string Prior="docs/planning/evidence/M3-W01-C01-provider-qualified.json";
-const string PriorBoundary="docs/planning/evidence/M3-W01-C01-boundary-qualified.json";
-const string RedProof="docs/planning/evidence/M3-W01-C02-contract-red.json";
-const string Qualified="docs/planning/evidence/M3-W01-C02-contract-qualified.json";
-const string Version="0.4.0-preview.1";
-const int GreenTestCount=17;
+const string Phase="M3-W01-C02", Task="M3-W01-C02-T2";
+const string Red="M3-W01-C02-T2-R", Green="M3-W01-C02-T2-G", Verify="M3-W01-C02-T2-V";
+const string Source="src/projects/dw.tools.math.numerics/RationalBinary64Conversion.cs";
+const string RedTest="tests/projects/dw.tools.math.numerics.tests/M3W01C02T2RedTests.cs";
+const string Tests="tests/projects/dw.tools.math.numerics.tests/M3W01C02T2Tests.cs";
+const string TestProject="tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj";
+const string ProductProject="src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj";
+const string Distribution="docs/distribution/numerical-matrices.md";
+const string Prior="docs/planning/evidence/M3-W01-C02-contract-qualified.json";
+const string Gate="docs/planning/evidence/M3-W01-C01-provider-qualified.json";
+const string RedEvidence="docs/planning/evidence/M3-W01-C02-boundary-red.json";
+const string Qualified="docs/planning/evidence/M3-W01-C02-boundaries-qualified.json";
+const string Version="0.4.0-preview.2";
+const int IndependentGreenTests=19;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
+p.Workflow.RequireCurrentRun("RS041","M3","M3-W01",Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS040",1,
+    "feat: introduce bounded provider-neutral numerical matrix contracts",
+    "0.1.59",0,0,0,true);
+var prior=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))!.AsObject();
+if((string?)prior["status"]!="provider-neutral-bounded-binary64-dense-sparse-matrix-and-vector-contract-qualified" ||
+   prior["independent_green_tests_passed"]?.GetValue<int>()!=17)
+    throw new InvalidOperationException("RS040 T1 qualification is not the accepted baseline.");
+var provider=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Gate)))!.AsObject();
+if((string?)provider["selected_package_id"]!="MathNet.Numerics" ||
+   (string?)provider["selected_package_version"]!="5.0.0")
+    throw new InvalidOperationException("Numerical provider smoke baseline is missing.");
+
 var backlog=JsonNode.Parse(File.ReadAllText(Path.Combine(root,"docs/planning/backlog.json")))!.AsObject();
-var work=backlog["work_packages"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]==Work);
-var chunk=backlog["chunks"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]==Phase);
-var t1=chunk["tasks"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]==Task);
-var t2=chunk["tasks"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]=="M3-W01-C02-T2");
-string Sub(string id)=>(string?)t1["subtasks"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]==id)["status"] ?? throw new InvalidOperationException("Missing "+id);
-bool baseline=(string?)backlog["plan_version"]=="0.1.38" &&
-    (string?)work["status"]=="in_progress" && (string?)chunk["status"]=="planned" &&
-    (string?)t1["status"]=="planned" && (string?)t2["status"]=="planned" &&
-    new[]{Red,Green,Verify}.All(x=>Sub(x)=="planned");
-bool target=(string?)backlog["plan_version"]=="0.1.39" &&
-    (string?)work["status"]=="in_progress" && (string?)chunk["status"]=="in_progress" &&
-    (string?)t1["status"]=="done" && (string?)t2["status"]=="planned" &&
-    new[]{Red,Green,Verify}.All(x=>Sub(x)=="done");
+var release=backlog["releases"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]=="M3");
+var wp=backlog["work_packages"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]=="M3-W01");
+var chunk=backlog["chunks"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]==Phase);
+var task=chunk["tasks"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]==Task);
+string SubStatus(string id)=>(string?)task["subtasks"]!.AsArray().Select(v=>v!.AsObject())
+    .Single(v=>(string?)v["id"]==id)["status"] ?? throw new InvalidOperationException(id);
+
+var baseline=(string?)backlog["plan_version"]=="0.1.39" &&
+    (string?)release["status"]=="in_progress" && (string?)wp["status"]=="in_progress" &&
+    (string?)chunk["status"]=="in_progress" && (string?)task["status"]=="planned" &&
+    new[]{Red,Green,Verify}.All(id=>SubStatus(id)=="planned");
+var target=(string?)backlog["plan_version"]=="0.1.40" &&
+    (string?)release["status"]=="in_progress" && (string?)wp["status"]=="in_progress" &&
+    (string?)chunk["status"]=="done" && (string?)task["status"]=="done" &&
+    new[]{Red,Green,Verify}.All(id=>SubStatus(id)=="done");
 if(!baseline && !target)
-    throw new InvalidOperationException("RS040 expects M3-W01-C02 0.1.38 baseline or 0.1.39 T1 target.");
-
-var previous=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))!.AsObject();
-var previousBoundary=JsonNode.Parse(File.ReadAllText(Path.Combine(root,PriorBoundary)))!.AsObject();
-if((string?)previous["status"]!="managed-mathnet-5.0.0-solve-stats-quadrature-smoke-qualified" ||
-    (string?)previousBoundary["status"]!="managed-mathnet-runtime-rid-license-and-native-deferral-qualified" ||
-    (string?)previous["selected_package_version"]!="5.0.0")
-    throw new InvalidOperationException("RS039 real provider qualification missing.");
-var external=backlog["external_dependencies"]!.AsArray().Select(x=>x!.AsObject())
-    .Single(x=>(string?)x["id"]=="EXT-NUMERIC");
-if((string?)external["status"]!="satisfied")
-    throw new InvalidOperationException("EXT-NUMERIC is not qualified.");
-var aura=JsonNode.Parse(File.ReadAllText(Path.Combine(root,
-    "docs/coordination/requests/MATH-XR-002-aura-adoption.json")))!.AsObject();
-if((string?)aura["status"]!="draft" || (string?)aura["transmission"]!="none")
-    throw new InvalidOperationException("Math cannot claim adoption or host permission.");
-
+    throw new InvalidOperationException("RS041 requires exact 0.1.39 T2 baseline or completed 0.1.40 target.");
+var dependency=backlog["external_dependencies"]!.AsArray().Select(v=>v!.AsObject())
+    .Single(v=>(string?)v["id"]=="EXT-NUMERIC");
+if((string?)dependency["status"]!="satisfied")
+    throw new InvalidOperationException("External numerical package is not previously qualified.");
 p.ProjectPlan.RequireNodeState("M3","in-progress");
-p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState("M3-W01","in-progress");
 p.ProjectPlan.RequireNodeState("M3-W01-C01","done");
-p.ProjectPlan.RequireNodeState(Phase,baseline?"not-ready":"in-progress");
-p.ProjectPlan.RequireNodeState("M3-W01-C02-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Phase,baseline?"in-progress":"done");
+p.ProjectPlan.RequireNodeState(Task,baseline?"not-ready":"done");
 p.ProjectPlan.RequireNodeState("M3-W01-C03","not-ready");
+p.ProjectPlan.RequireNodeState("M3-W02","not-ready");
 
-// Compile an independent RED against an empty but real numerical assembly.
-// The staged production source is deliberately absent until RED is recorded.
-foreach(var file in new[]{Proj,ProdLock,TestProj,TestLock,Solution,RedTest})
-    p.Files.ReplaceFromStaged("staged/"+file,file);
+// T2 RED: the independent reflection test is compiled against the completed
+// RS040 numerical assembly before the new conversion source is installed.
+p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 if(baseline)
 {
-    Required(root,"dotnet","restore",Solution,"--locked-mode");
-    Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
-    var red=Run(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M3W01C02RedTests.BoundedFiniteMatrixMustHavePublicProviderNeutralContract",
+    Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
+    Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
+    var red=Run(root,"dotnet","test",TestProject,"-c","Release","--no-build",
+        "--no-restore","--filter",
+        "FullyQualifiedName~M3W01C02T2RedTests.AgentIndependentRationalToBinary64RequiresExplicitStatusContract",
         "--logger","console;verbosity=normal");
     if(red.Code==0 || !red.Output.Contains(
-        "M3-W01-C02-T1 RED: provider-neutral bounded finite matrix contract is absent.",
+        "M3-W01-C02-T2 RED: explicit exact-rational binary64 conversion result contract is absent.",
         StringComparison.Ordinal))
-        throw new InvalidOperationException("RS040 independent absent-contract RED not observed: "+Relevant(red.Output));
-    var redEvidence=new JsonObject
+        throw new InvalidOperationException("RS041 missing independently observed absent-contract RED: "+
+            Relevant(red.Output));
+    var evidence=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M3-W01-C02-contract-red",
-        ["status"]="controlled-absent-provider-neutral-numerical-matrix-red-observed",
-        ["prior_provider_qualification"]=Prior,
-        ["oracle"]="Numerical matrix contract must be public, finite and provider-neutral.",
-        ["red_setup"]="Compiled independent assembly reflection test against numerical project without implementation.",
-        ["qualification_limit"]="The missing-contract RED does not prove arithmetic, dimensional policy, boundedness or provider conversion."
+        ["schema_version"]=1,["id"]="M3-W01-C02-boundary-red",
+        ["status"]="controlled-missing-explicit-rational-binary64-contract-red-observed",
+        ["baseline_t1_evidence"]=Prior,
+        ["red_test"]=RedTest,
+        ["scope"]="compiled absent public conversion contract, not an arithmetic or rounding proof",
+        ["expected_marker"]="M3-W01-C02-T2 RED: explicit exact-rational binary64 conversion result contract is absent."
     };
-    p.Files.WriteComplete(RedProof,redEvidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+    p.Files.WriteComplete(RedEvidence,evidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 else
 {
-    var redEvidence=JsonNode.Parse(File.ReadAllText(Path.Combine(root,RedProof)))!.AsObject();
-    if((string?)redEvidence["status"]!="controlled-absent-provider-neutral-numerical-matrix-red-observed")
-        throw new InvalidOperationException("RS040 target re-entry requires recorded RED.");
+    var redEvidence=JsonNode.Parse(File.ReadAllText(Path.Combine(root,RedEvidence)))!.AsObject();
+    if((string?)redEvidence["status"]!="controlled-missing-explicit-rational-binary64-contract-red-observed")
+        throw new InvalidOperationException("RS041 completed target lacks original controlled RED evidence.");
 }
 
-foreach(var file in new[]{Src,Test,SmokeProj,SmokeSource,Doc})
+foreach(var file in new[]{Source,Tests,ProductProject,Distribution})
     p.Files.ReplaceFromStaged("staged/"+file,file);
-Required(root,"dotnet","restore",Solution,"--locked-mode");
-Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
-var green=Required(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
-    "--filter","FullyQualifiedName~M3W01C02","--logger","console;verbosity=normal");
-if(!green.Contains("Total tests: 18",StringComparison.OrdinalIgnoreCase) ||
-   !green.Contains("Passed: 18",StringComparison.OrdinalIgnoreCase))
-    throw new InvalidOperationException("RS040 expected 1 recovered RED plus 17 independent numerical GREEN tests.");
 
-Required(root,"dotnet","test",TestProj,"-c","Release","--no-build","--no-restore",
-    "--logger","console;verbosity=minimal");
-Required(root,"dotnet","restore",SmokeProj);
-Required(root,"dotnet","build",SmokeProj,"-c","Release","--no-restore");
-var smoke=Required(root,"dotnet","run","--project",SmokeProj,"-c","Release","--no-build","--no-restore");
-if(!smoke.Contains("M3-W01-C02:managed-mathnet-5.0.0-provider-copy-smoke:qualified",
-    StringComparison.Ordinal))
-    throw new InvalidOperationException("Managed Math.NET copied-array numerical smoke failed.");
+Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
+Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
+var green=Required(root,"dotnet","test",TestProject,"-c","Release","--no-build","--no-restore",
+    "--filter","FullyQualifiedName~M3W01C02T2Tests","--logger","console;verbosity=normal");
+if(!green.Contains("Total tests: 19",StringComparison.OrdinalIgnoreCase) ||
+   !green.Contains("Passed: 19",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException("RS041 19 independent rounding/boundary GREEN oracles not confirmed.");
+var allNumerics=Required(root,"dotnet","test",TestProject,"-c","Release",
+    "--no-build","--no-restore","--logger","console;verbosity=minimal");
+if(!allNumerics.Contains("Passed:",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException("All numerical tests did not emit an admission count.");
 Required(root,"dotnet","test",
     "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
     "-c","Release","--no-build","--no-restore","--logger","console;verbosity=minimal");
@@ -135,17 +127,22 @@ Required(root,"dotnet","test",
 Required(root,"pwsh","-NoProfile","-NonInteractive","-File","scripts/verify.ps1");
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
-var feed=Path.Combine(root,"build","artifacts","numerics-package-feed");
-Required(root,"dotnet","pack",Proj,"-c","Release","--no-build","--no-restore","-o",feed);
-var nupkg=Path.Combine(feed,"dw.tools.math.numerics."+Version+".nupkg");
-if(!File.Exists(nupkg))throw new InvalidOperationException("Numerics NuGet archive missing.");
-using(var zip=ZipFile.OpenRead(nupkg))
+// Packaging is local, intentionally not a public NuGet publication.
+// The Math product must carry only an IR project dependency; managed
+// Math.NET remains a separate test-only consumer reference.
+var feed=Path.Combine(root,"build","artifacts","m3-c02-t2-local-feed");
+Required(root,"dotnet","pack",ProductProject,"-c","Release","--no-build",
+    "--no-restore","-o",feed);
+var archive=Path.Combine(feed,"dw.tools.math.numerics."+Version+".nupkg");
+if(!File.Exists(archive))throw new InvalidOperationException("Versioned numerical package not produced.");
+using(var zip=ZipFile.OpenRead(archive))
 {
     if(zip.GetEntry("lib/net10.0/dw.tools.math.numerics.dll") is null)
-        throw new InvalidOperationException("Numerical product assembly missing from local NuGet archive.");
-    var manifests=zip.Entries.Where(x=>x.FullName.EndsWith(".nuspec",StringComparison.OrdinalIgnoreCase)).ToArray();
-    if(manifests.Length!=1)throw new InvalidOperationException("Expected one NuGet manifest.");
-    using var stream=manifests[0].Open();
+        throw new InvalidOperationException("Versioned package lacks its numerical assembly.");
+    var nuspecs=zip.Entries.Where(e=>e.FullName.EndsWith(".nuspec",
+        StringComparison.OrdinalIgnoreCase)).ToArray();
+    if(nuspecs.Length!=1)throw new InvalidOperationException("Expected one versioned NuGet manifest.");
+    using var stream=nuspecs[0].Open();
     var xml=XDocument.Load(stream);
     var meta=xml.Descendants().Single(x=>x.Name.LocalName=="metadata");
     var id=meta.Elements().Single(x=>x.Name.LocalName=="id").Value;
@@ -153,84 +150,80 @@ using(var zip=ZipFile.OpenRead(nupkg))
     var deps=meta.Descendants().Where(x=>x.Name.LocalName=="dependency")
         .Select(x=>(string?)x.Attribute("id")??"").ToArray();
     if(id!="dw.tools.math.numerics" || version!=Version ||
-       !deps.SequenceEqual(new[]{"dw.tools.math.ir"},StringComparer.OrdinalIgnoreCase))
-        throw new InvalidOperationException("Unexpected numerical product package version or dependency graph.");
+        !deps.SequenceEqual(new[]{"dw.tools.math.ir"},StringComparer.OrdinalIgnoreCase))
+        throw new InvalidOperationException("Numerical package has unexpected version/provider dependencies.");
 }
-
+var sdk=Required(root,"dotnet","--version").Trim();
 var proof=new JsonObject
 {
-    ["schema_version"]=1,["id"]="M3-W01-C02-contract-qualified",
-    ["status"]="provider-neutral-bounded-binary64-dense-sparse-matrix-and-vector-contract-qualified",
-    ["prior_provider_evidence"]=Prior,["prior_provider_boundary_evidence"]=PriorBoundary,
-    ["controlled_red_evidence"]=RedProof,
-    ["source"]=Src,["source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Src))),
-    ["test"]=Test,["test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Test))),
+    ["schema_version"]=1,["id"]="M3-W01-C02-boundaries-qualified",
+    ["status"]="explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified",
+    ["baseline_t1_evidence"]=Prior,["provider_baseline_evidence"]=Gate,
+    ["controlled_red_evidence"]=RedEvidence,
+    ["source"]=Source,["source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Source))),
+    ["green_test"]=Tests,["green_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Tests))),
     ["red_test"]=RedTest,["red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,RedTest))),
-    ["provider_smoke_project"]=SmokeProj,
-    ["provider_smoke_source"]=SmokeSource,
-    ["provider_smoke_project_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,SmokeProj))),
-    ["provider_smoke_source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,SmokeSource))),
-    ["independent_green_tests_passed"]=GreenTestCount,
-    ["prior_red_test_now_green"]=true,["controlled_red_then_green"]=true,
-    ["matrix_add_oracle"]="[[1,2],[3,4]]+[[4,3],[2,1]]=[[5,5],[5,5]]",
-    ["matrix_multiply_oracle"]="[[1,2],[3,4]]*[[2,0],[1,2]]=[[4,4],[10,8]]",
-    ["matrix_vector_oracle"]="[[1,2],[3,4]]*[5,6]=[17,39]",
-    ["maximum_matrix_elements"]=4096,["maximum_scalar_products"]=65536,
-    ["precision"]="explicit finite approximate binary64",
-    ["sparse_strategy"]="unique canonical row-major nonzero coordinate triples; explicit dense conversion",
-    ["managed_mathnet_5_0_0_test_only_copy_bridge_qualified"]=true,
-    ["package_id"]="dw.tools.math.numerics",["package_version"]=Version,
-    ["package_dependencies"]=p.Json.StringArray("dw.tools.math.ir"),
-    ["observed_package_bytes"]=new FileInfo(nupkg).Length,
-    ["observed_package_sha256"]=Hash(File.ReadAllBytes(nupkg)),
+    ["independent_green_tests_passed"]=IndependentGreenTests,
+    ["prior_red_test_now_green"]=true,["red_then_green"]=true,
+    ["rounding"]="IEEE 754 binary64 nearest, ties to even; exact rational difference returned",
+    ["outcomes"]=p.Json.StringArray("Exact","Rounded","Underflow","Overflow","BudgetExceeded"),
+    ["maximum_operand_bits"]=4096,
+    ["underflow_and_overflow_refuse_partial_values"]=true,
+    ["matrix_exact_only_and_allow_rounded_policies_qualified"]=true,
+    ["matrix_partial_conversion_refused"]=true,
+    ["copy_in_copy_out_no_provider_views"]=true,
+    ["dotnet_sdk"]=sdk,
     ["runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-    ["locked_solution_build_passed"]=true,
-    ["full_prior_math_regressions_passed"]=true,
-    ["transfer_architecture_passed"]=true,["local_package_structure_qualified"]=true,
+    ["locked_solution_build_passed"]=true,["prior_math_regressions_passed"]=true,
+    ["nuget_product_version"]=Version,
+    ["nuget_package_sha256"]=Hash(File.ReadAllBytes(archive)),
+    ["nuget_package_bytes"]=new FileInfo(archive).Length,
+    ["direct_package_dependencies"]=p.Json.StringArray("dw.tools.math.ir"),
+    ["mathnet_only_in_independent_test_consumer"]=true,
+    ["no_AURA_or_Decision_dependency"]=true,
     ["nonclaims"]=p.Json.StringArray(
-        "No general rational-to-binary64 conversion, implicit widening, or exact numerical result.",
-        "No provider types or Math.NET dependencies in public numerics package.",
-        "No native BLAS qualification, provider routing, unexecuted RID or cross-platform floating bitwise identity.",
-        "M3-W01-C02-T2 copy/alias, explicit conversion policies and optional provider-load boundaries still planned.",
-        "No AURA, Decision or MCDM adoption or repository changes.")
+        "No public NuGet publication, native BLAS or unexecuted platform admission.",
+        "No implicit rational-to-double widening, algebraic exactness after a rounded conversion, or permission to call third-party providers.",
+        "No mutable provider-array views or shared mutable matrix aliases.",
+        "No generated Math skill, shared dw.discovery package or AURA broker admission.",
+        "Only the bounded M3-W01-C02 scientific contract is qualified by this run.")
 };
 p.Files.WriteComplete(Qualified,proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 
 p.Json.EditObject("docs/planning/backlog.json",plan=>
 {
-    plan["plan_version"]="0.1.39";
-    var c=plan["chunks"]!.AsArray().Select(x=>x!.AsObject())
-        .Single(x=>(string?)x["id"]==Phase);
-    var t=c["tasks"]!.AsArray().Select(x=>x!.AsObject())
-        .Single(x=>(string?)x["id"]==Task);
-    c["status"]="in_progress";
-    c["refinement"]="RS040 T1 adds a standalone .NET 10 provider-neutral dw.tools.math.numerics package: bounded finite binary64 dense matrices and vectors, explicit canonical sparse coordinate strategy, shape-safe 2x2 addition/multiplication, matrix-vector oracles, approximate IR-only transport and copied provider arrays. One independently observed missing-contract RED, seventeen GREEN tests, a real managed Math.NET copied-array smoke, prior Math regressions and locked NuGet package are qualified. T2 remains planned for explicit rational-to-binary64 and stronger alias/provider-loading boundaries.";
-    c["readiness"]="active T1 qualified; refine T2 exact/approximate conversion and copy/provider availability boundaries before C02 closure";
-    c["files"]=p.Json.StringArray(Src,Proj,ProdLock,Test,RedTest,TestProj,TestLock,
-        Solution,SmokeProj,SmokeSource,Doc,RedProof,Qualified);
+    plan["plan_version"]="0.1.40";
+    var c=plan["chunks"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]==Phase);
+    var t=c["tasks"]!.AsArray().Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]==Task);
+    c["status"]="done";
+    c["refinement"]="RS040 qualified provider-neutral bounded dense/sparse finite binary64 matrix and vector contracts; RS041 closes T2 with an independently observed RED followed by nineteen hand/binary IEEE 754 GREEN cases. Explicit correctly-rounded rational-to-binary64 conversion reports exact absolute loss, exact-only or rounded matrix policies, refusal on underflow/overflow/budget, no partial matrix, copy-only provider arrays, and local provider-neutral NuGet preview.2 packaging.";
+    c["readiness"]="closed: both T1 and T2 accepted; M3-W01-C03 remains not-ready for solving and decompositions";
+    var existingPaths=c["files"]!.AsArray().Select(v=>v!.GetValue<string>());
+    c["files"]=p.Json.StringArray(existingPaths.Concat(new[]{Source,RedTest,Tests,ProductProject,Distribution,RedEvidence,Qualified})
+        .Distinct(StringComparer.Ordinal).ToArray());
     c["commands"]=p.Json.StringArray(
-        "dotnet restore "+Solution+" --locked-mode",
-        "dotnet build "+Solution+" -c Release --no-restore",
-        "dotnet test "+TestProj+" -c Release --filter FullyQualifiedName~M3W01C02",
-        "dotnet run --project "+SmokeProj+" -c Release",
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M3W01C02T2",
+        "dotnet test "+TestProject+" -c Release",
         "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
-        "dotnet pack "+Proj+" -c Release");
-    c["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs",
+        "dotnet pack "+ProductProject+" -c Release");
+    var existingEvidence=c["evidence"]!.AsArray().Select(v=>v!.GetValue<string>());
+    c["evidence"]=p.Json.StringArray(existingEvidence.Concat(new[]{RedEvidence,Qualified})
+        .Distinct(StringComparer.Ordinal).ToArray());
     t["status"]="done";
-    t["evidence"]=p.Json.StringArray(RedProof,Qualified);
-    foreach(var child in t["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
+    t["evidence"]=p.Json.StringArray(RedEvidence,Qualified);
+    foreach(var sub in t["subtasks"]!.AsArray().Select(v=>v!.AsObject()))
     {
-        child["status"]="done";
-        child["evidence"]=p.Json.StringArray((string?)child["id"]==Red?RedProof:Qualified);
+        sub["status"]="done";
+        sub["evidence"]=p.Json.StringArray((string?)sub["id"]==Red?RedEvidence:Qualified);
     }
 });
 if(baseline)
 {
-    foreach(var node in new[]{Phase,Task})
-    {
-        p.ProjectPlan.TransitionNode(node,"not-ready","ready");
-        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
-    }
+    p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Task,"ready","in-progress");
     foreach(var node in new[]{Red,Green,Verify})
     {
         p.ProjectPlan.TransitionNode(node,"not-ready","ready");
@@ -238,14 +231,16 @@ if(baseline)
         p.ProjectPlan.ConvergeNodeToDone(node);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
 else
 {
-    p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-    foreach(var node in new[]{Red,Green,Verify,Task})
+    foreach(var node in new[]{Task,Red,Green,Verify,Phase})
         p.ProjectPlan.RequireNodeState(node,"done");
 }
-p.ProjectPlan.RequireNodeState("M3-W01-C02-T2","not-ready");
+p.ProjectPlan.RequireNodeState("M3","in-progress");
+p.ProjectPlan.RequireNodeState("M3-W01","in-progress");
+p.ProjectPlan.RequireNodeState("M3-W01-C03","not-ready");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
@@ -261,9 +256,11 @@ static string Relevant(string output)
 }
 static (int Code,string Output) Run(string root,string executable,params string[] args)
 {
-    using var process=new Process{StartInfo=new ProcessStartInfo{
+    using var process=new Process{StartInfo=new ProcessStartInfo
+    {
         FileName=executable,WorkingDirectory=root,UseShellExecute=false,
-        RedirectStandardOutput=true,RedirectStandardError=true}};
+        RedirectStandardOutput=true,RedirectStandardError=true
+    }};
     process.StartInfo.Environment["DOTNET_NOLOGO"]="1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
     foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
