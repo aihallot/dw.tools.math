@@ -31,7 +31,7 @@ public sealed record RationalBinary64Result(
     ExactRational? AbsoluteError)
 {
     public bool IsFiniteResult => Value.HasValue &&
-        Status is RationalBinary64Status.Exact or RationalBinary64Status.Rounded;
+        (Status is RationalBinary64Status.Exact or RationalBinary64Status.Rounded);
 }
 
 /// <summary>
