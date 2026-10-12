@@ -86,10 +86,10 @@ public static class BoundedLinearAlgebra64
         for (var column = 0; column < n; column++)
         {
             var pivotRow = column;
-            var pivotMagnitude = Math.Abs(lu[column, column]);
+            var pivotMagnitude = global::System.Math.Abs(lu[column, column]);
             for (var row = column + 1; row < n; row++)
             {
-                var magnitude = Math.Abs(lu[row, column]);
+                var magnitude = global::System.Math.Abs(lu[row, column]);
                 if (magnitude > pivotMagnitude)
                 {
                     pivotMagnitude = magnitude;
@@ -109,7 +109,7 @@ public static class BoundedLinearAlgebra64
             }
 
             var pivot = lu[column, column];
-            minimumPivot = Math.Min(minimumPivot, Math.Abs(pivot));
+            minimumPivot = global::System.Math.Min(minimumPivot, global::System.Math.Abs(pivot));
             for (var row = column + 1; row < n; row++)
             {
                 var multiplier = lu[row, column] / pivot;
@@ -185,22 +185,22 @@ public static class BoundedLinearAlgebra64
         var matrixMax = 0d;
         var rightMax = 0d;
         var xMax = 0d;
-        foreach (var value in x) xMax = Math.Max(xMax, Math.Abs(value));
+        foreach (var value in x) xMax = global::System.Math.Max(xMax, global::System.Math.Abs(value));
         for (var row = 0; row < n; row++)
         {
             var sum = 0d;
-            rightMax = Math.Max(rightMax, Math.Abs(right.At(row)));
+            rightMax = global::System.Math.Max(rightMax, global::System.Math.Abs(right.At(row)));
             for (var column = 0; column < n; column++)
             {
-                matrixMax = Math.Max(matrixMax, Math.Abs(matrix.At(row, column)));
+                matrixMax = global::System.Math.Max(matrixMax, global::System.Math.Abs(matrix.At(row, column)));
                 sum += matrix.At(row, column) * x[column];
             }
             if (!double.IsFinite(sum))
                 return SolveFailure(factors.PivotThreshold);
-            var error = Math.Abs(sum - right.At(row));
+            var error = global::System.Math.Abs(sum - right.At(row));
             if (!double.IsFinite(error))
                 return SolveFailure(factors.PivotThreshold);
-            residual = Math.Max(residual, error);
+            residual = global::System.Math.Max(residual, error);
         }
         // A relative residual is optional when a binary64 normalizer would
         // overflow or underflow; never manufacture a finite conditioning claim.
@@ -234,7 +234,7 @@ public static class BoundedLinearAlgebra64
         {
             var maxInColumn = 0d;
             for (var i = k; i < rows; i++)
-                maxInColumn = Math.Max(maxInColumn, Math.Abs(r[i, k]));
+                maxInColumn = global::System.Math.Max(maxInColumn, global::System.Math.Abs(r[i, k]));
             if (maxInColumn <= threshold)
                 return new(LinearAlgebraStatus64.RankDeficient, null, null, threshold);
 
@@ -244,7 +244,7 @@ public static class BoundedLinearAlgebra64
                 var scaled = r[i, k] / maxInColumn;
                 sumSquares += scaled * scaled;
             }
-            var norm = maxInColumn * Math.Sqrt(sumSquares);
+            var norm = maxInColumn * global::System.Math.Sqrt(sumSquares);
             if (!double.IsFinite(norm) || norm == 0d)
                 return QrFailure(threshold);
 
@@ -314,7 +314,7 @@ public static class BoundedLinearAlgebra64
         if (!first.HasValue || !second.HasValue)
             return new(LinearAlgebraStatus64.NonFiniteIntermediate, null, null, null);
         var largest = 0.5d * first.Value + 0.5d * second.Value;
-        var smallest = 0.5d * Math.Abs(first.Value - second.Value);
+        var smallest = 0.5d * global::System.Math.Abs(first.Value - second.Value);
         if (!double.IsFinite(largest) || !double.IsFinite(smallest))
             return new(LinearAlgebraStatus64.NonFiniteIntermediate, null, null, null);
         var ratio = smallest > 0d && double.IsFinite(largest / smallest)
@@ -335,18 +335,18 @@ public static class BoundedLinearAlgebra64
     private static double? HypotFinite(double a, double b)
     {
         if (!double.IsFinite(a) || !double.IsFinite(b)) return null;
-        var scale = Math.Max(Math.Abs(a), Math.Abs(b));
+        var scale = global::System.Math.Max(global::System.Math.Abs(a), global::System.Math.Abs(b));
         if (scale == 0d) return 0d;
         var x = a / scale;
         var y = b / scale;
-        var value = scale * Math.Sqrt(x * x + y * y);
+        var value = scale * global::System.Math.Sqrt(x * x + y * y);
         return double.IsFinite(value) ? value : null;
     }
 
     private static double MaxAbs(double[,] array)
     {
         var best = 0d;
-        foreach (var entry in array) best = Math.Max(best, Math.Abs(entry));
+        foreach (var entry in array) best = global::System.Math.Max(best, global::System.Math.Abs(entry));
         return best;
     }
 
