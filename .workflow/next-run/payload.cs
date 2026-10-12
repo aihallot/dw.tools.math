@@ -10,61 +10,64 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Phase="M3-W01-C03", Task="M3-W01-C03-T1";
-const string Red="M3-W01-C03-T1-R", Green="M3-W01-C03-T1-G", Verify="M3-W01-C03-T1-V";
+const string Phase="M3-W01-C03", Task="M3-W01-C03-T2";
+const string Red="M3-W01-C03-T2-R", Green="M3-W01-C03-T2-G", Verify="M3-W01-C03-T2-V";
+const string Work="M3-W01";
 const string Source="src/projects/dw.tools.math.numerics/BoundedLinearAlgebra64.cs";
-const string RedTest="tests/projects/dw.tools.math.numerics.tests/M3W01C03RedTests.cs";
-const string Tests="tests/projects/dw.tools.math.numerics.tests/M3W01C03Tests.cs";
+const string RedTest="tests/projects/dw.tools.math.numerics.tests/M3W01C03T2RedTests.cs";
+const string Tests="tests/projects/dw.tools.math.numerics.tests/M3W01C03T2Tests.cs";
 const string TestProject="tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj";
 const string ProductProject="src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj";
-const string SmokeProject="tests/providers/m3-w01-c03/ManagedLinearAlgebraSmoke.csproj";
-const string SmokeSource="tests/providers/m3-w01-c03/Program.cs";
 const string Distribution="docs/distribution/bounded-linear-algebra.md";
-const string Prior="docs/planning/evidence/M3-W01-C02-boundaries-qualified.json";
+const string Decision="docs/planning/decisions/m3-w01-c03-svd-scope.md";
+const string Prior="docs/planning/evidence/M3-W01-C03-contract-qualified.json";
+const string PriorNumerics="docs/planning/evidence/M3-W01-C02-boundaries-qualified.json";
 const string Gate="docs/planning/evidence/M3-W01-C01-provider-qualified.json";
-const string RedEvidence="docs/planning/evidence/M3-W01-C03-contract-red.json";
-const string Qualified="docs/planning/evidence/M3-W01-C03-contract-qualified.json";
-const string Version="0.4.0-preview.3";
-const int IndependentGreenTests=25;
+const string Smoke="tests/providers/m3-w01-c03/ManagedLinearAlgebraSmoke.csproj";
+const string RedEvidence="docs/planning/evidence/M3-W01-C03-boundary-red.json";
+const string Qualified="docs/planning/evidence/M3-W01-C03-boundaries-qualified.json";
+const string Version="0.4.0-preview.4";
+const string Backlog="docs/planning/backlog.json";
+const int IndependentGreenTests=16;
+const int ExpectedNumericsTests=81;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
-// The presence of a durable, uniquely named qualification receipt selects
-// exact completed-target re-entry; typed Require verifies every plan status.
-// No hand-written parse/traversal of workflow or product authority is needed.
+// Presence of a qualified T2 receipt selects completed target re-entry.
+// All authority values are then verified through bounded Payload SDK contracts.
 var target=File.Exists(Path.Combine(root,Qualified));
 var baseline=!target;
-p.Workflow.RequireCurrentRun("RS042","M3","M3-W01",target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS041",1,
-    "feat: qualify explicit rational-to-binary64 numerical boundaries",
+p.Workflow.RequireCurrentRun("RS043","M3",target?null:Work,target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS042",1,
+    "feat: add bounded provider-neutral LU QR and spectral contracts",
     "0.1.59",2,2,0,false);
 
 p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("bounded-dense-lu-qr-and-analytical-2x2-singular-spectrum-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(25));
+p.Require.JsonValueEquals(Prior,"/numerical_regression_tests_passed",JsonValue.Create(64));
+p.Require.JsonValueEquals(PriorNumerics,"/status",
     JsonValue.Create("explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified"));
-p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(19));
 p.Require.JsonValueEquals(Gate,"/selected_package_id",JsonValue.Create("MathNet.Numerics"));
 p.Require.JsonValueEquals(Gate,"/selected_package_version",JsonValue.Create("5.0.0"));
-
-const string ProductBacklog="docs/planning/backlog.json";
-p.Require.JsonValueBaselineOrTarget(ProductBacklog,"/plan_version",
-    JsonValue.Create("0.1.40"),JsonValue.Create("0.1.41"));
-p.Require.JsonValueEquals(ProductBacklog,"/plan_version",
-    JsonValue.Create(target?"0.1.41":"0.1.40"));
-p.Require.JsonValueEquals(ProductBacklog,"/releases/3/status",JsonValue.Create("in_progress"));
-p.Require.JsonValueEquals(ProductBacklog,"/work_packages/7/status",JsonValue.Create("in_progress"));
-p.Require.JsonValueEquals(ProductBacklog,"/chunks/21/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/tasks/0/status",
-    JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/tasks/1/status",JsonValue.Create("planned"));
+p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
+    JsonValue.Create("0.1.41"),JsonValue.Create("0.1.42"));
+p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create(target?"0.1.42":"0.1.41"));
+p.Require.JsonValueEquals(Backlog,"/releases/3/status",JsonValue.Create("in_progress"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/7/status",JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/20/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/21/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/22/status",JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/22/tasks/0/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/22/tasks/1/status",JsonValue.Create(target?"done":"planned"));
 foreach(var index in new[]{0,1,2})
-    p.Require.JsonValueEquals(ProductBacklog,$"/chunks/22/tasks/0/subtasks/{index}/status",
+    p.Require.JsonValueEquals(Backlog,$"/chunks/22/tasks/1/subtasks/{index}/status",
         JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/23/status",JsonValue.Create("planned"));
 if(target)
 {
     p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create("bounded-dense-lu-qr-and-analytical-2x2-singular-spectrum-qualified"));
+        JsonValue.Create("bounded-2x2-condition-availability-rank-pivot-policy-qualified"));
 }
 else
 {
@@ -73,73 +76,80 @@ else
 }
 
 p.ProjectPlan.RequireNodeState("M3","in-progress");
-p.ProjectPlan.RequireNodeState("M3-W01","in-progress");
+p.ProjectPlan.RequireNodeState(Work,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M3-W01-C01","done");
 p.ProjectPlan.RequireNodeState("M3-W01-C02","done");
-p.ProjectPlan.RequireNodeState(Phase,baseline?"not-ready":"in-progress");
-p.ProjectPlan.RequireNodeState(Task,baseline?"not-ready":"done");
-p.ProjectPlan.RequireNodeState("M3-W01-C03-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M3-W01-C03-T1","done");
+p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
 p.ProjectPlan.RequireNodeState("M3-W02","not-ready");
+foreach(var node in new[]{Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(node,target?"done":"not-ready");
 
-// Independent RED is compiled against the already-qualified 0.4.0-preview.2
-// assembly before any new linear algebra implementation is installed.
-var redInstalled=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+// Controlled RED: compile against qualified preview.3 without the new
+// spectral-condition property; only the reflection-based RED is installed.
+var installedRed=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 if(baseline)
 {
     Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
     Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
-    var observed=Run(root,"dotnet","test",TestProject,"-c","Release","--no-build",
-        "--no-restore","--filter",
-        "FullyQualifiedName~M3W01C03RedTests.BoundedProviderNeutralLinearAlgebraMustBeExplicitlyImplemented",
+    var observed=Run(root,"dotnet","test",TestProject,"-c","Release",
+        "--no-build","--no-restore","--filter",
+        "FullyQualifiedName~M3W01C03T2RedTests.AUniqueTwoByTwoSolveMustExposeConditionAvailability",
         "--logger","console;verbosity=normal");
-    const string marker="M3-W01-C03-T1 RED: bounded provider-neutral LU solve QR and singular spectrum contract is absent.";
-    if(observed.Code==0 || !observed.Output.Contains(marker,StringComparison.Ordinal))
-        throw new InvalidOperationException("RS042 independent missing-contract RED not observed: "+
+    const string marker="M3-W01-C03-T2 RED: bounded optional 2x2 condition estimate missing from solver result.";
+    if(observed.Code==0||!observed.Output.Contains(marker,StringComparison.Ordinal))
+        throw new InvalidOperationException("RS043 expected independent condition-availability RED absent: "+
             Relevant(observed.Output));
-    var record=new JsonObject
+    var redReceipt=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M3-W01-C03-contract-red",
-        ["status"]="controlled-provider-neutral-lu-qr-and-spectral-contract-absent-red-observed",
-        ["prior_numerical_evidence"]=Prior,["red_test"]=RedTest,
+        ["schema_version"]=1,["id"]="M3-W01-C03-boundary-red",
+        ["status"]="controlled-optional-solve-condition-result-contract-absent-red-observed",
+        ["prior_C03_T1_evidence"]=Prior,["red_test"]=RedTest,
         ["expected_marker"]=marker,
-        ["scope"]="One separately compiled public-contract RED before installing any candidate numerical implementation."
+        ["scope"]="Independent reflection RED against preview.3 before installing any modified solver implementation."
     };
-    p.Files.WriteComplete(RedEvidence,record.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+    p.Files.WriteComplete(RedEvidence,redReceipt.ToJsonString(
+        new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 else
 {
     p.Require.JsonValueEquals(RedEvidence,"/status",
-        JsonValue.Create("controlled-provider-neutral-lu-qr-and-spectral-contract-absent-red-observed"));
+        JsonValue.Create("controlled-optional-solve-condition-result-contract-absent-red-observed"));
 }
 
-// The SDK operations already hash and verify complete installed staged blobs.
-var installedSha=new Dictionary<string,string>(StringComparer.Ordinal);
-foreach(var file in new[]{Source,Tests,ProductProject,SmokeProject,SmokeSource,Distribution})
+var digests=new Dictionary<string,string>(StringComparer.Ordinal);
+foreach(var file in new[]{Source,Tests,ProductProject,Distribution,Decision})
 {
     var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
-    installedSha[file]=installed.AfterSha256 ??
-        throw new InvalidOperationException("Missing SDK installation digest: "+file);
+    digests[file]=installed.AfterSha256 ??
+        throw new InvalidOperationException("SDK staged-file SHA missing for "+file);
 }
 
 Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
 Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
-var green=Required(root,"dotnet","test",TestProject,"-c","Release","--no-build",
-    "--no-restore","--filter","FullyQualifiedName~M3W01C03Tests",
-    "--logger","console;verbosity=normal");
-if(!green.Contains("Total tests: 25",StringComparison.OrdinalIgnoreCase) ||
-   !green.Contains("Passed: 25",StringComparison.OrdinalIgnoreCase))
-    throw new InvalidOperationException("RS042 25 independent LU/QR/singular-spectrum GREEN oracles not confirmed.");
-var numerics=Required(root,"dotnet","test",TestProject,"-c","Release",
-    "--no-build","--no-restore","--logger","console;verbosity=minimal");
-if(!numerics.Contains("Passed:    64",StringComparison.OrdinalIgnoreCase)
-    && !numerics.Contains("Total:    64",StringComparison.OrdinalIgnoreCase))
-    throw new InvalidOperationException("Numerical regression expected 64 tests, including recovered RED and 25 GREEN.");
 
-var smoke=Required(root,"dotnet","run","--project",SmokeProject,"-c","Release");
+var green=Required(root,"dotnet","test",TestProject,"-c","Release",
+    "--no-build","--no-restore","--filter","FullyQualifiedName~M3W01C03T2Tests",
+    "--logger","console;verbosity=normal");
+if(!green.Contains("Total tests: 16",StringComparison.OrdinalIgnoreCase)
+    ||!green.Contains("Passed: 16",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException("RS043 must pass exactly 16 independent condition/rank boundary oracles.");
+
+var numerics=Required(root,"dotnet","test",TestProject,"-c","Release",
+    "--no-build","--no-restore","--logger","console;verbosity=normal");
+if(!numerics.Contains("Total tests: 81",StringComparison.OrdinalIgnoreCase)
+    ||!numerics.Contains("Passed: 81",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException("RS043 numerical boundary closure requires 81 passing tests.");
+
+var smoke=Required(root,"dotnet","run","--project",Smoke,"-c","Release");
 if(!smoke.Contains("M3-W01-C03:independent-managed-lu-qr-svd-smoke:qualified",
     StringComparison.Ordinal))
-    throw new InvalidOperationException("Managed Math.NET LU/QR/SVD corroboration failed.");
+    throw new InvalidOperationException("Managed provider optional LU/QR/SVD corroboration missing.");
 
-// Scope-risk requires exact prior mathematical regressions; no repository CI.
+// Completing the accepted numerical work package is a scientific trust
+// boundary, so replay the previously qualified composition, IR and exact
+// quantity regressions after the focused RED/GREEN numerical gates.
 Required(root,"dotnet","test",
     "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
     "-c","Release","--no-build","--no-restore","--logger","console;verbosity=minimal");
@@ -152,146 +162,136 @@ Required(root,"dotnet","test",
 Required(root,"pwsh","-NoProfile","-NonInteractive","-File","scripts/verify.ps1");
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
-var feed=Path.Combine(root,"build","artifacts","m3-c03-t1-local-feed");
-Required(root,"dotnet","pack",ProductProject,"-c","Release","--no-build",
-    "--no-restore","-o",feed);
-var archive=Path.Combine(feed,"dw.tools.math.numerics."+Version+".nupkg");
-if(!File.Exists(archive))
-    throw new InvalidOperationException("RS042 versioned product package missing.");
-using(var zip=ZipFile.OpenRead(archive))
+var feed=Path.Combine(root,"build","artifacts","m3-c03-t2-local-feed");
+Required(root,"dotnet","pack",ProductProject,"-c","Release",
+    "--no-build","--no-restore","-o",feed);
+var package=Path.Combine(feed,"dw.tools.math.numerics."+Version+".nupkg");
+if(!File.Exists(package))
+    throw new InvalidOperationException("RS043 local package is missing.");
+using(var zip=ZipFile.OpenRead(package))
 {
     if(zip.GetEntry("lib/net10.0/dw.tools.math.numerics.dll") is null)
-        throw new InvalidOperationException("RS042 package lacks its numerical assembly.");
+        throw new InvalidOperationException("Numerics package lacks its compiled assembly.");
     var nuspecs=zip.Entries.Where(e=>e.FullName.EndsWith(".nuspec",
         StringComparison.OrdinalIgnoreCase)).ToArray();
     if(nuspecs.Length!=1)throw new InvalidOperationException("Expected one NuGet manifest.");
     using var stream=nuspecs[0].Open();
     var xml=XDocument.Load(stream);
-    var meta=xml.Descendants().Single(x=>x.Name.LocalName=="metadata");
-    var packageId=meta.Elements().Single(x=>x.Name.LocalName=="id").Value;
-    var packageVersion=meta.Elements().Single(x=>x.Name.LocalName=="version").Value;
-    var deps=meta.Descendants().Where(x=>x.Name.LocalName=="dependency")
+    var metadata=xml.Descendants().Single(x=>x.Name.LocalName=="metadata");
+    var packageId=metadata.Elements().Single(x=>x.Name.LocalName=="id").Value;
+    var version=metadata.Elements().Single(x=>x.Name.LocalName=="version").Value;
+    var dependencies=metadata.Descendants().Where(x=>x.Name.LocalName=="dependency")
         .Select(x=>(string?)x.Attribute("id")??"").ToArray();
-    if(packageId!="dw.tools.math.numerics" || packageVersion!=Version
-        || !deps.SequenceEqual(new[]{"dw.tools.math.ir"},StringComparer.OrdinalIgnoreCase))
-        throw new InvalidOperationException("RS042 product introduced a provider dependency or wrong version.");
+    if(packageId!="dw.tools.math.numerics"||version!=Version||
+        !dependencies.SequenceEqual(new[]{"dw.tools.math.ir"},StringComparer.OrdinalIgnoreCase))
+        throw new InvalidOperationException("Package version or dependency boundary drifted.");
 }
+
 var proof=new JsonObject
 {
-    ["schema_version"]=1,["id"]="M3-W01-C03-contract-qualified",
-    ["status"]="bounded-dense-lu-qr-and-analytical-2x2-singular-spectrum-qualified",
-    ["prior_M3_W01_C02_evidence"]=Prior,
-    ["provider_baseline_evidence"]=Gate,
+    ["schema_version"]=1,["id"]="M3-W01-C03-boundaries-qualified",
+    ["status"]="bounded-2x2-condition-availability-rank-pivot-policy-qualified",
+    ["prior_C03_T1_evidence"]=Prior,
+    ["prior_C02_boundary_evidence"]=PriorNumerics,
+    ["managed_provider_qualified_evidence"]=Gate,
     ["controlled_red_evidence"]=RedEvidence,
-    ["source"]=Source,
-    ["source_sha256"]=installedSha[Source],
-    ["green_test"]=Tests,
-    ["green_test_sha256"]=installedSha[Tests],
-    ["red_test"]=RedTest,
-    ["red_test_sha256"]=redInstalled.AfterSha256,
-    ["provider_smoke_project"]=SmokeProject,
-    ["provider_smoke_source"]=SmokeSource,
-    ["provider_smoke_source_sha256"]=installedSha[SmokeSource],
+    ["source"]=Source,["source_sha256"]=digests[Source],
+    ["green_test"]=Tests,["green_test_sha256"]=digests[Tests],
+    ["red_test"]=RedTest,["red_test_sha256"]=installedRed.AfterSha256,
+    ["decision"]=Decision,["decision_sha256"]=digests[Decision],
+    ["distribution"]=Distribution,["distribution_sha256"]=digests[Distribution],
     ["independent_green_tests_passed"]=IndependentGreenTests,
-    ["numerical_regression_tests_passed"]=64,
+    ["numerical_regressions_passed"]=ExpectedNumericsTests,
     ["controlled_red_then_green"]=true,
-    ["lu_partial_pivot_PA_equals_LU"]=true,
-    ["solve_hand_oracle"]="[[2,1],[1,3]]*[1,2]=[4,7]",
-    ["singularity_does_not_claim_unique_solution"]=true,
-    ["qr_full_and_rectangular_reconstruction"]=true,
-    ["qr_orthogonality_invariant_checked"]=true,
-    ["singular_spectrum_2x2_only"]=true,
-    ["managed_mathnet_5_0_0_LU_QR_SVD_smoke_qualified_test_only"]=true,
-    ["max_dimension"]=16,
-    ["default_relative_pivot_rank_threshold"]=1e-12,
-    ["absolute_and_relative_residual_reported"]=true,
-    ["copy_in_copy_out_only"]=true,
+    ["condition_number_scope"]="Approximate optional 2x2 spectral condition estimate only.",
+    ["one_by_one_and_higher_dimension_condition_status"]="unavailable-null",
+    ["ill_conditioned_spectrum_can_remain_unavailable"]=true,
+    ["unavailable_relative_residual_never_fabricated"]=true,
+    ["rank_pivot_threshold_policy"]="relative maximum entry magnitude; 1e-12 default, caller factor in (0,1e-6]",
+    ["qr_reconstruction_and_orthogonality_not_vector_sign"]=true,
+    ["explicit_inverse_avoided_for_solve"]=true,
+    ["managed_provider_independent_smoke_passed"]=true,
+    ["copy_only_no_provider_aliases"]=true,
+    ["qualified_dimension_cap"]=16,
     ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
-    ["runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-    ["locked_solution_build_passed"]=true,
-    ["prior_math_regressions_passed"]=true,
-    ["nuget_product_version"]=Version,
-    ["nuget_package_bytes"]=new FileInfo(archive).Length,
-    ["nuget_manifest_id_version_and_dependency_check_passed"]=true,
-    ["package_sha256_scope"]="Not recalculated inside workflow payload; SDK-owned digests retained for installed repository inputs.",
+    ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
+    ["package_id"]="dw.tools.math.numerics",
+    ["package_version"]=Version,
+    ["package_bytes"]=new FileInfo(package).Length,
+    ["nuspec_dependency_boundary_passed"]=true,
     ["direct_product_dependencies"]=p.Json.StringArray("dw.tools.math.ir"),
+    ["full_public_svd_admission"]="deferred",
     ["nonclaims"]=p.Json.StringArray(
-        "No full public SVD factorization or arbitrary-size singular vectors; the independent provider full-SVD test does not admit a new Math API.",
-        "No platform except the actually observed RID, no native BLAS, no unconditional condition-number accuracy or robust unpivoted QR rank theorem.",
-        "No AURA, Decision, dw.discovery, generated skill or BrokerReady adoption.",
-        "M3-W01-C03-T2 still requires independent rank/pivot/conditioning and provider-loading boundary qualification.")
+        "No full public SVD, pseudoinverse, arbitrary precision condition number or rank-revealing pivoted QR.",
+        "No mathematical proof of exact rank or low forward error from a small residual.",
+        "No native BLAS, unexecuted RID, public NuGet publication or provider auto-loading.",
+        "No dw.discovery skill generation, BrokerReady, Decision, MCDM or Aura integration.")
 };
-p.Files.WriteComplete(Qualified,proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+p.Files.WriteComplete(Qualified,
+    proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 
-p.Json.EditObject("docs/planning/backlog.json",plan=>
+p.Json.EditObject(Backlog,plan=>
 {
-    plan["plan_version"]="0.1.41";
-    var c=plan["chunks"]!.AsArray().Select(v=>v!.AsObject())
+    plan["plan_version"]="0.1.42";
+    var wp=plan["work_packages"]!.AsArray().Select(v=>v!.AsObject())
+        .Single(v=>(string?)v["id"]==Work);
+    var chunk=plan["chunks"]!.AsArray().Select(v=>v!.AsObject())
         .Single(v=>(string?)v["id"]==Phase);
-    var t=c["tasks"]!.AsArray().Select(v=>v!.AsObject())
+    var t=chunk["tasks"]!.AsArray().Select(v=>v!.AsObject())
         .Single(v=>(string?)v["id"]==Task);
-    c["status"]="in_progress";
-    c["refinement"]="RS042 T1 supplies bounded provider-neutral partial-pivot LU, exact row-permutation reconstruction, dense solve with residuals, unpivoted full-Q Householder QR, and analytical 2x2 singular values; a real managed Math.NET 5.0.0 smoke independently checks LU/QR/full SVD without becoming a runtime dependency. Controlled missing-contract RED and 25 independent GREEN tests plus existing numerical/math regressions and NuGet preview.3 package are qualification evidence. C03-T2 remains planned for rank/pivot/ill-conditioning and full-SVD admission decisions.";
-    c["readiness"]="T1 qualified; C03-T2 still planned: refine conditioning, rank/pivot policy, optional managed provider loading and full SVD limitations before C03 closure";
-    var existingPaths=c["files"]!.AsArray().Select(v=>v!.GetValue<string>());
-    c["files"]=p.Json.StringArray(existingPaths.Concat(new[]{Source,RedTest,Tests,
-        ProductProject,SmokeProject,SmokeSource,Distribution,RedEvidence,Qualified})
+    wp["status"]="done";
+    chunk["status"]="done";
+    chunk["refinement"]="RS042 qualified bounded partial-pivot LU, dense residual solve, Householder QR and limited 2x2 singular values. RS043 closes T2 with a controlled missing-condition-contract RED, 16 independent condition/rank/scale/copy GREEN tests, 81 numerical regressions, managed Math.NET corroboration and provider-neutral NuGet preview.4 packaging. Optional spectral 2x2 solve condition is null when unavailable; full public SVD and rank-revealing QR remain explicitly deferred by a reviewed scope decision.";
+    chunk["readiness"]="closed: both T1 and T2 accepted; all M3-W01 numerical phases completed, M3-W02 remains planned";
+    var files=chunk["files"]!.AsArray().Select(v=>v!.GetValue<string>());
+    chunk["files"]=p.Json.StringArray(files.Concat(new[]{Source,RedTest,Tests,
+        ProductProject,Distribution,Decision,RedEvidence,Qualified})
         .Distinct(StringComparer.Ordinal).ToArray());
-    c["commands"]=p.Json.StringArray(
+    chunk["commands"]=p.Json.StringArray(
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M3W01C03Tests",
-        "dotnet run --project "+SmokeProject+" -c Release",
+        "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M3W01C03T2Tests",
+        "dotnet test "+TestProject+" -c Release",
+        "dotnet run --project "+Smoke+" -c Release",
         "pwsh -NoProfile -NonInteractive -File scripts/verify.ps1",
         "dotnet pack "+ProductProject+" -c Release");
-    var previous=c["evidence"]!.AsArray().Select(v=>v!.GetValue<string>());
-    c["evidence"]=p.Json.StringArray(previous.Concat(new[]{RedEvidence,Qualified})
+    var previous=chunk["evidence"]!.AsArray().Select(v=>v!.GetValue<string>());
+    chunk["evidence"]=p.Json.StringArray(previous.Concat(new[]{RedEvidence,Qualified})
         .Distinct(StringComparer.Ordinal).ToArray());
     t["status"]="done";
     t["evidence"]=p.Json.StringArray(RedEvidence,Qualified);
-    foreach(var sub in t["subtasks"]!.AsArray().Select(v=>v!.AsObject()))
+    foreach(var child in t["subtasks"]!.AsArray().Select(v=>v!.AsObject()))
     {
-        sub["status"]="done";
-        sub["evidence"]=p.Json.StringArray((string?)sub["id"]==Red?RedEvidence:Qualified);
+        child["status"]="done";
+        child["evidence"]=p.Json.StringArray((string?)child["id"]==Red?RedEvidence:Qualified);
     }
 });
+
 if(baseline)
 {
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
     p.ProjectPlan.ActivateReadyContinuation(Red);
     p.ProjectPlan.ConvergeNodeToDone(Red);
-    foreach(var node in new[]{Green,Verify})
+    foreach(var child in new[]{Green,Verify})
     {
-        p.ProjectPlan.TransitionNode(node,"not-ready","ready");
-        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
-        p.ProjectPlan.ConvergeNodeToDone(node);
+        p.ProjectPlan.TransitionNode(child,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(child,"ready","in-progress");
+        p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
+    p.ProjectPlan.ConvergeNodeToDone(Work);
 }
 else
 {
-    p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-    foreach(var node in new[]{Task,Red,Green,Verify})
-        p.ProjectPlan.RequireNodeState(node,"done");
+    foreach(var id in new[]{Task,Red,Green,Verify,Phase,Work})
+        p.ProjectPlan.RequireNodeState(id,"done");
 }
 p.ProjectPlan.RequireNodeState("M3","in-progress");
-p.ProjectPlan.RequireNodeState("M3-W01","in-progress");
-p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-p.ProjectPlan.RequireNodeState("M3-W01-C03-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Work,"done");
+p.ProjectPlan.RequireNodeState(Phase,"done");
 p.ProjectPlan.RequireNodeState("M3-W02","not-ready");
-p.Json.EditObject(".aura/workflow/state.json",state=>
-{
-    if((string?)state["pendingRun"]!="RS042"
-        ||(string?)state["activeMilestone"]!="M3"
-        ||(string?)state["activeWorkPackage"]!="M3-W01"
-        ||(string?)state["activeTask"] is not null
-        ||(string?)state["activeSubtask"] is not null
-        ||(string?)state["activePhase"] is not (null or Phase))
-        throw new InvalidOperationException("RS042 active workflow state diverged.");
-    state["activePhase"]=Phase;
-});
 
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
@@ -302,9 +302,10 @@ static string Relevant(string output)
 {
     var i=output.IndexOf("Error Message:",StringComparison.Ordinal);
     if(i<0)i=output.IndexOf("error ",StringComparison.OrdinalIgnoreCase);
-    var s=i<0?output:output[i..];
-    return s.Length>2500?s[..2500]:s;
+    var slice=i<0?output:output[i..];
+    return slice.Length>2400?slice[..2400]:slice;
 }
+
 static (int Code,string Output) Run(string root,string executable,params string[] args)
 {
     using var process=new Process{StartInfo=new ProcessStartInfo
@@ -327,6 +328,7 @@ static (int Code,string Output) Run(string root,string executable,params string[
     Console.WriteLine(output);
     return(process.ExitCode,output);
 }
+
 static string Required(string root,string executable,params string[] args)
 {
     var result=Run(root,executable,args);
