@@ -17,8 +17,8 @@ public sealed class M3W01C02T2Tests
     {
         var result = RationalBinary64Conversion.TryConvert(new ExactRational(1, 2));
         Assert.AreEqual(RationalBinary64Status.Exact, result.Status);
-        Assert.AreEqual(0.5d, result.Value);
-        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError);
+        Assert.AreEqual(0.5d, result.Value!.Value);
+        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -27,7 +27,7 @@ public sealed class M3W01C02T2Tests
         var result = RationalBinary64Conversion.TryConvert(default);
         Assert.AreEqual(RationalBinary64Status.Exact, result.Status);
         Assert.AreEqual(0L, BitConverter.DoubleToInt64Bits(result.Value!.Value));
-        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError);
+        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -56,8 +56,8 @@ public sealed class M3W01C02T2Tests
         var midpoint = new ExactRational((BigInteger.One << 53) + 1, BigInteger.One);
         var result = RationalBinary64Conversion.TryConvert(midpoint);
         Assert.AreEqual(RationalBinary64Status.Rounded, result.Status);
-        Assert.AreEqual(9007199254740992d, result.Value);
-        Assert.AreEqual(ExactRational.One, result.AbsoluteError);
+        Assert.AreEqual(9007199254740992d, result.Value!.Value);
+        Assert.AreEqual(ExactRational.One, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -66,8 +66,8 @@ public sealed class M3W01C02T2Tests
         var midpoint = new ExactRational((BigInteger.One << 53) + 3, BigInteger.One);
         var result = RationalBinary64Conversion.TryConvert(midpoint);
         Assert.AreEqual(RationalBinary64Status.Rounded, result.Status);
-        Assert.AreEqual(9007199254740996d, result.Value);
-        Assert.AreEqual(ExactRational.One, result.AbsoluteError);
+        Assert.AreEqual(9007199254740996d, result.Value!.Value);
+        Assert.AreEqual(ExactRational.One, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -77,7 +77,7 @@ public sealed class M3W01C02T2Tests
         var result = RationalBinary64Conversion.TryConvert(original);
         Assert.AreEqual(RationalBinary64Status.Exact, result.Status);
         Assert.AreEqual(1L, BitConverter.DoubleToInt64Bits(result.Value!.Value));
-        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError);
+        Assert.AreEqual(ExactRational.Zero, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -117,8 +117,8 @@ public sealed class M3W01C02T2Tests
         var value = new ExactRational(-((BigInteger.One << 53) + 1), 1);
         var result = RationalBinary64Conversion.TryConvert(value);
         Assert.AreEqual(RationalBinary64Status.Rounded, result.Status);
-        Assert.AreEqual(-9007199254740992d, result.Value);
-        Assert.AreEqual(ExactRational.One, result.AbsoluteError);
+        Assert.AreEqual(-9007199254740992d, result.Value!.Value);
+        Assert.AreEqual(ExactRational.One, result.AbsoluteError!.Value);
     }
 
     [TestMethod]
@@ -129,7 +129,7 @@ public sealed class M3W01C02T2Tests
         Assert.AreEqual(RationalBinary64Status.Rounded, result.Status);
         Assert.IsFalse(result.Accepted);
         Assert.IsNull(result.Matrix);
-        Assert.AreEqual(1, result.FirstRejectedIndex);
+        Assert.AreEqual(1, result.FirstRejectedIndex!.Value);
     }
 
     [TestMethod]
@@ -152,7 +152,7 @@ public sealed class M3W01C02T2Tests
         var result = ExactMatrixBinary64Conversion.TryConvert(matrix, RationalBinary64Policy.RequireExact);
         Assert.AreEqual(RationalBinary64Status.Exact, result.Status);
         Assert.AreEqual(0, result.RoundedElements);
-        Assert.AreEqual(ExactRational.Zero, result.MaximumAbsoluteError);
+        Assert.AreEqual(ExactRational.Zero, result.MaximumAbsoluteError!.Value);
         Assert.IsNull(result.FirstRejectedIndex);
         Assert.AreEqual(0.75d, result.Matrix!.At(0, 1));
     }
