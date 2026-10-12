@@ -108,7 +108,13 @@ public sealed class M3W01C02T2Tests
         var result = RationalBinary64Conversion.TryConvert(huge);
         Assert.AreEqual(RationalBinary64Status.BudgetExceeded, result.Status);
         Assert.IsNull(result.Value);
-        Assert.AreEqual(4096, RationalBinary64Conversion.MaximumOperandBits);
+
+        // An operand of exactly 4096 bits passes the operand-budget gate.
+        // Its magnitude still correctly overflows finite IEEE 754 binary64.
+        var admittedBitLength = new ExactRational(BigInteger.One << 4095, BigInteger.One);
+        var boundary = RationalBinary64Conversion.TryConvert(admittedBitLength);
+        Assert.AreEqual(RationalBinary64Status.Overflow, boundary.Status);
+        Assert.IsNull(boundary.Value);
     }
 
     [TestMethod]
