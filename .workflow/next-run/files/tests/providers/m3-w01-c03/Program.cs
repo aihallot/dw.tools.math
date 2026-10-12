@@ -57,8 +57,12 @@ for (var row = 0; row < 2; row++)
 var spectrum = BoundedLinearAlgebra64.SingularValues2x2(original);
 if (spectrum.Status != LinearAlgebraStatus64.Success)
     throw new InvalidOperationException("Math bounded singular values unexpectedly refused.");
-Near(spectrum.LargestSingularValue!.Value, svd.S[0], 1e-12, "singular value 1");
-Near(spectrum.SmallestSingularValue!.Value, svd.S[1], 1e-12, "singular value 2");
+// Compare the invariant spectrum, not provider-specific singular-vector signs
+// or the ordering of singular values reported by a factorization backend.
+var providerLargest = Math.Max(svd.S[0], svd.S[1]);
+var providerSmallest = Math.Min(svd.S[0], svd.S[1]);
+Near(spectrum.LargestSingularValue!.Value, providerLargest, 1e-12, "largest singular value");
+Near(spectrum.SmallestSingularValue!.Value, providerSmallest, 1e-12, "smallest singular value");
 
 // The test-only provider must not be given ownership of Math matrices.
 ownedCopy[0, 0] = 99d;
