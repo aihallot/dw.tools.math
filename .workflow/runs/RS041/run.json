@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "RS041",
+  "title": "Qualify exact-rational to binary64 rounding, explicit matrix loss and provider-copy boundaries",
+  "state": "prepared",
+  "commitMessage": "feat: qualify explicit rational-to-binary64 numerical boundaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W01",
+    "M3-W01-C02",
+    "M3-W01-C02-T2",
+    "M3-W01-C02-T2-R",
+    "M3-W01-C02-T2-G",
+    "M3-W01-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify M3-W01-C02-T2 with a controlled RED, 19 independent numerical GREEN tests, full Math regressions, explicit nearest-even rational-to-binary64 conversion and typed precision-loss, underflow, overflow and budget outcomes. Verify copy-only matrices and local provider-neutral NuGet 0.4.0-preview.2; complete C02 without closing M3.",
+    "value": "A qualified consumer can choose exact-only or admitted approximate binary64 matrix conversion and inspect typed errors without silent rational widening, partial results, aliases, or dependencies on a specific numerical provider.",
+    "debtChanges": [
+      "Discovery remains a separate proposed M3-W03 work package; it cannot claim native DWF adoption before Workflow issue 139 authoring and sibling-continuation support are qualified and installed.",
+      "The neutral dw.discovery project under aihallot/dw.tools remains at the independent planning/adoption stage; this numerical run neither duplicates its contract nor publishes a Math agent skill.",
+      "No native BLAS, untested operating-system RID, external provider availability, AURA authorization or Decision adoption is inferred from the local managed package check.",
+      "IEEE 754 nearest-even reporting is mathematically exact for bounded rational operands, but a rounded value does not become exact algebraic equality or certify downstream solver conditioning.",
+      "Verify the 4096-bit operand boundary through actual conversion outcomes (4096 bits accepted for evaluation, 4097 bits refused), not a tautological constant assertion (MSTEST0032). Underflow, overflow and bit-budget refusals never yield a partial matrix.",
+      "Closing M3-W01-C02 does not complete M3-W01 or M3; the next planned numerical chunk is M3-W01-C03 for solving and decompositions."
+    ],
+    "nextAction": "After durable RS041 success, prepare a substantive M3-W01-C03 numerical solve and decomposition slice under the existing native DWF plan, while monitoring the separate generic dw.discovery and Workflow issue 139 gates.",
+    "achievements": [
+      {
+        "projectNode": "M3-W01-C02-T2-R",
+        "achievement": "Compiled independent numerical-test assembly observes missing rational-to-binary64 public result contract before its source is installed; retain the exact controlled RED evidence."
+      },
+      {
+        "projectNode": "M3-W01-C02-T2-G",
+        "achievement": "Implement correctly rounded bounded BigInteger-rational to finite IEEE binary64 conversion with exact absolute error, explicit rounding policies and no implicit widening or partial matrices."
+      },
+      {
+        "projectNode": "M3-W01-C02-T2-V",
+        "achievement": "Nineteen independent numerical GREEN oracles, recovered RED, full Math regressions, copy/alias checks and local provider-free NuGet 0.4.0-preview.2 manifest pass."
+      },
+      {
+        "projectNode": "M3-W01-C02-T2",
+        "achievement": "Qualify declared exact-versus-approximate conversion, loss reporting and provider-load boundaries without changing third-party numerical packages or claiming external consumers."
+      },
+      {
+        "projectNode": "M3-W01-C02",
+        "achievement": "Both accepted numerical matrix/vector tasks T1 and T2 are done with durable evidence; M3 and its numerical work package remain in progress for solving and decompositions."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/distribution/numerical-matrices.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W01-C02-boundary-red.json",
+    "docs/planning/evidence/M3-W01-C02-boundaries-qualified.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.numerics/RationalBinary64Conversion.cs",
+    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C02T2RedTests.cs",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C02T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
