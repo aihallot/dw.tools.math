@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "M3-W01-C02-boundaries-qualified",
+  "status": "explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified",
+  "baseline_t1_evidence": "docs/planning/evidence/M3-W01-C02-contract-qualified.json",
+  "provider_baseline_evidence": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+  "controlled_red_evidence": "docs/planning/evidence/M3-W01-C02-boundary-red.json",
+  "source": "src/projects/dw.tools.math.numerics/RationalBinary64Conversion.cs",
+  "source_sha256": "5a77588a3cf61bab5d4dd5313286d850e4653b4f5a042bdfe515df186614bab4",
+  "green_test": "tests/projects/dw.tools.math.numerics.tests/M3W01C02T2Tests.cs",
+  "green_test_sha256": "4c39222229c793901b8b6a8719a518b592ea1e3245a8eee35eaa1e5b6025072b",
+  "red_test": "tests/projects/dw.tools.math.numerics.tests/M3W01C02T2RedTests.cs",
+  "red_test_sha256": "28e0afced88dbfa5154e168face06224d2b63645faa9c214571ec3d91d50f0dc",
+  "independent_green_tests_passed": 19,
+  "prior_red_test_now_green": true,
+  "red_then_green": true,
+  "rounding": "IEEE 754 binary64 nearest, ties to even; exact rational difference returned",
+  "outcomes": [
+    "Exact",
+    "Rounded",
+    "Underflow",
+    "Overflow",
+    "BudgetExceeded"
+  ],
+  "maximum_operand_bits": 4096,
+  "underflow_and_overflow_refuse_partial_values": true,
+  "matrix_exact_only_and_allow_rounded_policies_qualified": true,
+  "matrix_partial_conversion_refused": true,
+  "copy_in_copy_out_no_provider_views": true,
+  "dotnet_sdk": "10.0.401",
+  "runtime_identifier": "win-x64",
+  "locked_solution_build_passed": true,
+  "prior_math_regressions_passed": true,
+  "nuget_product_version": "0.4.0-preview.2",
+  "nuget_package_sha256": "e2f6abcdecc5a3d37d6ebb2e98e347ece92002a2a6b34ff3c6b6f81ba4a5b3b4",
+  "nuget_package_bytes": 12113,
+  "direct_package_dependencies": [
+    "dw.tools.math.ir"
+  ],
+  "mathnet_only_in_independent_test_consumer": true,
+  "no_AURA_or_Decision_dependency": true,
+  "nonclaims": [
+    "No public NuGet publication, native BLAS or unexecuted platform admission.",
+    "No implicit rational-to-double widening, algebraic exactness after a rounded conversion, or permission to call third-party providers.",
+    "No mutable provider-array views or shared mutable matrix aliases.",
+    "No generated Math skill, shared dw.discovery package or AURA broker admission.",
+    "Only the bounded M3-W01-C02 scientific contract is qualified by this run."
+  ]
+}
