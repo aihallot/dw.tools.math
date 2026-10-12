@@ -1,4 +1,4 @@
-# Bounded provider-neutral dense linear algebra — M3-W01-C03-T1
+# Bounded provider-neutral dense linear algebra — M3-W01-C03
 
 **Status: LU/QR and analytical 2x2 singular spectrum qualified by RS042. The RS043 scientific boundary extension is staged, not yet executed.**
 
