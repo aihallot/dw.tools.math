@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
@@ -23,59 +22,51 @@ const string RedEvidence="docs/planning/evidence/M3-W01-C03-contract-red.json";
 const string Qualified="docs/planning/evidence/M3-W01-C03-contract-qualified.json";
 const string Version="0.4.0-preview.3";
 const int IndependentGreenTests=25;
-const string ResultCommitMessage="feat: add bounded provider-neutral LU QR and spectral contracts";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
-p.Workflow.RequireCurrentRun("RS042","M3","M3-W01",null,null,null);
+// The presence of a durable, uniquely named qualification receipt selects
+// exact completed-target re-entry; typed Require verifies every plan status.
+// No hand-written parse/traversal of workflow or product authority is needed.
+var target=File.Exists(Path.Combine(root,Qualified));
+var baseline=!target;
+p.Workflow.RequireCurrentRun("RS042","M3","M3-W01",target?Phase:null,null,null);
 p.Workflow.RequirePriorSuccess("RS041",1,
     "feat: qualify explicit rational-to-binary64 numerical boundaries",
     "0.1.59",2,2,0,false);
 
-var prior=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))!.AsObject();
-if((string?)prior["status"]!="explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified"
-    || prior["independent_green_tests_passed"]?.GetValue<int>()!=19)
-    throw new InvalidOperationException("RS041 C02 boundary qualification is missing or divergent.");
-var provider=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Gate)))!.AsObject();
-if((string?)provider["selected_package_id"]!="MathNet.Numerics"
-    || (string?)provider["selected_package_version"]!="5.0.0")
-    throw new InvalidOperationException("The managed Math.NET provider is not pinned and qualified.");
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(19));
+p.Require.JsonValueEquals(Gate,"/selected_package_id",JsonValue.Create("MathNet.Numerics"));
+p.Require.JsonValueEquals(Gate,"/selected_package_version",JsonValue.Create("5.0.0"));
 
-var backlog=JsonNode.Parse(File.ReadAllText(Path.Combine(root,"docs/planning/backlog.json")))!.AsObject();
-var release=backlog["releases"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]=="M3");
-var wp=backlog["work_packages"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]=="M3-W01");
-var priorChunk=backlog["chunks"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]=="M3-W01-C02");
-var chunk=backlog["chunks"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]==Phase);
-var task=chunk["tasks"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]==Task);
-var nextTask=chunk["tasks"]!.AsArray().Select(v=>v!.AsObject())
-    .Single(v=>(string?)v["id"]=="M3-W01-C03-T2");
-string SubStatus(string id)=>(string?)task["subtasks"]!.AsArray()
-    .Select(v=>v!.AsObject()).Single(v=>(string?)v["id"]==id)["status"]
-    ??throw new InvalidOperationException("Missing C03 subtask "+id);
-
-var baseline=(string?)backlog["plan_version"]=="0.1.40"
-    && (string?)release["status"]=="in_progress"
-    && (string?)wp["status"]=="in_progress"
-    && (string?)priorChunk["status"]=="done"
-    && (string?)chunk["status"]=="planned"
-    && (string?)task["status"]=="planned"
-    && (string?)nextTask["status"]=="planned"
-    && new[]{Red,Green,Verify}.All(id=>SubStatus(id)=="planned");
-var target=(string?)backlog["plan_version"]=="0.1.41"
-    && (string?)release["status"]=="in_progress"
-    && (string?)wp["status"]=="in_progress"
-    && (string?)priorChunk["status"]=="done"
-    && (string?)chunk["status"]=="in_progress"
-    && (string?)task["status"]=="done"
-    && (string?)nextTask["status"]=="planned"
-    && new[]{Red,Green,Verify}.All(id=>SubStatus(id)=="done");
-if(!baseline&&!target)
-    throw new InvalidOperationException("RS042 expects exact C03 T1 baseline 0.1.40 or target 0.1.41.");
+const string ProductBacklog="docs/planning/backlog.json";
+p.Require.JsonValueBaselineOrTarget(ProductBacklog,"/plan_version",
+    JsonValue.Create("0.1.40"),JsonValue.Create("0.1.41"));
+p.Require.JsonValueEquals(ProductBacklog,"/plan_version",
+    JsonValue.Create(target?"0.1.41":"0.1.40"));
+p.Require.JsonValueEquals(ProductBacklog,"/releases/3/status",JsonValue.Create("in_progress"));
+p.Require.JsonValueEquals(ProductBacklog,"/work_packages/7/status",JsonValue.Create("in_progress"));
+p.Require.JsonValueEquals(ProductBacklog,"/chunks/21/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/tasks/0/status",
+    JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(ProductBacklog,"/chunks/22/tasks/1/status",JsonValue.Create("planned"));
+foreach(var index in new[]{0,1,2})
+    p.Require.JsonValueEquals(ProductBacklog,$"/chunks/22/tasks/0/subtasks/{index}/status",
+        JsonValue.Create(target?"done":"planned"));
+if(target)
+{
+    p.Require.JsonValueEquals(Qualified,"/status",
+        JsonValue.Create("bounded-dense-lu-qr-and-analytical-2x2-singular-spectrum-qualified"));
+}
+else
+{
+    p.Require.FileMissing(Qualified);
+    p.Require.FileMissing(RedEvidence);
+}
 
 p.ProjectPlan.RequireNodeState("M3","in-progress");
 p.ProjectPlan.RequireNodeState("M3-W01","in-progress");
@@ -87,7 +78,7 @@ p.ProjectPlan.RequireNodeState("M3-W02","not-ready");
 
 // Independent RED is compiled against the already-qualified 0.4.0-preview.2
 // assembly before any new linear algebra implementation is installed.
-p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+var redInstalled=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 if(baseline)
 {
     Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
@@ -112,14 +103,18 @@ if(baseline)
 }
 else
 {
-    var existing=JsonNode.Parse(File.ReadAllText(Path.Combine(root,RedEvidence)))!.AsObject();
-    if((string?)existing["status"]!="controlled-provider-neutral-lu-qr-and-spectral-contract-absent-red-observed")
-        throw new InvalidOperationException("Exact completed target lacks the controlled RED evidence.");
+    p.Require.JsonValueEquals(RedEvidence,"/status",
+        JsonValue.Create("controlled-provider-neutral-lu-qr-and-spectral-contract-absent-red-observed"));
 }
 
-// Make the public API and the isolated, test-only provider smoke available.
+// The SDK operations already hash and verify complete installed staged blobs.
+var installedSha=new Dictionary<string,string>(StringComparer.Ordinal);
 foreach(var file in new[]{Source,Tests,ProductProject,SmokeProject,SmokeSource,Distribution})
-    p.Files.ReplaceFromStaged("staged/"+file,file);
+{
+    var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
+    installedSha[file]=installed.AfterSha256 ??
+        throw new InvalidOperationException("Missing SDK installation digest: "+file);
+}
 
 Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
 Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
@@ -185,14 +180,14 @@ var proof=new JsonObject
     ["provider_baseline_evidence"]=Gate,
     ["controlled_red_evidence"]=RedEvidence,
     ["source"]=Source,
-    ["source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Source))),
+    ["source_sha256"]=installedSha[Source],
     ["green_test"]=Tests,
-    ["green_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,Tests))),
+    ["green_test_sha256"]=installedSha[Tests],
     ["red_test"]=RedTest,
-    ["red_test_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,RedTest))),
+    ["red_test_sha256"]=redInstalled.AfterSha256,
     ["provider_smoke_project"]=SmokeProject,
     ["provider_smoke_source"]=SmokeSource,
-    ["provider_smoke_source_sha256"]=Hash(File.ReadAllBytes(Path.Combine(root,SmokeSource))),
+    ["provider_smoke_source_sha256"]=installedSha[SmokeSource],
     ["independent_green_tests_passed"]=IndependentGreenTests,
     ["numerical_regression_tests_passed"]=64,
     ["controlled_red_then_green"]=true,
@@ -212,8 +207,9 @@ var proof=new JsonObject
     ["locked_solution_build_passed"]=true,
     ["prior_math_regressions_passed"]=true,
     ["nuget_product_version"]=Version,
-    ["nuget_package_sha256"]=Hash(File.ReadAllBytes(archive)),
     ["nuget_package_bytes"]=new FileInfo(archive).Length,
+    ["nuget_manifest_id_version_and_dependency_check_passed"]=true,
+    ["package_sha256_scope"]="Not recalculated inside workflow payload; SDK-owned digests retained for installed repository inputs.",
     ["direct_product_dependencies"]=p.Json.StringArray("dw.tools.math.ir"),
     ["nonclaims"]=p.Json.StringArray(
         "No full public SVD factorization or arbitrary-size singular vectors; the independent provider full-SVD test does not admit a new Math API.",
@@ -298,7 +294,6 @@ Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.c
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
 return p.Complete();
 
-static string Hash(byte[] bytes)=>Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 static string Relevant(string output)
 {
     var i=output.IndexOf("Error Message:",StringComparison.Ordinal);
