@@ -35,6 +35,13 @@ public sealed record LinearSolveResult64(
 {
     public bool HasUniqueSolution => Status == LinearAlgebraStatus64.Success &&
         Solution is not null;
+
+    /// <summary>
+    /// Optional approximate 2-norm condition estimate from the analytical 2x2
+    /// singular spectrum. Null for other shapes or unavailable finite spectrum;
+    /// a small residual never implies a well-conditioned solve.
+    /// </summary>
+    public double? TwoByTwoSpectralConditionEstimate { get; init; }
 }
 
 /// <summary>Full-Q QR: Q is m*m, R is m*n, Q*R approximates A.</summary>
@@ -208,8 +215,18 @@ public static class BoundedLinearAlgebra64
         double? relative = double.IsFinite(normalizer) && normalizer > 0d
             ? residual / normalizer
             : null;
-        return new(LinearAlgebraStatus64.Success, FiniteVector64.Create(x),
-            residual, relative, factors.PivotThreshold);
+        double? conditionEstimate = null;
+        if (n == 2)
+        {
+            var spectrum = SingularValues2x2(matrix);
+            if (spectrum.Status == LinearAlgebraStatus64.Success)
+                conditionEstimate = spectrum.ConditionRatio;
+        }
+        return new LinearSolveResult64(LinearAlgebraStatus64.Success,
+            FiniteVector64.Create(x), residual, relative, factors.PivotThreshold)
+        {
+            TwoByTwoSpectralConditionEstimate = conditionEstimate
+        };
     }
 
     public static QrFactorization64 FactorQr(
