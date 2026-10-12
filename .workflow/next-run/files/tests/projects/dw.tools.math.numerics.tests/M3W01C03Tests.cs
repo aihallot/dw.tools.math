@@ -12,7 +12,7 @@ public sealed class M3W01C03Tests
     private static void Near(double actual, double expected, double tolerance = 1e-11)
     {
         Assert.IsTrue(double.IsFinite(actual), "The result must be finite.");
-        Assert.IsTrue(Math.Abs(actual - expected) <= tolerance,
+        Assert.IsTrue(global::System.Math.Abs(actual - expected) <= tolerance,
             $"Expected {expected:R}, got {actual:R} beyond {tolerance:R}.");
     }
 
@@ -246,8 +246,8 @@ public sealed class M3W01C03Tests
     {
         var spectrum = BoundedLinearAlgebra64.SingularValues2x2(Matrix());
         Assert.AreEqual(LinearAlgebraStatus64.Success, spectrum.Status);
-        var expectedLargest = (5d + Math.Sqrt(5d)) / 2d;
-        var expectedSmallest = (5d - Math.Sqrt(5d)) / 2d;
+        var expectedLargest = (5d + global::System.Math.Sqrt(5d)) / 2d;
+        var expectedSmallest = (5d - global::System.Math.Sqrt(5d)) / 2d;
         Near(spectrum.LargestSingularValue!.Value, expectedLargest, 1e-12);
         Near(spectrum.SmallestSingularValue!.Value, expectedSmallest, 1e-12);
         Near(spectrum.ConditionRatio!.Value, expectedLargest / expectedSmallest, 1e-11);
