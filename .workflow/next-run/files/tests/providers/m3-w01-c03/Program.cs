@@ -12,7 +12,7 @@ if (!name.Contains("Managed", StringComparison.OrdinalIgnoreCase))
 
 static void Near(double observed, double expected, double tolerance, string label)
 {
-    if (!double.IsFinite(observed) || Math.Abs(observed - expected) > tolerance)
+    if (!double.IsFinite(observed) || global::System.Math.Abs(observed - expected) > tolerance)
         throw new InvalidOperationException(
             $"{label}: {observed:R} differs from {expected:R} (tolerance {tolerance:R}).");
 }
@@ -59,8 +59,8 @@ if (spectrum.Status != LinearAlgebraStatus64.Success)
     throw new InvalidOperationException("Math bounded singular values unexpectedly refused.");
 // Compare the invariant spectrum, not provider-specific singular-vector signs
 // or the ordering of singular values reported by a factorization backend.
-var providerLargest = Math.Max(svd.S[0], svd.S[1]);
-var providerSmallest = Math.Min(svd.S[0], svd.S[1]);
+var providerLargest = global::System.Math.Max(svd.S[0], svd.S[1]);
+var providerSmallest = global::System.Math.Min(svd.S[0], svd.S[1]);
 Near(spectrum.LargestSingularValue!.Value, providerLargest, 1e-12, "largest singular value");
 Near(spectrum.SmallestSingularValue!.Value, providerSmallest, 1e-12, "smallest singular value");
 
