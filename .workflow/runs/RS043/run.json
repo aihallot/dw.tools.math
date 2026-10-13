@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "RS043",
+  "title": "Qualify numeric rank and pivot boundaries and close the first matrix work package",
+  "state": "prepared",
+  "commitMessage": "feat: qualify 2x2 conditioning boundaries and close numerical matrix scope",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W01",
+    "M3-W01-C03",
+    "M3-W01-C03-T2",
+    "M3-W01-C03-T2-R",
+    "M3-W01-C03-T2-G",
+    "M3-W01-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Close the accepted M3-W01 numerical matrices work package by qualifying explicit LU pivot and unpivoted QR rank thresholds, a nullable 2x2 spectral condition estimate, absence of invented conditioning for unsupported inputs, and provider-free package boundaries. Observe an independent RED, 16 GREEN tests, 81 numerical regressions and managed Math.NET corroboration before completing T2, C03 and M3-W01.",
+    "value": "Expose truthful finite-binary64 solve diagnostics and bound rank/conditioning claims to observed numerical contracts. Preserve the existing LU/QR and 2x2 spectrum behavior, immutable provider copies, optional Math.NET smoke and local NuGet 0.4.0-preview.4 identity without exposing unsupported full SVD.",
+    "debtChanges": [
+      "The C03 work package closes only the admitted finite-binary64 dense LU, Householder QR, residual solve and 2x2 spectral subset. Full public SVD factors remain explicitly deferred in the scoped decision document.",
+      "The spectral 2x2 ratio is approximate and nullable; a small residual does not establish a universal forward-error bound or exact matrix rank.",
+      "Unpivoted QR and partial-pivot LU use declared relative rank/pivot thresholds. Ill-conditioned or extremely scaled cases may be refused, and numerical status is not an algebraic rank theorem.",
+      "Managed Math.NET 5.0.0 remains a separately qualified optional test consumer on its observed host; no native BLAS or unexecuted RID is admitted.",
+      "The numerical product has no dependency on Decision, Aura or a shared Discovery implementation. Neutral attributes, generated skills and BrokerReady require their own producer and host evidence.",
+      "No public NuGet feed publication is authorized. The new preview.4 package is a local qualified artifact and its NuGet manifest is verified without inventing binary provenance.",
+      "The next M3-W02 work package remains not-ready; do not make the still-open M3 milestone appear complete merely because M3-W01 has closed.",
+      "Retry 1 closes the M3-W01 work-package evidence gap: attach the six verified C01/C02/C03 scientific receipts to its done state before planning validation. No test, native DWF scope or scientific admission changes.",
+      "Retry 2 closes the exact target-reentry gap by retiring the completed M3-W01/C03 workflow cursor through the bounded Json.EditObject operation. Source-only cursor preconditions remain unchanged; no scientific tests or claims change."
+    ],
+    "nextAction": "After durable success, make the next major-cycle selection between existing M3-W02 numerical/statistical coverage and separately qualified Math adoption of the neutral dw.discovery contract once the external DWF and package gates are met.",
+    "achievements": [
+      {
+        "projectNode": "M3-W01-C03-T2-R",
+        "achievement": "Demonstrate and retain an independent missing-contract RED for an optional spectral condition estimate on the existing solve result."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2-G",
+        "achievement": "Introduce nullable approximate 2x2 solve conditioning and explicit unknown outcomes, retaining the prior provider-neutral bounded LU/QR surface."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2-V",
+        "achievement": "Qualify 16 boundary GREEN tests, all 81 numerics tests, existing Math regressions, optional managed-provider smoke and versioned provider-free package structure."
+      },
+      {
+        "projectNode": "M3-W01-C03-T2",
+        "achievement": "Finish pivot/rank policy, scale/condition diagnostics, inverse-free solve guarantees and the explicit bounded SVD deferral decision."
+      },
+      {
+        "projectNode": "M3-W01-C03",
+        "achievement": "Complete solving and decomposition phase C03 after separate scientific contract and numeric boundary evidence for both accepted tasks."
+      },
+      {
+        "projectNode": "M3-W01",
+        "achievement": "Close all three admitted numerical matrix/provider phases while preserving the in-progress M3 milestone and planned M3-W02 work package."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/bounded-linear-algebra.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w01-c03-svd-scope.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W01-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W01-C03-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.numerics/BoundedLinearAlgebra64.cs",
+    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.numerics.tests/M3W01C03T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer-architecture",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
