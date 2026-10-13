@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "RS049",
+  "title": "Qualify finite continuous distribution boundaries and portable seeded checkpoints",
+  "state": "prepared",
+  "commitMessage": "feat: qualify distribution boundaries and close reproducible randomness",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C03",
+    "M3-W02-C03-T2",
+    "M3-W02-C03-T2-R",
+    "M3-W02-C03-T2-G",
+    "M3-W02-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify finite binary64 continuous-uniform PDF/CDF/quantile and reproducible half-open sampling, plus canonical versioned SplitMix64 seed/counter checkpoints. Preserve the already qualified Bernoulli p=0/1 conventions and noncryptographic limits. Observe compiled RED, 30 independent GREEN tests, 166 complete statistics tests, pertinent regression checks and a local preview.6 package; complete T2 and C03 while keeping M3-W02 in progress.",
+    "value": "Make discrete versus approximate continuous distribution conventions, finite overflow refusals and stable checkpoint interoperability explicit without inventing a normal-distribution provider, cross-repository adoption or secure randomness.",
+    "debtChanges": [
+      "ContinuousUniformDistribution64 is restricted to finite ordered endpoints with representable width and inverse density; PDF/CDF/inverse use approximate binary64.",
+      "The uniform CDF saturates at exact bounds; quantile(1) returns upper, while samples strictly exclude upper using a BitDecrement clamp after rounding.",
+      "Portable SplitMix64PositionCodec encodes exact algorithm, seed and consumed counter in strict lowercase invariant 16-digit hexadecimal fields.",
+      "Bernoulli p=0/1 positive-mass quantiles, existing golden vectors and single-word sampling remain unchanged and independently regression tested.",
+      "SplitMix64 is noncryptographic; no random entropy, password/secret suitability or universal statistical quality can be inferred.",
+      "Normal/Gaussian tails, arbitrary unbounded streams, across-RID verification and robust nonlinear distribution approximations remain unqualified.",
+      "No Decision/MCDM consumer implementation, neutral dw.discovery admission, AURA brokerage or public NuGet feed publication is authorized."
+    ],
+    "nextAction": "On durable RS049 success, inspect accepted M3-W02-C04 consumer contract scope and prepare one evidence-backed Decision/MCDM mathematical-interface run without mutating sibling repositories.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C03-T2-R",
+        "achievement": "Compile and observe a controlled reflection RED against preview.5 for absent continuous-uniform and versioned seed/counter serialization contracts."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2-G",
+        "achievement": "Implement finite approximate continuous-uniform density/CDF/quantile and half-open seeded sampling plus strict canonical SplitMix64/v1 checkpoint codec, preserving T1 mathematical and bitwise contracts."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2-V",
+        "achievement": "Pass 30 independent T2 GREEN cases and 166 complete statistics tests, related numerical and rational regressions, locked .NET build, local provider-free preview.6 package checks and durable evidence."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2",
+        "achievement": "Qualify C03-T2 finite/invalid parameter boundaries, discrete-versus-continuous quantile conventions, seed/counter restoration and explicit noncryptographic consumer restrictions."
+      },
+      {
+        "projectNode": "M3-W02-C03",
+        "achievement": "Close C03 with T1 independently qualified Bernoulli/PRNG basics and T2 finite continuous approximation/checkpoint evidence, leaving M3-W02 active for C04 consumer research."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/reproducible-distributions.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C03-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/ContinuousUniformDistribution64.cs",
+    "src/projects/dw.tools.math.statistics/SplitMix64PositionCodec.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
