@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "id": "RS049",
+  "title": "Qualify finite continuous distribution boundaries and portable seeded checkpoints",
+  "commitMessage": "feat: qualify distribution boundaries and close reproducible randomness",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C03",
+    "M3-W02-C03-T2",
+    "M3-W02-C03-T2-R",
+    "M3-W02-C03-T2-G",
+    "M3-W02-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify finite binary64 continuous-uniform PDF/CDF/quantile and reproducible half-open sampling, plus canonical versioned SplitMix64 seed/counter checkpoints. Preserve the already qualified Bernoulli p=0/1 conventions and noncryptographic limits. Observe compiled RED, 30 independent GREEN tests, 166 complete statistics tests, pertinent regression checks and a local preview.6 package; complete T2 and C03 while keeping M3-W02 in progress.",
+    "value": "Make discrete versus approximate continuous distribution conventions, finite overflow refusals and stable checkpoint interoperability explicit without inventing a normal-distribution provider, cross-repository adoption or secure randomness.",
+    "debtChanges": [
+      "ContinuousUniformDistribution64 is restricted to finite ordered endpoints with representable width and inverse density; PDF/CDF/inverse use approximate binary64.",
+      "The uniform CDF saturates at exact bounds; quantile(1) returns upper, while samples strictly exclude upper using a BitDecrement clamp after rounding.",
+      "Portable SplitMix64PositionCodec encodes exact algorithm, seed and consumed counter in strict lowercase invariant 16-digit hexadecimal fields.",
+      "Bernoulli p=0/1 positive-mass quantiles, existing golden vectors and single-word sampling remain unchanged and independently regression tested.",
+      "SplitMix64 is noncryptographic; no random entropy, password/secret suitability or universal statistical quality can be inferred.",
+      "Normal/Gaussian tails, arbitrary unbounded streams, across-RID verification and robust nonlinear distribution approximations remain unqualified.",
+      "No Decision/MCDM consumer implementation, neutral dw.discovery admission, AURA brokerage or public NuGet feed publication is authorized."
+    ],
+    "nextAction": "On durable RS049 success, inspect accepted M3-W02-C04 consumer contract scope and prepare one evidence-backed Decision/MCDM mathematical-interface run without mutating sibling repositories.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C03-T2-R",
+        "achievement": "Compile and observe a controlled reflection RED against preview.5 for absent continuous-uniform and versioned seed/counter serialization contracts."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2-G",
+        "achievement": "Implement finite approximate continuous-uniform density/CDF/quantile and half-open seeded sampling plus strict canonical SplitMix64/v1 checkpoint codec, preserving T1 mathematical and bitwise contracts."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2-V",
+        "achievement": "Pass 30 independent T2 GREEN cases and 166 complete statistics tests, related numerical and rational regressions, locked .NET build, local provider-free preview.6 package checks and durable evidence."
+      },
+      {
+        "projectNode": "M3-W02-C03-T2",
+        "achievement": "Qualify C03-T2 finite/invalid parameter boundaries, discrete-versus-continuous quantile conventions, seed/counter restoration and explicit noncryptographic consumer restrictions."
+      },
+      {
+        "projectNode": "M3-W02-C03",
+        "achievement": "Close C03 with T1 independently qualified Bernoulli/PRNG basics and T2 finite continuous approximation/checkpoint evidence, leaving M3-W02 active for C04 consumer research."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/reproducible-distributions.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C03-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/ContinuousUniformDistribution64.cs",
+    "src/projects/dw.tools.math.statistics/SplitMix64PositionCodec.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2Tests.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.statistics/ContinuousUniformDistribution64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/ContinuousUniformDistribution64.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.statistics/SplitMix64PositionCodec.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/SplitMix64PositionCodec.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.statistics.tests/M3W02C03T2RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.statistics.tests/M3W02C03T2Tests.cs"
+    },
+    {
+      "path": "docs/distribution/reproducible-distributions.md",
+      "sourcePath": "files/docs/distribution/reproducible-distributions.md"
+    },
+    {
+      "path": "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
+      "sourcePath": "files/docs/planning/decisions/m3-w02-c03-distributions-policy.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M3"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M3-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M3-W02-C03"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS048/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.47"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/8/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/26/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/25/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/3/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/tasks/1/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/tasks/1/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/2/tasks/1/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "versioned-splitmix64-and-bernoulli-distribution-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+      "jsonPointer": "/new_green_tests_passed",
+      "expectedValue": 31
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+      "jsonPointer": "/total_statistics_tests_passed",
+      "expectedValue": 135
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+      "jsonPointer": "/local_package_version",
+      "expectedValue": "0.4.0-preview.5"
+    },
+    {
+      "repositoryPath": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+      "expectedText": "<Version>0.4.0-preview.5</Version>",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
