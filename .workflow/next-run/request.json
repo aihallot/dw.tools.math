@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "id": "RS046",
+  "title": "Qualify conventioned exact and finite quantiles with paired covariance and Pearson correlation",
+  "commitMessage": "feat: qualify conventioned quantiles and paired correlation",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C02",
+    "M3-W02-C02-T1",
+    "M3-W02-C02-T1-R",
+    "M3-W02-C02-T1-G",
+    "M3-W02-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify Type-7 and nearest-rank sample quantiles over exact rationals and finite binary64, plus bounded centered covariance and Pearson correlation. Observe a compiled independent RED, pass 26 new GREEN and 71 total statistics tests with numeric/rational regressions, inspect local NuGet preview.3, and complete only M3-W02-C02-T1 plus R/G/V while leaving C02/T2 active for boundary qualification.",
+    "value": "Make quantile definitions, probability representation, exact-vs-approximate loss, covariance denominators and independent Pearson oracles explicit without provider, Decision or AURA coupling.",
+    "debtChanges": [
+      "The Type-7 interpolation and nearest-rank conventions are explicit; no implicit distributional quantile or VaR estimator is inferred.",
+      "Rational quantiles use exact probabilities with 4096-bit and 4096-observation budgets. Finite quantiles remain lossy binary64.",
+      "Paired covariance uses population N and sample N-1, with a centered compensated Pearson normalization and a 4096-pair bound.",
+      "Constant/degenerate vectors refuse in T1; typed undefined correlation and complete missing/NaN/singleton policies belong to T2.",
+      "No exact rational bivariate moments or general real-valued weighting, and no universal finite-precision error bound are promised.",
+      "The preview.3 package is local and inspected; no public feed, consumer Decision mutation, dw.discovery skill or BrokerReady claim is authorized."
+    ],
+    "nextAction": "After RS046 succeeds, prepare M3-W02-C02-T2 for typed undefined Pearson correlations, remaining boundary and missing conventions, and consumer-facing integration policy.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C02-T1-R",
+        "achievement": "Compile and observe the independent RED requiring explicit public quantile-convention and paired-correlation contracts absent in preview.2; retain durable RED evidence."
+      },
+      {
+        "projectNode": "M3-W02-C02-T1-G",
+        "achievement": "Implement provider-neutral exact-rational and finite binary64 quantiles and centered bounded finite covariance/Pearson correlation with explicit mathematical conventions."
+      },
+      {
+        "projectNode": "M3-W02-C02-T1-V",
+        "achievement": "Pass all 26 new GREEN cases and 71 statistics tests, quantities/numerics regressions, locked build, native-plan validation and local preview.3 package inspection; retain qualification evidence."
+      },
+      {
+        "projectNode": "M3-W02-C02-T1",
+        "achievement": "Qualify the accepted C02-T1 [0,10] p=1/4 Type-7 2.5/nearest-rank 0 and increasing-affine Pearson 1 oracles while preserving C02/T2 in progress."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/quantiles-and-correlations.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C02-contract-qualified.json",
+    "docs/planning/evidence/M3-W02-C02-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1Tests.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/QuantileStatistics64.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.statistics.tests/M3W02C02T1RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.statistics.tests/M3W02C02T1Tests.cs"
+    },
+    {
+      "path": "docs/distribution/quantiles-and-correlations.md",
+      "sourcePath": "files/docs/distribution/quantiles-and-correlations.md"
+    },
+    {
+      "path": "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
+      "sourcePath": "files/docs/planning/decisions/m3-w02-c02-statistics-policy.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M3"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M3-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS045/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.44"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/8/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/23/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/tasks/0/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/24/tasks/0/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/tasks/0/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/tasks/0/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/workPackages/1/phases/1/tasks/0/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "frequency-weight-and-explicit-null-missing-statistics-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+      "jsonPointer": "/independent_green_tests_passed",
+      "expectedValue": 23
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+      "jsonPointer": "/descriptive_suite_total_passed",
+      "expectedValue": 44
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+      "jsonPointer": "/local_package_version",
+      "expectedValue": "0.4.0-preview.2"
+    },
+    {
+      "repositoryPath": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+      "expectedText": "<Version>0.4.0-preview.2</Version>",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
