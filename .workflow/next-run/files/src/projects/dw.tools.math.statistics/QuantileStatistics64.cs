@@ -51,6 +51,10 @@ public static class QuantileStatistics64
         if (lower == sorted.Length - 1)
             return sorted[lower];
         var fraction = position - lower;
+        // Exact knots need no subtraction; adjacent finite samples may span
+        // an unrepresentable binary64 difference despite an exact answer.
+        if (fraction == 0d || sorted[lower] == sorted[lower + 1])
+            return sorted[lower];
         var span = DescriptiveStatistics64.RequireFinite(sorted[lower + 1] - sorted[lower]);
         return DescriptiveStatistics64.RequireFinite(sorted[lower] +
             DescriptiveStatistics64.RequireFinite(fraction * span));

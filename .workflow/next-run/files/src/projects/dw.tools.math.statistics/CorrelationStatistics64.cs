@@ -92,4 +92,114 @@ public static class CorrelationStatistics64
             DescriptiveStatistics64.RequireFinite(cross / (x.Length - 1)),
             correlation);
     }
+
+    /// <summary>
+    /// Explicit null policy on index-aligned pairs. A missing value skips the
+    /// whole pair only with SkipPair; nonfinite present values are always refused.
+    /// One included pair and exactly constant axes yield typed undefined Pearson
+    /// results, not a fabricated zero correlation.
+    /// </summary>
+    public static CorrelationOutcome64 AnalyzeWithStatus(
+        IEnumerable<double?> first,
+        IEnumerable<double?> second,
+        MissingPairPolicy64 missingPolicy = MissingPairPolicy64.Reject)
+    {
+        ArgumentNullException.ThrowIfNull(first);
+        ArgumentNullException.ThrowIfNull(second);
+        if (!Enum.IsDefined(missingPolicy))
+            throw new ArgumentOutOfRangeException(nameof(missingPolicy),
+                "Only Reject and SkipPair are recognized.");
+
+        // Budget source pairs before filtering: missing records cannot bypass
+        // the resource bound. Index alignment is an explicit contract.
+        var left = first.Take(MaximumPairs + 1).ToArray();
+        var right = second.Take(MaximumPairs + 1).ToArray();
+        if (left.Length > MaximumPairs || right.Length > MaximumPairs)
+            throw new ArgumentOutOfRangeException(nameof(first),
+                "At most 4096 source pairs are admitted.");
+        if (left.Length != right.Length)
+            throw new ArgumentException("Input vectors must have identical source lengths.");
+        if (left.Length == 0)
+            throw new ArgumentException("At least one source pair is required.");
+
+        var x = new List<double>(left.Length);
+        var y = new List<double>(left.Length);
+        var missing = 0;
+        for (var i = 0; i < left.Length; i++)
+        {
+            // Validate both present components even on a skipped pair: NaN
+            // and infinity never become missing under the opt-in policy.
+            if (left[i].HasValue)
+                DescriptiveStatistics64.RequireFinite(left[i]!.Value);
+            if (right[i].HasValue)
+                DescriptiveStatistics64.RequireFinite(right[i]!.Value);
+
+            if (!left[i].HasValue || !right[i].HasValue)
+            {
+                if (missingPolicy == MissingPairPolicy64.Reject)
+                    throw new ArgumentException(
+                        "Null paired input requires an explicit SkipPair policy.");
+                missing++;
+                continue;
+            }
+
+            x.Add(left[i]!.Value);
+            y.Add(right[i]!.Value);
+        }
+
+        if (x.Count == 0)
+            throw new ArgumentException(
+                "All paired observations are missing after applying SkipPair.");
+        if (x.Count == 1)
+            return new(left.Length, x.Count, missing,
+                CorrelationDefinitionStatus64.UndefinedInsufficientPairs, 0d, null, null);
+
+        // Exactly constant coordinates have exact zero centered cross-products.
+        // Avoid computing meaningless/overflowing normalizers for the other axis.
+        if (x.All(v => v == x[0]) || y.All(v => v == y[0]))
+            return new(left.Length, x.Count, missing,
+                CorrelationDefinitionStatus64.UndefinedZeroVariance, 0d, 0d, null);
+
+        // Reuse the qualified T1 arithmetic rather than cloning a second
+        // covariance/Pearson implementation with divergent denominators.
+        var defined = Analyze(x, y);
+        return new(left.Length, x.Count, missing,
+            CorrelationDefinitionStatus64.Defined,
+            defined.PopulationCovariance, defined.SampleCovariance,
+            defined.PearsonCorrelation);
+    }
+
+}
+
+/// <summary>Reject null by default or discard the complete aligned pair.</summary>
+public enum MissingPairPolicy64
+{
+    Reject,
+    SkipPair
+}
+
+/// <summary>Non-numeric Pearson outcomes never masquerade as zero.</summary>
+public enum CorrelationDefinitionStatus64
+{
+    Defined,
+    UndefinedZeroVariance,
+    UndefinedInsufficientPairs
+}
+
+/// <summary>
+/// Provider-neutral, finite-binary64 result and explicit observation policy.
+/// For a singleton, population covariance is zero and sample covariance is null.
+/// With zero variance, both covariances are zero but Pearson is undefined.
+/// </summary>
+public sealed record CorrelationOutcome64(
+    int ProvidedPairs,
+    int IncludedPairs,
+    int MissingPairs,
+    CorrelationDefinitionStatus64 Status,
+    double? PopulationCovariance,
+    double? SampleCovariance,
+    double? PearsonCorrelation)
+{
+    public bool IsDefined => Status == CorrelationDefinitionStatus64.Defined;
+    public DescriptivePrecisionKind Precision => DescriptivePrecisionKind.FiniteBinary64;
 }
