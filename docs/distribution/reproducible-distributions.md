@@ -28,3 +28,33 @@ Sample(generator) consumes exactly one NextUnitInterval value and returns 1 iff 
 The T1 RED must compile and fail against the qualified preview.4 product assembly before new source installation. GREEN must pass independently authored PMF/CDF/quantile boundary examples, hardcoded multi-seed SplitMix64 reference vectors, seed/counter checkpoint and stream-consumption assertions, interval exclusion of 1, Bernoulli sample bit oracles, invalid-argument tests, and provider-independent contracts. Also run the prior 103 statistics tests, the locked .NET 10 build, and locally inspect the statistics preview.5 NuGet identity/dependencies without publishing to a feed.
 
 T2 retains exhaustive invalid-parameter/boundary and implementation integration policy, explicit continuous approximate distribution choices, empirical/analytical edge tests, and further reproducibility stress/restriction analysis. T1 does not qualify a numerical normal distribution, cryptographic randomness, indefinite streams, cross-RID provenance not actually observed, or a Decision/AURA/dw.discovery connector.
+
+## RS049 — finite continuous uniform boundaries and portable PRNG checkpoints
+
+**Qualification boundary.** This T2 addition is admitted only by an actual successful RS049 report. RS048 T1 remains the separately qualified Bernoulli and raw SplitMix64/v1 baseline. C03 closes only after both native tasks have durable scientific proof.
+
+### ContinuousUniformDistribution64: an explicitly approximate continuous example
+
+The standalone ContinuousUniformDistribution64 represents a mathematical uniform distribution on finite endpoints a and b with b greater than a. The interval width b-a and the density 1/(b-a) must also be finite binary64; parameterizations with overflowing widths or unrepresentably high densities are refused. This is an intentional resource and arithmetic limit: not every valid real-number interval is admissible. Both bounds are immutable.
+
+The probability density is 1/(b-a) on [a,b) and zero outside; zero density at b is a documented endpoint convention. The CDF returns 0 at or below a, 1 at or above b, and clamps the finite binary64 estimate (x-a)/(b-a) inside. The continuous generalized-inverse quantile returns a at q=0, b at q=1 and the bounded binary64 affine interpolation a+q*(b-a) for 0<q<1. All CDF/density arguments must be finite and all quantile probabilities finite within [0,1]. Because the operations are binary64 approximations, an interior quantile may round to an endpoint. No exact rational continuous-distribution contract is claimed.
+
+Sample(generator) consumes exactly one NextUnitInterval output from the already-qualified SplitMix64Random. It returns an approximation in the half-open interval [a,b), clamping a rounded-up affine sample to Math.BitDecrement(b). This guarantees the upper bound is never emitted by sampling, even for adjacent representable endpoints. The finite floating output grid does not itself form a mathematically continuous measure and must not be advertised as perfect distributional sampling. No Gaussian/normal CDF, inverse-erf quantile, convergence theorem, or tail accuracy certification is admitted.
+
+### Canonical versioned text for seed/counter restoration
+
+SplitMix64PositionCodec implements a strict machine-and-culture-independent ASCII checkpoint with three pipe-delimited fields:
+
+    splitmix64/v1|0123456789abcdef|0000000000000005
+
+The first field is exactly the previously qualified algorithm identifier. The next two fields each contain exactly sixteen lowercase ASCII hexadecimal digits: first unsigned seed, then the number of draws **already consumed**. The position denotes the *next* draw. Format rejects unknown algorithm identities; Parse rejects uppercase hex, whitespace, nonhex characters, abbreviated/extra fields and unknown algorithms. Parsing does not advance the PRNG. To resume, pass the decoded value to SplitMix64Random.FromSnapshot; a maximal counter still refuses on the next draw instead of wrapping. This is a Math-owned public wire convention, not an implemented or qualified Decision/MCDM adapter or an AURA broker protocol.
+
+### Bernoulli and security restrictions remain explicit
+
+RS048 already established the p=0/p=1 PMF and quantile endpoints, finite invalid-parameter refusal, half-open high-53-bit unit interval, one-word consumption, and seed 0/1/42 independent golden vectors. Continuous-uniform and Bernoulli quantile conventions are distinct: the first is a continuous generalized inverse, the second is the smallest *positive-mass* support reaching q. No sample distribution is intrinsically cryptographic. SplitMix64/v1 is non-cryptographic; public seed/counter serialization does not add entropy, secrecy, resistance to prediction, or cryptographic security. No user secrets should be generated with it.
+
+### Independent qualification gate
+
+RS049 must first compile and observe its focused reflection RED against preview.5 before installing new product types. The GREEN suite has **30 independent tests**, and the complete statistics suite is expected to include **166 tests** (135 existing, 30 new GREEN and one new RED). Independent analytic uniform-density/CDF/quantile oracles, exact high-53-bit source word, sampler upper-bound proofs, canonical external checkpoint literal and refusal tests supplement all existing statistics assertions. The run also checks pertinent numerical/quantity regressions, the native plan and a provider-free local preview.6 package.
+
+Do not infer independent cross-RID execution, public feed publication, qualified external Decision/MCDM consumers, normal distribution providers, neutral dw.discovery packages, or agent/Aura skills from C03 completion.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.47",
+  "plan_version": "0.1.48",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4046,7 +4046,7 @@
       "title": "Distributions and reproducible randomness",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C02"
       ],
@@ -4071,7 +4071,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C03Tests"
       ],
-      "refinement": "RS048 T1 qualifies versioned seeded SplitMix64/v1 with unsigned counter, restorable draw position and fixed multi-seed golden vectors; finite binary64 uniform [0,1) high-53-bit conversion; and Bernoulli PMF/CDF/inverse-support-quantile/sampling with exact p=0/1 outcomes. A compiled independent RED, 31 GREEN and 135 total statistics tests plus local preview.5 verify the bounded, explicitly noncryptographic baseline. C03-T2 retains remaining distribution boundaries and integration policy.",
+      "refinement": "RS048 qualifies fixed SplitMix64/v1 multi-seed vectors, consumed-counter checkpoints, bounded high-53-bit [0,1) draws, Bernoulli PMF/CDF/positive-mass quantile and deterministic sampling. RS049 T2 adds explicit finite continuous-uniform PDF/CDF/quantile/sampling with half-open binary64 samples, invalid-width/density/NaN refusals, and a strict invariant ASCII seed/counter codec. Compiled RED, 30 independent GREEN and 166 total statistics tests, quantities/numerics regressions, local preview.6 and scientific limitations close C03 without cryptographic or normal-distribution claims.",
       "files": [
         "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
         "src/projects/dw.tools.math.statistics/BernoulliDistribution64.cs",
@@ -4081,20 +4081,28 @@
         "docs/distribution/reproducible-distributions.md",
         "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
         "docs/planning/evidence/M3-W02-C03-contract-red.json",
-        "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+        "src/projects/dw.tools.math.statistics/ContinuousUniformDistribution64.cs",
+        "src/projects/dw.tools.math.statistics/SplitMix64PositionCodec.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C03T2Tests.cs",
+        "docs/planning/evidence/M3-W02-C03-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C03T1Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C03T2Tests",
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release",
         "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M3-W02-C03-contract-red.json",
-        "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C03-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json"
       ],
-      "readiness": "in progress: C03 T1 qualified on durable RS048 success; T2 remains planned",
+      "readiness": "closed: both T1 and T2 qualified on durable RS048/RS049 evidence; C04 Decision/MCDM consumer contracts still planned",
       "tasks": [
         {
           "id": "M3-W02-C03-T1",
@@ -4141,29 +4149,38 @@
           "title": "Boundaries and integration",
           "behavior": "Document p=0/1 quantiles and invalid parameters; identify continuous distributions as approximate; make no cryptographic promise.",
           "test_case": "Document p=0/1 quantiles and invalid parameters; identify continuous distributions as approximate; make no cryptographic promise.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C03-boundary-red.json",
+            "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Document p=0/1 quantiles and invalid parameters; identify continuous distributions as approximate; make no cryptographic promise.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-boundary-red.json"
+              ]
             },
             {
               "id": "M3-W02-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Document p=0/1 quantiles and invalid parameters; identify continuous distributions as approximate; make no cryptographic promise.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json"
+              ]
             }
           ]
         }
