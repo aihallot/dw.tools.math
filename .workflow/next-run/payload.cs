@@ -303,6 +303,21 @@ p.ProjectPlan.RequireNodeState(Work,"done");
 p.ProjectPlan.RequireNodeState(Phase,"done");
 p.ProjectPlan.RequireNodeState("M3-W02","not-ready");
 
+// Retire the completed work-package cursor inside the same controlled
+// transaction, before the runner performs its exact target replay.
+p.Json.EditObject(".aura/workflow/state.json",workflowState=>
+{
+    if((string?)workflowState["pendingRun"]!="RS043"
+        ||(string?)workflowState["activeMilestone"]!="M3"
+        ||(string?)workflowState["activeWorkPackage"]!=(target?null:Work)
+        ||(string?)workflowState["activePhase"]!=(target?null:Phase)
+        ||workflowState["activeTask"] is not null
+        ||workflowState["activeSubtask"] is not null)
+        throw new InvalidOperationException("RS043 current/target execution cursor diverged.");
+    workflowState["activeWorkPackage"]=null;
+    workflowState["activePhase"]=null;
+});
+
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
