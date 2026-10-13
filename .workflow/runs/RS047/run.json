@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "RS047",
+  "title": "Qualify typed undefined Pearson outcomes and explicit paired missing-value boundaries",
+  "state": "prepared",
+  "commitMessage": "feat: qualify typed correlation boundaries and close quantiles phase",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C02",
+    "M3-W02-C02-T2",
+    "M3-W02-C02-T2-R",
+    "M3-W02-C02-T2-G",
+    "M3-W02-C02-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify typed undefined Pearson outcomes on constant and singleton pairs, explicit default-Reject/opt-in SkipPair policies, and exact-knot finite Type-7 boundaries. Observe a compiled independent RED, pass 31 new GREEN and 103 total statistics tests, validate rational/numeric regressions and local preview.4 packaging, then complete T2 and C02 while preserving M3-W02 as in-progress.",
+    "value": "Expose machine-readable covariance/correlation status without inventing Pearson zero, preserve aligned nullable pair counts and finite budgets, avoid duplicate numerical engines, and document truthful consumer conventions.",
+    "debtChanges": [
+      "MissingPairPolicy64 defaults to Reject; SkipPair removes the entire aligned pair when either value is null and never treats nonfinite data as missing.",
+      "With exactly constant axes Pearson is typed undefined, covariance is zero; with a singleton Pearson/sample covariance are null, population covariance is zero.",
+      "Empty or all-skipped inputs refuse; mismatched source lengths, more than 4096 source pairs and nonfinite present inputs always refuse.",
+      "Numerical failure for nonconstant data is not reclassified as zero variance; finite Pearson arithmetic still lacks an unconditional rounding guarantee.",
+      "Type-7 binary64 exact knots bypass an otherwise overflowing adjacent subtraction, but nontrivial interpolation can still refuse.",
+      "Decision/MCDM consumption is documented by neutral public DTO conventions, not an implemented or verified external adapter.",
+      "No public NuGet feed, AURA skill, dw.discovery package, or BrokerReady implementation is admitted."
+    ],
+    "nextAction": "After RS047 durable success, prepare M3-W02-C03-T1 for bounded distributions and deterministic seeded random sampling, preserving explicit mathematical/provider conventions.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C02-T2-R",
+        "achievement": "Compile and observe a genuine RS047 reflection RED against the qualified preview.3 for missing typed Pearson status and paired nullable-input policy; retain the terminal marker."
+      },
+      {
+        "projectNode": "M3-W02-C02-T2-G",
+        "achievement": "Implement immutable machine-readable defined/undefined Pearson outcomes, explicit pairwise null policy with bounded counts and finite checks, and exact-knot Type-7 correction using the qualified covariance core."
+      },
+      {
+        "projectNode": "M3-W02-C02-T2-V",
+        "achievement": "Qualify 31 independent GREEN tests and all 103 statistics tests, numerical/rational regressions, locked build, locally inspected provider-free preview.4 package, planning checks and durable scientific evidence."
+      },
+      {
+        "projectNode": "M3-W02-C02-T2",
+        "achievement": "Complete accepted C02-T2 constant/singleton typed undefined correlation, explicit missing-pair handling and documented Decision-neutral consumer semantics without cross-repository changes."
+      },
+      {
+        "projectNode": "M3-W02-C02",
+        "achievement": "Close C02 with durably qualified T1 quantile/covariance contracts plus T2 boundary/normalization contracts, preserving M3-W02 and C03 for subsequent statistics work."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/quantiles-and-correlations.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C02-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C02T2RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C02T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
