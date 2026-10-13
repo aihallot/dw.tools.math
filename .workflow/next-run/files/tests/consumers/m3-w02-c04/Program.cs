@@ -207,7 +207,7 @@ static void Require(bool condition)
 static void ExpectThrows<T>(Action action) where T : Exception
 {
     try { action(); }
-    catch (T) { return; }
+    catch (Exception exception) when (exception is T) { return; }
     throw new InvalidOperationException("Expected " + typeof(T).Name + " was not observed.");
 }
 
