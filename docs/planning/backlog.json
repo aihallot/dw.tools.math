@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.46",
+  "plan_version": "0.1.47",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4046,7 +4046,7 @@
       "title": "Distributions and reproducible randomness",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W02-C02"
       ],
@@ -4071,40 +4071,68 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS048 T1 qualifies versioned seeded SplitMix64/v1 with unsigned counter, restorable draw position and fixed multi-seed golden vectors; finite binary64 uniform [0,1) high-53-bit conversion; and Bernoulli PMF/CDF/inverse-support-quantile/sampling with exact p=0/1 outcomes. A compiled independent RED, 31 GREEN and 135 total statistics tests plus local preview.5 verify the bounded, explicitly noncryptographic baseline. C03-T2 retains remaining distribution boundaries and integration policy.",
+      "files": [
+        "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "src/projects/dw.tools.math.statistics/BernoulliDistribution64.cs",
+        "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C03T1RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C03T1Tests.cs",
+        "docs/distribution/reproducible-distributions.md",
+        "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
+        "docs/planning/evidence/M3-W02-C03-contract-red.json",
+        "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C03T1Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release",
+        "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W02-C03-contract-red.json",
+        "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+      ],
+      "readiness": "in progress: C03 T1 qualified on durable RS048 success; T2 remains planned",
       "tasks": [
         {
           "id": "M3-W02-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt qualified CDF/quantile and sampling; version PRNG/seed/counter contract, importing Decision behavior only by agreement.",
           "test_case": "Bernoulli p=0/1 yields exact bounds; uniform [0,1) never returns 1; fixed-seed golden vectors match.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C03-contract-red.json",
+            "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Bernoulli p=0/1 yields exact bounds; uniform [0,1) never returns 1; fixed-seed golden vectors match.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-contract-red.json"
+              ]
             },
             {
               "id": "M3-W02-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt qualified CDF/quantile and sampling; version PRNG/seed/counter contract, importing Decision behavior only by agreement.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C03-contract-qualified.json"
+              ]
             }
           ]
         },
