@@ -240,6 +240,16 @@ p.Json.EditObject(Backlog,plan=>
     var t=chunk["tasks"]!.AsArray().Select(v=>v!.AsObject())
         .Single(v=>(string?)v["id"]==Task);
     wp["status"]="done";
+    // A completed work package must retain evidence from all three
+    // accepted numerical phases; product backlog validation rejects a
+    // "done" node with no concrete evidence array.
+    wp["evidence"]=p.Json.StringArray(
+        "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+        "docs/planning/evidence/M3-W01-C02-contract-qualified.json",
+        "docs/planning/evidence/M3-W01-C02-boundaries-qualified.json",
+        Prior,
+        Qualified);
     chunk["status"]="done";
     chunk["refinement"]="RS042 qualified bounded partial-pivot LU, dense residual solve, Householder QR and limited 2x2 singular values. RS043 closes T2 with a controlled missing-condition-contract RED, 16 independent condition/rank/scale/copy GREEN tests, 81 numerical regressions, managed Math.NET corroboration and provider-neutral NuGet preview.4 packaging. Optional spectral 2x2 solve condition is null when unavailable; full public SVD and rank-revealing QR remain explicitly deferred by a reviewed scope decision.";
     chunk["readiness"]="closed: both T1 and T2 accepted; all M3-W01 numerical phases completed, M3-W02 remains planned";
