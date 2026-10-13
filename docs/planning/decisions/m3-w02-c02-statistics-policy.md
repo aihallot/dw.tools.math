@@ -11,3 +11,16 @@
 7. Decision/MCDM are downstream consumers, not source owners; no business VaR/CVaR, neutral discovery feature, AURA skill or public package release is authorized.
 
 **Follow-up:** M3-W02-C02-T2 boundary/integration qualification, including typed undefined Pearson correlation and consumer-facing conventions. Do not mark C02 complete until its own T2 proof.
+
+## RS047 — T2 boundary qualification proposal
+
+The T1 contract remains a baseline and not an unconditional provider claim. RS047 adds a distinct typed CorrelationOutcome64 facade over the T1 finite-binary64 covariance/Pearson engine. This deliberate facade avoids copying numerical implementations or substituting an exception message for a machine-readable status.
+
+- MissingPairPolicy64.Reject is default. SkipPair is explicit and removes one *aligned source pair* on either null, while retaining source/included/missing pair counts; NaN/infinity remain invalid whether a peer is missing or not. Empty and entirely missing inputs refuse. Source vectors must align and each contain no more than 4096 rows before filtering.
+- Defined correlation and the existing unweighted covariance denominators N and N-1 are reused from T1. With at least two complete pairs and an exactly constant axis, UndefinedZeroVariance reports null Pearson but zero population and sample covariance. One admitted pair produces UndefinedInsufficientPairs with population covariance 0 and nullable sample covariance null. Those are mathematically distinct from a defined Pearson coefficient of zero.
+- Numeric overflow, nonfinite intermediates and rounding limitations do not become typed undefined conditions. For sufficiently small nonzero variation that cannot be resolved by the qualified T1 arithmetic, the computation can refuse rather than invent a zero-variance classification. No guarantee of a universal floating error envelope.
+- Type-7 binary64 quantiles at exact sorted knots bypass subtraction of adjacent extremes; nontrivial interpolation can still refuse. Exact-rational and nearest-rank contracts are unchanged.
+- Consumers can interpret the typed mathematical status and nullable coefficient through publicly documented names and explicit arithmetic conventions. This is **not** proof that Decision or MCDM has adopted any implementation, nor does it confer neutral dw.discovery schema conformance, generated skills or AURA broker admission.
+- Independent RED/GREEN, regression and preview.4 manifest evidence must precede completing native task T2 and its C02 phase. Work package M3-W02 continues toward distributions/randomness and other future chunks.
+
+**Review trigger:** a downstream consumer requests alternative complete-case semantics, statistical inference, exact paired moments, robust rescaling of extreme Pearson inputs, or a versioned cross-repository interoperability adapter.

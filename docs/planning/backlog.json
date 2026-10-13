@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.45",
+  "plan_version": "0.1.46",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3900,7 +3900,7 @@
       "title": "Quantiles and correlations",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C01"
       ],
@@ -3925,7 +3925,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C02Tests"
       ],
-      "refinement": "RS046 qualifies conventioned Type-7 and nearest-rank quantiles for exact rational and finite binary64 samples, together with bounded centered binary64 covariance and Pearson correlation. Compiled independent RED, 26 GREEN tests, 71 total statistics tests, rational/numeric regressions and local preview.3 manifest qualify only T1. T2 retains typed undefined constant-vector outcomes, missing/degenerate and Decision consumer conventions.",
+      "refinement": "RS046 T1 qualified separate Type-7 and nearest-rank sample quantiles over exact rational and binary64 inputs, plus finite paired covariance/Pearson. RS047 T2 qualifies machine-readable undefined Pearson statuses for truly constant/insufficient pairs; default Reject or explicit aligned SkipPair null policy, nonfinite refusal, count/budget contracts, exact-knots Type-7 extreme-boundary correction, 31 independent GREEN oracles and 103 total statistics tests with local preview.4 package inspection. Downstream Decision/MCDM adapters and neutral dw.discovery remain separately unqualified.",
       "files": [
         "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
         "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
@@ -3935,20 +3935,26 @@
         "docs/distribution/quantiles-and-correlations.md",
         "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
         "docs/planning/evidence/M3-W02-C02-contract-red.json",
-        "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C02-contract-qualified.json",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C02T2RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C02T2Tests.cs",
+        "docs/planning/evidence/M3-W02-C02-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C02T1Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C02T2Tests",
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release",
         "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M3-W02-C02-contract-red.json",
-        "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C02-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C02-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json"
       ],
-      "readiness": "in progress: C02 T1 admitted on RS046 durable success; T2 planned and not qualified",
+      "readiness": "closed: T1 and T2 accepted and qualified; distributions/randomness remain M3-W02-C03",
       "tasks": [
         {
           "id": "M3-W02-C02-T1",
@@ -3995,29 +4001,38 @@
           "title": "Boundaries and integration",
           "behavior": "A constant vector yields a typed undefined correlation; reuse conventions in Decision without moving business VaR/CVaR.",
           "test_case": "A constant vector yields a typed undefined correlation; reuse conventions in Decision without moving business VaR/CVaR.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C02-boundary-red.json",
+            "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: A constant vector yields a typed undefined correlation; reuse conventions in Decision without moving business VaR/CVaR.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-boundary-red.json"
+              ]
             },
             {
               "id": "M3-W02-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: A constant vector yields a typed undefined correlation; reuse conventions in Decision without moving business VaR/CVaR.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json"
+              ]
             }
           ]
         }
