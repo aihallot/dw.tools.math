@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "M3-W02-C02-contract-qualified",
+  "status": "conventioned-quantiles-and-paired-finite-correlation-qualified",
+  "prior_descriptive_statistics": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+  "controlled_T1_RED": "docs/planning/evidence/M3-W02-C02-contract-red.json",
+  "new_quantile_source": "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+  "quantile_source_sha256": "c99961c92a22e8e587fd045c4e82e50764105b93e4afec8b139473269cc48000",
+  "new_paired_source": "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
+  "correlation_source_sha256": "df94a19c58d6db822500457d83077b76e47b036ea6cb9f235262482c07d28fc9",
+  "green_test": "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1Tests.cs",
+  "green_test_sha256": "5075df5d37475e23772b7a742b48c1d083576a9185589985d633fcdad348e1d4",
+  "red_test": "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1RedTests.cs",
+  "red_test_sha256": "1a5eb8f0223d471032db4cddeeea696eda693fb820d92ef61cad6298456650ab",
+  "policy_decision": "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
+  "policy_decision_sha256": "dcdaf2da521f46601c04859331b31ba3623b0a4814a8176356cfaae97ad78dba",
+  "distribution": "docs/distribution/quantiles-and-correlations.md",
+  "distribution_sha256": "e8fbd90a0cd9d0ddc209b08bf2851a8124b251be4fc192027266960ff59ab936",
+  "project_file": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+  "project_file_sha256": "a27f0321907a13d22764c8f1c56c5b5bced15353debb60de0b173b93d63f574d",
+  "new_green_tests_passed": 26,
+  "total_statistics_tests_passed": 71,
+  "prior_statistics_tests_passed": 44,
+  "controlled_red_then_green": true,
+  "quantile_conventions": [
+    "Type-7 interpolated (n-1)*p",
+    "Nearest-rank ceiling(n*p), first datum at p=0"
+  ],
+  "exact_rational_quantiles_without_widening": true,
+  "paired_covariance_population_denominator": "N",
+  "paired_covariance_sample_denominator": "N-1",
+  "paired_pearson_oracle": "x=[1,2,3],y=[2,4,6]: population covariance=4/3, sample covariance=2, Pearson=1",
+  "finite_observation_budget": 4096,
+  "exact_operand_bits_budget": 4096,
+  "correlation_minimum_pair_count": 2,
+  "regression_quantities_and_numerics_passed": true,
+  "dotnet_sdk": "10.0.401",
+  "observed_runtime_identifier": "win-x64",
+  "local_package_id": "dw.tools.math.statistics",
+  "local_package_version": "0.4.0-preview.3",
+  "local_package_bytes": 12564,
+  "local_package_dependencies": [
+    "dw.quantities"
+  ],
+  "nonclaims": [
+    "T2 typed undefined correlation, complete singleton, missing/null and degenerate policies are not qualified.",
+    "Exact rational bivariate moments, weighted covariance, unbounded inputs and universal binary64 error bounds are not qualified.",
+    "No public NuGet push, Decision/MCDM implementation, neutral dw.discovery dependency or AURA broker capability is delivered."
+  ]
+}

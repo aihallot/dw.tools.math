@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.44",
+  "plan_version": "0.1.45",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3900,7 +3900,7 @@
       "title": "Quantiles and correlations",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W02-C01"
       ],
@@ -3925,40 +3925,68 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS046 qualifies conventioned Type-7 and nearest-rank quantiles for exact rational and finite binary64 samples, together with bounded centered binary64 covariance and Pearson correlation. Compiled independent RED, 26 GREEN tests, 71 total statistics tests, rational/numeric regressions and local preview.3 manifest qualify only T1. T2 retains typed undefined constant-vector outcomes, missing/degenerate and Decision consumer conventions.",
+      "files": [
+        "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/CorrelationStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C02T1Tests.cs",
+        "docs/distribution/quantiles-and-correlations.md",
+        "docs/planning/decisions/m3-w02-c02-statistics-policy.md",
+        "docs/planning/evidence/M3-W02-C02-contract-red.json",
+        "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C02T1Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release",
+        "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W02-C02-contract-red.json",
+        "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+      ],
+      "readiness": "in progress: C02 T1 admitted on RS046 durable success; T2 planned and not qualified",
       "tasks": [
         {
           "id": "M3-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Define conventioned quantiles, covariance/correlation, and generic mathematical normalization.",
           "test_case": "Type-7 of [0,10] at p=.25 equals 2.5; nearest-rank equals 0; correlation of an increasing affine vector equals 1.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C02-contract-red.json",
+            "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Type-7 of [0,10] at p=.25 equals 2.5; nearest-rank equals 0; correlation of an increasing affine vector equals 1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-contract-red.json"
+              ]
             },
             {
               "id": "M3-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Define conventioned quantiles, covariance/correlation, and generic mathematical normalization.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C02-contract-qualified.json"
+              ]
             }
           ]
         },
