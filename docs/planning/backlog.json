@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.42",
+  "plan_version": "0.1.43",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -341,7 +341,7 @@
       "id": "M3-W02",
       "release": "M3",
       "title": "Statistics and probability",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.statistics/",
         "tests/projects/dw.tools.math.statistics.tests/",
@@ -3745,7 +3745,7 @@
       "title": "Descriptive aggregates and stable summation",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W01-C01"
       ],
@@ -3772,40 +3772,72 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS044 opens the standalone provider-neutral dw.tools.math.statistics .NET 10 product with locked restoration and independent package tests. T1 admits bounded Neumaier compensated finite sums, mean/min/max, centered population/sample variance, and exact rational sum/mean/extrema. A controlled absent-contract RED, 19 focused GREEN tests, exact hand oracles, managed Math.NET corroboration and a local package establish the initial contract. Empty/singleton, missing, weighted, scale/overflow policy completion remains T2.",
+      "files": [
+        "dw.tools.math.slnx",
+        "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+        "src/projects/dw.tools.math.statistics/packages.lock.json",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "tests/projects/dw.tools.math.statistics.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C01RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C01Tests.cs",
+        "src/projects/dw.tools.math.statistics/DescriptiveStatistics64.cs",
+        "tests/providers/m3-w02-c01/ManagedStatisticsSmoke.csproj",
+        "tests/providers/m3-w02-c01/Program.cs",
+        "docs/distribution/descriptive-statistics.md",
+        "docs/planning/evidence/M3-W02-C01-contract-red.json",
+        "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C01Tests",
+        "dotnet run --project tests/providers/m3-w02-c01/ManagedStatisticsSmoke.csproj -c Release",
+        "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W02-C01-contract-red.json",
+        "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+      ],
+      "readiness": "T1 qualified; C01-T2 remains planned for missing-data, weighting and extended numerical boundary policies before C01 closure",
       "tasks": [
         {
           "id": "M3-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Provide mean/variance/min/max and compensated or otherwise qualified summation; distinguish exact and floating paths.",
           "test_case": "[1,2,3,4] mean=2.5; population variance=1.25; sample variance=5/3; exact summation remains rational.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C01-contract-red.json",
+            "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: [1,2,3,4] mean=2.5; population variance=1.25; sample variance=5/3; exact summation remains rational.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-contract-red.json"
+              ]
             },
             {
               "id": "M3-W02-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Provide mean/variance/min/max and compensated or otherwise qualified summation; distinguish exact and floating paths.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+              ]
             }
           ]
         },
