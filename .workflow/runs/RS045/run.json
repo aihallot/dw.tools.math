@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "RS045",
+  "title": "Qualify missing observations and bounded frequency-weighted descriptive statistics",
+  "state": "prepared",
+  "commitMessage": "feat: qualify frequency weighted statistics and close descriptive boundaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C01",
+    "M3-W02-C01-T2",
+    "M3-W02-C01-T2-R",
+    "M3-W02-C01-T2-G",
+    "M3-W02-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify explicit Reject/Skip null policies and bounded positive integer-frequency descriptive statistics with a controlled RED, 23 independent GREEN tests and 44 statistics tests in total. Reuse Neumaier compensated summation, confirm Math.NET managed oracles, rational and numerical regressions and NuGet preview.2. Complete M3-W02-C01-T2 and C01 while preserving active M3-W02.",
+    "value": "Make missingness and replication-count variance denominators explicit, refuse NaN, invalid weights, empty admitted data, oversized input and nonfinite intermediates; preserve exact and finite arithmetic as separate contracts.",
+    "debtChanges": [
+      "Only positive integer repetition frequencies are admitted; continuous reliability/importance weights and their denominator conventions require separate qualification.",
+      "Missing means null only; default Reject requires explicit opt-in Skip. NaN and infinity always refuse and imputation is not claimed.",
+      "Source records and included frequency are each bounded at 4096. Overflowing weighted sums, deviations or variance never yield partial results.",
+      "RS044 exact rational unweighted statistics remain intact; new weighted calculations are explicitly approximate finite binary64.",
+      "Math.NET remains an independent managed test consumer, not a runtime dependency. No unobserved RID or native BLAS is admitted.",
+      "Quantiles, correlation and distributions remain future M3-W02 phases; closing C01 does not complete M3-W02.",
+      "No Decision/Aura mutation, dw.discovery agent skill, BrokerReady designation or public NuGet publication is authorized."
+    ],
+    "nextAction": "After RS045 success, prepare M3-W02-C02 quantiles and correlation in the accepted DWF plan. Revisit neutral dw.discovery after independent package and Workflow qualification.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C01-T2-R",
+        "achievement": "Observe and retain a compiled reflection RED for the missing frequency/nullable-policy API against the previously qualified statistics library."
+      },
+      {
+        "projectNode": "M3-W02-C01-T2-G",
+        "achievement": "Implement bounded positive integer-frequency weighted descriptive statistics and opt-in null Skip policy using shared compensated floating arithmetic."
+      },
+      {
+        "projectNode": "M3-W02-C01-T2-V",
+        "achievement": "Pass 23 focused GREEN cases, all 44 statistics tests, managed Math.NET corroboration, prior numeric and rational regressions, and local NuGet preview.2 structure."
+      },
+      {
+        "projectNode": "M3-W02-C01-T2",
+        "achievement": "Qualify missingness and frequency-weighted boundary semantics with explicit invalid-data, cardinality and finite-arithmetic refusals."
+      },
+      {
+        "projectNode": "M3-W02-C01",
+        "achievement": "Complete both descriptive statistics tasks and scientific evidence while leaving M3-W02 active for remaining accepted statistical responsibilities."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/descriptive-statistics.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c01-statistics-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C01-boundary-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/DescriptiveStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/FrequencyWeightedStatistics64.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C01T2RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C01T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
