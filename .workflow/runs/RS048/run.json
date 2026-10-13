@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "RS048",
+  "title": "Qualify versioned SplitMix64 randomness and Bernoulli probability distributions",
+  "state": "prepared",
+  "commitMessage": "feat: qualify reproducible random sampling and Bernoulli distributions",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C03",
+    "M3-W02-C03-T1",
+    "M3-W02-C03-T1-R",
+    "M3-W02-C03-T1-G",
+    "M3-W02-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify portable versioned SplitMix64/v1 random draws with explicit seed, counter, checkpoint and independent three-seed golden vectors; admit finite Bernoulli PMF/CDF/quantile and reproducible sampling including exact p=0/1. Observe compiled RED, 31 new GREEN and 135 statistics tests, inspect local NuGet preview.5 and complete only M3-W02-C03-T1 plus R/G/V while preserving C03-T2 for boundaries.",
+    "value": "Provide a deterministic, provider-neutral 64-bit random stream and reproducible finite binary64 Bernoulli calculations with explicit bit conversion, consumption counter, mathematical conventions, and noncryptographic limits.",
+    "debtChanges": [
+      "SplitMix64/v1 uses an explicit 64-bit unsigned seed, monotonically consumed draw counter and position snapshot with exact three-seed golden word vectors.",
+      "A half-open uniform [0,1) is formed from the high 53 PRNG bits; mixed word/unit/Bernoulli draws each consume exactly one 64-bit output.",
+      "Bernoulli PMF, integer CDF, inverse-CDF support quantiles and sample decisions define explicit finite binary64 p in [0,1] and degenerate p=0/1 values.",
+      "SplitMix64 is deterministic and not cryptographically secure; no secret generation, entropy source, statistical inference or global random state is claimed.",
+      "The PRNG counter refuses exhaustion instead of wrapping; unknown snapshot algorithm and invalid finite parameters refuse.",
+      "Continuous distribution approximation, broader tail/boundary policy, cross-RID qualification and Decision adoption remain for later independently accepted scope.",
+      "Local preview.5 remains un-published; no neutral dw.discovery, Aura broker, third-party PRNG provider or public NuGet feed is introduced."
+    ],
+    "nextAction": "After durable RS048 success, prepare M3-W02-C03-T2 to qualify remaining distribution boundary conditions, numeric approximations, seeded repeatability policies and consumer-facing limitations.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C03-T1-R",
+        "achievement": "Compile and observe controlled reflection RED showing absent versioned random generator, snapshot and Bernoulli contracts in the qualified RS047 preview.4 assembly."
+      },
+      {
+        "projectNode": "M3-W02-C03-T1-G",
+        "achievement": "Implement versioned portable SplitMix64/v1 draws and checkpointing plus finite Bernoulli PMF/CDF/quantile/sampling with exact degenerate outcomes and no external providers."
+      },
+      {
+        "projectNode": "M3-W02-C03-T1-V",
+        "achievement": "Verify 31 independent GREEN tests, 135 complete statistics tests, stable multi-seed golden vectors, locked .NET 10 build, local preview.5 package and DWF/product planning evidence."
+      },
+      {
+        "projectNode": "M3-W02-C03-T1",
+        "achievement": "Qualify C03-T1 deterministic PRNG seed/counter/golden stream contract and discrete Bernoulli distribution behavior, retaining C03-T2 and all broader cross-repository boundaries."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/reproducible-distributions.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c03-distributions-policy.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+    "docs/planning/evidence/M3-W02-C03-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "src/projects/dw.tools.math.statistics/BernoulliDistribution64.cs",
+    "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T1RedTests.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M3W02C03T1Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
