@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
@@ -121,9 +120,17 @@ if(!target)
         "--no-build","--no-restore","-o",feed);
     var quantityArchive=Path.Combine(feed,"dw.quantities."+QuantityVersion+".nupkg");
     var statisticsArchive=Path.Combine(feed,"dw.tools.math.statistics."+StatisticsVersion+".nupkg");
-    var qtyDigest=InspectPackage(quantityArchive,"dw.quantities",QuantityVersion,[]);
-    var statsDigest=InspectPackage(statisticsArchive,"dw.tools.math.statistics",
+    InspectPackage(quantityArchive,"dw.quantities",QuantityVersion,[]);
+    InspectPackage(statisticsArchive,"dw.tools.math.statistics",
         StatisticsVersion,["dw.quantities"]);
+
+    // Product .nupkg SHA-256 is obtained by a dedicated, staged
+    // post-package verifier. DWF workflow authority identities remain SDK-owned.
+    var packageProof=Required(root,"dotnet","run","--file",
+        ".workflow/runs/RS050/staged/checks/package-sha.cs","--",
+        quantityArchive,statisticsArchive);
+    var qtyDigest=RequirePackageChecksum(packageProof,Path.GetFileName(quantityArchive));
+    var statsDigest=RequirePackageChecksum(packageProof,Path.GetFileName(statisticsArchive));
 
     var cache=Path.Combine(root,"build","artifacts","m3-w02-c04-isolated-packages");
     Required(root,"dotnet","restore",Consumer,"--source",feed,
@@ -252,7 +259,7 @@ Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.c
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
 return p.Complete();
 
-static string InspectPackage(string path,string expectedId,string expectedVersion,string[] expectedDependencies)
+static void InspectPackage(string path,string expectedId,string expectedVersion,string[] expectedDependencies)
 {
     if(!File.Exists(path))throw new InvalidOperationException("Missing local package: "+path);
     using(var zip=ZipFile.OpenRead(path))
@@ -271,7 +278,18 @@ static string InspectPackage(string path,string expectedId,string expectedVersio
            !dependencies.SequenceEqual(expectedDependencies,StringComparer.OrdinalIgnoreCase))
             throw new InvalidOperationException("Local NuGet identity or dependency mismatch: "+expectedId);
     }
-    return Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();
+}
+static string RequirePackageChecksum(string output,string packageFileName)
+{
+    var marker="C04-PKG-SHA256:"+packageFileName+":";
+    var values=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
+        .Where(line=>line.StartsWith(marker,StringComparison.Ordinal)).ToArray();
+    if(values.Length!=1)
+        throw new InvalidOperationException("One independent package SHA-256 receipt is required for "+packageFileName);
+    var digest=values[0][marker.Length..];
+    if(digest.Length!=64 || digest.Any(ch=>!((ch>='0' && ch<='9') || (ch>='a' && ch<='f'))))
+        throw new InvalidOperationException("Invalid independent package SHA-256 receipt for "+packageFileName);
+    return digest;
 }
 static string Relevant(string output)
 {
