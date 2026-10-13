@@ -110,7 +110,7 @@ public static class DescriptiveStatistics64
                 "The exact numerator or denominator exceeds 4096 bits.");
     }
 
-    private static double RequireFinite(double value)
+    internal static double RequireFinite(double value)
     {
         if (!double.IsFinite(value))
             throw new ArithmeticException(
@@ -118,7 +118,7 @@ public static class DescriptiveStatistics64
         return value;
     }
 
-    private static void Accumulate(double value, ref double sum, ref double correction)
+    internal static void Accumulate(double value, ref double sum, ref double correction)
     {
         var next = RequireFinite(sum + value);
         var drift = global::System.Math.Abs(sum) >= global::System.Math.Abs(value)
