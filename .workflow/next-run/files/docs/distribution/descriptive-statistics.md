@@ -1,6 +1,6 @@
 # Provider-neutral descriptive statistics — M3-W02-C01
 
-**RS044 T1 delivered.** RS045 T2 additions are candidates until the next DWF result is qualified.
+**Qualification scope.** RS044 T1 is delivered; RS045 T2 admission depends on its own durable DWF report and scientific evidence, not on this description alone.
 
 ## Public finite and exact contracts
 
