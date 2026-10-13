@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.43",
+  "plan_version": "0.1.44",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -3745,7 +3745,7 @@
       "title": "Descriptive aggregates and stable summation",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W01-C01"
       ],
@@ -3772,7 +3772,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C01Tests"
       ],
-      "refinement": "RS044 opens the standalone provider-neutral dw.tools.math.statistics .NET 10 product with locked restoration and independent package tests. T1 admits bounded Neumaier compensated finite sums, mean/min/max, centered population/sample variance, and exact rational sum/mean/extrema. A controlled absent-contract RED, 19 focused GREEN tests, exact hand oracles, managed Math.NET corroboration and a local package establish the initial contract. Empty/singleton, missing, weighted, scale/overflow policy completion remains T2.",
+      "refinement": "RS044 qualified bounded exact rational and finite compensated descriptive statistics with 19 independent T1 GREEN oracles. RS045 qualifies explicit null Reject/Skip missing policy and positive integer frequency-replicated weighted moments with 23 new GREEN oracles, exact-expanded-sample variance denominators, nonfinite/overflow and 4096-record/frequency limits. The complete 44-test statistics suite, separate managed Math.NET oracle, prior rational/numeric regressions, deterministic policy decision and provider-free local preview.2 NuGet manifest close C01 without claiming continuous weights.",
       "files": [
         "dw.tools.math.slnx",
         "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
@@ -3786,20 +3786,29 @@
         "tests/providers/m3-w02-c01/Program.cs",
         "docs/distribution/descriptive-statistics.md",
         "docs/planning/evidence/M3-W02-C01-contract-red.json",
-        "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C01-contract-qualified.json",
+        "src/projects/dw.tools.math.statistics/FrequencyWeightedStatistics64.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M3W02C01T2Tests.cs",
+        "docs/planning/decisions/m3-w02-c01-statistics-policy.md",
+        "docs/planning/evidence/M3-W02-C01-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C01Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M3W02C01T2Tests",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release",
         "dotnet run --project tests/providers/m3-w02-c01/ManagedStatisticsSmoke.csproj -c Release",
         "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M3-W02-C01-contract-red.json",
-        "docs/planning/evidence/M3-W02-C01-contract-qualified.json"
+        "docs/planning/evidence/M3-W02-C01-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C01-boundary-red.json",
+        "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json"
       ],
-      "readiness": "T1 qualified; C01-T2 remains planned for missing-data, weighting and extended numerical boundary policies before C01 closure",
+      "readiness": "closed: both T1 and T2 qualified; M3-W02-C02 quantiles/correlation remains not-ready",
       "tasks": [
         {
           "id": "M3-W02-C01-T1",
@@ -3846,29 +3855,38 @@
           "title": "Boundaries and integration",
           "behavior": "Define policies for empty, singleton, missing, NaN, weights, and large offsets; do not move RecordTransformer or nutrition logic.",
           "test_case": "Define policies for empty, singleton, missing, NaN, weights, and large offsets; do not move RecordTransformer or nutrition logic.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C01-boundary-red.json",
+            "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Define policies for empty, singleton, missing, NaN, weights, and large offsets; do not move RecordTransformer or nutrition logic.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-boundary-red.json"
+              ]
             },
             {
               "id": "M3-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Define policies for empty, singleton, missing, NaN, weights, and large offsets; do not move RecordTransformer or nutrition logic.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M3-W02-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json"
+              ]
             }
           ]
         }
