@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.54",
+  "plan_version": "0.1.55",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4489,7 +4489,7 @@
       "title": "IR bridge and restrictions",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M4-W01-C01"
       ],
@@ -4516,7 +4516,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C02Tests"
       ],
-      "refinement": "RS053 and RS054 independently qualified an isolated AngouriMath conditional-text example and a bounded child-process host, satisfying only the accepted EXT-SYMBOLIC provider-research prerequisite. RS055 T1 introduces a provider-free dw.tools.math.symbolics 0.5.0-preview.1 product referencing canonical IR and exact quantities only: the closed exact (x\u00B2-c\u00B2)/(x-c) rule yields typed restricted x\u002Bc with x!=c and an explicit status-bearing exact point evaluator. A compiled absent-contract RED recovers; 25 independent GREEN tests, 8 NuGet-only consumer oracles, all relevant IR/quantities regressions, new lockfiles, 3 local packages and actual archive SHA-256s qualify the narrow T1. T2 remains responsible for unsupported provider predicate integration, general conditional boundaries and copy/serialization rules.",
+      "refinement": "RS055 T1 qualified exact provider-free typed cancellation (x\u00B2-c\u00B2)/(x-c) to restricted x\u002Bc with x!=c, 25 scientific tests and eight NuGet-only oracles. RS056 T2 adds the strictly checked external-result admission API: only a native canonical IrRestrictedExpression exactly equal to the fresh local T1 proof is admitted, while opaque foreign objects, provider \u0027provided\u0027 strings, missing/extra/wrong conditions, foreign identities and unsupported domains are typed refusals without invoking untrusted ToString. A compiled RED, 29 further GREEN tests, eight independent preview.2 consumer probes, locked IR/quantities regressions, three actual NuGet manifest/hash receipts and unchanged CAS isolation close C02. Angouri provider integration and general symbolic proof remain explicitly unqualified.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/packages.lock.json",
@@ -4532,20 +4532,32 @@
         "tests/consumers/m4-w01-c02-t1/Program.cs",
         "tests/consumers/m4-w01-c02-t1/NuGet.Config",
         "docs/planning/evidence/M4-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M4-W01-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W01-C02-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.symbolics/SymbolicProviderResultAdmission.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W01C02T2RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W01C02T2Tests.cs",
+        "docs/planning/decisions/m4-w01-c02-t2-provider-admission.md",
+        "docs/distribution/symbolic-provider-result-admission.md",
+        "tests/consumers/m4-w01-c02-t2/m4-provider-admission-consumer.csproj",
+        "tests/consumers/m4-w01-c02-t2/Program.cs",
+        "tests/consumers/m4-w01-c02-t2/NuGet.Config",
+        "docs/planning/evidence/M4-W01-C02-T2-boundary-red.json",
+        "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C02T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C02T2",
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m4-w01-c02-t1/m4-bridge-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m4-w01-c02-t2/m4-provider-admission-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M4-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M4-W01-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W01-C02-T1-contract-qualified.json",
+        "docs/planning/evidence/M4-W01-C02-T2-boundary-red.json",
+        "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json"
       ],
-      "readiness": "in progress: T1 provider-free exact restricted IR bridge qualified; T2 unsupported external-provider condition and safety integration planned",
+      "readiness": "closed: T1 structural exact IR cancellation and T2 strict independent provider-output admission boundary qualified; C03 symbolic transformations still planned",
       "tasks": [
         {
           "id": "M4-W01-C02-T1",
@@ -4592,29 +4604,38 @@
           "title": "Boundaries and integration",
           "behavior": "An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
           "test_case": "An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W01-C02-T2-boundary-red.json",
+            "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W01-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C02-T2-boundary-red.json"
+              ]
             },
             {
               "id": "M4-W01-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M4-W01-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W01-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
