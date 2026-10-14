@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.52",
+  "plan_version": "0.1.53",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4351,7 +4351,7 @@
       "title": "Symbolic provider qualification",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M2-W02-C03"
       ],
@@ -4373,7 +4373,7 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS053 T1 compares two pinned isolated .NET 10 symbolic provider candidates: AngouriMath 2.5.0 checks a condition-carrying x!=1 rational cancellation, exact polynomial-derivative residual and elementary \u00B11 roots; MathNet.Symbolics 0.25.0 checks derivative values/point-roots but does not qualify exclusion preservation. Actual NuGet MIT metadata, direct dependencies, archive SHA-256s, C# compilation, runtime, exact/IR regressions and prohibition of product provider references are evidenced. Angouri is a provisional candidate; C01-T2 owns cancellation/interruption, domain and resource budgets, C02 owns typed IR adapters.",
+      "refinement": "RS053 T1 pinned isolated managed provider executables: AngouriMath 2.5.0 preserved observable provided text for a rational domain exclusion and qualified elementary roots/derivative, while MathNet.Symbolics 0.25.0 checked derivative and two candidate root values with no exclusion guarantee. RS054 T2 independently verified identical Angouri package archive SHA-256, a closed fixed mathematical corpus, 14 host/child process probes including typed refusals, finite host timeout and real parent cancellation signal, and relevant exact/IR regressions. Only an experimental host-level process boundary is qualified; no cooperative CAS cancellation, security sandbox, arbitrary symbolic input or typed Math IR condition bridge is admitted. Both tasks complete C01; work package and milestone remain in progress.",
       "files": [
         "docs/planning/decisions/m4-w01-c01.md",
         "docs/distribution/symbolic-provider-qualification.md",
@@ -4382,18 +4382,24 @@
         "tests/providers/m4-w01-c01-angouri/Program.cs",
         "tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj",
         "tests/providers/m4-w01-c01-mathnet/Program.cs",
-        "docs/planning/evidence/M4-W01-C01-T1-qualified.json"
+        "docs/planning/evidence/M4-W01-C01-T1-qualified.json",
+        "tests/providers/m4-w01-c01-boundaries/m4-provider-boundaries.csproj",
+        "tests/providers/m4-w01-c01-boundaries/Program.cs",
+        "docs/planning/decisions/m4-w01-c01-t2-boundaries.md",
+        "docs/distribution/symbolic-provider-bounded-host.md",
+        "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
-        "dotnet restore tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj",
-        "dotnet run --project tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj -c Release",
-        "dotnet restore tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj",
-        "dotnet run --project tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj -c Release"
+        "dotnet restore tests/providers/m4-w01-c01-boundaries/m4-provider-boundaries.csproj --packages build/artifacts/m4-w01-c01-t2-packages",
+        "dotnet build tests/providers/m4-w01-c01-boundaries/m4-provider-boundaries.csproj -c Release --no-restore",
+        "dotnet run --project tests/providers/m4-w01-c01-boundaries/m4-provider-boundaries.csproj -c Release --no-build --no-restore",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M4-W01-C01-T1-qualified.json"
+        "docs/planning/evidence/M4-W01-C01-T1-qualified.json",
+        "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "in progress: provider-selection spike T1 qualified only; bounds/assumption boundary T2 planned; no public Math symbolic implementation",
+      "readiness": "closed: T1 managed provider comparison and T2 bounded-host/assumption-refusal experiments admitted; next M4-W01-C02 owns actual public symbolic IR bridge",
       "tasks": [
         {
           "id": "M4-W01-C01-T1",
@@ -4439,29 +4445,37 @@
           "title": "Boundaries and integration",
           "behavior": "No mandatory Python dependency; reject providers whose assumptions/interruptions cannot be translated; bound search.",
           "test_case": "No mandatory Python dependency; reject providers whose assumptions/interruptions cannot be translated; bound search.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W01-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: No mandatory Python dependency; reject providers whose assumptions/interruptions cannot be translated; bound search.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M4-W01-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: No mandatory Python dependency; reject providers whose assumptions/interruptions cannot be translated; bound search.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M4-W01-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M4-W01-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
