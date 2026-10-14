@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.48",
+  "plan_version": "0.1.49",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4194,7 +4194,7 @@
       "title": "Decision and MCDM consumer contracts",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W01-C03",
         "M3-W02-C03"
@@ -4217,40 +4217,63 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS050 T1 qualifies a separate .NET 10 package-only consumer of dw.quantities preview.1 and statistics preview.6, with 31 independent named oracles for exact scaling loss/overflow refusal, explicit Type-7/nearest-rank quantile conventions, exact and compensated sums, typed Pearson, Bernoulli and SplitMix64 checkpoints. Both local package identities/dependencies and SHA-256 are recorded in evidence; consumer decision proposals remain unsent and no recipient adaptation is claimed. C04-T2 retains external ownership/adoption boundary review.",
+      "files": [
+        "tests/consumers/m3-w02-c04/c04-consumer.csproj",
+        "tests/consumers/m3-w02-c04/NuGet.Config",
+        "tests/consumers/m3-w02-c04/Program.cs",
+        "docs/planning/decisions/m3-w02-c04-t1-consumer-fit.md",
+        "docs/distribution/m3-w02-c04-isolated-consumer.md",
+        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release",
+        "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release",
+        "dotnet restore tests/consumers/m3-w02-c04/c04-consumer.csproj --source build/artifacts/m3-w02-c04-local-feed",
+        "dotnet run --project tests/consumers/m3-w02-c04/c04-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+      ],
+      "readiness": "in progress: T1 package-only consumer and proposals qualified on durable RS050; T2 recipient boundaries still planned",
       "tasks": [
         {
           "id": "M3-W02-C04-T1",
           "title": "Contract and outcome",
           "behavior": "Create minimal consumers and prepare primitive proposals without changing business semantics.",
           "test_case": "Exact-scaling sample rejects loss; sum/quantile sample carries its convention; packages are usable outside AURA.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C04-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Create minimal consumers and prepare primitive proposals without changing business semantics.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C04-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Exact-scaling sample rejects loss; sum/quantile sample carries its convention; packages are usable outside AURA.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C04-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M3-W02-C04-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+              ]
             }
           ]
         },
