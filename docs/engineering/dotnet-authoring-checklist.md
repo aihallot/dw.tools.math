@@ -1,7 +1,7 @@
 # .NET and DWF authoring checklist
 
 Planning uses executable .NET 10 C# and the BCL. The validator requires no Python, NuGet package, or Unix shell.
-SDK 10.0.401 was observed locally and is now pinned by the delivered M0-W01-C01 foundation.
+SDK 10.0.401 is the observed M0-W01-C01 baseline. `global.json` allows `latestPatch` only within the 10.0.4xx SDK feature band, selecting an installed stable patch at or above 10.0.401 (for example, 10.0.402). Record the actual selected SDK per run; locked package restore remains mandatory.
 
 - Project paths and command-facing project/solution names are lowercase; new namespaces are PascalCase. Preserve inherited dw.quantities namespaces during initial transfer unless an ADR justifies change.
 - Compiled output lives under build/artifacts/, packages under publish/. Do not ignore all build/ because source scripts may live there.
