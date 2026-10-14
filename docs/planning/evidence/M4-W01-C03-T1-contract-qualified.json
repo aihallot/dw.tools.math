@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "id": "M4-W01-C03-T1-contract-qualified",
+  "status": "exact-binomial-transformation-free-symbol-substitution-and-real-sqrt-qualified",
+  "prior_symbolic_output_admission": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+  "controlled_red_evidence": "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+  "question": "Which exact expansion, factorization, substitution and real sqrt transformations can be qualified in closed typed Math IR without silently losing conditions or depending on a general CAS?",
+  "observation": "One compiled absent-API RED became GREEN, 28 independent mathematical tests passed and an eight-probe NuGet-only consumer verified the preview.3 local package with exact typed IR/assumption semantics.",
+  "decision": "Admit only the closed exact binomial-square expansion/factor rules, refusal-safe free-symbol substitution and real sqrt(square(x)) conditional normalization; leave broad capture-avoiding binders, resource budgets and provider equivalence to separately admitted work.",
+  "source": "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
+  "source_sha256": "1aaa82fdfa7115ca870c6ce6036655beebe80929416f822e6111b63302e7e848",
+  "project": "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+  "project_sha256": "37850cd7400a90f2f87117a72d18c04c88957c50a0629d61571f508b7a7f0d5f",
+  "green_test": "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs",
+  "green_test_sha256": "efc907c7d60d421d0652014eb8eb4804f8ccdbde49359b4df68bb890ef1bc2b8",
+  "red_test": "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs",
+  "red_test_sha256": "9113a3e3c987205c5af783166b8d4913e5ffdf1c97d9432dd815fd1a1a652690",
+  "decision_document": "docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md",
+  "decision_document_sha256": "3aaf751e93130bf922f9d6ca43fa7015ce9b2df90d17cd7fe000fb2bebd7f97e",
+  "distribution_document": "docs/distribution/symbolic-exact-transformations.md",
+  "distribution_document_sha256": "db8cba93bd549b7e6c5bc949d399755720db6ae56e53ea5fa10c723e79010eb6",
+  "independent_green_tests_passed": 28,
+  "red_recovered_and_green_tests_passed": 29,
+  "controlled_red_then_green": true,
+  "exact_rules": [
+    "binomial-square/exact/v1",
+    "binomial-factor/exact/v1",
+    "free-symbol-substitute/closed/v1",
+    "sqrt-real-square/domain/v1"
+  ],
+  "coefficient_maximum_bits": 128,
+  "expanded_three_term_binomial_oracle": "(x\u002B1)^2 -\u003E x^2\u002B2*x\u002B1",
+  "exact_fraction_oracle": "(x\u002B1/2)^2 -\u003E x^2\u002Bx\u002B1/4",
+  "factor_round_trip_tested": true,
+  "substitution_uses_symbol_identity": true,
+  "bound_scope_and_unsafe_restricted_substitution_refused": true,
+  "prior_assumptions_preserved": true,
+  "real_sqrt_square_normalized_to_abs": true,
+  "nonnegative_sqrt_assumption_kept_typed": true,
+  "unproved_rules_return_unsupported": true,
+  "general_binder_alpha_renaming_qualified": false,
+  "external_CAS_runtime_required": false,
+  "full_symbolics_test_suite_passed": true,
+  "typed_ir_and_exact_quantities_regressions_passed": true,
+  "local_product_version": "0.5.0-preview.3",
+  "local_product_package_graph": [
+    {
+      "id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "bytes": 14735,
+      "sha256": "908a3010a9e6b042d40b136ed947a5a8f31b2e67d5029eb4f884e4e90dea1c4d",
+      "assembly": "lib/net10.0/dw.quantities.dll",
+      "dependencies": [],
+      "availability": "local-ignored-artifact-not-published"
+    },
+    {
+      "id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "bytes": 21907,
+      "sha256": "9e270952a5f29411bac88bb9af5fbfa3c4240298cf63efcedc39e76273180363",
+      "assembly": "lib/net10.0/dw.tools.math.ir.dll",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "availability": "local-ignored-artifact-not-published"
+    },
+    {
+      "id": "dw.tools.math.symbolics",
+      "version": "0.5.0-preview.3",
+      "bytes": 14021,
+      "sha256": "b9c1781c17a35865b5989fa56180d846181c051d5148616794858eb64a71ee46",
+      "assembly": "lib/net10.0/dw.tools.math.symbolics.dll",
+      "dependencies": [
+        "dw.tools.math.ir"
+      ],
+      "availability": "local-ignored-artifact-not-published"
+    }
+  ],
+  "post_packaging_manifest_sha_helper": ".workflow/runs/RS057/staged/checks/m4-c03-product-sha.cs",
+  "consumer_project": "tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj",
+  "consumer_project_sha256": "543251e3d19fb8a94a3c1aeca50dcdfa99f207483577e5324647ddb253bc8a2e",
+  "consumer_source": "tests/consumers/m4-w01-c03-t1/Program.cs",
+  "consumer_source_sha256": "30e21903f6d45fbc74e1efce8649a3e43d34d3d4dd9d0a15566e2bc3387f3081",
+  "consumer_nuget_config": "tests/consumers/m4-w01-c03-t1/NuGet.Config",
+  "consumer_nuget_config_sha256": "5256a7e3e07d2c5c94f7a1e6c45f39aab011c659c5e2d53e452dea525ce04575",
+  "independent_consumer_probes_passed": 8,
+  "consumer_exact_output": "dw.tools.math/m4-exact-transform-consumer/0.5 qualified; probes=8",
+  "source_only_nuget_client": true,
+  "packages_publicly_published": false,
+  "locked_solution_build_passed": true,
+  "transfer_architecture_passed": true,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "next_accepted_scope": "M4-W01-C03-T2 bounded rules, proof provenance, assumption/cancellation and capture-deferral tests",
+  "nonclaims": [
+    "No unrestricted factoring, general polynomial solver, arbitrary simplifier, general capture-avoiding substitution or alpha-renaming.",
+    "No external Angouri or MathNET Symbolics AST/string translation, native cooperative cancellation, complex principal-branch contract or unrestricted compute.",
+    "No public NuGet feed, M4-W01/C03 completion, AURA/Decision/MCDM integration, neutral dw.discovery metadata or BrokerReady agent skill."
+  ]
+}

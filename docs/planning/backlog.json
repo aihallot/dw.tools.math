@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.55",
+  "plan_version": "0.1.56",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4649,7 +4649,7 @@
       "title": "Simplification and substitutions",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M4-W01-C02"
       ],
@@ -4674,40 +4674,70 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS055 and RS056 qualified the provider-neutral exact restricted rational bridge and strict proposed-result admission in preview.2, without a CAS runtime. RS057 T1 now adds four exact closed preview.3 rules: binomial-square expansion, canonical factoring, source-identity free symbol substitution with capture/restriction refusal, and real sqrt(square(x)) -\u003E abs(x) unless an explicit nonnegative typed assumption permits x. A real compiled missing-contract RED recovers with 28 GREEN tests, eight isolated NuGet client probes, relevant IR/quantity suites, three local package SHA-256s, and explicit limits. T2 remains for deeper budget/proof/cancellation/condition interoperability boundaries before closing C03.",
+      "files": [
+        "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+        "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs",
+        "docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md",
+        "docs/distribution/symbolic-exact-transformations.md",
+        "tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj",
+        "tests/consumers/m4-w01-c03-t1/Program.cs",
+        "tests/consumers/m4-w01-c03-t1/NuGet.Config",
+        "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C03T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json"
+      ],
+      "readiness": "in progress: bounded exact transformations T1 qualified; T2 algorithmic proof, assumptions and budget limitations pending",
       "tasks": [
         {
           "id": "M4-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
           "test_case": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+            "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W01-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C03-T1-contract-red.json"
+              ]
             },
             {
               "id": "M4-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M4-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W01-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json"
+              ]
             }
           ]
         },
