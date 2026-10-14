@@ -96,7 +96,7 @@ else
         JsonValue.Create("compiled-exact-symbolic-transformations-public-contract-absent-red-observed"));
     p.Require.JsonValueEquals(Qualified,"/status",
         JsonValue.Create("exact-binomial-transformation-free-symbol-substitution-and-real-sqrt-qualified"));
-    p.Require.JsonValueEquals(Qualified,"/new_green_tests_passed",JsonValue.Create(NewGreenTests));
+    p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",JsonValue.Create(NewGreenTests));
     p.Require.JsonValueEquals(Qualified,"/independent_consumer_probes_passed",JsonValue.Create(8));
     p.Require.TextContains(Project,"<Version>0.5.0-preview.3</Version>");
 }
