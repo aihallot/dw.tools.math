@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,331 +9,309 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
+const string Phase="M4-W01-C01", Work="M4-W01", Task="M4-W01-C01-T1";
+const string Question="M4-W01-C01-T1-A", Observation="M4-W01-C01-T1-B",
+    DecisionNode="M4-W01-C01-T1-C";
 const string Backlog="docs/planning/backlog.json";
-const string State=".aura/workflow/state.json";
-const string Evidence="docs/planning/evidence/M3-gate.json";
-const string M2Gate="docs/planning/evidence/M2-gate.json";
-const string GateValidator="docs/planning/ValidateM3ReleaseGate.cs";
-const string Consumer="tests/consumers/m3-gate/m3-gate-consumer.csproj";
-const string ConsumerSource="tests/consumers/m3-gate/Program.cs";
-const string ConsumerConfig="tests/consumers/m3-gate/NuGet.Config";
-const string Recipe="docs/distribution/m3-release-gate.md";
-const string Decision="docs/planning/decisions/m3-gate.md";
-const string IsolatedOutput="dw.tools.math/m3-nuget-gate/0.4 qualified; probes=31";
-const string ScienceMarker="dw.tools.math/m3-scientific-gate/0.4 qualified; phases=7; tasks=14; subtasks=42";
-const string PackageHelper=".workflow/runs/RS052/staged/checks/m3-gate-package-sha.cs";
-var finalPhases=new (string Id,string File,string Status)[]
-{
-    ("M3-W01-C01","M3-W01-C01-boundary-qualified.json",
-        "managed-mathnet-runtime-rid-license-and-native-deferral-qualified"),
-    ("M3-W01-C02","M3-W01-C02-boundaries-qualified.json",
-        "explicit-correctly-rounded-rational-binary64-and-copy-only-boundaries-qualified"),
-    ("M3-W01-C03","M3-W01-C03-boundaries-qualified.json",
-        "bounded-2x2-condition-availability-rank-pivot-policy-qualified"),
-    ("M3-W02-C01","M3-W02-C01-boundaries-qualified.json",
-        "frequency-weight-and-explicit-null-missing-statistics-qualified"),
-    ("M3-W02-C02","M3-W02-C02-boundaries-qualified.json",
-        "typed-undefined-correlation-and-pair-missing-boundaries-qualified"),
-    ("M3-W02-C03","M3-W02-C03-boundaries-qualified.json",
-        "finite-continuous-distributions-and-portable-prng-checkpoints-qualified"),
-    ("M3-W02-C04","M3-W02-C04-boundaries-qualified.json",
-        "recipient-boundary-ownership-and-unsent-requests-qualified")
-};
-var products=new (string Id,string Version,string Project,string[] Dependencies)[]
-{
-    ("dw.quantities","0.2.0-preview.1",
-        "src/projects/dw.quantities/dw.quantities.csproj",[]),
-    ("dw.tools.math.ir","0.3.0-preview.1",
-        "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
-    ("dw.tools.math.numerics","0.4.0-preview.4",
-        "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",["dw.tools.math.ir"]),
-    ("dw.tools.math.statistics","0.4.0-preview.6",
-        "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",["dw.quantities"])
-};
-var testProjects=new[]
-{
-    "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
-    "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
-    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
-    "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
-    "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj"
-};
+const string Qualified="docs/planning/evidence/M4-W01-C01-T1-qualified.json";
+const string Prior="docs/planning/evidence/M3-gate.json";
+const string Decision="docs/planning/decisions/m4-w01-c01.md";
+const string Corpus="docs/distribution/symbolic-provider-qualification.md";
+const string Inventory="docs/planning/decisions/m4-w01-c01-candidates.json";
+const string AngouriProject="tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj";
+const string AngouriSource="tests/providers/m4-w01-c01-angouri/Program.cs";
+const string MathNetProject="tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj";
+const string MathNetSource="tests/providers/m4-w01-c01-mathnet/Program.cs";
+const string ProviderHashHelper=".workflow/runs/RS053/staged/checks/m4-provider-archive.cs";
+const string AngouriMarker="m4-symbolics-angouri/2.5.0:qualified; derivative=2*x; roots=-1,1; domain=conditional";
+const string MathNetMarker="m4-symbolics-mathnet/0.25.0:qualified; derivative=6@3; root-check=-1,1; exclusion=not-qualified";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
-var target=File.Exists(Path.Combine(root,Evidence));
-p.Workflow.RequireCurrentRun("RS052",target?null:"M3",null,null,null,null);
-p.Workflow.RequirePriorSuccess("RS051",1,
-    "docs: qualify consumer ownership boundaries and close statistics work package",
-    "0.1.59",0,0,0,true);
-p.Require.JsonValueEquals(M2Gate,"/status",
-    JsonValue.Create("local-m2-typed-ir-composition-and-isolated-consumer-qualified"));
+var target=File.Exists(Path.Combine(root,Qualified));
+
+p.Workflow.RequireCurrentRun("RS053",target?"M4":null,
+    target?Work:null,target?Phase:null,null,null);
+p.Workflow.RequirePriorSuccess("RS052",1,
+    "feat: qualify M3 numerical and statistics preview release gate",
+    "0.1.59",2,2,0,false);
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("m3-local-numerics-and-statistics-preview-gate-qualified"));
+p.Require.JsonValueEquals(Prior,"/cross_vertical_nuget_consumer_oracles",
+    JsonValue.Create(31));
+p.Require.JsonValueEquals(Prior,"/external_adoption_observed",
+    JsonValue.Create(false));
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.50"),JsonValue.Create("0.1.51"));
+    JsonValue.Create("0.1.51"),JsonValue.Create("0.1.52"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.51":"0.1.50"));
+    JsonValue.Create(target?"0.1.52":"0.1.51"));
 p.Require.JsonValueEquals(Backlog,"/releases/2/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(Backlog,"/releases/3/gate",JsonValue.Create("G-M3"));
-p.Require.JsonValueEquals(Backlog,"/releases/3/status",
-    JsonValue.Create(target?"done":"in_progress"));
-p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("planned"));
-foreach(var i in new[]{7,8})
-    p.Require.JsonValueEquals(Backlog,$"/work_packages/{i}/status",JsonValue.Create("done"));
-foreach(var i in new[]{20,21,22,23,24,25,26})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/{i}/status",JsonValue.Create("done"));
-foreach(var (id,file,status) in finalPhases)
-{
-    p.Require.JsonValueEquals("docs/planning/evidence/"+file,
-        "/status",JsonValue.Create(status));
-    p.ProjectPlan.RequireNodeState(id,"done");
-}
-p.Require.JsonValueEquals("docs/planning/evidence/M3-W01-C01-provider-qualified.json",
-    "/selected_package_version",JsonValue.Create("5.0.0"));
-p.Require.JsonValueEquals("docs/planning/evidence/M3-W02-C04-boundaries-qualified.json",
-    "/requests_transmitted",JsonValue.Create(false));
-p.Require.JsonValueEquals("docs/planning/evidence/M3-W02-C04-boundaries-qualified.json",
-    "/external_adoption_observed",JsonValue.Create(false));
+p.Require.JsonValueEquals(Backlog,"/releases/3/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/releases/4/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/9/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/10/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/27/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/27/tasks/0/status",
+    JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/27/tasks/1/status",JsonValue.Create("planned"));
+foreach(var index in new[]{0,1,2})
+    p.Require.JsonValueEquals(Backlog,$"/chunks/27/tasks/0/subtasks/{index}/status",
+        JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/28/status",JsonValue.Create("planned"));
+
 p.ProjectPlan.RequireNodeState("M2","done");
-p.ProjectPlan.RequireNodeState("M3",target?"done":"in-progress");
-p.ProjectPlan.RequireNodeState("M3-W01","done");
-p.ProjectPlan.RequireNodeState("M3-W02","done");
-p.ProjectPlan.RequireNodeState("M4","not-ready");
+p.ProjectPlan.RequireNodeState("M3","done");
+p.ProjectPlan.RequireNodeState("M4",target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Work,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
+p.ProjectPlan.RequireNodeState("M4-W01-C01-T2","not-ready");
+p.ProjectPlan.RequireNodeState("M4-W01-C02","not-ready");
+p.ProjectPlan.RequireNodeState("M4-W02","not-ready");
+foreach(var node in new[]{Question,Observation,DecisionNode})
+    p.ProjectPlan.RequireNodeState(node,target?"done":"not-ready");
 
 if(!target)
 {
-    foreach(var file in new[]{Evidence,GateValidator,Consumer,ConsumerSource,
-        ConsumerConfig,Recipe,Decision})
+    foreach(var file in new[]{Qualified,Decision,Corpus,Inventory,
+        AngouriProject,AngouriSource,MathNetProject,MathNetSource})
         p.Require.FileMissing(file);
 }
 else
 {
-    p.Require.JsonValueEquals(Evidence,"/status",
-        JsonValue.Create("m3-local-numerics-and-statistics-preview-gate-qualified"));
-    p.Require.JsonValueEquals(Evidence,"/cross_vertical_nuget_consumer_oracles",JsonValue.Create(31));
-    p.Require.JsonValueEquals(Evidence,"/external_adoption_observed",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Evidence,"/package_publication_observed",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/status",
+        JsonValue.Create("m4-two-managed-symbolic-provider-and-conditional-result-candidate-qualified"));
+    p.Require.JsonValueEquals(Qualified,"/selected_candidate",
+        JsonValue.Create("AngouriMath/2.5.0-provisional"));
+    p.Require.JsonValueEquals(Qualified,"/math_product_symbolic_adapter_delivered",
+        JsonValue.Create(false));
 }
 
-// Source-only staging is always converged using typed byte-idempotent SDK
-// operations. Do not perform local SHA-256 calculations on workflow authority.
-var stagedHashes=new Dictionary<string,string>(StringComparer.Ordinal);
-foreach(var path in new[]{GateValidator,Consumer,ConsumerSource,ConsumerConfig,Recipe,Decision})
+var digests=new Dictionary<string,string>(StringComparer.Ordinal);
+foreach(var file in new[]{Decision,Corpus,Inventory,
+    AngouriProject,AngouriSource,MathNetProject,MathNetSource})
 {
-    var result=p.Files.ReplaceFromStaged("staged/"+path,path);
-    stagedHashes[path]=result.AfterSha256 ??
-        throw new InvalidOperationException("Missing staged source SHA-256 from typed Payload SDK for "+path);
+    var receipt=p.Files.ReplaceFromStaged("staged/"+file,file);
+    digests[file]=receipt.AfterSha256 ??
+        throw new InvalidOperationException("Missing Payload SDK staged-file digest for "+file);
 }
-var science=Required(root,"dotnet","run","--file",GateValidator);
-if(!HasExactLine(science,ScienceMarker))
-    throw new InvalidOperationException("M3 scientific gate did not accept seven exact native/product phase authorities.");
-
 if(!target)
 {
-    Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
-    Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
-
-    foreach(var project in testProjects)
-    {
-        var result=Required(root,"dotnet","test",project,"-c","Release",
-            "--no-build","--no-restore","--logger","console;verbosity=minimal");
-        if(!result.Contains("Passed",StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("No passing test summary observed for "+project);
-    }
-
-    // This is an explicit release gate: repeat the foundation's original
-    // isolated package boundary, not just new feature tests.
-    var foundation=Required(root,"pwsh","-NoProfile","-NonInteractive",
-        "-File","scripts/verify.ps1");
-    if(!foundation.Contains("M0-W01-C01 foundation chain verified.",StringComparison.Ordinal))
-        throw new InvalidOperationException("Original foundation verification was not observed.");
-
-    var providerChecks=new (string Project,string Marker)[]
-    {
-        ("tests/providers/m3-w01-c01/MathNetSmoke.csproj","smoke-net10-managed:M3-W01-C01:qualified"),
-        ("tests/providers/m3-w01-c03/ManagedLinearAlgebraSmoke.csproj",
-            "M3-W01-C03:independent-managed-lu-qr-svd-smoke:qualified"),
-        ("tests/providers/m3-w02-c01/ManagedStatisticsSmoke.csproj",
-            "M3-W02-C01:managed-mathnet-5.0.0-descriptive-oracles:qualified")
+    // The spike runs candidate projects in distinct NuGet package caches and
+    // processes. Neither is added to the Math product solution.
+    var providerProjects=new[]{
+        (Project:AngouriProject,Id:"AngouriMath",Version:"2.5.0",
+            Cache:"m4-w01-c01-angouri-packages",Marker:AngouriMarker),
+        (Project:MathNetProject,Id:"MathNet.Symbolics",Version:"0.25.0",
+            Cache:"m4-w01-c01-mathnet-packages",Marker:MathNetMarker)
     };
-    foreach(var smoke in providerChecks)
+    var packageArchives=new List<string>();
+    foreach(var provider in providerProjects)
     {
-        var smokeOutput=Required(root,"dotnet","run","--project",smoke.Project,"-c","Release");
-        if(!smokeOutput.Contains(smoke.Marker,StringComparison.Ordinal))
-            throw new InvalidOperationException("Pinned managed-provider smoke marker missing: "+smoke.Project);
+        var projectXml=XDocument.Load(Path.Combine(root,provider.Project));
+        var packageReferences=projectXml.Descendants()
+            .Where(e=>e.Name.LocalName=="PackageReference").ToArray();
+        if(packageReferences.Length!=1 ||
+            (string?)packageReferences[0].Attribute("Include")!=provider.Id ||
+            (string?)packageReferences[0].Attribute("Version")!="["+provider.Version+"]" ||
+            projectXml.Descendants().Any(e=>e.Name.LocalName=="ProjectReference"))
+            throw new InvalidOperationException("Provider spike package identity or source-only boundary drifted: "+provider.Id);
+        var cache=Path.Combine(root,"build","artifacts",provider.Cache);
+        Required(root,"dotnet","restore",provider.Project,"--packages",cache);
+        Required(root,"dotnet","build",provider.Project,"-c","Release","--no-restore");
+        var programOutput=Required(root,"dotnet","run","--project",provider.Project,
+            "-c","Release","--no-build","--no-restore");
+        if(!HasExactLine(programOutput,provider.Marker))
+            throw new InvalidOperationException("Provider scientific smoke marker absent: "+provider.Id);
+        var packagePath=Path.Combine(cache,provider.Id.ToLowerInvariant(),provider.Version,
+            provider.Id.ToLowerInvariant()+"."+provider.Version+".nupkg");
+        if(!File.Exists(packagePath))
+            throw new InvalidOperationException("Exact restored provider archive is not accessible: "+provider.Id);
+        packageArchives.Add(packagePath);
     }
-    Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
-    Required(root,"dotnet","run","--file","docs/planning/ValidateC04ConsumerBoundaries.cs");
 
-    // Pack exact local release-graph bytes, not a symbolic provider registry.
-    var feed=Path.Combine(root,"build","artifacts","m3-gate-local-feed");
-    var archives=new List<string>();
-    foreach(var product in products)
+    var helperArgs=new List<string>{"run","--file",ProviderHashHelper,"--"};
+    helperArgs.AddRange(packageArchives);
+    var scanned=Required(root,"dotnet",helperArgs.ToArray());
+    var observed=new List<JsonNode>();
+    foreach(var provider in providerProjects)
     {
-        Required(root,"dotnet","pack",product.Project,"-c","Release",
-            "--no-build","--no-restore","-o",feed);
-        var archive=Path.Combine(feed,product.Id+"."+product.Version+".nupkg");
-        if(!File.Exists(archive))
-            throw new InvalidOperationException("M3 expected local NuGet archive is missing: "+product.Id);
-        archives.Add(archive);
-    }
-    var helperArgs=new List<string>{"run","--file",PackageHelper,"--"};
-    helperArgs.AddRange(archives);
-    var packageOutput=Required(root,"dotnet",helperArgs.ToArray());
-    var packages=new List<JsonNode>();
-    foreach(var product in products)
-    {
-        var (size,sha)=ReadProductPackageReceipt(packageOutput,product.Id,product.Version);
-        packages.Add(new JsonObject
-        {
-            ["id"]=product.Id,
-            ["version"]=product.Version,
-            ["bytes"]=size,
-            ["sha256"]=sha,
-            ["assembly"]="lib/net10.0/"+product.Id+".dll",
-            ["dependencies"]=p.Json.StringArray(product.Dependencies),
-            ["mode"]="local-ignored-artifact-not-published"
+        var meta=ReadPackageReceipt(scanned,provider.Id,provider.Version);
+        observed.Add(new JsonObject{
+            ["id"]=provider.Id,["version"]=provider.Version,
+            ["license"]=meta.License,["bytes"]=meta.Bytes,
+            ["sha256"]=meta.Sha,["direct_dependencies"]=p.Json.StringArray(meta.Dependencies),
+            ["runtime_marker"]=provider.Marker,
+            ["project"]=provider.Project,["source_project"]=provider.Project,
+            ["source_file"]=provider.Id=="AngouriMath"?AngouriSource:MathNetSource,
+            ["source_hash_sha256"]=digests[provider.Id=="AngouriMath"?AngouriSource:MathNetSource],
+            ["mode"]="isolated_test_provider_not_product_reference"
         });
     }
 
-    var consumerProjectPath=Path.Combine(root,Consumer);
-    var consumerXml=XDocument.Load(consumerProjectPath);
-    var refs=consumerXml.Descendants().Where(x=>x.Name.LocalName=="PackageReference")
-        .Select(x=>(Id:(string?)x.Attribute("Include")??"",
-            Version:(string?)x.Attribute("Version")??"")).OrderBy(x=>x.Id,StringComparer.Ordinal).ToArray();
-    if(refs.Length!=2||refs[0].Id!="dw.tools.math.numerics" ||
-        refs[0].Version!="[0.4.0-preview.4]"||
-        refs[1].Id!="dw.tools.math.statistics"||
-        refs[1].Version!="[0.4.0-preview.6]"||
-        consumerXml.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"))
-        throw new InvalidOperationException("M3 independent consumer must use only two pinned top-level NuGet packages.");
-    var nuget=XDocument.Load(Path.Combine(root,ConsumerConfig));
-    var sources=nuget.Descendants().Single(x=>x.Name.LocalName=="packageSources");
-    if(!sources.Elements().Any(x=>x.Name.LocalName=="clear")||
-       sources.Elements().Count(x=>x.Name.LocalName=="add")!=1)
-        throw new InvalidOperationException("M3 consumer must refuse external package feeds.");
-    var packagesDirectory=Path.Combine(root,"build","artifacts","m3-gate-isolated-packages");
-    Required(root,"dotnet","restore",Consumer,"--source",feed,
-        "--configfile",ConsumerConfig,"--packages",packagesDirectory);
-    Required(root,"dotnet","build",Consumer,"-c","Release","--no-restore");
-    var output=Required(root,"dotnet","run","--project",Consumer,"-c","Release",
-        "--no-build","--no-restore");
-    if(!HasExactLine(output,IsolatedOutput))
-        throw new InvalidOperationException("31 independent M3 package-only cross-vertical probes did not all pass.");
-
-    var proof=new JsonObject
+    // Only the already qualified exact/IR foundations regress at this spike.
+    // M4 has no product symbolics library yet and no release gate is due.
+    Required(root,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
+    Required(root,"dotnet","build","dw.tools.math.slnx","-c","Release","--no-restore");
+    foreach(var test in new[]{
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj"})
     {
-        ["schema_version"]=1,["id"]="M3-gate",
-        ["status"]="m3-local-numerics-and-statistics-preview-gate-qualified",
-        ["milestone"]="M3",["gate"]="G-M3",["release_version"]="0.4.0-preview",
-        ["plan_version"]="0.1.51",["previous_m2_gate"]=M2Gate,
-        ["checked_chunk_ids"]=p.Json.StringArray(finalPhases.Select(x=>x.Id).ToArray()),
-        ["qualified_phase_evidence"]=p.Json.StringArray(finalPhases
-            .Select(x=>"docs/planning/evidence/"+x.File).ToArray()),
-        ["completed_work_packages"]=p.Json.StringArray("M3-W01","M3-W02"),
-        ["qualified_tasks"]=14,["qualified_subtasks"]=42,
-        ["gate_scientific_validator"]=GateValidator,
-        ["scientific_validator_sha256"]=stagedHashes[GateValidator],
-        ["scientific_gate_marker"]=ScienceMarker,
-        ["locked_solution_restore_and_build_passed"]=true,
-        ["full_project_test_suites_passed"]=p.Json.StringArray(testProjects),
-        ["foundation_chain_and_isolated_consumer_passed"]=true,
-        ["managed_provider_smokes"]=p.Json.StringArray(
-            "M3-W01-C01 managed Math.NET 5.0.0",
-            "M3-W01-C03 LU QR singular spectrum",
-            "M3-W02-C01 descriptive statistics"),
-        ["provider_selected"]="MathNet.Numerics/5.0.0 managed on observed runtime",
-        ["native_blas_admitted"]=false,
-        ["local_package_only"]=true,
-        ["package_sha256_verified_by_independent_staged_helper"]=PackageHelper,
-        ["observed_local_packages"]=p.Json.Array(packages.ToArray()),
-        ["cross_vertical_consumer_project"]=Consumer,
-        ["consumer_project_sha256"]=stagedHashes[Consumer],
-        ["cross_vertical_consumer_source"]=ConsumerSource,
-        ["consumer_source_sha256"]=stagedHashes[ConsumerSource],
-        ["consumer_config"]=ConsumerConfig,
-        ["consumer_config_sha256"]=stagedHashes[ConsumerConfig],
-        ["cross_vertical_nuget_consumer_oracles"]=31,
-        ["isolated_consumer_exact_output"]=IsolatedOutput,
-        ["source_only_nuget_restore"]=true,
-        ["no_consumer_project_references"]=true,
+        var testResult=Required(root,"dotnet","test",test,
+            "-c","Release","--no-build","--no-restore",
+            "--logger","console;verbosity=minimal");
+        if(!testResult.Contains("Passed",StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("Math foundation regression has no passing test receipt: "+test);
+    }
+    Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
+
+    var proof=new JsonObject{
+        ["schema_version"]=1,
+        ["id"]="M4-W01-C01-T1-qualified",
+        ["status"]="m4-two-managed-symbolic-provider-and-conditional-result-candidate-qualified",
+        ["prior_M3_gate"]=Prior,
+        ["question"]="Which pinned managed .NET CAS candidates can preserve x!=1 under rational cancellation and meet elementary derivative/root checks without forcing a symbolic provider into public Math assemblies?",
+        ["observation"]="Two isolated provider-only C# smokes ran with pinned MIT NuGet packages; Angouri returned a condition-bearing cancellation, MathNet.Symbolics checked derivative and point-roots without claiming domain protection.",
+        ["decision"]="Keep AngouriMath 2.5.0 as the provisional conditional-result candidate; retain MathNet.Symbolics as comparison only and defer external CAS, T2 limits and the symbolic IR bridge.",
+        ["selected_candidate"]="AngouriMath/2.5.0-provisional",
+        ["compared_candidate"]="MathNet.Symbolics/0.25.0-no-domain-contract",
+        ["out_of_process_candidate"]="deferred-no-mandatory-Python",
+        ["candidate_inventory"]=Inventory,["inventory_sha256"]=digests[Inventory],
+        ["decision_document"]=Decision,["decision_sha256"]=digests[Decision],
+        ["experimental_contract"]=Corpus,["corpus_sha256"]=digests[Corpus],
+        ["observed_provider_archives"]=p.Json.Array(observed.ToArray()),
+        ["managed_provider_tests_executed"]=2,
+        ["provider_cache_isolated"]=true,
+        ["angouri_conditional_exclusion_observed"]=true,
+        ["mathnet_conditional_exclusion_admitted"]=false,
+        ["angouri_elementary_polynomial_roots_observed"]=true,
+        ["mathnet_root_solver_admitted"]=false,
+        ["derivative_corpus"]="x^2-1 -> 2*x; derivative(3)=6",
+        ["conditional_exclusion"]="(x^2-1)/(x-1) may cancel only with x!=1 retained",
+        ["exact_and_ir_regressions_passed"]=true,
+        ["product_solution_build_locked"]=true,
         ["transfer_architecture_passed"]=true,
-        ["decision_mcdm_owner_boundaries_validated"]=true,
-        ["release_recipe"]=Recipe,["release_recipe_sha256"]=stagedHashes[Recipe],
-        ["gate_decision"]=Decision,["gate_decision_sha256"]=stagedHashes[Decision],
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["external_adoption_observed"]=false,
-        ["package_publication_observed"]=false,
-        ["m4_symbolic_work_admitted"]=false,
+        ["math_product_symbolic_adapter_delivered"]=false,
+        ["next_accepted_scope"]="M4-W01-C01-T2 cancellation, budgets and assumption interoperability",
         ["nonclaims"]=p.Json.StringArray(
-            "No external Decision/MCDM/AURA package adoption, public NuGet push, agent skill or neutral dw.discovery conformance.",
-            "No native BLAS, unmanaged provider, full public SVD, other unexecuted RID or universal floating-point error bound.",
-            "No normal/Gaussian tail solver, cryptographic PRNG, general symbolic engine or claimed stable 1.0 product.",
-            "Package hashes are SHA-256 of exact current local archives, not cross-SDK reproducibility assertions.")
+            "No public Math symbolics engine, IR translation, provider-independent conditional result or general symbolic proof is delivered.",
+            "No arbitrary solver family, certified unexecuted RID, native library, Python executor, out-of-process CAS or broker is qualified.",
+            "No cooperative interruption, hard deadline, arbitrary complexity, thread safety, external Decision adoption, neutral dw.discovery or agent skill is claimed.",
+            "The observed external NuGet SHA-256s identify only restored archives, not portable binary rebuilds.")
     };
-    p.Files.WriteComplete(Evidence,
+    p.Files.WriteComplete(Qualified,
         proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
-    p.Json.EditObject(Backlog,plan=>
+
+    p.Json.EditObject(Backlog,roadmap=>
     {
-        plan["plan_version"]="0.1.51";
-        var milestone=plan["releases"]!.AsArray().Select(x=>x!.AsObject())
-            .Single(x=>(string?)x["id"]=="M3");
-        milestone["status"]="done";
-        milestone["evidence"]=p.Json.StringArray(
-            finalPhases.Select(x=>"docs/planning/evidence/"+x.File)
-                .Concat(new[]{Evidence}).ToArray());
+        roadmap["plan_version"]="0.1.52";
+        var m4=roadmap["releases"]!.AsArray().Select(x=>x!.AsObject())
+            .Single(x=>(string?)x["id"]=="M4");
+        var work=roadmap["work_packages"]!.AsArray().Select(x=>x!.AsObject())
+            .Single(x=>(string?)x["id"]==Work);
+        var phase=roadmap["chunks"]!.AsArray().Select(x=>x!.AsObject())
+            .Single(x=>(string?)x["id"]==Phase);
+        var task=phase["tasks"]!.AsArray().Select(x=>x!.AsObject())
+            .Single(x=>(string?)x["id"]==Task);
+        m4["status"]="in_progress";
+        work["status"]="in_progress";
+        phase["status"]="in_progress";
+        phase["refinement"]="RS053 T1 compares two pinned isolated .NET 10 symbolic provider candidates: AngouriMath 2.5.0 checks a condition-carrying x!=1 rational cancellation, exact polynomial-derivative residual and elementary ±1 roots; MathNet.Symbolics 0.25.0 checks derivative values/point-roots but does not qualify exclusion preservation. Actual NuGet MIT metadata, direct dependencies, archive SHA-256s, C# compilation, runtime, exact/IR regressions and prohibition of product provider references are evidenced. Angouri is a provisional candidate; C01-T2 owns cancellation/interruption, domain and resource budgets, C02 owns typed IR adapters.";
+        phase["readiness"]="in progress: provider-selection spike T1 qualified only; bounds/assumption boundary T2 planned; no public Math symbolic implementation";
+        phase["files"]=p.Json.StringArray(Decision,Corpus,Inventory,
+            AngouriProject,AngouriSource,MathNetProject,MathNetSource,Qualified);
+        phase["commands"]=p.Json.StringArray(
+            "dotnet restore "+AngouriProject,
+            "dotnet run --project "+AngouriProject+" -c Release",
+            "dotnet restore "+MathNetProject,
+            "dotnet run --project "+MathNetProject+" -c Release");
+        phase["evidence"]=p.Json.StringArray(Qualified);
+        task["status"]="done";
+        task["evidence"]=p.Json.StringArray(Qualified);
+        foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
+        {
+            child["status"]="done";
+            child["evidence"]=p.Json.StringArray(Qualified);
+        }
     });
-    p.ProjectPlan.ConvergeNodeToDone("M3");
+
+    p.ProjectPlan.TransitionNode("M4","not-ready","ready");
+    p.ProjectPlan.TransitionNode(Work,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Question,"not-ready","ready");
+    p.ProjectPlan.ActivateReadyContinuation(Question);
+    p.ProjectPlan.ConvergeNodeToDone(Question);
+    foreach(var child in new[]{Observation,DecisionNode})
+    {
+        p.ProjectPlan.TransitionNode(child,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(child,"ready","in-progress");
+        p.ProjectPlan.ConvergeNodeToDone(child);
+    }
+    p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.Json.EditObject(".aura/workflow/state.json",state=>
+    {
+        if((string?)state["pendingRun"]!="RS053" ||
+            state["activeMilestone"] is not null ||
+            state["activeWorkPackage"] is not null ||
+            state["activePhase"] is not null ||
+            state["activeTask"] is not null ||
+            state["activeSubtask"] is not null)
+            throw new InvalidOperationException("RS053 expected empty active hierarchy before first M4 entry.");
+        state["activeMilestone"]="M4";
+        state["activeWorkPackage"]=Work;
+        state["activePhase"]=Phase;
+    });
+    Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 }
 
-p.ProjectPlan.RequireNodeState("M2","done");
 p.ProjectPlan.RequireNodeState("M3","done");
-p.ProjectPlan.RequireNodeState("M3-W01","done");
-p.ProjectPlan.RequireNodeState("M3-W02","done");
-p.ProjectPlan.RequireNodeState("M4","not-ready");
-p.Json.EditObject(State,state=>
-{
-    if((string?)state["pendingRun"]!="RS052" ||
-       (string?)state["activeMilestone"]!=(target?null:"M3")||
-       state["activeWorkPackage"] is not null ||
-       state["activePhase"] is not null ||
-       state["activeTask"] is not null ||
-       state["activeSubtask"] is not null)
-        throw new InvalidOperationException("RS052 baseline/target milestone execution identity diverged.");
-    state["activeMilestone"]=null;
-});
-if(!target)Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
-Required(root,"dotnet","run","--file",GateValidator);
+p.ProjectPlan.RequireNodeState("M4","in-progress");
+p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,"in-progress");
+p.ProjectPlan.RequireNodeState(Task,"done");
+p.ProjectPlan.RequireNodeState("M4-W01-C01-T2","not-ready");
+p.ProjectPlan.RequireNodeState("M4-W01-C02","not-ready");
+foreach(var node in new[]{Question,Observation,DecisionNode})
+    p.ProjectPlan.RequireNodeState(node,"done");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
 return p.Complete();
 
-static bool HasExactLine(string output,string marker) =>
+static bool HasExactLine(string output,string expected)=>
     output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
-        .Any(line=>line.Trim()==marker);
+        .Any(line=>line.Trim()==expected);
 
-static (long Bytes,string Sha) ReadProductPackageReceipt(string output,string id,string version)
+static (long Bytes,string Sha,string License,string[] Dependencies) ReadPackageReceipt(
+    string output,string name,string version)
 {
-    var prefix="M3-PKG-SHA256:"+id+":"+version+":";
-    var lines=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
+    var prefix="M4-PROVIDER-ARCHIVE:"+name+":"+version+":";
+    var matches=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
-    if(lines.Length!=1)
-        throw new InvalidOperationException("Expected exactly one independent M3 package receipt: "+id);
-    var payload=lines[0][prefix.Length..].Split(':');
-    if(payload.Length!=2||
-       !long.TryParse(payload[0],NumberStyles.None,CultureInfo.InvariantCulture,out var size) ||
-       size<=0 || payload[1].Length!=64 ||
-       payload[1].Any(ch=>!((ch>='0' && ch<='9')||(ch>='a' && ch<='f'))))
-        throw new InvalidOperationException("Invalid independent SHA-256 product package observation: "+id);
-    return(size,payload[1]);
+    if(matches.Length!=1)
+        throw new InvalidOperationException("Missing/duplicate independent provider archive receipt: "+name);
+    var bits=matches[0][prefix.Length..].Split(':');
+    if(bits.Length!=4 ||
+        !long.TryParse(bits[0],out var bytes)||bytes<=0 ||
+        bits[1].Length!=64 || bits[1].Any(ch=>!((ch>='0'&&ch<='9')||(ch>='a'&&ch<='f'))) ||
+        bits[2]!="MIT")
+        throw new InvalidOperationException("Invalid restored NuGet archive observation for "+name);
+    var dependencies=bits[3].Split(';',StringSplitOptions.RemoveEmptyEntries);
+    if(dependencies.Length<1)
+        throw new InvalidOperationException("Symbolic package direct dependencies were not observed for "+name);
+    return(bytes,bits[1],bits[2],dependencies);
 }
 static string Relevant(string output)
 {
-    var i=output.IndexOf("Error Message:",StringComparison.Ordinal);
-    if(i<0)i=output.IndexOf("error ",StringComparison.OrdinalIgnoreCase);
-    var excerpt=i<0?output:output[i..];
-    return excerpt.Length>2400?excerpt[..2400]:excerpt;
+    var index=output.IndexOf("Error Message:",StringComparison.Ordinal);
+    if(index<0)index=output.IndexOf("error ",StringComparison.OrdinalIgnoreCase);
+    var part=index<0?output:output[index..];
+    return part.Length>2400?part[..2400]:part;
 }
 static (int Code,string Output) Run(string root,string executable,params string[] args)
 {
@@ -349,10 +326,10 @@ static (int Code,string Output) Run(string root,string executable,params string[
     if(!process.Start())throw new InvalidOperationException("Cannot start "+executable);
     var stdout=process.StandardOutput.ReadToEndAsync();
     var stderr=process.StandardError.ReadToEndAsync();
-    if(!process.WaitForExit(420000))
+    if(!process.WaitForExit(360000))
     {
         process.Kill(entireProcessTree:true);
-        throw new TimeoutException(executable+" timed out.");
+        throw new TimeoutException(executable+" exceeded six-minute provider execution window.");
     }
     var output=stdout.GetAwaiter().GetResult()+"\n"+stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
