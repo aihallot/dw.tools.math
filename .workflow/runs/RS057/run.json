@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "id": "RS057",
+  "title": "Qualify bounded exact symbolic transformations with domain-safe substitution and real square root",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded exact symbolic transformations and closed substitutions",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M4",
+    "M4-W01",
+    "M4-W01-C03",
+    "M4-W01-C03-T1",
+    "M4-W01-C03-T1-R",
+    "M4-W01-C03-T1-G",
+    "M4-W01-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify M4-W01-C03-T1 through a compiled missing-API RED, 28 independent GREEN tests and eight NuGet-only consumer oracles. Add provider-free symbolics preview.3 closed exact binomial expansion/factorization, identity-based free-symbol substitution that refuses binder capture, and real sqrt(x\u00B2) normalization to abs(x) unless a retained typed nonnegative hypothesis permits x. Inspect three local packages, their SHA-256s and relevant IR/quantities regressions; keep C03-T2 and M4-W01 open.",
+    "value": "Deliver small, executable, exact symbolic transformations without inventing equivalence, losing domain assumptions or introducing a mandatory CAS or agent broker dependency.",
+    "debtChanges": [
+      "One real compiled RED runs against existing symbolics preview.2 before staging the new public bounded exact transformation API.",
+      "28 independently authored GREEN tests check exact binomial coefficients, factor/expand roundtrips, negative and fractional constants, existing restrictions, and canonical IR preservation.",
+      "Only a source-identity free real symbol may be substituted into the closed Add/Subtract/Multiply/Square IR forms; bound variables and unsafe restricted substitution are refused.",
+      "Over real inputs sqrt(square(x)) becomes abs(x); only an explicitly typed x\u003E=0 assumption permits x and must remain attached to the mathematical result.",
+      "Eight independent NuGet-only .NET 10 probes check exact transforms and refusal boundaries; no direct ProjectReference, external feed or CAS product dependency is introduced.",
+      "Three local product archives are inspected with a separate C# manifest/SHA-256 helper; the payload consumes product receipts and never recalculates workflow authority hashes.",
+      "Only C03-T1 R/G/V and T1 close; C03-T2, M4-W01 and M4 remain open, with broader substitution, resource bounds, general CAS proof and dw.discovery/AURA deferred.",
+      "RS057\u0027s first invocation was refused before attempt allocation: the 129-bit exact binomial coefficient incorrectly yielded Unsupported. The recognized pattern now returns BudgetExceeded without changing the 28 GREEN mathematical oracles.",
+      "The second RS057 invocation was refused before attempt allocation: consumer Program.cs line 35 failed CS8602. An explicit IrApply shape and length guard replaces the non-flow-aware Require call, retaining all eight oracles and all 28 scientific GREEN tests.",
+      "Third RS057 pre-attempt refusal: target re-entry checked /new_green_tests_passed, but qualified evidence writes /independent_green_tests_passed. Fixed the pointer; all target evidence checks, 28 GREEN tests and eight NuGet consumer probes were re-audited without weakening acceptance."
+    ],
+    "nextAction": "After durable RS057 success, prepare M4-W01-C03-T2 for separate bounded rule, assumptions/provenance, unsupported-form and cancellation tests before closing C03 and M4-W01.",
+    "achievements": [
+      {
+        "projectNode": "M4-W01-C03-T1-R",
+        "achievement": "Observe the compiled missing public exact transformations API on the existing symbolics preview.2 assembly and record the precise failing RED assertion."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1-G",
+        "achievement": "Deliver four exact bounded transform rules and pass 28 independent GREEN tests with domain-safe capture refusal, typed retained restrictions and eight NuGet-only client oracles."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1-V",
+        "achievement": "Verify locked build, complete relevant symbolics/IR/quantities tests, a separate local three-product manifest/SHA-256 inspection and explicitly limited symbolic provenance."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1",
+        "achievement": "Qualify M4-W01-C03-T1 as a provider-free exact binomial, safe free-substitution and real-square-root transformation contract without claiming general symbolic processing."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/symbolic-exact-transformations.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json",
+    "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M4.md",
+    "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/consumers/m4-w01-c03-t1/NuGet.Config",
+    "tests/consumers/m4-w01-c03-t1/Program.cs",
+    "tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
