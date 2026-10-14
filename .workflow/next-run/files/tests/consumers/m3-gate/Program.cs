@@ -201,8 +201,9 @@ Probe("nearest rank is not interchangeable with Type-7", () =>
 Probe("increasing affine Pearson is defined and one", () =>
 {
     var r=CorrelationStatistics64.AnalyzeWithStatus([1d,2d,3d],[2d,4d,6d]);
-    Require(r.IsDefined && r.PearsonCorrelation.HasValue,"defined Pearson");
-    Near(r.PearsonCorrelation.Value,1d,"positive affine Pearson");
+    if (!r.IsDefined || r.PearsonCorrelation is not double pearson)
+        throw new InvalidOperationException("Expected a defined finite Pearson coefficient.");
+    Near(pearson,1d,"positive affine Pearson");
 });
 
 Probe("constant Pearson is typed undefined and null", () =>
