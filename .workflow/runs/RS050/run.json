@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "id": "RS050",
+  "title": "Qualify isolated Math NuGet consumers and convention-preserving primitive proposals",
+  "state": "prepared",
+  "commitMessage": "feat: qualify independent Math package consumer and primitive contracts",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3",
+    "M3-W02",
+    "M3-W02-C04",
+    "M3-W02-C04-T1",
+    "M3-W02-C04-T1-A",
+    "M3-W02-C04-T1-B",
+    "M3-W02-C04-T1-C"
+  ],
+  "contribution": {
+    "summary": "Qualify an independent .NET 10 package-only consumer of dw.quantities and dw.tools.math.statistics, demonstrating loss-refusing exact scaling, explicit Type-7 versus nearest-rank quantiles, exact and compensated sums, typed Pearson, Bernoulli and seeded checkpoint oracles. Verify 31 named probes, local-only NuGet manifests and artifact SHA-256s. Complete C04-T1 and A/B/C while leaving C04/T2 for Decision/MCDM ownership review.",
+    "value": "Provide evidence that generic Math primitives are usable outside AURA without silently adopting Decision risk semantics or MCDM ranking behavior; retain versioned package identity and explicit numerical conventions.",
+    "debtChanges": [
+      "An isolated package-only executable, not a sibling Decision/MCDM implementation, checks exact scaling with deliberate fractional and Int64 overflow refusal.",
+      "Exact rational results and finite binary64 arithmetic remain separate; consumer snapshots carry explicit Type-7 or nearest-rank quantile convention.",
+      "Defined Pearson and typed undefined constant-vector Pearson remain distinct; no null correlation is treated as numeric zero.",
+      "The consumer replays a golden SplitMix64/v1 word and strict seed/counter checkpoint without claiming cryptographic randomness.",
+      "Pinned local dw.quantities preview.1 and statistics preview.6 packages are packed, inspected and restored without external NuGet feeds.",
+      "Math owns only consumer evidence and candidate primitive documentation. Draft Decision and MCDM requests remain unsent and recipient 1.x/business contracts untouched.",
+      "C04-T2 still owns comparative recipient semantics and adoption boundaries; C04 and M3-W02 are not completed by this T1 run."
+    ],
+    "nextAction": "After durable RS050 success, prepare M3-W02-C04-T2 to resolve Decision/MCDM ownership boundaries, refine unsent Math requests with exact package evidence and preserve recipient-specific tests and semantics.",
+    "achievements": [
+      {
+        "projectNode": "M3-W02-C04-T1-A",
+        "achievement": "Fix the accepted C04-T1 question and explicit pass/fail oracles for independently consumable Math packages, exact-scale refusal, named quantiles and nonadoption boundaries."
+      },
+      {
+        "projectNode": "M3-W02-C04-T1-B",
+        "achievement": "Build and execute a separately restored package-only .NET 10 consumer with 31 independent mathematical oracles and record exact NuGet package IDs, dependencies, versions, SHA-256s and runtime evidence."
+      },
+      {
+        "projectNode": "M3-W02-C04-T1-C",
+        "achievement": "Document safe reusable primitive proposals and alternatives for Decision/MCDM while keeping ownership, draft-request status and non-cryptographic/precision limitations explicit."
+      },
+      {
+        "projectNode": "M3-W02-C04-T1",
+        "achievement": "Qualify M3-W02-C04-T1 as an independently tested mathematical consumer and documented primitive proposal, leaving C04-T2 and recipient implementation outside this run."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/m3-w02-c04-isolated-consumer.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-w02-c04-t1-consumer-fit.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-W02-C04-consumer-qualified.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "tests/consumers/m3-w02-c04/NuGet.Config",
+    "tests/consumers/m3-w02-c04/Program.cs",
+    "tests/consumers/m3-w02-c04/c04-consumer.csproj"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
