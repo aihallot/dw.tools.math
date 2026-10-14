@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.49",
+  "plan_version": "0.1.50",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -341,13 +341,23 @@
       "id": "M3-W02",
       "release": "M3",
       "title": "Statistics and probability",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.statistics/",
         "tests/projects/dw.tools.math.statistics.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M3-W02-C01-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+        "docs/planning/evidence/M3-W02-C02-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json",
+        "docs/planning/evidence/M3-W02-C03-contract-qualified.json",
+        "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json",
+        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json",
+        "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+      ]
     },
     {
       "id": "M4-W01",
@@ -4194,7 +4204,7 @@
       "title": "Decision and MCDM consumer contracts",
       "kind": "document",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W01-C03",
         "M3-W02-C03"
@@ -4217,26 +4227,32 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS050 T1 qualifies a separate .NET 10 package-only consumer of dw.quantities preview.1 and statistics preview.6, with 31 independent named oracles for exact scaling loss/overflow refusal, explicit Type-7/nearest-rank quantile conventions, exact and compensated sums, typed Pearson, Bernoulli and SplitMix64 checkpoints. Both local package identities/dependencies and SHA-256 are recorded in evidence; consumer decision proposals remain unsent and no recipient adaptation is claimed. C04-T2 retains external ownership/adoption boundary review.",
+      "refinement": "RS050 independently qualified a two-package Math-only consumer with 31 oracles and real local artifact SHA-256s. RS051 T2 now independently validates a Math-owned 8-row owner-boundary matrix (4 candidates, 1 hold, 3 retained external), two explicit Decision/MCDM request drafts still not transmitted, the exact T1 artifact identities, lossless scaling/quantile/tie/risk policy restrictions, and owner-side test/rollback requirements. Both tasks and all four M3-W02 chunks close while the M3 G-M3 release gate remains separately pending. No sibling adoption, public package transfer, dw.discovery or AURA broker implementation is claimed.",
       "files": [
         "tests/consumers/m3-w02-c04/c04-consumer.csproj",
         "tests/consumers/m3-w02-c04/NuGet.Config",
         "tests/consumers/m3-w02-c04/Program.cs",
         "docs/planning/decisions/m3-w02-c04-t1-consumer-fit.md",
         "docs/distribution/m3-w02-c04-isolated-consumer.md",
-        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json",
+        "docs/coordination/matrices/m3-decision-mcdm-primitive-boundaries.json",
+        "docs/coordination/requests/MATH-XR-002-decision.md",
+        "docs/coordination/requests/MATH-XR-003-mcdm.md",
+        "docs/planning/decisions/m3-w02-c04-t2-boundary-decisions.md",
+        "docs/distribution/m3-w02-consumer-handoff.md",
+        "docs/planning/ValidateC04ConsumerBoundaries.cs",
+        "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
       ],
       "commands": [
-        "dotnet restore dw.tools.math.slnx --locked-mode",
-        "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release",
-        "dotnet pack src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj -c Release",
-        "dotnet restore tests/consumers/m3-w02-c04/c04-consumer.csproj --source build/artifacts/m3-w02-c04-local-feed",
-        "dotnet run --project tests/consumers/m3-w02-c04/c04-consumer.csproj -c Release"
+        "dotnet run --file docs/planning/ValidateC04ConsumerBoundaries.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs"
       ],
       "evidence": [
-        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json"
+        "docs/planning/evidence/M3-W02-C04-consumer-qualified.json",
+        "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
       ],
-      "readiness": "in progress: T1 package-only consumer and proposals qualified on durable RS050; T2 recipient boundaries still planned",
+      "readiness": "closed: C04 T1 independent consumer and T2 owner-boundary decision qualified; M3-W02 complete; G-M3 release gate pending",
       "tasks": [
         {
           "id": "M3-W02-C04-T1",
@@ -4282,29 +4298,37 @@
           "title": "Boundaries and integration",
           "behavior": "PROMETHEE, FlowQuantization, EVPI, MDP, and decision solvers remain external; draft requests are not adoption.",
           "test_case": "PROMETHEE, FlowQuantization, EVPI, MDP, and decision solvers remain external; draft requests are not adoption.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M3-W02-C04-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: PROMETHEE, FlowQuantization, EVPI, MDP, and decision solvers remain external; draft requests are not adoption.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C04-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: PROMETHEE, FlowQuantization, EVPI, MDP, and decision solvers remain external; draft requests are not adoption.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M3-W02-C04-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M3-W02-C04-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+              ]
             }
           ]
         }
