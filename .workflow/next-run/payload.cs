@@ -240,12 +240,16 @@ if(!target)
         }
     });
 
+    // M4 is the first active hierarchy after M3 closure. Activate each
+    // ancestor explicitly, as in the qualified RS039 milestone-entry path.
+    // ActivateReadyContinuation requires an already-active ancestor prefix.
     p.ProjectPlan.TransitionNode("M4","not-ready","ready");
     p.ProjectPlan.TransitionNode(Work,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Question,"not-ready","ready");
-    p.ProjectPlan.ActivateReadyContinuation(Question);
+    foreach(var node in new[]{"M4",Work,Phase,Task,Question})
+        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
     p.ProjectPlan.ConvergeNodeToDone(Question);
     foreach(var child in new[]{Observation,DecisionNode})
     {
