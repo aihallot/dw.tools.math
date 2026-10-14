@@ -159,8 +159,8 @@ if(!target)
     };
     foreach(var smoke in providerChecks)
     {
-        var output=Required(root,"dotnet","run","--project",smoke.Project,"-c","Release");
-        if(!output.Contains(smoke.Marker,StringComparison.Ordinal))
+        var smokeOutput=Required(root,"dotnet","run","--project",smoke.Project,"-c","Release");
+        if(!smokeOutput.Contains(smoke.Marker,StringComparison.Ordinal))
             throw new InvalidOperationException("Pinned managed-provider smoke marker missing: "+smoke.Project);
     }
     Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
