@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "M4-W01-C01-T1-symbolic-provider-candidates",
+  "status": "proposed_until_durable_rs053",
+  "source_math_tip": "8297a3e43cad8edc797a95e46120d25f0a2b466d",
+  "scope": "M4-W01-C01-T1",
+  "candidates": [
+    {
+      "id": "AngouriMath",
+      "version": "2.5.0",
+      "license_expected": "MIT",
+      "repository_url": "https://github.com/asc-community/AngouriMath",
+      "nuget_url": "https://www.nuget.org/packages/AngouriMath/2.5.0",
+      "project": "tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj",
+      "source": "tests/providers/m4-w01-c01-angouri/Program.cs",
+      "decision": "conditional_candidate_if_verified",
+      "requires": [
+        "derivative symbolic residual zero",
+        "two hand-verified roots",
+        "explicit provided condition for x!=1"
+      ]
+    },
+    {
+      "id": "MathNet.Symbolics",
+      "version": "0.25.0",
+      "license_expected": "MIT",
+      "repository_url": "https://github.com/mathnet/mathnet-symbolics",
+      "nuget_url": "https://www.nuget.org/packages/MathNet.Symbolics/0.25.0",
+      "project": "tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj",
+      "source": "tests/providers/m4-w01-c01-mathnet/Program.cs",
+      "decision": "comparison_only_no_conditional_claim",
+      "requires": [
+        "derivative p'(3)=6",
+        "p(±1)=0 point checks",
+        "rational function evaluates to three at x=2"
+      ],
+      "nonclaims": [
+        "real roots were solver-produced",
+        "x=1 exclusion was preserved",
+        "MathNet.Numerics 5 product provider interoperates with Symbolics transitive dependency"
+      ]
+    },
+    {
+      "id": "out-of-process",
+      "version": null,
+      "license_expected": null,
+      "project": null,
+      "source": null,
+      "decision": "defer",
+      "requires": [],
+      "nonclaims": [
+        "installed engine",
+        "mandatory Python runtime",
+        "valid remote execution"
+      ]
+    }
+  ],
+  "observed_archive_hashes": null,
+  "external_runtime_claims": false,
+  "selected_math_product_dependency": false
+}

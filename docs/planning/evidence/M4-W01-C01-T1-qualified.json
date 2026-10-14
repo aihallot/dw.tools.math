@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "id": "M4-W01-C01-T1-qualified",
+  "status": "m4-two-managed-symbolic-provider-and-conditional-result-candidate-qualified",
+  "prior_M3_gate": "docs/planning/evidence/M3-gate.json",
+  "question": "Which pinned managed .NET CAS candidates can preserve x!=1 under rational cancellation and meet elementary derivative/root checks without forcing a symbolic provider into public Math assemblies?",
+  "observation": "Two isolated provider-only C# smokes ran with pinned MIT NuGet packages; Angouri returned a condition-bearing cancellation, MathNet.Symbolics checked derivative and point-roots without claiming domain protection.",
+  "decision": "Keep AngouriMath 2.5.0 as the provisional conditional-result candidate; retain MathNet.Symbolics as comparison only and defer external CAS, T2 limits and the symbolic IR bridge.",
+  "selected_candidate": "AngouriMath/2.5.0-provisional",
+  "compared_candidate": "MathNet.Symbolics/0.25.0-no-domain-contract",
+  "out_of_process_candidate": "deferred-no-mandatory-Python",
+  "candidate_inventory": "docs/planning/decisions/m4-w01-c01-candidates.json",
+  "inventory_sha256": "ae202f5e7588276b2382b06abbaab3d5cc5eca662f88a14fa031fa08924e4f3a",
+  "decision_document": "docs/planning/decisions/m4-w01-c01.md",
+  "decision_sha256": "5e0f34471f0f628a9fc2dbd48993cf031b4c7965ee94ddb6916ee1a156119cdb",
+  "experimental_contract": "docs/distribution/symbolic-provider-qualification.md",
+  "corpus_sha256": "566f4edf22c3cf579e8fccea3f29769c0df44dc7ade6fa149f42f8c42f75e2cf",
+  "observed_provider_archives": [
+    {
+      "id": "AngouriMath",
+      "version": "2.5.0",
+      "license": "MIT",
+      "bytes": 2368014,
+      "sha256": "8f194bf9ee09cc0514bac5894d413bb8c7e6c6f01071aa8274e24718bf855419",
+      "direct_dependencies": [
+        "Antlr4.Runtime.Standard",
+        "GenericTensor",
+        "HonkSharp",
+        "PeterO.Numbers",
+        "System.Memory"
+      ],
+      "runtime_marker": "m4-symbolics-angouri/2.5.0:qualified; derivative=2*x; roots=-1,1; domain=conditional",
+      "project": "tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj",
+      "source_project": "tests/providers/m4-w01-c01-angouri/m4-angouri-smoke.csproj",
+      "source_file": "tests/providers/m4-w01-c01-angouri/Program.cs",
+      "source_hash_sha256": "e8054f45b791a8bc0098ecc0fb7d425d67a533fbf2e3f8bf5d3bd653a879409b",
+      "mode": "isolated_test_provider_not_product_reference"
+    },
+    {
+      "id": "MathNet.Symbolics",
+      "version": "0.25.0",
+      "license": "MIT",
+      "bytes": 691758,
+      "sha256": "0604358e14bd48957e1885fc1927e90aeb43cfd8403ba7b88d08dc1679633ba8",
+      "direct_dependencies": [
+        "FParsec",
+        "FSharp.Core",
+        "MathNet.Numerics",
+        "MathNet.Numerics.FSharp"
+      ],
+      "runtime_marker": "m4-symbolics-mathnet/0.25.0:qualified; derivative=6@3; root-check=-1,1; exclusion=not-qualified",
+      "project": "tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj",
+      "source_project": "tests/providers/m4-w01-c01-mathnet/m4-mathnet-smoke.csproj",
+      "source_file": "tests/providers/m4-w01-c01-mathnet/Program.cs",
+      "source_hash_sha256": "52eee626dcbf145215c746f72abb27112e23cf54d5bf82e892736d41b2110b1c",
+      "mode": "isolated_test_provider_not_product_reference"
+    }
+  ],
+  "managed_provider_tests_executed": 2,
+  "provider_cache_isolated": true,
+  "angouri_conditional_exclusion_observed": true,
+  "mathnet_conditional_exclusion_admitted": false,
+  "angouri_elementary_polynomial_roots_observed": true,
+  "mathnet_root_solver_admitted": false,
+  "derivative_corpus": "x^2-1 -\u003E 2*x; derivative(3)=6",
+  "conditional_exclusion": "(x^2-1)/(x-1) may cancel only with x!=1 retained",
+  "exact_and_ir_regressions_passed": true,
+  "product_solution_build_locked": true,
+  "transfer_architecture_passed": true,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "math_product_symbolic_adapter_delivered": false,
+  "next_accepted_scope": "M4-W01-C01-T2 cancellation, budgets and assumption interoperability",
+  "nonclaims": [
+    "No public Math symbolics engine, IR translation, provider-independent conditional result or general symbolic proof is delivered.",
+    "No arbitrary solver family, certified unexecuted RID, native library, Python executor, out-of-process CAS or broker is qualified.",
+    "No cooperative interruption, hard deadline, arbitrary complexity, thread safety, external Decision adoption, neutral dw.discovery or agent skill is claimed.",
+    "The observed external NuGet SHA-256s identify only restored archives, not portable binary rebuilds."
+  ]
+}
