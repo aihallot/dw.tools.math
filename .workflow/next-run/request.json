@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "id": "RS057",
+  "title": "Qualify bounded exact symbolic transformations with domain-safe substitution and real square root",
+  "commitMessage": "feat: qualify bounded exact symbolic transformations and closed substitutions",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M4",
+    "M4-W01",
+    "M4-W01-C03",
+    "M4-W01-C03-T1",
+    "M4-W01-C03-T1-R",
+    "M4-W01-C03-T1-G",
+    "M4-W01-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify M4-W01-C03-T1 through a compiled missing-API RED, 28 independent GREEN tests and eight NuGet-only consumer oracles. Add provider-free symbolics preview.3 closed exact binomial expansion/factorization, identity-based free-symbol substitution that refuses binder capture, and real sqrt(x²) normalization to abs(x) unless a retained typed nonnegative hypothesis permits x. Inspect three local packages, their SHA-256s and relevant IR/quantities regressions; keep C03-T2 and M4-W01 open.",
+    "value": "Deliver small, executable, exact symbolic transformations without inventing equivalence, losing domain assumptions or introducing a mandatory CAS or agent broker dependency.",
+    "debtChanges": [
+      "One real compiled RED runs against existing symbolics preview.2 before staging the new public bounded exact transformation API.",
+      "28 independently authored GREEN tests check exact binomial coefficients, factor/expand roundtrips, negative and fractional constants, existing restrictions, and canonical IR preservation.",
+      "Only a source-identity free real symbol may be substituted into the closed Add/Subtract/Multiply/Square IR forms; bound variables and unsafe restricted substitution are refused.",
+      "Over real inputs sqrt(square(x)) becomes abs(x); only an explicitly typed x>=0 assumption permits x and must remain attached to the mathematical result.",
+      "Eight independent NuGet-only .NET 10 probes check exact transforms and refusal boundaries; no direct ProjectReference, external feed or CAS product dependency is introduced.",
+      "Three local product archives are inspected with a separate C# manifest/SHA-256 helper; the payload consumes product receipts and never recalculates workflow authority hashes.",
+      "Only C03-T1 R/G/V and T1 close; C03-T2, M4-W01 and M4 remain open, with broader substitution, resource bounds, general CAS proof and dw.discovery/AURA deferred."
+    ],
+    "nextAction": "After durable RS057 success, prepare M4-W01-C03-T2 for separate bounded rule, assumptions/provenance, unsupported-form and cancellation tests before closing C03 and M4-W01.",
+    "achievements": [
+      {
+        "projectNode": "M4-W01-C03-T1-R",
+        "achievement": "Observe the compiled missing public exact transformations API on the existing symbolics preview.2 assembly and record the precise failing RED assertion."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1-G",
+        "achievement": "Deliver four exact bounded transform rules and pass 28 independent GREEN tests with domain-safe capture refusal, typed retained restrictions and eight NuGet-only client oracles."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1-V",
+        "achievement": "Verify locked build, complete relevant symbolics/IR/quantities tests, a separate local three-product manifest/SHA-256 inspection and explicitly limited symbolic provenance."
+      },
+      {
+        "projectNode": "M4-W01-C03-T1",
+        "achievement": "Qualify M4-W01-C03-T1 as a provider-free exact binomial, safe free-substitution and real-square-root transformation contract without claiming general symbolic processing."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/symbolic-exact-transformations.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M4-W01-C03-T1-contract-qualified.json",
+    "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M4.md",
+    "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/consumers/m4-w01-c03-t1/NuGet.Config",
+    "tests/consumers/m4-w01-c03-t1/Program.cs",
+    "tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1RedTests.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.symbolics.tests/M4W01C03T1Tests.cs"
+    },
+    {
+      "path": "tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj",
+      "sourcePath": "files/tests/consumers/m4-w01-c03-t1/m4-exact-transform-consumer.csproj"
+    },
+    {
+      "path": "tests/consumers/m4-w01-c03-t1/Program.cs",
+      "sourcePath": "files/tests/consumers/m4-w01-c03-t1/Program.cs"
+    },
+    {
+      "path": "tests/consumers/m4-w01-c03-t1/NuGet.Config",
+      "sourcePath": "files/tests/consumers/m4-w01-c03-t1/NuGet.Config"
+    },
+    {
+      "path": "docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md",
+      "sourcePath": "files/docs/planning/decisions/m4-w01-c03-t1-exact-transformations.md"
+    },
+    {
+      "path": "docs/distribution/symbolic-exact-transformations.md",
+      "sourcePath": "files/docs/distribution/symbolic-exact-transformations.md"
+    },
+    {
+      "path": "checks/m4-c03-product-sha.cs",
+      "sourcePath": "checks/m4-c03-product-sha.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M4"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M4-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS056/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.55"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/4/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/9/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/10/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/27/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/28/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/30/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/external_dependencies/3/status",
+      "expectedValue": "satisfied"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/tasks/0/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/29/tasks/0/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/tasks/0/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/tasks/0/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/4/workPackages/0/phases/2/tasks/0/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "strict-typed-symbolic-provider-output-and-condition-admission-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/new_green_tests_passed",
+      "expectedValue": 29
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/red_recovered_and_green_tests_passed",
+      "expectedValue": 30
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/independent_consumer_probes_passed",
+      "expectedValue": 8
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/external_provider_integration_qualified",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/no_provider_product_runtime_dependency",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+      "jsonPointer": "/local_package_version",
+      "expectedValue": "0.5.0-preview.2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "10.0.401"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/rollForward",
+      "expectedValue": "latestPatch"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/allowPrerelease",
+      "expectedValue": false
+    },
+    {
+      "repositoryPath": "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+      "expectedText": "<Version>0.5.0-preview.2</Version>",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
