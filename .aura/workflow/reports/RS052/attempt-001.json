@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS052",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-14T09:28:44.9322009+00:00",
+  "completedAtUtc": "2026-10-14T09:30:15.1683421+00:00",
+  "durationMilliseconds": 90236,
+  "projectNodes": [
+    "M3"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/m3-release-gate.md",
+    "docs/planning/README.md",
+    "docs/planning/ValidateM3ReleaseGate.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m3-gate.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M3-gate.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "tests/consumers/m3-gate/NuGet.Config",
+    "tests/consumers/m3-gate/Program.cs",
+    "tests/consumers/m3-gate/m3-gate-consumer.csproj"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M3.md",
+    "docs/distribution/m3-release-gate.md",
+    "docs/planning/ValidateM3ReleaseGate.cs",
+    "docs/planning/decisions/m3-gate.md",
+    "docs/planning/evidence/M3-gate.json",
+    "tests/consumers/m3-gate/NuGet.Config",
+    "tests/consumers/m3-gate/Program.cs",
+    "tests/consumers/m3-gate/m3-gate-consumer.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261014T083411Z-20893c7d99ae2ed9",
+      "run-next-20261014T085730Z-f37ded5904f858aa"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261014T083411Z-20893c7d99ae2ed9",
+        "runId": "RS052",
+        "scope": "preselection-rs052",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs052/run-next-20261014T083411Z-20893c7d99ae2ed9"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261014T085730Z-f37ded5904f858aa",
+        "runId": "RS052",
+        "scope": "preselection-rs052",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs052/run-next-20261014T085730Z-f37ded5904f858aa"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS052/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-3b9d1afe8774403f8e1f176a9ecbc462\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 90137,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS052 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS051/attempt-001.json run=RS051 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M2-gate.json pointer=/status\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/2/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/3/gate\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/3/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/4/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/7/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/8/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/20/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/21/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/22/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/23/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/24/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/25/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/26/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W01-C01-boundary-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C01 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W01-C02-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C02 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W01-C03-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01-C03 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C01-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C01 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C02-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C02 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C03-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C03 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C04-boundaries-qualified.json pointer=/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C04 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W01-C01-provider-qualified.json pointer=/selected_package_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C04-boundaries-qualified.json pointer=/requests_transmitted\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M3-W02-C04-boundaries-qualified.json pointer=/external_adoption_observed\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M4 state=not-ready\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/M3-gate.json path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/ValidateM3ReleaseGate.cs path is absent\r\n[require.file-missing] VERIFIED path=tests/consumers/m3-gate/m3-gate-consumer.csproj path is absent\r\n[require.file-missing] VERIFIED path=tests/consumers/m3-gate/Program.cs path is absent\r\n[require.file-missing] VERIFIED path=tests/consumers/m3-gate/NuGet.Config path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/m3-release-gate.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/m3-gate.md path is absent\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM3ReleaseGate.cs bytes=7359\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m3-gate/m3-gate-consumer.csproj bytes=610\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m3-gate/Program.cs bytes=10905\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m3-gate/NuGet.Config bytes=218\r\n[files.replace-from-staged] CHANGED path=docs/distribution/m3-release-gate.md bytes=5578\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m3-gate.md bytes=3068\r\ndw.tools.math/m3-scientific-gate/0.4 qualified; phases=7; tasks=14; subtasks=42\r\n\n\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.statistics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics\\Release\\net10.0\\dw.tools.math.statistics.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.numerics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics\\Release\\net10.0\\dw.tools.math.numerics.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.statistics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.tools.math.numerics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:03.03\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    81, Skipped:     0, Total:    81, Duration: 108 ms - dw.tools.math.numerics.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   166, Skipped:     0, Total:   166, Duration: 127 ms - dw.tools.math.statistics.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   109, Skipped:     0, Total:   109, Duration: 296 ms - dw.quantities.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 106 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    74, Skipped:     0, Total:    74, Duration: 135 ms - dw.tools.math.composition.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 26 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n\n\r\nPossible reasons for this include:\r\n  * You misspelled a built-in dotnet command.\r\n  * You intended to execute a .NET program, but dotnet---definitely-not-a-real-dotnet-option does not exist.\r\n  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.\r\nPowerShell helper UTF-8 and non-zero propagation contracts verified.\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.statistics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics\\Release\\net10.0\\dw.tools.math.statistics.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.numerics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics\\Release\\net10.0\\dw.tools.math.numerics.dll\r\n  dw.tools.math.statistics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.tools.math.numerics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.84\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 34 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n  The package dw.tools.math.foundation.0.1.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\u0027.\r\nPackage contract verified: D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\publish\\packages\\dw.tools.math.foundation.0.1.0-preview.1.nupkg\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\foundation-smoke.csproj (in 199 ms).\r\n  foundation-smoke -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\consumer-smoke\\bin\\Release\\net10.0\\foundation-smoke.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.92\r\nIsolated local-package consumer verified.\r\nM0-W01-C01 foundation chain verified.\r\n\nCould not execute because the specified command or file was not found.\r\n\r\nsmoke-managed-provider:pass:ManagedLinearAlgebraProvider\r\nsmoke-matrix:pass\r\nsmoke-statistics:pass\r\nsmoke-integration:pass\r\nsmoke-independent-parallel:pass\r\nsmoke-mathnet-assembly:5.0.0.0\r\nsmoke-net10-managed:M3-W01-C01:qualified\r\n\n\r\nM3-W01-C03:independent-managed-lu-qr-svd-smoke:qualified\r\n\n\r\nM3-W02-C01:managed-mathnet-5.0.0-descriptive-oracles:qualified\r\n\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\ndw.tools.math/c04-boundaries/0.4 qualified; rows=8; candidate=4; hold=1; external=3; transmitted=0\r\n\n\r\n  The package dw.quantities.0.2.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m3-gate-local-feed\\dw.quantities.0.2.0-preview.1.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.ir.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m3-gate-local-feed\\dw.tools.math.ir.0.3.0-preview.1.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.numerics.0.4.0-preview.4 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m3-gate-local-feed\\dw.tools.math.numerics.0.4.0-preview.4.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.statistics.0.4.0-preview.6 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m3-gate-local-feed\\dw.tools.math.statistics.0.4.0-preview.6.nupkg\u0027.\r\n\n\r\nM3-PKG-SHA256:dw.quantities:0.2.0-preview.1:14737:de710a06d5ad484a3ba244da83b4755183b59a609633a163c1141c49a7c505d7\r\nM3-PKG-SHA256:dw.tools.math.ir:0.3.0-preview.1:21913:54456aefe9be1cc45c70b31d47733c7a408763b0126be757e254bde79582ae34\r\nM3-PKG-SHA256:dw.tools.math.numerics:0.4.0-preview.4:18294:54e03fb0ebc3b4494f374d9430d344fad02baca026714629bde9f1c314a9a340\r\nM3-PKG-SHA256:dw.tools.math.statistics:0.4.0-preview.6:17425:3785ca73c9da8e26bf130879c20998bb8b0389af53902deb87c533c677b8e062\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m3-gate\\m3-gate-consumer.csproj (in 283 ms).\r\n\n\r\n  m3-gate-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m3-gate-consumer\\Release\\net10.0\\m3-gate-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.97\r\n\n\r\ndw.tools.math/m3-nuget-gate/0.4 qualified; probes=31\r\n\n\r\n10.0.402\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M3-gate.json bytes=5784\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M3 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M2 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M4 state=not-ready\r\n[json.edit-object] CHANGED path=.aura/workflow/state.json semantic object updated\r\nplanning valid: 0.1.51 | 53 chunks | f061d5d4cbb3737909d5e555c3d493b50c5366abe72bc0050669be483972df01 | mode --write\r\n\n\r\ndw.tools.math/m3-scientific-gate/0.4 qualified; phases=7; tasks=14; subtasks=42\r\n\n\r\nnative DWF adoption valid: nodes=496 milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02=done\r\n\n\r\nplanning valid: 0.1.51 | 53 chunks | f061d5d4cbb3737909d5e555c3d493b50c5366abe72bc0050669be483972df01 | mode --check\r\n\n\r\n[payload] OK operations=62 changed=10 no-change=0 verified=52 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS052/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS052 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "798637d11906fae59bb2940dc36b0d5573d25fe28514d1712a5bf227be4111b8",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS051/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS051 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ebfa352aba3b19f57cf645801bca7d254bfce1da10659fb3acb1fea4a415f241",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M2-gate.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/2/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/3/gate",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/3/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/4/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/7/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/8/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/20/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/21/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/22/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/23/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/24/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/25/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/26/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W01-C02-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W01-C03-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C04 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/selected_package_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/requests_transmitted",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/external_adoption_observed",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M4 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/M3-gate.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/ValidateM3ReleaseGate.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/m3-gate/m3-gate-consumer.csproj",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/m3-gate/Program.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/m3-gate/NuGet.Config",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/m3-release-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/m3-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM3ReleaseGate.cs",
+        "Status": 1,
+        "Summary": "bytes=7359",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8a1dca6ad9d8852890cb745139ba576f28dc1063ad86ed795d156db0b323083b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m3-gate/m3-gate-consumer.csproj",
+        "Status": 1,
+        "Summary": "bytes=610",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "87e0c398ff259b88fc36f1262c11753b352a770fab40129e566b2986692acf13",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m3-gate/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=10905",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "09936b47e6e6827a0ee06d8324c45489f778d67736cf76cc20ff413bc7668b0b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m3-gate/NuGet.Config",
+        "Status": 1,
+        "Summary": "bytes=218",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "759cc4bef354f630e182115187de138e2492b430a10b0a6d8721143183020641",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/m3-release-gate.md",
+        "Status": 1,
+        "Summary": "bytes=5578",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "06407a9e3847fed8fb17076cbab4316b3f382f4db8f747b718c929e2d68d5c15",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m3-gate.md",
+        "Status": 1,
+        "Summary": "bytes=3068",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bade3e8f55aa5e75eb482e494fe727033ff281138b0990a0989ba435bbbc3018",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M3-gate.json",
+        "Status": 1,
+        "Summary": "bytes=5784",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ed2c1af2d0fecb42788b24d937b49216a2739b06da9019b098f68a34640e126c",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "cd7331514f5ee87fdb4de95727cfcd23133c52ab2d6c82f87d9cdb7c11df7f2f",
+        "AfterSha256": "f061d5d4cbb3737909d5e555c3d493b50c5366abe72bc0050669be483972df01",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M3 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "1d411ec86161f35a80b77ffb80d418ebab3f499b6c771ba96282cd4e25b38d3b",
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M2 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M4 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "331749c777ed9fce29f07d2f35f2c60374b6ed046a787949768529f7d081fe19",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/state.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "e6011168dc2b2a2aa5f0806921aa4f8ab2cb99ee37d646688be0aeaba6a6b2fb",
+        "AfterSha256": "0f2832521aaba733629f83b174d959660571fafb30982984975ea2c76b0ea250",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261014T092552Z-b7f0b031cc72ac09",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "9cb02ba74857e8f6b53b32705162751fa3ba1b26",
+  "invocationStartedAtUtc": "2026-10-14T09:25:52.4765341+00:00",
+  "invocationDurationMilliseconds": 262691,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS052",
+      "title": "Qualify M3 numerical and statistics preview through full cross-vertical release gate",
+      "projectNodes": [
+        "M3"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify M3\u0027s independent G-M3 gate after all seven numerical/statistics phases and 14 tasks/42 subtasks are durably done. Recheck M2 and science/native evidence, restore and build the complete .NET solution, run six admitted test suites, managed Math.NET smokes and foundation verification, and inspect four local NuGet packages. Require 31 cross-vertical oracles from a separate isolated consumer before closing only M3.",
+      "value": "Establish a coherent bounded 0.4.0-preview numerical/statistics release with real package graph SHA-256s, complete phase provenance and independent Math-only consumers, without claiming public publication or external Decision/AURA admission.",
+      "debtChanges": [
+        "Seven accepted M3 phase authorities and both work packages remain preserved; release-scoped verification explicitly covers 14 tasks and 42 subtasks.",
+        "A read-only C# gate validator rejects incomplete native/product status, unqualified scientific phase evidence, premature M4 and fabricated external Decision/MCDM adoption.",
+        "Six admitted foundation, quantity, IR, composition, numerics and statistics test suites plus the foundation chain and three managed Math.NET smokes are independently rerun at the explicit gate.",
+        "Four observed local product NuGet archives have checked net10.0 assemblies, direct dependency graphs, byte sizes and exact-build SHA-256 from a separate archive-only verifier.",
+        "An isolated package-only consumer with 31 independently named numerical/statistical oracles proves the transitive quantities/IR plus numerics/statistics graph without source or provider references.",
+        "Only M3 transitions to done and its execution cursor retires; M4 stays not-ready and the release is a local preview rather than public NuGet or stable 1.0.",
+        "No native BLAS, full public SVD, unobserved runtime platform, universal floating accuracy, cryptographic PRNG, Decision/MCDM migration, AURA skill or neutral dw.discovery readiness is claimed.",
+        "C# compilation preflight uses separate managed-provider smokeOutput and NuGet consumer output local bindings; this corrects the CS0136 pre-attempt refusal without changing gate scope or criteria.",
+        "The second RS052 pre-attempt refusal was consumer compile diagnostic CS8629; explicit non-null Pearson pattern matching now guards the independent positive-correlation oracle without altering 31 probes."
+      ],
+      "nextAction": "After RS052 durable success, examine M4 symbolic scope and native DWF dependencies, then prepare its first admitted bounded run without reinterpreting unqualified M3 extensions.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M3",
+          "achievement": "Complete qualified local M3 / 0.4.0-preview by validating all seven phase proofs, fourteen tasks/forty-two subtasks, six test projects, three managed provider smokes, the foundation chain, fresh four-product NuGet graph and 31 independent cross-vertical consumer oracles with actual local package identities and SHA-256 receipts, leaving M4 and external integration unadmitted."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        ".aura/workflow/state.json",
+        "docs/distribution/m3-release-gate.md",
+        "docs/planning/README.md",
+        "docs/planning/ValidateM3ReleaseGate.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m3-gate.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M3-gate.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M3.md",
+        "tests/consumers/m3-gate/NuGet.Config",
+        "tests/consumers/m3-gate/Program.cs",
+        "tests/consumers/m3-gate/m3-gate-consumer.csproj"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate.",
+        "completed": true,
+        "achievement": "Complete qualified local M3 / 0.4.0-preview by validating all seven phase proofs, fourteen tasks/forty-two subtasks, six test projects, three managed provider smokes, the foundation chain, fresh four-product NuGet graph and 31 independent cross-vertical consumer oracles with actual local package identities and SHA-256 receipts, leaving M4 and external integration unadmitted."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate.",
+        "completed": true,
+        "achievement": "Complete qualified local M3 / 0.4.0-preview by validating all seven phase proofs, fourteen tasks/forty-two subtasks, six test projects, three managed provider smokes, the foundation chain, fresh four-product NuGet graph and 31 independent cross-vertical consumer oracles with actual local package identities and SHA-256 receipts, leaving M4 and external integration unadmitted."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS052",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS052",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "9cb02ba74857e8f6b53b32705162751fa3ba1b26",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f937b5b747aaec7589a08168d2d0e1c6e543cffceb8f92c19e63ec02d8e279ca"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: qualify M3 numerical and statistics preview release gate",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

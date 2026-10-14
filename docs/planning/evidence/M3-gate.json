@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "id": "M3-gate",
+  "status": "m3-local-numerics-and-statistics-preview-gate-qualified",
+  "milestone": "M3",
+  "gate": "G-M3",
+  "release_version": "0.4.0-preview",
+  "plan_version": "0.1.51",
+  "previous_m2_gate": "docs/planning/evidence/M2-gate.json",
+  "checked_chunk_ids": [
+    "M3-W01-C01",
+    "M3-W01-C02",
+    "M3-W01-C03",
+    "M3-W02-C01",
+    "M3-W02-C02",
+    "M3-W02-C03",
+    "M3-W02-C04"
+  ],
+  "qualified_phase_evidence": [
+    "docs/planning/evidence/M3-W01-C01-boundary-qualified.json",
+    "docs/planning/evidence/M3-W01-C02-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W01-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C01-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C02-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C03-boundaries-qualified.json",
+    "docs/planning/evidence/M3-W02-C04-boundaries-qualified.json"
+  ],
+  "completed_work_packages": [
+    "M3-W01",
+    "M3-W02"
+  ],
+  "qualified_tasks": 14,
+  "qualified_subtasks": 42,
+  "gate_scientific_validator": "docs/planning/ValidateM3ReleaseGate.cs",
+  "scientific_validator_sha256": "8a1dca6ad9d8852890cb745139ba576f28dc1063ad86ed795d156db0b323083b",
+  "scientific_gate_marker": "dw.tools.math/m3-scientific-gate/0.4 qualified; phases=7; tasks=14; subtasks=42",
+  "locked_solution_restore_and_build_passed": true,
+  "full_project_test_suites_passed": [
+    "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+    "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+    "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj"
+  ],
+  "foundation_chain_and_isolated_consumer_passed": true,
+  "managed_provider_smokes": [
+    "M3-W01-C01 managed Math.NET 5.0.0",
+    "M3-W01-C03 LU QR singular spectrum",
+    "M3-W02-C01 descriptive statistics"
+  ],
+  "provider_selected": "MathNet.Numerics/5.0.0 managed on observed runtime",
+  "native_blas_admitted": false,
+  "local_package_only": true,
+  "package_sha256_verified_by_independent_staged_helper": ".workflow/runs/RS052/staged/checks/m3-gate-package-sha.cs",
+  "observed_local_packages": [
+    {
+      "id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "bytes": 14737,
+      "sha256": "de710a06d5ad484a3ba244da83b4755183b59a609633a163c1141c49a7c505d7",
+      "assembly": "lib/net10.0/dw.quantities.dll",
+      "dependencies": [],
+      "mode": "local-ignored-artifact-not-published"
+    },
+    {
+      "id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "bytes": 21913,
+      "sha256": "54456aefe9be1cc45c70b31d47733c7a408763b0126be757e254bde79582ae34",
+      "assembly": "lib/net10.0/dw.tools.math.ir.dll",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "mode": "local-ignored-artifact-not-published"
+    },
+    {
+      "id": "dw.tools.math.numerics",
+      "version": "0.4.0-preview.4",
+      "bytes": 18294,
+      "sha256": "54e03fb0ebc3b4494f374d9430d344fad02baca026714629bde9f1c314a9a340",
+      "assembly": "lib/net10.0/dw.tools.math.numerics.dll",
+      "dependencies": [
+        "dw.tools.math.ir"
+      ],
+      "mode": "local-ignored-artifact-not-published"
+    },
+    {
+      "id": "dw.tools.math.statistics",
+      "version": "0.4.0-preview.6",
+      "bytes": 17425,
+      "sha256": "3785ca73c9da8e26bf130879c20998bb8b0389af53902deb87c533c677b8e062",
+      "assembly": "lib/net10.0/dw.tools.math.statistics.dll",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "mode": "local-ignored-artifact-not-published"
+    }
+  ],
+  "cross_vertical_consumer_project": "tests/consumers/m3-gate/m3-gate-consumer.csproj",
+  "consumer_project_sha256": "87e0c398ff259b88fc36f1262c11753b352a770fab40129e566b2986692acf13",
+  "cross_vertical_consumer_source": "tests/consumers/m3-gate/Program.cs",
+  "consumer_source_sha256": "09936b47e6e6827a0ee06d8324c45489f778d67736cf76cc20ff413bc7668b0b",
+  "consumer_config": "tests/consumers/m3-gate/NuGet.Config",
+  "consumer_config_sha256": "759cc4bef354f630e182115187de138e2492b430a10b0a6d8721143183020641",
+  "cross_vertical_nuget_consumer_oracles": 31,
+  "isolated_consumer_exact_output": "dw.tools.math/m3-nuget-gate/0.4 qualified; probes=31",
+  "source_only_nuget_restore": true,
+  "no_consumer_project_references": true,
+  "transfer_architecture_passed": true,
+  "decision_mcdm_owner_boundaries_validated": true,
+  "release_recipe": "docs/distribution/m3-release-gate.md",
+  "release_recipe_sha256": "06407a9e3847fed8fb17076cbab4316b3f382f4db8f747b718c929e2d68d5c15",
+  "gate_decision": "docs/planning/decisions/m3-gate.md",
+  "gate_decision_sha256": "bade3e8f55aa5e75eb482e494fe727033ff281138b0990a0989ba435bbbc3018",
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "external_adoption_observed": false,
+  "package_publication_observed": false,
+  "m4_symbolic_work_admitted": false,
+  "nonclaims": [
+    "No external Decision/MCDM/AURA package adoption, public NuGet push, agent skill or neutral dw.discovery conformance.",
+    "No native BLAS, unmanaged provider, full public SVD, other unexecuted RID or universal floating-point error bound.",
+    "No normal/Gaussian tail solver, cryptographic PRNG, general symbolic engine or claimed stable 1.0 product.",
+    "Package hashes are SHA-256 of exact current local archives, not cross-SDK reproducibility assertions."
+  ]
+}
