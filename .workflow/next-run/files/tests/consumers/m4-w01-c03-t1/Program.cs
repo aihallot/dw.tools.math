@@ -30,8 +30,9 @@ var binomial=Binomial(x,ExactRational.One);
 var expanded=Admitted(SymbolicExactTransformations.ExpandSquare(binomial));
 Probe("exact binomial expansion has three terms",()=>
 {
-    var e=expanded as IrApply;
-    Require(e?.Operation==IrOperation.Add&&e.Arguments.Length==3,"exact three-term expansion");
+    if (expanded is not IrApply { Operation: IrOperation.Add } e ||
+        e.Arguments.Length != 3)
+        throw new InvalidOperationException("Expected an exact three-term expansion.");
     var twice=(IrExactScalar)((IrApply)e.Arguments[1]).Arguments[0];
     Require(twice.Value==new ExactRational(2,1),"coefficient 2");
 });
