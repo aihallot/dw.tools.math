@@ -44,9 +44,13 @@ public static class SymbolicExactTransformations
             square.Arguments[0] is not IrApply { Operation: IrOperation.Add } add ||
             add.Arguments.Length != 2 ||
             add.Arguments[0] is not IrSymbol x || !FreeReal(x) ||
-            add.Arguments[1] is not IrExactScalar constant ||
-            !Small(constant.Value))
+            add.Arguments[1] is not IrExactScalar constant)
             return No(SymbolicTransformStatus.Unsupported);
+
+        // An admitted exact binomial whose coefficient exceeds the declared
+        // 128-bit bound is a budget refusal, not an unsupported expression.
+        if (!Small(constant.Value))
+            return No(SymbolicTransformStatus.BudgetExceeded);
 
         var status = CheckConditions(prior, x);
         if (status != SymbolicTransformStatus.Admitted)
