@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "RS061",
+  "title": "Qualify exact real elementary equation and inequality solution sets",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact real elementary equation solution sets",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M4",
+    "M4-W02",
+    "M4-W02-C02",
+    "M4-W02-C02-T1",
+    "M4-W02-C02-T1-R",
+    "M4-W02-C02-T1-G",
+    "M4-W02-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify M4-W02-C02-T1 using one genuine compiled absent-API RED and 36 independent GREEN tests, with eight package-only NuGet client probes. Add exact real elementary equation solution sets for x=c and x^2=c, provable negative-square empty cases and selected closed-ray inequalities, preserving Unknown for real irrational roots and unproved forms. Inspect three local SHA-256 NuGet packages and keep C02, W02 and M4 open.",
+    "value": "Give .NET consumers a complete and exact real solution set only when a bounded mathematical rule proves it, without mistaking irrational or unsupported candidates for an empty solution set.",
+    "debtChanges": [
+      "Compile a missing public exact real solving API RED against symbolics preview.6 before installing the new preview.7 source.",
+      "Thirty-six independent GREEN MSTests cover exact ordered quadratic roots, negative empty real solution sets, unknown positive nonsquare roots, rational fractions, single-variable linear equations, bounded real closed rays, original-input hashes, real-domain, unit and assumption refusals.",
+      "Only Finite, Empty, LowerClosedRay, UpperClosedRay and AllReal carry a complete qualified result; unknown and refused results have neither candidates nor proof/provenance.",
+      "A real-only structural source contract refuses complex/integer/bound targets, unknown arbitrary quotients, unqualified radicals, binary64 approximations, restricted sources and 128-bit rational budget overflow.",
+      "Eight independent pinned NuGet-only probes verify x^2=1, x^2=-1, x^2=2 Unknown, rational roots, real rays, unit refusal and no CAS or agent dependency.",
+      "Inspect the exact three local Math product package identities, net10.0 libraries, dependencies, byte counts and SHA-256 with a separate staged C# archive helper.",
+      "Advance only M4-W02-C02-T1 R/G/V and T1; activate C02 without closing it. T2, C03, M4-W02 and M4 remain unfinished. No public package, external provider, complex roots or sibling-repository integration."
+    ],
+    "nextAction": "After verified durable RS061 success, refine M4-W02-C02-T2 for root substitution against original expressions, false candidates, multiplicity and unknown/incomplete solution boundaries.",
+    "achievements": [
+      {
+        "projectNode": "M4-W02-C02-T1-R",
+        "achievement": "Observe a compiled missing-public-API RED against the previous symbolics preview.6 assembly before introducing an exact real equation solver."
+      },
+      {
+        "projectNode": "M4-W02-C02-T1-G",
+        "achievement": "Deliver exact elementary real solution-set shapes with typed unknown and domain/unit refusals; demonstrate 36 independent tests and eight standalone NuGet client probes."
+      },
+      {
+        "projectNode": "M4-W02-C02-T1-V",
+        "achievement": "Verify local preview.7 product hashes, complete relevant symbolics tests and IR/quantities regressions, locked .NET solution build and planning integrity checks."
+      },
+      {
+        "projectNode": "M4-W02-C02-T1",
+        "achievement": "Qualify the bounded exact real equation and ray-solving contract while preserving M4-W02-C02-T2, phase C02, work package and milestone as incomplete."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/symbolic-exact-real-solving.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m4-w02-c02-t1-exact-real-solving.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json",
+    "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M4.md",
+    "src/projects/dw.tools.math.symbolics/SymbolicExactRealSolving.cs",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/consumers/m4-w02-c02-t1/NuGet.Config",
+    "tests/consumers/m4-w02-c02-t1/Program.cs",
+    "tests/consumers/m4-w02-c02-t1/m4-exact-real-solving-consumer.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1RedTests.cs",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
