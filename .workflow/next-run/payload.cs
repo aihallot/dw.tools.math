@@ -10,128 +10,122 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Work="M4-W02",Phase="M4-W02-C01",Task="M4-W02-C01-T2";
-const string Red="M4-W02-C01-T2-R",Green="M4-W02-C01-T2-G",
-    Verify="M4-W02-C01-T2-V";
+const string Work="M4-W02",Phase="M4-W02-C02",Task="M4-W02-C02-T1";
+const string Red="M4-W02-C02-T1-R",Green="M4-W02-C02-T1-G",Verify="M4-W02-C02-T1-V";
 const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
-const string Prior="docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json";
-const string RedProof="docs/planning/evidence/M4-W02-C01-T2-boundary-red.json";
-const string Qualified="docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json";
-const string Product="src/projects/dw.tools.math.symbolics/SymbolicDerivativePointAnalysis.cs";
+const string Prior="docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json";
+const string RedProof="docs/planning/evidence/M4-W02-C02-T1-contract-red.json";
+const string Qualified="docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json";
+const string Product="src/projects/dw.tools.math.symbolics/SymbolicExactRealSolving.cs";
 const string Project="src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj";
 const string TestProject="tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj";
-const string RedTest="tests/projects/dw.tools.math.symbolics.tests/M4W02C01T2RedTests.cs";
-const string GreenTests="tests/projects/dw.tools.math.symbolics.tests/M4W02C01T2Tests.cs";
-const string Decision="docs/planning/decisions/m4-w02-c01-t2-pointwise-boundary.md";
-const string Document="docs/distribution/symbolic-pointwise-derivatives.md";
-const string ConsumerProject="tests/consumers/m4-w02-c01-t2/m4-pointwise-derivative-consumer.csproj";
-const string ConsumerSource="tests/consumers/m4-w02-c01-t2/Program.cs";
-const string ConsumerConfig="tests/consumers/m4-w02-c01-t2/NuGet.Config";
-const string PackageHelper=".workflow/runs/RS060/staged/checks/m4-w02-c01-t2-package-sha.cs";
-const string Solution="dw.tools.math.slnx",Version="0.5.0-preview.6";
-const string RedMarker="M4-W02-C01-T2 RED: pointwise real derivative boundary API is absent.";
-const string ConsumerMarker="dw.tools.math/m4-pointwise-derivative-consumer/0.5 qualified; probes=8";
-const int IndependentGreen=37,TotalTargeted=38;
+const string RedTest="tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1Tests.cs";
+const string Decision="docs/planning/decisions/m4-w02-c02-t1-exact-real-solving.md";
+const string Document="docs/distribution/symbolic-exact-real-solving.md";
+const string ConsumerProject="tests/consumers/m4-w02-c02-t1/m4-exact-real-solving-consumer.csproj";
+const string ConsumerSource="tests/consumers/m4-w02-c02-t1/Program.cs";
+const string ConsumerConfig="tests/consumers/m4-w02-c02-t1/NuGet.Config";
+const string PackageHelper=".workflow/runs/RS061/staged/checks/m4-w02-c02-t1-package-sha.cs";
+const string Solution="dw.tools.math.slnx",Version="0.5.0-preview.7";
+const string RedMarker="M4-W02-C02-T1 RED: real exact equation solution contract is absent.";
+const string ConsumerMarker="dw.tools.math/m4-real-solving-consumer/0.5 qualified; probes=8";
+const int IndependentGreen=36,TotalTargeted=37;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS060","M4",Work,target?null:Phase,null,null);
-p.Workflow.RequirePriorSuccess("RS059",1,
-    "feat: qualify exact formal polynomial differentiation and real function domains",
+p.Workflow.RequireCurrentRun("RS061","M4",Work,target?Phase:null,null,null);
+p.Workflow.RequirePriorSuccess("RS060",1,
+    "feat: qualify exact pointwise derivative domains and close M4 W02 C01",
     "0.1.59",0,0,0,true);
-
 p.Require.JsonValueEquals(Prior,"/status",
-    JsonValue.Create("real-exact-formal-polynomial-differentiation-and-explicit-unit-refusal-qualified"));
-p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(38));
-p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(39));
+    JsonValue.Create("real-exact-pointwise-derivative-and-domain-refusal-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(37));
+p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(38));
 p.Require.JsonValueEquals(Prior,"/independent_consumer_probes_passed",JsonValue.Create(8));
-p.Require.JsonValueEquals(Prior,"/derived_units_automatically_supported",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("0.5.0-preview.5"));
-p.Require.JsonValueEquals(Prior,"/work_package_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("0.5.0-preview.6"));
+p.Require.JsonValueEquals(Prior,"/m4_w02_c01_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m4_w02_work_package_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/numerical_differentiation_qualified",JsonValue.Create(false));
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.58"),JsonValue.Create("0.1.59"));
+    JsonValue.Create("0.1.59"),JsonValue.Create("0.1.60"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.59":"0.1.58"));
+    JsonValue.Create(target?"0.1.60":"0.1.59"));
 p.Require.JsonValueEquals(Backlog,"/releases/3/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/9/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/10/status",JsonValue.Create("in_progress"));
-p.Require.JsonValueEquals(Backlog,"/chunks/29/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(Backlog,"/chunks/30/status",
-    JsonValue.Create(target?"done":"in_progress"));
-p.Require.JsonValueEquals(Backlog,"/chunks/30/tasks/0/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(Backlog,"/chunks/30/tasks/1/status",
+p.Require.JsonValueEquals(Backlog,"/chunks/30/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/31/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/31/tasks/0/status",
     JsonValue.Create(target?"done":"planned"));
 foreach(var i in new[]{0,1,2})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/30/tasks/1/subtasks/{i}/status",
+    p.Require.JsonValueEquals(Backlog,$"/chunks/31/tasks/0/subtasks/{i}/status",
         JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/31/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/31/tasks/1/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/32/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/external_dependencies/3/status",JsonValue.Create("satisfied"));
-
 p.ProjectPlan.RequireNodeState("M3","done");
 p.ProjectPlan.RequireNodeState("M4","in-progress");
 p.ProjectPlan.RequireNodeState("M4-W01","done");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
-p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
-p.ProjectPlan.RequireNodeState("M4-W02-C01-T1","done");
+p.ProjectPlan.RequireNodeState("M4-W02-C01","done");
+p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
 p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
-p.ProjectPlan.RequireNodeState("M4-W02-C02","not-ready");
+p.ProjectPlan.RequireNodeState("M4-W02-C02-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M4-W02-C03","not-ready");
 foreach(var child in new[]{Red,Green,Verify})
     p.ProjectPlan.RequireNodeState(child,target?"done":"not-ready");
-
 if(!target)
 {
     foreach(var file in new[]{Product,RedTest,GreenTests,Decision,Document,
         ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified})
         p.Require.FileMissing(file);
-    p.Require.TextContains(Project,"<Version>0.5.0-preview.5</Version>");
+    p.Require.TextContains(Project,"<Version>0.5.0-preview.6</Version>");
 }
 else
 {
     p.Require.JsonValueEquals(RedProof,"/status",
-        JsonValue.Create("compiled-pointwise-real-derivative-boundary-contract-absent-red-observed"));
+        JsonValue.Create("compiled-real-solving-api-absent-red-observed"));
     p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create("real-exact-pointwise-derivative-and-domain-refusal-qualified"));
+        JsonValue.Create("real-exact-elementary-equation-and-ray-solving-qualified"));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
-    p.Require.JsonValueEquals(Qualified,"/independent_consumer_probes_passed",
-        JsonValue.Create(8));
+    p.Require.JsonValueEquals(Qualified,"/independent_consumer_probes_passed",JsonValue.Create(8));
     p.Require.JsonValueEquals(Qualified,"/m4_w02_work_package_done",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/numerical_differentiation_qualified",
-        JsonValue.Create(false));
-    p.Require.TextContains(Project,"<Version>0.5.0-preview.6</Version>");
+    p.Require.JsonValueEquals(Qualified,"/complex_solution_sets_qualified",JsonValue.Create(false));
+    p.Require.TextContains(Project,"<Version>0.5.0-preview.7</Version>");
 }
-
 var stagedHashes=new Dictionary<string,string>(StringComparer.Ordinal);
 var redInstalled=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 stagedHashes[RedTest]=redInstalled.AfterSha256 ??
-    throw new InvalidOperationException("Missing typed staged RED source identity.");
+    throw new InvalidOperationException("Missing staged solving RED source hash.");
 if(!target)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
     var red=Run(root,"dotnet","test",TestProject,"-c","Release",
         "--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M4W02C01T2RedTests.ExplicitPointwiseDerivativeBoundaryContractMustExist",
+        "--filter","FullyQualifiedName~M4W02C02T1RedTests.PublicExactRealEquationSolverMustExist",
         "--logger","console;verbosity=normal");
     if(red.Code==0||!red.Output.Contains(RedMarker,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "A true compiled missing-pointwise-contract RED was not observed: "+Relevant(red.Output));
+            "A compiled absent exact real solving public API RED was not observed: "+
+            Relevant(red.Output));
     var proof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M4-W02-C01-T2-boundary-red",
-        ["status"]="compiled-pointwise-real-derivative-boundary-contract-absent-red-observed",
-        ["prior_exact_derivative"]=Prior,
-        ["compiled_source_product"]="dw.tools.math.symbolics/0.5.0-preview.5",
+        ["schema_version"]=1,["id"]="M4-W02-C02-T1-contract-red",
+        ["status"]="compiled-real-solving-api-absent-red-observed",
+        ["prior_exact_derivative_boundary"]=Prior,
+        ["compiled_source_product"]="dw.tools.math.symbolics/0.5.0-preview.6",
         ["red_test"]=RedTest,["red_test_sha256"]=stagedHashes[RedTest],
-        ["missing_api"]="SymbolicDerivativePointAnalysis.Analyze(IrNode,IrSymbol,ExactRational)",
+        ["missing_api"]="SymbolicExactRealSolving.Solve(IrNode,IrRelationKind,IrNode,IrSymbol,IrScalarDomain)",
         ["expected_red_assertion"]=RedMarker,
         ["independent_red_test_count"]=1,
-        ["failed_compiler_or_restore_did_not_substitute_for_red"]=true,
-        ["nonclaim"]="A missing public API is not a proof of real pointwise differentiability."
+        ["compiler_failure_not_a_red_substitute"]=true,
+        ["nonclaim"]="An absent API alone is not a proof of solution correctness."
     };
     p.Files.WriteComplete(RedProof,
         proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
@@ -141,18 +135,19 @@ foreach(var file in new[]{Project,Product,GreenTests,Decision,Document,
 {
     var receipt=p.Files.ReplaceFromStaged("staged/"+file,file);
     stagedHashes[file]=receipt.AfterSha256 ??
-        throw new InvalidOperationException("Missing typed target/source hash for "+file);
+        throw new InvalidOperationException("Missing staged target/source hash for "+file);
 }
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 var targeted=Required(root,"dotnet","test",TestProject,"-c","Release",
-    "--no-build","--no-restore","--filter","FullyQualifiedName~M4W02C01T2",
+    "--no-build","--no-restore","--filter","FullyQualifiedName~M4W02C02T1",
     "--logger","console;verbosity=normal");
-if(!targeted.Contains("Total tests: 38",StringComparison.OrdinalIgnoreCase)||
-   !targeted.Contains("Passed: 38",StringComparison.OrdinalIgnoreCase))
-    throw new InvalidOperationException("Expected 1 recovered RED plus 37 independent GREEN pointwise derivative tests.");
-Required(root,"dotnet","test",TestProject,"-c","Release","--no-build","--no-restore",
-    "--logger","console;verbosity=minimal");
+if(!targeted.Contains("Total tests: 37",StringComparison.OrdinalIgnoreCase)||
+   !targeted.Contains("Passed: 37",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException(
+        "Expected one recovered RED and 36 independent solving GREEN tests.");
+Required(root,"dotnet","test",TestProject,"-c","Release",
+    "--no-build","--no-restore","--logger","console;verbosity=minimal");
 foreach(var regression in new[]{
     "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"})
@@ -160,7 +155,7 @@ foreach(var regression in new[]{
     var output=Required(root,"dotnet","test",regression,"-c","Release",
         "--no-build","--no-restore","--logger","console;verbosity=minimal");
     if(!output.Contains("Passed",StringComparison.OrdinalIgnoreCase))
-        throw new InvalidOperationException("Required exact IR or quantities regression was not observed: "+regression);
+        throw new InvalidOperationException("Required exact IR or quantities regression not observed: "+regression);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
@@ -172,7 +167,7 @@ var packages=new (string Id,string Version,string Project,string[] DependsOn)[]
         "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
     ("dw.tools.math.symbolics",Version,Project,["dw.tools.math.ir"])
 };
-var feed=Path.Combine(root,"build","artifacts","m4-w02-c01-t2-local-feed");
+var feed=Path.Combine(root,"build","artifacts","m4-w02-c02-t1-local-feed");
 var archives=new List<string>();
 foreach(var package in packages)
 {
@@ -212,7 +207,7 @@ var sources=XDocument.Load(Path.Combine(root,ConsumerConfig)).Descendants()
 if(!sources.Elements().Any(e=>e.Name.LocalName=="clear")||
    sources.Elements().Any(e=>e.Name.LocalName=="add"))
     throw new InvalidOperationException("The NuGet-only pointwise consumer must clear external sources.");
-var isolated=Path.Combine(root,"build","artifacts","m4-w02-c01-t2-isolated-packages");
+var isolated=Path.Combine(root,"build","artifacts","m4-w02-c02-t1-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
 Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
@@ -221,41 +216,39 @@ var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
 if(!HasExactLine(consumerOutput,ConsumerMarker))
     throw new InvalidOperationException("Eight NuGet-only pointwise derivative oracles not observed.");
 
+
 if(!target)
 {
     var evidence=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M4-W02-C01-T2-boundaries-qualified",
-        ["status"]="real-exact-pointwise-derivative-and-domain-refusal-qualified",
-        ["prior_exact_formal_derivative"]=Prior,
-        ["controlled_red_evidence"]=RedProof,
-        ["question"]="Can a real polynomial derivative be evaluated at exact rational points while distinguishing nondifferentiability, undefined original domains, unsupported analytic functions and unit policy without any numerical finite differences?",
-        ["observation"]="One compiled missing-boundary RED recovered; 37 exact/domain/units GREEN tests and eight independent NuGet-only client oracles observed polynomial point values and conservatively classified real analytic boundaries.",
-        ["decision"]="Admit exact polynomial point evaluation, Abs and Sqrt(Square(real x)) away from zero, and explicit typed refusal at kinks, outside original real domain, unproved radical or quotient forms, units, and retained assumptions.",
+        ["schema_version"]=1,["id"]="M4-W02-C02-T1-contract-qualified",
+        ["status"]="real-exact-elementary-equation-and-ray-solving-qualified",
+        ["prior_exact_pointwise_derivative"]=Prior,["controlled_red_evidence"]=RedProof,
+        ["question"]="Can a provider-neutral exact real solver distinguish provable empty sets from unknown irrational roots for a bounded elementary equation/inequality subset?",
+        ["observation"]="One compiled absent-API RED recovered, 36 GREEN tests and eight NuGet-only independent consumer oracles establish exact polynomial root and closed-ray cases.",
+        ["decision"]="Admit only x=c, x^2=c with exact rational square roots or provably negative empty case, constant relations, and selected exact closed-ray inequalities. Preserve unknown for all unqualified forms.",
         ["new_source"]=Product,["new_source_sha256"]=stagedHashes[Product],
         ["product_project"]=Project,["product_project_sha256"]=stagedHashes[Project],
         ["new_green_tests"]=GreenTests,["new_green_tests_sha256"]=stagedHashes[GreenTests],
         ["red_test"]=RedTest,["red_test_sha256"]=stagedHashes[RedTest],
         ["decision_document"]=Decision,["decision_document_sha256"]=stagedHashes[Decision],
-        ["distribution_document"]=Document,
-        ["distribution_document_sha256"]=stagedHashes[Document],
+        ["distribution_document"]=Document,["distribution_document_sha256"]=stagedHashes[Document],
         ["independent_green_tests_passed"]=IndependentGreen,
         ["red_recovered_and_green_tests_passed"]=TotalTargeted,
-        ["compiled_red_observed"]=true,
-        ["independent_consumer_probes_passed"]=8,
-        ["exact_polynomial_point_oracle"]="D(x^3,x=2)=12",
-        ["original_quotient_pole_at_x_equal_1_returns_value"]=false,
-        ["absolute_value_at_zero_nondifferentiable"]=true,
-        ["real_sqrt_of_square_at_zero_nondifferentiable"]=true,
-        ["real_sqrt_negative_point_outside_domain"]=true,
-        ["positive_sqrt_derivative_qualified"]=false,
-        ["numerical_differentiation_qualified"]=false,
-        ["no_implicit_binary64"]=true,
+        ["compiled_red_observed"]=true,["independent_consumer_probes_passed"]=8,
+        ["real_x_squared_equal_one_roots"]="-1,1",
+        ["real_x_squared_equal_negative_one_complete_empty"]=true,
+        ["real_x_squared_equal_two_is_unknown_not_empty"]=true,
+        ["rational_root_pair_exact"]="-2/3,2/3",
+        ["selected_real_inequality_rays_admitted"]=true,
+        ["complex_solution_sets_qualified"]=false,
+        ["unknown_does_not_claim_completeness"]=true,
+        ["original_restrictions_are_not_erased"]=true,
         ["units_return_unsupported_units"]=true,
-        ["restricted_source_returns_unsupported_assumptions"]=true,
+        ["no_implicit_binary64"]=true,
         ["maximum_exact_rational_bits"]=128,
-        ["canonical_source_semantic_hash_recorded"]=true,
-        ["differentiation_variable_identity_recorded"]=true,
+        ["original_side_semantic_hashes_recorded"]=true,
+        ["variable_identity_recorded"]=true,
         ["no_external_provider_product_dependency"]=true,
         ["complete_symbolics_test_suite_passed"]=true,
         ["relevant_ir_quantities_regressions_passed"]=true,
@@ -270,50 +263,43 @@ if(!target)
         ["consumer_config_sha256"]=stagedHashes[ConsumerConfig],
         ["consumer_marker"]=ConsumerMarker,
         ["packages_publicly_published"]=false,
-        ["locked_solution_build_passed"]=true,
-        ["transfer_architecture_passed"]=true,
-        ["m4_w02_c01_done"]=true,
-        ["m4_w02_work_package_done"]=false,
-        ["m4_release_done"]=false,
+        ["locked_solution_build_passed"]=true,["transfer_architecture_passed"]=true,
+        ["m4_w02_c02_t1_done"]=true,["m4_w02_c02_phase_done"]=false,
+        ["m4_w02_work_package_done"]=false,["m4_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_accepted_scope"]="M4-W02-C02-T1 bounded symbolic solving of exact polynomial equations with domain-aware results",
+        ["next_accepted_scope"]="M4-W02-C02-T2: original equation verification, multiplicity and missing/partial solution boundaries",
         ["nonclaims"]=p.Json.StringArray(
-            "No general analytic or numerical derivative; no complete function domain/codomain or one-sided differential calculus.",
-            "No derived unit computations, implicit restriction removal, binary64 finite differences, general quotient, complex branches or universal differentiability.",
-            "No external Angouri/MathNET provider decoder, mandatory Python runtime, public NuGet feed, AURA/Decision/MCDM integration or dw.discovery agent skill.",
-            "No M4-W02/C02/C03 completion, G-M4 release promotion or hard deadline guarantees.")
+            "No general CAS, no complex or irrational algebraic-number root output, arbitrary polynomial or quotient solving.",
+            "No arbitrary inequality sets, numerical approximation, original equation substitution for rational cancellations, root multiplicity or partial candidate sets.",
+            "No derived-unit solving, external CAS, public NuGet, mandatory Python or sibling repository integration.",
+            "No M4-W02-C02/C03, work package or M4 release promotion.")
     };
     p.Files.WriteComplete(Qualified,
         evidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
-
     p.Json.EditObject(Backlog,plan=>
     {
-        plan["plan_version"]="0.1.59";
+        plan["plan_version"]="0.1.60";
         var chunk=plan["chunks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
         var task=chunk["tasks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-        if((string?)chunk["status"]!="in_progress" ||
+        if((string?)chunk["status"]!="planned" ||
            (string?)task["status"]!="planned")
-            throw new InvalidOperationException("M4-W02-C01 T2 baseline diverged.");
-        chunk["status"]="done";
-        chunk["refinement"]="RS059 T1 introduced dw.tools.math.symbolics preview.5 exact real formal polynomial derivative up to degree eight, with d(x^3)/dx=3x^2, absent-symbol zero, and explicit unit/assumption/nonpolynomial refusals. RS060 T2 adds preview.6 exact rational pointwise derivative values and conservatively classified scientific boundaries: |x| and sqrt(x^2) are nondifferentiable at zero; sqrt(x) is outside its real domain for x<0 and nondifferentiable at zero; the original quotient hole x=1 stays excluded. Generic radical/quotient differentiation, unit arithmetic and numerical finite differences remain unsupported. Controlled RED + 37 GREEN, eight local NuGet-only oracles, and scoped symbolic/IR/quantity regressions close C01 without claiming W02/M4 completion.";
-        chunk["readiness"]="closed: both T1 exact real formal derivative and T2 pointwise analytic-domain/units refusal boundary qualified; C02/C03 remain planned";
-        var priorFiles=chunk["files"]!.AsArray().Select(x=>x!.GetValue<string>());
-        chunk["files"]=p.Json.StringArray(priorFiles.Concat(new[]{
-            Project,Product,RedTest,GreenTests,Decision,Document,
-            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified})
-            .Distinct(StringComparer.Ordinal).ToArray());
+            throw new InvalidOperationException("M4-W02-C02 T1 baseline diverged.");
+        chunk["status"]="in_progress";
+        chunk["refinement"]="RS061 T1 introduces provider-neutral exact real elementary equations and one-bound inequalities: x=c; x^2=c (negative empty, rational squares complete, positive nonrational squares unknown); constant predicates and closed real rays. Compiled absent API RED, 36 GREEN, eight independent NuGet-only consumer oracles, real source/target hashes, local product NuGet hashes and relevant IR/quantities regressions. T2 retains multiplication/division singularities, unknown/partial behavior, multiplicity and original equation substitution; M4-W02/M4 remain open.";
+        chunk["readiness"]="T1 accepted when RS061 is durable; T2 remains not-ready; C02 in-progress";
+        chunk["files"]=p.Json.StringArray(Project,Product,RedTest,GreenTests,
+            Decision,Document,ConsumerProject,ConsumerSource,ConsumerConfig,
+            RedProof,Qualified);
         chunk["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
             "dotnet build "+Solution+" -c Release --no-restore",
-            "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M4W02C01T2",
+            "dotnet test "+TestProject+" -c Release --filter FullyQualifiedName~M4W02C02T1",
             "dotnet test "+TestProject+" -c Release",
             "dotnet run --project "+ConsumerProject+" -c Release");
-        var oldEvidence=chunk["evidence"]!.AsArray().Select(x=>x!.GetValue<string>());
-        chunk["evidence"]=p.Json.StringArray(oldEvidence.Concat(new[]{RedProof,Qualified})
-            .Distinct(StringComparer.Ordinal).ToArray());
+        chunk["evidence"]=p.Json.StringArray(RedProof,Qualified);
         task["status"]="done";
         task["evidence"]=p.Json.StringArray(RedProof,Qualified);
         foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -323,6 +309,7 @@ if(!target)
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
     });
+    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
     p.ProjectPlan.ActivateReadyContinuation(Red);
@@ -334,29 +321,27 @@ if(!target)
         p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
-    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
-
 p.ProjectPlan.RequireNodeState("M3","done");
 p.ProjectPlan.RequireNodeState("M4","in-progress");
 p.ProjectPlan.RequireNodeState("M4-W01","done");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
-p.ProjectPlan.RequireNodeState(Phase,"done");
-p.ProjectPlan.RequireNodeState("M4-W02-C01-T1","done");
-p.ProjectPlan.RequireNodeState("M4-W02-C02","not-ready");
+p.ProjectPlan.RequireNodeState("M4-W02-C01","done");
+p.ProjectPlan.RequireNodeState(Phase,"in-progress");
+p.ProjectPlan.RequireNodeState("M4-W02-C02-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M4-W02-C03","not-ready");
 foreach(var child in new[]{Task,Red,Green,Verify})
     p.ProjectPlan.RequireNodeState(child,"done");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS060" ||
+    if((string?)state["pendingRun"]!="RS061" ||
        (string?)state["activeMilestone"]!="M4" ||
        (string?)state["activeWorkPackage"]!=Work ||
-       (string?)state["activePhase"]!=(target?null:Phase) ||
+       (string?)state["activePhase"]!=(target?Phase:null) ||
        state["activeTask"] is not null ||
        state["activeSubtask"] is not null)
-        throw new InvalidOperationException("RS060 exact before/after C01 active cursor diverged.");
-    state["activePhase"]=null;
+        throw new InvalidOperationException("RS061 before/after phase cursor diverged.");
+    state["activePhase"]=Phase;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
@@ -371,7 +356,7 @@ static bool HasExactLine(string output,string expected) =>
 static (long Bytes,string Sha) ReadProductReceipt(
     string output,string id,string version)
 {
-    var prefix="M4-W02-C01-T2-PKG-SHA256:"+id+":"+version+":";
+    var prefix="M4-W02-C02-T1-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
