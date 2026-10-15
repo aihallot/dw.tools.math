@@ -212,7 +212,7 @@ public static class CanonicalMathNotation
 
     private static bool SupportedSymbol(IrSymbol symbol) =>
         !symbol.IsBound && symbol.Domain == IrScalarDomain.Real &&
-        symbol.Identity is "free:x" or "free:y" or "free:z" &&
+        (symbol.Identity is "free:x" or "free:y" or "free:z") &&
         symbol.DisplayName.Length == 1 &&
         symbol.DisplayName[0] == symbol.Identity[^1];
 
