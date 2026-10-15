@@ -23,7 +23,6 @@ static ExactRational R(long numerator,long denominator=1)=>
 static IrExactScalar N(long n)=>new(R(n));
 static IrNode Add(params IrNode[] nodes)=>IrApply.Create(IrOperation.Add,nodes);
 static IrNode Sub(IrNode a,IrNode b)=>IrApply.Create(IrOperation.Subtract,[a,b]);
-static IrNode Mul(IrNode a,IrNode b)=>IrApply.Create(IrOperation.Multiply,[a,b]);
 static IrNode Square(IrNode a)=>IrApply.Create(IrOperation.Square,[a]);
 static IrNode Power(IrNode a,long n)=>IrApply.Create(IrOperation.Power,[a,N(n)]);
 static IrNode Divide(IrNode a,IrNode b)=>IrApply.Create(IrOperation.Divide,[a,b]);

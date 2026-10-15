@@ -10,6 +10,7 @@ SDK 10.0.401 is the observed M0-W01-C01 baseline. `global.json` allows `latestPa
 - Verify actual runner/framework signatures, especially relational assertions; do not transpose xUnit/NUnit assumptions into MSTest.
 - If MSTest 4 is used: TestMethod + DataRow, dedicated collection assertions, and unambiguous bound helpers.
 - Avoid ContainsKey/indexer double lookup, repeated constant-array allocation, and exceptions naming a parameter that does not exist.
+- For top-level C# consumer programs, check that every declared local helper is used (notably CS8321). Warnings are errors: remove dead helpers before handing DWF a run, not during operator execution.
 - Restore/build/test share configuration and artifact root. Do not run --no-build against output that has not been built.
 - DWF: use exact generated paths, dotnet run --file, structured arguments, and stagedFiles from the current run's staged tree.
 - Before publishing the final DWF request commit, audit every contribution field against the **active executable authoring contract** (not just JSON syntax): summary <= 500 characters, value <= 1000, nextAction <= 500; no CR/LF or blank text; <= 20 unique debtChanges with <= 300 characters each, and <= 20 achievements with unique project nodes and <= 1000 characters each. Count characters programmatically, reserve margin, and check all fields before publication. A pre-attempt refusal is a failed first invocation even if no attempt is allocated.
