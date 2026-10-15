@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.61",
+  "plan_version": "0.1.62",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5123,7 +5123,7 @@
       "title": "Integration and conditional transformations",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M4-W02-C02"
       ],
@@ -5148,40 +5148,70 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS063 T1 admits provider-neutral exact rational univariate real polynomial primitives and definite integration from rational bounds, degree \u003C=7 with derivative proof through admitted degree-eight formal differentiation and exact coefficient recovery. Finite rational-point polynomial limits use exact continuity. The arbitrary additive integration constant is explicit; units, restrictions, binary64, roots, arbitrary quotients, improper intervals and convergence are refused. One compiled RED plus 50 GREEN tests, eight standalone local NuGet-only probes, three package inspections and relevant symbolics/IR/quantities regressions qualify T1. T2 remains not-ready; C03, W02 and M4 remain in-progress.",
+      "files": [
+        "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+        "src/projects/dw.tools.math.symbolics/SymbolicExactPolynomialCalculus.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C03T1RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C03T1Tests.cs",
+        "docs/planning/decisions/m4-w02-c03-t1-exact-polynomial-calculus.md",
+        "docs/distribution/symbolic-exact-polynomial-calculus.md",
+        "tests/consumers/m4-w02-c03-t1/m4-exact-polynomial-calculus-consumer.csproj",
+        "tests/consumers/m4-w02-c03-t1/Program.cs",
+        "tests/consumers/m4-w02-c03-t1/NuGet.Config",
+        "docs/planning/evidence/M4-W02-C03-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C03-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C03T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m4-w02-c03-t1/m4-exact-polynomial-calculus-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M4-W02-C03-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C03-T1-contract-qualified.json"
+      ],
+      "readiness": "T1 qualified by RS063 evidence; T2 not-ready pending singularities/constant/unknown convergence qualification",
       "tasks": [
         {
           "id": "M4-W02-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt antiderivative/integral and limits over the qualified subset, with constant/branch conventions.",
           "test_case": "Integral of x on [0,1]=1/2; differentiating a polynomial antiderivative recovers the integrand.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W02-C03-T1-contract-red.json",
+            "docs/planning/evidence/M4-W02-C03-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W02-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Integral of x on [0,1]=1/2; differentiating a polynomial antiderivative recovers the integrand.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C03-T1-contract-red.json"
+              ]
             },
             {
               "id": "M4-W02-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt antiderivative/integral and limits over the qualified subset, with constant/branch conventions.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C03-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M4-W02-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W02-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C03-T1-contract-qualified.json"
+              ]
             }
           ]
         },
