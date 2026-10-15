@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.65",
+  "plan_version": "0.1.66",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5296,7 +5296,7 @@
       "title": "Canonical text and LaTeX rendering",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C04",
         "M4-W02-C03"
@@ -5322,7 +5322,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C01Tests"
       ],
-      "refinement": "RS066 introduces a real .NET 10 dw.tools.math.codecs product with lock-file-managed IR/quantities dependencies, one compiled missing-API RED and 50 exact/boundary GREEN tests. A versioned closed canonical ASCII prefix grammar parses rationals, free real x/y/z, bounded arithmetic and function nodes, three typed unit identities and retained eq/ne/ge original-domain restrictions to Math IR. Rendering emits display-only LaTeX and source semantic hash without evaluation. Eight independent pinned NuGet-only oracles inspect the newly packed three-product graph and meaning-preserving IR roundtrip. T2 retains adversarial escaping, ambiguity and broader boundary responsibilities; M5/W01/C01 remain in-progress.",
+      "refinement": "RS066 T1 qualifies the closed canonical exact ASCII text-to-IR and passive LaTeX contract. RS067 T2 independently audits renderer-generated command braces/allowlist, exact canonical structural IR roundtrips, original-domain restriction binding and contradictions. Distinct IR square and power-two shapes produce the same LaTeX; the safe display is explicitly flagged noninjective, never marked reversible. A genuine compiled absent-API RED, 51 GREEN tests, eight isolated NuGet-only consumer oracles, three locally inspected packages and relevant codec/IR/quantities tests qualify C01. W01 and M5 remain in-progress; C02 bounded LaTeX import is not started.",
       "files": [
         "dw.tools.math.slnx",
         "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
@@ -5338,20 +5338,32 @@
         "tests/consumers/m5-w01-c01-t1/Program.cs",
         "tests/consumers/m5-w01-c01-t1/NuGet.Config",
         "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.codecs/CanonicalDisplayBoundaryAudit.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C01T2Tests.cs",
+        "docs/planning/decisions/m5-w01-c01-t2-display-boundaries.md",
+        "docs/distribution/m5-display-boundaries.md",
+        "tests/consumers/m5-w01-c01-t2/m5-display-boundary-consumer.csproj",
+        "tests/consumers/m5-w01-c01-t2/Program.cs",
+        "tests/consumers/m5-w01-c01-t2/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C01-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C01T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C01T2",
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m5-w01-c01-t1/m5-canonical-text-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m5-w01-c01-t2/m5-display-boundary-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json",
+        "docs/planning/evidence/M5-W01-C01-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 exact canonical parser and safe LaTeX display admitted only after RS066 durable evidence; T2 and future import/formatting phases remain unfinished",
+      "readiness": "C01 exact canonical text and display audit qualified by RS066 and RS067; C02 remains not-ready pending separate LaTeX import and ambiguity grammar acceptance",
       "tasks": [
         {
           "id": "M5-W01-C01-T1",
@@ -5398,29 +5410,38 @@
           "title": "Boundaries and integration",
           "behavior": "Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
           "test_case": "Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C01-T2-contract-red.json",
+            "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T2-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
