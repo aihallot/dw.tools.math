@@ -148,6 +148,8 @@ public static class CanonicalMathNotation
                 case IrSymbol symbol when !SupportedSymbol(symbol):
                     throw new UnsupportedNotationException(
                         CanonicalNotationStatus.UnsupportedDomain);
+                case IrSymbol:
+                    break;
                 case IrExactScalar exact when !Bounded(exact.Value):
                     throw new ArgumentOutOfRangeException(nameof(source));
                 case IrQuantityLiteral unit:

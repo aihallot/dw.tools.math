@@ -15,7 +15,8 @@ public sealed class M5W01C01T1Tests
     private static CanonicalNotationResult Pass(string text)
     {
         var result=CanonicalMathNotation.Parse(text);
-        Assert.IsTrue(result.IsAdmitted,"Expected admitted canonical text: "+text);
+        Assert.IsTrue(result.IsAdmitted,
+            "Expected admitted canonical text: "+text+"; status="+result.Status);
         Assert.AreEqual(CanonicalNotationStatus.Admitted,result.Status);
         Assert.AreEqual(text,result.CanonicalText);
         Assert.IsNotNull(result.Expression);
