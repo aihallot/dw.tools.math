@@ -148,11 +148,16 @@ public sealed class M5W01C01T1Tests
     [TestMethod]
     public void AbsoluteKelvinTemperatureKindIsRenderedExplicitly()
     {
-        var r=Pass("unit(27315/100,si.kelvin,Absolute)");
+        // Canonical text requires the already-reduced exact fraction.
+        var r=Pass("unit(5463/20,si.kelvin,Absolute)");
         var unit=(IrQuantityLiteral)r.Expression!;
+        Assert.AreEqual(new ExactRational(27315,100),
+            ((IrExactScalar)unit.Value).Value);
         Assert.AreEqual(IrTemperatureKind.Absolute,unit.Temperature);
         Assert.AreEqual(DimensionVector.TemperatureDimension,unit.Dimension);
         Assert.IsTrue(r.Latex!.Contains("_{\\mathrm{absolute}}",StringComparison.Ordinal));
+        Refuse("unit(27315/100,si.kelvin,Absolute)",
+            CanonicalNotationStatus.NonCanonical);
     }
 
     [TestMethod]

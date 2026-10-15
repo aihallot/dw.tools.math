@@ -31,6 +31,8 @@ ASCII text is prefix-structured, not a permissive infix parser:
 - where(expression,ne|eq|ge(symbol,rational), ...), with 1–8
   retained original-domain typed assumptions.
 
+A canonical absolute-temperature example is unit(5463/20,si.kelvin,Absolute): its exact value equals 27315/100 K, but the unreduced input unit(27315/100,si.kelvin,Absolute) is NonCanonical. Scientific equality does not waive canonical text normalization.
+
 The parser refuses noncanonical aliases such as 2/4, 01 and -0;
 implicit decimals, unit aliases, arbitrary identifiers, general
 infix and arbitrary LaTeX commands are not part of this *canonical*
