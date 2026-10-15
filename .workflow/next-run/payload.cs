@@ -158,9 +158,9 @@ foreach(var project in new[]{
     "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"})
 {
-    var observed=Required(root,"dotnet","test",project,"-c","Release",
+    var regressionOutput=Required(root,"dotnet","test",project,"-c","Release",
         "--no-build","--no-restore","--logger","console;verbosity=minimal");
-    if(!observed.Contains("Passed",StringComparison.OrdinalIgnoreCase))
+    if(!regressionOutput.Contains("Passed",StringComparison.OrdinalIgnoreCase))
         throw new InvalidOperationException("Required T2 IR/quantities regression not observed: "+project);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
