@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS066",
+  "title": "Qualify canonical exact Math text and safe LaTeX rendering",
+  "state": "prepared",
+  "commitMessage": "feat: qualify canonical Math text and LaTeX IR codecs",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M5",
+    "M5-W01",
+    "M5-W01-C01",
+    "M5-W01-C01-T1",
+    "M5-W01-C01-T1-R",
+    "M5-W01-C01-T1-G",
+    "M5-W01-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Create the .NET 10 Math codecs product with an exact canonical ASCII text-to-IR grammar and display-only LaTeX for rational, polynomial, function, unit and exclusion forms. Require a compiled RED, 50 GREEN tests, eight isolated NuGet consumer probes, three local archive inspections and locked builds. Complete T1 only; open M5/W01/C01 without promoting those parents, TeX import, public packages or stable 1.0.",
+    "value": "Enable independent Math consumers to exchange structurally exact, meaning-preserving mathematical expressions and safe presentation with explicit grammar limits and no provider or agent dependency.",
+    "debtChanges": [
+      "Create the real dw.tools.math.codecs .NET 10 project and its test project in the existing .slnx, with explicit locked ProjectReference graphs and no source migration from other repositories.",
+      "Observe a compiled missing public parser/renderer API RED against the empty codec assembly before installing the T1 implementation and fifty independent scientific GREEN tests.",
+      "Admit a versioned canonical ASCII prefix grammar with rational exactness, x/y/z identity, bounded arithmetic/sqrt/abs, three typed quantities and retained eq/ne/ge source restrictions.",
+      "Round-trip admitted canonical text and existing Math IR JSON without lossy identities, and render only whitelisted nodes to display-only LaTeX with typed refusals and no executable commands.",
+      "Preserve guarded x/y/z IR symbol admission, then verify every positive exact-text rational is reduced (gcd=1). Admit 5463/20 for exact 27315/100 Kelvin; explicitly reject the unreduced Kelvin spelling and keep all 50 GREEN oracles.",
+      "Build the locked .NET solution and new test suite, retain exact IR/quantities regressions, and independently inspect three locally packed net10 product archives and their actual SHA-256 hashes.",
+      "Execute eight NuGet-only client oracles using one pinned codecs preview.1 package and transitive IR/quantities; keep external feeds cleared and no product ProjectReference in the consumer.",
+      "Complete only T1 RED/GREEN/verification and T1. M5/W01/C01 become in-progress while T2, LaTeX import, MathML, Office, stable 1.0 and external adoption remain untouched."
+    ],
+    "nextAction": "After durable RS066 success, qualify M5-W01-C01-T2 adversarial escaping, nesting, command allowlists and ambiguity without treating display-only LaTeX as an input parser.",
+    "achievements": [
+      {
+        "projectNode": "M5-W01-C01-T1-R",
+        "achievement": "Observe one compiled missing canonical Math text and display-only LaTeX API RED against an empty codec assembly."
+      },
+      {
+        "projectNode": "M5-W01-C01-T1-G",
+        "achievement": "Implement exact bounded canonical text-to-IR and safe LaTeX rendering with fifty GREEN tests, versioned grammar and typed refusal semantics."
+      },
+      {
+        "projectNode": "M5-W01-C01-T1-V",
+        "achievement": "Verify locked new .NET projects, exact IR/quantity regressions, eight independent NuGet-only consumers, three package hashes and science/provenance evidence."
+      },
+      {
+        "projectNode": "M5-W01-C01-T1",
+        "achievement": "Qualify canonical text, rational/polynomial/function/unit/exclusion round-trips and exact IR source identity while leaving T2 and M5 hierarchy unfinished."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    "dw.tools.math.slnx",
+    "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+    "src/projects/dw.tools.math.codecs/packages.lock.json",
+    "src/projects/dw.tools.math.codecs/CanonicalMathNotation.cs",
+    "tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj",
+    "tests/projects/dw.tools.math.codecs.tests/packages.lock.json",
+    "tests/projects/dw.tools.math.codecs.tests/M5W01C01T1RedTests.cs",
+    "tests/projects/dw.tools.math.codecs.tests/M5W01C01T1Tests.cs",
+    "tests/consumers/m5-w01-c01-t1/Program.cs",
+    "tests/consumers/m5-w01-c01-t1/m5-canonical-text-consumer.csproj",
+    "tests/consumers/m5-w01-c01-t1/NuGet.Config",
+    "docs/planning/decisions/m5-w01-c01-t1-canonical-text.md",
+    "docs/distribution/m5-canonical-text.md",
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M5.md",
+    "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
+    "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
