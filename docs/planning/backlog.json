@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.59",
+  "plan_version": "0.1.60",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4969,7 +4969,7 @@
       "title": "Solving and solution sets",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M4-W02-C01"
       ],
@@ -4994,40 +4994,70 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS061 T1 introduces provider-neutral exact real elementary equations and one-bound inequalities: x=c; x^2=c (negative empty, rational squares complete, positive nonrational squares unknown); constant predicates and closed real rays. Compiled absent API RED, 36 GREEN, eight independent NuGet-only consumer oracles, real source/target hashes, local product NuGet hashes and relevant IR/quantities regressions. T2 retains multiplication/division singularities, unknown/partial behavior, multiplicity and original equation substitution; M4-W02/M4 remain open.",
+      "files": [
+        "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+        "src/projects/dw.tools.math.symbolics/SymbolicExactRealSolving.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T1Tests.cs",
+        "docs/planning/decisions/m4-w02-c02-t1-exact-real-solving.md",
+        "docs/distribution/symbolic-exact-real-solving.md",
+        "tests/consumers/m4-w02-c02-t1/m4-exact-real-solving-consumer.csproj",
+        "tests/consumers/m4-w02-c02-t1/Program.cs",
+        "tests/consumers/m4-w02-c02-t1/NuGet.Config",
+        "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C02T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m4-w02-c02-t1/m4-exact-real-solving-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+      ],
+      "readiness": "T1 accepted when RS061 is durable; T2 remains not-ready; C02 in-progress",
       "tasks": [
         {
           "id": "M4-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt subset equations/inequalities with domains and conditional solutions.",
           "test_case": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
+            "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W02-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T1-contract-red.json"
+              ]
             },
             {
               "id": "M4-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt subset equations/inequalities with domains and conditional solutions.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M4-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+              ]
             }
           ]
         },
