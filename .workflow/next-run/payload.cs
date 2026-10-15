@@ -10,166 +10,158 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C01",Task="M5-W01-C01-T1";
-const string Red="M5-W01-C01-T1-R",Green="M5-W01-C01-T1-G",Verify="M5-W01-C01-T1-V";
+const string Work="M5-W01",Phase="M5-W01-C01",Task="M5-W01-C01-T2";
+const string Red="M5-W01-C01-T2-R",Green="M5-W01-C01-T2-G",Verify="M5-W01-C01-T2-V";
 const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
-const string Gate="docs/planning/evidence/M4-gate.json";
-const string RedProof="docs/planning/evidence/M5-W01-C01-T1-contract-red.json";
-const string Qualified="docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json";
-const string Source="src/projects/dw.tools.math.codecs/CanonicalMathNotation.cs";
+const string Prior="docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json";
+const string RedProof="docs/planning/evidence/M5-W01-C01-T2-contract-red.json";
+const string Qualified="docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json";
+const string Source="src/projects/dw.tools.math.codecs/CanonicalDisplayBoundaryAudit.cs";
 const string Product="src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj";
-const string ProductLock="src/projects/dw.tools.math.codecs/packages.lock.json";
 const string Test="tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj";
-const string TestLock="tests/projects/dw.tools.math.codecs.tests/packages.lock.json";
-const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C01T1RedTests.cs";
-const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C01T1Tests.cs";
-const string Decision="docs/planning/decisions/m5-w01-c01-t1-canonical-text.md";
-const string Document="docs/distribution/m5-canonical-text.md";
-const string ConsumerProject="tests/consumers/m5-w01-c01-t1/m5-canonical-text-consumer.csproj";
-const string ConsumerSource="tests/consumers/m5-w01-c01-t1/Program.cs";
-const string ConsumerConfig="tests/consumers/m5-w01-c01-t1/NuGet.Config";
-const string PackageHelper=".workflow/runs/RS066/staged/checks/m5-w01-c01-t1-package-sha.cs";
-const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.1";
-const string RedMarker="M5-W01-C01-T1 RED: canonical math text parser and display-only LaTeX renderer APIs are absent.";
-const string ConsumerMarker="dw.tools.math/m5-canonical-text-consumer/1.0 qualified; probes=8";
-const int IndependentGreen=50,AllTargeted=51;
+const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C01T2RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C01T2Tests.cs";
+const string Decision="docs/planning/decisions/m5-w01-c01-t2-display-boundaries.md";
+const string Document="docs/distribution/m5-display-boundaries.md";
+const string ConsumerProject="tests/consumers/m5-w01-c01-t2/m5-display-boundary-consumer.csproj";
+const string ConsumerSource="tests/consumers/m5-w01-c01-t2/Program.cs";
+const string ConsumerConfig="tests/consumers/m5-w01-c01-t2/NuGet.Config";
+const string PackageHelper=".workflow/runs/RS067/staged/checks/m5-w01-c01-t2-package-sha.cs";
+const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.2";
+const string RedMarker="M5-W01-C01-T2 RED: canonical display-boundary text and IR audit APIs are absent.";
+const string ConsumerMarker="dw.tools.math/m5-display-boundary-consumer/1.0 qualified; probes=8";
+const int IndependentGreen=51,AllTargeted=52;
+
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
+p.Workflow.RequireCurrentRun("RS067","M5",Work,target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS066",1,
+    "feat: qualify canonical Math text and LaTeX IR codecs",
+    "0.1.59",2,2,0,false);
 
-p.Workflow.RequireCurrentRun("RS066",
-    target?Milestone:null,target?Work:null,target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS065",1,
-    "feat: qualify local M4 symbolic release gate",
-    "0.1.59",1,1,0,false);
-p.Require.JsonValueEquals(Gate,"/status",
-    JsonValue.Create("m4-local-exact-symbolic-preview-gate-qualified"));
-p.Require.JsonValueEquals(Gate,"/qualified_tasks",JsonValue.Create(12));
-p.Require.JsonValueEquals(Gate,"/qualified_subtasks",JsonValue.Create(36));
-p.Require.JsonValueEquals(Gate,"/cross_vertical_nuget_consumer_oracles",JsonValue.Create(32));
-p.Require.JsonValueEquals(Gate,"/m4_milestone_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(Gate,"/m5_milestone_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(Gate,"/packages_publicly_published",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("exact-canonical-text-ir-latex-subset-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(50));
+p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(51));
+p.Require.JsonValueEquals(Prior,"/isolated_consumer_probes_passed",JsonValue.Create(8));
+p.Require.JsonValueEquals(Prior,"/compiled_red_observed",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/canonical_grammar_id",
+    JsonValue.Create("dw-math-canonical-text/1"));
+p.Require.JsonValueEquals(Prior,"/local_product_version",
+    JsonValue.Create("1.0.0-preview.1"));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c01_t1_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c01_phase_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/m5_release_done",JsonValue.Create(false));
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.64"),JsonValue.Create("0.1.65"));
+    JsonValue.Create("0.1.65"),JsonValue.Create("0.1.66"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.65":"0.1.64"));
-p.Require.JsonValueEquals(Backlog,"/releases/3/status",JsonValue.Create("done"));
+    JsonValue.Create(target?"0.1.66":"0.1.65"));
 p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(Backlog,"/releases/5/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",
-    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/releases/5/status",JsonValue.Create("in_progress"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",JsonValue.Create("in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/12/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/32/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/chunks/33/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/33/tasks/0/status",
+    JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/33/tasks/0/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/33/tasks/1/status",
     JsonValue.Create(target?"done":"planned"));
-foreach(var i in new[]{0,1,2})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/33/tasks/0/subtasks/{i}/status",
+foreach(var index in new[]{0,1,2})
+    p.Require.JsonValueEquals(Backlog,$"/chunks/33/tasks/1/subtasks/{index}/status",
         JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/33/tasks/1/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/34/status",JsonValue.Create("planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/35/status",JsonValue.Create("planned"));
-p.ProjectPlan.RequireNodeState("M3","done");
 p.ProjectPlan.RequireNodeState("M4","done");
-p.ProjectPlan.RequireNodeState(Milestone,target?"in-progress":"not-ready");
-p.ProjectPlan.RequireNodeState(Work,target?"in-progress":"not-ready");
-p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState("M5","in-progress");
+p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M5-W01-C01-T1","done");
 p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
-p.ProjectPlan.RequireNodeState("M5-W01-C01-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W01-C02","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
-foreach(var id in new[]{Red,Green,Verify})
-    p.ProjectPlan.RequireNodeState(id,target?"done":"not-ready");
+foreach(var child in new[]{Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(child,target?"done":"not-ready");
+
 if(!target)
 {
-    foreach(var file in new[]{Product,ProductLock,Test,TestLock,Source,
-        RedTest,GreenTests,Decision,Document,ConsumerProject,ConsumerSource,
-        ConsumerConfig,RedProof,Qualified})
+    foreach(var file in new[]{Source,RedTest,GreenTests,Decision,Document,
+        ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified})
         p.Require.FileMissing(file);
-    p.Require.TextContains(Solution,
-        "<Project Path=\"src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj\" />");
+    p.Require.TextContains(Product,"<Version>1.0.0-preview.1</Version>");
 }
 else
 {
-    p.Require.TextContains(Solution,
-        "<Project Path=\"src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj\" />");
+    p.Require.JsonValueEquals(RedProof,"/status",
+        JsonValue.Create("compiled-canonical-display-boundary-apis-absent-red-observed"));
     p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create("exact-canonical-text-ir-latex-subset-qualified"));
+        JsonValue.Create("exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified"));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
-    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",
-        JsonValue.Create(8));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c01_t1_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",JsonValue.Create(8));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c01_phase_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_work_package_done",JsonValue.Create(false));
     p.Require.JsonValueEquals(Qualified,"/m5_release_done",JsonValue.Create(false));
+    p.Require.TextContains(Product,"<Version>1.0.0-preview.2</Version>");
 }
 var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
-// Bootstrap the first real codec product project as a compilation-ready
-// EMPTY assembly. One genuine compiled public-API RED must run before
-// introducing the implementation source or GREEN scientific tests.
-foreach(var file in new[]{Solution,Product,ProductLock,Test,TestLock,RedTest})
-{
-    var receipt=p.Files.ReplaceFromStaged("staged/"+file,file);
-    hashes[file]=receipt.AfterSha256 ??
-        throw new InvalidOperationException("Missing staged structural project hash: "+file);
-}
+var redInstalled=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+hashes[RedTest]=redInstalled.AfterSha256 ??
+    throw new InvalidOperationException("The staged codec display-boundary RED test has no byte receipt.");
 if(!target)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
     var red=Run(root,"dotnet","test",Test,"-c","Release",
         "--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M5W01C01T1RedTests.PublicCanonicalMathTextAndLatexContractMustExist",
+        "--filter","FullyQualifiedName~M5W01C01T2RedTests.IndependentCanonicalDisplayBoundaryAuditMustBePublic",
         "--logger","console;verbosity=normal");
     if(red.Code==0 || !red.Output.Contains(RedMarker,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "A compiled missing public canonical math text / LaTeX API RED was not observed: "+
+            "One compiled missing-public-API display boundary RED is mandatory: "+
             Relevant(red.Output));
-    var proof=new JsonObject
+    var redProof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M5-W01-C01-T1-contract-red",
-        ["status"]="compiled-canonical-text-apis-absent-red-observed",
-        ["prior_m4_symbolic_gate"]=Gate,
-        ["compiled_new_assembly_without_implementation"]="dw.tools.math.codecs/1.0.0-preview.1",
+        ["schema_version"]=1,["id"]="M5-W01-C01-T2-contract-red",
+        ["status"]="compiled-canonical-display-boundary-apis-absent-red-observed",
+        ["prior_canonical_text_contract"]=Prior,
+        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.1",
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
-        ["missing_api"]="CanonicalMathNotation.Parse(string);Render(IrNode)",
+        ["missing_api"]="CanonicalDisplayBoundaryAudit.AuditText(string);AuditIr(IrNode)",
         ["expected_red_assertion"]=RedMarker,
         ["independent_red_test_count"]=1,
-        ["compiler_failure_is_not_a_red_substitute"]=true,
-        ["nonclaim"]="An absent API alone is not evidence of mathematical notation correctness."
+        ["compiler_failure_not_a_red_substitute"]=true,
+        ["nonclaim"]="An absent API is not itself an admission of TeX safety or structural fidelity."
     };
     p.Files.WriteComplete(RedProof,
-        proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+        redProof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
-foreach(var file in new[]{Source,GreenTests,Decision,Document,
+foreach(var file in new[]{Product,Source,GreenTests,Decision,Document,
     ConsumerProject,ConsumerSource,ConsumerConfig})
 {
     var receipt=p.Files.ReplaceFromStaged("staged/"+file,file);
     hashes[file]=receipt.AfterSha256 ??
-        throw new InvalidOperationException("Missing staged codec product/science hash: "+file);
+        throw new InvalidOperationException("Missing staged Math codec proof hash for "+file);
 }
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 var targeted=Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore",
-    "--filter","FullyQualifiedName~M5W01C01T1",
+    "--filter","FullyQualifiedName~M5W01C01T2",
     "--logger","console;verbosity=normal");
-if(!targeted.Contains("Total tests: 51",StringComparison.OrdinalIgnoreCase) ||
-   !targeted.Contains("Passed: 51",StringComparison.OrdinalIgnoreCase))
+if(!targeted.Contains("Total tests: 52",StringComparison.OrdinalIgnoreCase)||
+   !targeted.Contains("Passed: 52",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException(
-        "Expected one compiled RED recovered plus fifty independent canonical text GREEN tests.");
+        "Require the compiled RED recovered plus 51 independent Math display-boundary GREEN tests.");
 Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore","--logger","console;verbosity=minimal");
-foreach(var existing in new[]{
+foreach(var project in new[]{
     "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
     "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"})
 {
-    var regression=Required(root,"dotnet","test",existing,"-c","Release",
+    var observed=Required(root,"dotnet","test",project,"-c","Release",
         "--no-build","--no-restore","--logger","console;verbosity=minimal");
-    if(!regression.Contains("Passed",StringComparison.OrdinalIgnoreCase))
-        throw new InvalidOperationException(
-            "Canonical Math text did not retain IR or exact quantities regression: "+existing);
+    if(!observed.Contains("Passed",StringComparison.OrdinalIgnoreCase))
+        throw new InvalidOperationException("Required T2 IR/quantities regression not observed: "+project);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
@@ -181,7 +173,7 @@ var packages=new (string Id,string Version,string Project,string[] DependsOn)[]
         "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
     ("dw.tools.math.codecs",Version,Product,["dw.tools.math.ir"])
 };
-var feed=Path.Combine(root,"build","artifacts","m5-w01-c01-t1-local-feed");
+var feed=Path.Combine(root,"build","artifacts","m5-w01-c01-t2-local-feed");
 var archives=new List<string>();
 foreach(var package in packages)
 {
@@ -223,8 +215,8 @@ var configured=XDocument.Load(Path.Combine(root,ConsumerConfig))
 if(!configured.Elements().Any(x=>x.Name.LocalName=="clear") ||
    configured.Elements().Any(x=>x.Name.LocalName=="add"))
     throw new InvalidOperationException(
-        "The canonical package-only consumer must clear external package feeds.");
-var isolated=Path.Combine(root,"build","artifacts","m5-w01-c01-t1-isolated-packages");
+        "The display-boundary package-only consumer must clear external package feeds.");
+var isolated=Path.Combine(root,"build","artifacts","m5-w01-c01-t2-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
 Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
@@ -232,62 +224,48 @@ var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
     "-c","Release","--no-build","--no-restore");
 if(!HasExactLine(consumerOutput,ConsumerMarker))
     throw new InvalidOperationException(
-        "Eight independent canonical text NuGet-only consumer oracles not observed.");
+        "Eight independent display-boundary NuGet-only consumer oracles not observed.");
 
 if(!target)
 {
     var evidence=new JsonObject
     {
         ["schema_version"]=1,
-        ["id"]="M5-W01-C01-T1-contract-qualified",
-        ["status"]="exact-canonical-text-ir-latex-subset-qualified",
-        ["prior_m4_scientific_gate"]=Gate,
+        ["id"]="M5-W01-C01-T2-boundaries-qualified",
+        ["status"]="exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified",
+        ["prior_canonical_text_contract"]=Prior,
         ["compiled_missing_api_red"]=RedProof,
-        ["question"]="Can bounded exact canonical text preserve rational, polynomial, function, quantity and original-domain exclusion IR meaning while emitting display-only LaTeX without running TeX or a CAS?",
-        ["observation"]="A genuine compiled missing-API RED was recovered; fifty independent GREEN oracles and eight isolated NuGet-only probes cover typed text/IR/LaTeX, unit metadata, exclusions and canonical refusals.",
-        ["decision"]="Admit a closed canonical ASCII prefix grammar with rational coefficients, x/y/z, arithmetic and sqrt/abs, three fixed units and typed eq/ne/ge restrictions; display LaTeX without interpreting it.",
-        ["source_file"]=Source,
-        ["source_sha256"]=hashes[Source],
-        ["solution_file"]=Solution,
-        ["solution_sha256"]=hashes[Solution],
-        ["product_project"]=Product,
-        ["product_project_sha256"]=hashes[Product],
-        ["product_lock_file"]=ProductLock,
-        ["product_lock_sha256"]=hashes[ProductLock],
-        ["test_project"]=Test,
-        ["test_project_sha256"]=hashes[Test],
-        ["test_lock_file"]=TestLock,
-        ["test_lock_sha256"]=hashes[TestLock],
-        ["green_tests"]=GreenTests,
-        ["green_tests_sha256"]=hashes[GreenTests],
-        ["red_test"]=RedTest,
-        ["red_test_sha256"]=hashes[RedTest],
-        ["decision_document"]=Decision,
-        ["decision_document_sha256"]=hashes[Decision],
+        ["question"]="Can the accepted Math T1 canonical text/IR/LaTeX subset be independently audited for bounded renderer commands, original-domain assumption binding, exact contradictions and noninjective display without admitting arbitrary TeX import or execution?",
+        ["observation"]="One genuine compiled missing-API RED recovered, 51 independent GREEN tests and eight isolated NuGet-only oracles qualify passive display command boundaries, exact structural IR roundtrips, unbound/contradictory assumption refusals and a known square-versus-power display collision.",
+        ["decision"]="Admit an independent Math display-boundary audit over the T1 grammar and renderer; allow only named passive TeX commands, retain original IR and structural SHA-256, classify a known collision without ever claiming inverse LaTeX parsing.",
+        ["source_file"]=Source,["source_sha256"]=hashes[Source],
+        ["product_project"]=Product,["product_project_sha256"]=hashes[Product],
+        ["green_tests"]=GreenTests,["green_tests_sha256"]=hashes[GreenTests],
+        ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
+        ["decision_document"]=Decision,["decision_document_sha256"]=hashes[Decision],
         ["distribution_document"]=Document,
         ["distribution_document_sha256"]=hashes[Document],
         ["independent_green_tests_passed"]=IndependentGreen,
         ["red_recovered_and_green_tests_passed"]=AllTargeted,
-        ["compiled_red_observed"]=true,
-        ["isolated_consumer_probes_passed"]=8,
-        ["canonical_grammar_id"]="dw-math-canonical-text/1",
-        ["canonical_ascii_only"]=true,
-        ["maximum_input_characters"]=1024,
-        ["maximum_latex_characters"]=4096,
-        ["maximum_parser_depth"]=16,
-        ["maximum_arguments"]=8,
-        ["maximum_conditions"]=8,
-        ["maximum_exact_rational_bits"]=128,
-        ["number_of_whitelisted_units"]=3,
-        ["text_ir_structural_roundtrip_qualified"]=true,
-        ["latex_display_only_no_inverse_parser"]=true,
-        ["original_domain_exclusions_retained"]=true,
-        ["arbitrary_tex_command_execution_admitted"]=false,
-        ["unqualified_unit_aliases_admitted"]=false,
-        ["implicit_finite_binary64_exactness_admitted"]=false,
+        ["compiled_red_observed"]=true,["isolated_consumer_probes_passed"]=8,
+        ["canonical_text_grammar"]="dw-math-canonical-text/1",
+        ["safe_display_audit_rule"]="canonical-safe-math-display-domain-audit/v1",
+        ["only_renderer_generated_latex_is_scanned"]=true,
+        ["latex_ascii_and_braces_bounded"]=true,
+        ["allowed_tex_commands"]=p.Json.StringArray(
+            "frac","left","right","cdot","sqrt","mathrm","ne","ge"),
+        ["latex_inverse_qualified"]=false,
+        ["square_and_power_two_have_identical_latex"]=true,
+        ["known_display_collision_reported"]=true,
+        ["semantic_structural_hash_retained"]=true,
+        ["canonical_math_ir_replay_verified"]=true,
+        ["unbound_original_assumptions_rejected"]=true,
+        ["contradictory_equalities_rejected"]=true,
+        ["refused_boundary_has_no_latex_or_mathematical_proof"]=true,
+        ["arbitrary_tex_import_or_execution_admitted"]=false,
         ["no_external_cas_or_agent_dependency"]=true,
         ["locked_solution_build_passed"]=true,
-        ["codec_tests_and_exact_ir_quantities_regressions_passed"]=true,
+        ["codec_ir_quantities_regressions_passed"]=true,
         ["local_product_version"]=Version,
         ["local_product_package_graph"]=p.Json.Array(products.ToArray()),
         ["product_package_manifest_sha_helper"]=PackageHelper,
@@ -299,52 +277,48 @@ if(!target)
         ["consumer_config_sha256"]=hashes[ConsumerConfig],
         ["consumer_marker"]=ConsumerMarker,
         ["packages_publicly_published"]=false,
-        ["m5_w01_c01_t1_done"]=true,
-        ["m5_w01_c01_phase_done"]=false,
+        ["m5_w01_c01_t2_done"]=true,
+        ["m5_w01_c01_phase_done"]=true,
         ["m5_w01_work_package_done"]=false,
         ["m5_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_accepted_scope"]="M5-W01-C01-T2: escaping, depth, command allowlist and semantic/rendering ambiguity refusal, without parsing arbitrary TeX",
+        ["next_accepted_scope"]="M5-W01-C02-T1: separately qualify bounded LaTeX import and explicit ambiguity controls without claiming T1 passive display is reversible",
         ["nonclaims"]=p.Json.StringArray(
-            "No general infix parser, implicit decimal aliases, TeX import/execution, MathML, Markdown, Office or generic symbol namespace.",
-            "No inverse LaTeX/typographic fidelity claim, unbounded mathematical evaluation, arbitrary quantity conversion or CAS.",
-            "No public NuGet, stable 1.0, AURA/Decision/MCDM adoption, broker permissions or dw.discovery conformance.",
-            "No completion of C01 phase, M5-W01 work package or M5 release; boundaries T2 and future interoperability work remain open.")
+            "No arbitrary LaTeX input, macro execution, general TeX sanitizer, safe rendering of arbitrary caller strings or reversible TeX grammar.",
+            "No general algebraic equivalence, symbolic CAS, complex principal branches, arbitrary text/Unicode aliases, MathML or Office interop.",
+            "No public NuGet or stable 1.0, AURA/Decision/MCDM external consumption or neutral dw.discovery skill.",
+            "Only C01 closes; M5-W01, M5 and C02 onward remain to be independently qualified.")
     };
     p.Files.WriteComplete(Qualified,
         evidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,plan=>
     {
-        plan["plan_version"]="0.1.65";
-        var release=plan["releases"]!.AsArray()
-            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Milestone);
-        var wp=plan["work_packages"]!.AsArray()
-            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Work);
+        plan["plan_version"]="0.1.66";
         var chunk=plan["chunks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
         var task=chunk["tasks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-        if((string?)release["status"]!="planned" ||
-           (string?)wp["status"]!="planned" ||
-           (string?)chunk["status"]!="planned" ||
+        if((string?)chunk["status"]!="in_progress" ||
            (string?)task["status"]!="planned")
-            throw new InvalidOperationException("M5-W01-C01 baseline unexpectedly changed.");
-        release["status"]="in_progress";
-        wp["status"]="in_progress";
-        chunk["status"]="in_progress";
-        chunk["refinement"]="RS066 introduces a real .NET 10 dw.tools.math.codecs product with lock-file-managed IR/quantities dependencies, one compiled missing-API RED and 50 exact/boundary GREEN tests. A versioned closed canonical ASCII prefix grammar parses rationals, free real x/y/z, bounded arithmetic and function nodes, three typed unit identities and retained eq/ne/ge original-domain restrictions to Math IR. Rendering emits display-only LaTeX and source semantic hash without evaluation. Eight independent pinned NuGet-only oracles inspect the newly packed three-product graph and meaning-preserving IR roundtrip. T2 retains adversarial escaping, ambiguity and broader boundary responsibilities; M5/W01/C01 remain in-progress.";
-        chunk["readiness"]="T1 exact canonical parser and safe LaTeX display admitted only after RS066 durable evidence; T2 and future import/formatting phases remain unfinished";
-        chunk["files"]=p.Json.StringArray(Solution,Product,ProductLock,
-            Test,TestLock,Source,RedTest,GreenTests,Decision,Document,
-            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified);
+            throw new InvalidOperationException("M5-W01-C01 T2 baseline diverged.");
+        chunk["status"]="done";
+        chunk["refinement"]="RS066 T1 qualifies the closed canonical exact ASCII text-to-IR and passive LaTeX contract. RS067 T2 independently audits renderer-generated command braces/allowlist, exact canonical structural IR roundtrips, original-domain restriction binding and contradictions. Distinct IR square and power-two shapes produce the same LaTeX; the safe display is explicitly flagged noninjective, never marked reversible. A genuine compiled absent-API RED, 51 GREEN tests, eight isolated NuGet-only consumer oracles, three locally inspected packages and relevant codec/IR/quantities tests qualify C01. W01 and M5 remain in-progress; C02 bounded LaTeX import is not started.";
+        chunk["readiness"]="C01 exact canonical text and display audit qualified by RS066 and RS067; C02 remains not-ready pending separate LaTeX import and ambiguity grammar acceptance";
+        var priorFiles=chunk["files"]!.AsArray().Select(x=>x!.GetValue<string>());
+        chunk["files"]=p.Json.StringArray(priorFiles.Concat(new[]{
+            Product,Source,RedTest,GreenTests,Decision,Document,
+            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified
+        }).Distinct(StringComparer.Ordinal).ToArray());
         chunk["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
             "dotnet build "+Solution+" -c Release --no-restore",
-            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C01T1",
+            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C01T2",
             "dotnet test "+Test+" -c Release",
             "dotnet run --project "+ConsumerProject+" -c Release");
-        chunk["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        var priorEvidence=chunk["evidence"]!.AsArray().Select(x=>x!.GetValue<string>());
+        chunk["evidence"]=p.Json.StringArray(priorEvidence.Concat(new[]{
+            RedProof,Qualified}).Distinct(StringComparer.Ordinal).ToArray());
         task["status"]="done";
         task["evidence"]=p.Json.StringArray(RedProof,Qualified);
         foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -354,50 +328,44 @@ if(!target)
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
     });
-    // M4 has just completed. This is a NEW active project hierarchy,
-    // not a continuation of an existing active M4 path.
-    foreach(var id in new[]{Milestone,Work,Phase,Task,Red})
-        p.ProjectPlan.TransitionNode(id,"not-ready","ready");
-    foreach(var id in new[]{Milestone,Work,Phase,Task,Red})
-        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
+    p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
+    p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
+    p.ProjectPlan.ActivateReadyContinuation(Red);
     p.ProjectPlan.ConvergeNodeToDone(Red);
-    foreach(var id in new[]{Green,Verify})
+    foreach(var child in new[]{Green,Verify})
     {
-        p.ProjectPlan.TransitionNode(id,"not-ready","ready");
-        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
-        p.ProjectPlan.ConvergeNodeToDone(id);
+        p.ProjectPlan.TransitionNode(child,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(child,"ready","in-progress");
+        p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
-p.ProjectPlan.RequireNodeState("M3","done");
 p.ProjectPlan.RequireNodeState("M4","done");
-p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
+p.ProjectPlan.RequireNodeState("M5","in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
-p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-p.ProjectPlan.RequireNodeState(Task,"done");
-p.ProjectPlan.RequireNodeState("M5-W01-C01-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Phase,"done");
+p.ProjectPlan.RequireNodeState("M5-W01-C01-T1","done");
+foreach(var child in new[]{Task,Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(child,"done");
 p.ProjectPlan.RequireNodeState("M5-W01-C02","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
-foreach(var id in new[]{Red,Green,Verify})
-    p.ProjectPlan.RequireNodeState(id,"done");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS066" ||
-       (string?)state["activeMilestone"]!=(target?Milestone:null) ||
-       (string?)state["activeWorkPackage"]!=(target?Work:null) ||
-       (string?)state["activePhase"]!=(target?Phase:null) ||
+    if((string?)state["pendingRun"]!="RS067" ||
+       (string?)state["activeMilestone"]!="M5" ||
+       (string?)state["activeWorkPackage"]!=Work ||
+       (string?)state["activePhase"]!=(target?null:Phase) ||
        state["activeTask"] is not null || state["activeSubtask"] is not null)
-        throw new InvalidOperationException(
-            "RS066 exact new M5 hierarchy cursor baseline/target diverged.");
-    state["activeMilestone"]=Milestone;
-    state["activeWorkPackage"]=Work;
-    state["activePhase"]=Phase;
+        throw new InvalidOperationException("RS067 C01 phase-close cursor baseline/target diverged.");
+    state["activePhase"]=null;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
 return p.Complete();
+
 static bool HasExactLine(string output,string expected) =>
     output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Any(line=>line.Trim()==expected);
@@ -405,7 +373,7 @@ static bool HasExactLine(string output,string expected) =>
 static (long Bytes,string Sha) ReadProductReceipt(
     string output,string id,string version)
 {
-    var prefix="M5-W01-C01-T1-PKG-SHA256:"+id+":"+version+":";
+    var prefix="M5-W01-C01-T2-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
