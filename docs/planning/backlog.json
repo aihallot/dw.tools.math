@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.58",
+  "plan_version": "0.1.59",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4815,7 +4815,7 @@
       "title": "Functions and differentiation",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M4-W01-C03"
       ],
@@ -4840,7 +4840,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01Tests"
       ],
-      "refinement": "RS053-RS058 qualified the first symbolic provider review, typed IR bridge and bounded exact transformations without an external CAS dependency. RS059 T1 now adds preview.5 closed exact formal polynomial differentiation with explicit real domain/codomain: d(x^3)/dx=3*x^2; derivative wrt an absent symbol is exact zero, exact constant products/sums are admitted, and powers beyond degree eight, non-polynomial analytic forms, scoped restrictions and derived units return typed refusals. One compiled RED recovered with 38 independent GREEN tests, eight NuGet-only consumer oracles, locked IR/quantities regression suites and three actual local product SHA-256s. C01-T2 retains pointwise differentiability, units and conditional-provider boundaries.",
+      "refinement": "RS059 T1 introduced dw.tools.math.symbolics preview.5 exact real formal polynomial derivative up to degree eight, with d(x^3)/dx=3x^2, absent-symbol zero, and explicit unit/assumption/nonpolynomial refusals. RS060 T2 adds preview.6 exact rational pointwise derivative values and conservatively classified scientific boundaries: |x| and sqrt(x^2) are nondifferentiable at zero; sqrt(x) is outside its real domain for x\u003C0 and nondifferentiable at zero; the original quotient hole x=1 stays excluded. Generic radical/quotient differentiation, unit arithmetic and numerical finite differences remain unsupported. Controlled RED \u002B 37 GREEN, eight local NuGet-only oracles, and scoped symbolic/IR/quantity regressions close C01 without claiming W02/M4 completion.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/SymbolicExactDifferentiation.cs",
@@ -4852,20 +4852,32 @@
         "tests/consumers/m4-w02-c01-t1/Program.cs",
         "tests/consumers/m4-w02-c01-t1/NuGet.Config",
         "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.symbolics/SymbolicDerivativePointAnalysis.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T2Tests.cs",
+        "docs/planning/decisions/m4-w02-c01-t2-pointwise-boundary.md",
+        "docs/distribution/symbolic-pointwise-derivatives.md",
+        "tests/consumers/m4-w02-c01-t2/m4-pointwise-derivative-consumer.csproj",
+        "tests/consumers/m4-w02-c01-t2/Program.cs",
+        "tests/consumers/m4-w02-c01-t2/NuGet.Config",
+        "docs/planning/evidence/M4-W02-C01-T2-boundary-red.json",
+        "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01T2",
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m4-w02-c01-t1/m4-exact-derivative-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m4-w02-c01-t2/m4-pointwise-derivative-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json",
+        "docs/planning/evidence/M4-W02-C01-T2-boundary-red.json",
+        "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "in progress: exact real formal-polynomial differentiation T1 qualified; T2 domain, unit and unsupported-function boundaries planned",
+      "readiness": "closed: both T1 exact real formal derivative and T2 pointwise analytic-domain/units refusal boundary qualified; C02/C03 remain planned",
       "tasks": [
         {
           "id": "M4-W02-C01-T1",
@@ -4912,29 +4924,38 @@
           "title": "Boundaries and integration",
           "behavior": "Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
           "test_case": "Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W02-C01-T2-boundary-red.json",
+            "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T2-boundary-red.json"
+              ]
             },
             {
               "id": "M4-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M4-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W02-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
