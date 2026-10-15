@@ -1,10 +1,10 @@
 # Exact real elementary equation solving — local preview
 
-The Math symbolics package 0.5.0-preview.7 will expose
+The local Math symbolics package 0.5.0-preview.7 exposes
 SymbolicExactRealSolving.Solve(IrNode left, IrRelationKind relation,
-IrNode right, IrSymbol variable, IrScalarDomain.Real) once the
-RS061 scientific qualification succeeds. This document describes
-the candidate bounded contract; it is not itself an execution receipt.
+IrNode right, IrSymbol variable, IrScalarDomain.Real). The bounded
+contract is supported by the RS061 scientific evidence; this
+public-facing note is not itself an execution receipt.
 
 The independently demonstrable examples are:
 - x² = 1 over the reals: complete finite set {-1, 1}.

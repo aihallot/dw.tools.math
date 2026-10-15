@@ -1,4 +1,4 @@
-# M4-W02-C02-T1 — Exact real elementary solution sets (candidate)
+# M4-W02-C02-T1 — Exact real elementary solution sets
 
 ## Responsibility and prior authority
 

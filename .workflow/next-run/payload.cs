@@ -206,7 +206,7 @@ var sources=XDocument.Load(Path.Combine(root,ConsumerConfig)).Descendants()
     .Single(e=>e.Name.LocalName=="packageSources");
 if(!sources.Elements().Any(e=>e.Name.LocalName=="clear")||
    sources.Elements().Any(e=>e.Name.LocalName=="add"))
-    throw new InvalidOperationException("The NuGet-only pointwise consumer must clear external sources.");
+    throw new InvalidOperationException("The NuGet-only real-solving consumer must clear external sources.");
 var isolated=Path.Combine(root,"build","artifacts","m4-w02-c02-t1-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
@@ -214,7 +214,7 @@ Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
 var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
     "-c","Release","--no-build","--no-restore");
 if(!HasExactLine(consumerOutput,ConsumerMarker))
-    throw new InvalidOperationException("Eight NuGet-only pointwise derivative oracles not observed.");
+    throw new InvalidOperationException("Eight NuGet-only real-solving oracles not observed.");
 
 
 if(!target)
