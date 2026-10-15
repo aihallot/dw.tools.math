@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "id": "M4-gate",
+  "status": "m4-local-exact-symbolic-preview-gate-qualified",
+  "milestone": "M4",
+  "gate": "G-M4",
+  "release_version": "0.5.0-preview",
+  "plan_version": "0.1.64",
+  "previous_m2_gate": "docs/planning/evidence/M2-gate.json",
+  "previous_m3_gate": "docs/planning/evidence/M3-gate.json",
+  "checked_chunk_ids": [
+    "M4-W01-C01",
+    "M4-W01-C02",
+    "M4-W01-C03",
+    "M4-W02-C01",
+    "M4-W02-C02",
+    "M4-W02-C03"
+  ],
+  "qualified_phase_evidence": [
+    "docs/planning/evidence/M4-W01-C01-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W01-C02-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W01-C03-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W02-C01-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W02-C03-T2-boundaries-qualified.json"
+  ],
+  "qualified_work_packages": [
+    "M4-W01",
+    "M4-W02"
+  ],
+  "qualified_tasks": 12,
+  "qualified_subtasks": 36,
+  "gate_scientific_validator": "docs/planning/ValidateM4ReleaseGate.cs",
+  "gate_scientific_validator_sha256": "869dd8be6277c90bb3cbb04f9ca32b9c9f4621befd4afafbe019338b5149bfa2",
+  "scientific_gate_marker": "dw.tools.math/m4-scientific-gate/0.5 qualified; phases=6; tasks=12; subtasks=36",
+  "science_validator_rechecked_after_progress": true,
+  "locked_solution_restore_and_build_passed": true,
+  "focused_scientific_regressions": [
+    "tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj",
+    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"
+  ],
+  "full_solution_test_suite_passed": true,
+  "full_solution_test_command": "dotnet test dw.tools.math.slnx -c Release --no-build --no-restore",
+  "typed_ir_and_original_domain_retained": true,
+  "provider_candidate_is_experimental_only": true,
+  "unqualified_cas_and_unknown_results_refused": true,
+  "real_polynomial_degree_bound": 7,
+  "real_derivative_maximum_power": 8,
+  "original_domain_holes_remain_excluded": true,
+  "no_general_improper_convergence_claim": true,
+  "local_package_only": true,
+  "package_sha256_verified_by_independent_staged_helper": ".workflow/runs/RS065/staged/checks/m4-gate-package-sha.cs",
+  "observed_local_packages": [
+    {
+      "id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "bytes": 14739,
+      "sha256": "20c4bd63f33924f447934e218f6ecdb6099798132f449becd4a273ac06d60aec",
+      "dependencies": [],
+      "assembly": "lib/net10.0/dw.quantities.dll",
+      "publication": "local-only-no-public-feed"
+    },
+    {
+      "id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "bytes": 21908,
+      "sha256": "3ea93da7bdb4be588e5d433111622c3f7967de103843a1e3d552d7ba20caa206",
+      "dependencies": [
+        "dw.quantities"
+      ],
+      "assembly": "lib/net10.0/dw.tools.math.ir.dll",
+      "publication": "local-only-no-public-feed"
+    },
+    {
+      "id": "dw.tools.math.symbolics",
+      "version": "0.5.0-preview.10",
+      "bytes": 34690,
+      "sha256": "b985f067b11dc3bb13e97194832f40ae247671a3573874474639b96d4e0cef63",
+      "dependencies": [
+        "dw.tools.math.ir"
+      ],
+      "assembly": "lib/net10.0/dw.tools.math.symbolics.dll",
+      "publication": "local-only-no-public-feed"
+    }
+  ],
+  "cross_vertical_consumer_project": "tests/consumers/m4-gate/m4-gate-consumer.csproj",
+  "consumer_project_sha256": "e82e7d9f35294836124dbbfb4f7e85c7b96f7a651190d7e15f165b37610555ef",
+  "cross_vertical_consumer_source": "tests/consumers/m4-gate/Program.cs",
+  "consumer_source_sha256": "d4167b835763db74fe71bcf478a763e78c0f52ef38d56732931bce372df175ec",
+  "consumer_config": "tests/consumers/m4-gate/NuGet.Config",
+  "consumer_config_sha256": "5256a7e3e07d2c5c94f7a1e6c45f39aab011c659c5e2d53e452dea525ce04575",
+  "cross_vertical_nuget_consumer_oracles": 32,
+  "isolated_consumer_exact_output": "dw.tools.math/m4-nuget-gate/0.5 qualified; probes=32",
+  "no_consumer_project_references": true,
+  "transfer_architecture_passed": true,
+  "gate_decision": "docs/planning/decisions/m4-gate.md",
+  "gate_decision_sha256": "d3620f5ac5af105d850618a24d457a046038a6e7fab5bc0b787f2eca90a50c7c",
+  "release_recipe": "docs/distribution/m4-release-gate.md",
+  "release_recipe_sha256": "2fde851b04515b274990eab1da6c18d670bb1b119084d3d841593776cb0c8e74",
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "packages_publicly_published": false,
+  "external_aura_decision_mcdm_adoption_observed": false,
+  "m4_milestone_done": true,
+  "m5_milestone_done": false,
+  "next_accepted_scope": "M5-W01-C01-T1: independently qualify accepted notation/parsing scope; no M5 run started",
+  "nonclaims": [
+    "No general symbolic CAS, provider AST decoding, certified arbitrary integral, inequality, derivative, complex branch or irrational solver.",
+    "No foreign Angouri/MathNET product runtime, Python interpreter, secure sandbox or hard preemptive in-process deadline.",
+    "No public NuGet, stable 1.0, cross-RID/OS guarantee, AURA/Decision/MCDM adoption or dw.discovery skill.",
+    "M5 public notation, interoperability and independent product gates remain to be qualified."
+  ]
+}
