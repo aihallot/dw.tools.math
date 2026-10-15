@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.64",
+  "plan_version": "0.1.65",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -152,7 +152,7 @@
       "version": "1.0.0",
       "title": "Interoperability and stable public vertical",
       "outcome": "Qualify the first coherent numerical/symbolic platform usable without AURA.",
-      "status": "planned",
+      "status": "in_progress",
       "gate": "G-M5",
       "required_chunks": [
         "M5-W01-C01",
@@ -426,7 +426,7 @@
       "id": "M5-W01",
       "release": "M5",
       "title": "Notation and exchange",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.codecs/",
         "tests/projects/dw.tools.math.codecs.tests/",
@@ -5296,7 +5296,7 @@
       "title": "Canonical text and LaTeX rendering",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M3-W02-C04",
         "M4-W02-C03"
@@ -5322,40 +5322,74 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS066 introduces a real .NET 10 dw.tools.math.codecs product with lock-file-managed IR/quantities dependencies, one compiled missing-API RED and 50 exact/boundary GREEN tests. A versioned closed canonical ASCII prefix grammar parses rationals, free real x/y/z, bounded arithmetic and function nodes, three typed unit identities and retained eq/ne/ge original-domain restrictions to Math IR. Rendering emits display-only LaTeX and source semantic hash without evaluation. Eight independent pinned NuGet-only oracles inspect the newly packed three-product graph and meaning-preserving IR roundtrip. T2 retains adversarial escaping, ambiguity and broader boundary responsibilities; M5/W01/C01 remain in-progress.",
+      "files": [
+        "dw.tools.math.slnx",
+        "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+        "src/projects/dw.tools.math.codecs/packages.lock.json",
+        "tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj",
+        "tests/projects/dw.tools.math.codecs.tests/packages.lock.json",
+        "src/projects/dw.tools.math.codecs/CanonicalMathNotation.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C01T1RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C01T1Tests.cs",
+        "docs/planning/decisions/m5-w01-c01-t1-canonical-text.md",
+        "docs/distribution/m5-canonical-text.md",
+        "tests/consumers/m5-w01-c01-t1/m5-canonical-text-consumer.csproj",
+        "tests/consumers/m5-w01-c01-t1/Program.cs",
+        "tests/consumers/m5-w01-c01-t1/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C01T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m5-w01-c01-t1/m5-canonical-text-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+      ],
+      "readiness": "T1 exact canonical parser and safe LaTeX display admitted only after RS066 durable evidence; T2 and future import/formatting phases remain unfinished",
       "tasks": [
         {
           "id": "M5-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
           "test_case": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
+            "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T1-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C01-T1-contract-qualified.json"
+              ]
             }
           ]
         },
