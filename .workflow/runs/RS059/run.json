@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "RS059",
+  "title": "Qualify exact real formal polynomial derivatives and typed unit refusal in M4-W02",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact formal polynomial differentiation and real function domains",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M4",
+    "M4-W02",
+    "M4-W02-C01",
+    "M4-W02-C01-T1",
+    "M4-W02-C01-T1-R",
+    "M4-W02-C01-T1-G",
+    "M4-W02-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify M4-W02-C01-T1 through a real compiled missing-API RED, 38 independent GREEN tests and eight NuGet-only consumer oracles. Add provider-free exact formal real functions and polynomial derivatives: d(x^3)/dx=3x^2, absent variable=0, sums and constant products, with explicit domain/codomain, source/wrt provenance, bounded power eight, and typed refusal of units, assumptions, bound symbols and unproved analytic forms. Verify preview.5 local NuGet hashes and relevant IR/quantity suites.",
+    "value": "Deliver the first independently consumable exact real symbolic derivative without silently dropping units, domain restrictions or uncertain differentiability, and without a CAS runtime or broker.",
+    "debtChanges": [
+      "Execute a compiled missing-public-derivative-contract RED against the existing real preview.4 symbolics assembly before staging the new implementation.",
+      "38 scientific GREEN tests cover exact cubic and absent-variable derivatives, polynomial sums and constant products, negative/fractional coefficients and power limits.",
+      "Explicit SymbolicRealFunction carries free real parameter/domain/codomain; bound/integer variables, unit literals, prior restrictions and unsupported analytic shapes receive distinct typed refusals.",
+      "Local rule ID, canonical IR source semantic SHA-256 and differentiation variable identity accompany only admitted exact derivatives; refused results contain no mathematical proof.",
+      "Eight NuGet-only real .NET10 consumer oracles check exact calculus, independent variable zero, unit/nondifferentiability refusal, exponent budget and no external CAS dependencies.",
+      "Three local product archives are verified with a separate C# nuspec/SHA-256 inspector; the canonical solution builds locked and relevant symbolics, IR and quantities tests pass.",
+      "Only C01-T1 R/G/V and T1 complete; M4-W02/C01 enter in-progress, T2 and C02 remain not-ready, and M4 release/AURA/dw.discovery agent rights remain unqualified."
+    ],
+    "nextAction": "After durable RS059 success, prepare M4-W02-C01-T2 with explicit differentiability/singularity and derived-unit boundaries, refusal of unsupported functions and controlled scientific tests.",
+    "achievements": [
+      {
+        "projectNode": "M4-W02-C01-T1-R",
+        "achievement": "Demonstrate a compiled absent-API RED against the real preview.4 symbolics assembly, proving the new public formal derivative contract is not already present."
+      },
+      {
+        "projectNode": "M4-W02-C01-T1-G",
+        "achievement": "Deliver exact free-real polynomial differentiation with typed domain/unit/assumption refusals and pass 38 independent GREEN tests plus eight package-only oracles."
+      },
+      {
+        "projectNode": "M4-W02-C01-T1-V",
+        "achievement": "Verify complete relevant symbolics/IR/quantity regressions, locked .NET10 solution, actual preview.5 local NuGet provenance and no foreign CAS or broker dependency."
+      },
+      {
+        "projectNode": "M4-W02-C01-T1",
+        "achievement": "Qualify M4-W02-C01-T1 as a provider-independent exact formal real polynomial derivative capability, while preserving unfinished C01-T2, W02 and M4 boundaries."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/symbolic-exact-differentiation.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m4-w02-c01-t1-exact-differentiation.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json",
+    "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M4.md",
+    "src/projects/dw.tools.math.symbolics/SymbolicExactDifferentiation.cs",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/consumers/m4-w02-c01-t1/NuGet.Config",
+    "tests/consumers/m4-w02-c01-t1/Program.cs",
+    "tests/consumers/m4-w02-c01-t1/m4-exact-derivative-consumer.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T1RedTests.cs",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T1Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
