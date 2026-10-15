@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "RS064",
+  "title": "Qualify original real calculus singularities, removable limits and M4-W02 closure",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact calculus boundaries and close M4 W02",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M4",
+    "M4-W02",
+    "M4-W02-C03",
+    "M4-W02-C03-T2",
+    "M4-W02-C03-T2-R",
+    "M4-W02-C03-T2-G",
+    "M4-W02-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify bounded real calculus boundaries: distinguish exact polynomial integrals, nonzero simple poles, removable original-domain holes, finite removable limits and unknown convergence. Preserve exact rational values, original-domain exclusions and arbitrary additive constants. Recover a compiled missing-API RED, pass 51 GREEN tests, eight NuGet-only probes and package checks. Close C03-T2, C03 and M4-W02 only; leave M4 open.",
+    "value": "Give .NET consumers scientifically bounded real calculus diagnostics and an exact Math work-package closure without claiming general symbolic integrability or promoting the M4 release prematurely.",
+    "debtChanges": [
+      "Observe one compiled missing public calculus-boundary API RED against symbolics preview.9 before installing the new preview.10 source.",
+      "Classify k/(x-c) simple poles on closed real intervals, retain zero-numerator removable holes and exact finite rational limits away from the pole; never infer a logarithmic primitive.",
+      "Reuse only the previously qualified (x^2-c^2)/(x-c) bridge: the original hole remains excluded, the removable finite limit is explicit, and exact integration requires a hole-free closed interval.",
+      "Delegate polynomial results to T1 with the explicit arbitrary \u002BC convention; keep unknown analytic/improper convergence, units, assumptions, binary64 and budget refusal distinct.",
+      "Pass 51 independent GREEN tests for original-domain poles, holes, signed hole-free integrals, finite limits, provenance, rational budgets and typed refusals.",
+      "Verify eight independent NuGet-only probes and inspect three local net10 package manifests and SHA-256 hashes; run relevant symbolics, IR and quantities regressions.",
+      "Close C03-T2 RED/GREEN/verification, T2, C03 and M4-W02 using six prior qualified phase-task receipts plus an aggregate scientific work-package evidence file. Do not close M4.",
+      "Retain Math-only ownership, no external CAS or agent-broker dependency, no public NuGet publication, and no implied principal values or complex branches."
+    ],
+    "nextAction": "After durable RS064 success, audit G-M4 against its accepted release-gate criteria and prepare a separate M4 promotion run only if complete durable scientific and consumer evidence permits it.",
+    "achievements": [
+      {
+        "projectNode": "M4-W02-C03-T2-R",
+        "achievement": "Observe the compiled absent real calculus boundary public API RED against the qualified preview.9 assembly."
+      },
+      {
+        "projectNode": "M4-W02-C03-T2-G",
+        "achievement": "Deliver exact rational pole/hole classification, finite removable limits, hole-free integration and unknown convergence refusals with 51 GREEN tests and eight NuGet-only probes."
+      },
+      {
+        "projectNode": "M4-W02-C03-T2-V",
+        "achievement": "Verify original-domain evidence, symbolics/IR/quantities tests, local package SHA-256 and manifest provenance plus controlled planning consistency."
+      },
+      {
+        "projectNode": "M4-W02-C03-T2",
+        "achievement": "Qualify C03-T2 real calculus boundary results without overclaiming improper convergence or original-domain values."
+      },
+      {
+        "projectNode": "M4-W02-C03",
+        "achievement": "Close C03 with the previously qualified polynomial T1 contract and the new exact domain/refusal T2 evidence."
+      },
+      {
+        "projectNode": "M4-W02",
+        "achievement": "Close the M4 symbolic calculus and solving work package by aggregating durable C01, C02 and C03 scientific evidence while leaving the release gate open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/symbolic-calculus-boundaries.md",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/decisions/m4-w02-c03-t2-calculus-boundaries.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/evidence/M4-W02-C03-T2-boundaries-qualified.json",
+    "docs/planning/evidence/M4-W02-C03-T2-contract-red.json",
+    "docs/planning/evidence/M4-W02-work-package-qualified.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M4.md",
+    "src/projects/dw.tools.math.symbolics/SymbolicRealCalculusBoundaries.cs",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/consumers/m4-w02-c03-t2/NuGet.Config",
+    "tests/consumers/m4-w02-c03-t2/Program.cs",
+    "tests/consumers/m4-w02-c03-t2/m4-calculus-boundary-consumer.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.symbolics.tests/M4W02C03T2Tests.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
