@@ -12,6 +12,7 @@ SDK 10.0.401 is the observed M0-W01-C01 baseline. `global.json` allows `latestPa
 - Avoid ContainsKey/indexer double lookup, repeated constant-array allocation, and exceptions naming a parameter that does not exist.
 - Restore/build/test share configuration and artifact root. Do not run --no-build against output that has not been built.
 - DWF: use exact generated paths, dotnet run --file, structured arguments, and stagedFiles from the current run's staged tree.
+- Before publishing the final DWF request commit, audit every contribution field against the **active executable authoring contract** (not just JSON syntax): summary <= 500 characters, value <= 1000, nextAction <= 500; no CR/LF or blank text; <= 20 unique debtChanges with <= 300 characters each, and <= 20 achievements with unique project nodes and <= 1000 characters each. Count characters programmatically, reserve margin, and check all fields before publication. A pre-attempt refusal is a failed first invocation even if no attempt is allocated.
 - Preparation validations are read-only. Projection generation belongs in a mutating payload or deliberate planning-authoring step with all mutations declared.
 - Payloads are replayable from declared baseline or exact target and refuse third states rather than masking drift.
 - Verify public provider APIs against pinned versions; assume no RID availability that has not been qualified.
