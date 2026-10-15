@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.60",
+  "plan_version": "0.1.61",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -4969,7 +4969,7 @@
       "title": "Solving and solution sets",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M4-W02-C01"
       ],
@@ -4994,7 +4994,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C02Tests"
       ],
-      "refinement": "RS061 T1 introduces provider-neutral exact real elementary equations and one-bound inequalities: x=c; x^2=c (negative empty, rational squares complete, positive nonrational squares unknown); constant predicates and closed real rays. Compiled absent API RED, 36 GREEN, eight independent NuGet-only consumer oracles, real source/target hashes, local product NuGet hashes and relevant IR/quantities regressions. T2 retains multiplication/division singularities, unknown/partial behavior, multiplicity and original equation substitution; M4-W02/M4 remain open.",
+      "refinement": "RS061 T1 admitted exact real elementary equation sets, real negative-square emptiness and selected closed rays without irrational/complex roots. RS062 T2 adds original-equation exact rational candidate audit: Complete only with independent T1 original-form certificate; VerifiedSubset, NoVerifiedCandidates, Unknown, out-of-domain and false candidates remain distinct. Qualified multiplicities are limited to x=c, x^2=0 and x^2=c rational nonzero roots. Original quotient holes and real target assumptions are retained. One compiled missing-API RED, 40 GREEN tests, eight independent local NuGet-only probes, three inspected product packages and relevant regressions close C02. C03 and M4-W02/M4 remain unfinished.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/SymbolicExactRealSolving.cs",
@@ -5006,20 +5006,32 @@
         "tests/consumers/m4-w02-c02-t1/Program.cs",
         "tests/consumers/m4-w02-c02-t1/NuGet.Config",
         "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
-        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.symbolics/SymbolicRootAudit.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T2RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C02T2Tests.cs",
+        "docs/planning/decisions/m4-w02-c02-t2-original-root-audit.md",
+        "docs/distribution/symbolic-original-root-audit.md",
+        "tests/consumers/m4-w02-c02-t2/m4-original-root-audit-consumer.csproj",
+        "tests/consumers/m4-w02-c02-t2/Program.cs",
+        "tests/consumers/m4-w02-c02-t2/NuGet.Config",
+        "docs/planning/evidence/M4-W02-C02-T2-contract-red.json",
+        "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C02T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C02T2",
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m4-w02-c02-t1/m4-exact-real-solving-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m4-w02-c02-t2/m4-original-root-audit-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
-        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M4-W02-C02-T1-contract-qualified.json",
+        "docs/planning/evidence/M4-W02-C02-T2-contract-red.json",
+        "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 accepted when RS061 is durable; T2 remains not-ready; C02 in-progress",
+      "readiness": "closed: both T1 exact real elementary solution sets and T2 original-domain candidate/multiplicity boundaries qualified; M4-W02-C03 remains planned",
       "tasks": [
         {
           "id": "M4-W02-C02-T1",
@@ -5066,29 +5078,38 @@
           "title": "Boundaries and integration",
           "behavior": "Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
           "test_case": "Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W02-C02-T2-contract-red.json",
+            "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W02-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T2-contract-red.json"
+              ]
             },
             {
               "id": "M4-W02-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M4-W02-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W02-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C02-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
