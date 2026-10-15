@@ -368,6 +368,26 @@ if(!target)
             child["evidence"]=p.Json.StringArray(
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
+
+        // A done work package needs its own durable evidence array, not
+        // merely completed child phases. Aggregate C01/C02/C03 receipts
+        // after the T2 evidence was installed, without inventing a gate.
+        var completedPhases=plan["chunks"]!.AsArray().Select(v=>v!.AsObject())
+            .Where(v=>(string?)v["work_package"]==Work)
+            .OrderBy(v=>v["id"]!.GetValue<string>(),StringComparer.Ordinal)
+            .ToArray();
+        if(completedPhases.Length!=3 ||
+           completedPhases.Any(v=>(string?)v["status"]!="done"))
+            throw new InvalidOperationException(
+                "M4-W01 work package cannot close with unqualified phases.");
+        var workEvidence=completedPhases.SelectMany(v=>v["evidence"]!.AsArray()
+                .Select(e=>e!.GetValue<string>()))
+            .Distinct(StringComparer.Ordinal).ToArray();
+        if(workEvidence.Length<6 ||
+           !workEvidence.Contains(Qualified,StringComparer.Ordinal))
+            throw new InvalidOperationException(
+                "M4-W01 completion must cite all three qualified phase receipts.");
+        work["evidence"]=p.Json.StringArray(workEvidence);
     });
 
     // Phase and work package must close in the same native DWF mutation,
