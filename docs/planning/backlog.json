@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.57",
+  "plan_version": "0.1.58",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -396,7 +396,7 @@
       "id": "M4-W02",
       "release": "M4",
       "title": "Symbolic calculus and solving",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.symbolics/",
         "tests/projects/dw.tools.math.symbolics.tests/",
@@ -4815,7 +4815,7 @@
       "title": "Functions and differentiation",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M4-W01-C03"
       ],
@@ -4840,40 +4840,70 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS053-RS058 qualified the first symbolic provider review, typed IR bridge and bounded exact transformations without an external CAS dependency. RS059 T1 now adds preview.5 closed exact formal polynomial differentiation with explicit real domain/codomain: d(x^3)/dx=3*x^2; derivative wrt an absent symbol is exact zero, exact constant products/sums are admitted, and powers beyond degree eight, non-polynomial analytic forms, scoped restrictions and derived units return typed refusals. One compiled RED recovered with 38 independent GREEN tests, eight NuGet-only consumer oracles, locked IR/quantities regression suites and three actual local product SHA-256s. C01-T2 retains pointwise differentiability, units and conditional-provider boundaries.",
+      "files": [
+        "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+        "src/projects/dw.tools.math.symbolics/SymbolicExactDifferentiation.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T1RedTests.cs",
+        "tests/projects/dw.tools.math.symbolics.tests/M4W02C01T1Tests.cs",
+        "docs/planning/decisions/m4-w02-c01-t1-exact-differentiation.md",
+        "docs/distribution/symbolic-exact-differentiation.md",
+        "tests/consumers/m4-w02-c01-t1/m4-exact-derivative-consumer.csproj",
+        "tests/consumers/m4-w02-c01-t1/Program.cs",
+        "tests/consumers/m4-w02-c01-t1/NuGet.Config",
+        "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m4-w02-c01-t1/m4-exact-derivative-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+      ],
+      "readiness": "in progress: exact real formal-polynomial differentiation T1 qualified; T2 domain, unit and unsupported-function boundaries planned",
       "tasks": [
         {
           "id": "M4-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
           "test_case": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
+            "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M4-W02-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T1-contract-red.json"
+              ]
             },
             {
               "id": "M4-W02-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M4-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M4-W02-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M4-W02-C01-T1-contract-qualified.json"
+              ]
             }
           ]
         },
