@@ -167,6 +167,8 @@ public static class BoundedLatexImporter
                 {
                     if (_convention == LatexJuxtapositionConvention.RequireExplicitOperator)
                         throw new ImportRefusal(LatexImportStatus.Ambiguous);
+                    if (_convention != LatexJuxtapositionConvention.Multiplication)
+                        throw new ImportRefusal(LatexImportStatus.Unsupported);
                     var right = ReadParenthesis(depth + 1);
                     left = IrApply.Create(IrOperation.Multiply, [left, right]);
                     continue;

@@ -22,7 +22,8 @@ public sealed class M5W01C02T1Tests
         Assert.IsNotNull(result.CanonicalText);
         Assert.IsNotNull(result.SemanticStructuralSha256);
         Assert.AreEqual(BoundedLatexImporter.Rule,result.RuleId);
-        Assert.AreEqual(convention,result.AppliedConvention);
+        Assert.IsNotNull(result.AppliedConvention);
+        Assert.AreEqual(convention,result.AppliedConvention.Value);
         Assert.AreEqual(result.SemanticStructuralSha256,
             IrCanonicalHashes.SemanticStructuralSha256(result.Expression!));
         Assert.AreEqual(result.CanonicalText,
