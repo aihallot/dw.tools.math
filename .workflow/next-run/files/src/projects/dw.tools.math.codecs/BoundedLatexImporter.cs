@@ -277,7 +277,7 @@ public static class BoundedLatexImporter
             if (length == 0)
                 throw new FormatException("Expected decimal digits.");
             if (length > 39)
-                throw new ArgumentOutOfRangeException(nameof(_source));
+                throw new ArgumentOutOfRangeException("latex");
             var digits = _source[beginning.._offset];
             if (digits.Length > 1 && digits[0] == '0')
                 throw new ImportRefusal(LatexImportStatus.NonCanonical);
@@ -287,7 +287,7 @@ public static class BoundedLatexImporter
                     CultureInfo.InvariantCulture,out var integer))
                 throw new FormatException("Invalid exact integer.");
             if (integer.GetBitLength() > MaximumExactBits)
-                throw new ArgumentOutOfRangeException(nameof(_source));
+                throw new ArgumentOutOfRangeException("latex");
             return negative ? BigInteger.Negate(integer) : integer;
         }
 
