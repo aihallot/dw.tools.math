@@ -146,8 +146,7 @@ public static class MathLocalReleaseQualification
             var digest=Convert.ToHexString(SHA256.HashData(archive))
                 .ToLowerInvariant();
             return new(MathPackageQualificationStatus.Qualified,expected,
-                digest,archive.Length,documents,
-                RuntimeIdentifierCertified:false,Rule);
+                digest,archive.Length,documents,false,Rule);
         }
         catch(Exception error) when (error is InvalidDataException or
             XmlException or IOException or InvalidOperationException or
@@ -159,6 +158,5 @@ public static class MathLocalReleaseQualification
 
     private static MathPackageQualificationResult Refuse(
         MathPackageQualificationStatus status) =>
-        new(status,null,null,0,DistributionDocumentsPackaged:false,
-            RuntimeIdentifierCertified:false,null);
+        new(status,null,null,0,false,false,null);
 }
