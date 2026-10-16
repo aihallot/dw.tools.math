@@ -23,6 +23,7 @@ const string Source="src/projects/dw.tools.math.distribution/MathPackageRuntimeS
 const string Test="tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj";
 const string RedTest="tests/projects/dw.tools.math.distribution.tests/M5W02C02T2RedTests.cs";
 const string GreenTest="tests/projects/dw.tools.math.distribution.tests/M5W02C02T2Tests.cs";
+const string RetainedTests="tests/projects/dw.tools.math.distribution.tests/M5W02C02T1Tests.cs";
 const string Client="tests/consumers/m5-w02-c02-t2/m5-managed-api-boundary-consumer.csproj";
 const string ClientCode="tests/consumers/m5-w02-c02-t2/Program.cs";
 const string ClientConfig="tests/consumers/m5-w02-c02-t2/NuGet.Config";
@@ -116,7 +117,7 @@ if(!target)
         ["compiler_failure_is_not_a_red_substitute"]=true
     }.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
-foreach(var file in new[]{Project,Manifest,Source,GreenTest,Client,ClientCode,
+foreach(var file in new[]{Project,Manifest,Source,GreenTest,RetainedTests,Client,ClientCode,
     ClientConfig,Clean,CleanCode,Sample,Readme,Notices,Decision,Matrix})
 {
     var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
@@ -131,6 +132,14 @@ var focused=Required(root,"dotnet","test",Test,"-c","Release",
 if(!focused.Contains("Total tests: 37",StringComparison.OrdinalIgnoreCase) ||
    !focused.Contains("Passed: 37",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException("The compiled RED and 36 independent GREEN tests must pass.");
+var retainedOutput=Required(root,"dotnet","test",Test,"-c","Release",
+    "--no-build","--no-restore","--filter",
+    "FullyQualifiedName~M5W02C02T1Tests",
+    "--logger","console;verbosity=normal");
+if(!retainedOutput.Contains("Total tests: 40",StringComparison.OrdinalIgnoreCase) ||
+   !retainedOutput.Contains("Passed: 40",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException(
+        "All 40 retained T1 package archive oracles must pass the current declared version before the broader distribution suite.");
 Required(root,"dotnet","test",Test,"-c","Release","--no-build","--no-restore");
 foreach(var regression in new[]{
     "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
@@ -265,6 +274,9 @@ if(!target)
         ["manifest_source"]=Manifest,["manifest_source_sha256"]=hashes[Manifest],
         ["source_file"]=Source,["source_sha256"]=hashes[Source],
         ["green_tests"]=GreenTest,["green_tests_sha256"]=hashes[GreenTest],
+        ["retained_t1_tests"]=RetainedTests,
+        ["retained_t1_tests_sha256"]=hashes[RetainedTests],
+        ["retained_t1_tests_passed"]=40,
         ["retained_clean_consumer_source"]=CleanCode,
         ["retained_clean_consumer_source_sha256"]=hashes[CleanCode],
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
@@ -314,7 +326,7 @@ if(!target)
         phase["readiness"]="C02 managed local package qualification complete; current public API/assembly SHA observed, foreign native assets refused, unknown RIDs and cross-version ABI not certified";
         var paths=phase["files"]!.AsArray().Select(x=>x!.GetValue<string>());
         phase["files"]=p.Json.StringArray(paths.Concat(new[]{
-            Project,Manifest,Source,GreenTest,RedTest,Client,ClientCode,
+            Project,Manifest,Source,GreenTest,RetainedTests,RedTest,Client,ClientCode,
             ClientConfig,Clean,CleanCode,Sample,Readme,Notices,Decision,Matrix,RedProof,Proof
         }).Distinct(StringComparer.Ordinal).ToArray());
         phase["commands"]=p.Json.StringArray(

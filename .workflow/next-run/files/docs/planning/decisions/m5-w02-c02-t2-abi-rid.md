@@ -49,3 +49,16 @@ repository directory. This corrects the original pre-attempt refusal
 for untracked `Directory.CreateDirectory` and `File.Copy` in payload.
 All exact filename, version, SHA-256, dependency and NuGet-only constraints
 remain enforced.
+
+## Versioned retained-test evolution (RS077 retry 2)
+
+The previous M5-W02-C02-T1 archive test suite is preserved and rerun, not
+suppressed. Its positive distribution-version assertion now compares the
+actual inspected package identity to the current declared Math graph,
+which changes with a qualified prerelease. The explicit incompatible nuspec
+fixture uses `9.9.9`, a separately disallowed version rather than the
+new, valid `1.0.0-preview.4`. Both tests remain falsifiable; the RS077
+T2 suite independently asserts the exact `preview.4` product identity.
+All 40 retained T1 tests run as a focused gate before the full distribution
+test suite. Their exact corrected source SHA is recorded in the new RS077
+receipt; the immutable RS076 T1 receipt retains its historical source SHA.
