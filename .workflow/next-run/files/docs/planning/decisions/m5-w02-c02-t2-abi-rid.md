@@ -37,3 +37,15 @@ clean consumer and exact math console probes must survive preview.4.
 After durable proof only C02-T2 and C02 close. M5-W02, M5 and G-M5
 remain open; CI publication, new OS host matrices and stable 1.0
 require separate authorization and evidence.
+
+## Controlled retained-consumer compatibility
+
+The prior T1 clean NuGet consumer retains its eight scientific/package
+oracles. Its input directory check explicitly admits only the originally
+qualified `m5-w02-c02-t1-local-feed` or the current
+`m5-w02-c02-t2-local-feed`. The RS077 payload reuses the SAME seven
+inspected .nupkg files directly; it does not create or copy a second
+repository directory. This corrects the original pre-attempt refusal
+for untracked `Directory.CreateDirectory` and `File.Copy` in payload.
+All exact filename, version, SHA-256, dependency and NuGet-only constraints
+remain enforced.

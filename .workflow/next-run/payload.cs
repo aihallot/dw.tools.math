@@ -27,6 +27,7 @@ const string Client="tests/consumers/m5-w02-c02-t2/m5-managed-api-boundary-consu
 const string ClientCode="tests/consumers/m5-w02-c02-t2/Program.cs";
 const string ClientConfig="tests/consumers/m5-w02-c02-t2/NuGet.Config";
 const string Clean="tests/consumers/m5-w02-c02-t1/m5-clean-package-consumer.csproj";
+const string CleanCode="tests/consumers/m5-w02-c02-t1/Program.cs";
 const string CleanConfig="tests/consumers/m5-w02-c02-t1/NuGet.Config";
 const string Sample="samples/m5-exact-vertical/m5-exact-vertical.csproj";
 const string SampleConfig="samples/m5-exact-vertical/NuGet.Config";
@@ -116,7 +117,7 @@ if(!target)
     }.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 foreach(var file in new[]{Project,Manifest,Source,GreenTest,Client,ClientCode,
-    ClientConfig,Clean,Sample,Readme,Notices,Decision,Matrix})
+    ClientConfig,Clean,CleanCode,Sample,Readme,Notices,Decision,Matrix})
 {
     var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
     hashes[file]=installed.AfterSha256 ??
@@ -219,20 +220,14 @@ foreach(var item in packages)
     });
 }
 EnsurePinned(root,Clean,CleanConfig,Version);
-var cleanFeed=Path.Combine(root,"build","artifacts","m5-w02-c02-t1-local-feed");
-Directory.CreateDirectory(cleanFeed);
-var oldArchives=new List<string>();
-foreach(var item in archives)
-{
-    var dest=Path.Combine(cleanFeed,Path.GetFileName(item));
-    File.Copy(item,dest,overwrite:true);
-    oldArchives.Add(dest);
-}
-Required(root,"dotnet","restore",Clean,"--source",cleanFeed,"--configfile",CleanConfig,
+// The previous clean NuGet consumer accepts the exact current T2 local
+// archive directory. Do not duplicate the packages through untracked
+// File.Copy or Directory.CreateDirectory: preserve byte-for-byte identity.
+Required(root,"dotnet","restore",Clean,"--source",feed,"--configfile",CleanConfig,
     "--packages",Path.Combine(root,"build","artifacts","m5-w02-c02-t2-old-clean"));
 Required(root,"dotnet","build",Clean,"-c","Release","--no-restore");
 var oldArgs=new List<string>{"run","--project",Clean,"-c","Release","--no-build","--no-restore","--"};
-oldArgs.AddRange(oldArchives);
+oldArgs.AddRange(archives);
 var oldOutput=Required(root,"dotnet",oldArgs.ToArray());
 if(!HasExactLine(oldOutput,"dw.tools.math/m5-clean-package-consumer/1.0 qualified; probes=8"))
     throw new InvalidOperationException("Retained eight-probe clean NuGet consumer regressed.");
@@ -270,6 +265,8 @@ if(!target)
         ["manifest_source"]=Manifest,["manifest_source_sha256"]=hashes[Manifest],
         ["source_file"]=Source,["source_sha256"]=hashes[Source],
         ["green_tests"]=GreenTest,["green_tests_sha256"]=hashes[GreenTest],
+        ["retained_clean_consumer_source"]=CleanCode,
+        ["retained_clean_consumer_source_sha256"]=hashes[CleanCode],
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
         ["decision_document"]=Decision,["decision_document_sha256"]=hashes[Decision],
         ["support_matrix_document"]=Matrix,["support_matrix_sha256"]=hashes[Matrix],
@@ -318,7 +315,7 @@ if(!target)
         var paths=phase["files"]!.AsArray().Select(x=>x!.GetValue<string>());
         phase["files"]=p.Json.StringArray(paths.Concat(new[]{
             Project,Manifest,Source,GreenTest,RedTest,Client,ClientCode,
-            ClientConfig,Clean,Sample,Readme,Notices,Decision,Matrix,RedProof,Proof
+            ClientConfig,Clean,CleanCode,Sample,Readme,Notices,Decision,Matrix,RedProof,Proof
         }).Distinct(StringComparer.Ordinal).ToArray());
         phase["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
