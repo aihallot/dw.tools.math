@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "id": "RS070",
+  "title": "Qualify exact annotated Content and Presentation MathML subset",
+  "state": "prepared",
+  "commitMessage": "feat: qualify exact annotated MathML and IR interchange",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M5",
+    "M5-W01",
+    "M5-W01-C03",
+    "M5-W01-C03-T1",
+    "M5-W01-C03-T1-R",
+    "M5-W01-C03-T1-G",
+    "M5-W01-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify a bounded MathML 3 Content/Presentation exact IR interchange with canonical text and content annotations. Preserve rational, real-symbol, simple sum and original-equality structure; refuse ambiguous presentation, forged markup, DTD and XML budgets. Recover one compiled RED, pass 41 independent GREEN tests, eight isolated NuGet probes and three local package inspections. Complete only C03-T1; leave C03, W01 and M5 open.",
+    "value": "Let independent .NET Math consumers exchange exact, typed mathematical content and passive presentation with independently checked source identity rather than guessed visual equivalence.",
+    "debtChanges": [
+      "Observe a genuine compiled missing MathML public API RED against the previously qualified codecs preview.4, before installing the new preview.5 implementation.",
+      "Introduce a pinned MathML 3 annotated profile with Content MathML integer rationals, real x/y/z, simple ordered sums and an original equality restriction, not a solved equation.",
+      "Bind passive Presentation MathML to both Math-owned canonical text and independent Content MathML annotations; never infer original math from unannotated display alone.",
+      "Import only canonical annotated XML using XmlReader with prohibited DTD, null resolver and tight size/node/depth bounds, refusing altered content, presentation or semantic annotations.",
+      "Remove remaining MSTEST0032 constant-vs-public-const Rule equality; assert RuleId on an actual Render result. Preserve all 41 GREEN oracles, with exact XML annotation, IR, namespace, tampering and budget tests.",
+      "Run locked .NET 10 Release solution build, the focused codecs suite and IR/quantities regressions; independently inspect three local net10 NuGet archives and their SHA-256.",
+      "Run eight standalone NuGet-only consumer oracles through one pinned codecs preview.5 reference with transitive IR/quantities, no project source dependency and no CAS/broker runtime.",
+      "Complete C03-T1 RED/GREEN/verification and T1 only. Activate C03; keep T2, C04, W01 and M5 uncompleted and leave public NuGet and stable 1.0 unclaimed."
+    ],
+    "nextAction": "After durable RS070 success, qualify M5-W01-C03-T2 XML/DTD/depth/namespace adversarial boundaries and semantic-loss guarantees before closing the MathML phase.",
+    "achievements": [
+      {
+        "projectNode": "M5-W01-C03-T1-R",
+        "achievement": "Observe a compiled missing exact Content/Presentation MathML and annotation import public API RED on the qualified codecs preview.4."
+      },
+      {
+        "projectNode": "M5-W01-C03-T1-G",
+        "achievement": "Implement a bounded exact MathML 3 profile and canonical annotation cross-check with 41 GREEN tests and eight independent pinned NuGet oracles."
+      },
+      {
+        "projectNode": "M5-W01-C03-T1-V",
+        "achievement": "Qualify exact IR/content/presentation replay, XML trust refusals, local codecs preview.5 package hashes, tests and runtime evidence."
+      },
+      {
+        "projectNode": "M5-W01-C03-T1",
+        "achievement": "Admit exact annotated MathML fraction, symbol, simple addition and original equality interchange, without closing C03 or claiming a general MathML importer."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M5.md",
+    "docs/planning/evidence/M5-W01-C03-T1-contract-red.json",
+    "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json",
+    "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+    "src/projects/dw.tools.math.codecs/ExactMathMlInterop.cs",
+    "tests/projects/dw.tools.math.codecs.tests/M5W01C03T1RedTests.cs",
+    "tests/projects/dw.tools.math.codecs.tests/M5W01C03T1Tests.cs",
+    "tests/consumers/m5-w01-c03-t1/Program.cs",
+    "tests/consumers/m5-w01-c03-t1/m5-mathml-consumer.csproj",
+    "tests/consumers/m5-w01-c03-t1/NuGet.Config",
+    "docs/planning/decisions/m5-w01-c03-t1-exact-mathml.md",
+    "docs/distribution/m5-exact-mathml.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
