@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.68",
+  "plan_version": "0.1.69",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5609,7 +5609,7 @@
       "title": "Content and presentation MathML",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W01-C02"
       ],
@@ -5634,40 +5634,70 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS070 T1 qualifies a closed MathML 3 Content/Presentation serialization with typed exact integer rational components, real x/y/z, simple ordered sums, and a single original equality restriction. Versioned canonical Math text and independent Content MathML annotation bind passive presentation to exact source IR; annotated import regenerates and cross-checks all three forms and Math IR JSON identity. An unannotated presentation, tampered XML or unsupported shape has no mathematical result. One compiled RED, 41 GREEN tests, eight isolated NuGet consumers and three inspected local packages qualify T1. T2 still owns deeper DTD/namespace/node/depth adversarial integration; C03, W01 and M5 remain in-progress.",
+      "files": [
+        "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+        "src/projects/dw.tools.math.codecs/ExactMathMlInterop.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C03T1RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C03T1Tests.cs",
+        "docs/planning/decisions/m5-w01-c03-t1-exact-mathml.md",
+        "docs/distribution/m5-exact-mathml.md",
+        "tests/consumers/m5-w01-c03-t1/m5-mathml-consumer.csproj",
+        "tests/consumers/m5-w01-c03-t1/Program.cs",
+        "tests/consumers/m5-w01-c03-t1/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C03T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m5-w01-c03-t1/m5-mathml-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json"
+      ],
+      "readiness": "T1 annotated exact Content/Presentation MathML subset qualified by RS070 only; T2 security and semantic-loss boundary tests remain not-ready",
       "tasks": [
         {
           "id": "M5-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt subset Content MathML and Presentation MathML rendering with semantic annotations.",
           "test_case": "Fraction/symbol/equation round-trip preserves IR; ambiguous presentation alone does not invent certain content.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C03-T1-contract-red.json",
+            "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Fraction/symbol/equation round-trip preserves IR; ambiguous presentation alone does not invent certain content.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C03-T1-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt subset Content MathML and Presentation MathML rendering with semantic annotations.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json"
+              ]
             }
           ]
         },
