@@ -30,6 +30,7 @@ const string PackageHelper=".workflow/runs/RS068/staged/checks/m5-w01-c02-t1-pac
 const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.3";
 const string RedMarker="M5-W01-C02-T1 RED: bounded LaTeX importer and explicit ambiguity convention public API are absent.";
 const string ConsumerMarker="dw.tools.math/m5-latex-import-consumer/1.0 qualified; probes=8";
+const string QualifiedStatus="bounded-latex-exact-subset-and-juxtaposition-ambiguity-qualified";
 const int IndependentGreen=50,AllTargeted=51;
 
 var p=PayloadContext.Create();
@@ -95,7 +96,7 @@ else
     p.Require.JsonValueEquals(RedProof,"/status",
         JsonValue.Create("compiled-bounded-latex-import-api-absent-red-observed"));
     p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create("bounded-exact-latex-import-and-ambiguity-convention-qualified"));
+        JsonValue.Create(QualifiedStatus));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
     p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",JsonValue.Create(8));
@@ -238,7 +239,7 @@ if(!target)
     {
         ["schema_version"]=1,
         ["id"]="M5-W01-C02-T1-contract-qualified",
-        ["status"]="bounded-latex-exact-subset-and-juxtaposition-ambiguity-qualified",
+        ["status"]=QualifiedStatus,
         ["prior_display_boundary_qualification"]=Prior,
         ["compiled_missing_api_red"]=RedProof,
         ["question"]="Can a closed non-executing LaTeX subset parse exact 1/2 and selected mathematical structures while refusing ambiguous function-versus-multiplication notation without a declared caller convention?",
