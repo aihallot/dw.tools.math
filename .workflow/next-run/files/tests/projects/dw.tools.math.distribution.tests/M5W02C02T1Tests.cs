@@ -43,7 +43,7 @@ public sealed class M5W02C02T1Tests
         using var destination=new MemoryStream();
         using(var zip=new ZipArchive(destination,ZipArchiveMode.Create,leaveOpen:true))
         {
-            var direct=config.OmitDependencies ? [] :
+            string[] direct=config.OmitDependencies ? Array.Empty<string>() :
                 expected.DirectDependencies.ToArray();
             var dependencyMarkup=string.Concat(direct.Select(name=>
                 "<dependency id=\""+name+"\" version=\"["+
@@ -269,7 +269,7 @@ public sealed class M5W02C02T1Tests
         Assert.IsTrue(first.IsQualified);
         Assert.AreEqual(first.ArchiveSha256,second.ArchiveSha256);
     }
-    [TestMethod] public void ChangingNoticesChangesVerifiedArchiveDigest()
+    [TestMethod] public void MissingNoticesRemoveReleaseQualificationAndDigest()
     {
         var original=Qualified();
         var without=Refused(MathPackageQualificationStatus.MissingRequiredDocuments,

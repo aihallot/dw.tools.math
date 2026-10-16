@@ -50,7 +50,7 @@ Probe("actual seven archives qualify with correct identities and net10 assemblie
 {
     Require(results.Length==manifest.Length&&
         results.Select((r,i)=>r.IsQualified&&r.Status==MathPackageQualificationStatus.Qualified&&
-            r.Package?.Id==manifest[i].Id&&r.Package.Version==manifest[i].Version)
+            r.Package?.Id==manifest[i].Id&&r.Package?.Version==manifest[i].Version)
         .All(x=>x),"a declared package graph alone cannot qualify broken archive bytes");
 });
 Probe("all actual package hashes and byte lengths match independently",()=>
