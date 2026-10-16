@@ -1,6 +1,6 @@
 # dw.tools.math.distribution local prerelease
 
-Version: 1.0.0-preview.3. Target framework: net10.0.
+Version: 1.0.0-preview.4. Target framework: net10.0.
 
 This package exposes a bounded exact numerical/symbolic Math vertical
 without AURA, Decision, MCDM, Office or an external algebra system.
@@ -16,3 +16,7 @@ A declaration alone is not a verified package. Neither the net10 target nor
 a single local restore certifies a runtime identifier, cross-OS release,
 source/binary compatibility, signing or a remote public NuGet release.
 All such claims require separate qualification.
+
+The managed API surface digest is an observed single-archive fingerprint,
+not a cross-version source/binary compatibility certificate. Native or
+RID-specific runtime assets are refused by the bounded surface audit.
