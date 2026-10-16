@@ -8,6 +8,7 @@ SDK 10.0.401 is the observed M0-W01-C01 baseline. `global.json` allows `latestPa
 - Central package management, lock files, nullable, and analyzers are configured at bootstrap.
 - CancellationToken is the last public argument; check cancellation before computation and at bounded points.
 - Verify actual runner/framework signatures, especially relational assertions; do not transpose xUnit/NUnit assumptions into MSTest.
+- Under warnings-as-errors MSTest, do not use `Assert.IsTrue` or `Assert.IsFalse` on compile-time constants, constant comparisons or tautologies (MSTEST0032). Replace them with executable boundary cases, such as actual over-budget and missing-annotation refusals, and audit all newly staged assertions before requesting DWF execution.
 - If MSTest 4 is used: TestMethod + DataRow, dedicated collection assertions, and unambiguous bound helpers.
 - Avoid ContainsKey/indexer double lookup, repeated constant-array allocation, and exceptions naming a parameter that does not exist.
 - For top-level C# consumer programs, check that every declared local helper is used (notably CS8321). Warnings are errors: remove dead helpers before handing DWF a run, not during operator execution.

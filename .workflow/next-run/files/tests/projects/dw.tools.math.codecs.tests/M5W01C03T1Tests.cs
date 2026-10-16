@@ -418,10 +418,17 @@ public sealed class M5W01C03T1Tests
     }
 
     [TestMethod]
-    public void VersionedContractNeverClaimsGeneralMathMlImport()
+    public void VersionedContractRejectsUnannotatedAndOverBudgetMathMl()
     {
         Assert.AreEqual("dw-math-mathml3-annotated-ir/1",ExactMathMlInterop.Rule);
-        Assert.IsTrue(ExactMathMlInterop.MaximumXmlDepth>0);
-        Assert.IsTrue(ExactMathMlInterop.MaximumXmlNodes>0);
+        var presentation=new XElement(
+            XNamespace.Get(ExactMathMlInterop.Namespace)+"math",
+            new XElement(XNamespace.Get(ExactMathMlInterop.Namespace)+"mi","x"))
+            .ToString(SaveOptions.DisableFormatting);
+        Refuse(ExactMathMlInterop.ImportAnnotated(presentation),
+            MathMlInteropStatus.PresentationAmbiguous);
+        var oversized=new string('x',ExactMathMlInterop.MaximumXmlCharacters+1);
+        Refuse(ExactMathMlInterop.ImportAnnotated(oversized),
+            MathMlInteropStatus.BudgetExceeded);
     }
 }
