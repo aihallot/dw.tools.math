@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.73",
+  "plan_version": "0.1.74",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5927,7 +5927,7 @@
       "title": "Independent numerical and symbolic vertical",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W01-C04"
       ],
@@ -5952,7 +5952,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C01Tests"
       ],
-      "refinement": "RS074 T1 delivers a standalone .NET 10 public console sample from one pinned NuGet distribution package, combining canonical source parsing, typed restricted Math IR, exact formal body derivative 2x, polynomial point value 3 at admissible x=2, complete unrestricted quadratic candidates and original-domain audited root -1 with excluded 1. It retains exact/explicit binary64 composition, original JSON replay, source SHA-256, provider and loss policy. Incompatible derivative-as-original-equation pipelines and unauthorized rounding are refused. One compiled absent-API RED, 34 independent GREEN tests, eight isolated NuGet console probes and seven independently inspected local packages qualify only C01 T1. T2 and all wider M5-W02 release gates remain open.",
+      "refinement": "RS074 T1 qualified the exact source-bound numerical/symbolic public console: original x!=1 IR, body derivative 2x, point value 3 at x=2, unrestricted roots -1/1 with original excluded 1, explicit exact/binary64 composition, independent local NuGet sample and seven archives. RS075 T2 independently rechecks source IR structural identity, provider/assumptions, formal derivative versus solving, exact point proof, original root audit versus unrestricted candidate completeness, precise binary64 loss and typed refusal boundaries. One compiled RED, 41 GREEN oracles, eight new isolated NuGet boundary probes, the retained eight-probe console and seven SHA-inspected local packages complete C01 only. M5-W02 and M5 remain open.",
       "files": [
         "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
         "src/projects/dw.tools.math.distribution/packages.lock.json",
@@ -5969,20 +5969,33 @@
         "docs/planning/decisions/m5-w02-c01-t1-public-vertical.md",
         "docs/distribution/m5-exact-console-vertical.md",
         "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.distribution/ExactVerticalBoundaryAudit.cs",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C01T2Tests.cs",
+        "tests/consumers/m5-w02-c01-t2/m5-exact-vertical-boundary-consumer.csproj",
+        "tests/consumers/m5-w02-c01-t2/Program.cs",
+        "tests/consumers/m5-w02-c01-t2/NuGet.Config",
+        "docs/planning/decisions/m5-w02-c01-t2-public-vertical-boundaries.md",
+        "docs/distribution/m5-exact-console-boundaries.md",
+        "docs/planning/evidence/M5-W02-C01-T2-contract-red.json",
+        "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C01T2",
         "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m5-w02-c01-t2/m5-exact-vertical-boundary-consumer.csproj -c Release",
         "dotnet run --project samples/m5-exact-vertical/m5-exact-vertical.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json",
+        "docs/planning/evidence/M5-W02-C01-T2-contract-red.json",
+        "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 exact public numerical/symbolic console and local package consumption qualified; T2 provider/assumption/loss boundaries still planned, C01/W02/M5 remain in-progress",
+      "readiness": "C01 complete with T1 exact console composition and T2 independent original-domain/pipeline/provenance/numeric-loss boundaries; C02 clean packaging matrix and C03 release gate remain pending",
       "tasks": [
         {
           "id": "M5-W02-C01-T1",
@@ -6029,29 +6042,38 @@
           "title": "Boundaries and integration",
           "behavior": "No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
           "test_case": "No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W02-C01-T2-contract-red.json",
+            "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T2-contract-red.json"
+              ]
             },
             {
               "id": "M5-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W02-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
