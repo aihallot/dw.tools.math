@@ -39,7 +39,7 @@ Probe("seven actual net10 Math archives qualify independently",()=>
 {
     Require(qualified.Length==7 && qualified.Select((result,i)=>
         result.IsQualified && result.Package?.Id==expected[i].Id &&
-        result.Package.Version==expected[i].Version).All(x=>x),
+        result.Package?.Version==expected[i].Version).All(x=>x),
         "all versioned archived assemblies must pass public-surface inspection");
 });
 Probe("actual public API SHA and managed assembly SHA exist",()=>
