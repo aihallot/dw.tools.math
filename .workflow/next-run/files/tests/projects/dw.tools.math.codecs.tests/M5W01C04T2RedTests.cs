@@ -13,7 +13,7 @@ public sealed class M5W01C04T2RedTests
         var audit=assembly.GetType("Dw.Tools.Math.Codecs.MathDisplayBoundaryAudit");
         Assert.IsNotNull(audit,
             "M5-W01-C04-T2 RED: independent OMML and Markdown display boundary audit API is absent.");
-        Assert.IsNotNull(audit.GetMethod("AuditOmml"));
-        Assert.IsNotNull(audit.GetMethod("AuditMarkdown"));
+        Assert.IsNotNull(audit!.GetMethod("AuditOmml"));
+        Assert.IsNotNull(audit!.GetMethod("AuditMarkdown"));
     }
 }
