@@ -339,7 +339,7 @@ if(!target)
         ["distribution_readme_is_not_a_license_grant"]=true,
         ["actual_archive_bytes_and_sha256_cross_checked"]=true,
         ["qualified_target_framework"]="net10.0",
-        ["qualified_rid_matrix"]=p.Json.StringArray(),
+        ["qualified_rid_matrix"]=new JsonArray(),
         ["multi_os_release_certified"]=false,
         ["public_nuget_published"]=false,
         ["stable_release_certified"]=false,
