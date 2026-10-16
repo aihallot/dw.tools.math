@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.67",
+  "plan_version": "0.1.68",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5455,7 +5455,7 @@
       "title": "Bounded LaTeX import and ambiguities",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W01-C01"
       ],
@@ -5480,7 +5480,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C02Tests"
       ],
-      "refinement": "RS068 T1 establishes a bounded non-executing exact LaTeX import grammar over the already-qualified canonical Math IR/text codec. Fractions, three free real identifiers, elementary functions, explicit multiplication and bounded sums/differences are imported exactly. Juxtaposition x(y) is ambiguous by default and multiplication needs a caller-declared convention; T1 square/power LaTeX collision also remains ambiguous. Refusal states distinguish invalid syntax, unsupported TeX macros, noncanonical rationals and budget exhaustion. One compiled missing-API RED, 50 independent GREEN tests, eight NuGet-only consumer probes and three locally inspected archives qualify T1. C02 remains in-progress; T2 retains adversarial loss/ambiguity policy, and M5/W01 remain in-progress.",
+      "refinement": "RS068 T1 qualifies the closed exact LaTeX importer, convention-bound juxtaposition, refusal statuses and source Math IR. RS069 T2 independently binds the bounded source SHA-256, distinguishes passive notation change from convention-dependent meaning, preserves typed canonical IR identity, and retains precise macro/noncanonical/invalid/ambiguous/budget refusals without proof on failure. One compiled absent-API RED, 46 independent GREEN tests, eight NuGet-only consumer probes and three locally inspected packages qualify the exact import boundary. M5-W01 and M5 remain in-progress; C03 MathML/Markdown mathematical interchange has not started.",
       "files": [
         "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
         "src/projects/dw.tools.math.codecs/BoundedLatexImporter.cs",
@@ -5492,20 +5492,32 @@
         "tests/consumers/m5-w01-c02-t1/Program.cs",
         "tests/consumers/m5-w01-c02-t1/NuGet.Config",
         "docs/planning/evidence/M5-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.codecs/LatexImportBoundaryAudit.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C02T2RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C02T2Tests.cs",
+        "docs/planning/decisions/m5-w01-c02-t2-latex-loss.md",
+        "docs/distribution/m5-latex-loss.md",
+        "tests/consumers/m5-w01-c02-t2/m5-latex-loss-consumer.csproj",
+        "tests/consumers/m5-w01-c02-t2/Program.cs",
+        "tests/consumers/m5-w01-c02-t2/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C02-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C02T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C02T2",
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m5-w01-c02-t1/m5-latex-import-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m5-w01-c02-t2/m5-latex-loss-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M5-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json",
+        "docs/planning/evidence/M5-W01-C02-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 bounded LaTeX exact import and explicit ambiguity convention qualified by RS068; T2 hostile inputs/loss metadata and the full C02 phase remain not-ready",
+      "readiness": "C02 closed by RS068 exact subset and RS069 loss-provenance audit; M5-W01-C03 remains not-ready pending independent MathML/Markdown qualification",
       "tasks": [
         {
           "id": "M5-W01-C02-T1",
@@ -5552,29 +5564,38 @@
           "title": "Boundaries and integration",
           "behavior": "Reject arbitrary macros; preserve loss metadata; publish the subset, not all-LaTeX support.",
           "test_case": "Reject arbitrary macros; preserve loss metadata; publish the subset, not all-LaTeX support.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C02-T2-contract-red.json",
+            "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Reject arbitrary macros; preserve loss metadata; publish the subset, not all-LaTeX support.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C02-T2-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: Reject arbitrary macros; preserve loss metadata; publish the subset, not all-LaTeX support.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
