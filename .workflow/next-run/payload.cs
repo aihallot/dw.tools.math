@@ -10,153 +10,161 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C02",Task="M5-W01-C02-T1";
-const string Red="M5-W01-C02-T1-R",Green="M5-W01-C02-T1-G",Verify="M5-W01-C02-T1-V";
+const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C02",Task="M5-W01-C02-T2";
+const string Red="M5-W01-C02-T2-R",Green="M5-W01-C02-T2-G",Verify="M5-W01-C02-T2-V";
 const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
-const string Prior="docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json";
-const string RedProof="docs/planning/evidence/M5-W01-C02-T1-contract-red.json";
-const string Qualified="docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json";
-const string Source="src/projects/dw.tools.math.codecs/BoundedLatexImporter.cs";
+const string Prior="docs/planning/evidence/M5-W01-C02-T1-contract-qualified.json";
+const string RedProof="docs/planning/evidence/M5-W01-C02-T2-contract-red.json";
+const string Qualified="docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json";
+const string QualifiedStatus="bounded-latex-import-semantic-loss-and-adversarial-boundaries-qualified";
+const string Source="src/projects/dw.tools.math.codecs/LatexImportBoundaryAudit.cs";
 const string Product="src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj";
 const string Test="tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj";
-const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C02T1RedTests.cs";
-const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C02T1Tests.cs";
-const string Decision="docs/planning/decisions/m5-w01-c02-t1-bounded-latex-import.md";
-const string Document="docs/distribution/m5-bounded-latex-import.md";
-const string ConsumerProject="tests/consumers/m5-w01-c02-t1/m5-latex-import-consumer.csproj";
-const string ConsumerSource="tests/consumers/m5-w01-c02-t1/Program.cs";
-const string ConsumerConfig="tests/consumers/m5-w01-c02-t1/NuGet.Config";
-const string PackageHelper=".workflow/runs/RS068/staged/checks/m5-w01-c02-t1-package-sha.cs";
-const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.3";
-const string RedMarker="M5-W01-C02-T1 RED: bounded LaTeX importer and explicit ambiguity convention public API are absent.";
-const string ConsumerMarker="dw.tools.math/m5-latex-import-consumer/1.0 qualified; probes=8";
-const string QualifiedStatus="bounded-latex-exact-subset-and-juxtaposition-ambiguity-qualified";
-const int IndependentGreen=50,AllTargeted=51;
+const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C02T2RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C02T2Tests.cs";
+const string Decision="docs/planning/decisions/m5-w01-c02-t2-latex-loss.md";
+const string Document="docs/distribution/m5-latex-loss.md";
+const string ConsumerProject="tests/consumers/m5-w01-c02-t2/m5-latex-loss-consumer.csproj";
+const string ConsumerSource="tests/consumers/m5-w01-c02-t2/Program.cs";
+const string ConsumerConfig="tests/consumers/m5-w01-c02-t2/NuGet.Config";
+const string PackageHelper=".workflow/runs/RS069/staged/checks/m5-w01-c02-t2-package-sha.cs";
+const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.4";
+const string RedMarker="M5-W01-C02-T2 RED: independent bounded LaTeX semantic-loss and provenance audit API is absent.";
+const string ConsumerMarker="dw.tools.math/m5-latex-loss-consumer/1.0 qualified; probes=8";
+const int IndependentGreen=46,AllTargeted=47;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS068",Milestone,Work,target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS067",1,
-    "feat: qualify canonical Math display boundaries and close C01",
-    "0.1.59",1,1,0,false);
+p.Workflow.RequireCurrentRun("RS069",Milestone,Work,target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS068",1,
+    "feat: qualify bounded LaTeX import with explicit ambiguity policy",
+    "0.1.59",2,2,0,false);
 
 p.Require.JsonValueEquals(Prior,"/status",
-    JsonValue.Create("exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified"));
-p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(51));
-p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(52));
+    JsonValue.Create("bounded-latex-exact-subset-and-juxtaposition-ambiguity-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(50));
+p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(51));
 p.Require.JsonValueEquals(Prior,"/isolated_consumer_probes_passed",JsonValue.Create(8));
 p.Require.JsonValueEquals(Prior,"/compiled_red_observed",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/canonical_text_grammar",
-    JsonValue.Create("dw-math-canonical-text/1"));
-p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("1.0.0-preview.2"));
-p.Require.JsonValueEquals(Prior,"/m5_w01_c01_phase_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/default_juxtaposition_is_ambiguous",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/caller_convention_is_recorded",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("1.0.0-preview.3"));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c02_t1_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c02_phase_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_w01_work_package_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_release_done",JsonValue.Create(false));
+
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.66"),JsonValue.Create("0.1.67"));
+    JsonValue.Create("0.1.67"),JsonValue.Create("0.1.68"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.67":"0.1.66"));
+    JsonValue.Create(target?"0.1.68":"0.1.67"));
 p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/releases/5/status",JsonValue.Create("in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",JsonValue.Create("in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/12/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/33/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/chunks/34/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/34/tasks/0/status",
+    JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/34/tasks/0/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/34/tasks/1/status",
     JsonValue.Create(target?"done":"planned"));
 foreach(var slot in new[]{0,1,2})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/34/tasks/0/subtasks/{slot}/status",
+    p.Require.JsonValueEquals(Backlog,$"/chunks/34/tasks/1/subtasks/{slot}/status",
         JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/34/tasks/1/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/35/status",JsonValue.Create("planned"));
+p.Require.TextContains(Product,target?
+    "<Version>1.0.0-preview.4</Version>":
+    "<Version>1.0.0-preview.3</Version>");
 
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
 p.ProjectPlan.RequireNodeState("M5-W01-C01","done");
-p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M5-W01-C02-T1","done");
 p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
-p.ProjectPlan.RequireNodeState("M5-W01-C02-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W01-C03","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
-foreach(var id in new[]{Red,Green,Verify})
-    p.ProjectPlan.RequireNodeState(id,target?"done":"not-ready");
+foreach(var child in new[]{Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(child,target?"done":"not-ready");
 
 if(!target)
 {
     foreach(var file in new[]{Source,RedTest,GreenTests,Decision,Document,
         ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified})
         p.Require.FileMissing(file);
-    p.Require.TextContains(Product,"<Version>1.0.0-preview.2</Version>");
 }
 else
 {
     p.Require.JsonValueEquals(RedProof,"/status",
-        JsonValue.Create("compiled-bounded-latex-import-api-absent-red-observed"));
-    p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create(QualifiedStatus));
+        JsonValue.Create("compiled-bounded-latex-loss-audit-api-absent-red-observed"));
+    p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(QualifiedStatus));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
-    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",JsonValue.Create(8));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c02_t1_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c02_phase_done",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/m5_release_done",JsonValue.Create(false));
-    p.Require.TextContains(Product,"<Version>1.0.0-preview.3</Version>");
+    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",
+        JsonValue.Create(8));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c02_t2_done",
+        JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c02_phase_done",
+        JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_work_package_done",
+        JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/m5_release_done",
+        JsonValue.Create(false));
 }
 
 var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
-var redReceipt=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
-hashes[RedTest]=redReceipt.AfterSha256 ??
-    throw new InvalidOperationException("Missing staged reflection RED test SHA-256.");
-
+var stagedRed=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+hashes[RedTest]=stagedRed.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged compiled RED byte hash.");
 if(!target)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
-    var failedRed=Run(root,"dotnet","test",Test,"-c","Release",
+    var redOutput=Run(root,"dotnet","test",Test,"-c","Release",
         "--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M5W01C02T1RedTests.CompiledBoundedLatexImportApiMustBePresent",
+        "--filter","FullyQualifiedName~M5W01C02T2RedTests.IndependentLatexLossAndProvenanceAuditApiMustExist",
         "--logger","console;verbosity=normal");
-    if(failedRed.Code==0 ||
-       !failedRed.Output.Contains(RedMarker,StringComparison.Ordinal))
+    if(redOutput.Code==0 ||
+       !redOutput.Output.Contains(RedMarker,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "One compiled missing-public-API bounded LaTeX RED is required: "+
-            Relevant(failedRed.Output));
-    var proof=new JsonObject
+            "A genuine compiled absent-boundary-API RED is required: "+
+            Relevant(redOutput.Output));
+    var redProof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M5-W01-C02-T1-contract-red",
-        ["status"]="compiled-bounded-latex-import-api-absent-red-observed",
-        ["prior_display_boundary_contract"]=Prior,
-        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.2",
+        ["schema_version"]=1,
+        ["id"]="M5-W01-C02-T2-contract-red",
+        ["status"]="compiled-bounded-latex-loss-audit-api-absent-red-observed",
+        ["prior_bounded_latex_import"]=Prior,
+        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.3",
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
-        ["missing_api"]="BoundedLatexImporter.Import(string,LatexJuxtapositionConvention)",
+        ["missing_api"]="LatexImportBoundaryAudit.Audit(string,LatexJuxtapositionConvention)",
         ["expected_red_assertion"]=RedMarker,
         ["independent_red_test_count"]=1,
-        ["compiler_failure_not_a_red_substitute"]=true,
-        ["nonclaim"]="An absent public importer is not evidence of mathematical LaTeX semantics."
+        ["compiler_failure_is_not_a_red_substitute"]=true,
+        ["nonclaim"]="An absent public audit API is not itself a losslessness or hostile-input safety proof."
     };
     p.Files.WriteComplete(RedProof,
-        proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+        redProof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
-
 foreach(var file in new[]{Product,Source,GreenTests,Decision,Document,
     ConsumerProject,ConsumerSource,ConsumerConfig})
 {
-    var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
-    hashes[file]=installed.AfterSha256 ??
-        throw new InvalidOperationException("Missing staged Math LaTeX import source SHA-256: "+file);
+    var stagedFile=p.Files.ReplaceFromStaged("staged/"+file,file);
+    hashes[file]=stagedFile.AfterSha256 ??
+        throw new InvalidOperationException("Missing Math LaTeX source identity: "+file);
 }
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 var targeted=Required(root,"dotnet","test",Test,"-c","Release",
-    "--no-build","--no-restore","--filter","FullyQualifiedName~M5W01C02T1",
+    "--no-build","--no-restore",
+    "--filter","FullyQualifiedName~M5W01C02T2",
     "--logger","console;verbosity=normal");
-if(!targeted.Contains("Total tests: 51",StringComparison.OrdinalIgnoreCase)||
-   !targeted.Contains("Passed: 51",StringComparison.OrdinalIgnoreCase))
+if(!targeted.Contains("Total tests: 47",StringComparison.OrdinalIgnoreCase) ||
+   !targeted.Contains("Passed: 47",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException(
-        "The recovered compiled RED and 50 independent LaTeX GREENs were not all observed.");
+        "Require one recovered compiled RED and 46 independent exact LaTeX loss GREEN tests.");
 Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore","--logger","console;verbosity=minimal");
 foreach(var regressionProject in new[]{
@@ -168,7 +176,7 @@ foreach(var regressionProject in new[]{
         "--logger","console;verbosity=minimal");
     if(!regressionOutput.Contains("Passed",StringComparison.OrdinalIgnoreCase))
         throw new InvalidOperationException(
-            "Exact IR/quantities regression not qualified: "+regressionProject);
+            "Exact IR and quantities regression not observed: "+regressionProject);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
@@ -180,7 +188,7 @@ var packages=new (string Id,string Version,string Project,string[] DependsOn)[]
         "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
     ("dw.tools.math.codecs",Version,Product,["dw.tools.math.ir"])
 };
-var feed=Path.Combine(root,"build","artifacts","m5-w01-c02-t1-local-feed");
+var feed=Path.Combine(root,"build","artifacts","m5-w01-c02-t2-local-feed");
 var archives=new List<string>();
 foreach(var package in packages)
 {
@@ -222,8 +230,8 @@ var configured=XDocument.Load(Path.Combine(root,ConsumerConfig))
 if(!configured.Elements().Any(x=>x.Name.LocalName=="clear") ||
    configured.Elements().Any(x=>x.Name.LocalName=="add"))
     throw new InvalidOperationException(
-        "The bounded LaTeX import package-only consumer must clear external package feeds.");
-var isolated=Path.Combine(root,"build","artifacts","m5-w01-c02-t1-isolated-packages");
+        "The LaTeX loss audit package-only consumer must clear external package feeds.");
+var isolated=Path.Combine(root,"build","artifacts","m5-w01-c02-t2-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
 Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
@@ -231,20 +239,20 @@ var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
     "-c","Release","--no-build","--no-restore");
 if(!HasExactLine(consumerOutput,ConsumerMarker))
     throw new InvalidOperationException(
-        "Eight independent bounded LaTeX import NuGet-only consumer oracles not observed.");
+        "Eight independent LaTeX loss audit NuGet-only consumer oracles not observed.");
 
 if(!target)
 {
-    var evidence=new JsonObject
+    var proof=new JsonObject
     {
         ["schema_version"]=1,
-        ["id"]="M5-W01-C02-T1-contract-qualified",
+        ["id"]="M5-W01-C02-T2-boundaries-qualified",
         ["status"]=QualifiedStatus,
-        ["prior_display_boundary_qualification"]=Prior,
+        ["prior_bounded_latex_qualification"]=Prior,
         ["compiled_missing_api_red"]=RedProof,
-        ["question"]="Can a closed non-executing LaTeX subset parse exact 1/2 and selected mathematical structures while refusing ambiguous function-versus-multiplication notation without a declared caller convention?",
-        ["observation"]="One compiled missing-API RED recovered, 50 independent GREEN oracles and eight isolated NuGet-only consumer probes distinguish exact fraction/operation import, convention-controlled x(y), square/power LaTeX collision, invalid syntax, unsupported macros and resource budgets.",
-        ["decision"]="Admit a bounded passive LaTeX importer with exact rational and limited real-expression IR output; default to Ambiguous for juxtaposition, allow explicit Multiplication convention, never infer the source tree from colliding T1 square/power displays.",
+        ["question"]="Can the exact bounded LaTeX importer preserve source-byte provenance, structural Math IR identity and an explicit ambiguity/loss classification while refusing hostile TeX and avoiding unqualified inverse-display claims?",
+        ["observation"]="One genuine compiled missing-public-API RED recovered, 46 independent GREEN oracles and eight package-only consumer probes distinguish exact structural admission, source SHA-256, passive notation change, caller-dependent multiplication, ambiguous meaning, noncanonical fractions, invalid syntax, unsupported commands and resource refusal.",
+        ["decision"]="Admit a separate bounded LaTeX loss/provenance audit wrapping the qualified T1 importer. Only exact admitted results expose IR, canonical text, structural semantic SHA-256 and an audit rule. Fingerprints of refused bounded input are never proofs.",
         ["source_file"]=Source,["source_sha256"]=hashes[Source],
         ["product_project"]=Product,["product_project_sha256"]=hashes[Product],
         ["green_tests"]=GreenTests,["green_tests_sha256"]=hashes[GreenTests],
@@ -256,19 +264,21 @@ if(!target)
         ["red_recovered_and_green_tests_passed"]=AllTargeted,
         ["compiled_red_observed"]=true,
         ["isolated_consumer_probes_passed"]=8,
-        ["latex_import_rule"]="math-bounded-latex-exact-subset/v1",
-        ["default_juxtaposition_is_ambiguous"]=true,
-        ["caller_convention_is_recorded"]=true,
-        ["latex_half_is_exact"]="1/2",
-        ["latex_t1_square_power_collision_is_ambiguous"]=true,
-        ["input_tex_commands_are_never_executed"]=true,
-        ["arbitrary_macros_unsupported"]=true,
-        ["noncanonical_fraction_is_refused"]=true,
+        ["qualified_audit_rule"]="math-latex-import-boundary-loss/v1",
+        ["qualified_import_rule"]="math-bounded-latex-exact-subset/v1",
+        ["bounded_source_sha256_observed"]=true,
+        ["oversized_source_does_not_allocate_hash"]=true,
+        ["semantic_structural_sha256_retained"]=true,
+        ["canonical_ir_json_roundtrip_observed"]=true,
+        ["passive_notation_change_classified"]=true,
+        ["caller_convention_requirement_explicit"]=true,
+        ["unqualified_juxtaposition_refused"]=true,
+        ["square_power_two_collision_refused"]=true,
+        ["arbitrary_tex_macro_execution_admitted"]=false,
+        ["noncanonical_fraction_normalization_admitted"]=false,
+        ["refused_result_has_no_mathematical_ir_or_rule"]=true,
+        ["latex_inverse_qualified"]=false,
         ["maximum_latex_characters"]=512,
-        ["maximum_parser_depth"]=12,
-        ["maximum_exact_bits"]=128,
-        ["source_semantic_structural_sha256_qualified"]=true,
-        ["ambiguity_or_refusal_has_no_ir_or_proof"]=true,
         ["no_external_cas_or_agent_dependency"]=true,
         ["locked_solution_build_passed"]=true,
         ["focused_codec_and_ir_quantities_regressions_passed"]=true,
@@ -283,44 +293,51 @@ if(!target)
         ["consumer_config_sha256"]=hashes[ConsumerConfig],
         ["consumer_marker"]=ConsumerMarker,
         ["packages_publicly_published"]=false,
-        ["m5_w01_c02_t1_done"]=true,
-        ["m5_w01_c02_phase_done"]=false,
+        ["m5_w01_c02_t2_done"]=true,
+        ["m5_w01_c02_phase_done"]=true,
         ["m5_w01_work_package_done"]=false,
         ["m5_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_accepted_scope"]="M5-W01-C02-T2: richer semantic loss metadata, hostile macro and ambiguity boundaries without broad all-LaTeX claims",
+        ["next_accepted_scope"]="M5-W01-C03-T1: independently qualify semantic MathML/Markdown mathematical interchange, retaining typed original IR rather than inferring meaning from typography",
         ["nonclaims"]=p.Json.StringArray(
-            "No unrestricted TeX interpreter, macro expansion, arbitrary Unicode/infix grammar, broad function application or unknown symbol admission.",
-            "No lossless inverse to any display-only LaTeX, general exponent algebra, implicit algebraic simplification or generic symbolic CAS.",
-            "No public NuGet, stable 1.0, other RID platform evidence, AURA/Decision/MCDM adoption or dw.discovery skill.",
-            "Only M5-W01-C02-T1 completes; C02 T2, work package W01 and M5 release remain unqualified.")
+            "No arbitrary TeX parser/executor, macro expansion, universal input sanitizer, arbitrary functions or general symbolic CAS.",
+            "No algebraic equivalence, binary64 inference, lossless TeX typography, arbitrary source LaTeX inverse or unchecked assumptions.",
+            "No public NuGet or stable 1.0, AURA/Decision/MCDM consumer adoption or dw.discovery skill.",
+            "Only C02 closes; M5-W01, M5 and C03 onward remain to be independently qualified.")
     };
     p.Files.WriteComplete(Qualified,
-        evidence.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+        proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,plan=>
     {
-        plan["plan_version"]="0.1.67";
+        plan["plan_version"]="0.1.68";
         var chunk=plan["chunks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
         var task=chunk["tasks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-        if((string?)chunk["status"]!="planned" ||
+        if((string?)chunk["status"]!="in_progress" ||
            (string?)task["status"]!="planned")
-            throw new InvalidOperationException("The accepted M5-W01-C02 T1 baseline changed.");
-        chunk["status"]="in_progress";
-        chunk["refinement"]="RS068 T1 establishes a bounded non-executing exact LaTeX import grammar over the already-qualified canonical Math IR/text codec. Fractions, three free real identifiers, elementary functions, explicit multiplication and bounded sums/differences are imported exactly. Juxtaposition x(y) is ambiguous by default and multiplication needs a caller-declared convention; T1 square/power LaTeX collision also remains ambiguous. Refusal states distinguish invalid syntax, unsupported TeX macros, noncanonical rationals and budget exhaustion. One compiled missing-API RED, 50 independent GREEN tests, eight NuGet-only consumer probes and three locally inspected archives qualify T1. C02 remains in-progress; T2 retains adversarial loss/ambiguity policy, and M5/W01 remain in-progress.";
-        chunk["readiness"]="T1 bounded LaTeX exact import and explicit ambiguity convention qualified by RS068; T2 hostile inputs/loss metadata and the full C02 phase remain not-ready";
-        chunk["files"]=p.Json.StringArray(Product,Source,RedTest,GreenTests,
-            Decision,Document,ConsumerProject,ConsumerSource,ConsumerConfig,
-            RedProof,Qualified);
+            throw new InvalidOperationException("The accepted M5-W01-C02 T2 baseline changed.");
+        chunk["status"]="done";
+        chunk["refinement"]="RS068 T1 qualifies the closed exact LaTeX importer, convention-bound juxtaposition, refusal statuses and source Math IR. RS069 T2 independently binds the bounded source SHA-256, distinguishes passive notation change from convention-dependent meaning, preserves typed canonical IR identity, and retains precise macro/noncanonical/invalid/ambiguous/budget refusals without proof on failure. One compiled absent-API RED, 46 independent GREEN tests, eight NuGet-only consumer probes and three locally inspected packages qualify the exact import boundary. M5-W01 and M5 remain in-progress; C03 MathML/Markdown mathematical interchange has not started.";
+        chunk["readiness"]="C02 closed by RS068 exact subset and RS069 loss-provenance audit; M5-W01-C03 remains not-ready pending independent MathML/Markdown qualification";
+        var previousFiles=chunk["files"]!.AsArray()
+            .Select(x=>x!.GetValue<string>());
+        chunk["files"]=p.Json.StringArray(previousFiles.Concat(new[]{
+            Product,Source,RedTest,GreenTests,Decision,Document,
+            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified
+        }).Distinct(StringComparer.Ordinal).ToArray());
         chunk["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
             "dotnet build "+Solution+" -c Release --no-restore",
-            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C02T1",
+            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C02T2",
             "dotnet test "+Test+" -c Release",
             "dotnet run --project "+ConsumerProject+" -c Release");
-        chunk["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        var oldEvidence=chunk["evidence"]!.AsArray()
+            .Select(x=>x!.GetValue<string>());
+        chunk["evidence"]=p.Json.StringArray(
+            oldEvidence.Concat(new[]{RedProof,Qualified})
+                .Distinct(StringComparer.Ordinal).ToArray());
         task["status"]="done";
         task["evidence"]=p.Json.StringArray(RedProof,Qualified);
         foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -330,7 +347,6 @@ if(!target)
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
     });
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
     p.ProjectPlan.ActivateReadyContinuation(Red);
@@ -342,28 +358,27 @@ if(!target)
         p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
-p.ProjectPlan.RequireNodeState("M5-W01-C01","done");
-p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-p.ProjectPlan.RequireNodeState(Task,"done");
-p.ProjectPlan.RequireNodeState("M5-W01-C02-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Phase,"done");
+p.ProjectPlan.RequireNodeState("M5-W01-C02-T1","done");
+foreach(var node in new[]{Task,Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(node,"done");
 p.ProjectPlan.RequireNodeState("M5-W01-C03","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
-foreach(var child in new[]{Red,Green,Verify})
-    p.ProjectPlan.RequireNodeState(child,"done");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS068" ||
+    if((string?)state["pendingRun"]!="RS069" ||
        (string?)state["activeMilestone"]!=Milestone ||
        (string?)state["activeWorkPackage"]!=Work ||
-       (string?)state["activePhase"]!=(target?Phase:null) ||
+       (string?)state["activePhase"]!=(target?null:Phase) ||
        state["activeTask"] is not null || state["activeSubtask"] is not null)
         throw new InvalidOperationException(
-            "RS068 exact M5-W01-C02 activation cursor baseline/target diverged.");
-    state["activePhase"]=Phase;
+            "RS069 C02 phase-close cursor diverged from the exact baseline/target.");
+    state["activePhase"]=null;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
@@ -378,7 +393,7 @@ static bool HasExactLine(string output,string expected) =>
 static (long Bytes,string Sha) ReadProductReceipt(
     string output,string id,string version)
 {
-    var prefix="M5-W01-C02-T1-PKG-SHA256:"+id+":"+version+":";
+    var prefix="M5-W01-C02-T2-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
