@@ -10,54 +10,58 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C03",Task="M5-W01-C03-T1";
-const string Red="M5-W01-C03-T1-R",Green="M5-W01-C03-T1-G",Verify="M5-W01-C03-T1-V";
+const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C03",Task="M5-W01-C03-T2";
+const string Red="M5-W01-C03-T2-R",Green="M5-W01-C03-T2-G",Verify="M5-W01-C03-T2-V";
 const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
-const string Prior="docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json";
-const string RedProof="docs/planning/evidence/M5-W01-C03-T1-contract-red.json";
-const string Qualified="docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json";
-const string QualifiedStatus="exact-annotated-content-presentation-mathml-ir-qualified";
-const string Source="src/projects/dw.tools.math.codecs/ExactMathMlInterop.cs";
+const string Prior="docs/planning/evidence/M5-W01-C03-T1-contract-qualified.json";
+const string RedProof="docs/planning/evidence/M5-W01-C03-T2-contract-red.json";
+const string Qualified="docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json";
+const string QualifiedStatus="exact-annotated-mathml-xml-security-and-loss-boundaries-qualified";
+const string Source="src/projects/dw.tools.math.codecs/MathMlBoundaryAudit.cs";
 const string Product="src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj";
 const string Test="tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj";
-const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C03T1RedTests.cs";
-const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C03T1Tests.cs";
-const string Decision="docs/planning/decisions/m5-w01-c03-t1-exact-mathml.md";
-const string Document="docs/distribution/m5-exact-mathml.md";
-const string ConsumerProject="tests/consumers/m5-w01-c03-t1/m5-mathml-consumer.csproj";
-const string ConsumerSource="tests/consumers/m5-w01-c03-t1/Program.cs";
-const string ConsumerConfig="tests/consumers/m5-w01-c03-t1/NuGet.Config";
-const string PackageHelper=".workflow/runs/RS070/staged/checks/m5-w01-c03-t1-package-sha.cs";
-const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.5";
-const string RedMarker="M5-W01-C03-T1 RED: exact MathML Content/Presentation semantic annotation and import APIs are absent.";
-const string ConsumerMarker="dw.tools.math/m5-mathml-consumer/1.0 qualified; probes=8";
-const int IndependentGreen=41,AllTargeted=42;
+const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C03T2RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C03T2Tests.cs";
+const string Decision="docs/planning/decisions/m5-w01-c03-t2-mathml-boundaries.md";
+const string Document="docs/distribution/m5-mathml-boundaries.md";
+const string ConsumerProject="tests/consumers/m5-w01-c03-t2/m5-mathml-boundary-consumer.csproj";
+const string ConsumerSource="tests/consumers/m5-w01-c03-t2/Program.cs";
+const string ConsumerConfig="tests/consumers/m5-w01-c03-t2/NuGet.Config";
+const string PackageHelper=".workflow/runs/RS071/staged/checks/m5-w01-c03-t2-package-sha.cs";
+const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.6";
+const string RedMarker="M5-W01-C03-T2 RED: independent bounded MathML XML provenance and semantic-loss audit API is absent.";
+const string ConsumerMarker="dw.tools.math/m5-mathml-boundary-consumer/1.0 qualified; probes=8";
+const int IndependentGreen=42,AllTargeted=43;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS070",Milestone,Work,target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS069",1,
-    "feat: qualify bounded LaTeX loss provenance and close C02",
-    "0.1.59",0,0,0,true);
+p.Workflow.RequireCurrentRun("RS071",Milestone,Work,target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS070",1,
+    "feat: qualify exact annotated MathML and IR interchange",
+    "0.1.59",2,2,0,false);
 
 p.Require.JsonValueEquals(Prior,"/status",
-    JsonValue.Create("bounded-latex-import-semantic-loss-and-adversarial-boundaries-qualified"));
-p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(46));
-p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(47));
+    JsonValue.Create("exact-annotated-content-presentation-mathml-ir-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(41));
+p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(42));
 p.Require.JsonValueEquals(Prior,"/isolated_consumer_probes_passed",JsonValue.Create(8));
 p.Require.JsonValueEquals(Prior,"/compiled_red_observed",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/qualified_audit_rule",
-    JsonValue.Create("math-latex-import-boundary-loss/v1"));
-p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("1.0.0-preview.4"));
-p.Require.JsonValueEquals(Prior,"/m5_w01_c02_t2_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/m5_w01_c02_phase_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/mathml_rule",
+    JsonValue.Create("dw-math-mathml3-annotated-ir/1"));
+p.Require.JsonValueEquals(Prior,"/mathml_namespace",
+    JsonValue.Create("http://www.w3.org/1998/Math/MathML"));
+p.Require.JsonValueEquals(Prior,"/local_product_version",
+    JsonValue.Create("1.0.0-preview.5"));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c03_t1_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c03_phase_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_w01_work_package_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_release_done",JsonValue.Create(false));
+
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.68"),JsonValue.Create("0.1.69"));
+    JsonValue.Create("0.1.69"),JsonValue.Create("0.1.70"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.69":"0.1.68"));
+    JsonValue.Create(target?"0.1.70":"0.1.69"));
 p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/releases/5/status",JsonValue.Create("in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",JsonValue.Create("in_progress"));
@@ -65,26 +69,26 @@ p.Require.JsonValueEquals(Backlog,"/work_packages/12/status",JsonValue.Create("p
 p.Require.JsonValueEquals(Backlog,"/chunks/33/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/chunks/34/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/chunks/35/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/35/tasks/0/status",
+    JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/35/tasks/0/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/35/tasks/1/status",
     JsonValue.Create(target?"done":"planned"));
 foreach(var slot in new[]{0,1,2})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/35/tasks/0/subtasks/{slot}/status",
+    p.Require.JsonValueEquals(Backlog,$"/chunks/35/tasks/1/subtasks/{slot}/status",
         JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/35/tasks/1/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/36/status",JsonValue.Create("planned"));
 p.Require.TextContains(Product,target?
-    "<Version>1.0.0-preview.5</Version>":
-    "<Version>1.0.0-preview.4</Version>");
+    "<Version>1.0.0-preview.6</Version>":
+    "<Version>1.0.0-preview.5</Version>");
 
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
 p.ProjectPlan.RequireNodeState("M5-W01-C01","done");
 p.ProjectPlan.RequireNodeState("M5-W01-C02","done");
-p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M5-W01-C03-T1","done");
 p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
-p.ProjectPlan.RequireNodeState("M5-W01-C03-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W01-C04","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
 foreach(var child in new[]{Red,Green,Verify})
@@ -99,68 +103,68 @@ if(!target)
 else
 {
     p.Require.JsonValueEquals(RedProof,"/status",
-        JsonValue.Create("compiled-mathml-annotation-and-ir-apis-absent-red-observed"));
-    p.Require.JsonValueEquals(Qualified,"/status",
-        JsonValue.Create(QualifiedStatus));
+        JsonValue.Create("compiled-mathml-boundary-audit-api-absent-red-observed"));
+    p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(QualifiedStatus));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
-    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",
-        JsonValue.Create(8));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c03_t1_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c03_phase_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",JsonValue.Create(8));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c03_t2_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c03_phase_done",JsonValue.Create(true));
     p.Require.JsonValueEquals(Qualified,"/m5_w01_work_package_done",JsonValue.Create(false));
     p.Require.JsonValueEquals(Qualified,"/m5_release_done",JsonValue.Create(false));
 }
 
 var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
-var stagedRed=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
-hashes[RedTest]=stagedRed.AfterSha256 ??
-    throw new InvalidOperationException("Compiled MathML absent-API RED has no byte identity.");
+var redReceipt=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
+hashes[RedTest]=redReceipt.AfterSha256 ??
+    throw new InvalidOperationException("The compiled MathML boundary RED has no source byte hash.");
 if(!target)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
     var redOutput=Run(root,"dotnet","test",Test,"-c","Release",
         "--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M5W01C03T1RedTests.IndependentContentAndAnnotatedPresentationMathMlApiMustExist",
+        "--filter","FullyQualifiedName~M5W01C03T2RedTests.IndependentMathMlXmlLossAndSourceProvenanceAuditMustExist",
         "--logger","console;verbosity=normal");
     if(redOutput.Code==0 ||
        !redOutput.Output.Contains(RedMarker,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "A genuine compiled missing MathML public API RED is required: "+
+            "One genuinely compiled missing-boundary-API RED is required: "+
             Relevant(redOutput.Output));
     var redProof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M5-W01-C03-T1-contract-red",
-        ["status"]="compiled-mathml-annotation-and-ir-apis-absent-red-observed",
-        ["prior_latex_loss_gate"]=Prior,
-        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.4",
+        ["schema_version"]=1,["id"]="M5-W01-C03-T2-contract-red",
+        ["status"]="compiled-mathml-boundary-audit-api-absent-red-observed",
+        ["prior_mathml_interop_qualification"]=Prior,
+        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.5",
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
-        ["missing_api"]="ExactMathMlInterop.Render(IrNode);ImportAnnotated(string)",
+        ["missing_api"]="MathMlBoundaryAudit.Audit(string)",
         ["expected_red_assertion"]=RedMarker,
         ["independent_red_test_count"]=1,
-        ["compiler_failure_not_a_red_substitute"]=true,
-        ["nonclaim"]="An absent MathML API does not establish mathematical structural interop."
+        ["compiler_failure_is_not_a_red_substitute"]=true,
+        ["nonclaim"]="A missing MathML audit API does not prove semantic fidelity or XML security."
     };
     p.Files.WriteComplete(RedProof,
         redProof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
+
 foreach(var file in new[]{Product,Source,GreenTests,Decision,Document,
     ConsumerProject,ConsumerSource,ConsumerConfig})
 {
     var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
     hashes[file]=installed.AfterSha256 ??
-        throw new InvalidOperationException("Missing staged MathML source identity: "+file);
+        throw new InvalidOperationException("Missing MathML boundary source byte hash: "+file);
 }
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 var targeted=Required(root,"dotnet","test",Test,"-c","Release",
-    "--no-build","--no-restore","--filter","FullyQualifiedName~M5W01C03T1",
+    "--no-build","--no-restore",
+    "--filter","FullyQualifiedName~M5W01C03T2",
     "--logger","console;verbosity=normal");
-if(!targeted.Contains("Total tests: 42",StringComparison.OrdinalIgnoreCase) ||
-   !targeted.Contains("Passed: 42",StringComparison.OrdinalIgnoreCase))
+if(!targeted.Contains("Total tests: 43",StringComparison.OrdinalIgnoreCase) ||
+   !targeted.Contains("Passed: 43",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException(
-        "Require one recovered compiled RED and 41 independent exact MathML GREEN tests.");
+        "Require one recovered compiled RED and all 42 independent MathML boundary GREEN oracles.");
 Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore","--logger","console;verbosity=minimal");
 foreach(var regressionProject in new[]{
@@ -172,7 +176,7 @@ foreach(var regressionProject in new[]{
         "--logger","console;verbosity=minimal");
     if(!regressionOutput.Contains("Passed",StringComparison.OrdinalIgnoreCase))
         throw new InvalidOperationException(
-            "Math IR or quantities regression not observed: "+regressionProject);
+            "Qualified MathML IR/quantities regression did not pass: "+regressionProject);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
@@ -184,7 +188,7 @@ var packages=new (string Id,string Version,string Project,string[] DependsOn)[]
         "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
     ("dw.tools.math.codecs",Version,Product,["dw.tools.math.ir"])
 };
-var feed=Path.Combine(root,"build","artifacts","m5-w01-c03-t1-local-feed");
+var feed=Path.Combine(root,"build","artifacts","m5-w01-c03-t2-local-feed");
 var archives=new List<string>();
 foreach(var package in packages)
 {
@@ -220,14 +224,14 @@ if(references.Length!=1 ||
    (string?)references[0].Attribute("Version")!="["+Version+"]" ||
    consumerXml.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"))
     throw new InvalidOperationException(
-        "The independent MathML consumer requires only one pinned codec NuGet package.");
+        "The independent MathML boundary consumer requires only one pinned codec NuGet package.");
 var configured=XDocument.Load(Path.Combine(root,ConsumerConfig))
     .Descendants().Single(x=>x.Name.LocalName=="packageSources");
 if(!configured.Elements().Any(x=>x.Name.LocalName=="clear") ||
    configured.Elements().Any(x=>x.Name.LocalName=="add"))
     throw new InvalidOperationException(
-        "The MathML annotated interchange package-only consumer must clear external package feeds.");
-var isolated=Path.Combine(root,"build","artifacts","m5-w01-c03-t1-isolated-packages");
+        "The MathML boundary package-only consumer must clear external package feeds.");
+var isolated=Path.Combine(root,"build","artifacts","m5-w01-c03-t2-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
 Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
@@ -235,49 +239,49 @@ var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
     "-c","Release","--no-build","--no-restore");
 if(!HasExactLine(consumerOutput,ConsumerMarker))
     throw new InvalidOperationException(
-        "Eight independent MathML annotated interchange NuGet-only consumer oracles not observed.");
+        "Eight independent MathML boundary NuGet-only consumer oracles not observed.");
 
 if(!target)
 {
     var proof=new JsonObject
     {
         ["schema_version"]=1,
-        ["id"]="M5-W01-C03-T1-contract-qualified",
+        ["id"]="M5-W01-C03-T2-boundaries-qualified",
         ["status"]=QualifiedStatus,
-        ["prior_latex_loss_qualification"]=Prior,
+        ["prior_exact_mathml_contract"]=Prior,
         ["compiled_missing_api_red"]=RedProof,
-        ["question"]="Can a closed Content/Presentation MathML profile with an independent canonical-text annotation transport fractions, free real symbols, ordered sums and an original equation restriction without inventing semantic certainty from typography?",
-        ["observation"]="A genuine compiled missing-API RED was recovered; 41 independent GREEN tests and eight pinned NuGet-only consumers qualify exact Content MathML, passive Presentation MathML, canonical annotation replay, structural IR identity and strict refusal of unannotated or tampered markup.",
-        ["decision"]="Admit a bounded MathML 3 canonical annotated subprofile. Require matching regenerated content/presentation and original Math canonical-text annotation before decoding mathematical IR; never infer exact content from Presentation MathML alone.",
+        ["question"]="Can independently audited exact annotated MathML 3 bind input provenance to source Math IR while refusing adversarial XML, missing annotations and changed presentation/content without falsely claiming a universal inverse?",
+        ["observation"]="One compiled missing-public-API RED recovered, 42 independent GREEN oracles and eight isolated NuGet-only clients qualify structural Math IR replay, source-byte SHA-256, typed DTD/entity, namespace, presentation, tampering, canonicalization and resource-limit refusals.",
+        ["decision"]="Admit only the existing qualified exact annotated MathML 3 subprofile through a separate loss/provenance audit. Keep bounded input source fingerprint separate from mathematical structural evidence. Refuse all uncertified markup without IR or a proof rule.",
         ["source_file"]=Source,["source_sha256"]=hashes[Source],
         ["product_project"]=Product,["product_project_sha256"]=hashes[Product],
         ["green_tests"]=GreenTests,["green_tests_sha256"]=hashes[GreenTests],
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
         ["decision_document"]=Decision,["decision_document_sha256"]=hashes[Decision],
-        ["distribution_document"]=Document,
-        ["distribution_document_sha256"]=hashes[Document],
+        ["distribution_document"]=Document,["distribution_document_sha256"]=hashes[Document],
         ["independent_green_tests_passed"]=IndependentGreen,
         ["red_recovered_and_green_tests_passed"]=AllTargeted,
         ["compiled_red_observed"]=true,
         ["isolated_consumer_probes_passed"]=8,
-        ["mathml_rule"]="dw-math-mathml3-annotated-ir/1",
-        ["mathml_namespace"]="http://www.w3.org/1998/Math/MathML",
-        ["content_mathml_encoding"]="application/mathml-content+xml",
-        ["canonical_source_annotation"]="application/x-dw-math-canonical-text-v1",
-        ["typed_integer_content_rationals"]=true,
-        ["typed_real_content_identifiers"]=true,
-        ["original_equality_restriction_retained"]=true,
-        ["ordered_simple_sums_retained"]=true,
-        ["content_and_presentation_both_checked_against_source_ir"]=true,
-        ["math_ir_json_structural_roundtrip_qualified"]=true,
-        ["presentation_without_annotation_is_ambiguous"]=true,
-        ["arbitrary_standalone_content_import_admitted"]=false,
-        ["tampered_annotation_or_content_admitted"]=false,
-        ["xml_dtd_external_entity_processing_admitted"]=false,
+        ["qualified_audit_rule"]="dw-math-mathml3-boundary-provenance/1",
+        ["qualified_mathml_rule"]="dw-math-mathml3-annotated-ir/1",
+        ["content_mathml_and_presentation_both_checked"]=true,
+        ["typed_exact_fraction_symbol_and_original_equation_retained"]=true,
+        ["source_sha256_binds_bounded_original_utf8"]=true,
+        ["over_budget_xml_does_not_allocate_source_hash"]=true,
+        ["source_fingerprint_is_not_a_mathematical_proof"]=true,
+        ["math_ir_canonical_json_replay_qualified"]=true,
+        ["semantic_structural_sha256_retained"]=true,
+        ["presentation_inverse_qualified"]=false,
+        ["missing_annotation_is_presentation_ambiguous"]=true,
+        ["xml_dtd_or_external_entity_processing_admitted"]=false,
+        ["unqualified_xml_namespace_admitted"]=false,
+        ["tampered_presentation_content_annotation_refused"]=true,
+        ["unreduced_annotation_admitted"]=false,
         ["maximum_xml_characters"]=4096,
         ["maximum_xml_nodes"]=32,
         ["maximum_xml_depth"]=12,
-        ["unqualified_markup_has_no_ir_or_proof"]=true,
+        ["refused_result_has_no_ir_or_semantic_proof"]=true,
         ["no_external_cas_or_agent_dependency"]=true,
         ["locked_solution_build_passed"]=true,
         ["focused_codecs_and_ir_quantities_regressions_passed"]=true,
@@ -292,44 +296,51 @@ if(!target)
         ["consumer_config_sha256"]=hashes[ConsumerConfig],
         ["consumer_marker"]=ConsumerMarker,
         ["packages_publicly_published"]=false,
-        ["m5_w01_c03_t1_done"]=true,
-        ["m5_w01_c03_phase_done"]=false,
+        ["m5_w01_c03_t2_done"]=true,
+        ["m5_w01_c03_phase_done"]=true,
         ["m5_w01_work_package_done"]=false,
         ["m5_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_accepted_scope"]="M5-W01-C03-T2: independently qualify XML/DTD/namespace/depth security and semantic-loss boundaries before completing MathML phase C03",
+        ["next_accepted_scope"]="M5-W01-C04-T1: independently qualify typed Markdown/Office mathematical interchange without inventing semantics from typography",
         ["nonclaims"]=p.Json.StringArray(
-            "No universal MathML importer, unannotated Presentation/Content interpretation, arbitrary algebraic equivalence or symbolic CAS.",
-            "No TeX/HTML execution, arbitrary XML entity resolver, unbounded XML, unknown symbols, complex branches, unit conversion or broad presentation inverse.",
-            "No public NuGet, stable 1.0, AURA/Decision/MCDM adoption or dw.discovery skill.",
-            "Only C03 T1 completes; phase C03, W01 and M5 remain open for separately qualified boundaries.")
+            "No general MathML/HTML/XML importer, arbitrary Content or Presentation interpretation, DTD processing, external entity loading or general XML sanitizer.",
+            "No algebraic equivalence, presentation inverse, arbitrary TeX/Office/Markdown parsing, complex branches, general CAS or silent precision loss.",
+            "No public NuGet, stable 1.0, AURA/Decision/MCDM external adoption or dw.discovery agent skill.",
+            "Only MathML phase C03 closes; M5-W01, M5 and C04 onward remain pending independent qualification.")
     };
     p.Files.WriteComplete(Qualified,
         proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,plan=>
     {
-        plan["plan_version"]="0.1.69";
+        plan["plan_version"]="0.1.70";
         var chunk=plan["chunks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
         var task=chunk["tasks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-        if((string?)chunk["status"]!="planned" ||
+        if((string?)chunk["status"]!="in_progress" ||
            (string?)task["status"]!="planned")
-            throw new InvalidOperationException("M5-W01-C03 T1 accepted baseline diverged.");
-        chunk["status"]="in_progress";
-        chunk["refinement"]="RS070 T1 qualifies a closed MathML 3 Content/Presentation serialization with typed exact integer rational components, real x/y/z, simple ordered sums, and a single original equality restriction. Versioned canonical Math text and independent Content MathML annotation bind passive presentation to exact source IR; annotated import regenerates and cross-checks all three forms and Math IR JSON identity. An unannotated presentation, tampered XML or unsupported shape has no mathematical result. One compiled RED, 41 GREEN tests, eight isolated NuGet consumers and three inspected local packages qualify T1. T2 still owns deeper DTD/namespace/node/depth adversarial integration; C03, W01 and M5 remain in-progress.";
-        chunk["readiness"]="T1 annotated exact Content/Presentation MathML subset qualified by RS070 only; T2 security and semantic-loss boundary tests remain not-ready";
-        chunk["files"]=p.Json.StringArray(Product,Source,RedTest,GreenTests,
-            Decision,Document,ConsumerProject,ConsumerSource,ConsumerConfig,
-            RedProof,Qualified);
+            throw new InvalidOperationException(
+                "The accepted M5-W01-C03 T2 baseline changed.");
+        chunk["status"]="done";
+        chunk["refinement"]="RS070 T1 qualifies the MathML 3 canonical Content/Presentation exact annotated subset for rationals, real symbols, ordered sums and an original equality restriction. RS071 T2 adds an independent bounded input fingerprint and semantic-loss/refusal audit over the unchanged qualified importer. It independently replays exact Math IR JSON, canonical text and annotated Content/Presentation, retains precise DTD/entity/namespace/tampering/canonical/resource refusals, and never treats a refused input fingerprint as a semantic proof. One compiled absent-API RED, 42 GREEN tests, eight isolated NuGet oracles and three independently inspected local packages qualify the C03 boundary. W01 and M5 remain in-progress; C04 Markdown/Office has not begun.";
+        chunk["readiness"]="C03 completed with T1 annotated MathML and T2 source-provenance, XML refusal and structural-loss evidence; C04 not-ready until independent Markdown/Office scope and tests";
+        var existingFiles=chunk["files"]!.AsArray()
+            .Select(x=>x!.GetValue<string>());
+        chunk["files"]=p.Json.StringArray(existingFiles.Concat(new[]{
+            Product,Source,RedTest,GreenTests,Decision,Document,
+            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified
+        }).Distinct(StringComparer.Ordinal).ToArray());
         chunk["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
             "dotnet build "+Solution+" -c Release --no-restore",
-            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C03T1",
+            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C03T2",
             "dotnet test "+Test+" -c Release",
             "dotnet run --project "+ConsumerProject+" -c Release");
-        chunk["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        var previousEvidence=chunk["evidence"]!.AsArray()
+            .Select(x=>x!.GetValue<string>());
+        chunk["evidence"]=p.Json.StringArray(previousEvidence.Concat(new[]{
+            RedProof,Qualified}).Distinct(StringComparer.Ordinal).ToArray());
         task["status"]="done";
         task["evidence"]=p.Json.StringArray(RedProof,Qualified);
         foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -339,7 +350,6 @@ if(!target)
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
     });
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
     p.ProjectPlan.ActivateReadyContinuation(Red);
@@ -351,29 +361,29 @@ if(!target)
         p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
 p.ProjectPlan.RequireNodeState("M5-W01-C01","done");
 p.ProjectPlan.RequireNodeState("M5-W01-C02","done");
-p.ProjectPlan.RequireNodeState(Phase,"in-progress");
-p.ProjectPlan.RequireNodeState(Task,"done");
-p.ProjectPlan.RequireNodeState("M5-W01-C03-T2","not-ready");
+p.ProjectPlan.RequireNodeState(Phase,"done");
+p.ProjectPlan.RequireNodeState("M5-W01-C03-T1","done");
+foreach(var node in new[]{Task,Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(node,"done");
 p.ProjectPlan.RequireNodeState("M5-W01-C04","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
-foreach(var child in new[]{Red,Green,Verify})
-    p.ProjectPlan.RequireNodeState(child,"done");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS070" ||
+    if((string?)state["pendingRun"]!="RS071" ||
        (string?)state["activeMilestone"]!=Milestone ||
        (string?)state["activeWorkPackage"]!=Work ||
-       (string?)state["activePhase"]!=(target?Phase:null) ||
+       (string?)state["activePhase"]!=(target?null:Phase) ||
        state["activeTask"] is not null || state["activeSubtask"] is not null)
         throw new InvalidOperationException(
-            "RS070 exact M5-W01-C03 activation cursor baseline or target diverged.");
-    state["activePhase"]=Phase;
+            "RS071 MathML C03 close cursor diverged from its baseline/target.");
+    state["activePhase"]=null;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
@@ -388,7 +398,7 @@ static bool HasExactLine(string output,string expected) =>
 static (long Bytes,string Sha) ReadProductReceipt(
     string output,string id,string version)
 {
-    var prefix="M5-W01-C03-T1-PKG-SHA256:"+id+":"+version+":";
+    var prefix="M5-W01-C03-T2-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
