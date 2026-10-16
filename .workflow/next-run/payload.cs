@@ -26,7 +26,6 @@ const string ConsumerProject="tests/consumers/m5-w02-c01-t2/m5-exact-vertical-bo
 const string ConsumerSource="tests/consumers/m5-w02-c01-t2/Program.cs";
 const string ConsumerConfig="tests/consumers/m5-w02-c01-t2/NuGet.Config";
 const string SampleProject="samples/m5-exact-vertical/m5-exact-vertical.csproj";
-const string SampleSource="samples/m5-exact-vertical/Program.cs";
 const string SampleConfig="samples/m5-exact-vertical/NuGet.Config";
 const string Decision="docs/planning/decisions/m5-w02-c01-t2-public-vertical-boundaries.md";
 const string Document="docs/distribution/m5-exact-console-boundaries.md";
