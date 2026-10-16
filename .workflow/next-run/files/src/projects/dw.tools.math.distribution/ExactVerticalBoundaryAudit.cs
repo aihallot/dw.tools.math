@@ -163,25 +163,25 @@ public static class ExactVerticalBoundaryAudit
             if (!unrestricted.IsComplete ||
                 unrestricted.Status!=SymbolicRealSolvingStatus.Finite ||
                 vertical.UnrestrictedCandidates is null ||
-                !vertical.UnrestrictedCandidates.IsComplete ||
-                unrestricted.Status!=vertical.UnrestrictedCandidates.Status ||
-                !unrestricted.Roots.SequenceEqual(vertical.UnrestrictedCandidates.Roots) ||
+                !vertical.UnrestrictedCandidates!.IsComplete ||
+                unrestricted.Status!=vertical.UnrestrictedCandidates!.Status ||
+                !unrestricted.Roots.SequenceEqual(vertical.UnrestrictedCandidates!.Roots) ||
                 !roots.HasVerifiedRoots ||
                 vertical.OriginalRootAudit is null ||
-                roots.Status!=vertical.OriginalRootAudit.Status ||
-                roots.IsComplete!=vertical.OriginalRootAudit.IsComplete ||
+                roots.Status!=vertical.OriginalRootAudit!.Status ||
+                roots.IsComplete!=vertical.OriginalRootAudit!.IsComplete ||
                 !roots.VerifiedRoots.SequenceEqual(
-                    vertical.OriginalRootAudit.VerifiedRoots) ||
+                    vertical.OriginalRootAudit!.VerifiedRoots) ||
                 !roots.ExcludedFromDomain.SequenceEqual(
-                    vertical.OriginalRootAudit.ExcludedFromDomain) ||
+                    vertical.OriginalRootAudit!.ExcludedFromDomain) ||
                 !roots.RejectedCandidates.SequenceEqual(
-                    vertical.OriginalRootAudit.RejectedCandidates) ||
+                    vertical.OriginalRootAudit!.RejectedCandidates) ||
                 !roots.UnresolvedCandidates.SequenceEqual(
-                    vertical.OriginalRootAudit.UnresolvedCandidates) ||
+                    vertical.OriginalRootAudit!.UnresolvedCandidates) ||
                 roots.VerifiedRoots.Length+
                     roots.ExcludedFromDomain.Length!=unrestricted.Roots.Length ||
                 !string.Equals(roots.RuleId,
-                    vertical.OriginalRootAudit.RuleId,StringComparison.Ordinal))
+                    vertical.OriginalRootAudit!.RuleId,StringComparison.Ordinal))
                 return Unverified(sourceSha);
 
             if (!point.Value.HasValue || vertical.Binary64Projection is null ||
@@ -194,9 +194,9 @@ public static class ExactVerticalBoundaryAudit
                 return Unverified(sourceSha);
             var converted=RationalBinary64Conversion.TryConvert(point.Value.Value);
             if (!converted.IsFiniteResult || !converted.Value.HasValue ||
-                converted.Status!=vertical.Binary64Projection.Status ||
-                converted.Value!=vertical.Binary64Projection.Value ||
-                converted.AbsoluteError!=vertical.Binary64Projection.AbsoluteError ||
+                converted.Status!=vertical.Binary64Projection!.Status ||
+                converted.Value!=vertical.Binary64Projection!.Value ||
+                converted.AbsoluteError!=vertical.Binary64Projection!.AbsoluteError ||
                 BitConverter.DoubleToInt64Bits(approximateValue.Value)!=
                     BitConverter.DoubleToInt64Bits(converted.Value.Value) ||
                 (numericPolicy==RationalBinary64Policy.RequireExact &&
