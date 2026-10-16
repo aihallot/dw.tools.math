@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.70",
+  "plan_version": "0.1.71",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -5763,7 +5763,7 @@
       "title": "Markdown, Unicode, and Office",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W01-C03"
       ],
@@ -5788,40 +5788,71 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C04Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS072 T1 admits Unicode/Markdown math display with explicit inline/block delimiters and a separate, bounded canonical Office OMML subset retaining caller-supplied typed original IR for a rational fraction and a simple original equality. Independent compiled RED, 24 GREEN tests, eight NuGet-only consumer oracles and three inspected local packages qualify only this exact contract. OMML typography cannot authorize source-free semantic reconstruction. C04-T2 owns wider unsupported inputs, document conversion and font/positioning limitations; W01 and M5 remain in progress.",
+      "files": [
+        "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+        "src/projects/dw.tools.math.codecs/MarkdownUnicodeMathCodec.cs",
+        "src/projects/dw.tools.math.codecs/ExactOfficeOmmlCodec.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C04T1RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C04T1Tests.cs",
+        "docs/planning/decisions/m5-w01-c04-t1-markdown-omml.md",
+        "docs/distribution/m5-markdown-omml.md",
+        "tests/consumers/m5-w01-c04-t1/m5-markdown-omml-consumer.csproj",
+        "tests/consumers/m5-w01-c04-t1/Program.cs",
+        "tests/consumers/m5-w01-c04-t1/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C04-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C04T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m5-w01-c04-t1/m5-markdown-omml-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W01-C04-T1-contract-red.json",
+        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+      ],
+      "readiness": "C04 T1 completed with exact original-IR-bound OMML and explicit Markdown math placement; T2 still pending independent loss and Office document/font boundaries",
       "tasks": [
         {
           "id": "M5-W01-C04-T1",
           "title": "Contract and outcome",
           "behavior": "Render Markdown/Unicode wrappers and qualify an Office OMML subset through a separate codec.",
           "test_case": "A simple OMML equation and a fraction traverse the codec without semantic loss; Markdown identifies inline/block math.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C04-T1-contract-red.json",
+            "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C04-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: A simple OMML equation and a fraction traverse the codec without semantic loss; Markdown identifies inline/block math.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T1-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C04-T1-G",
               "title": "GREEN",
               "description": "Implement only: Render Markdown/Unicode wrappers and qualify an Office OMML subset through a separate codec.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C04-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C04-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+              ]
             }
           ]
         },
