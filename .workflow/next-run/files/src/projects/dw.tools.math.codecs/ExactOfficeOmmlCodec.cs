@@ -162,20 +162,20 @@ public static class ExactOfficeOmmlCodec
                     new XElement(M + "num", Run(numerator)),
                     new XElement(M + "den", Run(denominator)))];
             }
-            case IrSymbol symbol:
-                return [Run(symbol.DisplayName)];
+            case IrSymbol freeSymbol:
+                return [Run(freeSymbol.DisplayName)];
             case IrApply { Operation: IrOperation.Add } sum
                 when sum.Arguments.Length == 2 &&
                      sum.Arguments[0] is IrSymbol &&
                      sum.Arguments[1] is IrExactScalar:
                 return [..Write(sum.Arguments[0]), Run("+"), ..Write(sum.Arguments[1])];
             case IrRestrictedExpression restriction
-                when restriction.Expression is IrSymbol symbol &&
+                when restriction.Expression is IrSymbol equationSymbol &&
                      restriction.Assumptions.Conditions.Length == 1 &&
                      restriction.Assumptions.Conditions[0].Kind == IrRelationKind.Equal &&
-                     restriction.Assumptions.Conditions[0].Symbol.Identity == symbol.Identity &&
-                     restriction.Assumptions.Conditions[0].Symbol.Domain == symbol.Domain:
-                return [..Write(symbol), Run("="),
+                     restriction.Assumptions.Conditions[0].Symbol.Identity == equationSymbol.Identity &&
+                     restriction.Assumptions.Conditions[0].Symbol.Domain == equationSymbol.Domain:
+                return [..Write(equationSymbol), Run("="),
                     ..Write(restriction.Assumptions.Conditions[0].Right)];
             default:
                 throw new NotSupportedException(

@@ -100,12 +100,12 @@ public static class MarkdownUnicodeMathCodec
                  sum.Arguments[1] is IrExactScalar =>
             WriteUnicode(sum.Arguments[0]) + " + " + WriteUnicode(sum.Arguments[1]),
         IrRestrictedExpression restriction
-            when restriction.Expression is IrSymbol symbol &&
+            when restriction.Expression is IrSymbol equationSymbol &&
                  restriction.Assumptions.Conditions.Length == 1 &&
                  restriction.Assumptions.Conditions[0].Kind == IrRelationKind.Equal &&
-                 restriction.Assumptions.Conditions[0].Symbol.Identity == symbol.Identity &&
-                 restriction.Assumptions.Conditions[0].Symbol.Domain == symbol.Domain =>
-            WriteUnicode(symbol) + " = " +
+                 restriction.Assumptions.Conditions[0].Symbol.Identity == equationSymbol.Identity &&
+                 restriction.Assumptions.Conditions[0].Symbol.Domain == equationSymbol.Domain =>
+            WriteUnicode(equationSymbol) + " = " +
             WriteUnicode(restriction.Assumptions.Conditions[0].Right),
         _ => throw new NotSupportedException("This Math IR shape has no qualified Unicode display.")
     };
