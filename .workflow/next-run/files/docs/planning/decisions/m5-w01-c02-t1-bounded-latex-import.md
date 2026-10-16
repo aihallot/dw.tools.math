@@ -32,6 +32,11 @@ parser. It admits only these exact shapes:
 - bounded + and - expression nesting and passive parentheses,
   including T1 \left(...\right) display grouping.
 
+TeX control-word tokenization is conservative: x\cdot y is an
+explicit admitted multiplication with a command-delimiting space,
+whereas x\cdoty is one unrecognized control word and returns
+Unsupported, never a silently inferred product.
+
 Juxtaposed x(y) is Ambiguous by default. With the **explicit**
 LatexJuxtapositionConvention.Multiplication, x(y) becomes the
 typed ordered multiplication mul(x,y), and the chosen convention

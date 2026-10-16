@@ -110,13 +110,10 @@ public sealed class M5W01C02T1Tests
     }
 
     [TestMethod]
-    public void ExplicitCdotIsAlwaysMathematicalMultiplication()
+    public void UndelimitedCdotControlWordIsUnsupportedRatherThanMultiplication()
     {
-        // No whitespace after the command, unlike the T1 display convention.
-        var result=Pass(@"x\cdot"+"y");
-        Assert.AreEqual("mul(x,y)",result.CanonicalText);
-        Assert.AreEqual(IrOperation.Multiply,
-            ((IrApply)result.Expression!).Operation);
+        // TeX treats \cdoty as one unsupported control word.
+        Refuse(@"x\cdoty", LatexImportStatus.Unsupported);
     }
 
     [TestMethod]

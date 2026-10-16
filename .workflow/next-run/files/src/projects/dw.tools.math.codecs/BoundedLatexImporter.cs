@@ -158,6 +158,10 @@ public static class BoundedLatexImporter
                 if (Starts("\\cdot"))
                 {
                     _offset += "\\cdot".Length;
+                    // Adjacent ASCII letters extend a TeX control word.
+                    // \cdoty is NOT \cdot followed by the symbol y.
+                    if (!AtEnd && Current is >= 'a' and <= 'z')
+                        throw new ImportRefusal(LatexImportStatus.Unsupported);
                     Consume(' ');
                     var right = ReadPrimary(depth + 1);
                     left = IrApply.Create(IrOperation.Multiply, [left, right]);
@@ -227,7 +231,8 @@ public static class BoundedLatexImporter
             if (Current == '(')
                 return ReadParenthesis(depth + 1);
             if (Current == '-' || (Current >= '0' && Current <= '9'))
-                return new IrExactScalar(ReadInteger(true));
+                return new IrExactScalar(
+                    new ExactRational(ReadInteger(true), BigInteger.One));
             if (Current is 'x' or 'y' or 'z')
             {
                 var identity = Current.ToString();

@@ -18,6 +18,10 @@ Qualified examples:
 | \frac{2}{4} | NonCanonical, no implicit lossy rewrite |
 | \input{file} | Unsupported; never interpreted or executed |
 
+An ASCII-letter immediately following a TeX command remains part of
+that command: x\cdoty is Unsupported, not x\cdot y. Delimit \cdot
+before a variable to express multiplication.
+
 The importer is intentionally NOT the inverse of arbitrary
 LaTeX produced by Math. It does not accept unrestricted TeX
 macros, broad function vocabularies, general exponents,

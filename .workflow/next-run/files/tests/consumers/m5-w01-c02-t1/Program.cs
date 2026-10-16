@@ -66,9 +66,12 @@ Probe("unsafe TeX commands are unsupported, never executed",()=>
 {
     var r=BoundedLatexImporter.Import(@"\input{private}");
     var alias=BoundedLatexImporter.Import(@"\frac{2}{4}");
+    var joinedControl=BoundedLatexImporter.Import(@"x\cdoty");
     Require(r.Status==LatexImportStatus.Unsupported&&
         alias.Status==LatexImportStatus.NonCanonical&&
-        !r.IsAdmitted&&!alias.IsAdmitted&&r.CanonicalText is null,
+        joinedControl.Status==LatexImportStatus.Unsupported&&
+        !r.IsAdmitted&&!alias.IsAdmitted&&!joinedControl.IsAdmitted&&
+        r.CanonicalText is null,
         "only the closed bounded non-executing grammar is admitted");
 });
 Probe("semantic hash survives canonical IR transport without CAS runtime",()=>
