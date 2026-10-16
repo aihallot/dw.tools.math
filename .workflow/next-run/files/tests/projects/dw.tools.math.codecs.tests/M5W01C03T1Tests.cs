@@ -420,7 +420,9 @@ public sealed class M5W01C03T1Tests
     [TestMethod]
     public void VersionedContractRejectsUnannotatedAndOverBudgetMathMl()
     {
-        Assert.AreEqual("dw-math-mathml3-annotated-ir/1",ExactMathMlInterop.Rule);
+        var qualified=ExactMathMlInterop.Render(N(1,2));
+        Assert.AreEqual(MathMlInteropStatus.Admitted,qualified.Status);
+        Assert.AreEqual(ExactMathMlInterop.Rule,qualified.RuleId);
         var presentation=new XElement(
             XNamespace.Get(ExactMathMlInterop.Namespace)+"math",
             new XElement(XNamespace.Get(ExactMathMlInterop.Namespace)+"mi","x"))
