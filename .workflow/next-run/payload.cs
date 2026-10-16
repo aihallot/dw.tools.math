@@ -10,157 +10,176 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C04",Task="M5-W01-C04-T1";
-const string Red="M5-W01-C04-T1-R",Green="M5-W01-C04-T1-G",Verify="M5-W01-C04-T1-V";
+const string Milestone="M5",Work="M5-W01",Phase="M5-W01-C04",Task="M5-W01-C04-T2";
+const string Red="M5-W01-C04-T2-R",Green="M5-W01-C04-T2-G",Verify="M5-W01-C04-T2-V";
 const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
-const string Prior="docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json";
-const string RedProof="docs/planning/evidence/M5-W01-C04-T1-contract-red.json";
-const string Qualified="docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json";
-const string QualifiedStatus="exact-markdown-unicode-and-original-ir-bound-office-omml-qualified";
-const string MarkdownSource="src/projects/dw.tools.math.codecs/MarkdownUnicodeMathCodec.cs";
-const string OmmlSource="src/projects/dw.tools.math.codecs/ExactOfficeOmmlCodec.cs";
+const string C01="docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json";
+const string C02="docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json";
+const string C03="docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json";
+const string Prior="docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json";
+const string RedProof="docs/planning/evidence/M5-W01-C04-T2-contract-red.json";
+const string Qualified="docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json";
+const string Aggregate="docs/planning/evidence/M5-W01-work-package-qualified.json";
+const string QualifiedStatus="exact-office-omml-markdown-unicode-loss-and-format-boundaries-qualified";
+const string AggregateStatus="m5-w01-exact-math-codecs-interchange-boundaries-qualified";
+const string Source="src/projects/dw.tools.math.codecs/MathDisplayBoundaryAudit.cs";
 const string Product="src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj";
 const string Test="tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj";
-const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C04T1RedTests.cs";
-const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C04T1Tests.cs";
-const string Decision="docs/planning/decisions/m5-w01-c04-t1-markdown-omml.md";
-const string Document="docs/distribution/m5-markdown-omml.md";
-const string ConsumerProject="tests/consumers/m5-w01-c04-t1/m5-markdown-omml-consumer.csproj";
-const string ConsumerSource="tests/consumers/m5-w01-c04-t1/Program.cs";
-const string ConsumerConfig="tests/consumers/m5-w01-c04-t1/NuGet.Config";
-const string PackageHelper=".workflow/runs/RS072/staged/checks/m5-w01-c04-t1-package-sha.cs";
-const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.7";
-const string RedMarker="M5-W01-C04-T1 RED: exact Office OMML public codec is absent.";
-const string ConsumerMarker="dw.tools.math/m5-markdown-omml-consumer/1.0 qualified; probes=8";
-const int IndependentGreen=24,AllTargeted=25;
+const string RedTest="tests/projects/dw.tools.math.codecs.tests/M5W01C04T2RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.codecs.tests/M5W01C04T2Tests.cs";
+const string Decision="docs/planning/decisions/m5-w01-c04-t2-display-boundaries.md";
+const string Document="docs/distribution/m5-markdown-omml-boundaries.md";
+const string ConsumerProject="tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj";
+const string ConsumerSource="tests/consumers/m5-w01-c04-t2/Program.cs";
+const string ConsumerConfig="tests/consumers/m5-w01-c04-t2/NuGet.Config";
+const string PackageHelper=".workflow/runs/RS073/staged/checks/m5-w01-c04-t2-package-sha.cs";
+const string Solution="dw.tools.math.slnx",Version="1.0.0-preview.8";
+const string RedMarker="M5-W01-C04-T2 RED: independent OMML and Markdown display boundary audit API is absent.";
+const string ConsumerMarker="dw.tools.math/m5-markdown-omml-boundary-consumer/1.0 qualified; probes=8";
+const int IndependentGreen=38,AllTargeted=39;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS072",Milestone,Work,target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS071",1,
-    "feat: qualify exact MathML XML boundaries and close C03",
+p.Workflow.RequireCurrentRun("RS073",Milestone,target?null:Work,
+    target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS072",1,
+    "feat: qualify exact Markdown and original-IR Office OMML interchange",
     "0.1.59",0,0,0,true);
 
-p.Require.JsonValueEquals(Prior,"/status",
+p.Require.JsonValueEquals(C01,"/status",
+    JsonValue.Create("exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified"));
+p.Require.JsonValueEquals(C02,"/status",
+    JsonValue.Create("bounded-latex-import-semantic-loss-and-adversarial-boundaries-qualified"));
+p.Require.JsonValueEquals(C03,"/status",
     JsonValue.Create("exact-annotated-mathml-xml-security-and-loss-boundaries-qualified"));
-p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(42));
-p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(43));
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("exact-markdown-unicode-and-original-ir-bound-office-omml-qualified"));
+p.Require.JsonValueEquals(Prior,"/independent_green_tests_passed",JsonValue.Create(24));
+p.Require.JsonValueEquals(Prior,"/red_recovered_and_green_tests_passed",JsonValue.Create(25));
 p.Require.JsonValueEquals(Prior,"/isolated_consumer_probes_passed",JsonValue.Create(8));
 p.Require.JsonValueEquals(Prior,"/compiled_red_observed",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("1.0.0-preview.6"));
-p.Require.JsonValueEquals(Prior,"/m5_w01_c03_phase_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/local_product_version",JsonValue.Create("1.0.0-preview.7"));
+p.Require.JsonValueEquals(Prior,"/omml_import_requires_original_typed_ir",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c04_t1_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/m5_w01_c04_phase_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_w01_work_package_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_release_done",JsonValue.Create(false));
 
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.70"),JsonValue.Create("0.1.71"));
+    JsonValue.Create("0.1.71"),JsonValue.Create("0.1.72"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.71":"0.1.70"));
+    JsonValue.Create(target?"0.1.72":"0.1.71"));
 p.Require.JsonValueEquals(Backlog,"/releases/4/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/releases/5/status",JsonValue.Create("in_progress"));
-p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",JsonValue.Create("in_progress"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/11/status",
+    JsonValue.Create(target?"done":"in_progress"));
 p.Require.JsonValueEquals(Backlog,"/work_packages/12/status",JsonValue.Create("planned"));
 foreach(var index in new[]{33,34,35})
     p.Require.JsonValueEquals(Backlog,$"/chunks/{index}/status",JsonValue.Create("done"));
 p.Require.JsonValueEquals(Backlog,"/chunks/36/status",
-    JsonValue.Create(target?"in_progress":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/36/tasks/0/status",
+    JsonValue.Create(target?"done":"in_progress"));
+p.Require.JsonValueEquals(Backlog,"/chunks/36/tasks/0/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/chunks/36/tasks/1/status",
     JsonValue.Create(target?"done":"planned"));
 foreach(var slot in new[]{0,1,2})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/36/tasks/0/subtasks/{slot}/status",
+    p.Require.JsonValueEquals(Backlog,$"/chunks/36/tasks/1/subtasks/{slot}/status",
         JsonValue.Create(target?"done":"planned"));
-p.Require.JsonValueEquals(Backlog,"/chunks/36/tasks/1/status",JsonValue.Create("planned"));
 p.Require.JsonValueEquals(Backlog,"/chunks/37/status",JsonValue.Create("planned"));
 p.Require.TextContains(Product,target?
-    "<Version>1.0.0-preview.7</Version>":
-    "<Version>1.0.0-preview.6</Version>");
+    "<Version>1.0.0-preview.8</Version>":
+    "<Version>1.0.0-preview.7</Version>");
 
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
-p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Work,target?"done":"in-progress");
 foreach(var node in new[]{"M5-W01-C01","M5-W01-C02","M5-W01-C03"})
     p.ProjectPlan.RequireNodeState(node,"done");
-p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M5-W01-C04-T1","done");
 p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
 foreach(var node in new[]{Red,Green,Verify})
     p.ProjectPlan.RequireNodeState(node,target?"done":"not-ready");
-p.ProjectPlan.RequireNodeState("M5-W01-C04-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
 
 if(!target)
 {
-    foreach(var file in new[]{MarkdownSource,OmmlSource,RedTest,GreenTests,
-        Decision,Document,ConsumerProject,ConsumerSource,ConsumerConfig,
-        RedProof,Qualified})
+    foreach(var file in new[]{Source,RedTest,GreenTests,Decision,Document,
+        ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified,Aggregate})
         p.Require.FileMissing(file);
 }
 else
 {
     p.Require.JsonValueEquals(RedProof,"/status",
-        JsonValue.Create("compiled-office-omml-public-api-absent-red-observed"));
+        JsonValue.Create("compiled-math-display-boundary-api-absent-red-observed"));
     p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(QualifiedStatus));
     p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
         JsonValue.Create(IndependentGreen));
+    p.Require.JsonValueEquals(Qualified,"/red_recovered_and_green_tests_passed",
+        JsonValue.Create(AllTargeted));
     p.Require.JsonValueEquals(Qualified,"/isolated_consumer_probes_passed",
         JsonValue.Create(8));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c04_t1_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_c04_phase_done",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/m5_w01_work_package_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c04_t2_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_c04_phase_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m5_w01_work_package_done",JsonValue.Create(true));
     p.Require.JsonValueEquals(Qualified,"/m5_release_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Aggregate,"/status",JsonValue.Create(AggregateStatus));
+    p.Require.JsonValueEquals(Aggregate,"/m5_w01_work_package_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Aggregate,"/m5_release_done",JsonValue.Create(false));
 }
 
 var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
 var redReceipt=p.Files.ReplaceFromStaged("staged/"+RedTest,RedTest);
 hashes[RedTest]=redReceipt.AfterSha256 ??
-    throw new InvalidOperationException("The compiled Markdown/OMML RED source hash is absent.");
+    throw new InvalidOperationException("No genuine compiled Office/Markdown boundary RED source hash.");
 if(!target)
 {
     Required(root,"dotnet","restore",Solution,"--locked-mode");
     Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
     var redOutput=Run(root,"dotnet","test",Test,"-c","Release",
         "--no-build","--no-restore",
-        "--filter","FullyQualifiedName~M5W01C04T1RedTests.StandaloneExactOfficeAndMarkdownUnicodePublicContractsMustExist",
+        "--filter","FullyQualifiedName~M5W01C04T2RedTests.IndependentOmmlAndMarkdownBoundaryAuditPublicApiMustExist",
         "--logger","console;verbosity=normal");
     if(redOutput.Code==0 ||
        !redOutput.Output.Contains(RedMarker,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "A real compiled absent-public-API RED is required: "+
+            "A genuinely compiled absent-public-boundary-API RED is required: "+
             Relevant(redOutput.Output));
     var redProof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M5-W01-C04-T1-contract-red",
-        ["status"]="compiled-office-omml-public-api-absent-red-observed",
-        ["prior_exact_mathml_boundary"]=Prior,
-        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.6",
+        ["schema_version"]=1,
+        ["id"]="M5-W01-C04-T2-contract-red",
+        ["status"]="compiled-math-display-boundary-api-absent-red-observed",
+        ["prior_exact_display_interop"]=Prior,
+        ["compiled_predecessor"]="dw.tools.math.codecs/1.0.0-preview.7",
         ["red_test"]=RedTest,["red_test_sha256"]=hashes[RedTest],
-        ["missing_api"]="ExactOfficeOmmlCodec and MarkdownUnicodeMathCodec public contracts",
+        ["missing_api"]="MathDisplayBoundaryAudit.AuditOmml(string, IrNode) and AuditMarkdown(string, MarkdownMathPlacement, IrNode)",
         ["expected_red_assertion"]=RedMarker,
         ["independent_red_test_count"]=1,
         ["compiler_failure_is_not_a_red_substitute"]=true,
-        ["nonclaim"]="A missing public API is not evidence of OMML semantic losslessness."
+        ["nonclaim"]="A missing public audit API does not prove Office document, typography or inverse fidelity."
     };
     p.Files.WriteComplete(RedProof,
         redProof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 
-foreach(var file in new[]{Product,MarkdownSource,OmmlSource,GreenTests,
-    Decision,Document,ConsumerProject,ConsumerSource,ConsumerConfig})
+foreach(var file in new[]{Product,Source,GreenTests,Decision,Document,
+    ConsumerProject,ConsumerSource,ConsumerConfig})
 {
     var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
     hashes[file]=installed.AfterSha256 ??
-        throw new InvalidOperationException("Missing exact Markdown/OMML source byte hash: "+file);
+        throw new InvalidOperationException("Missing exact math display source byte hash: "+file);
 }
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
 var targeted=Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore",
-    "--filter","FullyQualifiedName~M5W01C04T1",
+    "--filter","FullyQualifiedName~M5W01C04T2",
     "--logger","console;verbosity=normal");
-if(!targeted.Contains("Total tests: 25",StringComparison.OrdinalIgnoreCase) ||
-   !targeted.Contains("Passed: 25",StringComparison.OrdinalIgnoreCase))
+if(!targeted.Contains("Total tests: 39",StringComparison.OrdinalIgnoreCase) ||
+   !targeted.Contains("Passed: 39",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException(
-        "Recover compiled RED and pass all 24 independent Markdown/Office OMML GREEN tests.");
+        "Require one recovered compiled RED and all 38 independent Office/Markdown boundary GREEN oracles.");
 Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore","--logger","console;verbosity=minimal");
 foreach(var regressionProject in new[]{
@@ -172,7 +191,8 @@ foreach(var regressionProject in new[]{
         "--logger","console;verbosity=minimal");
     if(!regressionOutput.Contains("Passed",StringComparison.OrdinalIgnoreCase))
         throw new InvalidOperationException(
-            "Exact IR/quantities regression did not pass: "+regressionProject);
+            "Qualified canonical Math IR or quantities regression failed: "+
+            regressionProject);
 }
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 
@@ -184,7 +204,7 @@ var packages=new (string Id,string Version,string Project,string[] DependsOn)[]
         "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
     ("dw.tools.math.codecs",Version,Product,["dw.tools.math.ir"])
 };
-var feed=Path.Combine(root,"build","artifacts","m5-w01-c04-t1-local-feed");
+var feed=Path.Combine(root,"build","artifacts","m5-w01-c04-t2-local-feed");
 var archives=new List<string>();
 foreach(var package in packages)
 {
@@ -193,7 +213,7 @@ foreach(var package in packages)
     var archive=Path.Combine(feed,package.Id+"."+package.Version+".nupkg");
     if(!File.Exists(archive))
         throw new InvalidOperationException(
-            "Required freshly built local NuGet archive missing: "+package.Id);
+            "Required freshly packed local NuGet product archive absent: "+package.Id);
     archives.Add(archive);
 }
 var inspectorArguments=new List<string>{"run","--file",PackageHelper,"--"};
@@ -220,14 +240,14 @@ if(references.Length!=1 ||
    (string?)references[0].Attribute("Version")!="["+Version+"]" ||
    consumerXml.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"))
     throw new InvalidOperationException(
-        "The standalone Office/Markdown consumer must use one pinned NuGet codecs package.");
+        "Independent Math display boundary consumer must pin one NuGet codecs prerelease.");
 var configured=XDocument.Load(Path.Combine(root,ConsumerConfig))
     .Descendants().Single(x=>x.Name.LocalName=="packageSources");
 if(!configured.Elements().Any(x=>x.Name.LocalName=="clear") ||
    configured.Elements().Any(x=>x.Name.LocalName=="add"))
     throw new InvalidOperationException(
-        "The independent NuGet consumer must clear external feeds.");
-var isolated=Path.Combine(root,"build","artifacts","m5-w01-c04-t1-isolated-packages");
+        "Independent NuGet consumer must clear non-local package feeds.");
+var isolated=Path.Combine(root,"build","artifacts","m5-w01-c04-t2-isolated-packages");
 Required(root,"dotnet","restore",ConsumerProject,"--source",feed,
     "--configfile",ConsumerConfig,"--packages",isolated);
 Required(root,"dotnet","build",ConsumerProject,"-c","Release","--no-restore");
@@ -235,24 +255,22 @@ var consumerOutput=Required(root,"dotnet","run","--project",ConsumerProject,
     "-c","Release","--no-build","--no-restore");
 if(!HasExactLine(consumerOutput,ConsumerMarker))
     throw new InvalidOperationException(
-        "Eight independent pinned NuGet Office/Markdown probes not observed.");
+        "Eight independent pinned NuGet-only exact Office/Markdown loss probes not observed.");
 
 if(!target)
 {
     var proof=new JsonObject
     {
         ["schema_version"]=1,
-        ["id"]="M5-W01-C04-T1-contract-qualified",
+        ["id"]="M5-W01-C04-T2-boundaries-qualified",
         ["status"]=QualifiedStatus,
-        ["prior_qualified_mathml_profile"]=Prior,
-        ["compiled_missing_public_api_red"]=RedProof,
-        ["question"]="Can a small standalone Office OMML fraction and original equation round-trip without semantic loss while Unicode/Markdown distinguish inline and block math without source-free semantic inference?",
-        ["observation"]="One compiled absent-API RED recovered; 24 independent GREEN oracles, exact source-bound OMML canonical replay, two Markdown placements and eight pinned NuGet-only consumer oracles verified.",
-        ["decision"]="Admit only existing exact MathML-qualified IR through separately typed Unicode/Markdown display and an original-IR-bound, canonically verified standalone Office OMML subset; refuse altered/unqualified markup.",
-        ["markdown_source"]=MarkdownSource,
-        ["markdown_source_sha256"]=hashes[MarkdownSource],
-        ["omml_source"]=OmmlSource,
-        ["omml_source_sha256"]=hashes[OmmlSource],
+        ["prior_exact_omml_markdown_contract"]=Prior,
+        ["compiled_missing_boundary_api_red"]=RedProof,
+        ["question"]="Can standalone exact Office OMML and Unicode Markdown display preserve caller-supplied original IR while explicitly refusing extra document/layout markup, noncanonical XML, presentation ambiguity and unsupported conversions?",
+        ["observation"]="One compiled missing-public-API RED recovered, 38 independent GREEN boundary oracles and eight NuGet-only consumers qualify exact source-bound OMML/Markdown structural fidelity, explicit loss and no Office runtime.",
+        ["decision"]="Delegate XML to the previously qualified secure Office codec; admit only independently replayed caller-supplied typed IR with exact canonical OMML or Markdown placement. Refuse document/layout, typography inference, extra glyphs and resource limits.",
+        ["source_file"]=Source,
+        ["source_sha256"]=hashes[Source],
         ["product_project"]=Product,
         ["product_project_sha256"]=hashes[Product],
         ["red_test"]=RedTest,
@@ -267,18 +285,20 @@ if(!target)
         ["red_recovered_and_green_tests_passed"]=AllTargeted,
         ["compiled_red_observed"]=true,
         ["isolated_consumer_probes_passed"]=8,
-        ["markdown_rule"]="dw-math-markdown-unicode-exact-display/1",
-        ["omml_rule"]="dw-math-office-omml-exact-original-ir/1",
-        ["omml_namespace"]="http://schemas.openxmlformats.org/officeDocument/2006/math",
-        ["omml_import_requires_original_typed_ir"]=true,
-        ["exact_fraction_and_equation_roundtrip"]=true,
-        ["semantic_structural_sha256_retained"]=true,
-        ["unicode_display_inverse_qualified"]=false,
-        ["markdown_inline_and_block_distinct"]=true,
+        ["display_boundary_rule"]="dw-math-omml-markdown-display-boundary/1",
+        ["bounded_original_input_utf8_sha256"]=true,
+        ["source_sha256_is_not_semantic_proof"]=true,
+        ["original_ir_canonical_json_replay_qualified"]=true,
+        ["exact_fraction_equation_and_ordered_sum_verified"]=true,
+        ["markdown_inline_block_placement_refusals_qualified"]=true,
+        ["omml_dtd_xml_document_style_positioning_refusals_qualified"]=true,
+        ["omml_inverse_without_original_ir_qualified"]=false,
+        ["unicode_markdown_typography_inverse_qualified"]=false,
         ["office_application_or_sdk_required"]=false,
-        ["whole_office_documents_qualified"]=false,
-        ["fonts_or_positioning_qualified"]=false,
-        ["refused_result_has_no_ir_or_semantic_hash"]=true,
+        ["whole_office_document_conversion_qualified"]=false,
+        ["font_fidelity_qualified"]=false,
+        ["positioning_fidelity_qualified"]=false,
+        ["refused_input_has_no_ir_semantic_hash_or_rule"]=true,
         ["locked_solution_build_passed"]=true,
         ["focused_codecs_ir_quantities_regressions_passed"]=true,
         ["local_product_version"]=Version,
@@ -292,45 +312,81 @@ if(!target)
         ["consumer_config_sha256"]=hashes[ConsumerConfig],
         ["consumer_marker"]=ConsumerMarker,
         ["packages_publicly_published"]=false,
-        ["m5_w01_c04_t1_done"]=true,
-        ["m5_w01_c04_phase_done"]=false,
-        ["m5_w01_work_package_done"]=false,
+        ["m5_w01_c04_t2_done"]=true,
+        ["m5_w01_c04_phase_done"]=true,
+        ["m5_w01_work_package_done"]=true,
         ["m5_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_accepted_scope"]="M5-W01-C04-T2: independent unsupported Office/Markdown input, positioning, documents, loss and ambiguity boundaries",
+        ["next_accepted_scope"]="M5-W02-C01-T1: independent .NET console vertical joining qualified numeric, symbolic, expression and display IR components; keep M5 gate unpromoted",
         ["nonclaims"]=p.Json.StringArray(
-            "No general OMML, Word document conversion, Office installation, Open XML SDK, fonts or positioning support.",
-            "No Unicode/Markdown inverse parsing, typography-derived identities, unqualified mathematical equivalence, arbitrary TeX/Office interpreter or general CAS.",
-            "No public NuGet, stable 1.0, sibling agent or dw.discovery adoption.",
-            "T1 alone completes; C04-T2, C04, M5-W01 and M5 remain open.")
+            "No general Office Math interpreter, Word document conversion, font or layout fidelity, arbitrary Markdown or Unicode math parser.",
+            "No typography-derived semantic identity, source-free Office import, unbounded XML or executable entities.",
+            "No public stable NuGet, AURA/Decision/MCDM or dw.discovery adoption.",
+            "M5-W01 alone closes; M5, M5-W02 and G-M5 remain open.")
     };
     p.Files.WriteComplete(Qualified,
         proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+    var aggregate=new JsonObject
+    {
+        ["schema_version"]=1,
+        ["id"]="M5-W01",
+        ["status"]=AggregateStatus,
+        ["qualified_chains"]=p.Json.StringArray(C01,C02,C03,Prior,Qualified),
+        ["exact_canonical_math_text_and_latex_qualified"]=true,
+        ["exact_annotated_content_presentation_mathml_qualified"]=true,
+        ["exact_omml_and_markdown_ir_bound_display_qualified"]=true,
+        ["unicode_omml_typography_inverse_qualified"]=false,
+        ["no_office_installation_required"]=true,
+        ["no_whole_document_or_font_positioning_fidelity_qualified"]=true,
+        ["compiled_red_recovered_for_c04_t2"]=true,
+        ["independent_green_tests_for_c04_t2"]=IndependentGreen,
+        ["nuget_only_consumer_probes_for_c04_t2"]=8,
+        ["last_codecs_version"]=Version,
+        ["local_product_package_graph"]=p.Json.Array(products.ToArray()),
+        ["m5_w01_c01_done"]=true,
+        ["m5_w01_c02_done"]=true,
+        ["m5_w01_c03_done"]=true,
+        ["m5_w01_c04_done"]=true,
+        ["m5_w01_work_package_done"]=true,
+        ["m5_release_done"]=false,
+        ["scope"]="Qualified bounded exact text, LaTeX, MathML, Unicode Markdown and original-IR-bound standalone OMML; no arbitrary document conversion.",
+        ["next_gate"]="M5-W02 numeric/symbolic public vertical and stable 1.0 qualification remain separate."
+    };
+    p.Files.WriteComplete(Aggregate,
+        aggregate.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,plan=>
     {
-        plan["plan_version"]="0.1.71";
+        plan["plan_version"]="0.1.72";
         var chunk=plan["chunks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
         var task=chunk["tasks"]!.AsArray()
             .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
-        if((string?)chunk["status"]!="planned" ||
-           (string?)task["status"]!="planned")
+        var wp=plan["work_packages"]!.AsArray()
+            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Work);
+        if((string?)chunk["status"]!="in_progress" ||
+           (string?)task["status"]!="planned" ||
+           (string?)wp["status"]!="in_progress")
             throw new InvalidOperationException(
-                "The accepted Markdown/Office C04 T1 baseline changed.");
-        chunk["status"]="in_progress";
-        chunk["refinement"]="RS072 T1 admits Unicode/Markdown math display with explicit inline/block delimiters and a separate, bounded canonical Office OMML subset retaining caller-supplied typed original IR for a rational fraction and a simple original equality. Independent compiled RED, 24 GREEN tests, eight NuGet-only consumer oracles and three inspected local packages qualify only this exact contract. OMML typography cannot authorize source-free semantic reconstruction. C04-T2 owns wider unsupported inputs, document conversion and font/positioning limitations; W01 and M5 remain in progress.";
-        chunk["readiness"]="C04 T1 completed with exact original-IR-bound OMML and explicit Markdown math placement; T2 still pending independent loss and Office document/font boundaries";
-        chunk["files"]=p.Json.StringArray(Product,MarkdownSource,OmmlSource,
-            RedTest,GreenTests,Decision,Document,ConsumerProject,ConsumerSource,
-            ConsumerConfig,RedProof,Qualified);
+                "Accepted M5-W01 C04 T2 and work-package baseline diverged.");
+        chunk["status"]="done";
+        chunk["refinement"]="RS072 T1 qualified exact Markdown/Unicode inline/block display and standalone canonical Office OMML fraction/equality import bound to retained Math IR. RS073 T2 independently audits typed XML/document/style/layout and Unicode/Markdown loss boundaries, verifies source-byte SHA-256 separately from original Math IR canonical JSON/structural hash, refuses all unqualified formats and preserves no Office installation. One compiled missing-API RED, 38 independent GREEN tests, eight isolated NuGet consumer oracles and three SHA-verified local packages complete C04 and the four C01-C04 phases of M5-W01. M5 and M5-W02 remain unfinished.";
+        chunk["readiness"]="C04 complete: original-IR-bound OMML equation/fraction, Unicode/Markdown placements and independent unsupported document/font/positioning/ambiguity refusals; M5-W01 complete, M5-W02 not started";
+        var priorFiles=chunk["files"]!.AsArray().Select(x=>x!.GetValue<string>());
+        chunk["files"]=p.Json.StringArray(priorFiles.Concat(new[]{
+            Product,Source,RedTest,GreenTests,Decision,Document,
+            ConsumerProject,ConsumerSource,ConsumerConfig,RedProof,Qualified,Aggregate
+        }).Distinct(StringComparer.Ordinal).ToArray());
         chunk["commands"]=p.Json.StringArray(
             "dotnet restore "+Solution+" --locked-mode",
             "dotnet build "+Solution+" -c Release --no-restore",
-            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C04T1",
+            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M5W01C04T2",
             "dotnet test "+Test+" -c Release",
             "dotnet run --project "+ConsumerProject+" -c Release");
-        chunk["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        var priorEvidence=chunk["evidence"]!.AsArray()
+            .Select(x=>x!.GetValue<string>());
+        chunk["evidence"]=p.Json.StringArray(priorEvidence.Concat(new[]{RedProof,Qualified})
+            .Distinct(StringComparer.Ordinal).ToArray());
         task["status"]="done";
         task["evidence"]=p.Json.StringArray(RedProof,Qualified);
         foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
@@ -339,8 +395,9 @@ if(!target)
             child["evidence"]=p.Json.StringArray(
                 (string?)child["id"]==Red?RedProof:Qualified);
         }
+        wp["status"]="done";
+        wp["evidence"]=p.Json.StringArray(C01,C02,C03,Prior,Qualified,Aggregate);
     });
-    p.ProjectPlan.TransitionNode(Phase,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Task,"not-ready","ready");
     p.ProjectPlan.TransitionNode(Red,"not-ready","ready");
     p.ProjectPlan.ActivateReadyContinuation(Red);
@@ -352,27 +409,30 @@ if(!target)
         p.ProjectPlan.ConvergeNodeToDone(child);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
+    p.ProjectPlan.ConvergeNodeToDone(Work);
 }
 p.ProjectPlan.RequireNodeState("M4","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
-p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Work,"done");
 foreach(var node in new[]{"M5-W01-C01","M5-W01-C02","M5-W01-C03"})
     p.ProjectPlan.RequireNodeState(node,"done");
-p.ProjectPlan.RequireNodeState(Phase,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,"done");
+p.ProjectPlan.RequireNodeState("M5-W01-C04-T1","done");
 foreach(var node in new[]{Task,Red,Green,Verify})
     p.ProjectPlan.RequireNodeState(node,"done");
-p.ProjectPlan.RequireNodeState("M5-W01-C04-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M5-W02","not-ready");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS072" ||
+    if((string?)state["pendingRun"]!="RS073" ||
        (string?)state["activeMilestone"]!=Milestone ||
-       (string?)state["activeWorkPackage"]!=Work ||
-       (string?)state["activePhase"]!=(target?Phase:null) ||
+       (string?)state["activeWorkPackage"]!=(target?null:Work) ||
+       (string?)state["activePhase"]!=(target?null:Phase) ||
        state["activeTask"] is not null || state["activeSubtask"] is not null)
         throw new InvalidOperationException(
-            "RS072 exact Markdown/OMML phase start cursor diverged from baseline/target.");
-    state["activePhase"]=Phase;
+            "RS073 exact M5-W01 completion cursor diverged from baseline/target.");
+    state["activeWorkPackage"]=null;
+    state["activePhase"]=null;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
@@ -387,7 +447,7 @@ static bool HasExactLine(string output,string expected) =>
 static (long Bytes,string Sha) ReadProductReceipt(
     string output,string id,string version)
 {
-    var prefix="M5-W01-C04-T1-PKG-SHA256:"+id+":"+version+":";
+    var prefix="M5-W01-C04-T2-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
