@@ -1,6 +1,6 @@
 # Source and distribution notices
 
-Package: dw.tools.math.distribution 1.0.0-preview.3 (local only).
+Package: dw.tools.math.distribution 1.0.0-preview.4 (local only).
 Repository: aihallot/dw.tools.math.
 
 The project owner has stated ownership of the relevant mathematical code.

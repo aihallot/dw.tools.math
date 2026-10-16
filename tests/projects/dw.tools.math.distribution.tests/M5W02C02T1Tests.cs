@@ -107,7 +107,9 @@ public sealed class M5W02C02T1Tests
     [TestMethod] public void CurrentDistributionArchiveIdentityIsQualified()
     {
         var result=Qualified();
-        Assert.AreEqual("1.0.0-preview.3",result.Package!.Version);
+        var declared=MathLocalReleaseQualification.Find("dw.tools.math.distribution");
+        Assert.IsNotNull(declared);
+        Assert.AreEqual(declared!.Version,result.Package!.Version);
     }
     [TestMethod] public void CurrentDistributionEmbedsReadmeAndNotice()
     {
@@ -206,7 +208,7 @@ public sealed class M5W02C02T1Tests
             new(){ActualId="dw.tools.math.symbolics"});
     [TestMethod] public void WrongEmbeddedNuspecVersionIsNotSilentlyResolved() =>
         Refused(MathPackageQualificationStatus.UnsupportedIdentity,
-            new(){Version="1.0.0-preview.4"});
+            new(){Version="9.9.9"});
     [TestMethod] public void MissingNet10AssemblyRefusesArchive()
     {
         Refused(MathPackageQualificationStatus.MissingNet10Assembly,

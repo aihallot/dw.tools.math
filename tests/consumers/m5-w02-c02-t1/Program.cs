@@ -17,7 +17,8 @@ for(var index=0;index<manifest.Length;index++)
     var expected=manifest[index];
     var archivePath=Path.GetFullPath(args[index]);
     if(Path.GetFileName(archivePath)!=expected.Id+"."+expected.Version+".nupkg"||
-       Path.GetFileName(Path.GetDirectoryName(archivePath))!="m5-w02-c02-t1-local-feed")
+       Path.GetFileName(Path.GetDirectoryName(archivePath)) is not
+           ("m5-w02-c02-t1-local-feed" or "m5-w02-c02-t2-local-feed"))
         throw new InvalidOperationException("Supplied archive must be in the exact selected local feed.");
     bytes[index]=File.ReadAllBytes(archivePath);
 }
