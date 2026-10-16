@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.72",
+  "plan_version": "0.1.73",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -446,7 +446,7 @@
       "id": "M5-W02",
       "release": "M5",
       "title": "1.0 qualification",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.distribution/",
         "tests/projects/dw.tools.math.distribution.tests/",
@@ -5927,7 +5927,7 @@
       "title": "Independent numerical and symbolic vertical",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W01-C04"
       ],
@@ -5952,40 +5952,75 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS074 T1 delivers a standalone .NET 10 public console sample from one pinned NuGet distribution package, combining canonical source parsing, typed restricted Math IR, exact formal body derivative 2x, polynomial point value 3 at admissible x=2, complete unrestricted quadratic candidates and original-domain audited root -1 with excluded 1. It retains exact/explicit binary64 composition, original JSON replay, source SHA-256, provider and loss policy. Incompatible derivative-as-original-equation pipelines and unauthorized rounding are refused. One compiled absent-API RED, 34 independent GREEN tests, eight isolated NuGet console probes and seven independently inspected local packages qualify only C01 T1. T2 and all wider M5-W02 release gates remain open.",
+      "files": [
+        "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+        "src/projects/dw.tools.math.distribution/packages.lock.json",
+        "src/projects/dw.tools.math.distribution/ExactVerticalContracts.cs",
+        "src/projects/dw.tools.math.distribution/ExactMathVerticalRunner.cs",
+        "tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj",
+        "tests/projects/dw.tools.math.distribution.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C01T1RedTests.cs",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C01T1Tests.cs",
+        "samples/m5-exact-vertical/m5-exact-vertical.csproj",
+        "samples/m5-exact-vertical/Program.cs",
+        "samples/m5-exact-vertical/NuGet.Config",
+        "dw.tools.math.slnx",
+        "docs/planning/decisions/m5-w02-c01-t1-public-vertical.md",
+        "docs/distribution/m5-exact-console-vertical.md",
+        "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release",
+        "dotnet run --project samples/m5-exact-vertical/m5-exact-vertical.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+      ],
+      "readiness": "T1 exact public numerical/symbolic console and local package consumption qualified; T2 provider/assumption/loss boundaries still planned, C01/W02/M5 remain in-progress",
       "tasks": [
         {
           "id": "M5-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
           "test_case": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
+            "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W02-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T1-contract-red.json"
+              ]
             },
             {
               "id": "M5-W02-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W02-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json"
+              ]
             }
           ]
         },
