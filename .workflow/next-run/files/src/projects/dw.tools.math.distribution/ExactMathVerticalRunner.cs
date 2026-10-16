@@ -45,9 +45,10 @@ public static class ExactMathVerticalRunner
                     StringComparison.Ordinal))
                 return Refuse(ExactVerticalStatus.InvalidSource);
 
-            if (source.Assumptions.Conditions.Length!=1 ||
-                source.Assumptions.Conditions[0] is not IrRelation condition ||
-                condition.Kind!=IrRelationKind.NotEqual ||
+            if (source.Assumptions.Conditions.Length!=1)
+                return Refuse(ExactVerticalStatus.Unsupported);
+            var condition=source.Assumptions.Conditions[0];
+            if (condition.Kind!=IrRelationKind.NotEqual ||
                 condition.Symbol.IsBound ||
                 condition.Symbol.Domain!=IrScalarDomain.Real ||
                 source.Expression is not IrApply { Operation: IrOperation.Subtract } body ||
