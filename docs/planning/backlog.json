@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.74",
+  "plan_version": "0.1.75",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6087,7 +6087,7 @@
       "title": "Packaging and qualification matrix",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W02-C01"
       ],
@@ -6112,40 +6112,74 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS076 T1 qualifies actual local versioned .NET 10 Math nupkg archives and a separate public BCL ZIP inspector, embeds distribution README and rights notices, and verifies all seven archive digests and dependency graphs against an independent clean pinned NuGet consumer. It preserves the prior exact console through its eight original probes, records local host/SDK, and explicitly refuses to certify unobserved OS RIDs, public releases or source/binary ABIs. One compiled absent-API RED, 40 GREEN MSTests, eight package-only probes and seven archive checks qualify only T1. T2 owns cross-platform, native, API/ABI, performance and final support matrix; C02, W02 and M5 remain in-progress.",
+      "files": [
+        "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+        "src/projects/dw.tools.math.distribution/MathLocalReleaseQualification.cs",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C02T1RedTests.cs",
+        "tests/projects/dw.tools.math.distribution.tests/M5W02C02T1Tests.cs",
+        "tests/consumers/m5-w02-c02-t1/m5-clean-package-consumer.csproj",
+        "tests/consumers/m5-w02-c02-t1/Program.cs",
+        "tests/consumers/m5-w02-c02-t1/NuGet.Config",
+        "samples/m5-exact-vertical/m5-exact-vertical.csproj",
+        "docs/distribution/m5-package-readme.md",
+        "docs/distribution/m5-package-notices.md",
+        "docs/planning/decisions/m5-w02-c02-t1-clean-packages.md",
+        "docs/distribution/m5-local-support-evidence.md",
+        "docs/planning/evidence/M5-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M5-W02-C02-T1-contract-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --filter FullyQualifiedName~M5W02C02T1",
+        "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m5-w02-c02-t1/m5-clean-package-consumer.csproj -c Release",
+        "dotnet run --project samples/m5-exact-vertical/m5-exact-vertical.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M5-W02-C02-T1-contract-qualified.json"
+      ],
+      "readiness": "C02-T1 qualified local archive graph, one pinned clean NuGet consumer, retained Math console, distribution README/NOTICE and observed host only; T2 source/binary/platform support boundaries remain pending",
       "tasks": [
         {
           "id": "M5-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify clean consumer, package versions, notices, API docs, targeted CI, and multi-OS release for the admitted scope.",
           "test_case": "Restore from versioned artifacts; sample and release suites pass on every announced platform; no machine path or sibling source dependency.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W02-C02-T1-contract-red.json",
+            "docs/planning/evidence/M5-W02-C02-T1-contract-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W02-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Restore from versioned artifacts; sample and release suites pass on every announced platform; no machine path or sibling source dependency.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C02-T1-contract-red.json"
+              ]
             },
             {
               "id": "M5-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Qualify clean consumer, package versions, notices, API docs, targeted CI, and multi-OS release for the admitted scope.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C02-T1-contract-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C02-T1-contract-qualified.json"
+              ]
             }
           ]
         },
