@@ -49,7 +49,7 @@ public static class MathLocalReleaseQualification
         new("dw.tools.math.numerics","0.4.0-preview.4",["dw.tools.math.ir"]),
         new("dw.tools.math.composition","0.3.0-preview.1",
             ["dw.quantities","dw.tools.math.ir"]),
-        new("dw.tools.math.distribution","1.0.0-preview.3",
+        new("dw.tools.math.distribution","1.0.0-preview.4",
             ["dw.quantities","dw.tools.math.ir","dw.tools.math.codecs",
              "dw.tools.math.symbolics","dw.tools.math.numerics",
              "dw.tools.math.composition"])
