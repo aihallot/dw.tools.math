@@ -74,8 +74,8 @@ Probe("consented rounding retains exact error",()=>
     var audited=ExactVerticalBoundaryAudit.Audit(source,R(1,3),
         numericPolicy:RationalBinary64Policy.AllowRounded);
     Require(audited.IsAdmitted&&audited.Vertical!.ExactValueAtPoint==R(-8,9)&&
-        audited.Vertical.Binary64Projection?.Status==RationalBinary64Status.Rounded&&
-        audited.Vertical.Binary64Projection.AbsoluteError is ExactRational error &&
+        audited.Vertical!.Binary64Projection?.Status==RationalBinary64Status.Rounded&&
+        audited.Vertical!.Binary64Projection!.AbsoluteError is ExactRational error &&
         error>R(0)&&
         audited.NumericLoss=="binary64-rounded-exact-error-retained-original-ir-unchanged",
         "approximate binary64 cannot replace exact rational meaning");
@@ -85,8 +85,8 @@ Probe("alternate exact quadratic is not hardcoded to one fixture",()=>
     var audited=ExactVerticalBoundaryAudit.Audit(
         "where(sub(square(x),4),ne(x,1))",R(3));
     Require(audited.IsAdmitted&&audited.Vertical!.ExactValueAtPoint==R(5)&&
-        audited.Vertical.OriginalRootAudit!.VerifiedRoots.Length==2&&
-        audited.Vertical.OriginalRootAudit.ExcludedFromDomain.Length==0,
+        audited.Vertical!.OriginalRootAudit!.VerifiedRoots.Length==2&&
+        audited.Vertical!.OriginalRootAudit!.ExcludedFromDomain.Length==0,
         "different rational roots must retain original-domain evidence");
 });
 Probe("pinned Math-only package needs no AURA or external CAS",()=>

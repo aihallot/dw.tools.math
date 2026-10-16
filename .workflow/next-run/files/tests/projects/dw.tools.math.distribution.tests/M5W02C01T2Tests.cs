@@ -30,10 +30,10 @@ public sealed class M5W02C01T2Tests
         Assert.AreEqual(ExactVerticalBoundaryLossKind.None,audited.LossKind);
         Assert.IsTrue(audited.IsAdmitted);
         Assert.IsNotNull(audited.Vertical);
-        Assert.IsTrue(audited.Vertical.IsAdmitted);
+        Assert.IsTrue(audited.Vertical!.IsAdmitted);
         Assert.AreEqual(ExactVerticalBoundaryAudit.Rule,audited.AuditRuleId);
         Assert.AreEqual(Sha(source),audited.SourceSha256);
-        Assert.AreEqual(audited.Vertical.OriginalSemanticSha256,
+        Assert.AreEqual(audited.Vertical!.OriginalSemanticSha256,
             audited.OriginalSemanticSha256);
         Assert.AreEqual(ExactMathVerticalRunner.Provider,audited.ProviderId);
         Assert.IsTrue(audited.OriginalIrReplayed);
@@ -76,8 +76,8 @@ public sealed class M5W02C01T2Tests
     {
         var audit=Admit();
         Assert.AreEqual(Example,audit.Vertical!.CanonicalSource);
-        Assert.AreEqual(IrCanonicalJsonCodec.Encode(audit.Vertical.Original!),
-            audit.Vertical.SourceCanonicalIrJson);
+        Assert.AreEqual(IrCanonicalJsonCodec.Encode(audit.Vertical!.Original!),
+            audit.Vertical!.SourceCanonicalIrJson);
     }
     [TestMethod] public void SemanticDigestReplaysOriginalRestrictedIr()
     {
@@ -102,20 +102,20 @@ public sealed class M5W02C01T2Tests
         var audit=Admit();
         Assert.AreEqual("mul(2,x)",audit.Vertical!.CanonicalDerivative);
         Assert.AreEqual(SymbolicExactDifferentiation.Rule,
-            audit.Vertical.FormalDerivativeRule);
+            audit.Vertical!.FormalDerivativeRule);
     }
     [TestMethod] public void FormalDerivativeCannotBeOriginalEquation()
     {
         var audit=Admit();
         Assert.AreNotEqual(IrCanonicalJsonCodec.Encode(
-            audit.Vertical!.FormalBodyDerivative!),audit.Vertical.SourceCanonicalIrJson);
+            audit.Vertical!.FormalBodyDerivative!),audit.Vertical!.SourceCanonicalIrJson);
         Assert.IsTrue(audit.FormalDerivativeSeparated);
     }
     [TestMethod] public void AtTwoExactPolynomialValueIsThree()
     {
         var audit=Admit();
         Assert.AreEqual(R(3),audit.Vertical!.ExactValueAtPoint!.Value);
-        Assert.AreEqual(ExactMathVerticalRunner.PointRule,audit.Vertical.PointEvaluationRule);
+        Assert.AreEqual(ExactMathVerticalRunner.PointRule,audit.Vertical!.PointEvaluationRule);
     }
     [TestMethod] public void OriginalRootMinusOneIsProven()
     {
@@ -132,7 +132,7 @@ public sealed class M5W02C01T2Tests
     {
         var audit=Admit();
         Assert.IsTrue(audit.Vertical!.UnrestrictedCandidates!.IsComplete);
-        Assert.IsFalse(audit.Vertical.OriginalRootAudit!.IsComplete);
+        Assert.IsFalse(audit.Vertical!.OriginalRootAudit!.IsComplete);
         Assert.IsFalse(audit.OriginalRootAuditComplete);
     }
     [TestMethod] public void OriginalCandidateAuditHasNoUnresolvedPoints()
@@ -145,7 +145,7 @@ public sealed class M5W02C01T2Tests
         var audit=Admit();
         Assert.AreEqual(RationalBinary64Status.Exact,
             audit.Vertical!.Binary64Projection!.Status);
-        Assert.AreEqual(R(0),audit.Vertical.Binary64Projection.AbsoluteError!.Value);
+        Assert.AreEqual(R(0),audit.Vertical!.Binary64Projection!.AbsoluteError!.Value);
         Assert.AreEqual("binary64-exact-representable-original-ir-unchanged",
             audit.NumericLoss);
     }
@@ -155,7 +155,7 @@ public sealed class M5W02C01T2Tests
         Assert.AreEqual(ComputationStatus.Exact,
             audit.Vertical!.ExactComposition!.Status);
         Assert.AreEqual(ComputationStatus.Approximate,
-            audit.Vertical.Binary64Composition!.Status);
+            audit.Vertical!.Binary64Composition!.Status);
     }
     [TestMethod] public void ProviderAndVersionedProofRemainVisible()
     {
@@ -183,7 +183,7 @@ public sealed class M5W02C01T2Tests
         var audit=Admit(point:R(1,3),policy:RationalBinary64Policy.AllowRounded);
         Assert.AreEqual(R(-8,9),audit.Vertical!.ExactValueAtPoint!.Value);
         Assert.AreEqual(RationalBinary64Status.Rounded,
-            audit.Vertical.Binary64Projection!.Status);
+            audit.Vertical!.Binary64Projection!.Status);
     }
     [TestMethod] public void NumericRoundingRetainsPositiveExactError()
     {
@@ -197,7 +197,7 @@ public sealed class M5W02C01T2Tests
         var audit=Admit(point:R(1,3),policy:RationalBinary64Policy.AllowRounded);
         Assert.AreEqual(ComputationStatus.Exact,audit.Vertical!.ExactComposition!.Status);
         Assert.AreEqual(ComputationStatus.Approximate,
-            audit.Vertical.Binary64Composition!.Status);
+            audit.Vertical!.Binary64Composition!.Status);
     }
     [TestMethod] public void ExcludedOriginalEvaluationPointIsRefused()
     {
@@ -297,21 +297,21 @@ public sealed class M5W02C01T2Tests
         var audit=Admit("where(sub(square(x),4),ne(x,1))",R(3));
         Assert.AreEqual(R(5),audit.Vertical!.ExactValueAtPoint!.Value);
         CollectionAssert.AreEquivalent(new[]{R(-2),R(2)},
-            audit.Vertical.OriginalRootAudit!.VerifiedRoots.Select(root=>root.Value).ToArray());
-        Assert.AreEqual(0,audit.Vertical.OriginalRootAudit.ExcludedFromDomain.Length);
+            audit.Vertical!.OriginalRootAudit!.VerifiedRoots.Select(root=>root.Value).ToArray());
+        Assert.AreEqual(0,audit.Vertical!.OriginalRootAudit!.ExcludedFromDomain.Length);
     }
     [TestMethod] public void AlternativeExclusionMinusOneRetainsPositiveRoot()
     {
         var audit=Admit("where(sub(square(x),1),ne(x,-1))");
         Assert.AreEqual(R(1),
             audit.Vertical!.OriginalRootAudit!.VerifiedRoots.Single().Value);
-        Assert.AreEqual(R(-1),audit.Vertical.OriginalRootAudit.ExcludedFromDomain.Single());
+        Assert.AreEqual(R(-1),audit.Vertical!.OriginalRootAudit!.ExcludedFromDomain.Single());
     }
     [TestMethod] public void NonrootExclusionStillAdmitsBothRationalRoots()
     {
         var audit=Admit("where(sub(square(x),1),ne(x,3))");
         Assert.AreEqual(2,audit.Vertical!.OriginalRootAudit!.VerifiedRoots.Length);
-        Assert.AreEqual(0,audit.Vertical.OriginalRootAudit.ExcludedFromDomain.Length);
+        Assert.AreEqual(0,audit.Vertical!.OriginalRootAudit!.ExcludedFromDomain.Length);
     }
     [TestMethod] public void ChangingOriginalAssumptionsChangesSemanticFingerprint()
     {
