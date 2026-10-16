@@ -220,9 +220,9 @@ foreach(var item in packages)
     });
 }
 EnsurePinned(root,Clean,CleanConfig,Version);
-// The previous clean NuGet consumer accepts the exact current T2 local
-// archive directory. Do not duplicate the packages through untracked
-// File.Copy or Directory.CreateDirectory: preserve byte-for-byte identity.
+// The retained consumer accepts the exact current T2 local feed.
+// Reuse the already inspected archive paths without copying files or
+// creating untracked directories; retain byte-for-byte identity.
 Required(root,"dotnet","restore",Clean,"--source",feed,"--configfile",CleanConfig,
     "--packages",Path.Combine(root,"build","artifacts","m5-w02-c02-t2-old-clean"));
 Required(root,"dotnet","build",Clean,"-c","Release","--no-restore");
