@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.71",
+  "plan_version": "0.1.72",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -426,13 +426,21 @@
       "id": "M5-W01",
       "release": "M5",
       "title": "Notation and exchange",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.codecs/",
         "tests/projects/dw.tools.math.codecs.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json",
+        "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W01-work-package-qualified.json"
+      ]
     },
     {
       "id": "M5-W02",
@@ -5763,7 +5771,7 @@
       "title": "Markdown, Unicode, and Office",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W01-C03"
       ],
@@ -5788,7 +5796,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C04Tests"
       ],
-      "refinement": "RS072 T1 admits Unicode/Markdown math display with explicit inline/block delimiters and a separate, bounded canonical Office OMML subset retaining caller-supplied typed original IR for a rational fraction and a simple original equality. Independent compiled RED, 24 GREEN tests, eight NuGet-only consumer oracles and three inspected local packages qualify only this exact contract. OMML typography cannot authorize source-free semantic reconstruction. C04-T2 owns wider unsupported inputs, document conversion and font/positioning limitations; W01 and M5 remain in progress.",
+      "refinement": "RS072 T1 qualified exact Markdown/Unicode inline/block display and standalone canonical Office OMML fraction/equality import bound to retained Math IR. RS073 T2 independently audits typed XML/document/style/layout and Unicode/Markdown loss boundaries, verifies source-byte SHA-256 separately from original Math IR canonical JSON/structural hash, refuses all unqualified formats and preserves no Office installation. One compiled missing-API RED, 38 independent GREEN tests, eight isolated NuGet consumer oracles and three SHA-verified local packages complete C04 and the four C01-C04 phases of M5-W01. M5 and M5-W02 remain unfinished.",
       "files": [
         "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
         "src/projects/dw.tools.math.codecs/MarkdownUnicodeMathCodec.cs",
@@ -5801,20 +5809,33 @@
         "tests/consumers/m5-w01-c04-t1/Program.cs",
         "tests/consumers/m5-w01-c04-t1/NuGet.Config",
         "docs/planning/evidence/M5-W01-C04-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.codecs/MathDisplayBoundaryAudit.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C04T2RedTests.cs",
+        "tests/projects/dw.tools.math.codecs.tests/M5W01C04T2Tests.cs",
+        "docs/planning/decisions/m5-w01-c04-t2-display-boundaries.md",
+        "docs/distribution/m5-markdown-omml-boundaries.md",
+        "tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj",
+        "tests/consumers/m5-w01-c04-t2/Program.cs",
+        "tests/consumers/m5-w01-c04-t2/NuGet.Config",
+        "docs/planning/evidence/M5-W01-C04-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W01-work-package-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C04T1",
+        "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release --filter FullyQualifiedName~M5W01C04T2",
         "dotnet test tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj -c Release",
-        "dotnet run --project tests/consumers/m5-w01-c04-t1/m5-markdown-omml-consumer.csproj -c Release"
+        "dotnet run --project tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M5-W01-C04-T1-contract-red.json",
-        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json"
+        "docs/planning/evidence/M5-W01-C04-T1-contract-qualified.json",
+        "docs/planning/evidence/M5-W01-C04-T2-contract-red.json",
+        "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json"
       ],
-      "readiness": "C04 T1 completed with exact original-IR-bound OMML and explicit Markdown math placement; T2 still pending independent loss and Office document/font boundaries",
+      "readiness": "C04 complete: original-IR-bound OMML equation/fraction, Unicode/Markdown placements and independent unsupported document/font/positioning/ambiguity refusals; M5-W01 complete, M5-W02 not started",
       "tasks": [
         {
           "id": "M5-W01-C04-T1",
@@ -5861,29 +5882,38 @@
           "title": "Boundaries and integration",
           "behavior": "Require no Office installation; do not convert whole documents; do not guarantee fonts/positioning; return explicit unsupported.",
           "test_case": "Require no Office installation; do not convert whole documents; do not guarantee fonts/positioning; return explicit unsupported.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W01-C04-T2-contract-red.json",
+            "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W01-C04-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Require no Office installation; do not convert whole documents; do not guarantee fonts/positioning; return explicit unsupported.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T2-contract-red.json"
+              ]
             },
             {
               "id": "M5-W01-C04-T2-G",
               "title": "GREEN",
               "description": "Implement only: Require no Office installation; do not convert whole documents; do not guarantee fonts/positioning; return explicit unsupported.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W01-C04-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M5-W01-C04-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
