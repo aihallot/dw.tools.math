@@ -100,26 +100,26 @@ public sealed class M5W02C01T1Tests
     {
         var result=Accepted();
         Assert.AreEqual(SymbolicRealSolvingStatus.Finite,result.UnrestrictedCandidates!.Status);
-        Assert.IsTrue(result.UnrestrictedCandidates.IsComplete);
-        CollectionAssert.AreEqual(new[]{R(-1),R(1)},result.UnrestrictedCandidates.Roots.ToArray());
+        Assert.IsTrue(result.UnrestrictedCandidates!.IsComplete);
+        CollectionAssert.AreEqual(new[]{R(-1),R(1)},result.UnrestrictedCandidates!.Roots.ToArray());
     }
     [TestMethod] public void OriginalDomainAuditAdmitsOnlyMinusOne()
     {
         var result=Accepted();
         Assert.AreEqual(R(-1),result.OriginalRootAudit!.VerifiedRoots.Single().Value);
-        Assert.AreEqual(R(1),result.OriginalRootAudit.ExcludedFromDomain.Single());
+        Assert.AreEqual(R(1),result.OriginalRootAudit!.ExcludedFromDomain.Single());
     }
     [TestMethod] public void OriginalRootAuditDoesNotClaimGlobalCompleteness()
     {
         var result=Accepted();
         Assert.AreEqual(SymbolicRootAuditStatus.VerifiedSubset,result.OriginalRootAudit!.Status);
-        Assert.IsFalse(result.OriginalRootAudit.IsComplete);
+        Assert.IsFalse(result.OriginalRootAudit!.IsComplete);
     }
     [TestMethod] public void NoCandidateOfOriginalDomainIsInvented()
     {
         var result=Accepted();
         Assert.AreEqual(0,result.OriginalRootAudit!.UnresolvedCandidates.Length);
-        Assert.AreEqual(0,result.OriginalRootAudit.RejectedCandidates.Length);
+        Assert.AreEqual(0,result.OriginalRootAudit!.RejectedCandidates.Length);
     }
     [TestMethod] public void AForbiddenEvaluationPointIsRefused()
     {
@@ -140,16 +140,16 @@ public sealed class M5W02C01T1Tests
     {
         var result=Accepted();
         Assert.AreEqual(RationalBinary64Status.Exact,result.Binary64Projection!.Status);
-        Assert.AreEqual(3d,result.Binary64Projection.Value!.Value);
-        Assert.AreEqual(R(0),result.Binary64Projection.AbsoluteError!.Value);
+        Assert.AreEqual(3d,result.Binary64Projection!.Value!.Value);
+        Assert.AreEqual(R(0),result.Binary64Projection!.AbsoluteError!.Value);
     }
     [TestMethod] public void CompositionMaintainsExactVsBinary64PrecisionTypes()
     {
         var result=Accepted();
         Assert.AreEqual(ComputationStatus.Exact,result.ExactComposition!.Status);
         Assert.AreEqual(ComputationStatus.Approximate,result.Binary64Composition!.Status);
-        Assert.AreEqual(R(3),((IrExactScalar)result.ExactComposition.Value!).Value);
-        Assert.AreEqual(3d,((IrFiniteBinary64Scalar)result.Binary64Composition.Value!).Value);
+        Assert.AreEqual(R(3),((IrExactScalar)result.ExactComposition!.Value!).Value);
+        Assert.AreEqual(3d,((IrFiniteBinary64Scalar)result.Binary64Composition!.Value!).Value);
     }
     [TestMethod] public void ProviderAndLossAreExplicitNotImplicit()
     {
@@ -197,7 +197,7 @@ public sealed class M5W02C01T1Tests
         var result=Accepted(R(1,3),RationalBinary64Policy.AllowRounded);
         Assert.AreEqual(R(-8,9),result.ExactValueAtPoint!.Value);
         Assert.AreEqual(RationalBinary64Status.Rounded,result.Binary64Projection!.Status);
-        Assert.IsTrue(result.Binary64Projection.AbsoluteError!.Value > R(0));
+        Assert.IsTrue(result.Binary64Projection!.AbsoluteError!.Value > R(0));
     }
     [TestMethod] public void RoundedCompositionDoesNotReclassifyExactSource()
     {

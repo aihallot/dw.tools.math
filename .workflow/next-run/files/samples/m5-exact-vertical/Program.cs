@@ -55,15 +55,15 @@ Probe("original roots are separately audited",()=>
 {
     var roots=accepted.OriginalRootAudit;
     Require(accepted.UnrestrictedCandidates?.IsComplete==true&&
-        roots?.VerifiedRoots.Single().Value==R(-1)&&
+        roots is not null&&roots.VerifiedRoots.Single().Value==R(-1)&&
         roots.ExcludedFromDomain.Single()==R(1)&&
         !roots.IsComplete,"the original x!=1 excludes one algebraic candidate");
 });
 Probe("binary64 conversion is explicit and loss-free at three",()=>
 {
     Require(accepted.Binary64Projection?.Status==RationalBinary64Status.Exact&&
-        accepted.Binary64Projection.Value==3d&&
-        accepted.Binary64Projection.AbsoluteError==R(0)&&
+        accepted.Binary64Projection?.Value==3d&&
+        accepted.Binary64Projection?.AbsoluteError==R(0)&&
         accepted.Binary64Composition?.Status==ComputationStatus.Approximate,
         "binary64 is a separate numeric precision even when exactly representable");
 });
@@ -85,7 +85,8 @@ Probe("rounding requires consent and retains exact error",()=>
     Require(withheld.Status==ExactVerticalStatus.RoundingNotAuthorized&&
         allowed.IsAdmitted&&allowed.ExactValueAtPoint==R(-8,9)&&
         allowed.Binary64Projection?.Status==RationalBinary64Status.Rounded&&
-        allowed.Binary64Projection.AbsoluteError>R(0),
+        allowed.Binary64Projection?.AbsoluteError is ExactRational loss &&
+        loss>R(0),
         "there is no implicit approximate answer or swallowed precision loss");
 });
 Probe("NuGet-only dependency graph requires no AURA or external CAS",()=>
@@ -113,8 +114,8 @@ var report=new
     binary64=accepted.Binary64Projection!.Value!.Value,
     numeric_loss=accepted.LossClassification,
     admitted_roots=accepted.OriginalRootAudit!.VerifiedRoots.Select(x=>x.Value.ToFractionString()).ToArray(),
-    excluded_candidates=accepted.OriginalRootAudit.ExcludedFromDomain.Select(x=>x.ToFractionString()).ToArray(),
-    original_root_audit_complete=accepted.OriginalRootAudit.IsComplete,
+    excluded_candidates=accepted.OriginalRootAudit!.ExcludedFromDomain.Select(x=>x.ToFractionString()).ToArray(),
+    original_root_audit_complete=accepted.OriginalRootAudit!.IsComplete,
     provider=accepted.ProviderId,
     assumption=accepted.OriginalAssumption,
     source_sha256=accepted.OriginalSemanticSha256,
