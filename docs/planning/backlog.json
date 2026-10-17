@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.82",
+  "plan_version": "0.1.83",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6556,7 +6556,7 @@
       "title": "Roots and numerical integration",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W01-C01"
       ],
@@ -6581,7 +6581,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C02Tests"
       ],
-      "refinement": "RS083 T1: one compiled API RED, 43 independently asserted GREENs, retained 48 curve T1 and 60 T2 tests, two Math regression suites and source-free preview.3 eight-probe NuGet client. Numeric endpoints, finite bounded bisection, observed root residual/bracket diagnostics and Simpson heuristic error estimates qualified; false certified-error and discontinuity claims refused. C02 T2 remains planned.",
+      "refinement": "RS083 T1 admitted provider-free bounded bisection and composite Simpson with noncertified error diagnostics, 43 GREEN tests and one compiled RED. RS084 T2 independently adds residual-only root admission and explicit unverified Simpson smoothness declaration, with 50 GREEN and recovered RED, 152 retained focused tests, two Math regressions and 16 source-free NuGet probes from a SHA-qualified preview.4 archive. The entire C02 phase closes; M6-W01 and M6 remain open.",
       "files": [
         "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
         "src/projects/dw.tools.math.analysis/BoundedUnivariateAnalysis64.cs",
@@ -6593,20 +6593,33 @@
         "docs/planning/decisions/m6-w01-c02-t1-bounded-univariate.md",
         "docs/distribution/m6-bounded-univariate.md",
         "docs/planning/evidence/M6-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C02-T1-qualified.json"
+        "docs/planning/evidence/M6-W01-C02-T1-qualified.json",
+        "src/projects/dw.tools.math.analysis/UnivariateBoundaryAudit64.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C02T2RedTests.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C02T2Tests.cs",
+        "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c02-t2/Program.cs",
+        "tests/consumers/m6-w01-c02-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w01-c02-t2-audit-boundaries.md",
+        "docs/distribution/m6-univariate-audit-boundaries.md",
+        "docs/planning/evidence/M6-W01-C02-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C02T1",
+        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C02T2",
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w01-c02-t1/m6-univariate-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M6-W01-C02-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C02-T1-qualified.json"
+        "docs/planning/evidence/M6-W01-C02-T1-qualified.json",
+        "docs/planning/evidence/M6-W01-C02-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 delivered finite bounded bisection and Simpson diagnostics; T2 must separately falsify discontinuity, tolerance and budget limits before C02 may close.",
+      "readiness": "C02 complete: T1 bounded numerical estimates and T2 typed, fail-closed residual and regularity audits independently qualified on local NuGet preview.4; C03 numerical differentiation and ODE planned.",
       "tasks": [
         {
           "id": "M6-W01-C02-T1",
@@ -6653,29 +6666,38 @@
           "title": "Boundaries and integration",
           "behavior": "Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
           "test_case": "Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W01-C02-T2-contract-red.json",
+            "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W01-C02-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C02-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W01-C02-T2-G",
               "title": "GREEN",
               "description": "Implement only: Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W01-C02-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W01-C02-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
