@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "id": "RS085",
+  "title": "Qualify bounded central differentiation and scalar RK4 ODEs",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded central-difference and RK4 numerical analysis contracts",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W01",
+    "M6-W01-C03",
+    "M6-W01-C03-T1",
+    "M6-W01-C03-T1-R",
+    "M6-W01-C03-T1-G",
+    "M6-W01-C03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify bounded binary64 central difference and fixed-step RK4 in Math analysis preview.5. Observe a compiled public API RED; pass 57 new GREEN, 203 retained analysis tests and two core regressions. Independently SHA-inspect the actual local NuGet archive with a new eight-probe differential consumer and a retained eight-probe C02 consumer. Complete C03-T1 only, leaving C03, W01/M6, rigorous error bounds, public NuGet and downstream adoption unqualified.",
+    "value": "Add reusable source-free differentiation and scalar initial-value ODE calculations with explicit numeric step/evaluation budgets, typed refusals and noncertified error estimates while preserving previous curve, root and quadrature contracts.",
+    "debtChanges": [
+      "Require one genuinely compiled reflection RED for absent derivative/ODE public APIs before staging the new source.",
+      "Qualify four-evaluation central finite differences with explicit representable step, finite callback values and heuristic h/h2 error estimates.",
+      "Qualify scalar forward-time fixed-step RK4 using N/2N step refinement, bounded evaluation counts and no claimed global-error theorem.",
+      "Observe 57 new independent GREEN, recover RED, and retain all 203 previous C01/C02 focused tests without changing their APIs.",
+      "Refuse invalid policy, unrepresentable steps, overflow, callback errors, nonfinite data, cancellation and unmet error-estimate limits without partial outputs.",
+      "Validate relevant numerics and composition regressions; avoid unrelated routine full-solution certification.",
+      "Pack a real local net10 1.1.0-preview.5 NuGet archive, inspect SHA/nuspec, and verify identical bytes in two independent eight-probe source-free consumers.",
+      "Complete C03 T1 RED/GREEN/V only. Preserve C03 T2, stiffness/events/PDE, public release and Decision/MCDM/AURA adoption as unqualified."
+    ],
+    "nextAction": "After durable RS085 success, prepare M6-W01-C03-T2 for stiffness, event and PDE exclusions, overflow, cancellation and local/global error policies; close C03 only after independent qualification.",
+    "achievements": [
+      {
+        "projectNode": "M6-W01-C03-T1-R",
+        "achievement": "Observe one genuinely compiled absent public derivative/ODE API RED on the qualified preceding version."
+      },
+      {
+        "projectNode": "M6-W01-C03-T1-G",
+        "achievement": "Deliver bounded central-difference and scalar RK4 methods with 57 independent numerical and refusal GREEN tests."
+      },
+      {
+        "projectNode": "M6-W01-C03-T1-V",
+        "achievement": "Preserve 203 earlier analysis tests and two relevant Math regressions, with a real preview.5 SHA-confirmed by two eight-probe NuGet-only consumers."
+      },
+      {
+        "projectNode": "M6-W01-C03-T1",
+        "achievement": "Qualify finite derivative and scalar ODE estimates with explicit noncertified error and resource policies; leave C03 T2 and M6 open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
+    "docs/planning/evidence/M6-W01-C03-T1-qualified.json",
+    "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "src/projects/dw.tools.math.analysis/BoundedDifferentialAnalysis64.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C03T1RedTests.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C03T1Tests.cs",
+    "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c02-t2/Program.cs",
+    "tests/consumers/m6-w01-c03-t1/m6-differential-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t1/Program.cs",
+    "tests/consumers/m6-w01-c03-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w01-c03-t1-differential-ode.md",
+    "docs/distribution/m6-differential-ode.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
