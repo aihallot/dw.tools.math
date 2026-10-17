@@ -1,0 +1,981 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS087",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-17T21:17:50.8524381+00:00",
+  "completedAtUtc": "2026-10-17T21:18:36.6883022+00:00",
+  "durationMilliseconds": 45835,
+  "projectNodes": [
+    "M6",
+    "M6-W01"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-local-gate-qualified.json",
+    "tests/consumers/m6-w01-c01-t2/Program.cs",
+    "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c02-t2/Program.cs",
+    "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t2/Program.cs",
+    "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+    "docs/distribution/m6-w01-local-numerical-gate.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "tests/consumers/m6-w01-c01-t2/Program.cs",
+    "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c02-t2/Program.cs",
+    "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t2/Program.cs",
+    "docs/distribution/m6-w01-local-numerical-gate.md",
+    "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+    "docs/planning/evidence/M6-W01-local-gate-qualified.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261017T210624Z-b2cbc4bb3a835e69"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261017T210624Z-b2cbc4bb3a835e69",
+        "runId": "RS087",
+        "scope": "preselection-rs087",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs087/run-next-20261017T210624Z-b2cbc4bb3a835e69"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS087/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-2f273606b1a3439d9d18d1201f94e848\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 45723,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS087 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS086/attempt-001.json run=RS086 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json pointer=/m6_w01_c01_phase_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json pointer=/m6_w01_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json pointer=/m6_w01_c02_phase_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json pointer=/m6_w01_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/independent_green_tests_passed\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/red_recovered_and_green_tests_passed\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/local_product_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/m6_w01_c03_phase_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/m6_w01_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json pointer=/publicly_published\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/5/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/6/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/7/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/13/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/14/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/40/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/41/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/42/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/43/status\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c01-t2/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c02-t2/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj semantic text found\r\n[require.text-contains] VERIFIED path=tests/consumers/m6-w01-c03-t2/Program.cs semantic text found\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02 state=not-ready\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/m6-w01-local-numerical-gate.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/m6-w01-local-numerical-gate.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/M6-W01-local-gate-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m6-w01-c01-t2/Program.cs bytes=5345\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj bytes=531\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m6-w01-c02-t2/Program.cs bytes=5254\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj bytes=538\r\n[files.replace-from-staged] CHANGED path=tests/consumers/m6-w01-c03-t2/Program.cs bytes=5526\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m6-w01-local-numerical-gate.md bytes=2000\r\n[files.replace-from-staged] CHANGED path=docs/distribution/m6-w01-local-numerical-gate.md bytes=1281\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.tools.math.analysis -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis\\Release\\net10.0\\dw.tools.math.analysis.dll\r\n  dw.tools.math.statistics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics\\Release\\net10.0\\dw.tools.math.statistics.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.analysis.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.symbolics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics\\Release\\net10.0\\dw.tools.math.symbolics.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.codecs -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs\\Release\\net10.0\\dw.tools.math.codecs.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.numerics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics\\Release\\net10.0\\dw.tools.math.numerics.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.statistics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll\r\n  dw.tools.math.symbolics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics.tests\\Release\\net10.0\\dw.tools.math.symbolics.tests.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.tools.math.codecs.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs.tests\\Release\\net10.0\\dw.tools.math.codecs.tests.dll\r\n  dw.tools.math.distribution -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution\\Release\\net10.0\\dw.tools.math.distribution.dll\r\n  dw.tools.math.numerics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n  dw.tools.math.distribution.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:04.08\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed BoundedPublicLinearSplineAndLeastSquaresContractMustExist [8 ms]\r\n  Passed LinearAtHalfReturnsTwo [2 ms]\r\n  Passed LinearAtBeginningReturnsOriginalObservation [\u003C 1 ms]\r\n  Passed LinearAtFirstKnotReturnsOriginalObservation [\u003C 1 ms]\r\n  Passed LinearAtLastKnotReturnsOriginalObservation [\u003C 1 ms]\r\n  Passed LinearAtSecondSegmentIsCorrect [\u003C 1 ms]\r\n  Passed LinearHandlesNegativeSlope [1 ms]\r\n  Passed LinearHandlesNegativeAbscissae [\u003C 1 ms]\r\n  Passed LinearReturnsExactPointAtInteriorKnot [\u003C 1 ms]\r\n  Passed PiecewiseLineUsesLeftSegment [\u003C 1 ms]\r\n  Passed PiecewiseLineUsesRightSegment [\u003C 1 ms]\r\n  Passed NaturalSplineAtHalfPreservesCollinearData [\u003C 1 ms]\r\n  Passed NaturalSplineAtOneAndHalfPreservesCollinearData [\u003C 1 ms]\r\n  Passed NaturalSplineTwoPointsFallsBackToLinear [\u003C 1 ms]\r\n  Passed NaturalSplineReturnsKnotWithoutReconstructionDrift [\u003C 1 ms]\r\n  Passed NaturalSplineCurvedFixtureAtHalfMatchesExactBclOracle [\u003C 1 ms]\r\n  Passed NaturalSplineCurvedFixtureIsSymmetric [\u003C 1 ms]\r\n  Passed NaturalSplineFourLinearKnotsPreserveLine [\u003C 1 ms]\r\n  Passed NaturalSplineNegativeYCanBeInterpolated [\u003C 1 ms]\r\n  Passed LeastSquaresFitsAcceptedSlope [\u003C 1 ms]\r\n  Passed LeastSquaresFitsAcceptedIntercept [\u003C 1 ms]\r\n  Passed LeastSquaresFitsAcceptedZeroResidual [\u003C 1 ms]\r\n  Passed LeastSquaresTwoSamplesFitExactly [\u003C 1 ms]\r\n  Passed LeastSquaresNegativeSlopeAdmitted [\u003C 1 ms]\r\n  Passed LeastSquaresFlatLineAdmitted [\u003C 1 ms]\r\n  Passed LeastSquaresNoisyPointsReportNonzeroSse [\u003C 1 ms]\r\n  Passed LeastSquaresThreePointsWithShiftedX [\u003C 1 ms]\r\n  Passed NullPointsAreTypedInvalidInput [\u003C 1 ms]\r\n  Passed EmptyPointsAreTypedInvalidInput [\u003C 1 ms]\r\n  Passed SinglePointCannotProveInterpolation [\u003C 1 ms]\r\n  Passed DuplicateAbscissaRejectsInterpolation [\u003C 1 ms]\r\n  Passed DuplicateAbscissaRejectsFit [\u003C 1 ms]\r\n  Passed UnsortedPointsCannotSilentlyReorder [\u003C 1 ms]\r\n  Passed NaNAbscissaIsTypedInvalidInput [\u003C 1 ms]\r\n  Passed NonFiniteYIsTypedInvalidInput [\u003C 1 ms]\r\n  Passed NonFiniteQueryIsTypedInvalidInput [\u003C 1 ms]\r\n  Passed InfiniteQueryIsTypedInvalidInput [\u003C 1 ms]\r\n  Passed LinearNeverExtrapolatesBelowDomain [\u003C 1 ms]\r\n  Passed SplineNeverExtrapolatesAboveDomain [\u003C 1 ms]\r\n  Passed TooManySamplesExplicitlyExceedBudget [1 ms]\r\n  Passed MaximumSamplesAreAdmitted [\u003C 1 ms]\r\n  Passed InfSlopeFromOpposingExtremesRefuses [\u003C 1 ms]\r\n  Passed TinyNonzeroDistinctAbscissaeHaveRankDeficiency [\u003C 1 ms]\r\n  Passed SuccessResultsExposeMeasuredRuleAndFiniteValues [\u003C 1 ms]\r\n  Passed FailedResultNeverCarriesAValue [\u003C 1 ms]\r\n  Passed FailedFitNeverCarriesNumericCoefficients [\u003C 1 ms]\r\n  Passed MutationOfCallerArrayDoesNotRetroactivelyChangeReceipt [\u003C 1 ms]\r\n  Passed IndependentBinary64AnalysisDoesNotRequireForeignAgent [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 48\r\n     Passed: 48\r\n Total time: 0,6315 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed PublicUnitAndConditioningBoundaryAuditMustExist [7 ms]\r\n  Passed DefaultLinearRefusesOutsideLeft [3 ms]\r\n  Passed DefaultLinearRefusesOutsideRight [\u003C 1 ms]\r\n  Passed ExplicitLeftLinearExtrapolationIsAdmitted [1 ms]\r\n  Passed ExplicitRightLinearExtrapolationIsAdmitted [\u003C 1 ms]\r\n  Passed LeftExtrapolationSlopeAndAxisUnitsRetained [\u003C 1 ms]\r\n  Passed RightExtrapolationRetainsNoPredictionGuarantee [\u003C 1 ms]\r\n  Passed InsideDomainNeverClaimedExtrapolatedEvenWithOptIn [\u003C 1 ms]\r\n  Passed OldT1ContractStillRefusesExtrapolation [\u003C 1 ms]\r\n  Passed InsideDomainMatchesOriginalLinearSemantics [\u003C 1 ms]\r\n  Passed ExactKnotPreservesOriginalValue [\u003C 1 ms]\r\n  Passed QueryUnitMismatchNeverConverts [\u003C 1 ms]\r\n  Passed QueryUnitsAreCaseSensitive [\u003C 1 ms]\r\n  Passed NullQueryUnitIsIncompatible [\u003C 1 ms]\r\n  Passed InvalidBlankAbscissaUnitRefused [\u003C 1 ms]\r\n  Passed InvalidBlankYUnitRefused [\u003C 1 ms]\r\n  Passed CompositeUnitSyntaxIsNotImplicitlyParsed [\u003C 1 ms]\r\n  Passed LongAxisSymbolIsRefusedByBudget [\u003C 1 ms]\r\n  Passed NonAsciiSymbolsDoNotImplyConversion [\u003C 1 ms]\r\n  Passed ValidUnderbarAxisSymbolRetained [\u003C 1 ms]\r\n  Passed ValidDigitSuffixUnitRetained [\u003C 1 ms]\r\n  Passed InterpolationProvidesDeclaredUnitsWithoutConversion [\u003C 1 ms]\r\n  Passed FitExposesPhysicalSlopeTagFromCallerMetadata [\u003C 1 ms]\r\n  Passed FitRetainsInputAxisUnitLabels [\u003C 1 ms]\r\n  Passed FitDoesNotConvertUnits [\u003C 1 ms]\r\n  Passed FitDoesNotClaimCausalInference [\u003C 1 ms]\r\n  Passed FitZeroResidualStraightThreePointOracle [\u003C 1 ms]\r\n  Passed FitSymmetricNoisySseIsTwoThirds [2 ms]\r\n  Passed FitNegativeSlopeAndNonzeroIntercept [\u003C 1 ms]\r\n  Passed FitConstantOrdinateIsAdmitted [\u003C 1 ms]\r\n  Passed SuccessCarriesActualRelativeSpan [\u003C 1 ms]\r\n  Passed NearRankDeficiencyIsExplicitFitRefusal [\u003C 1 ms]\r\n  Passed NearRankDeficiencyIsExplicitInterpolationRefusal [\u003C 1 ms]\r\n  Passed SubnormalAbscissaSpanRejectedAsNearRank [\u003C 1 ms]\r\n  Passed ExplicitTighterRankPolicyCanAdmitSmallSpan [\u003C 1 ms]\r\n  Passed PolicyZeroThresholdIsInvalid [\u003C 1 ms]\r\n  Passed PolicyNegativeThresholdIsInvalid [\u003C 1 ms]\r\n  Passed PolicyNaNThresholdIsInvalid [\u003C 1 ms]\r\n  Passed PolicyInfiniteThresholdIsInvalid [\u003C 1 ms]\r\n  Passed PolicyOverlargeRelativeThresholdIsInvalid [\u003C 1 ms]\r\n  Passed UnknownExtrapolationEnumIsTypedInvalidPolicy [\u003C 1 ms]\r\n  Passed NullSamplesAreInvalid [\u003C 1 ms]\r\n  Passed EmptySamplesAreInvalid [\u003C 1 ms]\r\n  Passed OneSampleCannotProveUniqueLine [\u003C 1 ms]\r\n  Passed OversizedSamplesCannotExceedBudget [1 ms]\r\n  Passed DuplicateXIsTypedInvalidCoordinateSample [\u003C 1 ms]\r\n  Passed UnsortedXIsTypedInvalid [\u003C 1 ms]\r\n  Passed NaNAbscissaRefused [\u003C 1 ms]\r\n  Passed InfiniteOrdinateRefused [\u003C 1 ms]\r\n  Passed NaNQueryRefused [\u003C 1 ms]\r\n  Passed InfiniteQueryRefused [\u003C 1 ms]\r\n  Passed AbscissaDifferenceOverflowRefused [\u003C 1 ms]\r\n  Passed OrdinateDifferenceOverflowRefused [\u003C 1 ms]\r\n  Passed RefusedResultCannotContainPartialUnitClaim [\u003C 1 ms]\r\n  Passed RefusedFitDoesNotExposePartialRankSpan [\u003C 1 ms]\r\n  Passed LegacySplineCurvatureStillAdmitted [\u003C 1 ms]\r\n  Passed AcceptedBoundariesAreDeterministic [\u003C 1 ms]\r\n  Passed PolicyIsReflectedByRuntimeRuleNotConstantTautology [\u003C 1 ms]\r\n  Passed FitDoesNotModifyCallerSuppliedSamples [\u003C 1 ms]\r\n  Passed NoBrokerOrForeignCASDependencyIntroduced [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 60\r\n     Passed: 60\r\n Total time: 0,5799 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed BoundedRootAndQuadraturePublicContractMustExist [6 ms]\r\n  Passed PolynomialRootIsSqrtTwo [1 ms]\r\n  Passed RootResidualIsObservedAndBoundedByRequestedTolerance [\u003C 1 ms]\r\n  Passed RootReportsFiniteBracketWidth [\u003C 1 ms]\r\n  Passed RootReportsActualIterationAndFunctionBudgets [\u003C 1 ms]\r\n  Passed RootNeverCertifiesUnprovedErrorBound [\u003C 1 ms]\r\n  Passed LowerEndpointRootNeedsNoIteration [\u003C 1 ms]\r\n  Passed UpperEndpointRootNeedsNoIteration [\u003C 1 ms]\r\n  Passed NegativeSlopeBracketIsAdmitted [\u003C 1 ms]\r\n  Passed DiscontinuousSignChangeNeverCertifiesRootError [\u003C 1 ms]\r\n  Passed MissingBracketProducesTypedNonpartialRefusal [\u003C 1 ms]\r\n  Passed NullFunctionIsInvalidInput [\u003C 1 ms]\r\n  Passed ReversedIntervalIsInvalidInput [\u003C 1 ms]\r\n  Passed ZeroWidthIntervalIsInvalidInput [\u003C 1 ms]\r\n  Passed NaNEndpointIsInvalidInput [\u003C 1 ms]\r\n  Passed InfiniteFunctionIsTypedRefusal [\u003C 1 ms]\r\n  Passed ThrowingFunctionIsTypedRefusal [\u003C 1 ms]\r\n  Passed InvalidZeroResidualToleranceRefused [\u003C 1 ms]\r\n  Passed InvalidIterationBudgetRefused [\u003C 1 ms]\r\n  Passed IterationLimitIsNonconvergenceNotPartialRoot [\u003C 1 ms]\r\n  Passed CancelledRootIsNonpartial [\u003C 1 ms]\r\n  Passed RootRuleIsVersionedRuntimeEvidence [\u003C 1 ms]\r\n  Passed CompositeSimpsonIntegratesSquareToOneThird [\u003C 1 ms]\r\n  Passed SimpsonIntegratesConstantFunction [\u003C 1 ms]\r\n  Passed SimpsonIntegratesLinearFunction [\u003C 1 ms]\r\n  Passed SimpsonIntegratesSymmetricQuadratic [\u003C 1 ms]\r\n  Passed SimpsonIntegratesSineOnZeroToPi [\u003C 1 ms]\r\n  Passed SimpsonReportsRefinedEvenPanelCount [\u003C 1 ms]\r\n  Passed SimpsonReportsObservedEstimationNotRigorousBound [\u003C 1 ms]\r\n  Passed SimpsonReportsBoundedEvaluationCount [\u003C 1 ms]\r\n  Passed SimpsonRejectsReversedInterval [\u003C 1 ms]\r\n  Passed SimpsonRejectsNullCallback [\u003C 1 ms]\r\n  Passed SimpsonRejectsNonfiniteValue [\u003C 1 ms]\r\n  Passed SimpsonRejectsThrowingCallback [\u003C 1 ms]\r\n  Passed SimpsonRejectsInvalidOddPanelBudget [\u003C 1 ms]\r\n  Passed SimpsonRejectsZeroTolerance [\u003C 1 ms]\r\n  Passed SimpsonRejectsInsufficientEvaluationBudget [\u003C 1 ms]\r\n  Passed SimpsonRejectsBudgetExhaustionWithoutPartialIntegral [\u003C 1 ms]\r\n  Passed SimpsonRejectsNonconvergedBoundedPanelCount [\u003C 1 ms]\r\n  Passed SimpsonRejectsCancelledRequest [\u003C 1 ms]\r\n  Passed SimpsonRuleIsVersionedAtRuntime [\u003C 1 ms]\r\n  Passed RepeatCalculationsProduceIdenticalRecords [\u003C 1 ms]\r\n  Passed PreviouslyQualifiedCurveStillMatchesExactOracle [1 ms]\r\n  Passed LibraryHasNoAgentOrForeignSolverReference [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 44\r\n     Passed: 44\r\n Total time: 0,5274 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed ExplicitResidualAndRegularityAuditPublicApiMustExist [8 ms]\r\n  Passed SmoothRootIsAdmitted [2 ms]\r\n  Passed SmoothRootResidualMeetsExplicitTolerance [\u003C 1 ms]\r\n  Passed SmoothRootDoesNotProveContinuity [\u003C 1 ms]\r\n  Passed SmoothRootDoesNotClaimGuaranteedError [\u003C 1 ms]\r\n  Passed SmoothRootKeepsObservedBracketWidth [\u003C 1 ms]\r\n  Passed SmoothRootKeepsObservedFunctionCount [\u003C 1 ms]\r\n  Passed ExactLowerEndpointRootIsAdmitted [\u003C 1 ms]\r\n  Passed ExactUpperEndpointRootIsAdmitted [\u003C 1 ms]\r\n  Passed FallingLinearRootIsAdmitted [\u003C 1 ms]\r\n  Passed RootOutsideSignBracketIsNonpartialRefusal [1 ms]\r\n  Passed SignedJumpFailsIndependentResidualGate [\u003C 1 ms]\r\n  Passed NarrowBracketIsNotSufficientIfResidualIsLarge [\u003C 1 ms]\r\n  Passed LegacyBisectionRetainsItsUncertifiedWidthSuccess [\u003C 1 ms]\r\n  Passed InvalidRootPolicyIsTypedRefusal [\u003C 1 ms]\r\n  Passed ExcessiveRootIterationLimitIsRefused [\u003C 1 ms]\r\n  Passed InsufficientIterationsAreNonconvergence [\u003C 1 ms]\r\n  Passed NullRootFunctionRefuses [\u003C 1 ms]\r\n  Passed ReversedRootIntervalRefuses [\u003C 1 ms]\r\n  Passed RootNaNEvaluationRefuses [\u003C 1 ms]\r\n  Passed RootCallbackFailureRefuses [\u003C 1 ms]\r\n  Passed RootCancellationRefuses [\u003C 1 ms]\r\n  Passed RootIntervalOverflowRefuses [\u003C 1 ms]\r\n  Passed RootUnknownErrorGuaranteeNeverChangesWithTolerance [\u003C 1 ms]\r\n  Passed RootResultContainsObservedRuleId [\u003C 1 ms]\r\n  Passed QuadratureWithoutRegularityAssumptionRefuses [\u003C 1 ms]\r\n  Passed DiscontinuousStepWithoutRegularityAssumptionRefuses [\u003C 1 ms]\r\n  Passed PointSpikeWithoutRegularityAssumptionRefuses [\u003C 1 ms]\r\n  Passed InvalidRegularityEnumRefuses [\u003C 1 ms]\r\n  Passed CallerDeclaredSmoothSquareIntegrates [\u003C 1 ms]\r\n  Passed CallerDeclaredSmoothnessRecordedNotVerified [\u003C 1 ms]\r\n  Passed SmoothSquareErrorEstimateIsObserved [\u003C 1 ms]\r\n  Passed SmoothSineIntegralIsTwo [\u003C 1 ms]\r\n  Passed LinearFunctionIntegratesExactly [\u003C 1 ms]\r\n  Passed ConstantFunctionIntegratesExactly [\u003C 1 ms]\r\n  Passed FinitePanelCountIsReported [\u003C 1 ms]\r\n  Passed FiniteCallbackCountIsReported [\u003C 1 ms]\r\n  Passed StrongToleranceWithTinyBudgetRefuses [\u003C 1 ms]\r\n  Passed StrongToleranceWithFewPanelsRefuses [\u003C 1 ms]\r\n  Passed InvalidPanelCountRefuses [\u003C 1 ms]\r\n  Passed InvalidAbsoluteErrorToleranceRefuses [\u003C 1 ms]\r\n  Passed NullQuadratureFunctionRefuses [\u003C 1 ms]\r\n  Passed QuadratureNaNEvaluationRefuses [\u003C 1 ms]\r\n  Passed QuadratureThrownCallbackRefuses [\u003C 1 ms]\r\n  Passed QuadratureCancellationRefuses [\u003C 1 ms]\r\n  Passed QuadratureOverflowIntervalRefuses [\u003C 1 ms]\r\n  Passed QuadratureObservedRuleIsVersioned [\u003C 1 ms]\r\n  Passed PriorQuadratureRemainsUsableWithoutNewAuditPolicy [\u003C 1 ms]\r\n  Passed PriorCurveBoundaryContractStillAdmitsUnits [3 ms]\r\n  Passed AuditResultsAreDeterministicForDeterministicCallbacks [1 ms]\r\n  Passed AuditHasNoForeignBrokerOrProviderDependency [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 51\r\n     Passed: 51\r\n Total time: 0,5525 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed PublicBoundedDerivativeAndOdeApiMustExist [7 ms]\r\n  Passed SquareDerivativeAtTwoIsFour [2 ms]\r\n  Passed SquareDerivativeAtNegativeTwoIsNegativeFour [\u003C 1 ms]\r\n  Passed ConstantFunctionDerivativeIsZero [\u003C 1 ms]\r\n  Passed AffineFunctionDerivativeIsSlope [\u003C 1 ms]\r\n  Passed SineDerivativeAtZeroIsOne [\u003C 1 ms]\r\n  Passed ExponentialDerivativeAtZeroIsOne [\u003C 1 ms]\r\n  Passed FourthPowerDerivativeAtTwoIsThirtyTwo [\u003C 1 ms]\r\n  Passed DerivativeIncludesObservedNoncertifiedEstimate [\u003C 1 ms]\r\n  Passed DerivativeUsesRefinedHalfStep [\u003C 1 ms]\r\n  Passed DerivativeUsesExactlyFourCallbackEvaluations [\u003C 1 ms]\r\n  Passed DerivativeRuleIsObservedAtRuntime [\u003C 1 ms]\r\n  Passed DerivativePolicyRefusesZeroStep [\u003C 1 ms]\r\n  Passed DerivativePolicyRefusesNegativeStep [\u003C 1 ms]\r\n  Passed DerivativePolicyRefusesHugeStep [\u003C 1 ms]\r\n  Passed DerivativePolicyRefusesNaNTolerance [\u003C 1 ms]\r\n  Passed DerivativePolicyRefusesExcessBudget [\u003C 1 ms]\r\n  Passed DerivativeInsufficientBudgetIsTypedRefusal [\u003C 1 ms]\r\n  Passed DerivativeAtNaNIsInvalid [\u003C 1 ms]\r\n  Passed DerivativeNullCallbackIsInvalid [\u003C 1 ms]\r\n  Passed DerivativeAtUnrepresentableLargeCoordinateRefuses [\u003C 1 ms]\r\n  Passed DerivativeUltraTinyStepRefuses [\u003C 1 ms]\r\n  Passed DerivativeNonfiniteCallbackRefuses [\u003C 1 ms]\r\n  Passed DerivativeCallbackExceptionRefuses [\u003C 1 ms]\r\n  Passed DerivativeCallbackCancellationRefuses [\u003C 1 ms]\r\n  Passed DerivativePreCancellationRefusesWithoutCallingUser [\u003C 1 ms]\r\n  Passed DerivativeOverflowDifferenceRefuses [\u003C 1 ms]\r\n  Passed DerivativeErrorEstimateBudgetRefuses [\u003C 1 ms]\r\n  Passed GrowthOdeAtOneApproximatesEulerNumber [1 ms]\r\n  Passed DecayOdeAtOneApproximatesInverseEulerNumber [\u003C 1 ms]\r\n  Passed ConstantOdeDerivativeRetainsInitialValue [\u003C 1 ms]\r\n  Passed ConstantVelocityOdeIntegratesLinearly [\u003C 1 ms]\r\n  Passed TimeDependentOdeIntegratesTwoTimeToOne [\u003C 1 ms]\r\n  Passed OdeDefaultReports64FineSteps [\u003C 1 ms]\r\n  Passed OdeDefaultReports384Evaluations [\u003C 1 ms]\r\n  Passed OdeCallbackCountMatchesReportedEvaluationCount [\u003C 1 ms]\r\n  Passed OdeEstimatedGlobalErrorIsHeuristic [\u003C 1 ms]\r\n  Passed OdeRuleIsObservedAtRuntime [\u003C 1 ms]\r\n  Passed OdeReversedTimeRefuses [\u003C 1 ms]\r\n  Passed OdeEqualTimeRefuses [\u003C 1 ms]\r\n  Passed OdeInfiniteInitialValueRefuses [\u003C 1 ms]\r\n  Passed OdeNullCallbackRefuses [\u003C 1 ms]\r\n  Passed OdeInvalidZeroStepCountRefuses [\u003C 1 ms]\r\n  Passed OdeExcessiveStepCountRefuses [\u003C 1 ms]\r\n  Passed OdeInvalidZeroEstimatedErrorBudgetRefuses [\u003C 1 ms]\r\n  Passed OdeInsufficientEvaluationBudgetRefuses [\u003C 1 ms]\r\n  Passed OdeVeryStrictErrorEstimateRefuses [\u003C 1 ms]\r\n  Passed OdeNonfiniteCallbackRefuses [\u003C 1 ms]\r\n  Passed OdeThrownCallbackRefuses [\u003C 1 ms]\r\n  Passed OdeCancellationFromCallbackRefuses [\u003C 1 ms]\r\n  Passed OdePreCancelledRequestNeverCallsFunction [\u003C 1 ms]\r\n  Passed OdeOverlargeTimeIntervalRefuses [\u003C 1 ms]\r\n  Passed OdeNonrepresentableTimeStepRefuses [\u003C 1 ms]\r\n  Passed OdeOverflowIntermediateRefuses [\u003C 1 ms]\r\n  Passed OdeTestHasNoUnqualifiedExternalSolver [\u003C 1 ms]\r\n  Passed RepeatDeterministicCalculationsAgree [1 ms]\r\n  Passed OriginalUnivariateNumericalMethodStillWorks [1 ms]\r\n  Passed OriginalCurveInterpolationStillWorks [1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 58\r\n     Passed: 58\r\n Total time: 0,5822 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n  Passed PublicDifferentialAndOdeBoundaryAuditMustExist [5 ms]\r\n  Passed DerivativeDefaultRequiresExplicitRegularity [1 ms]\r\n  Passed CuspWithoutCallerSmoothnessRefuses [\u003C 1 ms]\r\n  Passed JumpWithoutCallerSmoothnessRefuses [\u003C 1 ms]\r\n  Passed UnknownDerivativeRegularityIsInvalidPolicy [\u003C 1 ms]\r\n  Passed AssumedSmoothSquareAtTwoDerivativeFour [1 ms]\r\n  Passed AssumedSmoothSquareAtMinusTwoDerivativeMinusFour [\u003C 1 ms]\r\n  Passed AssumedSmoothSineAtZeroDerivativeOne [\u003C 1 ms]\r\n  Passed AssumedSmoothExponentialAtZeroDerivativeOne [\u003C 1 ms]\r\n  Passed AssumedSmoothConstantDerivativeZero [\u003C 1 ms]\r\n  Passed AssumedSmoothAffineDerivativeThree [\u003C 1 ms]\r\n  Passed CallerSmoothnessIsNotIndependentlyVerified [\u003C 1 ms]\r\n  Passed LocalDerivativeErrorBoundIsNotProven [\u003C 1 ms]\r\n  Passed DerivativeExposesFiniteHeuristicEstimate [\u003C 1 ms]\r\n  Passed DerivativeExposesRefinedHalfStep [\u003C 1 ms]\r\n  Passed DerivativeExposesActualEvaluationCount [\u003C 1 ms]\r\n  Passed FalseCallerSmoothnessAssertionDoesNotBecomeProof [\u003C 1 ms]\r\n  Passed ExistingCuspOperationIsUnchanged [\u003C 1 ms]\r\n  Passed DerivativeLargeCoordinateRefusesUnrepresentableStep [\u003C 1 ms]\r\n  Passed DerivativeTinyStepRefusesUnrepresentableStep [\u003C 1 ms]\r\n  Passed DerivativeZeroStepIsInvalidPolicy [\u003C 1 ms]\r\n  Passed DerivativeInsufficientBudgetRefuses [\u003C 1 ms]\r\n  Passed DerivativeNonfiniteEvaluationRefusesWithoutPartial [\u003C 1 ms]\r\n  Passed DerivativeThrownCallbackIsTypedRefusal [\u003C 1 ms]\r\n  Passed DerivativeCancellationPreemptsCallback [\u003C 1 ms]\r\n  Passed DerivativeCallbackCancellationIsTyped [\u003C 1 ms]\r\n  Passed DerivativeOverflowDifferenceIsTyped [\u003C 1 ms]\r\n  Passed DerivativeUnmetEstimateRefusesWithoutPartial [\u003C 1 ms]\r\n  Passed DerivativeNullFunctionIsInvalidInput [\u003C 1 ms]\r\n  Passed DerivativeNaNPointIsInvalidInput [\u003C 1 ms]\r\n  Passed DerivativeRuleIdIsObservedFromRuntime [\u003C 1 ms]\r\n  Passed OdeDefaultRequiresExplicitRegime [\u003C 1 ms]\r\n  Passed KnownStiffOdeRegimeIsOutOfScope [\u003C 1 ms]\r\n  Passed EventDrivenOdeRegimeIsOutOfScope [\u003C 1 ms]\r\n  Passed PdeRegimeIsOutOfScope [\u003C 1 ms]\r\n  Passed UnknownOdeEnumIsInvalidPolicy [\u003C 1 ms]\r\n  Passed AssumedNonstiffGrowthApproximatesEulerNumber [\u003C 1 ms]\r\n  Passed AssumedNonstiffDecayApproximatesInverseEuler [\u003C 1 ms]\r\n  Passed AssumedNonstiffConstantStateIsPreserved [\u003C 1 ms]\r\n  Passed AssumedNonstiffConstantVelocityIsIntegrated [\u003C 1 ms]\r\n  Passed AssumedNonstiffTimeDependentRateIsIntegrated [\u003C 1 ms]\r\n  Passed ODEDeclaredNonstiffnessIsNotIndependentlyVerified [\u003C 1 ms]\r\n  Passed OdeDeclaredEventAbsenceIsNotIndependentlyVerified [\u003C 1 ms]\r\n  Passed OdeGlobalErrorIsNotCertified [\u003C 1 ms]\r\n  Passed OdeReportedHeuristicEstimateIsFinite [\u003C 1 ms]\r\n  Passed OdeReportsFiniteFineStepCount [\u003C 1 ms]\r\n  Passed OdeReportsActualEvaluationCount [\u003C 1 ms]\r\n  Passed OdeReversedTimeIsInvalidInput [\u003C 1 ms]\r\n  Passed OdeZeroWidthTimeIsInvalidInput [\u003C 1 ms]\r\n  Passed OdeNullFunctionIsInvalidInput [\u003C 1 ms]\r\n  Passed OdeInvalidZeroStepBudgetRefuses [\u003C 1 ms]\r\n  Passed OdeExcessiveStepCountRefuses [\u003C 1 ms]\r\n  Passed OdeInsufficientCallbackBudgetRefuses [\u003C 1 ms]\r\n  Passed OdeStrictHeuristicToleranceRefuses [\u003C 1 ms]\r\n  Passed OdeNonfiniteCallbackIsTyped [\u003C 1 ms]\r\n  Passed OdeThrownCallbackIsTyped [\u003C 1 ms]\r\n  Passed OdePrecancellationSkipsAllCallbacks [\u003C 1 ms]\r\n  Passed OdeCallbackCancellationIsTyped [\u003C 1 ms]\r\n  Passed OdeOverwideTimeIntervalRefusesWithoutPartial [\u003C 1 ms]\r\n  Passed OdeNonrepresentableTimeStepRefuses [\u003C 1 ms]\r\n  Passed OdeIntermediateOverflowRefusesWithoutPartial [\u003C 1 ms]\r\n  Passed OdeRuleIdIsObservedAtRuntime [\u003C 1 ms]\r\n  Passed PreviouslyQualifiedRk4MethodIsUnchanged [\u003C 1 ms]\r\n  Passed RepeatedDeterministicAuditRecordsMatch [1 ms]\r\n  Passed PriorUnivariateRootAndQuadratureRemainsCallable [1 ms]\r\n  Passed PriorCurveAnalysisRemainsCallable [1 ms]\r\n  Passed AuditHasNoAgentOrForeignProviderDependency [\u003C 1 ms]\r\n\r\nTest Run Successful.\r\nTotal tests: 67\r\n     Passed: 67\r\n Total time: 0,4938 Seconds\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   328, Skipped:     0, Total:   328, Duration: 163 ms - dw.tools.math.analysis.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    81, Skipped:     0, Total:    81, Duration: 142 ms - dw.tools.math.numerics.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 94 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   109, Skipped:     0, Total:   109, Duration: 276 ms - dw.quantities.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    74, Skipped:     0, Total:    74, Duration: 133 ms - dw.tools.math.composition.tests.dll (net10.0)\r\n\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\n  The package dw.tools.math.analysis.1.1.0-preview.6 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w01-gate-local-feed\\dw.tools.math.analysis.1.1.0-preview.6.nupkg\u0027.\r\n\n\r\nM6-W01-GATE-PKG-SHA256:dw.tools.math.analysis:1.1.0-preview.6:27820:facb88dcf029de1445122eef38a147b609b89d1c5a36567506b1c10c2ce423ac\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m6-w01-c01-t2\\m6-curve-boundary-consumer.csproj (in 226 ms).\r\n\n\r\n  m6-curve-boundary-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m6-curve-boundary-consumer\\Release\\net10.0\\m6-curve-boundary-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.06\r\n\n\r\nM6-W01-C01-T2-CONSUMER-SHA256:dw.tools.math.analysis:1.1.0-preview.6:27820:facb88dcf029de1445122eef38a147b609b89d1c5a36567506b1c10c2ce423ac\r\ndw.tools.math/m6-curve-boundary-consumer/1.1 qualified; probes=8\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m6-w01-c02-t2\\m6-univariate-boundary-consumer.csproj (in 179 ms).\r\n\n\r\n  m6-univariate-boundary-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m6-univariate-boundary-consumer\\Release\\net10.0\\m6-univariate-boundary-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.99\r\n\n\r\nM6-W01-C02-T2-CONSUMER-SHA256:dw.tools.math.analysis:1.1.0-preview.6:27820:facb88dcf029de1445122eef38a147b609b89d1c5a36567506b1c10c2ce423ac\r\ndw.tools.math/m6-univariate-boundary-consumer/1.1 qualified; probes=8\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m6-w01-c03-t2\\m6-differential-boundary-consumer.csproj (in 200 ms).\r\n\n\r\n  m6-differential-boundary-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m6-differential-boundary-consumer\\Release\\net10.0\\m6-differential-boundary-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.08\r\n\n\r\nM6-W01-C03-T2-CONSUMER-SHA256:dw.tools.math.analysis:1.1.0-preview.6:27820:facb88dcf029de1445122eef38a147b609b89d1c5a36567506b1c10c2ce423ac\r\ndw.tools.math/m6-differential-boundary-consumer/1.1 qualified; probes=8\r\n\n\r\n10.0.402\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M6-W01-local-gate-qualified.json bytes=4795\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M6-W01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02 state=not-ready\r\n[json.edit-object] CHANGED path=.aura/workflow/state.json semantic object updated\r\nplanning valid: 0.1.86 | 53 chunks | f882756091f85c6b334ee2f09d968ab9cfac75855bd75520b9b5eb7cfd93cd16 | mode --write\r\n\n\r\nnative DWF adoption valid: nodes=496 milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02=done\r\n\n\r\nplanning valid: 0.1.86 | 53 chunks | f882756091f85c6b334ee2f09d968ab9cfac75855bd75520b9b5eb7cfd93cd16 | mode --check\r\n\n\r\n[payload] OK operations=61 changed=11 no-change=0 verified=50 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS087/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS087 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "38b4099a851a00f7f615f5abc07a83aa1dc14455849bca836db3a6cfab90ca36",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS086/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS086 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d036ebbd4d7c3c5057b8f2110cec20217c8eed4a1e3f31d97f2f883e00aaadcd",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_c01_phase_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_c02_phase_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/independent_green_tests_passed",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/red_recovered_and_green_tests_passed",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/local_product_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_c03_phase_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w01_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/publicly_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/5/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/6/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/7/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/13/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/14/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/40/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/41/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/42/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/43/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c01-t2/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c02-t2/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/consumers/m6-w01-c03-t2/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/m6-w01-local-numerical-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/M6-W01-local-gate-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m6-w01-c01-t2/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=5345",
+        "Details": null,
+        "BeforeSha256": "ab7ccab12bc05c5d39a79942e70c811ae1e98ee8ec825db16736e168cbe87633",
+        "AfterSha256": "8f0830aede950c744c228fd23b2dc0033c9508e95059550dee42c531a9bb63e4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+        "Status": 1,
+        "Summary": "bytes=531",
+        "Details": null,
+        "BeforeSha256": "ca2791a9bd1c729de46120672bdef421364811ed1d43561afce07d374a6199a1",
+        "AfterSha256": "49e218e000daa151dd7e8a8bd4d8fcd3dd2149f0db40ade9d8b9fffe29285067",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m6-w01-c02-t2/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=5254",
+        "Details": null,
+        "BeforeSha256": "028124f6d8c0b9dafda5ad68644b894b7747e7a6298dbd4b8b11462d53c472c2",
+        "AfterSha256": "970c093fa4ee348605f05b3b2870629eb5d13fdef6018c8f6891fdb8eee16489",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+        "Status": 1,
+        "Summary": "bytes=538",
+        "Details": null,
+        "BeforeSha256": "01092fe0b2213a5caaef667843aed7ce757b886fdef551e6d1b9d0776ebd6a68",
+        "AfterSha256": "defc086b19e62cf9197e7a97c9a4bf0b83529ba038938609a0de207e498b87c9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/m6-w01-c03-t2/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=5526",
+        "Details": null,
+        "BeforeSha256": "cf31fce4dcae680f650713df717034839808dc69ce3f92cf70c16895bb3431d3",
+        "AfterSha256": "e933d024122a293ba08896b7bd3827004ba786aff72be25f6f43f11b7ff6be30",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+        "Status": 1,
+        "Summary": "bytes=2000",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b94c3e6d251ebb40e0c6ead31869faa89e5bfdee06ed9b8bbf2b834053368cf1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/m6-w01-local-numerical-gate.md",
+        "Status": 1,
+        "Summary": "bytes=1281",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "819a372081dafe5409d98618813343db3c77e0ba39e809a02ecf1904bede3718",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M6-W01-local-gate-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=4795",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "16695773fccd394e992d8bc9abc1160c02521048cc065f5f9b1d32442696aeff",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "cd0477f3ce6101a8d6e6c56e7a8d6c94b30cc8f0fe8a298d2ed8c51a5c6a93bc",
+        "AfterSha256": "f882756091f85c6b334ee2f09d968ab9cfac75855bd75520b9b5eb7cfd93cd16",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M6-W01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "03d5864ffd243af7798ef1af0bc6bf2ca2eeed3ea8bddc7282594e965772a2f4",
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e00ae25f18b26ca3cfc638cb67d6dd6f723f9be98bbbb6163831662ea5b4f2",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/state.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "a2cf6af442e63266110f2d672849d6521c18c488e6328c4494a2de88422ac0d0",
+        "AfterSha256": "096fe42a970d3e3d9e9ec24fa3c66e6eeec858d36d00417c06e99f1565dbcfbf",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261017T211526Z-51cc2fde60c31074",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "c3ae9d9dbfaac0aad06873ffd65f487c68746421",
+  "invocationStartedAtUtc": "2026-10-17T21:15:26.2259647+00:00",
+  "invocationDurationMilliseconds": 190462,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS087",
+      "title": "Qualify and close the M6 W01 numerical-analysis work package",
+      "projectNodes": [
+        "M6",
+        "M6-W01"
+      ]
+    },
+    "declared": {
+      "summary": "Requalify the complete M6-W01 numerical-analysis package by rerunning 328 targeted tests, the full analysis suite, four regressions and three independent eight-probe NuGet clients on the same SHA-inspected preview.6 archive. Correct the previous RS087 pre-attempt planning refusal by recording C01/C02/C03 and gate evidence on the completed W01 node. Close W01 only; M6/W02, public NuGet, other OSes and downstream adoption remain open.",
+      "value": "Prove compatibility across three already qualified numerical families on exactly one local package artifact, with reproducible scientific oracles and shared SHA identity, without changing algorithms or upgrading bounded evidence into broad precision guarantees.",
+      "debtChanges": [
+        "Retain all six accepted C01/C02/C03 T1/T2 contracts and their 328 targeted test oracles.",
+        "Run the full existing analysis test project and four relevant Math regressions as a bounded work-package qualification gate.",
+        "Repack the actual provider-neutral BCL-only preview.6 archive locally and inspect its net10 assembly, nuspec, SHA-256 and byte count.",
+        "Pin distinct C01-T2, C02-T2 and C03-T2 consumers to one exact isolated NuGet archive and compare all three SHA/byte receipts across 24 independent scientific probes.",
+        "Do not add a fake task or rewrite math code; close only the already complete W01 work package from truthful end-to-end evidence.",
+        "Keep the parent M6 and all W02 scientific phases open; no stable/public NuGet, nonobserved OS, physical-unit conversion or downstream agent adoption claim."
+      ],
+      "nextAction": "After durable RS087 success, prepare M6-W02-C01-T1 for bounded exact integers, combinatorics and finite sequences. Keep the M6 scientific expansion milestone in progress and refrain from public NuGet promotion.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M6-W01",
+          "achievement": "Close M6-W01 after its three durably completed phases pass 328 retained targeted tests, the full analysis project, four relevant regressions and 24 source-free NuGet scientific probes sharing the actual SHA-inspected local preview.6 package."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        ".aura/workflow/state.json",
+        "docs/distribution/m6-w01-local-numerical-gate.md",
+        "docs/planning/README.md",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M6-W01-local-gate-qualified.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M6.md",
+        "tests/consumers/m6-w01-c01-t2/Program.cs",
+        "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c02-t2/Program.cs",
+        "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c03-t2/Program.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M6",
+        "objective": "Scientific expansion",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M6 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M6-W01",
+        "objective": "Numerical analysis and data",
+        "kind": "work-package",
+        "parentId": "M6",
+        "state": "done",
+        "completionCondition": "Complete all accepted product phases belonging to M6-W01 in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M6-W01",
+        "objective": "Numerical analysis and data",
+        "kind": "work-package",
+        "parentId": "M6",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete all accepted product phases belonging to M6-W01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Close M6-W01 after its three durably completed phases pass 328 retained targeted tests, the full analysis project, four relevant regressions and 24 source-free NuGet scientific probes sharing the actual SHA-inspected local preview.6 package."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M6-W01",
+        "objective": "Numerical analysis and data",
+        "kind": "work-package",
+        "parentId": "M6",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete all accepted product phases belonging to M6-W01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Close M6-W01 after its three durably completed phases pass 328 retained targeted tests, the full analysis project, four relevant regressions and 24 source-free NuGet scientific probes sharing the actual SHA-inspected local preview.6 package."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS087",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS087",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "c3ae9d9dbfaac0aad06873ffd65f487c68746421",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "1f3d50aa9f4f4b69d3c9aa524a9b4dbe5f0340488648d691cdb8e4600cd34482"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: qualify integrated Math numerical analysis local gate and close M6 W01",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
