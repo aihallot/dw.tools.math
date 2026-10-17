@@ -2,14 +2,14 @@
 
 Package: dw.tools.math.analysis 1.1.0-preview.5, net10, BCL only.
 
-\`BoundedDifferentialAnalysis64.Differentiate\` returns a finite
+`BoundedDifferentialAnalysis64.Differentiate` returns a finite
 four-callback central-difference derivative of f(x) at a caller-defined
 point and step policy. The half-step result is admitted only if the
 coarse/fine /3 estimate meets the requested heuristic tolerance.
 Step representation, callback budgets, cancellation and numeric overflow
 produce typed nonpartial refusal. ErrorBoundGuaranteed is always false.
 
-\`BoundedDifferentialAnalysis64.IntegrateOde\` solves the scalar
+`BoundedDifferentialAnalysis64.IntegrateOde` solves the scalar
 forward-time initial-value problem y'=f(t,y), with fixed-step RK4
 at N and 2N partitions. The default is N=32 and 384 evaluations;
 the maximum N is 256 and the caller must admit 12N callback

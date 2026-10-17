@@ -2,12 +2,12 @@
 
 ## Scope and scientific admission
 
-The existing \`dw.tools.math.analysis\` net10 BCL-only package adds
-\`BoundedDifferentialAnalysis64\` in local version 1.1.0-preview.5.
+The existing `dw.tools.math.analysis` net10 BCL-only package adds
+`BoundedDifferentialAnalysis64` in local version 1.1.0-preview.5.
 This is provider-neutral and does not change the qualified curve, root,
 or Simpson APIs. Two finite binary64 operations are admitted:
 
-- \`Differentiate(Func<double,double>,at,DerivativePolicy64,CancellationToken)\`
+- `Differentiate(Func<double,double>,at,DerivativePolicy64,CancellationToken)`
   evaluates a four-sample central difference at step h and h/2. It
   returns the refined derivative and the absolute coarse/fine
   difference divided by 3 as a **heuristic** discretization-error
@@ -16,8 +16,8 @@ or Simpson APIs. Two finite binary64 operations are admitted:
   independently proven. Step representation and evaluation budget
   are checked before starting callbacks.
 
-- \`IntegrateOde(Func<double,double,double>,start,end,initial,OdePolicy64,
-  CancellationToken)\` integrates one scalar initial-value ODE forward
+- `IntegrateOde(Func<double,double,double>,start,end,initial,OdePolicy64,
+  CancellationToken)` integrates one scalar initial-value ODE forward
   with fixed-step classical RK4. It computes N and 2N refinements and
   reports |y(2N)-y(N)|/15, a **noncertified** global-error estimate under
   unverified smoothness and stability assumptions. Default N=32;
