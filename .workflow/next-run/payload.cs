@@ -30,6 +30,7 @@ const string EvidenceStatus="local-v1-publication-owner-and-recipient-boundaries
 const string WorkStatus="m5-w02-local-v1-qualification-complete-no-stable-publication";
 const string BoundaryMarker="dw.tools.math/m5-local-publication-boundary/1.0 qualified; oracles=12; recipients=3; public=false";
 const string V1Marker="dw.tools.math/m5-v1-local-rc-evidence/1.0 qualified; criteria=10; predecessor-gates=5; publication=false";
+const string HistoricalValidatorSha="86ca4d24fd961b7f15fd5454563703aff9fbdc180229578e823bf5def3e0ef78";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
@@ -49,6 +50,7 @@ p.Require.JsonValueEquals(Prior,"/m5_w02_c03_phase_done",JsonValue.Create(false)
 p.Require.JsonValueEquals(Prior,"/m5_w02_work_package_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/m5_release_done",JsonValue.Create(false));
 p.Require.JsonValueEquals(Prior,"/recipient_prompts_transmitted",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/validator_sha256",JsonValue.Create(HistoricalValidatorSha));
 p.Require.JsonValueEquals(Prior,"/public_nuget_published",JsonValue.Create(false));
 p.Require.JsonValueEquals(PreviousPackage,"/status",
     JsonValue.Create("managed-api-native-rid-and-cross-version-release-boundaries-qualified"));
@@ -155,7 +157,7 @@ if(!target)
         ["publication_matrix_sha256"]=hashes[ReleaseMap],
         ["t1_validator_extended"]=LegacyValidator,
         ["t1_validator_extended_sha256"]=hashes[LegacyValidator],
-        ["t1_validator_historical_sha256"]=p.Json.String(Prior,"/validator_sha256"),
+        ["t1_validator_historical_sha256"]=HistoricalValidatorSha,
         ["boundary_validator"]=Validator,["boundary_validator_sha256"]=hashes[Validator],
         ["decision_document"]=DecisionDocument,
         ["decision_document_sha256"]=hashes[DecisionDocument],
