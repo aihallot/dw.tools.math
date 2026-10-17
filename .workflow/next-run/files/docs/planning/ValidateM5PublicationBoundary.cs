@@ -80,7 +80,9 @@ var native=nativeDoc.RootElement;
 var version=Text(backlog,"plan_version");
 var isBaseline=version=="0.1.77";
 var isTarget=version=="0.1.78";
-Require(isBaseline||isTarget,"Only C03-T2 exact accepted lifecycle allowed.");
+var isMilestone=version=="0.1.79";
+Require(isBaseline||isTarget||isMilestone,
+    "Only C03-T2 and the accepted local milestone lifecycle are allowed.");
 
 Probe("candidate-identity",()=>
 {
@@ -238,8 +240,10 @@ Probe("workflow-and-backlog-are-not-promoted",()=>
         State(Find(backlog.GetProperty("releases"),"M"+i),"done");
         State(Find(native.GetProperty("milestones"),"M"+i),"done","state");
     }
-    State(Find(backlog.GetProperty("releases"),"M5"),"in_progress");
-    State(Find(native.GetProperty("milestones"),"M5"),"in-progress","state");
+    State(Find(backlog.GetProperty("releases"),"M5"),
+        isMilestone?"done":"in_progress");
+    State(Find(native.GetProperty("milestones"),"M5"),
+        isMilestone?"done":"in-progress","state");
     var current=Find(backlog.GetProperty("work_packages"),"M5-W02");
     var milestone=Find(native.GetProperty("milestones"),"M5");
     var work=Find(milestone.GetProperty("workPackages"),"M5-W02");
