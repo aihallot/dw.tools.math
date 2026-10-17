@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.80",
+  "plan_version": "0.1.81",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6394,7 +6394,7 @@
       "title": "Interpolation and regression",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W02-C03"
       ],
@@ -6421,7 +6421,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C01Tests"
       ],
-      "refinement": "RS081 T1 introduces a real .NET 10 dw.tools.math.analysis library and MSTest project with committed lockfiles and independent compiled absent-API RED, followed by 47 GREEN oracles and eight source-free NuGet probes. The bounded provider-free package admits finite strictly ascending 2-32 point binary64 piecewise linear and natural cubic interpolation and descriptive unweighted OLS. It qualifies y=2x\u002B1, x=0.5 -\u003E 2, zero SSE, curved natural spline 0.6875 and typed failure on duplicate/order/outside-domain/nonfinite/over-budget/rank-deficient data. T2 separately owns deeper extrapolation, unit, near-singular and precision conditions; M6 and W01 remain unfinished.",
+      "refinement": "RS081 T1 delivered real provider-free finite binary64 line, natural cubic spline and unweighted OLS with 47 scientific GREENs and an eight-oracle local NuGet consumer. RS082 T2 independently qualifies declared axis-unit labels and exact-match query units, explicit caller-selected LINEAR segment extrapolation, finite policy/conditioned relative X-span refusal and no causal or predictive inference. One compiled RED, 59 GREENs, retained 48 T1 tests, four Math regression suites, two eight-oracle source-free consumers and verified preview.2 nupkg SHA close only C01. M6-W01/M6 remain in-progress; C02 numerical roots/integration is the next scoped task.",
       "files": [
         "dw.tools.math.slnx",
         "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
@@ -6438,20 +6438,33 @@
         "docs/planning/decisions/m6-w01-c01-t1-curve-analysis.md",
         "docs/distribution/m6-curve-analysis.md",
         "docs/planning/evidence/M6-W01-C01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json",
+        "src/projects/dw.tools.math.analysis/CurveBoundaryAudit64.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C01T2Tests.cs",
+        "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c01-t2/Program.cs",
+        "tests/consumers/m6-w01-c01-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w01-c01-t2-curve-boundaries.md",
+        "docs/distribution/m6-curve-boundaries.md",
+        "docs/planning/evidence/M6-W01-C01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C01T1",
+        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C01T2",
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w01-c01-t1/m6-curve-analysis-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M6-W01-C01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json"
+        "docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json",
+        "docs/planning/evidence/M6-W01-C01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 proved finite binary64 interpolation, natural spline and unweighted OLS with 47 GREEN, a genuine compiled RED, local versioned nupkg SHA and independent eight-probe NuGet consumer; T2 limits remain planned",
+      "readiness": "C01 complete: T1 numerical analysis and T2 unit/extrapolation/conditioning policies with typed nonpartial refusals, real local NuGet SHA and both source-free client receipts; M6-W01-C02 planned.",
       "tasks": [
         {
           "id": "M6-W01-C01-T1",
@@ -6498,29 +6511,38 @@
           "title": "Boundaries and integration",
           "behavior": "Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
           "test_case": "Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W01-C01-T2-contract-red.json",
+            "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W01-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C01-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W01-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W01-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W01-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
