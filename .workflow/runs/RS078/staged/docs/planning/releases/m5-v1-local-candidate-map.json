@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "id": "M5-W02-C03-T1-v1-local-candidate-evidence-map",
+  "status": "bounded-v1-evidence-map-local-rc-not-promoted",
+  "candidate_label": "1.0.0-local-rc-evidence-only",
+  "distribution_package_version": "1.0.0-preview.4",
+  "source_coverage": "docs/planning/coverage.md",
+  "predecessor_gates": [
+    {
+      "milestone": "M0",
+      "path": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+      "field": "authorization/copy_into_dw_tools_math",
+      "expected": true
+    },
+    {
+      "milestone": "M1",
+      "path": "docs/planning/evidence/M1-W03-C02-gate.json",
+      "field": "local_consumer_execution_passed",
+      "expected": true
+    },
+    {
+      "milestone": "M2",
+      "path": "docs/planning/evidence/M2-gate.json",
+      "field": "locked_solution_build_passed",
+      "expected": true
+    },
+    {
+      "milestone": "M3",
+      "path": "docs/planning/evidence/M3-gate.json",
+      "field": "source_only_nuget_restore",
+      "expected": true
+    },
+    {
+      "milestone": "M4",
+      "path": "docs/planning/evidence/M4-gate.json",
+      "field": "m4_milestone_done",
+      "expected": true
+    }
+  ],
+  "criteria": [
+    {
+      "id": "V1-01",
+      "coverage_line": "1. Parse notation: M5-W01-C01/C02.",
+      "scope_limit": "Bounded canonical/LaTeX parsing; no arbitrary TeX.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json",
+          "witness_key": "canonical_math_ir_replay_verified",
+          "expected": true,
+          "expected_status": "exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-02",
+      "coverage_line": "2. Validate domains/assumptions: M2-W01-C02/C03.",
+      "scope_limit": "Admitted original-domain and typed IR restrictions.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M2-W01-C02-boundary-qualified.json",
+          "witness_key": "full_ir_test_suite_passed",
+          "expected": true,
+          "expected_status": "immutable-bounded-typed-IR-chunk-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
+          "witness_key": "original_domain_exclusions_checked_before_evaluation",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-original-domain-provenance-loss-boundaries-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-03",
+      "coverage_line": "3. Numerical and symbolic computation: M3 and M4.",
+      "scope_limit": "Bounded M3 numerical/M4 symbolic families, not a universal CAS.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M3-gate.json",
+          "witness_key": "locked_solution_restore_and_build_passed",
+          "expected": true,
+          "expected_status": "m3-local-numerics-and-statistics-preview-gate-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M4-gate.json",
+          "witness_key": "m4_milestone_done",
+          "expected": true,
+          "expected_status": "m4-local-exact-symbolic-preview-gate-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json",
+          "witness_key": "numeric_and_symbolic_provenance_exposed",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-public-console-composition-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-04",
+      "coverage_line": "4. Compose: M2-W02-C02.",
+      "scope_limit": "Typed finite step composition; no general workflow orchestration.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+          "witness_key": "controlled_semantic_red_then_green",
+          "expected": true,
+          "expected_status": "bounded-cancellable-step-provenance-exact-pipeline-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-05",
+      "coverage_line": "5. Reject incompatible composition: M2-W02-C02.",
+      "scope_limit": "Cannot substitute a formal derivative as an original root equation.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json",
+          "witness_key": "incompatible_derivative_to_solver_pipeline_refused",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-public-console-composition-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-06",
+      "coverage_line": "6. Preserve exclusions: M4-W01-C02/C03.",
+      "scope_limit": "Original x!=1 hole is retained through solving and evaluation.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
+          "witness_key": "original_domain_exclusions_checked_before_evaluation",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-original-domain-provenance-loss-boundaries-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-07",
+      "coverage_line": "7. Render notation: M5-W01-C01/C03/C04.",
+      "scope_limit": "Bounded notation/MathML/OMML rendering, no arbitrary Office fidelity.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json",
+          "witness_key": "canonical_math_ir_replay_verified",
+          "expected": true,
+          "expected_status": "exact-safe-canonical-display-original-restrictions-and-ambiguity-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json",
+          "witness_key": "math_ir_canonical_json_replay_qualified",
+          "expected": true,
+          "expected_status": "exact-annotated-mathml-xml-security-and-loss-boundaries-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json",
+          "witness_key": "exact_fraction_equation_and_ordered_sum_verified",
+          "expected": true,
+          "expected_status": "exact-office-omml-markdown-unicode-loss-and-format-boundaries-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-08",
+      "coverage_line": "8. Results/errors/provenance: M2-W02-C01.",
+      "scope_limit": "Typed exactness, assumptions, losses and refusal outcomes.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
+          "witness_key": "typed_unsupported_and_pipeline_refusals_return_no_partial_result",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-original-domain-provenance-loss-boundaries-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-09",
+      "coverage_line": "9. Qualified replay: M2-W02-C03.",
+      "scope_limit": "Typed canonical IR replay, not general algebraic equivalence.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M2-W02-C03-boundary-qualified.json",
+          "witness_key": "controlled_red_then_green",
+          "expected": true,
+          "expected_status": "explicit-nonfinal-exact-replay-cache-quota-and-portability-boundaries-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
+          "witness_key": "canonical_original_ir_json_and_semantic_hash_rechecked",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-original-domain-provenance-loss-boundaries-qualified"
+        }
+      ]
+    },
+    {
+      "id": "V1-10",
+      "coverage_line": "10. Client without AURA: M1-W03-C01 and M5-W02-C01.",
+      "scope_limit": "Independent local NuGet; no AURA adoption implied.",
+      "proofs": [
+        {
+          "path": "docs/planning/evidence/M5-W02-C01-T1-contract-qualified.json",
+          "witness_key": "no_aura_or_external_cas_required",
+          "expected": true,
+          "expected_status": "exact-numeric-symbolic-public-console-composition-qualified"
+        },
+        {
+          "path": "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+          "witness_key": "isolated_consumer_probes_passed",
+          "expected": 8,
+          "expected_status": "managed-api-native-rid-and-cross-version-release-boundaries-qualified"
+        }
+      ]
+    }
+  ],
+  "required_m5_phase_ids": [
+    "M5-W01-C01",
+    "M5-W01-C02",
+    "M5-W01-C03",
+    "M5-W01-C04",
+    "M5-W02-C01",
+    "M5-W02-C02",
+    "M5-W02-C03"
+  ],
+  "m5_final_gate_completed": false,
+  "public_nuget_published": false,
+  "stable_release_certified": false,
+  "external_agent_adoption_observed": false,
+  "untested_other_rids_certified": false,
+  "cross_version_source_or_binary_compatibility_certified": false,
+  "publication_requires_owner_authorization": true,
+  "planned_or_unbounded_capabilities_claimed": false
+}
