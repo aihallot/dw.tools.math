@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.84",
+  "plan_version": "0.1.85",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6711,7 +6711,7 @@
       "title": "Numerical differentiation and ODEs",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W01-C02"
       ],
@@ -6736,7 +6736,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C03Tests"
       ],
-      "refinement": "RS085 T1 delivers provider-free bounded binary64 numerical differentiation and scalar RK4 with one compiled API RED, 57 GREEN tests, 203 retained Math analysis tests, two relevant Math regressions and 16 NuGet-only source-free probes against one SHA-qualified preview.5 archive. Step doubling is a heuristic, not a proof. T2 retains stiffness, overflow, events, PDE and global/local error boundaries.",
+      "refinement": "RS085 T1 qualified finite central difference and scalar RK4 with 57 GREEN tests and one compiled RED. RS086 T2 adds explicit unverified caller smoothness, nonstiff/event-free assumption policies and typed unsupported regime refusals. Its 66 GREEN plus recovered RED, 261 retained tests, two Math regressions and two eight-probe NuGet-only consumers from one SHA-inspected local preview.6 package complete C03. M6-W01/M6 remain in progress.",
       "files": [
         "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
         "src/projects/dw.tools.math.analysis/BoundedDifferentialAnalysis64.cs",
@@ -6750,20 +6750,33 @@
         "docs/planning/decisions/m6-w01-c03-t1-differential-ode.md",
         "docs/distribution/m6-differential-ode.md",
         "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+        "docs/planning/evidence/M6-W01-C03-T1-qualified.json",
+        "src/projects/dw.tools.math.analysis/DifferentialBoundaryAudit64.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C03T2RedTests.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C03T2Tests.cs",
+        "tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c03-t2/Program.cs",
+        "tests/consumers/m6-w01-c03-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w01-c03-t2-differential-boundaries.md",
+        "docs/distribution/m6-differential-boundaries.md",
+        "docs/planning/evidence/M6-W01-C03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C03T1",
+        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C03T2",
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w01-c03-t1/m6-differential-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+        "docs/planning/evidence/M6-W01-C03-T1-qualified.json",
+        "docs/planning/evidence/M6-W01-C03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 numerical differentiation and scalar IVP solution qualified locally with explicit step and evaluation budgets, typed failures and noncertified estimates; T2 requires independent error/stability/boundary characterization.",
+      "readiness": "C03 complete: bounded numerical derivative/ODE contracts plus typed and explicitly noncertified regularity, stability and event policies. M6-W01 remains open for separate closure.",
       "tasks": [
         {
           "id": "M6-W01-C03-T1",
@@ -6810,29 +6823,38 @@
           "title": "Boundaries and integration",
           "behavior": "Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
           "test_case": "Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W01-C03-T2-contract-red.json",
+            "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W01-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W01-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W01-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W01-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
