@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.83",
+  "plan_version": "0.1.84",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6711,7 +6711,7 @@
       "title": "Numerical differentiation and ODEs",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W01-C02"
       ],
@@ -6736,40 +6736,72 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C03Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS085 T1 delivers provider-free bounded binary64 numerical differentiation and scalar RK4 with one compiled API RED, 57 GREEN tests, 203 retained Math analysis tests, two relevant Math regressions and 16 NuGet-only source-free probes against one SHA-qualified preview.5 archive. Step doubling is a heuristic, not a proof. T2 retains stiffness, overflow, events, PDE and global/local error boundaries.",
+      "files": [
+        "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+        "src/projects/dw.tools.math.analysis/BoundedDifferentialAnalysis64.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C03T1RedTests.cs",
+        "tests/projects/dw.tools.math.analysis.tests/M6W01C03T1Tests.cs",
+        "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+        "tests/consumers/m6-w01-c02-t2/Program.cs",
+        "tests/consumers/m6-w01-c03-t1/m6-differential-consumer.csproj",
+        "tests/consumers/m6-w01-c03-t1/Program.cs",
+        "tests/consumers/m6-w01-c03-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w01-c03-t1-differential-ode.md",
+        "docs/distribution/m6-differential-ode.md",
+        "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --filter FullyQualifiedName~M6W01C03T1",
+        "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w01-c03-t1/m6-differential-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
+        "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+      ],
+      "readiness": "T1 numerical differentiation and scalar IVP solution qualified locally with explicit step and evaluation budgets, typed failures and noncertified estimates; T2 requires independent error/stability/boundary characterization.",
       "tasks": [
         {
           "id": "M6-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
           "test_case": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
+            "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W01-C03-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement only: Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W01-C03-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W01-C03-T1-qualified.json"
+              ]
             }
           ]
         },
