@@ -1,0 +1,1158 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS080",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-17T09:25:50.87939+00:00",
+  "completedAtUtc": "2026-10-17T09:26:47.2604744+00:00",
+  "durationMilliseconds": 56381,
+  "projectNodes": [
+    "M5"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M5.md",
+    "docs/planning/evidence/M5-gate.json",
+    "docs/planning/ValidateM5ReleaseCandidate.cs",
+    "docs/planning/ValidateM5PublicationBoundary.cs",
+    "docs/planning/ValidateM5ReleaseGate.cs",
+    "docs/planning/decisions/m5-gate.md",
+    "docs/distribution/m5-local-release-gate.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/ValidateM5PublicationBoundary.cs",
+    "docs/planning/ValidateM5ReleaseCandidate.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M5.md",
+    "docs/distribution/m5-local-release-gate.md",
+    "docs/planning/ValidateM5ReleaseGate.cs",
+    "docs/planning/decisions/m5-gate.md",
+    "docs/planning/evidence/M5-gate.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS080/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-680ebdcc3af049ec9c48a5a0f946ac5a\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 56266,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS080 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS079/attempt-001.json run=RS079 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M4-gate.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M4-gate.json pointer=/m4_milestone_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json pointer=/authorization/redistribute_from_dw_tools_math\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W01-work-package-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W01-work-package-qualified.json pointer=/m5_w01_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W01-work-package-qualified.json pointer=/m5_release_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/m5_w02_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/final_m5_gate_pending\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/m5_release_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/local_distribution_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-work-package-qualified.json pointer=/public_nuget_published\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json pointer=/v1_criteria_qualified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json pointer=/bounded_scientific_witnesses_checked\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json pointer=/prior_milestone_gates_verified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json pointer=/public_nuget_published\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/read_only_release_boundary_oracles\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/recipient_drafts_unsent\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/m5_w02_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/m5_release_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json pointer=/stable_release_certified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json pointer=/local_distribution_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json pointer=/inspected_local_archives\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json pointer=/other_platform_rids_certified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json pointer=/stable_release_certified\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj semantic text found\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.distribution/MathLocalReleaseQualification.cs semantic text found\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/0/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/1/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/2/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/3/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/4/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/5/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/5/gate\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/6/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/11/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/12/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/33/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/34/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/35/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/36/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/37/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/38/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/39/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M4 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01-C04 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W02-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W02-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W02-C03 state=done\r\n[require.file-missing] VERIFIED path=docs/planning/ValidateM5ReleaseGate.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/m5-gate.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/m5-local-release-gate.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/M5-gate.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM5ReleaseCandidate.cs bytes=8705\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM5PublicationBoundary.cs bytes=13464\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM5ReleaseGate.cs bytes=12800\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m5-gate.md bytes=2465\r\n[files.replace-from-staged] CHANGED path=docs/distribution/m5-local-release-gate.md bytes=2345\r\nM5-V1-CRITERION:V1-01:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-V1-CRITERION:V1-02:6146efe14689c62d8cc167eb8aab34095d274d53f0b411833f9a7ba18fea4913\r\nM5-V1-CRITERION:V1-03:ed2c1af2d0fecb42788b24d937b49216a2739b06da9019b098f68a34640e126c\r\nM5-V1-CRITERION:V1-04:d4e893f91e31ff7bf041592a1554badd750a2a3da1294b35ac731be57a0f01cf\r\nM5-V1-CRITERION:V1-05:366117336b79281647858dd21816e3ffe8a3fe745ac502be02aa217346426705\r\nM5-V1-CRITERION:V1-06:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-V1-CRITERION:V1-07:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-V1-CRITERION:V1-08:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-V1-CRITERION:V1-09:b0e578d4155a9b258af26920ac74f64e9ff85a08e48f5177c559482056476718\r\nM5-V1-CRITERION:V1-10:366117336b79281647858dd21816e3ffe8a3fe745ac502be02aa217346426705\r\ndw.tools.math/m5-v1-local-rc-evidence/1.0 qualified; criteria=10; predecessor-gates=5; publication=false\r\n\n\r\nM5-BOUNDARY-ORACLE:candidate-identity\r\nM5-BOUNDARY-ORACLE:source-links\r\nM5-BOUNDARY-ORACLE:ten-canonical-v1\r\nM5-BOUNDARY-ORACLE:owner-source-rights-not-publication\r\nM5-BOUNDARY-ORACLE:real-local-nuget-and-host\r\nM5-BOUNDARY-ORACLE:not-a-cross-version-binary-contract\r\nM5-BOUNDARY-ORACLE:release-refusal-no-action\r\nM5-BOUNDARY-ORACLE:three-unsent-recipient-states\r\nM5-BOUNDARY-ORACLE:unsent-draft-content-and-historic-hash\r\nM5-BOUNDARY-ORACLE:migration-and-rollback-only-on-consumer-side\r\nM5-BOUNDARY-ORACLE:future-owner-decisions-are-explicit\r\nM5-BOUNDARY-ORACLE:workflow-and-backlog-are-not-promoted\r\ndw.tools.math/m5-local-publication-boundary/1.0 qualified; oracles=12; recipients=3; public=false\r\n\n\r\nM5-GATE-PHASE:M5-W01-C01:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-GATE-PHASE:M5-W01-C02:62df69b0af06fb868a0d663e6c7ed24733650473328cf6b0573cd662eade7649\r\nM5-GATE-PHASE:M5-W01-C03:e284eba63a87b2a9d82d5b96916a3c1a7da5715e2729e155895c27fc5a2c7804\r\nM5-GATE-PHASE:M5-W01-C04:9c8212cf38615da89018310cae85d7fc5a3c87b3372e76e4fa0bf6c7a687b02a\r\nM5-GATE-PHASE:M5-W02-C01:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-GATE-PHASE:M5-W02-C02:be1b9b393b7630809940f596589de4ce95f981f383e41de391644645ab85d7ef\r\nM5-GATE-PHASE:M5-W02-C03:ac249325dd2ad4d9c6c62c9ac6d2d893db76e0e0a35b1548219da58ff41e0e81\r\ndw.tools.math/m5-local-scientific-gate/1.0 qualified; phases=7; tasks=14; subtasks=42; v1=10; public=false\r\n\n\r\nM5-GATE-PHASE:M5-W01-C01:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-GATE-PHASE:M5-W01-C02:62df69b0af06fb868a0d663e6c7ed24733650473328cf6b0573cd662eade7649\r\nM5-GATE-PHASE:M5-W01-C03:e284eba63a87b2a9d82d5b96916a3c1a7da5715e2729e155895c27fc5a2c7804\r\nM5-GATE-PHASE:M5-W01-C04:9c8212cf38615da89018310cae85d7fc5a3c87b3372e76e4fa0bf6c7a687b02a\r\nM5-GATE-PHASE:M5-W02-C01:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-GATE-PHASE:M5-W02-C02:be1b9b393b7630809940f596589de4ce95f981f383e41de391644645ab85d7ef\r\nM5-GATE-PHASE:M5-W02-C03:ac249325dd2ad4d9c6c62c9ac6d2d893db76e0e0a35b1548219da58ff41e0e81\r\ndw.tools.math/m5-local-scientific-gate/1.0 qualified; phases=7; tasks=14; subtasks=42; v1=10; public=false\r\n\n\r\n  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n\r\n  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.foundation.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll\r\n  dw.tools.math.statistics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics\\Release\\net10.0\\dw.tools.math.statistics.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.numerics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics\\Release\\net10.0\\dw.tools.math.numerics.dll\r\n  dw.tools.math.codecs -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs\\Release\\net10.0\\dw.tools.math.codecs.dll\r\n  dw.tools.math.symbolics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics\\Release\\net10.0\\dw.tools.math.symbolics.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.tools.math.statistics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll\r\n  dw.tools.math.ir.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll\r\n  dw.tools.math.symbolics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics.tests\\Release\\net10.0\\dw.tools.math.symbolics.tests.dll\r\n  dw.tools.math.composition.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll\r\n  dw.tools.math.codecs.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs.tests\\Release\\net10.0\\dw.tools.math.codecs.tests.dll\r\n  dw.tools.math.numerics.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\n  dw.tools.math.distribution -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution\\Release\\net10.0\\dw.tools.math.distribution.dll\r\n  dw.tools.math.distribution.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:04.11\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   155, Skipped:     0, Total:   155, Duration: 273 ms - dw.tools.math.distribution.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs.tests\\Release\\net10.0\\dw.tools.math.codecs.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   350, Skipped:     0, Total:   350, Duration: 265 ms - dw.tools.math.codecs.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 90 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics.tests\\Release\\net10.0\\dw.tools.math.symbolics.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   370, Skipped:     0, Total:   370, Duration: 223 ms - dw.tools.math.symbolics.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   109, Skipped:     0, Total:   109, Duration: 282 ms - dw.quantities.tests.dll (net10.0)\r\n\n\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs.tests\\Release\\net10.0\\dw.tools.math.codecs.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics.tests\\Release\\net10.0\\dw.tools.math.statistics.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics.tests\\Release\\net10.0\\dw.tools.math.symbolics.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:    49, Skipped:     0, Total:    49, Duration: 162 ms - dw.tools.math.ir.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:   109, Skipped:     0, Total:   109, Duration: 249 ms - dw.quantities.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:   350, Skipped:     0, Total:   350, Duration: 415 ms - dw.tools.math.codecs.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:   370, Skipped:     0, Total:   370, Duration: 407 ms - dw.tools.math.symbolics.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:   155, Skipped:     0, Total:   155, Duration: 420 ms - dw.tools.math.distribution.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 27 ms - dw.tools.math.foundation.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:   166, Skipped:     0, Total:   166, Duration: 121 ms - dw.tools.math.statistics.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:    81, Skipped:     0, Total:    81, Duration: 98 ms - dw.tools.math.numerics.tests.dll (net10.0)\r\n\r\nPassed!  - Failed:     0, Passed:    74, Skipped:     0, Total:    74, Duration: 125 ms - dw.tools.math.composition.tests.dll (net10.0)\r\n\n\r\n  The package dw.quantities.0.2.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.quantities.0.2.0-preview.1.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.ir.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.ir.0.3.0-preview.1.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.codecs.1.0.0-preview.8 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.codecs.1.0.0-preview.8.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.symbolics.0.5.0-preview.10 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.symbolics.0.5.0-preview.10.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.numerics.0.4.0-preview.4 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.numerics.0.4.0-preview.4.nupkg\u0027.\r\n\n\r\n  The package dw.tools.math.composition.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.composition.0.3.0-preview.1.nupkg\u0027.\r\n\n\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.distribution.1.0.0-preview.4.nupkg\u0027.\r\n\n\r\nM5-W02-C02-T2-PKG-SHA256:dw.quantities:0.2.0-preview.1:14738:afe537310d2def0bbf6b0aa17273bf411425c3b79a4ec82507384b5a7fed576a\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.ir:0.3.0-preview.1:21912:c151b691fe0073be9055d1ad43e13b58c17d3f21982ae74b413203e2e2fafc05\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.codecs:1.0.0-preview.8:35086:16d26c55f5247d88bf0e4b15b3779f7218df2ea409bf6d6c2fa574f378cabd51\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.symbolics:0.5.0-preview.10:34691:2445ce89224a1d492cabccba5bb1ed9b831752bca12ca2f1941c951270d37640\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.numerics:0.4.0-preview.4:18290:c3acc003019addc6a1125a66b2b2fba738a7840e0cbafb713ee642cfdf50105f\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.composition:0.3.0-preview.1:17085:4226f8223111faab6107b57e7d756500b21ea48e651c9a66dbcab2782a2dfca2\r\nM5-W02-C02-T2-PKG-SHA256:dw.tools.math.distribution:1.0.0-preview.4:25867:40755502c8d2b73d3ecbc8b02c523926f54288e3853118f3089c38bf85f4cb27\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m5-w02-c02-t2\\m5-managed-api-boundary-consumer.csproj (in 315 ms).\r\n\n\r\n  m5-managed-api-boundary-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m5-managed-api-boundary-consumer\\Release\\net10.0\\m5-managed-api-boundary-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.92\r\n\n\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.quantities:0.2.0-preview.1:6d332ff8e5fe6da3dcbe7805a9effdefdfe88a9ea9261665453fd0beab9a730b:422d18851053ab6f5df330213c34d93c372c58e34e67df7570165150b4965215\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.ir:0.3.0-preview.1:29b93a7b9f429932dc9d5ff83f2f79aa32d338091f4f34fabf941b791b205be9:fafd709d6995715c4d939de74c4cf7e61fff121f718681a1193046212d98f6f6\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.codecs:1.0.0-preview.8:8bdd0c88d4ad8701caa16ef9d63529ff0bb937dd4b078255c40f53dce991614e:9e70c99378729f3550f17f469185bfb9be44727b057bbf608f69393f80a6d018\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.symbolics:0.5.0-preview.10:afef3886a8fed77a88b13a36411a46c08c5a19b33c64d75585636aaaa37aa620:ed683dff46cdf389a31ae0b06acc7e8f65b24eafb0979647c1370232d285c9eb\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.numerics:0.4.0-preview.4:5d9316db9660d91ea8be4e1a50c019a6f4769c7a83676ba16884316dec225656:bf1d1ab070120bb64ac85b282dcdbc04ecebe51246b4abc2e1b730538df6c336\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.composition:0.3.0-preview.1:6d2bce2a4f3a73b48fa8449fa161f4fdfb1caeef2aa9c4611d53f6b159053d0b:1f86fb1eba438c6258bcdacf1c4f2f507bb487dec4bb64ff7e337dfa0e7d608c\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.distribution:1.0.0-preview.4:07b96952264393441f55ad618e174cbaf59aec9bfbb7d47cfa8f5a7fe514ccfd:f11230fcb13c2425e5dcdadb3745250ccb6ad19fdfee110e7f1097474757ba63\r\nOBSERVED-RUNTIME:win-x64\r\ndw.tools.math/m5-managed-api-boundary-consumer/1.0 qualified; probes=8\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m5-w02-c02-t1\\m5-clean-package-consumer.csproj (in 231 ms).\r\n\n\r\n  m5-clean-package-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m5-clean-package-consumer\\Release\\net10.0\\m5-clean-package-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.92\r\n\n\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.quantities:0.2.0-preview.1:14738:afe537310d2def0bbf6b0aa17273bf411425c3b79a4ec82507384b5a7fed576a\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.ir:0.3.0-preview.1:21912:c151b691fe0073be9055d1ad43e13b58c17d3f21982ae74b413203e2e2fafc05\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.codecs:1.0.0-preview.8:35086:16d26c55f5247d88bf0e4b15b3779f7218df2ea409bf6d6c2fa574f378cabd51\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.symbolics:0.5.0-preview.10:34691:2445ce89224a1d492cabccba5bb1ed9b831752bca12ca2f1941c951270d37640\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.numerics:0.4.0-preview.4:18290:c3acc003019addc6a1125a66b2b2fba738a7840e0cbafb713ee642cfdf50105f\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.composition:0.3.0-preview.1:17085:4226f8223111faab6107b57e7d756500b21ea48e651c9a66dbcab2782a2dfca2\r\nM5-W02-C02-T1-CONSUMER-SHA256:dw.tools.math.distribution:1.0.0-preview.4:25867:40755502c8d2b73d3ecbc8b02c523926f54288e3853118f3089c38bf85f4cb27\r\ndw.tools.math/m5-clean-package-consumer/1.0 qualified; probes=8\r\nOBSERVED-RUNTIME:win-x64\r\n\n\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\samples\\m5-exact-vertical\\m5-exact-vertical.csproj (in 227 ms).\r\n\n\r\n  m5-exact-vertical -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\m5-exact-vertical\\Release\\net10.0\\m5-exact-vertical.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.88\r\n\n\r\n{\u0022schema_version\u0022:1,\u0022id\u0022:\u0022dw.tools.math/m5-exact-vertical/1\u0022,\u0022status\u0022:\u0022Exact\u0022,\u0022source\u0022:\u0022where(sub(square(x),1),ne(x,1))\u0022,\u0022derivative\u0022:\u0022mul(2,x)\u0022,\u0022evaluated_at\u0022:2,\u0022exact_value\u0022:\u00223\u0022,\u0022binary64\u0022:3,\u0022numeric_loss\u0022:\u0022binary64-exact-representable-original-ir-unchanged\u0022,\u0022admitted_roots\u0022:[\u0022-1\u0022],\u0022excluded_candidates\u0022:[\u00221\u0022],\u0022original_root_audit_complete\u0022:false,\u0022provider\u0022:\u0022dw.tools.math/managed-qualified-engines\u0022,\u0022assumption\u0022:\u0022ne(x,1)\u0022,\u0022source_sha256\u0022:\u0022f2a7d7fe13742c300e3bd531c903101928c45acc1900f5a869f14ea16449f684\u0022,\u0022replay_bytes\u0022:506,\u0022oracles\u0022:8}\r\ndw.tools.math/m5-exact-vertical-console/1.0 qualified; probes=8\r\n\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\n10.0.402\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M5-gate.json bytes=9956\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M5 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M4 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5-W02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=not-ready\r\n[json.edit-object] CHANGED path=.aura/workflow/state.json semantic object updated\r\nplanning valid: 0.1.79 | 53 chunks | 4b35d570ff38e5b71c46f851c3b68b651f6d2cded753505277dadad2df636a24 | mode --write\r\n\n\r\nM5-GATE-PHASE:M5-W01-C01:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-GATE-PHASE:M5-W01-C02:62df69b0af06fb868a0d663e6c7ed24733650473328cf6b0573cd662eade7649\r\nM5-GATE-PHASE:M5-W01-C03:e284eba63a87b2a9d82d5b96916a3c1a7da5715e2729e155895c27fc5a2c7804\r\nM5-GATE-PHASE:M5-W01-C04:9c8212cf38615da89018310cae85d7fc5a3c87b3372e76e4fa0bf6c7a687b02a\r\nM5-GATE-PHASE:M5-W02-C01:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-GATE-PHASE:M5-W02-C02:be1b9b393b7630809940f596589de4ce95f981f383e41de391644645ab85d7ef\r\nM5-GATE-PHASE:M5-W02-C03:ac249325dd2ad4d9c6c62c9ac6d2d893db76e0e0a35b1548219da58ff41e0e81\r\ndw.tools.math/m5-local-scientific-gate/1.0 qualified; phases=7; tasks=14; subtasks=42; v1=10; public=false\r\n\n\r\nM5-V1-CRITERION:V1-01:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-V1-CRITERION:V1-02:6146efe14689c62d8cc167eb8aab34095d274d53f0b411833f9a7ba18fea4913\r\nM5-V1-CRITERION:V1-03:ed2c1af2d0fecb42788b24d937b49216a2739b06da9019b098f68a34640e126c\r\nM5-V1-CRITERION:V1-04:d4e893f91e31ff7bf041592a1554badd750a2a3da1294b35ac731be57a0f01cf\r\nM5-V1-CRITERION:V1-05:366117336b79281647858dd21816e3ffe8a3fe745ac502be02aa217346426705\r\nM5-V1-CRITERION:V1-06:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-V1-CRITERION:V1-07:6267d0153b81cbac50af608758d7035d5581923f90a6800bf6d295dd46e3faa4\r\nM5-V1-CRITERION:V1-08:f70d5ce5ddce2ea83130250ac7ed20eec4d383fd8513c2652fbb0f3154794ff6\r\nM5-V1-CRITERION:V1-09:b0e578d4155a9b258af26920ac74f64e9ff85a08e48f5177c559482056476718\r\nM5-V1-CRITERION:V1-10:366117336b79281647858dd21816e3ffe8a3fe745ac502be02aa217346426705\r\ndw.tools.math/m5-v1-local-rc-evidence/1.0 qualified; criteria=10; predecessor-gates=5; publication=false\r\n\n\r\nM5-BOUNDARY-ORACLE:candidate-identity\r\nM5-BOUNDARY-ORACLE:source-links\r\nM5-BOUNDARY-ORACLE:ten-canonical-v1\r\nM5-BOUNDARY-ORACLE:owner-source-rights-not-publication\r\nM5-BOUNDARY-ORACLE:real-local-nuget-and-host\r\nM5-BOUNDARY-ORACLE:not-a-cross-version-binary-contract\r\nM5-BOUNDARY-ORACLE:release-refusal-no-action\r\nM5-BOUNDARY-ORACLE:three-unsent-recipient-states\r\nM5-BOUNDARY-ORACLE:unsent-draft-content-and-historic-hash\r\nM5-BOUNDARY-ORACLE:migration-and-rollback-only-on-consumer-side\r\nM5-BOUNDARY-ORACLE:future-owner-decisions-are-explicit\r\nM5-BOUNDARY-ORACLE:workflow-and-backlog-are-not-promoted\r\ndw.tools.math/m5-local-publication-boundary/1.0 qualified; oracles=12; recipients=3; public=false\r\n\n\r\nnative DWF adoption valid: nodes=496 milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02=done\r\n\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\nplanning valid: 0.1.79 | 53 chunks | 4b35d570ff38e5b71c46f851c3b68b651f6d2cded753505277dadad2df636a24 | mode --check\r\n\n\r\n[payload] OK operations=80 changed=9 no-change=0 verified=71 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS080/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS080 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8afdf2d43157e4722dc348d27d50df418fc8ba926491e07e917cdf9f213b1305",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS079/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS079 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "28c2f1a6b7a9baa29aae85d422bddfd8841a3321766eaf48935a100282a69aa4",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M4-gate.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M4-gate.json",
+        "Status": 0,
+        "Summary": "pointer=/m4_milestone_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+        "Status": 0,
+        "Summary": "pointer=/authorization/redistribute_from_dw_tools_math",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_w01_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_release_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_w02_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/final_m5_gate_pending",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_release_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/local_distribution_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/public_nuget_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/v1_criteria_qualified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/bounded_scientific_witnesses_checked",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/prior_milestone_gates_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/public_nuget_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/read_only_release_boundary_oracles",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/recipient_drafts_unsent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_w02_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m5_release_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/stable_release_certified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/local_distribution_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/inspected_local_archives",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/other_platform_rids_certified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/stable_release_certified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.tools.math.distribution/MathLocalReleaseQualification.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/0/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/1/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/2/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/3/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/4/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/5/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/5/gate",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/6/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/11/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/12/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/33/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/34/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/35/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/36/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/37/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/38/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/39/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M4 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01-C04 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W02-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/ValidateM5ReleaseGate.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/m5-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/m5-local-release-gate.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/M5-gate.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM5ReleaseCandidate.cs",
+        "Status": 1,
+        "Summary": "bytes=8705",
+        "Details": null,
+        "BeforeSha256": "141fca943aa874244d67b986edd1c5c535bb7169624cd785b40c75ae074d20f7",
+        "AfterSha256": "3b1cbefa016c98c740618c8d8f7ad948afc309b1f03d045912d5cb476c754b0c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM5PublicationBoundary.cs",
+        "Status": 1,
+        "Summary": "bytes=13464",
+        "Details": null,
+        "BeforeSha256": "381fc0287df0ff0037317b4bfee5a049f100cdb86283e30b51d863cba5226af5",
+        "AfterSha256": "d7f33bc292c7614a046ef7f8c66bacd49771b6e482cc66b16658fb87d2876b51",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM5ReleaseGate.cs",
+        "Status": 1,
+        "Summary": "bytes=12800",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "15b24e30459a1c0d24442ac0641af181b12cab2e31ba96c97e8400c6f4c25b86",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m5-gate.md",
+        "Status": 1,
+        "Summary": "bytes=2465",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "da15e2e4cf1535b538ea71bb14de5ee4b8a190ab01be9333cebe2c62db3b11fd",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/m5-local-release-gate.md",
+        "Status": 1,
+        "Summary": "bytes=2345",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "85821584bf8eaa2f138e6d24c8fcb827e924fccc66b9f94fe52f404dc84d82d1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M5-gate.json",
+        "Status": 1,
+        "Summary": "bytes=9956",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "246ebbcb632c323dd5c64c21b3a4e50baee697cb7a9e308eb6a77e6da3b5e77e",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "21b7cbbcfa4818c76f731a7eae22543b8eb4ab4348369da5c692bb4f2c0ba64a",
+        "AfterSha256": "4b35d570ff38e5b71c46f851c3b68b651f6d2cded753505277dadad2df636a24",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M5 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "886374129b6eefd937764e8d23e00484482d9ba0d6993008e924f4daec62391c",
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M4 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5-W02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2306e0e1882bb7e8a4ee3e46760c28bb6ecf805581426c634dfb9e1cbe0b5bfe",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/state.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "cb00d8ab3682905bd8bf671e82c5e151fa9d914cb236a6c91576d327f2d64529",
+        "AfterSha256": "8f6eb2cee295945c1e646b810c661404703d682666baa08f100b17044ccb6fbb",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261017T092313Z-91aa477483a596df",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "0b2ae3aa7f150a6ef4bab6bd11857674ac27134b",
+  "invocationStartedAtUtc": "2026-10-17T09:23:13.322184+00:00",
+  "invocationDurationMilliseconds": 213938,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS080",
+      "title": "Qualify independent local Math V1 G-M5 scientific gate",
+      "projectNodes": [
+        "M5"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify LOCAL G-M5: independently verify seven phases, 14 tasks, 42 substages, ten V1 criteria, 17 scientific witnesses and 12 publication/adoption refusal oracles. Run locked Release build, five focused suites, full .NET solution tests, seven SHA-inspected local NuGet archives and three eight-probe source-free clients. Complete only M5\u0027s local scientific milestone; preview.4 stays unpublished, other OSs/ABIs unqualified, recipients unsent and stable/public 1.0 unauthorized.",
+      "value": "Independently prove the bounded local Math V1 milestone and seven-package source-free consumer graph before M6 scientific expansion, while preserving public release and downstream adoption as separate owner decisions.",
+      "debtChanges": [
+        "Verify all seven accepted M5 phases, 14 tasks and 42 substages against backlog, DWF, previous M0-M4 gates and source-linked Math scientific receipts.",
+        "Preserve ten bounded V1 criteria, 17 witnessed facts and 12 owner/recipient refusal oracles; do not infer public release or external adoption.",
+        "Execute the original two independent V1/publication validators and new G-M5 gate before and after native milestone completion.",
+        "At this milestone boundary, run locked .NET Release build, five focused regressions and the full admitted solution test suite.",
+        "Repack seven local net10 Math packages, recheck real NuGet dependencies, README/NOTICE and exact archive byte SHA-256.",
+        "Run three distinct source-free NuGet consumers with eight independent probes each: API surface, clean archive audit, exact numerical/symbolic console.",
+        "Complete M5 only as a LOCAL science gate. Keep preview.4 unchanged and stable/public NuGet, unknown RIDs, cross-version ABI and recipients unpromoted."
+      ],
+      "nextAction": "After durable RS080 success, prepare M6-W01-C01-T1 bounded interpolation/least-squares work; defer stable/public release pending separate owner authorization.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M5",
+          "achievement": "Complete the independent local G-M5 gate: seven qualified phases, 14 tasks, 42 substages, ten evidence-backed V1 criteria, full admitted .NET regressions, seven inspected local NuGet archives and 24 source-free consumer probes; no stable/public release claim."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        ".aura/workflow/state.json",
+        "docs/distribution/m5-local-release-gate.md",
+        "docs/planning/README.md",
+        "docs/planning/ValidateM5PublicationBoundary.cs",
+        "docs/planning/ValidateM5ReleaseCandidate.cs",
+        "docs/planning/ValidateM5ReleaseGate.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m5-gate.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M5-gate.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M5.md"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M5",
+        "objective": "Interoperability and stable public vertical",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M5 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M5",
+        "objective": "Interoperability and stable public vertical",
+        "kind": "milestone",
+        "parentId": null,
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete every required product chunk for M5 in docs/planning/backlog.json and satisfy its accepted release gate.",
+        "completed": true,
+        "achievement": "Complete the independent local G-M5 gate: seven qualified phases, 14 tasks, 42 substages, ten evidence-backed V1 criteria, full admitted .NET regressions, seven inspected local NuGet archives and 24 source-free consumer probes; no stable/public release claim."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M5",
+        "objective": "Interoperability and stable public vertical",
+        "kind": "milestone",
+        "parentId": null,
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Complete every required product chunk for M5 in docs/planning/backlog.json and satisfy its accepted release gate.",
+        "completed": true,
+        "achievement": "Complete the independent local G-M5 gate: seven qualified phases, 14 tasks, 42 substages, ten evidence-backed V1 criteria, full admitted .NET regressions, seven inspected local NuGet archives and 24 source-free consumer probes; no stable/public release claim."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS080",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS080",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "0b2ae3aa7f150a6ef4bab6bd11857674ac27134b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "e557126e20f7786bebeec676c9c4eca614b434845fb7ece64bfa3523a19fba7b"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: qualify independent local G-M5 science gate and complete M5",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

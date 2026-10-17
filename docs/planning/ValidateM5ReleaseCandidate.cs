@@ -65,8 +65,9 @@ var version=Text(backlog,"plan_version");
 var baseline=version=="0.1.76";
 var candidate=version=="0.1.77";
 var boundary=version=="0.1.78";
-Require(baseline||candidate||boundary,
-    "Only exact candidate and bounded publication-matrix roadmap states are admitted.");
+var localMilestone=version=="0.1.79";
+Require(baseline||candidate||boundary||localMilestone,
+    "Only exact candidate, publication and local M5 milestone states are admitted.");
 for(var index=0;index<5;index++)
 {
     var id="M"+index;
@@ -75,16 +76,16 @@ for(var index=0;index<5;index++)
 }
 var m5=Find(backlog.GetProperty("releases"),"M5");
 var m5native=Find(native.GetProperty("milestones"),"M5");
-Status(m5,"in_progress");
-Status(m5native,"in-progress","state");
+Status(m5,localMilestone?"done":"in_progress");
+Status(m5native,localMilestone?"done":"in-progress","state");
 Require(Text(m5,"gate")=="G-M5","M5 release gate identity drift.");
 var w01=Find(m5native.GetProperty("workPackages"),"M5-W01");
 var w02=Find(m5native.GetProperty("workPackages"),"M5-W02");
 Status(w01,"done","state");
-Status(w02,boundary?"done":"in-progress","state");
+Status(w02,(boundary||localMilestone)?"done":"in-progress","state");
 Status(Find(backlog.GetProperty("work_packages"),"M5-W01"),"done");
 Status(Find(backlog.GetProperty("work_packages"),"M5-W02"),
-    boundary?"done":"in_progress");
+    (boundary||localMilestone)?"done":"in_progress");
 var phases=map.GetProperty("required_m5_phase_ids")
     .EnumerateArray().Select(x=>x.GetString()??"").ToArray();
 Require(phases.Length==7 && phases.Distinct(StringComparer.Ordinal).Count()==7,
@@ -106,16 +107,16 @@ for(var index=0;index<phases.Length;index++)
     }
     else
     {
-        Status(product,baseline?"planned":boundary?"done":"in_progress");
-        Status(workflow,baseline?"not-ready":boundary?"done":"in-progress","state");
+        Status(product,baseline?"planned":(boundary||localMilestone)?"done":"in_progress");
+        Status(workflow,baseline?"not-ready":(boundary||localMilestone)?"done":"in-progress","state");
         var t1=Find(product.GetProperty("tasks"),"M5-W02-C03-T1");
         Status(t1,baseline?"planned":"done");
         Status(Find(workflow.GetProperty("tasks"),"M5-W02-C03-T1"),
             baseline?"not-ready":"done","state");
         Status(Find(product.GetProperty("tasks"),"M5-W02-C03-T2"),
-            boundary?"done":"planned");
+            (boundary||localMilestone)?"done":"planned");
         Status(Find(workflow.GetProperty("tasks"),"M5-W02-C03-T2"),
-            boundary?"done":"not-ready","state");
+            (boundary||localMilestone)?"done":"not-ready","state");
     }
 }
 var gates=map.GetProperty("predecessor_gates").EnumerateArray().ToArray();
