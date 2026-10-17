@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "id": "RS083",
+  "title": "Qualify finite bracketed root solving and composite Simpson quadrature",
+  "state": "prepared",
+  "commitMessage": "feat: add bounded univariate root and Simpson integration contracts",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W01",
+    "M6-W01-C02",
+    "M6-W01-C02-T1",
+    "M6-W01-C02-T1-R",
+    "M6-W01-C02-T1-G",
+    "M6-W01-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify provider-free bounded real bisection and composite Simpson with truthful residual, bracket and heuristic error diagnostics. Recover one compiled RED; pass 43 independent GREEN, 48 retained T1 and 60 T2 curve tests plus two relevant Math regressions. SHA-inspect an actual preview.3 local NuGet and run eight source-free scientific probes. Complete only C02-T1 R/G/V; leave C02, W01/M6 and public or foreign adoption open.",
+    "value": "Deliver useful, bounded numerical root and quadrature primitives without silently certifying continuity, root error, integral error, unknown units or user callbacks. Retain qualified curve APIs and independent package verification.",
+    "debtChanges": [
+      "Treat finite opposite endpoint signs as an input bracket only; caller continuity and uniqueness remain unverified assumptions.",
+      "Keep the Simpson refinement difference /15 as an explicitly noncertified smooth-case estimate, never a rigorous global error bound.",
+      "Observe one compiled reflection RED for missing bounded root/quadrature public API before staging source.",
+      "Require 43 new GREEN and the recovered RED plus 48 qualified C01 T1 and 60 C01 T2 tests.",
+      "Bound bisection iterations and Simpson panel/evaluation budgets; represent callback errors, NaN, missing bracket, cancellation and failure as typed nonpartial refusals.",
+      "Repack versioned net10 BCL-only analysis 1.1.0-preview.3; inspect actual local archive identity and digest with a separate helper.",
+      "Restore a source-free pinned consumer from the isolated local NuGet feed; verify eight independent numerical and refusal probes against the same SHA-256.",
+      "Close C02-T1 R/G/V and T1 only; preserve C02-T2 and later M6 tasks, public NuGet, cross-platform and Decision/MCDM adoption as unqualified."
+    ],
+    "nextAction": "After durable RS083 success, prepare RS084 M6-W01-C02-T2 for discontinuity/tolerance and failure-budget falsification; close C02 only upon its independent qualification. No public package.",
+    "achievements": [
+      {
+        "projectNode": "M6-W01-C02-T1-R",
+        "achievement": "Observe one genuine compiled missing-public-API RED for independent bounded root and Simpson operations before introducing product source."
+      },
+      {
+        "projectNode": "M6-W01-C02-T1-G",
+        "achievement": "Implement provider-free finite bisection and Simpson with explicit request policy, observed diagnostics and 43 independent GREEN scientific assertions."
+      },
+      {
+        "projectNode": "M6-W01-C02-T1-V",
+        "achievement": "Retain 108 C01 curve tests and two Math regressions, SHA-qualify preview.3 archive and pass eight independent NuGet-only consumer probes."
+      },
+      {
+        "projectNode": "M6-W01-C02-T1",
+        "achievement": "Qualify bounded univariate root/quadrature contract and independent package for C02 T1, leaving noncertified tolerances and C02 T2 gate explicit."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-C02-T1-contract-red.json",
+    "docs/planning/evidence/M6-W01-C02-T1-qualified.json",
+    "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "src/projects/dw.tools.math.analysis/BoundedUnivariateAnalysis64.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C02T1RedTests.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C02T1Tests.cs",
+    "tests/consumers/m6-w01-c02-t1/m6-univariate-consumer.csproj",
+    "tests/consumers/m6-w01-c02-t1/Program.cs",
+    "tests/consumers/m6-w01-c02-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w01-c02-t1-bounded-univariate.md",
+    "docs/distribution/m6-bounded-univariate.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
