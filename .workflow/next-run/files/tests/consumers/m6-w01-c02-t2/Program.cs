@@ -3,13 +3,14 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Analysis;
 
-const string Id="dw.tools.math.analysis",Version="1.1.0-preview.4";
+const string Id="dw.tools.math.analysis",Version="1.1.0-preview.5";
 if(args.Length!=1)
     throw new ArgumentException("Exactly one isolated Math numerical audit nupkg required.");
 var path=Path.GetFullPath(args[0]);
 if(Path.GetFileName(path)!=Id+"."+Version+".nupkg"||
-   Path.GetFileName(Path.GetDirectoryName(path))!="m6-w01-c02-t2-local-feed")
-    throw new InvalidOperationException("Only the local .4 boundary-audit feed is admitted.");
+   Path.GetFileName(Path.GetDirectoryName(path)) is not
+       ("m6-w01-c02-t2-local-feed" or "m6-w01-c03-t1-local-feed"))
+    throw new InvalidOperationException("Only the qualified local T2 or C03 T1 boundary-audit feed is admitted.");
 var archiveBytes=File.ReadAllBytes(path);
 using(var memory=new MemoryStream(archiveBytes,writable:false))
 using(var zip=new ZipArchive(memory,ZipArchiveMode.Read))
