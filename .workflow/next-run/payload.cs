@@ -77,8 +77,8 @@ p.Require.JsonValueEquals(Backlog,"/chunks/42/status",JsonValue.Create("planned"
 p.Require.JsonValueEquals(Backlog,"/chunks/43/status",JsonValue.Create("planned"));
 p.Require.TextContains(Product,target?"<Version>1.1.0-preview.2</Version>":
     "<Version>1.1.0-preview.1</Version>");
-p.Require.TextContains(OriginalConsumer,target?'Version="[1.1.0-preview.2]"':
-    'Version="[1.1.0-preview.1]"');
+p.Require.TextContains(OriginalConsumer,target?"Version=\"[1.1.0-preview.2]\"":
+    "Version=\"[1.1.0-preview.1]\"");
 p.ProjectPlan.RequireNodeState("M5","done");
 p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
 p.ProjectPlan.RequireNodeState(Work,"in-progress");
