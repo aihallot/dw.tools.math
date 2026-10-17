@@ -1,0 +1,591 @@
+{
+  "schemaVersion": 1,
+  "id": "RS081",
+  "title": "Implement bounded Math interpolation, natural spline and least squares",
+  "commitMessage": "feat: add bounded numerical interpolation and regression contracts and open M6",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W01",
+    "M6-W01-C01",
+    "M6-W01-C01-T1",
+    "M6-W01-C01-T1-R",
+    "M6-W01-C01-T1-G",
+    "M6-W01-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Start M6 with a real net10 dw.tools.math.analysis library for bounded finite binary64 linear interpolation, natural cubic splines and unweighted least squares. Compile one absent-API RED, pass 47 independent GREEN tests, retain four Math regression suites and independently verify a SHA-inspected local NuGet package through eight package-only consumer probes. Qualify y=2x+1, interpolation at 0.5 = 2 and typed refusals; complete C01-T1 only, leaving T2, work packages and M6 open.",
+    "value": "Introduce an independently consumable bounded .NET Math analysis package with real interpolation, spline and descriptive regression contracts, exact acceptance examples and explicit approximation/refusal provenance rather than a planned empty project.",
+    "nextAction": "After RS081 durable success, prepare M6-W01-C01-T2 for extrapolation, duplicate/conditioning, units and scientific loss boundaries; do not promote release M6 or public stable 1.1.",
+    "debtChanges": [
+      "Create lowercase analysis and MSTest net10 project files, locked dependency manifests and solution entries without multiplying empty package assemblies.",
+      "Observe one genuine compiled absent public BoundedCurveAnalysis64 API RED before introducing its implementation, keeping missing API distinct from compiler failure.",
+      "Implement finite provider-free 2–32 sample linear and natural cubic interpolation plus descriptive ordinary least squares with typed refusals.",
+      "Qualify 47 independent scientific and boundary GREEN tests including y=2x+1, zero SSE, curved spline 0.6875, duplicate/outside-range and rank-deficient samples.",
+      "Run locked Release build, the full new analysis test project and focused existing numerics, quantities, IR and composition regressions, not routine full solution tests.",
+      "Pack and independently SHA-check the actual 1.1.0-preview.1 local Math analysis nupkg; restore a pinned isolated NuGet-only console and verify eight hand oracles.",
+      "Advance only M6-W01-C01-T1 RED/GREEN/VERIFY, opening M6/W01/C01 while preserving T2, other work packages, public NuGet and stable release gates as future scope."
+    ],
+    "achievements": [
+      {
+        "projectNode": "M6-W01-C01-T1-R",
+        "achievement": "Observe a compiled missing public analysis API RED in the newly created net10 assembly, distinct from any compiler or restore failure."
+      },
+      {
+        "projectNode": "M6-W01-C01-T1-G",
+        "achievement": "Implement finite bounded binary64 line/spline/OLS analysis and pass 47 independent Math scientific GREEN oracles."
+      },
+      {
+        "projectNode": "M6-W01-C01-T1-V",
+        "achievement": "Verify retained Math numerical regressions, a real local analysis nupkg SHA and eight isolated source-free NuGet consumer checks."
+      },
+      {
+        "projectNode": "M6-W01-C01-T1",
+        "achievement": "Qualify the first substantive bounded Math analysis package and three-point scientific acceptance while C01-T2 and M6 remain open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-C01-T1-contract-red.json",
+    "docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json",
+    "dw.tools.math.slnx",
+    "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "src/projects/dw.tools.math.analysis/packages.lock.json",
+    "src/projects/dw.tools.math.analysis/CurvePoint64.cs",
+    "tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj",
+    "tests/projects/dw.tools.math.analysis.tests/packages.lock.json",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C01T1RedTests.cs",
+    "src/projects/dw.tools.math.analysis/M6W01C01Contract.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C01T1Tests.cs",
+    "tests/consumers/m6-w01-c01-t1/m6-curve-analysis-consumer.csproj",
+    "tests/consumers/m6-w01-c01-t1/Program.cs",
+    "tests/consumers/m6-w01-c01-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w01-c01-t1-curve-analysis.md",
+    "docs/distribution/m6-curve-analysis.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "dw.tools.math.slnx",
+      "sourcePath": "files/dw.tools.math.slnx"
+    },
+    {
+      "path": "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj"
+    },
+    {
+      "path": "src/projects/dw.tools.math.analysis/packages.lock.json",
+      "sourcePath": "files/src/projects/dw.tools.math.analysis/packages.lock.json"
+    },
+    {
+      "path": "src/projects/dw.tools.math.analysis/CurvePoint64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.analysis/CurvePoint64.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj",
+      "sourcePath": "files/tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.analysis.tests/packages.lock.json",
+      "sourcePath": "files/tests/projects/dw.tools.math.analysis.tests/packages.lock.json"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.analysis.tests/M6W01C01T1RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.analysis.tests/M6W01C01T1RedTests.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.analysis/M6W01C01Contract.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.analysis/M6W01C01Contract.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.analysis.tests/M6W01C01T1Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.analysis.tests/M6W01C01T1Tests.cs"
+    },
+    {
+      "path": "tests/consumers/m6-w01-c01-t1/m6-curve-analysis-consumer.csproj",
+      "sourcePath": "files/tests/consumers/m6-w01-c01-t1/m6-curve-analysis-consumer.csproj"
+    },
+    {
+      "path": "tests/consumers/m6-w01-c01-t1/Program.cs",
+      "sourcePath": "files/tests/consumers/m6-w01-c01-t1/Program.cs"
+    },
+    {
+      "path": "tests/consumers/m6-w01-c01-t1/NuGet.Config",
+      "sourcePath": "files/tests/consumers/m6-w01-c01-t1/NuGet.Config"
+    },
+    {
+      "path": "docs/planning/decisions/m6-w01-c01-t1-curve-analysis.md",
+      "sourcePath": "files/docs/planning/decisions/m6-w01-c01-t1-curve-analysis.md"
+    },
+    {
+      "path": "docs/distribution/m6-curve-analysis.md",
+      "sourcePath": "files/docs/distribution/m6-curve-analysis.md"
+    },
+    {
+      "path": "checks/m6-w01-c01-t1-package-sha.cs",
+      "sourcePath": "checks/m6-w01-c01-t1-package-sha.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/correctionMode",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "feat: qualify independent local G-M5 science gate and complete M5"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS080/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.79"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/1/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/2/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/3/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/4/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/5/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/6/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/7/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/11/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/12/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/13/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/14/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/tasks/0/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/40/tasks/0/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/41/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/43/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/5/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/tasks/0/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/tasks/0/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/0/tasks/0/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/status",
+      "expectedValue": "m5-local-v1-independent-nuget-evidence-gate-qualified-unpublished"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/gate",
+      "expectedValue": "G-M5"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/qualified_m5_phases",
+      "expectedValue": 7
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/qualified_tasks",
+      "expectedValue": 14
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/qualified_subtasks",
+      "expectedValue": 42
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/original_v1_criteria_checked",
+      "expectedValue": 10
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/isolated_nuget_consumer_probes",
+      "expectedValue": 24
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/m5_milestone_done",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/packages_publicly_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/stable_release_certified",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M5-gate.json",
+      "jsonPointer": "/owner_stable_publication_approved",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "10.0.401"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/rollForward",
+      "expectedValue": "latestPatch"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/allowPrerelease",
+      "expectedValue": false
+    },
+    {
+      "repositoryPath": "dw.tools.math.slnx",
+      "expectedText": "<Project Path=\"src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj\" />",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "dw.tools.math.slnx",
+      "expectedText": "<Project Path=\"src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj\" />",
+      "expectedOccurrences": 0
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
