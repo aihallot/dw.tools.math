@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "RS086",
+  "title": "Qualify derivative smoothness and scalar ODE regime refusal boundaries",
+  "state": "prepared",
+  "commitMessage": "feat: qualify derivative and ODE regime boundaries and close M6 W01 C03",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W01",
+    "M6-W01-C03",
+    "M6-W01-C03-T2",
+    "M6-W01-C03-T2-R",
+    "M6-W01-C03-T2-G",
+    "M6-W01-C03-T2-V"
+  ],
+  "contribution": {
+    "summary": "Qualify explicit derivative regularity and scalar RK4 regime audits without inventing stiffness, event or error guarantees. Recover one compiled public API RED, pass 66 new GREEN and 261 retained focused tests plus two Math regressions. SHA-inspect a real local analysis preview.6 nupkg via two distinct source-free eight-probe consumers. Close C03-T2 and C03 only; leave M6-W01/M6, public NuGet, untested platforms and downstream adoption open.",
+    "value": "Add fail-closed caller-declared smoothness and nonstiff/event-free numerical admission to reusable Math APIs, rejecting unsupported stiffness, event-driven and PDE regimes with no partial results. Existing derivative/ODE contracts remain unchanged.",
+    "debtChanges": [
+      "Require one genuinely compiled absent public derivative/ODE audit API RED before staging any product source.",
+      "Retain original C03 T1 APIs and 58 tests; do not represent four-sample symmetric differences as proof of differentiability.",
+      "Reject default derivative calls without an explicit unverified caller smoothness declaration, and refuse invalid policy or nonfinite values.",
+      "Admit only caller-declared nonstiff, event-free scalar ODEs; known-stiff, event-driven, PDE and unknown regimes refuse without partial results.",
+      "Never certify local derivative error, ODE stability, event absence or RK4 global error from heuristic step refinement.",
+      "Require 66 independent GREEN, recovered RED, 261 retained focused tests and two relevant Math regressions.",
+      "Inspect a real 1.1.0-preview.6 local net10 NuGet archive and verify identical SHA-256 bytes via new and retained independent eight-probe consumers.",
+      "Complete C03 T2 RED/GREEN/V and phase only; W01/M6 remain in progress until separately qualified closure. No public release or agent adoption."
+    ],
+    "nextAction": "After durable RS086 success, qualify M6-W01 numerical-analysis closure separately before activating M6-W02. Keep M6 and public/downstream release decisions open.",
+    "achievements": [
+      {
+        "projectNode": "M6-W01-C03-T2-R",
+        "achievement": "Observe a genuine compiled reflection RED for the absent explicit differential and ODE regime audit public API."
+      },
+      {
+        "projectNode": "M6-W01-C03-T2-G",
+        "achievement": "Add typed, nonpartial caller-assumed regularity, nonstiffness and event boundary audits with 66 independent GREEN scientific tests."
+      },
+      {
+        "projectNode": "M6-W01-C03-T2-V",
+        "achievement": "Preserve 261 earlier focused Math tests and two regressions; SHA-qualify one real preview.6 archive through two eight-probe NuGet-only consumers."
+      },
+      {
+        "projectNode": "M6-W01-C03-T2",
+        "achievement": "Qualify bounded derivative and scalar RK4 refusal policies while explicitly rejecting unsupported regimes and unproved error guarantees."
+      },
+      {
+        "projectNode": "M6-W01-C03",
+        "achievement": "Close both differential and ODE tasks with independently recorded RED, GREEN, retained regressions and local package evidence; leave M6-W01/M6 open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-C03-T2-contract-red.json",
+    "docs/planning/evidence/M6-W01-C03-T2-boundaries-qualified.json",
+    "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "src/projects/dw.tools.math.analysis/DifferentialBoundaryAudit64.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C03T2RedTests.cs",
+    "tests/projects/dw.tools.math.analysis.tests/M6W01C03T2Tests.cs",
+    "tests/consumers/m6-w01-c03-t1/m6-differential-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t1/Program.cs",
+    "tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t2/Program.cs",
+    "tests/consumers/m6-w01-c03-t2/NuGet.Config",
+    "docs/planning/decisions/m6-w01-c03-t2-differential-boundaries.md",
+    "docs/distribution/m6-differential-boundaries.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
