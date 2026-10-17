@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.76",
+  "plan_version": "0.1.77",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6243,7 +6243,7 @@
       "title": "1.0 gate and exposure requests",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W02-C02"
       ],
@@ -6265,40 +6265,60 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS078 T1 qualifies ten canonical V1 framing criteria against 17 exact scoped evidence witnesses and five M0-M4 predecessor gates, with one read-only executable C# validator, a bounded local 1.0 candidate map and documentation/unsent AURA Decision MCDM recipient drafts. This is an evidence-only local candidate; distribution remains preview.4 and six prior M5 phases are done. Publication, cross-OS support, owner licensing choices, recipient adoption and M5 G-M5 remain unqualified; C03 T2 is planned.",
+      "files": [
+        "docs/planning/releases/m5-v1-local-candidate-map.json",
+        "docs/planning/ValidateM5ReleaseCandidate.cs",
+        "docs/planning/decisions/m5-w02-c03-t1-release-candidate.md",
+        "docs/distribution/m5-v1-local-candidate.md",
+        "docs/coordination/requests/MATH-XR-004-local-v1-consumer-adoption-draft.md",
+        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM5ReleaseCandidate.cs -- --check",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+      ],
+      "readiness": "C03-T1 local ten-V1-criterion evidence candidate documented and independently checked; C03-T2 owner/publication/external-adoption boundaries still pending",
       "tasks": [
         {
           "id": "M5-W02-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Establish a release candidate, recipe coverage, migration guide, and updated AURA/Decision/MCDM prompts.",
           "test_case": "All required M0-M5 gates are proven; the 10 V1 framing criteria link to evidence; no planned capability is marketed.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W02-C03-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Establish a release candidate, recipe coverage, migration guide, and updated AURA/Decision/MCDM prompts.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C03-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: All required M0-M5 gates are proven; the 10 V1 framing criteria link to evidence; no planned capability is marketed.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C03-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M5-W02-C03-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+              ]
             }
           ]
         },
