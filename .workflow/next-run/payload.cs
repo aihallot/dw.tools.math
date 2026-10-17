@@ -378,9 +378,10 @@ static bool HasExactLine(string output,string expected) =>
         .Any(line=>line.Trim()==expected);
 
 static (long Bytes,string Sha) ReadProductReceipt(
-    string output,string id,string version)
+    string output,string id,string version,
+    string marker="M6-W01-C01-T1-PKG-SHA256:")
 {
-    var prefix="M6-W01-C01-T1-PKG-SHA256:"+id+":"+version+":";
+    var prefix=marker+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
