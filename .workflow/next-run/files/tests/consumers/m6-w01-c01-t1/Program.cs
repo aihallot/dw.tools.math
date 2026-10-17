@@ -3,11 +3,12 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Analysis;
 
-const string Id="dw.tools.math.analysis",Version="1.1.0-preview.1";
+const string Id="dw.tools.math.analysis",Version="1.1.0-preview.2";
 if(args.Length!=1)throw new ArgumentException("Exactly one isolated local nupkg path is required.");
 var archivePath=Path.GetFullPath(args[0]);
 if(Path.GetFileName(archivePath)!=Id+"."+Version+".nupkg" ||
-   Path.GetFileName(Path.GetDirectoryName(archivePath))!="m6-w01-c01-t1-local-feed")
+   Path.GetFileName(Path.GetDirectoryName(archivePath)) is not
+       ("m6-w01-c01-t1-local-feed" or "m6-w01-c01-t2-local-feed"))
     throw new InvalidOperationException("Unexpected local archive version or feed.");
 var archive=File.ReadAllBytes(archivePath);
 using(var stream=new MemoryStream(archive,writable:false))
