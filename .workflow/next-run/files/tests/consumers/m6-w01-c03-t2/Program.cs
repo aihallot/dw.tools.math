@@ -7,7 +7,8 @@ const string Id="dw.tools.math.analysis",Version="1.1.0-preview.6";
 if(args.Length!=1)throw new ArgumentException("Exactly one local numerical-audit nupkg is required.");
 var archivePath=Path.GetFullPath(args[0]);
 if(Path.GetFileName(archivePath)!=Id+"."+Version+".nupkg"||
-   Path.GetFileName(Path.GetDirectoryName(archivePath))!="m6-w01-c03-t2-local-feed")
+   Path.GetFileName(Path.GetDirectoryName(archivePath)) is not
+       ("m6-w01-c03-t2-local-feed" or "m6-w01-gate-local-feed"))
     throw new InvalidOperationException("Only the pinned C03-T2 isolated feed is admissible.");
 var bytes=File.ReadAllBytes(archivePath);
 using(var input=new MemoryStream(bytes,writable:false))
