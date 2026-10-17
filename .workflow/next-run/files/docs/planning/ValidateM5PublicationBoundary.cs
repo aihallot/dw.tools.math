@@ -32,11 +32,12 @@ static JsonElement Find(JsonElement items,string id) =>
     items.EnumerateArray().Single(x=>Text(x,"id")==id);
 static string ReadText(string relative)
 {
-    Require(relative.StartsWith("docs/",StringComparison.Ordinal) &&
+    Require((relative.StartsWith("docs/",StringComparison.Ordinal) ||
+        string.Equals(relative,Native,StringComparison.Ordinal)) &&
         !Path.IsPathRooted(relative) &&
         !relative.Contains("..",StringComparison.Ordinal) &&
         !relative.Contains('\\'),
-        "Only local bounded docs may be read: "+relative);
+        "Only bounded Math docs or the exact native DWF plan may be read: "+relative);
     return File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
         relative.Replace('/',Path.DirectorySeparatorChar)));
 }
