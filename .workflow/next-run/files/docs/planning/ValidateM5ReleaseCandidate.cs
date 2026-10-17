@@ -138,7 +138,8 @@ var criteria=map.GetProperty("criteria").EnumerateArray().ToArray();
 Require(criteria.Length==10,"Exactly ten mapped V1 criteria are required.");
 for(var i=0;i<criteria.Length;i++)
 {
-    var item=criteria[i],id="V1-"+(i+1).ToString("00",
+    var item=criteria[i];
+    var id="V1-"+(i+1).ToString("00",
         System.Globalization.CultureInfo.InvariantCulture);
     Require(Text(item,"id")==id && Text(item,"coverage_line")==sourceLines[i],
         "Criterion must preserve exact canonical framing and order: "+id);
