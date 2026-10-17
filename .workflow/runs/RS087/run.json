@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "RS087",
+  "title": "Qualify and close the M6 W01 numerical-analysis work package",
+  "state": "prepared",
+  "commitMessage": "feat: qualify integrated Math numerical analysis local gate and close M6 W01",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W01"
+  ],
+  "contribution": {
+    "summary": "Requalify the complete M6-W01 numerical-analysis package by rerunning 328 targeted tests, the full analysis suite, four regressions and three independent eight-probe NuGet clients on the same SHA-inspected preview.6 archive. Correct the previous RS087 pre-attempt planning refusal by recording C01/C02/C03 and gate evidence on the completed W01 node. Close W01 only; M6/W02, public NuGet, other OSes and downstream adoption remain open.",
+    "value": "Prove compatibility across three already qualified numerical families on exactly one local package artifact, with reproducible scientific oracles and shared SHA identity, without changing algorithms or upgrading bounded evidence into broad precision guarantees.",
+    "debtChanges": [
+      "Retain all six accepted C01/C02/C03 T1/T2 contracts and their 328 targeted test oracles.",
+      "Run the full existing analysis test project and four relevant Math regressions as a bounded work-package qualification gate.",
+      "Repack the actual provider-neutral BCL-only preview.6 archive locally and inspect its net10 assembly, nuspec, SHA-256 and byte count.",
+      "Pin distinct C01-T2, C02-T2 and C03-T2 consumers to one exact isolated NuGet archive and compare all three SHA/byte receipts across 24 independent scientific probes.",
+      "Do not add a fake task or rewrite math code; close only the already complete W01 work package from truthful end-to-end evidence.",
+      "Keep the parent M6 and all W02 scientific phases open; no stable/public NuGet, nonobserved OS, physical-unit conversion or downstream agent adoption claim."
+    ],
+    "nextAction": "After durable RS087 success, prepare M6-W02-C01-T1 for bounded exact integers, combinatorics and finite sequences. Keep the M6 scientific expansion milestone in progress and refrain from public NuGet promotion.",
+    "achievements": [
+      {
+        "projectNode": "M6-W01",
+        "achievement": "Close M6-W01 after its three durably completed phases pass 328 retained targeted tests, the full analysis project, four relevant regressions and 24 source-free NuGet scientific probes sharing the actual SHA-inspected local preview.6 package."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W01-local-gate-qualified.json",
+    "tests/consumers/m6-w01-c01-t2/Program.cs",
+    "tests/consumers/m6-w01-c01-t2/m6-curve-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c02-t2/Program.cs",
+    "tests/consumers/m6-w01-c02-t2/m6-univariate-boundary-consumer.csproj",
+    "tests/consumers/m6-w01-c03-t2/Program.cs",
+    "docs/planning/decisions/m6-w01-local-numerical-gate.md",
+    "docs/distribution/m6-w01-local-numerical-gate.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
