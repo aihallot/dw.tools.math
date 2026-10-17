@@ -262,6 +262,7 @@ if(!target)
            children.Any(c=>(string?)c["status"]!="done"))
             throw new InvalidOperationException("All accepted W01 phase nodes must be complete before work-package closure.");
         work["status"]="done";
+        work["evidence"]=p.Json.StringArray(PriorC01,PriorC02,PriorC03,Gate);
     });
     p.ProjectPlan.ConvergeNodeToDone(Work);
 }
