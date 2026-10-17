@@ -10,424 +10,377 @@ using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M5",Backlog="docs/planning/backlog.json";
-const string State=".aura/workflow/state.json";
-const string M5Gate="docs/planning/evidence/M5-gate.json";
-const string QualifiedStatus="m5-local-v1-independent-nuget-evidence-gate-qualified-unpublished";
-const string CandidateValidator="docs/planning/ValidateM5ReleaseCandidate.cs";
-const string PublicationValidator="docs/planning/ValidateM5PublicationBoundary.cs";
-const string GateValidator="docs/planning/ValidateM5ReleaseGate.cs";
-const string Decision="docs/planning/decisions/m5-gate.md";
-const string Document="docs/distribution/m5-local-release-gate.md";
-const string W01="docs/planning/evidence/M5-W01-work-package-qualified.json";
-const string W02="docs/planning/evidence/M5-W02-work-package-qualified.json";
-const string Boundary="docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json";
-const string Candidate="docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json";
-const string NuGetProof="docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json";
-const string M4Gate="docs/planning/evidence/M4-gate.json";
-const string OwnerRights="docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json";
-const string Product="src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj";
-const string Manifest="src/projects/dw.tools.math.distribution/MathLocalReleaseQualification.cs";
-const string TestCodecs="tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj";
-const string TestDistribution="tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj";
-const string TestSymbolics="tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj";
-const string TestIr="tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj";
-const string TestQuantities="tests/projects/dw.quantities.tests/dw.quantities.tests.csproj";
-const string Solution="dw.tools.math.slnx";
-const string Version="1.0.0-preview.4";
-const string PackageHelper=".workflow/runs/RS077/staged/checks/m5-w02-c02-t2-package-sha.cs";
-const string SurfaceConsumer="tests/consumers/m5-w02-c02-t2/m5-managed-api-boundary-consumer.csproj";
-const string SurfaceConfig="tests/consumers/m5-w02-c02-t2/NuGet.Config";
-const string CleanConsumer="tests/consumers/m5-w02-c02-t1/m5-clean-package-consumer.csproj";
-const string CleanConfig="tests/consumers/m5-w02-c02-t1/NuGet.Config";
-const string Sample="samples/m5-exact-vertical/m5-exact-vertical.csproj";
-const string SampleConfig="samples/m5-exact-vertical/NuGet.Config";
-const string GateMarker="dw.tools.math/m5-local-scientific-gate/1.0 qualified; phases=7; tasks=14; subtasks=42; v1=10; public=false";
-const string CandidateMarker="dw.tools.math/m5-v1-local-rc-evidence/1.0 qualified; criteria=10; predecessor-gates=5; publication=false";
-const string BoundaryMarker="dw.tools.math/m5-local-publication-boundary/1.0 qualified; oracles=12; recipients=3; public=false";
-const string SurfaceMarker="dw.tools.math/m5-managed-api-boundary-consumer/1.0 qualified; probes=8";
-const string CleanMarker="dw.tools.math/m5-clean-package-consumer/1.0 qualified; probes=8";
-const string SampleMarker="dw.tools.math/m5-exact-vertical-console/1.0 qualified; probes=8";
+const string Milestone="M6",Work="M6-W01",Phase="M6-W01-C01",Task="M6-W01-C01-T1";
+const string Red="M6-W01-C01-T1-R",Green="M6-W01-C01-T1-G",Verify="M6-W01-C01-T1-V";
+const string State=".aura/workflow/state.json",Backlog="docs/planning/backlog.json";
+const string Prior="docs/planning/evidence/M5-gate.json";
+const string RedProof="docs/planning/evidence/M6-W01-C01-T1-contract-red.json";
+const string Qualified="docs/planning/evidence/M6-W01-C01-T1-contract-qualified.json";
+const string QualifiedStatus="bounded-binary64-linear-natural-spline-and-ols-local-nuget-qualified";
+const string Solution="dw.tools.math.slnx",Version="1.1.0-preview.1";
+const string Product="src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj";
+const string ProductLock="src/projects/dw.tools.math.analysis/packages.lock.json";
+const string Point="src/projects/dw.tools.math.analysis/CurvePoint64.cs";
+const string Source="src/projects/dw.tools.math.analysis/M6W01C01Contract.cs";
+const string Test="tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj";
+const string TestLock="tests/projects/dw.tools.math.analysis.tests/packages.lock.json";
+const string RedTest="tests/projects/dw.tools.math.analysis.tests/M6W01C01T1RedTests.cs";
+const string GreenTests="tests/projects/dw.tools.math.analysis.tests/M6W01C01T1Tests.cs";
+const string Consumer="tests/consumers/m6-w01-c01-t1/m6-curve-analysis-consumer.csproj";
+const string ConsumerCode="tests/consumers/m6-w01-c01-t1/Program.cs";
+const string ConsumerConfig="tests/consumers/m6-w01-c01-t1/NuGet.Config";
+const string Decision="docs/planning/decisions/m6-w01-c01-t1-curve-analysis.md";
+const string Recipe="docs/distribution/m6-curve-analysis.md";
+const string PackageHelper=".workflow/runs/RS081/staged/checks/m6-w01-c01-t1-package-sha.cs";
+const string RedMarker="M6-W01-C01-T1 RED: bounded public linear/spline interpolation and least-squares analysis API is absent.";
+const string ConsumerMarker="dw.tools.math/m6-curve-analysis-consumer/1.1 qualified; probes=8";
+const int IndependentGreen=47,AllTargeted=48;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
-var target=File.Exists(Path.Combine(root,M5Gate));
-p.Workflow.RequireCurrentRun("RS080",target?null:Milestone,null,null,null,null);
-p.Workflow.RequirePriorSuccess("RS079",1,
-    "docs: qualify Math local V1 release boundaries and close M5 W02",
-    "0.1.59",1,1,0,false);
-
-p.Require.JsonValueEquals(M4Gate,"/status",
-    JsonValue.Create("m4-local-exact-symbolic-preview-gate-qualified"));
-p.Require.JsonValueEquals(M4Gate,"/m4_milestone_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(OwnerRights,
-    "/authorization/redistribute_from_dw_tools_math",JsonValue.Create(true));
-p.Require.JsonValueEquals(W01,"/status",
-    JsonValue.Create("m5-w01-exact-math-codecs-interchange-boundaries-qualified"));
-p.Require.JsonValueEquals(W01,"/m5_w01_work_package_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(W01,"/m5_release_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(W02,"/status",
-    JsonValue.Create("m5-w02-local-v1-qualification-complete-no-stable-publication"));
-p.Require.JsonValueEquals(W02,"/m5_w02_work_package_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(W02,"/final_m5_gate_pending",JsonValue.Create(true));
-p.Require.JsonValueEquals(W02,"/m5_release_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(W02,"/local_distribution_version",JsonValue.Create(Version));
-p.Require.JsonValueEquals(W02,"/public_nuget_published",JsonValue.Create(false));
-p.Require.JsonValueEquals(Candidate,"/status",
-    JsonValue.Create("ten-v1-criteria-and-prior-gates-local-release-evidence-candidate-qualified"));
-p.Require.JsonValueEquals(Candidate,"/v1_criteria_qualified",JsonValue.Create(10));
-p.Require.JsonValueEquals(Candidate,"/bounded_scientific_witnesses_checked",JsonValue.Create(17));
-p.Require.JsonValueEquals(Candidate,"/prior_milestone_gates_verified",JsonValue.Create(5));
-p.Require.JsonValueEquals(Candidate,"/public_nuget_published",JsonValue.Create(false));
-p.Require.JsonValueEquals(Boundary,"/status",
-    JsonValue.Create("local-v1-publication-owner-and-recipient-boundaries-qualified-not-released"));
-p.Require.JsonValueEquals(Boundary,"/read_only_release_boundary_oracles",JsonValue.Create(12));
-p.Require.JsonValueEquals(Boundary,"/recipient_drafts_unsent",JsonValue.Create(3));
-p.Require.JsonValueEquals(Boundary,"/m5_w02_work_package_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(Boundary,"/m5_release_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(Boundary,"/stable_release_certified",JsonValue.Create(false));
-p.Require.JsonValueEquals(NuGetProof,"/local_distribution_version",JsonValue.Create(Version));
-p.Require.JsonValueEquals(NuGetProof,"/inspected_local_archives",JsonValue.Create(7));
-p.Require.JsonValueEquals(NuGetProof,"/other_platform_rids_certified",JsonValue.Create(false));
-p.Require.JsonValueEquals(NuGetProof,"/stable_release_certified",JsonValue.Create(false));
-p.Require.TextContains(Product,"<Version>1.0.0-preview.4</Version>");
-p.Require.TextContains(Manifest,"\"dw.tools.math.distribution\",\"1.0.0-preview.4\"");
+var target=File.Exists(Path.Combine(root,Qualified));
+p.Workflow.RequireCurrentRun("RS081",
+    target?Milestone:null,target?Work:null,target?Phase:null,null,null);
+p.Workflow.RequirePriorSuccess("RS080",1,
+    "feat: qualify independent local G-M5 science gate and complete M5",
+    "0.1.59",0,0,0,true);
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("m5-local-v1-independent-nuget-evidence-gate-qualified-unpublished"));
+p.Require.JsonValueEquals(Prior,"/gate",JsonValue.Create("G-M5"));
+p.Require.JsonValueEquals(Prior,"/qualified_m5_phases",JsonValue.Create(7));
+p.Require.JsonValueEquals(Prior,"/qualified_tasks",JsonValue.Create(14));
+p.Require.JsonValueEquals(Prior,"/qualified_subtasks",JsonValue.Create(42));
+p.Require.JsonValueEquals(Prior,"/original_v1_criteria_checked",JsonValue.Create(10));
+p.Require.JsonValueEquals(Prior,"/isolated_nuget_consumer_probes",JsonValue.Create(24));
+p.Require.JsonValueEquals(Prior,"/m5_milestone_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/packages_publicly_published",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/stable_release_certified",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/owner_stable_publication_approved",JsonValue.Create(false));
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.78"),JsonValue.Create("0.1.79"));
+    JsonValue.Create("0.1.79"),JsonValue.Create("0.1.80"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.79":"0.1.78"));
-for(var index=0;index<5;index++)
-    p.Require.JsonValueEquals(Backlog,$"/releases/{index}/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(Backlog,"/releases/5/status",
-    JsonValue.Create(target?"done":"in_progress"));
-p.Require.JsonValueEquals(Backlog,"/releases/5/gate",JsonValue.Create("G-M5"));
-p.Require.JsonValueEquals(Backlog,"/releases/6/status",JsonValue.Create("planned"));
-foreach(var index in new[]{11,12})
-    p.Require.JsonValueEquals(Backlog,$"/work_packages/{index}/status",JsonValue.Create("done"));
-foreach(var index in new[]{33,34,35,36,37,38,39})
-    p.Require.JsonValueEquals(Backlog,$"/chunks/{index}/status",JsonValue.Create("done"));
-p.ProjectPlan.RequireNodeState("M4","done");
-p.ProjectPlan.RequireNodeState(Milestone,target?"done":"in-progress");
-p.ProjectPlan.RequireNodeState("M5-W01","done");
-p.ProjectPlan.RequireNodeState("M5-W02","done");
-p.ProjectPlan.RequireNodeState("M6","not-ready");
-foreach(var phase in new[]{"M5-W01-C01","M5-W01-C02","M5-W01-C03",
-    "M5-W01-C04","M5-W02-C01","M5-W02-C02","M5-W02-C03"})
-    p.ProjectPlan.RequireNodeState(phase,"done");
+    JsonValue.Create(target?"0.1.80":"0.1.79"));
+p.Require.JsonValueEquals(Backlog,"/releases/5/status",JsonValue.Create("done"));
+p.Require.JsonValueEquals(Backlog,"/releases/6/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/releases/7/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/13/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/work_packages/14/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/40/status",
+    JsonValue.Create(target?"in_progress":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/40/tasks/0/status",
+    JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/40/tasks/1/status",JsonValue.Create("planned"));
+foreach(var i in new[]{0,1,2})
+    p.Require.JsonValueEquals(Backlog,$"/chunks/40/tasks/0/subtasks/{i}/status",
+        JsonValue.Create(target?"done":"planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/41/status",JsonValue.Create("planned"));
+p.Require.JsonValueEquals(Backlog,"/chunks/43/status",JsonValue.Create("planned"));
+p.ProjectPlan.RequireNodeState("M5","done");
+p.ProjectPlan.RequireNodeState(Milestone,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Work,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Phase,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Task,target?"done":"not-ready");
+foreach(var child in new[]{Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(child,target?"done":"not-ready");
+p.ProjectPlan.RequireNodeState("M6-W01-C01-T2","not-ready");
+p.ProjectPlan.RequireNodeState("M6-W01-C02","not-ready");
+p.ProjectPlan.RequireNodeState("M6-W02","not-ready");
+p.ProjectPlan.RequireNodeState("M7","not-ready");
 
 if(!target)
 {
-    foreach(var file in new[]{GateValidator,Decision,Document,M5Gate})
+    foreach(var file in new[]{Product,ProductLock,Point,Source,Test,TestLock,
+        RedTest,GreenTests,Consumer,ConsumerCode,ConsumerConfig,Decision,
+        Recipe,RedProof,Qualified})
         p.Require.FileMissing(file);
+    p.Require.TextContains(Solution,
+        "<Project Path=\"src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj\" />");
 }
 else
 {
-    p.Require.JsonValueEquals(M5Gate,"/status",
-        JsonValue.Create(QualifiedStatus));
-    p.Require.JsonValueEquals(M5Gate,"/gate",JsonValue.Create("G-M5"));
-    p.Require.JsonValueEquals(M5Gate,"/qualified_m5_phases",JsonValue.Create(7));
-    p.Require.JsonValueEquals(M5Gate,"/qualified_tasks",JsonValue.Create(14));
-    p.Require.JsonValueEquals(M5Gate,"/qualified_subtasks",JsonValue.Create(42));
-    p.Require.JsonValueEquals(M5Gate,"/isolated_nuget_consumer_probes",JsonValue.Create(24));
-    p.Require.JsonValueEquals(M5Gate,"/m5_milestone_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(M5Gate,"/packages_publicly_published",JsonValue.Create(false));
-    p.Require.JsonValueEquals(M5Gate,"/stable_release_certified",JsonValue.Create(false));
-    p.Require.JsonValueEquals(M5Gate,"/owner_stable_publication_approved",JsonValue.Create(false));
+    p.Require.TextContains(Solution,
+        "<Project Path=\"src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj\" />");
+    p.Require.TextContains(Product,"<Version>1.1.0-preview.1</Version>");
+    p.Require.JsonValueEquals(RedProof,"/status",
+        JsonValue.Create("compiled-public-bounded-curve-analysis-api-absent-red-observed"));
+    p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(QualifiedStatus));
+    p.Require.JsonValueEquals(Qualified,"/independent_green_tests_passed",
+        JsonValue.Create(IndependentGreen));
+    p.Require.JsonValueEquals(Qualified,"/red_recovered_and_green_tests_passed",
+        JsonValue.Create(AllTargeted));
+    p.Require.JsonValueEquals(Qualified,"/independent_nuget_consumer_probes_passed",
+        JsonValue.Create(8));
+    p.Require.JsonValueEquals(Qualified,"/m6_w01_c01_t1_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m6_w01_c01_phase_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/m6_w01_work_package_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/m6_release_done",JsonValue.Create(false));
 }
-var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
-foreach(var file in new[]{CandidateValidator,PublicationValidator,GateValidator,
-    Decision,Document})
+var sha=new Dictionary<string,string>(StringComparer.Ordinal);
+// Only the compilation-ready project skeleton and RED oracle are present
+// at this stage. The actual public analysis operation API does not exist.
+foreach(var file in new[]{Solution,Product,ProductLock,Point,Test,TestLock,RedTest})
 {
-    var installed=p.Files.ReplaceFromStaged("staged/"+file,file);
-    hashes[file]=installed.AfterSha256 ??
-        throw new InvalidOperationException("G-M5 staged scientific/documentary asset SHA-256 is absent: "+file);
+    var staged=p.Files.ReplaceFromStaged("staged/"+file,file);
+    sha[file]=staged.AfterSha256 ??
+        throw new InvalidOperationException("Missing immutable scoped project/test source SHA: "+file);
 }
-foreach(var entry in new[]{
-    (File:CandidateValidator,Marker:CandidateMarker),
-    (File:PublicationValidator,Marker:BoundaryMarker),
-    (File:GateValidator,Marker:GateMarker)})
+if(!target)
 {
-    var output=Required(root,"dotnet","run","--file",entry.File,"--","--check");
-    if(!HasExactLine(output,entry.Marker))
-        throw new InvalidOperationException("Required qualified local M5 science boundary did not pass: "+entry.File);
+    Required(root,"dotnet","restore",Solution,"--locked-mode");
+    Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
+    var redOutput=Run(root,"dotnet","test",Test,"-c","Release",
+        "--no-build","--no-restore",
+        "--filter","FullyQualifiedName~M6W01C01T1RedTests.BoundedPublicLinearSplineAndLeastSquaresContractMustExist",
+        "--logger","console;verbosity=normal");
+    if(redOutput.Code==0||!redOutput.Output.Contains(RedMarker,StringComparison.Ordinal))
+        throw new InvalidOperationException(
+            "One actual compiled absent-analysis-API RED is required: "+
+            Relevant(redOutput.Output));
+    var redReceipt=new JsonObject
+    {
+        ["schema_version"]=1,["id"]="M6-W01-C01-T1-contract-red",
+        ["status"]="compiled-public-bounded-curve-analysis-api-absent-red-observed",
+        ["prior_local_m5_gate"]=Prior,
+        ["compiled_empty_analysis_package"]=Version,
+        ["compiled_red_test"]=RedTest,["compiled_red_test_sha256"]=sha[RedTest],
+        ["missing_public_api"]="BoundedCurveAnalysis64.InterpolateLinear / InterpolateNaturalSpline / FitLeastSquares",
+        ["expected_red_assertion"]=RedMarker,
+        ["compiler_failure_is_not_a_red_substitute"]=true,
+        ["independent_compiled_red_tests"]=1
+    };
+    p.Files.WriteComplete(RedProof,
+        redReceipt.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
-var gateOutput=Required(root,"dotnet","run","--file",GateValidator,"--","--check");
-var phaseLines=gateOutput.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
-    .Where(line=>line.StartsWith("M5-GATE-PHASE:",StringComparison.Ordinal)).ToArray();
-if(phaseLines.Length!=7)
-    throw new InvalidOperationException("Independent M5 gate must provide exactly seven phase SHA-256 observations.");
-var phaseIds=new[]{"M5-W01-C01","M5-W01-C02","M5-W01-C03","M5-W01-C04",
-    "M5-W02-C01","M5-W02-C02","M5-W02-C03"};
-for(var i=0;i<phaseIds.Length;i++)
+foreach(var file in new[]{Source,GreenTests,Consumer,ConsumerCode,
+    ConsumerConfig,Decision,Recipe})
 {
-    var prefix="M5-GATE-PHASE:"+phaseIds[i]+":";
-    var line=phaseLines[i];
-    var digest=line.StartsWith(prefix,StringComparison.Ordinal)?
-        line[prefix.Length..]:string.Empty;
-    if(digest.Length!=64 ||
-        digest.Any(ch=>!((ch>='0'&&ch<='9')||(ch>='a'&&ch<='f'))))
-        throw new InvalidOperationException("Missing ordered, content-derived M5 phase SHA-256: "+phaseIds[i]);
+    var staged=p.Files.ReplaceFromStaged("staged/"+file,file);
+    sha[file]=staged.AfterSha256 ??
+        throw new InvalidOperationException("New bounded analysis product scientific SHA absent: "+file);
 }
-
 Required(root,"dotnet","restore",Solution,"--locked-mode");
 Required(root,"dotnet","build",Solution,"-c","Release","--no-restore");
-foreach(var test in new[]{TestDistribution,TestCodecs,TestIr,TestSymbolics,TestQuantities})
-{
-    var focused=Required(root,"dotnet","test",test,"-c","Release",
-        "--no-build","--no-restore","--logger","console;verbosity=minimal");
-    if(!focused.Contains("Passed",StringComparison.OrdinalIgnoreCase))
-        throw new InvalidOperationException("A focused M5 scientific regression failed: "+test);
-}
-var fullTests=Required(root,"dotnet","test",Solution,"-c","Release",
+var targeted=Required(root,"dotnet","test",Test,"-c","Release",
+    "--no-build","--no-restore","--filter","FullyQualifiedName~M6W01C01T1",
+    "--logger","console;verbosity=normal");
+if(!targeted.Contains("Total tests: 48",StringComparison.OrdinalIgnoreCase) ||
+   !targeted.Contains("Passed: 48",StringComparison.OrdinalIgnoreCase))
+    throw new InvalidOperationException(
+        "Require one compiled RED recovered and 47 independent numeric/spline/OLS GREEN oracles.");
+Required(root,"dotnet","test",Test,"-c","Release",
     "--no-build","--no-restore","--logger","console;verbosity=minimal");
-if(!fullTests.Contains("Passed",StringComparison.OrdinalIgnoreCase))
-    throw new InvalidOperationException("Full admitted Math solution suite did not show passing tests.");
-
-var graph=new (string Id,string Version,string Project,string[] Dependencies)[]
+foreach(var regressionProject in new[]{
+    "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
+    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj"})
 {
-    ("dw.quantities","0.2.0-preview.1","src/projects/dw.quantities/dw.quantities.csproj",[]),
-    ("dw.tools.math.ir","0.3.0-preview.1","src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",["dw.quantities"]),
-    ("dw.tools.math.codecs","1.0.0-preview.8","src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",["dw.tools.math.ir"]),
-    ("dw.tools.math.symbolics","0.5.0-preview.10","src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",["dw.tools.math.ir"]),
-    ("dw.tools.math.numerics","0.4.0-preview.4","src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",["dw.tools.math.ir"]),
-    ("dw.tools.math.composition","0.3.0-preview.1","src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",["dw.quantities","dw.tools.math.ir"]),
-    ("dw.tools.math.distribution",Version,Product,["dw.quantities","dw.tools.math.ir",
-        "dw.tools.math.codecs","dw.tools.math.symbolics","dw.tools.math.numerics",
-        "dw.tools.math.composition"])
-};
-var feed=Path.Combine(root,"build","artifacts","m5-w02-c02-t2-local-feed");
-var archives=new List<string>();
-foreach(var pkg in graph)
-{
-    Required(root,"dotnet","pack",pkg.Project,"-c","Release",
-        "--no-build","--no-restore","-o",feed);
-    var archive=Path.Combine(feed,pkg.Id+"."+pkg.Version+".nupkg");
-    if(!File.Exists(archive))
-        throw new InvalidOperationException("M5 inspected local package missing: "+pkg.Id);
-    archives.Add(archive);
+    var output=Required(root,"dotnet","test",regressionProject,
+        "-c","Release","--no-build","--no-restore",
+        "--logger","console;verbosity=minimal");
+    if(!output.Contains("Passed",StringComparison.OrdinalIgnoreCase))
+        throw new InvalidOperationException(
+            "Prior Math analysis/typed IR numerical regression failed: "+regressionProject);
 }
-var helperArgs=new List<string>{"run","--file",PackageHelper,"--"};
-helperArgs.AddRange(archives);
-var packageOutput=Required(root,"dotnet",helperArgs.ToArray());
-var archiveReceipts=new Dictionary<string,(long Bytes,string Sha)>(StringComparer.Ordinal);
-var products=new List<JsonNode>();
-foreach(var item in graph)
-{
-    var inspected=ReadProductReceipt(packageOutput,item.Id,item.Version);
-    archiveReceipts.Add(item.Id,inspected);
-    products.Add(new JsonObject
-    {
-        ["id"]=item.Id,["version"]=item.Version,["bytes"]=inspected.Bytes,
-        ["sha256"]=inspected.Sha,
-        ["dependencies"]=p.Json.StringArray(item.Dependencies),
-        ["assembly"]="lib/net10.0/"+item.Id+".dll",
-        ["publication"]="local-only-unpublished"
-    });
-}
-
-foreach(var pair in new[]{
-    (Project:SurfaceConsumer,Config:SurfaceConfig),
-    (Project:CleanConsumer,Config:CleanConfig),
-    (Project:Sample,Config:SampleConfig)})
-    RequirePinnedSourceOnly(root,pair.Project,pair.Config,Version);
-
-var consumers=new (string Project,string Config,string Marker,int Count)[]
-{
-    (SurfaceConsumer,SurfaceConfig,SurfaceMarker,8),
-    (CleanConsumer,CleanConfig,CleanMarker,8),
-    (Sample,SampleConfig,SampleMarker,8)
-};
-var consumerOutput=new Dictionary<string,string>(StringComparer.Ordinal);
-foreach(var client in consumers)
-{
-    var cache=Path.Combine(root,"build","artifacts",
-        "m5-gate-nuget-cache-"+(client.Project==SurfaceConsumer?"surface":
-            client.Project==CleanConsumer?"clean":"sample"));
-    Required(root,"dotnet","restore",client.Project,"--source",feed,
-        "--configfile",client.Config,"--packages",cache);
-    Required(root,"dotnet","build",client.Project,"-c","Release","--no-restore");
-    var call=new List<string>{"run","--project",client.Project,
-        "-c","Release","--no-build","--no-restore"};
-    if(client.Project!=Sample)
-    {
-        call.Add("--");
-        call.AddRange(archives);
-    }
-    var result=Required(root,"dotnet",call.ToArray());
-    if(!HasExactLine(result,client.Marker))
-        throw new InvalidOperationException("Expected eight independent local NuGet Math probes missing: "+client.Project);
-    consumerOutput.Add(client.Project,result);
-}
-var clean=consumerOutput[CleanConsumer];
-var publicApi=consumerOutput[SurfaceConsumer];
-var surfaces=new List<JsonNode>();
-foreach(var pkg in graph)
-{
-    var cleanReceipt=ReadProductReceipt(clean,pkg.Id,pkg.Version,
-        "M5-W02-C02-T1-CONSUMER-SHA256:");
-    var nativeReceipt=archiveReceipts[pkg.Id];
-    if(cleanReceipt.Bytes!=nativeReceipt.Bytes ||
-       !string.Equals(cleanReceipt.Sha,nativeReceipt.Sha,StringComparison.Ordinal))
-        throw new InvalidOperationException("M5 gate package archive SHA differs from independent clean consumer: "+pkg.Id);
-    var surface=ReadSurface(publicApi,pkg.Id,pkg.Version);
-    surfaces.Add(new JsonObject
-    {
-        ["id"]=pkg.Id,["version"]=pkg.Version,
-        ["public_api_sha256"]=surface.Public,
-        ["managed_assembly_sha256"]=surface.Assembly
-    });
-}
-var sampleReceipt=consumerOutput[Sample];
-if(!sampleReceipt.Contains("\"derivative\":\"mul(2,x)\"",StringComparison.Ordinal) ||
-   !sampleReceipt.Contains("\"exact_value\":\"3\"",StringComparison.Ordinal) ||
-   !sampleReceipt.Contains("\"admitted_roots\":[\"-1\"]",StringComparison.Ordinal) ||
-   !sampleReceipt.Contains("\"excluded_candidates\":[\"1\"]",StringComparison.Ordinal) ||
-   !sampleReceipt.Contains("\"original_root_audit_complete\":false",StringComparison.Ordinal))
-    throw new InvalidOperationException("M5 exact original-domain example changed under milestone gate.");
-
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
+
+var feed=Path.Combine(root,"build","artifacts","m6-w01-c01-t1-local-feed");
+Required(root,"dotnet","pack",Product,"-c","Release",
+    "--no-build","--no-restore","-o",feed);
+var archive=Path.Combine(feed,"dw.tools.math.analysis."+Version+".nupkg");
+if(!File.Exists(archive))
+    throw new InvalidOperationException("New local Math analysis nupkg missing.");
+var inspected=Required(root,"dotnet","run","--file",PackageHelper,"--",archive);
+var productReceipt=ReadProductReceipt(inspected,"dw.tools.math.analysis",Version);
+var consumerXml=XDocument.Load(Path.Combine(root,Consumer));
+var references=consumerXml.Descendants()
+    .Where(x=>x.Name.LocalName=="PackageReference").ToArray();
+if(references.Length!=1 ||
+    (string?)references[0].Attribute("Include")!="dw.tools.math.analysis" ||
+    (string?)references[0].Attribute("Version")!="["+Version+"]" ||
+    consumerXml.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"))
+    throw new InvalidOperationException(
+        "Only one explicit pinned NuGet analysis dependency and zero source refs are admitted.");
+var feeds=XDocument.Load(Path.Combine(root,ConsumerConfig))
+    .Descendants().Single(x=>x.Name.LocalName=="packageSources");
+if(!feeds.Elements().Any(x=>x.Name.LocalName=="clear") ||
+    feeds.Elements().Any(x=>x.Name.LocalName=="add"))
+    throw new InvalidOperationException(
+        "External NuGet sources are forbidden for independent analysis consumption.");
+var isolated=Path.Combine(root,"build","artifacts","m6-w01-c01-t1-consumer-packages");
+Required(root,"dotnet","restore",Consumer,"--source",feed,
+    "--configfile",ConsumerConfig,"--packages",isolated);
+Required(root,"dotnet","build",Consumer,"-c","Release","--no-restore");
+var observed=Required(root,"dotnet","run","--project",Consumer,
+    "-c","Release","--no-build","--no-restore","--",archive);
+if(!HasExactLine(observed,ConsumerMarker))
+    throw new InvalidOperationException("Eight independent source-free Math analysis probes not present.");
+var consumerReceipt=ReadProductReceipt(observed,"dw.tools.math.analysis",
+    Version,"M6-W01-C01-T1-CONSUMER-SHA256:");
+if(consumerReceipt.Bytes!=productReceipt.Bytes ||
+   !string.Equals(consumerReceipt.Sha,productReceipt.Sha,StringComparison.Ordinal))
+    throw new InvalidOperationException(
+        "Exact nupkg bytes/SHA-256 differ between independent inspector and NuGet-only consumer.");
+
 if(!target)
 {
     var proof=new JsonObject
     {
-        ["schema_version"]=1,["id"]="M5-gate",
-        ["status"]=QualifiedStatus,
-        ["milestone"]=Milestone,["gate"]="G-M5",
-        ["release_version"]="1.0.0-local-evidence-only",
-        ["local_distribution_version"]=Version,
-        ["plan_version"]="0.1.79",
-        ["previous_m4_gate"]=M4Gate,
-        ["m5_w01_work_package"]=W01,
-        ["m5_w02_work_package"]=W02,
-        ["owner_rights_source"]=OwnerRights,
-        ["candidate_t1_proof"]=Candidate,
-        ["publication_boundary_t2_proof"]=Boundary,
-        ["qualified_phase_ids"]=p.Json.StringArray(phaseIds),
-        ["qualified_phase_evidence_sha256"]=p.Json.StringArray(phaseLines),
-        ["qualified_phase_evidence"]=p.Json.StringArray(
-            "docs/planning/evidence/M5-W01-C01-T2-boundaries-qualified.json",
-            "docs/planning/evidence/M5-W01-C02-T2-boundaries-qualified.json",
-            "docs/planning/evidence/M5-W01-C03-T2-boundaries-qualified.json",
-            "docs/planning/evidence/M5-W01-C04-T2-boundaries-qualified.json",
-            "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
-            NuGetProof,Boundary),
-        ["qualified_m5_phases"]=7,["qualified_tasks"]=14,["qualified_subtasks"]=42,
-        ["original_v1_criteria_checked"]=10,
-        ["scientific_v1_witnesses_checked"]=17,
-        ["owner_publication_boundary_oracles_checked"]=12,
-        ["three_untransmitted_recipients_retained"]=true,
-        ["gate_validator"]=GateValidator,
-        ["gate_validator_sha256"]=hashes[GateValidator],
-        ["candidate_validator"]=CandidateValidator,
-        ["candidate_validator_sha256"]=hashes[CandidateValidator],
-        ["publication_validator"]=PublicationValidator,
-        ["publication_validator_sha256"]=hashes[PublicationValidator],
-        ["gate_decision"]=Decision,["gate_decision_sha256"]=hashes[Decision],
-        ["release_recipe"]=Document,["release_recipe_sha256"]=hashes[Document],
-        ["locked_solution_restore_and_build_passed"]=true,
-        ["focused_scientific_regressions_passed"]=5,
-        ["full_solution_test_suite_passed"]=true,
-        ["seven_local_nuget_packages_inspected"]=7,
-        ["local_product_package_graph"]=p.Json.Array(products.ToArray()),
-        ["public_api_binary_surface_sha256"]=p.Json.Array(surfaces.ToArray()),
+        ["schema_version"]=1,["id"]="M6-W01-C01-T1-contract-qualified",
+        ["status"]=QualifiedStatus,["prior_m5_gate"]=Prior,
+        ["compiled_missing_public_api_red"]=RedProof,
+        ["question"]="Can a new provider-free net10 Math analysis package interpolate and fit 2-32 ordered finite binary64 points with bounded typed refusals and a source-free consumer?",
+        ["observation"]="A compiled missing-API RED recovered, 47 independent linear/natural spline/OLS GREEN tests, relevant numerical/IR/quantities/composition regressions and eight standalone NuGet probes passed.",
+        ["decision"]="Admit finite binary64 linear/natural cubic interpolation and descriptive unweighted least squares only within accepted domain and budgets, without extrapolation, units or inference guarantees.",
+        ["solution"]=Solution,["solution_sha256"]=sha[Solution],
+        ["product_project"]=Product,["product_project_sha256"]=sha[Product],
+        ["product_lock"]=ProductLock,["product_lock_sha256"]=sha[ProductLock],
+        ["product_sample"]=Point,["product_sample_sha256"]=sha[Point],
+        ["product_source"]=Source,["product_source_sha256"]=sha[Source],
+        ["tests_project"]=Test,["tests_project_sha256"]=sha[Test],
+        ["tests_lock"]=TestLock,["tests_lock_sha256"]=sha[TestLock],
+        ["red_test"]=RedTest,["red_test_sha256"]=sha[RedTest],
+        ["green_tests"]=GreenTests,["green_tests_sha256"]=sha[GreenTests],
+        ["consumer_project"]=Consumer,["consumer_project_sha256"]=sha[Consumer],
+        ["consumer_source"]=ConsumerCode,["consumer_source_sha256"]=sha[ConsumerCode],
+        ["consumer_config"]=ConsumerConfig,["consumer_config_sha256"]=sha[ConsumerConfig],
+        ["decision_document"]=Decision,["decision_document_sha256"]=sha[Decision],
+        ["distribution_document"]=Recipe,["distribution_document_sha256"]=sha[Recipe],
+        ["independent_green_tests_passed"]=IndependentGreen,
+        ["red_recovered_and_green_tests_passed"]=AllTargeted,
+        ["compiled_red_observed"]=true,
+        ["targeted_existing_numerical_regression_projects_passed"]=4,
+        ["independent_nuget_consumer_probes_passed"]=8,
+        ["package_archive_inspected"]=true,
+        ["product_package_id"]="dw.tools.math.analysis",
+        ["local_product_version"]=Version,
+        ["product_archive_bytes"]=productReceipt.Bytes,
+        ["product_archive_sha256"]=productReceipt.Sha,
+        ["product_assembly"]="lib/net10.0/dw.tools.math.analysis.dll",
         ["package_inspector"]=PackageHelper,
-        ["isolated_nuget_consumer_probes"]=24,
-        ["independent_nuget_consumers"]=3,
-        ["surface_consumer_marker"]=SurfaceMarker,
-        ["clean_consumer_marker"]=CleanMarker,
-        ["exact_sample_marker"]=SampleMarker,
-        ["runtime_target_framework"]="net10.0",
-        ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
-        ["local_math_milestone_scope_qualified"]=true,
-        ["m5_milestone_done"]=true,
-        ["m6_started"]=false,
+        ["product_has_no_external_nuget_dependencies"]=true,
+        ["consumer_has_no_project_references"]=true,
+        ["accepted_linear_interpolation_at_half"]=2,
+        ["accepted_spline_interpolation_at_half"]=2,
+        ["accepted_ols_slope"]=2,
+        ["accepted_ols_intercept"]=1,
+        ["accepted_ols_zero_sse"]=true,
+        ["natural_curved_spline_value_at_half"]=0.6875,
+        ["maximum_samples"]=32,
+        ["bounded_binary64_only"]=true,
+        ["implicit_extrapolation_admitted"]=false,
+        ["weighted_regression_certified"]=false,
+        ["unit_conversion_certified"]=false,
+        ["causal_or_predictive_inference_certified"]=false,
+        ["source_free_local_package_only"]=true,
         ["packages_publicly_published"]=false,
-        ["stable_release_certified"]=false,
-        ["owner_stable_publication_approved"]=false,
-        ["other_os_rids_certified"]=false,
-        ["cross_version_binary_compatibility_certified"]=false,
-        ["external_aura_decision_mcdm_adoption_observed"]=false,
-        ["next_accepted_scope"]="M6-W01-C01-T1: independently qualify bounded linear/spline interpolation and least squares; publication remains owner-controlled.",
+        ["m6_w01_c01_t1_done"]=true,
+        ["m6_w01_c01_phase_done"]=false,
+        ["m6_w01_work_package_done"]=false,
+        ["m6_release_done"]=false,
+        ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
+        ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
+        ["next_accepted_scope"]="M6-W01-C01-T2: independent abscissa, conditioning, extrapolation and unit policy/admission boundaries",
         ["nonclaims"]=p.Json.StringArray(
-            "M5 local milestone qualification is distinct from stable/public NuGet 1.0 publication.",
-            "A single observed host does not certify other operating systems or source/binary compatibility across versions.",
-            "The ten V1 criteria are bounded; no general CAS, Office document importer or universal mathematics.",
-            "No AURA, Decision, MCDM external adoption, migration, owner publication approval or new license is implied.")
+            "Only 2-32 strictly increasing finite points, binary64 numeric outputs; no exact rational or arbitrary spline proof.",
+            "No implicit extrapolation, weighted fitting, automated unit conversion, prediction or causality.",
+            "No external CAS, AURA, Decision/MCDM owner replacement or unqualified provider dependency.",
+            "M6-W01-C01-T2, M6 work packages, M6 release, stable/public NuGet and other OS support remain unqualified.")
     };
-    p.Files.WriteComplete(M5Gate,
+    p.Files.WriteComplete(Qualified,
         proof.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
-    p.Json.EditObject(Backlog,roadmap=>
+    p.Json.EditObject(Backlog,plan=>
     {
-        roadmap["plan_version"]="0.1.79";
-        var release=roadmap["releases"]!.AsArray().Select(x=>x!.AsObject())
-            .Single(x=>(string?)x["id"]==Milestone);
-        if((string?)release["status"]!="in_progress" ||
-           (string?)release["gate"]!="G-M5")
-            throw new InvalidOperationException("M5 original milestone version/state has drifted.");
-        release["status"]="done";
-        release["evidence"]=p.Json.StringArray(W01,W02,Candidate,Boundary,M5Gate);
+        plan["plan_version"]="0.1.80";
+        var release=plan["releases"]!.AsArray()
+            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Milestone);
+        var work=plan["work_packages"]!.AsArray()
+            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Work);
+        var phase=plan["chunks"]!.AsArray()
+            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Phase);
+        var task=phase["tasks"]!.AsArray()
+            .Select(x=>x!.AsObject()).Single(x=>(string?)x["id"]==Task);
+        if((string?)release["status"]!="planned" ||
+           (string?)work["status"]!="planned" ||
+           (string?)phase["status"]!="planned" ||
+           (string?)task["status"]!="planned")
+            throw new InvalidOperationException(
+                "M6 initial analysis product/T1 native and roadmap baseline drifted.");
+        release["status"]="in_progress";
+        work["status"]="in_progress";
+        phase["status"]="in_progress";
+        phase["refinement"]="RS081 T1 introduces a real .NET 10 dw.tools.math.analysis library and MSTest project with committed lockfiles and independent compiled absent-API RED, followed by 47 GREEN oracles and eight source-free NuGet probes. The bounded provider-free package admits finite strictly ascending 2-32 point binary64 piecewise linear and natural cubic interpolation and descriptive unweighted OLS. It qualifies y=2x+1, x=0.5 -> 2, zero SSE, curved natural spline 0.6875 and typed failure on duplicate/order/outside-domain/nonfinite/over-budget/rank-deficient data. T2 separately owns deeper extrapolation, unit, near-singular and precision conditions; M6 and W01 remain unfinished.";
+        phase["readiness"]="T1 proved finite binary64 interpolation, natural spline and unweighted OLS with 47 GREEN, a genuine compiled RED, local versioned nupkg SHA and independent eight-probe NuGet consumer; T2 limits remain planned";
+        phase["files"]=p.Json.StringArray(Solution,Product,ProductLock,Point,Source,
+            Test,TestLock,RedTest,GreenTests,Consumer,ConsumerCode,ConsumerConfig,
+            Decision,Recipe,RedProof,Qualified);
+        phase["commands"]=p.Json.StringArray(
+            "dotnet restore "+Solution+" --locked-mode",
+            "dotnet build "+Solution+" -c Release --no-restore",
+            "dotnet test "+Test+" -c Release --filter FullyQualifiedName~M6W01C01T1",
+            "dotnet test "+Test+" -c Release",
+            "dotnet run --project "+Consumer+" -c Release");
+        phase["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        task["status"]="done";
+        task["evidence"]=p.Json.StringArray(RedProof,Qualified);
+        foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
+        {
+            child["status"]="done";
+            child["evidence"]=p.Json.StringArray(
+                (string?)child["id"]==Red?RedProof:Qualified);
+        }
     });
-    p.ProjectPlan.ConvergeNodeToDone(Milestone);
+    foreach(var node in new[]{Milestone,Work,Phase,Task,Red})
+        p.ProjectPlan.TransitionNode(node,"not-ready","ready");
+    foreach(var node in new[]{Milestone,Work,Phase,Task,Red})
+        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
+    p.ProjectPlan.ConvergeNodeToDone(Red);
+    foreach(var node in new[]{Green,Verify})
+    {
+        p.ProjectPlan.TransitionNode(node,"not-ready","ready");
+        p.ProjectPlan.TransitionNode(node,"ready","in-progress");
+        p.ProjectPlan.ConvergeNodeToDone(node);
+    }
+    p.ProjectPlan.ConvergeNodeToDone(Task);
 }
-p.ProjectPlan.RequireNodeState("M4","done");
-p.ProjectPlan.RequireNodeState(Milestone,"done");
-p.ProjectPlan.RequireNodeState("M5-W01","done");
-p.ProjectPlan.RequireNodeState("M5-W02","done");
-p.ProjectPlan.RequireNodeState("M6","not-ready");
+p.ProjectPlan.RequireNodeState("M5","done");
+p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
+p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,"in-progress");
+p.ProjectPlan.RequireNodeState(Task,"done");
+foreach(var child in new[]{Red,Green,Verify})
+    p.ProjectPlan.RequireNodeState(child,"done");
+p.ProjectPlan.RequireNodeState("M6-W01-C01-T2","not-ready");
+p.ProjectPlan.RequireNodeState("M6-W01-C02","not-ready");
+p.ProjectPlan.RequireNodeState("M6-W02","not-ready");
+p.ProjectPlan.RequireNodeState("M7","not-ready");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS080"||
-       (string?)state["activeMilestone"]!=(target?null:Milestone)||
-       state["activeWorkPackage"] is not null||
-       state["activePhase"] is not null||
-       state["activeTask"] is not null||
-       state["activeSubtask"] is not null)
-        throw new InvalidOperationException("G-M5 native state cursor differs from baseline/target.");
-    state["activeMilestone"]=null;
+    if((string?)state["pendingRun"]!="RS081" ||
+       (string?)state["activeMilestone"]!=(target?Milestone:null) ||
+       (string?)state["activeWorkPackage"]!=(target?Work:null) ||
+       (string?)state["activePhase"]!=(target?Phase:null) ||
+       state["activeTask"] is not null||state["activeSubtask"] is not null)
+        throw new InvalidOperationException("RS081 new M6 hierarchy cursor differs from baseline/target.");
+    state["activeMilestone"]=Milestone;
+    state["activeWorkPackage"]=Work;
+    state["activePhase"]=Phase;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
-foreach(var check in new[]{
-    (Path:GateValidator,Marker:GateMarker),
-    (Path:CandidateValidator,Marker:CandidateMarker),
-    (Path:PublicationValidator,Marker:BoundaryMarker)})
-{
-    var result=Required(root,"dotnet","run","--file",check.Path,"--","--check");
-    if(!HasExactLine(result,check.Marker))
-        throw new InvalidOperationException("Completed local M5 gate re-entry fails: "+check.Path);
-}
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
-Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
 return p.Complete();
-
-static void RequirePinnedSourceOnly(
-    string root,string project,string config,string distributionVersion)
-{
-    var document=XDocument.Load(Path.Combine(root,project));
-    var refs=document.Descendants().Where(x=>x.Name.LocalName=="PackageReference").ToArray();
-    if(refs.Length!=1 ||
-       (string?)refs[0].Attribute("Include")!="dw.tools.math.distribution" ||
-       (string?)refs[0].Attribute("Version")!="["+distributionVersion+"]" ||
-       document.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"))
-        throw new InvalidOperationException("Exactly one source-free pinned Math NuGet project is required: "+project);
-    var feeds=XDocument.Load(Path.Combine(root,config))
-        .Descendants().Single(x=>x.Name.LocalName=="packageSources");
-    if(!feeds.Elements().Any(x=>x.Name.LocalName=="clear") ||
-       feeds.Elements().Any(x=>x.Name.LocalName=="add"))
-        throw new InvalidOperationException("External NuGet source is not admitted: "+config);
-}
-
 static bool HasExactLine(string output,string expected) =>
     output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Any(line=>line.Trim()==expected);
 
 static (long Bytes,string Sha) ReadProductReceipt(
-    string output,string id,string version,
-    string marker="M5-W02-C02-T2-PKG-SHA256:")
+    string output,string id,string version)
 {
-    var prefix=marker+id+":"+version+":";
+    var prefix="M6-W01-C01-T1-PKG-SHA256:"+id+":"+version+":";
     var found=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
         .Where(line=>line.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
     if(found.Length!=1)
@@ -476,17 +429,4 @@ static string Required(string root,string executable,params string[] args)
         throw new InvalidOperationException(executable+" "+string.Join(" ",args)+
             " exited "+result.Code+": "+Relevant(result.Output));
     return result.Output;
-}
-
-static (string Public,string Assembly) ReadSurface(string output,string id,string version)
-{
-    var prefix="M5-W02-C02-T2-SURFACE-SHA256:"+id+":"+version+":";
-    var hits=output.Split(new[]{'\r','\n'},StringSplitOptions.RemoveEmptyEntries)
-        .Where(x=>x.StartsWith(prefix,StringComparison.Ordinal)).ToArray();
-    if(hits.Length!=1)throw new InvalidOperationException("One managed ABI receipt expected: "+id);
-    var values=hits[0][prefix.Length..].Split(':');
-    if(values.Length!=2 || values.Any(x=>x.Length!=64 ||
-        x.Any(ch=>!((ch>='0'&&ch<='9')||(ch>='a'&&ch<='f')))))
-        throw new InvalidOperationException("Invalid public API or DLL SHA for "+id);
-    return(values[0],values[1]);
 }
