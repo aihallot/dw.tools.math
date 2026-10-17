@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.77",
+  "plan_version": "0.1.78",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -446,13 +446,20 @@
       "id": "M5-W02",
       "release": "M5",
       "title": "1.0 qualification",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.distribution/",
         "tests/projects/dw.tools.math.distribution.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M5-W02-C01-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W02-C02-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W02-work-package-qualified.json"
+      ]
     },
     {
       "id": "M6-W01",
@@ -6243,7 +6250,7 @@
       "title": "1.0 gate and exposure requests",
       "kind": "document",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W02-C02"
       ],
@@ -6265,23 +6272,33 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS078 T1 qualifies ten canonical V1 framing criteria against 17 exact scoped evidence witnesses and five M0-M4 predecessor gates, with one read-only executable C# validator, a bounded local 1.0 candidate map and documentation/unsent AURA Decision MCDM recipient drafts. This is an evidence-only local candidate; distribution remains preview.4 and six prior M5 phases are done. Publication, cross-OS support, owner licensing choices, recipient adoption and M5 G-M5 remain unqualified; C03 T2 is planned.",
+      "refinement": "RS078 T1 independently proved 10 canonical V1 criteria, 17 source-bound mathematical witnesses and five M0-M4 receipts as an evidence-only local candidate. RS079 T2 qualifies owner/source rights vs stable publication refusal, three unsent recipient states, observed-host-only support and future opt-in migration/rollback rules with twelve read-only independent C# oracles. The current distribution stays local preview.4. C03 and M5-W02 close as bounded local work; M5, G-M5 and all public/stable/external adoption gates remain open.",
       "files": [
         "docs/planning/releases/m5-v1-local-candidate-map.json",
         "docs/planning/ValidateM5ReleaseCandidate.cs",
         "docs/planning/decisions/m5-w02-c03-t1-release-candidate.md",
         "docs/distribution/m5-v1-local-candidate.md",
         "docs/coordination/requests/MATH-XR-004-local-v1-consumer-adoption-draft.md",
-        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "docs/planning/releases/m5-v1-publication-boundary.json",
+        "docs/planning/ValidateM5PublicationBoundary.cs",
+        "docs/planning/decisions/m5-w02-c03-t2-publication-boundary.md",
+        "docs/distribution/m5-v1-migration-and-rollback.md",
+        "docs/coordination/requests/MATH-XR-005-v1-owner-publication-decision-unsent.md",
+        "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W02-work-package-qualified.json"
       ],
       "commands": [
         "dotnet run --file docs/planning/ValidateM5ReleaseCandidate.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM5PublicationBoundary.cs -- --check",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json"
+        "docs/planning/evidence/M5-W02-C03-T1-local-candidate-qualified.json",
+        "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json",
+        "docs/planning/evidence/M5-W02-work-package-qualified.json"
       ],
-      "readiness": "C03-T1 local ten-V1-criterion evidence candidate documented and independently checked; C03-T2 owner/publication/external-adoption boundaries still pending",
+      "readiness": "Complete local candidate publication/recipient/migration boundary; future final G-M5 requires owner release decision and independent acceptance; no stable package publicly published",
       "tasks": [
         {
           "id": "M5-W02-C03-T1",
@@ -6327,29 +6344,37 @@
           "title": "Boundaries and integration",
           "behavior": "Publication requires authorization; pending external adoption neither blocks the standalone package nor becomes done.",
           "test_case": "Publication requires authorization; pending external adoption neither blocks the standalone package nor becomes done.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M5-W02-C03-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Publication requires authorization; pending external adoption neither blocks the standalone package nor becomes done.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C03-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Publication requires authorization; pending external adoption neither blocks the standalone package nor becomes done.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M5-W02-C03-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M5-W02-C03-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M5-W02-C03-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }

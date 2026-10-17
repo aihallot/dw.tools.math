@@ -26,3 +26,16 @@ AURA/Decision/MCDM integration are claimed.
 Recipient drafts are intentionally unsent. All publication decisions,
 recipient tests and owner-controlled rollout/rollback belong to C03-T2 and
 the final independent release gate.
+
+
+## M5-W02-C03-T2 continuation
+
+The independent C# V1 evidence-map validator accepts the qualified
+C03-T2 work-package closure state while preserving the same ten criteria
+and their immutable scientific receipts. At the documentary T2 boundary,
+also execute `dotnet run --file docs/planning/ValidateM5PublicationBoundary.cs -- --check`
+to verify the exact owner, release and unsent-recipient nonclaims. This
+second read-only gate does not publish packages, alter downstream repos
+or promote G-M5. The RS078 evidence retains the SHA-256 of the earlier
+T1 validator; the RS079 receipt will record the evolved validator SHA
+rather than retroactively changing the earlier scientific receipt.
