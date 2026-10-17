@@ -54,8 +54,8 @@ public sealed class M6W01C02T1Tests
     { var r=BoundedUnivariateAnalysis64.SolveBracketed(x=>x-2,1,2);Assert.IsTrue(r.Succeeded);Near(r.Root,2);Assert.AreEqual(0,r.Iterations); }
     [TestMethod] public void NegativeSlopeBracketIsAdmitted()
     { var r=BoundedUnivariateAnalysis64.SolveBracketed(x=>2-x,1,3);Assert.IsTrue(r.Succeeded);Near(r.Root,2); }
-    [TestMethod] public void BisectionHandlesSignedOppositeWithoutOverflowingProduct()
-    { var r=BoundedUnivariateAnalysis64.SolveBracketed(x=>x<0?-1e200:1e200,-1,1);Assert.IsFalse(r.Succeeded);Assert.AreEqual(UnivariateStatus64.NonConverged,r.Status); }
+    [TestMethod] public void DiscontinuousSignChangeNeverCertifiesRootError()
+    { var r=BoundedUnivariateAnalysis64.SolveBracketed(x=>x<0?-1e200:1e200,-1,1);Assert.IsTrue(r.Succeeded);Assert.IsTrue(r.AbsoluteResidual>1e199);Assert.IsFalse(r.GuaranteedRootError); }
     [TestMethod] public void MissingBracketProducesTypedNonpartialRefusal()
     { RootRejected(BoundedUnivariateAnalysis64.SolveBracketed(x=>x*x+1,1,2),UnivariateStatus64.MissingBracket); }
     [TestMethod] public void NullFunctionIsInvalidInput()
