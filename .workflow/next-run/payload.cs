@@ -14,8 +14,7 @@ const string Validator="docs/planning/ValidateNativeDwfAdoption.cs";
 const string Decision="docs/planning/decisions/m6-w02-c03-size-l-split.md";
 const string Proof="docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json";
 const string Status="m6-w02-c03-size-l-split-native-topology-qualified-no-product";
-const int PriorNodes=496,TargetNodes=523;
-const string NextGeometry="M6-W02-C03-S01";
+const int TargetNodes=523;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
