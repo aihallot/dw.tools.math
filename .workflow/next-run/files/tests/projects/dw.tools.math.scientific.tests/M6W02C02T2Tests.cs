@@ -79,7 +79,7 @@ public sealed class M6W02C02T2Tests
     [TestMethod] public void ConvertedRadianObservation()
     { var r=R(SpecialFunctionKind64.Sine,90,SpecialAngleInput64.Degrees);Assert.IsTrue(r.Succeeded);Assert.IsNotNull(r.EffectiveRadians);Assert.IsTrue(global::System.Math.Abs(r.EffectiveRadians.Value-global::System.Math.PI/2d)<1e-14); }
     [TestMethod] public void NativeRadianObservation()
-    { var r=R(SpecialFunctionKind64.Sine,0.5d,SpecialAngleInput64.Radians);Assert.IsTrue(r.Succeeded);Assert.AreEqual(0.5d,r.EffectiveRadians); }
+    { var r=R(SpecialFunctionKind64.Sine,0.5d,SpecialAngleInput64.Radians);Assert.IsTrue(r.Succeeded);Assert.IsNotNull(r.EffectiveRadians);Assert.AreEqual(0.5d,r.EffectiveRadians.Value); }
     [TestMethod] public void DegreeMetadataRecorded()
     { var r=R(SpecialFunctionKind64.Cosine,60d,SpecialAngleInput64.Degrees);Assert.IsTrue(r.Succeeded);Assert.AreEqual(SpecialAngleInput64.Degrees,r.InputAngleUnit); }
     [TestMethod] public void RadianMetadataRecorded()
