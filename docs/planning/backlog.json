@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.92",
+  "plan_version": "0.1.93",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7301,7 +7301,7 @@
       "title": "Finite Euclidean geometry and projection",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W02-C02",
         "M6-W01-C03"
@@ -7327,7 +7327,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S01"
       ],
-      "refinement": "RS092 split created this separate geometry child. RS093 T1 qualifies bounded binary64 finite 2D/3D norm, distance and projection, one compiled missing API RED, 24 GREEN, retained scientific contracts and two independently SHA-equal local preview.5 NuGet-only clients; T2 and aggregate gates remain open.",
+      "refinement": "RS093 T1 qualified finite Cartesian 2D/3D norm, distance and projection with one compiled RED, 24 GREEN and preview.5 NuGet evidence. RS094 T2 independently qualifies resolution/cancellation heuristics and typed refusals with one RED, 52 GREEN, 351 retained scientific tests, four regressions and three SHA-equal isolated local preview.6 clients. Direct T1 unchanged; C03/S02/S03 and M6 gates remain open.",
       "files": [
         "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
         "src/projects/dw.tools.math.scientific/FiniteGeometry64.cs",
@@ -7341,21 +7341,34 @@
         "docs/planning/decisions/m6-w02-c03-s01-t1-finite-euclidean.md",
         "docs/distribution/m6-finite-euclidean-t1.md",
         "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json",
+        "src/projects/dw.tools.math.scientific/FiniteGeometryBoundaryAudit64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S01T2RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S01T2Tests.cs",
+        "tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s01-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-s01-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c03-s01-t2-geometry-boundaries.md",
+        "docs/distribution/m6-finite-euclidean-boundaries.md",
+        "docs/planning/evidence/M6-W02-C03-S01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S01T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S01T2",
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s01-t1/m6-finite-geometry-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C03-S01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S01-T2-boundaries-qualified.json"
       ],
-      "readiness": "T1 qualified with limited finite Cartesian examples; T2 detailed boundary, conditioning and full integration remains planned. No parent C03 or release completion.",
+      "readiness": "S01 qualified within caller-managed Cartesian units, fixed binary64 2D/3D budgets and conservative boundary heuristics; original size-L C03/S02/S03 and M6-W02/M6 remain unfinished.",
       "tasks": [
         {
           "id": "M6-W02-C03-S01-T1",
@@ -7402,29 +7415,38 @@
           "title": "Boundaries and integration",
           "behavior": "Refuse zero projection axes, nonfinite values, dimension mismatch and non-Euclidean/geodesic interpretations; no implicit units.",
           "test_case": "Refuse zero projection axes, nonfinite values, dimension mismatch and non-Euclidean/geodesic interpretations; no implicit units.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C03-S01-T2-contract-red.json",
+            "docs/planning/evidence/M6-W02-C03-S01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C03-S01-T2-R",
               "title": "RED",
               "description": "Observe a compiled independent RED for Norm of (3,4) is 5; distance (0,0) to (3,4) is 5; projection of (3,4) on (1,0) is (3,0).",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S01-T2-G",
               "title": "GREEN",
               "description": "Implement only the finite accepted scope: Bounded finite 2D/3D Euclidean norms, distances and projections with explicit domain and finite budgets.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S01-T2-V",
               "title": "Verify and document",
               "description": "Verify the independent finite oracles, explicit boundaries and retained Math regressions for M6-W02-C03-S01-T2",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
