@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.87",
+  "plan_version": "0.1.88",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -6874,7 +6874,7 @@
       "title": "Integers, combinatorics, and sequences",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M5-W02-C03"
       ],
@@ -6899,7 +6899,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C01Tests"
       ],
-      "refinement": "RS088 T1 creates the BCL-only dw.tools.math.scientific net10 package and qualifies bounded exact gcd/lcm, finite factorial/binomial and signed arithmetic sequence sums. One genuinely compiled absent-public-API RED and 69 independent GREENs, three retained core Math regressions, real local preview.1 NuGet SHA and eight independent source-free consumer oracles prove only the stated T1 contract. T2 input signs, output and resource boundaries remain planned.",
+      "refinement": "RS088 T1 qualified bounded exact BigInteger gcd/lcm, factorial, binomial and finite arithmetic sequence sums with one compiled RED, 69 GREEN and a real source-free local preview.1 package. RS089 T2 adds explicit opt-in signed Euclidean normalization, independent finite intermediate-bit budgets and primality nonclaims, with one compiled RED recovered, 87 GREEN, 70 retained T1 tests, four Math regressions and two independent eight-probe consumers from one SHA-inspected preview.2 archive. C01 complete; M6-W02 and M6 remain in progress.",
       "files": [
         "dw.tools.math.slnx",
         "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
@@ -6916,20 +6916,33 @@
         "docs/planning/decisions/m6-w02-c01-t1-exact-integer-contract.md",
         "docs/distribution/m6-exact-integer-science.md",
         "docs/planning/evidence/M6-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C01-T1-qualified.json",
+        "src/projects/dw.tools.math.scientific/ExactScientificBoundaryAudit.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C01T2RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C01T2Tests.cs",
+        "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c01-t2/Program.cs",
+        "tests/consumers/m6-w02-c01-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c01-t2-exact-boundaries.md",
+        "docs/distribution/m6-exact-boundary-science.md",
+        "docs/planning/evidence/M6-W02-C01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C01T2",
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c01-t1/m6-exact-science-consumer.csproj -c Release"
       ],
       "evidence": [
         "docs/planning/evidence/M6-W02-C01-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C01-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C01-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json"
       ],
-      "readiness": "C01 T1 delivered finite exact integer/combinatorial contracts with operand/output bit and step budgets, typed refusals and local NuGet-only evidence. C01 T2 requires independent boundary qualification.",
+      "readiness": "C01 qualified: exact bounded integer/combinatorial formulas and explicit signed/intermediate refusal policies, backed by two compiled RED/GREEN gates and source-free NuGet evidence. C02 special functions remains planned.",
       "tasks": [
         {
           "id": "M6-W02-C01-T1",
@@ -6976,29 +6989,38 @@
           "title": "Boundaries and integration",
           "behavior": "Bound negatives, output size, and integer budgets; do not claim probabilistic primality as certainty.",
           "test_case": "Bound negatives, output size, and integer budgets; do not claim probabilistic primality as certainty.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C01-T2-contract-red.json",
+            "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C01-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Bound negatives, output size, and integer budgets; do not claim probabilistic primality as certainty.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C01-T2-G",
               "title": "GREEN",
               "description": "Implement only: Bound negatives, output size, and integer budgets; do not claim probabilistic primality as certainty.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W02-C01-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }

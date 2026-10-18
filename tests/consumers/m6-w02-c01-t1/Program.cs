@@ -4,11 +4,12 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id="dw.tools.math.scientific",Version="1.1.0-preview.1";
+const string Id="dw.tools.math.scientific",Version="1.1.0-preview.2";
 if(args.Length!=1)throw new ArgumentException("Exactly one local exact-science package required.");
 var path=Path.GetFullPath(args[0]);
 if(Path.GetFileName(path)!=Id+"."+Version+".nupkg" ||
-   Path.GetFileName(Path.GetDirectoryName(path))!="m6-w02-c01-t1-local-feed")
+   Path.GetFileName(Path.GetDirectoryName(path)) is not
+       ("m6-w02-c01-t1-local-feed" or "m6-w02-c01-t2-local-feed"))
     throw new InvalidOperationException("Only the pinned local scientific feed is admitted.");
 var bytes=File.ReadAllBytes(path);
 using(var memory=new MemoryStream(bytes,writable:false))
