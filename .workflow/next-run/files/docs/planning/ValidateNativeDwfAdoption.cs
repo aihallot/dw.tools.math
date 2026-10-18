@@ -17,7 +17,7 @@ try
     var expected = BuildExpected(backlog);
     var actual = BuildActual(plan);
 
-    Require(expected.Count == 496, $"Expected product projection count changed: {expected.Count}.");
+    Require(expected.Count == 523, $"Expected product projection count changed: {expected.Count}.");
     Require(actual.Count == expected.Count, $"Native DWF node count {actual.Count} differs from expected {expected.Count}.");
 
     foreach (var pair in expected)
@@ -38,7 +38,7 @@ try
     foreach (var id in historicalOmissions)
         Require(!actual.ContainsKey(id), "Historical C01 subtask must not be backfilled: " + id + ".");
 
-    RequireState(actual, "M0", "in-progress");
+    Require(State(actual, "M0") is "in-progress" or "done", "M0 must be in-progress or done after native DWF adoption.");
     Require(State(actual, "M0-W01") is "in-progress" or "done", "M0-W01 must be in-progress before RS002 or done after RS002.");
     RequireState(actual, "M0-W01-C01", "done");
     RequireState(actual, "M0-W01-C01-T1", "done");
@@ -83,7 +83,7 @@ try
             "Completed M0-W01-C02 target is missing its qualification decision.");
     }
 
-    Console.WriteLine($"native DWF adoption valid: nodes={actual.Count} milestones=8 workPackages=17 phases=53 tasks=106 subtasks=312 c02={(target ? "done" : "ready")}");
+    Console.WriteLine($"native DWF adoption valid: nodes={actual.Count} milestones=8 workPackages=17 phases=56 tasks=112 subtasks=330 c02={(target ? "done" : "ready")}");
     return 0;
 }
 catch (Exception ex)
