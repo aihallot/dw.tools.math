@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS092",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-18T09:11:23.9540804+00:00",
+  "completedAtUtc": "2026-10-18T09:11:27.6353726+00:00",
+  "durationMilliseconds": 3681,
+  "projectNodes": [
+    "M6",
+    "M6-W02"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+    "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+    "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261018T084648Z-9a3b2ca8180b4646"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261018T084648Z-9a3b2ca8180b4646",
+        "runId": "RS092",
+        "scope": "preselection-rs092",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs092/run-next-20261018T084648Z-9a3b2ca8180b4646"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS092/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1200,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-f2932a4622b341b3b0e582a831eee198\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1200000,
+      "DurationMilliseconds": 3560,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS092 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS091/attempt-001.json run=RS091 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W02-C02-T2-boundaries-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W02-C02-T2-boundaries-qualified.json pointer=/m6_w02_c02_phase_done\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/6/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/14/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/43/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/44/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/45/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/45/size\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/45/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/45/tasks/0/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/45/tasks/1/status\r\n[require.text-contains] VERIFIED path=docs/planning/ValidateNativeDwfAdoption.cs semantic text found\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C04 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C05 state=not-ready\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/m6-w02-c03-size-l-split.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=10667\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m6-w02-c03-size-l-split.md bytes=3551\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[json.edit-object] CHANGED path=.aura/workflow/plan/project.json semantic object updated\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03 state=not-ready\r\n[project-plan.require-direct-child] VERIFIED path=.aura/workflow/plan/project.json parent=M6-W02 child=M6-W02-C03-S01\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T1 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T1-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T1-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T2-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T2-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S01-T2-V state=not-ready\r\n[project-plan.require-direct-child] VERIFIED path=.aura/workflow/plan/project.json parent=M6-W02 child=M6-W02-C03-S02\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T1 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T1-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T1-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T2-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T2-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S02-T2-V state=not-ready\r\n[project-plan.require-direct-child] VERIFIED path=.aura/workflow/plan/project.json parent=M6-W02 child=M6-W02-C03-S03\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T1 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T1-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T1-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T2-R state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T2-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6-W02-C03-S03-T2-V state=not-ready\r\nplanning valid: 0.1.91 | 56 chunks | 0ed6c538c662720343f0c6b07f8812d21ff5882c9e4c925d173e20e41d99c681 | mode --write\r\n\n\r\nnative DWF adoption valid: nodes=523 milestones=8 workPackages=17 phases=56 tasks=112 subtasks=330 c02=done\r\n\n\r\nplanning valid: 0.1.91 | 56 chunks | 0ed6c538c662720343f0c6b07f8812d21ff5882c9e4c925d173e20e41d99c681 | mode --check\r\n\n\r\ntransfer architecture valid: 3 packages; 20 direct transfer entries; 8 host-localization files retained; UnitConverter split qualified\r\n\n\r\n10.0.402\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json bytes=1809\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json pointer=/native_node_count\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json pointer=/product_qualified\r\n[json.edit-object] NOCHANGE path=.aura/workflow/state.json semantic content already matches\r\n[payload] OK operations=69 changed=5 no-change=1 verified=63 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS092/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS092 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5442609572853b19a205491c11645694a981fe723fa5e86ed9d64195d8ddcbe9",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS091/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS091 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2293248e95fa91955f0ccbca3ec40478716c5192af34369d3d1eb65fe2960c05",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W02-C02-T2-boundaries-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m6_w02_c02_phase_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/6/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/14/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/43/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/44/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/45/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/45/size",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/45/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/45/tasks/0/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/45/tasks/1/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C04 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C05 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e2c95384eb9664e1bbd0a74b2ef9b075e0556da4ae212e40eb90a3aebe8ea8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=10667",
+        "Details": null,
+        "BeforeSha256": "d72aa8e0524504c0ef0607cfe131421cede0c211194c4cf21603237305e823e2",
+        "AfterSha256": "2181f852cee7d06c419dd7e8e77e5d7762389db66f1d15db4b5ca4980f861455",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+        "Status": 1,
+        "Summary": "bytes=3551",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba09d96e65a86d4fe1633b2364f3283a5dc5dd94dcf45e494e8e883b513a1571",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "a7419cfc5cd25cb5df6ef73c6ccc37e3981d82237d0e567403e457e84e8231b6",
+        "AfterSha256": "0ed6c538c662720343f0c6b07f8812d21ff5882c9e4c925d173e20e41d99c681",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "556ef978335b7011a6a3a06b66798e6cb076685e1f9631761493ee9855c1f29f",
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-direct-child",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "parent=M6-W02 child=M6-W02-C03-S01",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T1 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T1-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T1-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T2-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T2-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S01-T2-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-direct-child",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "parent=M6-W02 child=M6-W02-C03-S02",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T1 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T1-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T1-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T2-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T2-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S02-T2-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-direct-child",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "parent=M6-W02 child=M6-W02-C03-S03",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T1 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T1-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T1-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T2-R state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T2-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6-W02-C03-S03-T2-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ae088c2932d0b0311b3a10fe6f4de802eb818f5394bcbc88e08c030837d9be1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=1809",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f4baccf015eb013dca8547ce7abecae3175cfe0766f612ab18886959da7d028c",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/native_node_count",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/product_qualified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/state.json",
+        "Status": 2,
+        "Summary": "semantic content already matches",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261018T091037Z-e1a3853ff33d38c7",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "64c800532c67e597dc9bb28a231ecb39e65342be",
+  "invocationStartedAtUtc": "2026-10-18T09:10:37.6981197+00:00",
+  "invocationDurationMilliseconds": 49937,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS092",
+      "title": "Split C03 L-size scope into geometry, signals and uniform-series child phases",
+      "projectNodes": [
+        "M6",
+        "M6-W02"
+      ]
+    },
+    "declared": {
+      "summary": "Split M6-W02-C03 into three planned geometry, signal and uniform-series phases, preserving its original tasks, requirements and dependencies. Project 27 new native DWF nodes (496 to 523), retain strict mapping checks, and regenerate planning projections without claiming product completion. RS092 retry 1 corrects the pre-attempt CS0219 payload compilation refusal caused by two unused constants; zero attempts were allocated.",
+      "value": "Make geometry, direct DFT/convolution and uniform-series work separately executable with concrete independent oracles, finite domain policies and stable product/native identifiers, rather than activating one untestably large block.",
+      "debtChanges": [
+        "Preserve original accepted L-sized M6-W02-C03, stable IDs, T1/T2, requirements and downstream C05 dependency; no geometry-only parent substitution.",
+        "Add three size-M parent_chunk children S01 geometry, S02 direct DFT/linear convolution, S03 uniform time series, each with its own T1/T2 and RED/GREEN/V children.",
+        "Declare independent norm/projection, impulse DFT/convolution and uniform-difference/window-average scientific oracles without claiming execution.",
+        "Document finite dimensions, nonzero projection axes, DFT sign and inverse convention, aliasing, positive sampling intervals and irregular-time exclusions.",
+        "Project exactly 27 new native DWF nodes with no historical state changes and preserve 1:1 product/native IDs, dependencies and parent assertions.",
+        "Raise strict native adoption node-count expectation from 496 to 523 without disabling semantic equality; regenerate canonical planning projections.",
+        "Keep parent and all children planned/not-ready; qualify structural split only, no code, packages, new scientific guarantees or downstream adoption."
+      ],
+      "nextAction": "After durable RS092 structural success, prepare RS093 on M6-W02-C03-S01-T1: bounded finite Euclidean geometry, norm=5 for (3,4), and projection on a nonzero axis. Qualify code separately; retain S02/S03, aggregate C03, W02 and M6 as unfinished.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/README.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M6.md"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M6",
+        "objective": "Scientific expansion",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M6 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M6-W02",
+        "objective": "Complementary scientific families",
+        "kind": "work-package",
+        "parentId": "M6",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M6-W02 in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS092",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS092",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "64c800532c67e597dc9bb28a231ecb39e65342be",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "724b6403d9808c6e376b6e380480ff9be8e00e826c344481a721272c3614a6d6"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: split M6 W02 C03 scientific scope into three native DWF phases",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
