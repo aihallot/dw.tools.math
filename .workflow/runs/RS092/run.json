@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "RS092",
+  "title": "Split C03 L-size scope into geometry, signals and uniform-series child phases",
+  "state": "prepared",
+  "commitMessage": "docs: split M6 W02 C03 scientific scope into three native DWF phases",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M6",
+    "M6-W02"
+  ],
+  "contribution": {
+    "summary": "Split M6-W02-C03 into three planned geometry, signal and uniform-series phases, preserving its original tasks, requirements and dependencies. Project 27 new native DWF nodes (496 to 523), retain strict mapping checks, and regenerate planning projections without claiming product completion. RS092 retry 1 corrects the pre-attempt CS0219 payload compilation refusal caused by two unused constants; zero attempts were allocated.",
+    "value": "Make geometry, direct DFT/convolution and uniform-series work separately executable with concrete independent oracles, finite domain policies and stable product/native identifiers, rather than activating one untestably large block.",
+    "debtChanges": [
+      "Preserve original accepted L-sized M6-W02-C03, stable IDs, T1/T2, requirements and downstream C05 dependency; no geometry-only parent substitution.",
+      "Add three size-M parent_chunk children S01 geometry, S02 direct DFT/linear convolution, S03 uniform time series, each with its own T1/T2 and RED/GREEN/V children.",
+      "Declare independent norm/projection, impulse DFT/convolution and uniform-difference/window-average scientific oracles without claiming execution.",
+      "Document finite dimensions, nonzero projection axes, DFT sign and inverse convention, aliasing, positive sampling intervals and irregular-time exclusions.",
+      "Project exactly 27 new native DWF nodes with no historical state changes and preserve 1:1 product/native IDs, dependencies and parent assertions.",
+      "Raise strict native adoption node-count expectation from 496 to 523 without disabling semantic equality; regenerate canonical planning projections.",
+      "Keep parent and all children planned/not-ready; qualify structural split only, no code, packages, new scientific guarantees or downstream adoption."
+    ],
+    "nextAction": "After durable RS092 structural success, prepare RS093 on M6-W02-C03-S01-T1: bounded finite Euclidean geometry, norm=5 for (3,4), and projection on a nonzero axis. Qualify code separately; retain S02/S03, aggregate C03, W02 and M6 as unfinished.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1000
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m6-w02-c03-size-l-split.md",
+    "docs/planning/evidence/M6-W02-C03-size-l-split-qualified.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
