@@ -83,9 +83,10 @@ p.Require.TextContains(Product,target?"<Version>1.1.0-preview.6</Version>":
 foreach(var client in new[]{GeometryConsumer,SpecialConsumer})
     p.Require.TextContains(client,target?"Version=\"[1.1.0-preview.6]\"":
         "Version=\"[1.1.0-preview.5]\"");
-foreach(var source in new[]{GeometryConsumerSource,SpecialConsumerSource})
-    p.Require.TextContains(source,target?"Version=\"1.1.0-preview.6\"":
-        "Version=\"1.1.0-preview.5\"");
+p.Require.TextContains(GeometryConsumerSource,
+    target?"Version = \"1.1.0-preview.6\"":"Version = \"1.1.0-preview.5\"");
+p.Require.TextContains(SpecialConsumerSource,
+    target?"Version=\"1.1.0-preview.6\"":"Version=\"1.1.0-preview.5\"");
 p.Require.TextContains("docs/planning/ValidateNativeDwfAdoption.cs",
     "Require(expected.Count == 523,");
 p.ProjectPlan.RequireNodeState("M5","done");
