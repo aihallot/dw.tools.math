@@ -3,11 +3,11 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.6";
+const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.7";
 if (args.Length != 1) throw new ArgumentException("One local scientific boundary archive required.");
 var archive = Path.GetFullPath(args[0]);
 if (Path.GetFileName(archive) != Id + "." + Version + ".nupkg" ||
-    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c03-s01-t2-local-feed")
+    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c03-s02-t1-local-feed")
     throw new InvalidOperationException("Only the exact local S01-T2 scientific archive is accepted.");
 var bytes = File.ReadAllBytes(archive);
 using (var buffer = new MemoryStream(bytes, writable: false))
