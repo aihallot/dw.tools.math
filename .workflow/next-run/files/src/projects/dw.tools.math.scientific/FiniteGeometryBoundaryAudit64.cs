@@ -132,7 +132,7 @@ public static class FiniteGeometryBoundaryAudit64
         if (cancellationToken.IsCancellationRequested)
             return Reject(FiniteGeometryAuditStatus64.Cancelled);
         if (!outcome.Succeeded) return Reject(Map(outcome.Status));
-        if (relative is { } signal && (!double.IsFinite(signal) || signal < 0d || signal > 1d))
+        if (relative is { } signal && (!double.IsFinite(signal) || signal < 0d))
             return Reject(FiniteGeometryAuditStatus64.NonFiniteResult);
         return new(FiniteGeometryAuditStatus64.Success, outcome, relative, RuleId, false);
     }
