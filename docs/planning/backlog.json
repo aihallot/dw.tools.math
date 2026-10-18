@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.86",
+  "plan_version": "0.1.87",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -489,7 +489,7 @@
       "id": "M6-W02",
       "release": "M6",
       "title": "Complementary scientific families",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.scientific/",
         "tests/projects/dw.tools.math.scientific.tests/",
@@ -6874,7 +6874,7 @@
       "title": "Integers, combinatorics, and sequences",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M5-W02-C03"
       ],
@@ -6899,40 +6899,75 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C01Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS088 T1 creates the BCL-only dw.tools.math.scientific net10 package and qualifies bounded exact gcd/lcm, finite factorial/binomial and signed arithmetic sequence sums. One genuinely compiled absent-public-API RED and 69 independent GREENs, three retained core Math regressions, real local preview.1 NuGet SHA and eight independent source-free consumer oracles prove only the stated T1 contract. T2 input signs, output and resource boundaries remain planned.",
+      "files": [
+        "dw.tools.math.slnx",
+        "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+        "src/projects/dw.tools.math.scientific/packages.lock.json",
+        "src/projects/dw.tools.math.scientific/ExactScientificContracts.cs",
+        "src/projects/dw.tools.math.scientific/BoundedExactScientific.cs",
+        "tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj",
+        "tests/projects/dw.tools.math.scientific.tests/packages.lock.json",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C01T1RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C01T1Tests.cs",
+        "tests/consumers/m6-w02-c01-t1/m6-exact-science-consumer.csproj",
+        "tests/consumers/m6-w02-c01-t1/Program.cs",
+        "tests/consumers/m6-w02-c01-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c01-t1-exact-integer-contract.md",
+        "docs/distribution/m6-exact-integer-science.md",
+        "docs/planning/evidence/M6-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C01T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c01-t1/m6-exact-science-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C01-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+      ],
+      "readiness": "C01 T1 delivered finite exact integer/combinatorial contracts with operand/output bit and step budgets, typed refusals and local NuGet-only evidence. C01 T2 requires independent boundary qualification.",
       "tasks": [
         {
           "id": "M6-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt or implement justified gcd/lcm, factorial, binomial, and finite-sequence primitives with budgets.",
           "test_case": "gcd(48,18)=6; C(5,2)=10; 0!=1; arithmetic-sequence sum is verified exactly.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C01-T1-contract-red.json",
+            "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C01-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: gcd(48,18)=6; C(5,2)=10; 0!=1; arithmetic-sequence sum is verified exactly.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C01-T1-G",
               "title": "GREEN",
               "description": "Implement only: Adapt or implement justified gcd/lcm, factorial, binomial, and finite-sequence primitives with budgets.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W02-C01-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C01-T1-qualified.json"
+              ]
             }
           ]
         },
