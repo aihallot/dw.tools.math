@@ -4,11 +4,12 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id="dw.tools.math.scientific",Version="1.1.0-preview.2";
+const string Id="dw.tools.math.scientific",Version="1.1.0-preview.3";
 if(args.Length!=1)throw new ArgumentException("One local scientific boundary package is required.");
 var path=Path.GetFullPath(args[0]);
 if(Path.GetFileName(path)!=Id+"."+Version+".nupkg"||
-   Path.GetFileName(Path.GetDirectoryName(path))!="m6-w02-c01-t2-local-feed")
+   Path.GetFileName(Path.GetDirectoryName(path)) is not
+       ("m6-w02-c01-t2-local-feed" or "m6-w02-c02-t1-local-feed"))
     throw new InvalidOperationException("Only the exact T2 local NuGet feed is admitted.");
 var bytes=File.ReadAllBytes(path);
 using(var stream=new MemoryStream(bytes,writable:false))
