@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "id": "RS090",
+  "title": "Qualify managed real and complex elementary and positive Gamma functions",
+  "commitMessage": "feat: qualify bounded managed special functions and positive Gamma in Math scientific",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W02",
+    "M6-W02-C02",
+    "M6-W02-C02-T1",
+    "M6-W02-C02-T1-R",
+    "M6-W02-C02-T1-G",
+    "M6-W02-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify an explicit managed BCL provider for bounded real sin/cos/exp/log, positive-real Lanczos Gamma and complex principal sin/cos/exp/log in Math scientific preview.3. Recover one compiled missing-API RED and pass 79 new GREEN, 158 retained exact tests and four Math regressions. Verify a real local archive by two eight-probe NuGet-only clients with matching SHA-256. Close C02-T1 only; Gamma poles, complex Gamma, alternate branches and public release remain unqualified.",
+    "value": "Expose useful, reusable managed real/complex special functions through a provider-neutral contract with typed finite domains, radian convention, explicit backend identity and no unsupported error-bound or automatic MathNet-fallback claims.",
+    "nextAction": "After durable RS090 success, prepare M6-W02-C02-T2 to qualify Gamma poles, complex logarithm branches, angle conventions and overflow/underflow boundaries; keep C02, W02 and M6 open.",
+    "debtChanges": [
+      "Use one explicit managed BCL backend and a provider interface; prior MathNet 5.0 smoke supports EXT-NUMERIC but is not imported or silently used as fallback.",
+      "Observe a genuinely compiled missing-public-facade/provider RED before staging real and complex implementations.",
+      "Admit real sin/cos/exp/log on finite bounded domains and Lanczos Gamma only for positive real x in [0.5,20], without a precision theorem.",
+      "Admit finite complex principal Sin/Cos/Exp/Log with separate component limits; refuse complex Gamma, invalid log domain, and unknown operations.",
+      "Use radians only in T1, typed nonpartial numeric refusals, caller range controls and runtime provider/rule observations.",
+      "Recover the compiled RED, pass 79 independent GREEN and 158 retained C01 exact tests, and four relevant Math regressions.",
+      "Pack real local net10 scientific preview.3 and compare actual SHA/byte receipts from independent special-function and retained exact eight-probe NuGet clients.",
+      "Close only C02 T1 R/G/V and T1; defer C02 T2 branch/pole/angle/error boundaries, M6-W02/M6 completion and stable/public publication."
+    ],
+    "achievements": [
+      {
+        "projectNode": "M6-W02-C02-T1-R",
+        "achievement": "Observe an independently compiled reflection RED for absent bounded real/complex special-function facade and managed provider."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1-G",
+        "achievement": "Provide BCL managed real trig/exp/log, positive-real Lanczos Gamma and complex principal elementary functions with 79 scientific GREEN oracles."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1-V",
+        "achievement": "Retain 158 exact integer tests and four Math regressions; SHA-qualify actual scientific preview.3 with two independent source-free NuGet consumers."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1",
+        "achievement": "Qualify explicit provider, bounded real/complex domains, radians and noncertified Gamma approximations without closing C02 or claiming external provider adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W02-C02-T1-contract-red.json",
+    "docs/planning/evidence/M6-W02-C02-T1-qualified.json",
+    "src/projects/dw.tools.math.scientific/SpecialFunctionContracts64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1RedTests.cs",
+    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "src/projects/dw.tools.math.scientific/ManagedSpecialFunctions64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1Tests.cs",
+    "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c01-t2/Program.cs",
+    "tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj",
+    "tests/consumers/m6-w02-c02-t1/Program.cs",
+    "tests/consumers/m6-w02-c02-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w02-c02-t1-managed-special-functions.md",
+    "docs/distribution/m6-special-functions-real-complex.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.scientific/SpecialFunctionContracts64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.scientific/SpecialFunctionContracts64.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1RedTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.scientific.tests/M6W02C02T1RedTests.cs"
+    },
+    {
+      "path": "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+      "sourcePath": "files/src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj"
+    },
+    {
+      "path": "src/projects/dw.tools.math.scientific/ManagedSpecialFunctions64.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.scientific/ManagedSpecialFunctions64.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1Tests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.scientific.tests/M6W02C02T1Tests.cs"
+    },
+    {
+      "path": "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+      "sourcePath": "files/tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj"
+    },
+    {
+      "path": "tests/consumers/m6-w02-c01-t2/Program.cs",
+      "sourcePath": "files/tests/consumers/m6-w02-c01-t2/Program.cs"
+    },
+    {
+      "path": "tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj",
+      "sourcePath": "files/tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj"
+    },
+    {
+      "path": "tests/consumers/m6-w02-c02-t1/Program.cs",
+      "sourcePath": "files/tests/consumers/m6-w02-c02-t1/Program.cs"
+    },
+    {
+      "path": "tests/consumers/m6-w02-c02-t1/NuGet.Config",
+      "sourcePath": "files/tests/consumers/m6-w02-c02-t1/NuGet.Config"
+    },
+    {
+      "path": "docs/planning/decisions/m6-w02-c02-t1-managed-special-functions.md",
+      "sourcePath": "files/docs/planning/decisions/m6-w02-c02-t1-managed-special-functions.md"
+    },
+    {
+      "path": "docs/distribution/m6-special-functions-real-complex.md",
+      "sourcePath": "files/docs/distribution/m6-special-functions-real-complex.md"
+    },
+    {
+      "path": "checks/m6-w02-c02-t1-package-sha.cs",
+      "sourcePath": "checks/m6-w02-c02-t1-package-sha.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M6"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M6-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/correctionMode",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "feat: qualify exact integer sign and intermediate budgets and close M6 W02 C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS089/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.88"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/5/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/6/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/7/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/13/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/14/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/external_dependencies/2/status",
+      "expectedValue": "satisfied"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/external_dependencies/2/qualified_by",
+      "expectedValue": "M3-W01-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/43/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/tasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/tasks/0/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/tasks/0/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/tasks/0/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/44/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/45/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/5/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/tasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/tasks/0/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/tasks/0/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/tasks/0/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/1/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/workPackages/1/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "bounded-exact-signed-and-intermediate-bit-audit-local-nuget-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/independent_green_tests_passed",
+      "expectedValue": 87
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/red_recovered_and_green_tests_passed",
+      "expectedValue": 88
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/retained_t1_tests_passed",
+      "expectedValue": 70
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/independent_boundary_consumer_probes_passed",
+      "expectedValue": 8
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/retained_t1_consumer_probes_passed",
+      "expectedValue": 8
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/local_product_version",
+      "expectedValue": "1.1.0-preview.2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/m6_w02_c01_phase_done",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/m6_w02_work_package_done",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-W02-C01-T2-boundaries-qualified.json",
+      "jsonPointer": "/publicly_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+      "jsonPointer": "/selected_package_id",
+      "expectedValue": "MathNet.Numerics"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+      "jsonPointer": "/selected_package_version",
+      "expectedValue": "5.0.0"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M3-W01-C01-provider-qualified.json",
+      "jsonPointer": "/package_license_expression",
+      "expectedValue": "MIT"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "10.0.401"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/rollForward",
+      "expectedValue": "latestPatch"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/allowPrerelease",
+      "expectedValue": false
+    },
+    {
+      "repositoryPath": "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+      "expectedText": "<Version>1.1.0-preview.2</Version>",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+      "expectedText": "Version=\"[1.1.0-preview.2]\"",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "tests/consumers/m6-w02-c01-t2/Program.cs",
+      "expectedText": "Version=\"1.1.0-preview.2\"",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "dw.tools.math.slnx",
+      "expectedText": "<Project Path=\"src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj\" />",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "Directory.Build.props",
+      "expectedText": "<TreatWarningsAsErrors>true</TreatWarningsAsErrors>",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
