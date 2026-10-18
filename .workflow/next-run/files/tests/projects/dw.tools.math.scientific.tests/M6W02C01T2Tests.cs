@@ -173,7 +173,7 @@ public sealed class M6W02C01T2Tests
     [TestMethod] public void ArithmeticSeriesConstantIsExact()
     { Exact(S(3,0,4),12); }
     [TestMethod] public void ArithmeticSeriesZeroCountReturnsZero()
-    { var r=S(99,5,0);Exact(r,0);Assert.AreEqual(0L,r.MaximumIntermediateBitsObserved); }
+    { var r=S(99,5,0);Exact(r,0);Assert.IsNotNull(r.MaximumIntermediateBitsObserved);Assert.AreEqual(0L,r.MaximumIntermediateBitsObserved.Value); }
     [TestMethod] public void ArithmeticSeriesOneCountIsFirst()
     { Exact(S(-7,3,1),-7); }
     [TestMethod] public void ArithmeticSeriesMaxCountMatchesClosedOracle()
@@ -185,7 +185,7 @@ public sealed class M6W02C01T2Tests
     [TestMethod] public void ArithmeticSeriesCancellationDoesNotHideOversizedIntermediates()
     { Refused(S(1000,-2000,2,8),ExactScientificStatus.ResultTooLarge); }
     [TestMethod] public void ArithmeticSeriesExplicitElevenBitBoundaryAdmitsCancellation()
-    { var r=S(1000,-2000,2,11);Exact(r,0);Assert.AreEqual(11L,r.MaximumIntermediateBitsObserved); }
+    { var r=S(1000,-2000,2,11);Exact(r,0);Assert.IsNotNull(r.MaximumIntermediateBitsObserved);Assert.AreEqual(11L,r.MaximumIntermediateBitsObserved.Value); }
     [TestMethod] public void ArithmeticSeriesIndependentResultBudgetAdmitsCancellation()
     { Exact(S(1000,-2000,2,16,new(128,1,4096)),0); }
     [TestMethod] public void ArithmeticSeriesInputBitsAreStillBounded()
@@ -209,14 +209,14 @@ public sealed class M6W02C01T2Tests
     [TestMethod] public void ArithmeticSeriesResultHasNoSignNormalization()
     { var r=S(-3,1,5);Exact(r,-5);Assert.IsFalse(r.NegativeOperandsNormalized); }
     [TestMethod] public void ArithmeticSeriesAllZeroInputsHaveZeroIntermediateBits()
-    { var r=S(0,0,5);Exact(r,0);Assert.AreEqual(0L,r.MaximumIntermediateBitsObserved); }
+    { var r=S(0,0,5);Exact(r,0);Assert.IsNotNull(r.MaximumIntermediateBitsObserved);Assert.AreEqual(0L,r.MaximumIntermediateBitsObserved.Value); }
 
     [TestMethod] public void PriorT1NegativeGcdStillRefuses()
     { var r=BoundedExactScientific.GreatestCommonDivisor(-48,18);Assert.AreEqual(ExactScientificStatus.InvalidInput,r.Status);Assert.IsNull(r.Value); }
     [TestMethod] public void PriorT1PositiveGcdStillSucceeds()
-    { var r=BoundedExactScientific.GreatestCommonDivisor(48,18);Assert.IsTrue(r.Succeeded);Assert.AreEqual(new BigInteger(6),r.Value); }
+    { var r=BoundedExactScientific.GreatestCommonDivisor(48,18);Assert.IsTrue(r.Succeeded);Assert.IsNotNull(r.Value);Assert.AreEqual(new BigInteger(6),r.Value.Value); }
     [TestMethod] public void PriorT1FiniteSequenceResultIsUnchanged()
-    { var r=BoundedExactScientific.SumArithmeticSequence(-3,1,5);Assert.IsTrue(r.Succeeded);Assert.AreEqual(new BigInteger(-5),r.Value); }
+    { var r=BoundedExactScientific.SumArithmeticSequence(-3,1,5);Assert.IsTrue(r.Succeeded);Assert.IsNotNull(r.Value);Assert.AreEqual(new BigInteger(-5),r.Value.Value); }
     [TestMethod] public void NoProbabilisticPrimalityApiIsClaimed()
     { var names=typeof(ExactScientificBoundaryAudit).GetMethods(System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.Static).Select(m=>m.Name);Assert.IsFalse(names.Any(n=>n.Contains("Prime",StringComparison.OrdinalIgnoreCase))); }
     [TestMethod] public void AuditAssemblyRemainsIndependentOfAgentsAndCas()
