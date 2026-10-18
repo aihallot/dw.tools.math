@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.88",
+  "plan_version": "0.1.89",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7034,7 +7034,7 @@
       "title": "Special functions and trigonometry",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C01"
       ],
@@ -7061,40 +7061,74 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C02Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS090 T1 qualifies provider-neutral explicit BCL managed real sin/cos/exp/log and finite positive-real Lanczos Gamma, plus bounded complex principal Sin/Cos/Exp/Log. One compiled RED, 79 GREEN tests, 158 retained C01 tests, four core Math regressions and two SHA-matched eight-probe consumers of actual scientific preview.3. Complex Gamma, poles, alternate branches and degrees conversion are deferred to T2; no numerical guarantee or MathNet auto-import is claimed.",
+      "files": [
+        "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+        "src/projects/dw.tools.math.scientific/SpecialFunctionContracts64.cs",
+        "src/projects/dw.tools.math.scientific/ManagedSpecialFunctions64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1Tests.cs",
+        "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c01-t2/Program.cs",
+        "tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj",
+        "tests/consumers/m6-w02-c02-t1/Program.cs",
+        "tests/consumers/m6-w02-c02-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c02-t1-managed-special-functions.md",
+        "docs/distribution/m6-special-functions-real-complex.md",
+        "docs/planning/evidence/M6-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C02-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C02T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C02-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C02-T1-qualified.json"
+      ],
+      "readiness": "C02 T1 admitted managed provider identification, radians, bounded real/complex domains and positive Gamma subset with typed refusals and independent local NuGet oracles; T2 must separately qualify poles, branch, units, overflow/underflow.",
       "tasks": [
         {
           "id": "M6-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify useful exp/log/trig/gamma functions through a provider over admitted real/complex domains.",
           "test_case": "sin(0)=0; log(1)=0; Gamma(5)=24; document tolerances and angle conventions.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C02-T1-contract-red.json",
+            "docs/planning/evidence/M6-W02-C02-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C02-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: sin(0)=0; log(1)=0; Gamma(5)=24; document tolerances and angle conventions.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C02-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C02-T1-G",
               "title": "GREEN",
               "description": "Implement only: Qualify useful exp/log/trig/gamma functions through a provider over admitted real/complex domains.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C02-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W02-C02-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C02-T1-qualified.json"
+              ]
             }
           ]
         },
