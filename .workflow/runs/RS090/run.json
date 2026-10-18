@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "RS090",
+  "title": "Qualify managed real and complex elementary and positive Gamma functions",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded managed special functions and positive Gamma in Math scientific",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W02",
+    "M6-W02-C02",
+    "M6-W02-C02-T1",
+    "M6-W02-C02-T1-R",
+    "M6-W02-C02-T1-G",
+    "M6-W02-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify an explicit managed BCL provider for bounded real sin/cos/exp/log, positive-real Lanczos Gamma and complex principal sin/cos/exp/log in Math scientific preview.3. Recover one compiled missing-API RED and pass 79 new GREEN, 158 retained exact tests and four Math regressions. Verify a real local archive by two eight-probe NuGet-only clients with matching SHA-256. Close C02-T1 only; Gamma poles, complex Gamma, alternate branches and public release remain unqualified.",
+    "value": "Expose useful, reusable managed real/complex special functions through a provider-neutral contract with typed finite domains, radian convention, explicit backend identity and no unsupported error-bound or automatic MathNet-fallback claims.",
+    "debtChanges": [
+      "Use one explicit managed BCL backend and a provider interface; prior MathNet 5.0 smoke supports EXT-NUMERIC but is not imported or silently used as fallback.",
+      "Observe a genuinely compiled missing-public-facade/provider RED before staging real and complex implementations.",
+      "Admit real sin/cos/exp/log on finite bounded domains and Lanczos Gamma only for positive real x in [0.5,20], without a precision theorem.",
+      "Admit finite complex principal Sin/Cos/Exp/Log with separate component limits; refuse complex Gamma, invalid log domain, and unknown operations.",
+      "Use radians only in T1, typed nonpartial numeric refusals, caller range controls and runtime provider/rule observations.",
+      "Recover the compiled RED, pass 79 independent GREEN and 158 retained C01 exact tests, and four relevant Math regressions.",
+      "Pack real local net10 scientific preview.3 and compare actual SHA/byte receipts from independent special-function and retained exact eight-probe NuGet clients.",
+      "Close only C02 T1 R/G/V and T1; defer C02 T2 branch/pole/angle/error boundaries, M6-W02/M6 completion and stable/public publication."
+    ],
+    "nextAction": "After durable RS090 success, prepare M6-W02-C02-T2 to qualify Gamma poles, complex logarithm branches, angle conventions and overflow/underflow boundaries; keep C02, W02 and M6 open.",
+    "achievements": [
+      {
+        "projectNode": "M6-W02-C02-T1-R",
+        "achievement": "Observe an independently compiled reflection RED for absent bounded real/complex special-function facade and managed provider."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1-G",
+        "achievement": "Provide BCL managed real trig/exp/log, positive-real Lanczos Gamma and complex principal elementary functions with 79 scientific GREEN oracles."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1-V",
+        "achievement": "Retain 158 exact integer tests and four Math regressions; SHA-qualify actual scientific preview.3 with two independent source-free NuGet consumers."
+      },
+      {
+        "projectNode": "M6-W02-C02-T1",
+        "achievement": "Qualify explicit provider, bounded real/complex domains, radians and noncertified Gamma approximations without closing C02 or claiming external provider adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W02-C02-T1-contract-red.json",
+    "docs/planning/evidence/M6-W02-C02-T1-qualified.json",
+    "src/projects/dw.tools.math.scientific/SpecialFunctionContracts64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1RedTests.cs",
+    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "src/projects/dw.tools.math.scientific/ManagedSpecialFunctions64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C02T1Tests.cs",
+    "tests/consumers/m6-w02-c01-t2/m6-exact-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c01-t2/Program.cs",
+    "tests/consumers/m6-w02-c02-t1/m6-special-functions-consumer.csproj",
+    "tests/consumers/m6-w02-c02-t1/Program.cs",
+    "tests/consumers/m6-w02-c02-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w02-c02-t1-managed-special-functions.md",
+    "docs/distribution/m6-special-functions-real-complex.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
