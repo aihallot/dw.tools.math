@@ -417,7 +417,8 @@ static bool HasExactLine(string output, string marker) =>
 
 static (long Bytes, string Sha) ReadReceipt(string output, string marker)
 {
-    var prefix = marker + "dw.tools.math.scientific:" + Version + ":";
+    const string receiptVersion = "1.1.0-preview.5";
+    var prefix = marker + "dw.tools.math.scientific:" + receiptVersion + ":";
     var matches = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
         .Where(x => x.StartsWith(prefix, StringComparison.Ordinal)).ToArray();
     if (matches.Length != 1)
