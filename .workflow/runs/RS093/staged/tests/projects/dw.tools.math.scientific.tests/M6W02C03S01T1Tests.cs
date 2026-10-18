@@ -23,7 +23,7 @@ public sealed class M6W02C03S01T1Tests
         Assert.AreEqual(FiniteGeometryStatus64.Success, result.Status);
         Assert.IsNull(result.Scalar);
         Assert.IsNotNull(result.Coordinates);
-        Assert.HasCount(expected.Length, result.Coordinates);
+        Assert.AreEqual(expected.Length, result.Coordinates.Length);
         for (var i = 0; i < expected.Length; i++)
             Assert.IsTrue(global::System.Math.Abs(result.Coordinates[i] - expected[i]) <= tolerance);
         Assert.IsFalse(result.ErrorBoundGuaranteed);
