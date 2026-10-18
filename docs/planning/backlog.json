@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.91",
+  "plan_version": "0.1.92",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7301,7 +7301,7 @@
       "title": "Finite Euclidean geometry and projection",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C02",
         "M6-W01-C03"
@@ -7327,40 +7327,73 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S01"
       ],
-      "refinement": "RS092 structural split candidate only; no code or product qualification.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine bounded exact source files, compiled red, independent tests, active runner and NuGet oracles before ready.",
+      "refinement": "RS092 split created this separate geometry child. RS093 T1 qualifies bounded binary64 finite 2D/3D norm, distance and projection, one compiled missing API RED, 24 GREEN, retained scientific contracts and two independently SHA-equal local preview.5 NuGet-only clients; T2 and aggregate gates remain open.",
+      "files": [
+        "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+        "src/projects/dw.tools.math.scientific/FiniteGeometry64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S01T1RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S01T1Tests.cs",
+        "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c02-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-s01-t1/m6-finite-geometry-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s01-t1/Program.cs",
+        "tests/consumers/m6-w02-c03-s01-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c03-s01-t1-finite-euclidean.md",
+        "docs/distribution/m6-finite-euclidean-t1.md",
+        "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S01T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s01-t1/m6-finite-geometry-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+      ],
+      "readiness": "T1 qualified with limited finite Cartesian examples; T2 detailed boundary, conditioning and full integration remains planned. No parent C03 or release completion.",
       "tasks": [
         {
           "id": "M6-W02-C03-S01-T1",
           "title": "Contract and outcome",
           "behavior": "Bounded finite 2D/3D Euclidean norms, distances and projections with explicit domain and finite budgets.",
           "test_case": "Norm of (3,4) is 5; distance (0,0) to (3,4) is 5; projection of (3,4) on (1,0) is (3,0).",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json",
+            "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C03-S01-T1-R",
               "title": "RED",
               "description": "Observe a compiled independent RED for Norm of (3,4) is 5; distance (0,0) to (3,4) is 5; projection of (3,4) on (1,0) is (3,0).",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S01-T1-G",
               "title": "GREEN",
               "description": "Implement only the finite accepted scope: Bounded finite 2D/3D Euclidean norms, distances and projections with explicit domain and finite budgets.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S01-T1-V",
               "title": "Verify and document",
               "description": "Verify the independent finite oracles, explicit boundaries and retained Math regressions for M6-W02-C03-S01-T1",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S01-T1-qualified.json"
+              ]
             }
           ]
         },
