@@ -63,7 +63,7 @@ foreach(var (pointer,value) in new (string,JsonNode?)[]
 })p.Require.JsonValueEquals(Prior,pointer,value);
 p.Require.JsonValueEquals(External,"/selected_package_id",JsonValue.Create("MathNet.Numerics"));
 p.Require.JsonValueEquals(External,"/selected_package_version",JsonValue.Create("5.0.0"));
-p.Require.JsonValueEquals(External,"/license_expression",
+p.Require.JsonValueEquals(External,"/package_license_expression",
     JsonValue.Create("MIT"));
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
     JsonValue.Create("0.1.88"),JsonValue.Create("0.1.89"));
