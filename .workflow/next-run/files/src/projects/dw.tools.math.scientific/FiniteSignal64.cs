@@ -19,9 +19,10 @@ public sealed record FiniteDirectDftOutcome64(
         get
         {
             if (Status != FiniteSignalStatus64.Success || ErrorBoundGuaranteed ||
-                Bins is not { Length: >= 1 and <= FiniteSignal64.MaxSamplesPerInput } bins)
+                Bins is null || Bins.Length < 1 ||
+                Bins.Length > FiniteSignal64.MaxSamplesPerInput)
                 return false;
-            foreach (var value in bins)
+            foreach (var value in Bins)
                 if (!double.IsFinite(value.Real) || !double.IsFinite(value.Imaginary))
                     return false;
             return true;
@@ -39,9 +40,10 @@ public sealed record FiniteLinearConvolutionOutcome64(
         get
         {
             if (Status != FiniteSignalStatus64.Success || ErrorBoundGuaranteed ||
-                Samples is not { Length: >= 1 and <= 2 * FiniteSignal64.MaxSamplesPerInput - 1 } values)
+                Samples is null || Samples.Length < 1 ||
+                Samples.Length > 2 * FiniteSignal64.MaxSamplesPerInput - 1)
                 return false;
-            foreach (var value in values)
+            foreach (var value in Samples)
                 if (!double.IsFinite(value)) return false;
             return true;
         }
