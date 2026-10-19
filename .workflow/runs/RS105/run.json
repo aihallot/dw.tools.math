@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "RS105",
+  "title": "Independently qualify and close the local M6 scientific release gate",
+  "state": "prepared",
+  "commitMessage": "docs: qualify local M6 scientific release gate",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M6"
+  ],
+  "contribution": {
+    "summary": "Independently qualify the local G-M6 scientific gate across 11 admitted phases, 22 tasks and 66 subtasks. Preserve two historical local NuGet SHA/byte receipts and 10 source-free consumers; run locked restore and fresh full Release solution tests. Complete M6 locally only, with stable/public publication and external adoption explicitly unapproved.",
+    "value": "The BCL-only gate validates product/native completion, each phase\u0027s pinned evidence, the historical analysis and scientific archives, owner/semver/notices boundaries, and a fresh full solution test. Save SHA-bound validator, release decision and recipe; do not reissue packages or claim the 10 historical consumers were rerun.",
+    "debtChanges": [
+      "M6 local scientific milestone completion must remain distinct from public/stable NuGet publication, license choice or external adoption.",
+      "RS105 full-solution tests do not rerun historical source-free NuGet consumers or recreate prior package bytes.",
+      "Retain preview.6 analysis and preview.14 scientific archive SHA/byte pins and explicit finite-domain numeric limits.",
+      "Decision reuse and migration stay owner-gated through semver/notices, recipient agreement and independent verification.",
+      "M7 precision, uncertainty, tensors and other advanced features require separately admitted or deferred contracts."
+    ],
+    "nextAction": "After durable RS105 success, verify G-M6, report counters and transitions. Pause for a product roadmap decision on M7 advanced-extension admission before preparing another run. Do not presume stable/public 1.1.0 publication, new licensing or external adoption.",
+    "achievements": [
+      {
+        "projectNode": "M6",
+        "achievement": "Complete the M6 bounded local scientific milestone after independently checked 11-phase/22-task/66-subtask G-M6 evidence and fresh solution tests, with no publication or external adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2250
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-gate.json",
+    "docs/planning/ValidateM6ReleaseGate.cs",
+    "docs/planning/decisions/m6-gate.md",
+    "docs/distribution/m6-local-release-gate.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m6-local-gate",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM6ReleaseGate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    }
+  ]
+}
