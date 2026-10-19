@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "RS104",
+  "title": "Qualify owner-gated scientific adoption and close W02 documentation",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M6 scientific adoption boundaries and close W02",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W02",
+    "M6-W02-C05",
+    "M6-W02-C05-T2",
+    "M6-W02-C05-T2-A",
+    "M6-W02-C05-T2-B",
+    "M6-W02-C05-T2-C"
+  ],
+  "contribution": {
+    "summary": "Complete C05-T2 documentary Q/O/D, C05 and scientific W02 using pinned seven-family evidence, owner-gated semver/notices and an explicit retain-and-defer disposition. Preserve no automatic external cutover, no Decision approval and no new product science; leave M6\u0027s separate G-M6 release gate open.",
+    "value": "Record independent T2 decision/notices SHA-256 and the immutable RS102 local preview.14 receipt. Keep all seven families in Math, require per-family owner action, rights/licensing notices, semver, target-runtime verification and source-free consumer tests before any future change. Close C05 and W02 only after accepted documentary boundaries; no public release or sibling modification.",
+    "debtChanges": [
+      "Require specific owner disposition before changing, replacing or removing any scientific family; unanswered proposals default to retain.",
+      "Any provider cutover requires immutable source/version/SHA, notices/rights, semver compatibility, target runtime and isolated consumer evidence.",
+      "Preserve RS102 preview.14 science as historical qualification only; RS104 is documentary, with no new scientific tests or pack.",
+      "Keep the Decision bracketed-root candidate as unsent owner review; no duplication, external acceptance or sibling change is asserted.",
+      "C05/W02 documentary completion does not satisfy the independent G-M6 release gate or authorize stable/public NuGet publishing.",
+      "Retain seven finite-domain/refusal contracts and prohibit automatic external migration or numeric error-certification claims."
+    ],
+    "nextAction": "After durable RS104 success, review the separate G-M6 release gate, independently verify all required M6 chunks and local package/consumer and rights evidence, and decide readiness versus explicit blockers before preparing a milestone-close run. Do not assume stable/public 1.1.0 publication or owner approval.",
+    "achievements": [
+      {
+        "projectNode": "M6-W02-C05-T2-A",
+        "achievement": "Resolve optional scientific adoption scope, explicit owner dispositions and non-cutover acceptance criteria."
+      },
+      {
+        "projectNode": "M6-W02-C05-T2-B",
+        "achievement": "Verify seven admitted family pins, exact historical RS102 archive receipts and absent public/Decision owner authorizations."
+      },
+      {
+        "projectNode": "M6-W02-C05-T2-C",
+        "achievement": "Publish deterministic retain-and-defer decision, semver/notices/rights gates and no external cutover."
+      },
+      {
+        "projectNode": "M6-W02-C05-T2",
+        "achievement": "Qualify adoption boundaries in staged decision/notices documents and T2 evidence without new product science."
+      },
+      {
+        "projectNode": "M6-W02-C05",
+        "achievement": "Close accepted scientific documentary adoption phase after T1 contracts and T2 owner-gated boundaries."
+      },
+      {
+        "projectNode": "M6-W02",
+        "achievement": "Close completed local scientific work package C01\u2013C05 while leaving the separate M6 release gate open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W02-C05-T2-qualified.json",
+    "docs/planning/decisions/m6-w02-c05-t2.md",
+    "docs/distribution/m6-scientific-adoption-notices.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
