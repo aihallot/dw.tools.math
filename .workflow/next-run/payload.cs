@@ -350,7 +350,7 @@ if(!target)
         ["m6_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_scope"]="M6-W02-C03-S03-T1: qualify bounded uniform-series interpolation and integration with explicit sampled-domain limits, independent RED/GREEN and NuGet evidence.",
+        ["next_scope"]="M6-W02-C03-S03-T1: qualify bounded uniform-series first differences and sliding arithmetic means with explicit positive sample interval, independent RED/GREEN and local NuGet evidence.",
         ["nonclaims"]=p.Json.StringArray(
             "Discrete sampling consent does not prove Nyquist bandwidth, alias-free reconstruction or antialias filtering.",
             "The spectral and convolution ratio heuristics are not certified binary64 error bounds or observed rounding failures.",
