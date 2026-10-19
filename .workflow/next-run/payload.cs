@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,227 +7,228 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M7", Work="M7-W01", Phase="M7-W01-C01", Task="M7-W01-C01-T1";
-const string Question="M7-W01-C01-T1-A", Observation="M7-W01-C01-T1-B", DecisionNode="M7-W01-C01-T1-C";
+const string Milestone="M7", Work="M7-W01", Phase="M7-W01-C01", Task="M7-W01-C01-T2";
+const string Question="M7-W01-C01-T2-A", Observation="M7-W01-C01-T2-B", DecisionNode="M7-W01-C01-T2-C";
 const string State=".aura/workflow/state.json", Backlog="docs/planning/backlog.json";
-const string M6Gate="docs/planning/evidence/M6-gate.json";
-const string Decision="docs/planning/decisions/m7-w01-c01.md";
-const string Screen="docs/planning/decisions/m7-w01-c01-provider-screen.md";
-const string Oracle="docs/planning/ValidateM7PrecisionAdmission.cs";
-const string Qualified="docs/planning/evidence/M7-W01-C01-T1-qualified.json";
-const string Status="m7-c01-t1-bcl-exact-precision-interval-oracles-provider-screen-qualified";
-const string Marker="dw.tools.math/m7-w01-c01-t1-independent-precision-screen/1.2 qualified; cancellation=1/0; tenth=enclosed; external-provider=false";
-const string CancellationMarker="M7-PRECISION-ORACLE:CANCELLATION:EXACT=1:BINARY64=0:ULP=2";
-const string TenthMarker="M7-PRECISION-ORACLE:DECIMAL-TENTH:ADJACENT-BINARY64-ENCLOSURE=TRUE";
+const string Prior="docs/planning/evidence/M7-W01-C01-T1-qualified.json";
+const string PriorOracle="docs/planning/ValidateM7PrecisionAdmission.cs";
+const string Decision="docs/planning/decisions/m7-w01-c01-t2.md";
+const string Distribution="docs/distribution/m7-precision-interval-deferral.md";
+const string Validator="docs/planning/ValidateM7PrecisionBoundary.cs";
+const string Qualified="docs/planning/evidence/M7-W01-C01-T2-qualified.json";
+const string Status="m7-c01-t2-precision-provider-deferral-and-interval-boundaries-qualified";
+const string Marker="dw.tools.math/m7-w01-c01-t2-deferred-provider-gate/1.2 qualified; triggers=3; provider=none; public-api=false";
+const string PriorMarker="dw.tools.math/m7-w01-c01-t1-independent-precision-screen/1.2 qualified; cancellation=1/0; tenth=enclosed; external-provider=false";
+const string Trigger1="A named consumer and bounded Math operation demonstrate a gap against existing exact/binary64 contracts.";
+const string Trigger2="An exact version/source/license/RID/notices/provider-cost and offline rollback record is independently qualified.";
+const string Trigger3="Adversarial exact inclusion, rounding/refusal/budget tests and a source-free package consumer pass for each proposed operation.";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS106",
-    target?Milestone:null,target?Work:null,target?Phase:null,null,null);
-p.Workflow.RequirePriorSuccess("RS105",1,
-    "docs: qualify local M6 scientific release gate",
-    "0.1.59",1,1,0,false);
-p.Require.JsonValueEquals(M6Gate,"/status",
-    JsonValue.Create("m6-independent-local-analysis-scientific-release-gate-qualified-unpublished"));
-p.Require.JsonValueEquals(M6Gate,"/m6_milestone_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(M6Gate,"/qualified_phases",JsonValue.Create(11));
-p.Require.JsonValueEquals(M6Gate,"/packages_publicly_published",JsonValue.Create(false));
-p.Require.JsonValueEquals(M6Gate,"/stable_release_certified",JsonValue.Create(false));
-p.Require.JsonValueEquals(M6Gate,"/external_cutover_performed",JsonValue.Create(false));
+p.Workflow.RequireCurrentRun("RS107",Milestone,Work,target?null:Phase,null,null);
+p.Workflow.RequirePriorSuccess("RS106",1,
+    "docs: qualify M7 precision and interval research oracles",
+    "0.1.59",0,0,0,true);
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.104"),JsonValue.Create("0.1.105"));
+    JsonValue.Create("0.1.105"),JsonValue.Create("0.1.106"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.105":"0.1.104"));
+    JsonValue.Create(target?"0.1.106":"0.1.105"));
 p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("in_progress"));
 foreach(var (pointer,value) in new (string,string)[]
 {
-    ("/releases/6/id","M6"),
-    ("/releases/6/status","done"),
-    ("/releases/7/id",Milestone),
-    ("/releases/7/version","1.2.0-candidate"),
-    ("/releases/7/gate","G-M7"),
-    ("/releases/7/status",target?"in_progress":"planned"),
-    ("/work_packages/15/id",Work),
-    ("/work_packages/15/status",target?"in_progress":"planned"),
+    ("/releases/6/id","M6"),("/releases/6/status","done"),
+    ("/releases/7/id",Milestone),("/releases/7/status","in_progress"),
+    ("/work_packages/15/id",Work),("/work_packages/15/status","in_progress"),
     ("/work_packages/16/status","planned"),
-    ("/chunks/50/status","done"),
-    ("/chunks/51/id",Phase),
+    ("/chunks/50/status","done"),("/chunks/51/id",Phase),
     ("/chunks/51/kind","spike"),
-    ("/chunks/51/status",target?"in_progress":"planned"),
-    ("/chunks/51/tasks/0/id",Task),
-    ("/chunks/51/tasks/0/status",target?"done":"planned"),
-    ("/chunks/51/tasks/1/status","planned"),
+    ("/chunks/51/status",target?"done":"in_progress"),
+    ("/chunks/51/tasks/0/id","M7-W01-C01-T1"),
+    ("/chunks/51/tasks/0/status","done"),
+    ("/chunks/51/tasks/1/id",Task),
+    ("/chunks/51/tasks/1/status",target?"done":"planned"),
     ("/chunks/52/status","planned"),
     ("/chunks/53/status","planned")
-})
-    p.Require.JsonValueEquals(Backlog,pointer,JsonValue.Create(value));
-foreach(var index in new[]{0,1,2})
+})p.Require.JsonValueEquals(Backlog,pointer,JsonValue.Create(value));
+for(var index=0;index<3;index++)
 {
-    p.Require.JsonValueEquals(Backlog,
-        "/chunks/51/tasks/0/subtasks/"+index+"/status",
+    p.Require.JsonValueEquals(Backlog,"/chunks/51/tasks/0/subtasks/"+index+"/status",
+        JsonValue.Create("done"));
+    p.Require.JsonValueEquals(Backlog,"/chunks/51/tasks/1/subtasks/"+index+"/status",
         JsonValue.Create(target?"done":"planned"));
-    p.Require.JsonValueEquals(Backlog,
-        "/chunks/51/tasks/1/subtasks/"+index+"/status",JsonValue.Create("planned"));
 }
 p.ProjectPlan.RequireNodeState("M6","done");
-foreach(var id in new[]{Milestone,Work,Phase})
-    p.ProjectPlan.RequireNodeState(id,target?"in-progress":"not-ready");
+p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
+p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M7-W01-C01-T1","done");
+foreach(var id in new[]{"M7-W01-C01-T1-A","M7-W01-C01-T1-B","M7-W01-C01-T1-C"})
+    p.ProjectPlan.RequireNodeState(id,"done");
 foreach(var id in new[]{Task,Question,Observation,DecisionNode})
     p.ProjectPlan.RequireNodeState(id,target?"done":"not-ready");
-foreach(var id in new[]{"M7-W01-C01-T2","M7-W01-C01-T2-A","M7-W01-C01-T2-B",
-    "M7-W01-C01-T2-C","M7-W01-C02","M7-W01-C03","M7-W02"})
+foreach(var id in new[]{"M7-W01-C02","M7-W01-C03","M7-W02"})
     p.ProjectPlan.RequireNodeState(id,"not-ready");
+p.Require.JsonValueEquals(Prior,"/status",
+    JsonValue.Create("m7-c01-t1-bcl-exact-precision-interval-oracles-provider-screen-qualified"));
+p.Require.JsonValueEquals(Prior,"/exact_integer_result",JsonValue.Create("1"));
+p.Require.JsonValueEquals(Prior,"/observed_binary64_cancellation",JsonValue.Create("0"));
+p.Require.JsonValueEquals(Prior,"/reference_tenth_enclosed",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/independent_oracle_cases",JsonValue.Create(2));
+p.Require.JsonValueEquals(Prior,"/precision_reference_oracles_run",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/one_constant_enclosure_is_general_interval_certification",
+    JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/external_provider_adopted",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/public_precision_api_delivered",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/t1_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Prior,"/t2_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/m7_w01_c01_parent_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/m7_w01_work_package_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Prior,"/m7_release_done",JsonValue.Create(false));
 p.Require.TextContains("docs/planning/ValidateNativeDwfAdoption.cs",
     "Require(expected.Count == 523,");
-p.Require.FileExists("src/projects/dw.quantities/ExactRational.cs");
-p.Require.FileExists("src/projects/dw.quantities/ExactBinaryNumber.cs");
+p.Require.TextContains(PriorOracle,
+    "M7-PRECISION-ORACLE:DECIMAL-TENTH:ADJACENT-BINARY64-ENCLOSURE=TRUE");
 
 if(!target)
 {
-    foreach(var file in new[]{Decision,Screen,Oracle,Qualified})
+    foreach(var file in new[]{Decision,Distribution,Validator,Qualified})
         p.Require.FileMissing(file);
 }
 else
 {
     p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(Status));
-    p.Require.JsonValueEquals(Qualified,"/precision_reference_oracles_run",
-        JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/exact_integer_result",
-        JsonValue.Create("1"));
-    p.Require.JsonValueEquals(Qualified,"/observed_binary64_cancellation",
-        JsonValue.Create("0"));
-    p.Require.JsonValueEquals(Qualified,"/reference_tenth_enclosed",
-        JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/disposition",
+        JsonValue.Create("defer-new-precision-interval-provider"));
+    p.Require.JsonValueEquals(Qualified,"/review_trigger_count",JsonValue.Create(3));
+    p.Require.JsonValueEquals(Qualified,"/external_provider_adopted",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/public_precision_api_delivered",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/automatic_cutover",JsonValue.Create(false));
     p.Require.JsonValueEquals(Qualified,"/t1_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/t2_done",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/external_provider_adopted",
-        JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/public_precision_api_delivered",
-        JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/m7_release_done",
-        JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/t2_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m7_w01_c01_parent_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Qualified,"/m7_w01_work_package_done",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Qualified,"/m7_release_done",JsonValue.Create(false));
 }
-var decisionWrite=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
-var screenWrite=p.Files.ReplaceFromStaged("staged/"+Screen,Screen);
-var oracleWrite=p.Files.ReplaceFromStaged("staged/"+Oracle,Oracle);
-var decisionSha=decisionWrite.AfterSha256 ??
-    throw new InvalidOperationException("Missing staged precision decision SHA-256.");
-var screenSha=screenWrite.AfterSha256 ??
-    throw new InvalidOperationException("Missing staged provider evaluation SHA-256.");
-var oracleSha=oracleWrite.AfterSha256 ??
-    throw new InvalidOperationException("Missing staged independent oracle SHA-256.");
-foreach(var value in new[]{"## Question","## Observation","## Decision",
-    "1/10","BigInteger","M7-W01-C01-T2","defer","no product capability"})
-    p.Require.TextContains(Decision,value,StringComparison.OrdinalIgnoreCase);
-foreach(var value in new[]{"## Candidate strategy screen","BigInteger",
-    "decimal","native","not admitted","source-free consumer"})
-    p.Require.TextContains(Screen,value,StringComparison.OrdinalIgnoreCase);
-p.Require.TextContains(Oracle,"M7-PRECISION-ORACLE:CANCELLATION:EXACT=1:BINARY64=0:ULP=2");
-p.Require.TextContains(Oracle,"M7-PRECISION-ORACLE:DECIMAL-TENTH:ADJACENT-BINARY64-ENCLOSURE=TRUE");
-
-var observed=Required(root,"dotnet","run","--file",Oracle,"--","--check");
-foreach(var marker in new[]{CancellationMarker,TenthMarker,Marker})
-    if(!observed.Contains(marker,StringComparison.Ordinal))
-        throw new InvalidOperationException("Independent precision oracle marker missing: "+marker);
-
+var decisionResult=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
+var distributionResult=p.Files.ReplaceFromStaged("staged/"+Distribution,Distribution);
+var validatorResult=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
+var decisionSha=decisionResult.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged T2 decision source SHA-256.");
+var distributionSha=distributionResult.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged T2 distribution source SHA-256.");
+var validatorSha=validatorResult.AfterSha256 ??
+    throw new InvalidOperationException("Missing T2 BCL validator SHA-256.");
+foreach(var marker in new[]{"## Question","## Observation","## Decision",
+    "All three triggers are necessary","DEFER","No product API",
+    "M7-W01-C02"})
+    p.Require.TextContains(Decision,marker,StringComparison.OrdinalIgnoreCase);
+foreach(var marker in new[]{"## Not-admitted candidate matrix","## Three review triggers",
+    "If any trigger is missing: **remain deferred**","M7-W01-C02"})
+    p.Require.TextContains(Distribution,marker,StringComparison.Ordinal);
+p.Require.TextContains(Validator,Marker);
 if(!target)
 {
-    var record=new JsonObject
+    var replay=Required(root,"dotnet","run","--file",PriorOracle,"--","--check");
+    if(!replay.Contains(PriorMarker,StringComparison.Ordinal))
+        throw new InvalidOperationException("Historical independent T1 exact numeric oracles were not reverified.");
+}
+var baseline=Required(root,"dotnet","run","--file",Validator,"--","--check");
+if(!baseline.Contains(Marker,StringComparison.Ordinal))
+    throw new InvalidOperationException("Independent T2 source/deferral gate did not pass.");
+if(!target)
+{
+    var manifest=new JsonObject
     {
-        ["schema_version"]=1,
-        ["id"]="M7-W01-C01-T1-qualified",
+        ["schema_version"]=1,["id"]="M7-W01-C01-T2-qualified",
         ["status"]=Status,
-        ["question"]="Do finite high-precision and interval needs exceed existing exact rationals and binary64, and what evidence would justify a provider?",
-        ["observation"]="A BCL-only independent integer reference gives 1 versus binary64 cancellation 0 at 1e16; exact binary decoding proves adjacent IEEE 754 doubles enclose 1/10. No external provider was inspected.",
-        ["decision"]="Admit reproducible research oracles and candidate criteria only. Defer any new high-precision or interval product API/provider until separate T2 qualification and owner admission.",
-        ["prior_m6_gate"]=M6Gate,
-        ["oracle_validator"]=Oracle,
-        ["oracle_validator_sha256"]=oracleSha,
-        ["decision_document"]=Decision,
-        ["decision_document_sha256"]=decisionSha,
-        ["provider_screen"]=Screen,
-        ["provider_screen_sha256"]=screenSha,
-        ["exact_integer_result"]="1",
-        ["observed_binary64_cancellation"]="0",
-        ["binary64_ulp_at_1e16"]="2",
-        ["reference_tenth_enclosed"]=true,
-        ["reference_upper_exact_numerator"]="3602879701896397",
-        ["reference_upper_exact_denominator"]="36028797018963968",
-        ["precision_reference_oracles_run"]=true,
-        ["independent_oracle_cases"]=2,
-        ["existing_exact_rational_retained"]=true,
-        ["calculation_precision_is_measurement_error"]=false,
-        ["one_constant_enclosure_is_general_interval_certification"]=false,
-        ["unverified_external_provider_count_adopted"]=0,
+        ["question"]="Do Math consumers and verifiable source/rounding/rights evidence justify an external arbitrary-precision or interval provider now?",
+        ["observation"]="T1 independent exact-oracle evidence remains pinned; no named product gap, verified external provider/license/RID or admitted per-operation interval corpus and consumer is available.",
+        ["decision"]="Explicitly defer all new high-precision and interval providers and public APIs until all three bounded review triggers are satisfied in a future owner-approved run.",
+        ["prior_precision_evidence"]=Prior,
+        ["prior_oracle_validator"]=PriorOracle,
+        ["prior_oracles_reexecuted_before_boundary_transition"]=true,
+        ["prior_reference_oracle_cases"]=2,
+        ["disposition"]="defer-new-precision-interval-provider",
+        ["review_trigger_count"]=3,
+        ["review_triggers"]=p.Json.StringArray(Trigger1,Trigger2,Trigger3),
+        ["provider_categories_screened"]=5,
+        ["new_provider_categories_admitted"]=0,
         ["external_provider_adopted"]=false,
         ["external_library_installed"]=false,
+        ["provider_license_verified"]=false,
+        ["provider_rid_qualified"]=false,
+        ["provider_source_free_consumer_qualified"]=false,
+        ["certified_interval_arithmetic_delivered"]=false,
+        ["physical_measurement_uncertainty_certified"]=false,
         ["public_precision_api_delivered"]=false,
-        ["scientific_tests_rerun"]=false,
+        ["automatic_cutover"]=false,
         ["publicly_published"]=false,
-        ["t1_done"]=true,
-        ["t2_done"]=false,
-        ["m7_w01_c01_parent_done"]=false,
+        ["new_math_code_or_packages_built"]=false,
+        ["decision_document"]=Decision,
+        ["decision_document_sha256"]=decisionSha,
+        ["distribution_document"]=Distribution,
+        ["distribution_document_sha256"]=distributionSha,
+        ["boundary_validator"]=Validator,
+        ["boundary_validator_sha256"]=validatorSha,
+        ["t1_done"]=true,["t2_done"]=true,
+        ["m7_w01_c01_parent_done"]=true,
         ["m7_w01_work_package_done"]=false,
         ["m7_release_done"]=false,
         ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_scope"]="M7-W01-C01-T2: qualify finite operation limits, provider/license/version/rights/RID and rounding semantics or issue a documented deferral with trigger; no product API without independent acceptance.",
+        ["next_scope"]="M7-W01-C02-T1: research tensor shape, 2x2x2 independent oracle, incompatible dimensions and size budgets without inventing an advanced package.",
         ["nonclaims"]=p.Json.StringArray(
-            "No public high-precision, interval or physical uncertainty API was implemented or packed.",
-            "A single correctly enclosing rational witness is not general directed-rounding interval certification.",
-            "Third-party managed and native provider categories have no pinned package, license, platform or source-free client qualification.",
-            "M7-W01-C01-T2, parent C01, M7-W01 and M7 remain incomplete.")
+            "A completed research spike does not deliver a high-precision real or certified interval arithmetic API.",
+            "No provider is selected, installed, version/right/RID-qualified or integrated; the three review triggers are not owner approval.",
+            "Two rational reference oracles are not a general error theorem, statistical confidence or physical uncertainty model.",
+            "M7-W01 and M7 remain active while later advanced research scopes are separately admitted.")
     };
     p.Files.WriteComplete(Qualified,
-        record.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
+        manifest.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,doc=>
     {
-        if((string?)doc["plan_version"]!="0.1.104")
-            throw new InvalidOperationException("M7 precision baseline plan version changed.");
-        var milestone=doc["releases"]!.AsArray()[7]!.AsObject();
-        var wp=doc["work_packages"]!.AsArray()[15]!.AsObject();
+        if((string?)doc["plan_version"]!="0.1.105")
+            throw new InvalidOperationException("M7 C01 T2 baseline version changed.");
+        var release=doc["releases"]!.AsArray()[7]!.AsObject();
+        var work=doc["work_packages"]!.AsArray()[15]!.AsObject();
         var chunk=doc["chunks"]!.AsArray()[51]!.AsObject();
-        var task=chunk["tasks"]!.AsArray()[0]!.AsObject();
-        if((string?)milestone["id"]!=Milestone ||
-            (string?)milestone["status"]!="planned" ||
-            (string?)wp["id"]!=Work || (string?)wp["status"]!="planned" ||
+        var t2=chunk["tasks"]!.AsArray()[1]!.AsObject();
+        if((string?)release["id"]!=Milestone ||
+            (string?)release["status"]!="in_progress" ||
+            (string?)work["id"]!=Work ||
+            (string?)work["status"]!="in_progress" ||
             (string?)chunk["id"]!=Phase ||
             (string?)chunk["kind"]!="spike" ||
-            (string?)chunk["status"]!="planned" ||
-            (string?)task["id"]!=Task ||
-            (string?)task["status"]!="planned" ||
-            (string?)chunk["tasks"]!.AsArray()[1]!["status"]!="planned")
-            throw new InvalidOperationException("M7 C01 T1 documentary baseline drifted.");
-        doc["plan_version"]="0.1.105";
-        milestone["status"]="in_progress";
-        wp["status"]="in_progress";
-        chunk["status"]="in_progress";
-        chunk["refinement"]="RS106 T1 qualifies a BCL-only exact cancellation and adjacent-double rational enclosure oracle, documents existing exact-rational reuse and conditional provider costs. This spike delivers no precision/interval API, certifying interval engine or public package. T2 stays planned for admission/deferral, version, license and rounding gates.";
-        chunk["readiness"]="T1 Q/O/D research qualified with two independent finite oracles, explicit noncertification, and a bounded candidate-provider screen. T2 is pending; no external numeric provider or precise rounding contract has been selected.";
-        var existingFiles=chunk["files"]!.AsArray()
-            .Select(x=>x!.GetValue<string>());
-        chunk["files"]=p.Json.StringArray(existingFiles.Concat(new[]{
-            Decision,Screen,Oracle,Qualified}).Distinct(StringComparer.Ordinal).ToArray());
-        var existingEvidence=chunk["evidence"]!.AsArray()
-            .Select(x=>x!.GetValue<string>());
-        chunk["evidence"]=p.Json.StringArray(existingEvidence.Concat(new[]{Qualified})
+            (string?)chunk["status"]!="in_progress" ||
+            (string?)chunk["tasks"]!.AsArray()[0]!["status"]!="done" ||
+            (string?)t2["id"]!=Task || (string?)t2["status"]!="planned")
+            throw new InvalidOperationException("M7 precision provider disposition baseline drifted.");
+        doc["plan_version"]="0.1.106";
+        chunk["status"]="done";
+        chunk["refinement"]="T1 retained two BCL-only independent integer/rational reference oracles and a provider screening matrix. RS107 T2 explicitly defers new high-precision/interval provider and API until all three review triggers (consumer need, source/license/RID/cost evidence, per-operation rounding and independent consumer tests) are independently qualified. No provider cutover or new product capability.";
+        chunk["readiness"]="M7-W01-C01 research spike complete by a documented provider-deferral decision with three review triggers, not by delivery of an arbitrary-precision or interval engine. Existing Math exact and binary64 contracts remain admitted; M7-W01-C02 remains planned.";
+        var files=chunk["files"]!.AsArray().Select(x=>x!.GetValue<string>());
+        chunk["files"]=p.Json.StringArray(files.Concat(new[]{
+            Decision,Distribution,Validator,Qualified}).Distinct(StringComparer.Ordinal).ToArray());
+        var evidence=chunk["evidence"]!.AsArray().Select(x=>x!.GetValue<string>());
+        chunk["evidence"]=p.Json.StringArray(evidence.Concat(new[]{Qualified})
             .Distinct(StringComparer.Ordinal).ToArray());
         chunk["commands"]=p.Json.StringArray(
-            "dotnet run --file docs/planning/ValidateM7PrecisionAdmission.cs -- --check",
+            "dotnet run --file docs/planning/ValidateM7PrecisionBoundary.cs -- --check",
             "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
             "dotnet run --file docs/planning/ValidatePlan.cs -- --check");
-        task["status"]="done";
-        task["evidence"]=p.Json.StringArray(Qualified);
-        foreach(var child in task["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
+        t2["status"]="done";
+        t2["evidence"]=p.Json.StringArray(Qualified);
+        foreach(var child in t2["subtasks"]!.AsArray().Select(x=>x!.AsObject()))
         {
             if((string?)child["status"]!="planned")
-                throw new InvalidOperationException("T1 Q/O/D subtask baseline changed.");
+                throw new InvalidOperationException("M7 C01 T2 Q/O/D child was not planned.");
             child["status"]="done";
             child["evidence"]=p.Json.StringArray(Qualified);
         }
     });
-    foreach(var id in new[]{Milestone,Work,Phase,Task,Question})
+    foreach(var id in new[]{Task,Question})
     {
         p.ProjectPlan.TransitionNode(id,"not-ready","ready");
         p.ProjectPlan.TransitionNode(id,"ready","in-progress");
@@ -241,60 +241,60 @@ if(!target)
         p.ProjectPlan.ConvergeNodeToDone(id);
     }
     p.ProjectPlan.ConvergeNodeToDone(Task);
+    p.ProjectPlan.ConvergeNodeToDone(Phase);
 }
-foreach(var id in new[]{Milestone,Work,Phase})
-    p.ProjectPlan.RequireNodeState(id,"in-progress");
+p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
+p.ProjectPlan.RequireNodeState(Work,"in-progress");
+p.ProjectPlan.RequireNodeState(Phase,"done");
 foreach(var id in new[]{Task,Question,Observation,DecisionNode})
     p.ProjectPlan.RequireNodeState(id,"done");
-p.ProjectPlan.RequireNodeState("M7-W01-C01-T2","not-ready");
 p.ProjectPlan.RequireNodeState("M7-W01-C02","not-ready");
-p.ProjectPlan.RequireNodeState("M6","done");
+p.ProjectPlan.RequireNodeState("M7-W01-C03","not-ready");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS106" ||
-        (string?)state["activeMilestone"]!=(target?Milestone:null) ||
-        (string?)state["activeWorkPackage"]!=(target?Work:null) ||
-        (string?)state["activePhase"]!=(target?Phase:null) ||
+    if((string?)state["pendingRun"]!="RS107" ||
+        (string?)state["activeMilestone"]!=Milestone ||
+        (string?)state["activeWorkPackage"]!=Work ||
+        (string?)state["activePhase"]!=(target?null:Phase) ||
         state["activeTask"] is not null ||
         state["activeSubtask"] is not null)
-        throw new InvalidOperationException("Unexpected RS106 M7 Q/O/D cursor.");
-    state["activeMilestone"]=Milestone;
-    state["activeWorkPackage"]=Work;
-    state["activePhase"]=Phase;
+        throw new InvalidOperationException("Unexpected RS107 deferred scientific spike workflow cursor.");
+    state["activePhase"]=null;
 });
 if(!target)
     Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
 Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
 Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
-var finalOracle=Required(root,"dotnet","run","--file",Oracle,"--","--check");
-if(!finalOracle.Contains(Marker,StringComparison.Ordinal))
-    throw new InvalidOperationException("M7 qualified precision oracle target marker absent.");
+var finalGate=Required(root,"dotnet","run","--file",Validator,"--","--check");
+if(!finalGate.Contains(Marker,StringComparison.Ordinal))
+    throw new InvalidOperationException("Qualified T2 target failed independent source and boundary gate.");
 return p.Complete();
 
 static string Required(string root,string executable,params string[] args)
 {
     using var process=new Process{StartInfo=new ProcessStartInfo
     {
-        FileName=executable,WorkingDirectory=root,UseShellExecute=false,
-        RedirectStandardOutput=true,RedirectStandardError=true
+        FileName=executable,WorkingDirectory=root,
+        UseShellExecute=false,RedirectStandardOutput=true,
+        RedirectStandardError=true
     }};
     process.StartInfo.Environment["DOTNET_NOLOGO"]="1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
     foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
     if(!process.Start())
-        throw new InvalidOperationException("RS106 independent research validator did not start.");
+        throw new InvalidOperationException("RS107 independent boundary validation process did not start.");
     var stdout=process.StandardOutput.ReadToEndAsync();
     var stderr=process.StandardError.ReadToEndAsync();
     if(!process.WaitForExit(300000))
     {
         process.Kill(entireProcessTree:true);
-        throw new TimeoutException("RS106 independent research validator timed out.");
+        throw new TimeoutException("RS107 independent boundary validation timed out.");
     }
     var output=stdout.GetAwaiter().GetResult()+"\n"+stderr.GetAwaiter().GetResult();
     Console.WriteLine(output);
     if(process.ExitCode!=0)
-        throw new InvalidOperationException("RS106 local research validation failed: "+
+        throw new InvalidOperationException("RS107 bounded documentary validation failed: "+
             executable+" "+string.Join(" ",args)+"\n"+
-            output[..Math.Min(output.Length,2400)]);
+            output[..Math.Min(output.Length,2200)]);
     return output;
 }
