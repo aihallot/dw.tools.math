@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.99",
+  "plan_version": "0.1.100",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7852,7 +7852,7 @@
       "title": "Pure financial mathematics",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C02"
       ],
@@ -7877,40 +7877,85 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C04Tests"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS100 completed C03. RS101 T1 independently qualifies effective-discrete-per-period discount and single-sign-change bracketed IRR with one compiled RED, 66 GREEN, 837 retained scientific tests, four Math regressions and six isolated SHA-equal preview.13 NuGet consumers. C04-T2 calendar/day-count and root-topology boundaries, C05 and M6 gates remain open.",
+      "files": [
+        "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+        "src/projects/dw.tools.math.scientific/M6W02C04Contract.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C04T1RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C04T1Tests.cs",
+        "tests/consumers/m6-w02-c03-t2/m6-scientific-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-t1/m6-scientific-families-consumer.csproj",
+        "tests/consumers/m6-w02-c03-t1/Program.cs",
+        "tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s03-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s02-t2/Program.cs",
+        "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c02-t2/Program.cs",
+        "tests/consumers/m6-w02-c04-t1/m6-effective-finance-consumer.csproj",
+        "tests/consumers/m6-w02-c04-t1/Program.cs",
+        "tests/consumers/m6-w02-c04-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c04-t1-financial-rate-contracts.md",
+        "docs/distribution/m6-pure-finance-t1.md",
+        "docs/planning/evidence/M6-W02-C04-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C04-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C04T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c04-t1/m6-effective-finance-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-t2/m6-scientific-boundary-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-t1/m6-scientific-families-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C04-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C04-T1-qualified.json"
+      ],
+      "readiness": "C04 T1 qualified for finite caller-owned amount/rate inputs, integer periods 0..32, 2..16 finite cashflows, one nonzero sign transition and explicitly bracketed root. Dates, day-count, multiple-root/no-solution classification and market data are not admitted.",
       "tasks": [
         {
           "id": "M6-W02-C04-T1",
           "title": "Contract and outcome",
           "behavior": "Define rate/discount conventions and IRR solving as parameterized calculations without recommendation.",
           "test_case": "100 discounted at 10% for one period equals 1000/11; cashflows [-100,110] have IRR=10% under the convention.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C04-T1-contract-red.json",
+            "docs/planning/evidence/M6-W02-C04-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C04-T1-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: 100 discounted at 10% for one period equals 1000/11; cashflows [-100,110] have IRR=10% under the convention.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C04-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C04-T1-G",
               "title": "GREEN",
               "description": "Implement only: Define rate/discount conventions and IRR solving as parameterized calculations without recommendation.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C04-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C04-T1-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W02-C04-T1.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C04-T1-qualified.json"
+              ]
             }
           ]
         },
