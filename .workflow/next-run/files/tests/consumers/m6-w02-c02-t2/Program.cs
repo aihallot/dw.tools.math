@@ -4,11 +4,11 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id="dw.tools.math.scientific",Version="1.1.0-preview.8";
+const string Id="dw.tools.math.scientific",Version="1.1.0-preview.9";
 if(args.Length!=1)throw new ArgumentException("One local special-function boundary package required.");
 var path=Path.GetFullPath(args[0]);
 if(Path.GetFileName(path)!=Id+"."+Version+".nupkg"||
-   Path.GetFileName(Path.GetDirectoryName(path))!="m6-w02-c03-s02-t2-local-feed")
+   Path.GetFileName(Path.GetDirectoryName(path))!="m6-w02-c03-s03-t1-local-feed")
     throw new InvalidOperationException("Only exact bounded local scientific T2 feed admitted.");
 var bytes=File.ReadAllBytes(path);
 using(var buffer=new MemoryStream(bytes,writable:false))
