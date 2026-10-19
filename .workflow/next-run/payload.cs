@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,296 +8,266 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Milestone="M6", Work="M6-W02", Phase="M6-W02-C05", Task="M6-W02-C05-T2";
-const string Question="M6-W02-C05-T2-A", Observation="M6-W02-C05-T2-B", DecisionNode="M6-W02-C05-T2-C";
-const string State=".aura/workflow/state.json", Backlog="docs/planning/backlog.json";
-const string Prior="docs/planning/evidence/M6-W02-C05-T1-qualified.json";
-const string PriorScientific="docs/planning/evidence/M6-W02-C04-T2-boundaries-qualified.json";
-const string Publication="docs/planning/releases/m5-v1-publication-boundary.json";
-const string Decision="docs/planning/decisions/m6-w02-c05-t2.md";
-const string Notices="docs/distribution/m6-scientific-adoption-notices.md";
-const string Qualified="docs/planning/evidence/M6-W02-C05-T2-qualified.json";
-const string Status="owner-gated-scientific-adoption-no-cutover-and-notices-qualified";
-const string LatestVersion="1.1.0-preview.14";
-const string LatestArchiveSha="2de3e9f536ced58e28d1558ff7c4692f367b72d5efaa1989d56ffa8ec07a31cf";
-const long LatestArchiveBytes=37270;
-const int FamilyCount=7, RetainedConsumerCount=7;
+const string Milestone="M6", State=".aura/workflow/state.json";
+const string Backlog="docs/planning/backlog.json";
+const string Gate="docs/planning/evidence/M6-gate.json";
+const string Validator="docs/planning/ValidateM6ReleaseGate.cs";
+const string Decision="docs/planning/decisions/m6-gate.md";
+const string Recipe="docs/distribution/m6-local-release-gate.md";
+const string Numerical="docs/planning/evidence/M6-W01-local-gate-qualified.json";
+const string Scientific="docs/planning/evidence/M6-W02-C04-T2-boundaries-qualified.json";
+const string Last="docs/planning/evidence/M6-W02-C05-T2-qualified.json";
+const string Status="m6-independent-local-analysis-scientific-release-gate-qualified-unpublished";
+const string Marker="dw.tools.math/m6-local-science-gate/1.1 qualified; phases=11; tasks=22; subtasks=66; consumers=10; public=false";
+const string AnalysisSha="facb88dcf029de1445122eef38a147b609b89d1c5a36567506b1c10c2ce423ac";
+const string ScientificSha="2de3e9f536ced58e28d1558ff7c4692f367b72d5efaa1989d56ffa8ec07a31cf";
+const long AnalysisBytes=27820, ScientificBytes=37270;
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
-var target=File.Exists(Path.Combine(root,Qualified));
-p.Workflow.RequireCurrentRun("RS104",Milestone,target?null:Work,target?null:Phase,null,null);
-p.Workflow.RequirePriorSuccess("RS103",1,
-    "docs: qualify M6 scientific family pins and Decision reuse assessment",
-    "0.1.59",1,1,0,false);
-p.Require.JsonValueEquals(Prior,"/status",
-    JsonValue.Create("seven-scientific-family-contract-pins-and-owner-gated-reuse-request-documented"));
-p.Require.JsonValueEquals(Prior,"/qualified_family_count",JsonValue.Create(FamilyCount));
-p.Require.JsonValueEquals(Prior,"/previous_source_free_consumer_count",
-    JsonValue.Create(RetainedConsumerCount));
-p.Require.JsonValueEquals(Prior,"/prior_package_version",JsonValue.Create(LatestVersion));
-p.Require.JsonValueEquals(Prior,"/prior_package_sha256",JsonValue.Create(LatestArchiveSha));
-p.Require.JsonValueEquals(Prior,"/prior_package_bytes",JsonValue.Create(LatestArchiveBytes));
-p.Require.JsonValueEquals(Prior,"/historical_receipts_preserved",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/decision_duplicate_verified",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/decision_owner_approval_obtained",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/decision_sibling_modified",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/new_scientific_tests_executed",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/m6_w02_c05_t1_done",JsonValue.Create(true));
-p.Require.JsonValueEquals(Prior,"/m6_w02_c05_t2_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/m6_w02_c05_parent_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/m6_w02_work_package_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(Prior,"/m6_release_done",JsonValue.Create(false));
-p.Require.JsonValueEquals(PriorScientific,"/local_product_version",JsonValue.Create(LatestVersion));
-p.Require.JsonValueEquals(PriorScientific,"/actual_inspected_package_sha256",
-    JsonValue.Create(LatestArchiveSha));
-p.Require.JsonValueEquals(PriorScientific,"/actual_inspected_package_bytes",
-    JsonValue.Create(LatestArchiveBytes));
-p.Require.JsonValueEquals(Publication,"/owner/stable_v1_publication_authorized",
-    JsonValue.Create(false));
-p.Require.JsonValueEquals(Publication,"/publication/public_nuget_published",
-    JsonValue.Create(false));
-p.Require.TextContains("src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
-    "<Version>1.1.0-preview.14</Version>");
-p.Require.TextContains("docs/distribution/m6-scientific-family-adoption.md",
-    "1.1.0-preview.14");
-p.Require.TextContains("docs/planning/requests/decision-bounded-bracketed-root-assessment.md",
-    "No duplicate implementation");
-p.Require.TextContains("docs/distribution/m5-package-notices.md",
-    "does not select or grant an open-source license");
+var target=File.Exists(Path.Combine(root,Gate));
+p.Workflow.RequireCurrentRun("RS105",target?null:Milestone,null,null,null,null);
+p.Workflow.RequirePriorSuccess("RS104",1,
+    "docs: qualify M6 scientific adoption boundaries and close W02",
+    "0.1.59",0,0,0,true);
 p.Require.JsonValueBaselineOrTarget(Backlog,"/plan_version",
-    JsonValue.Create("0.1.102"),JsonValue.Create("0.1.103"));
+    JsonValue.Create("0.1.103"),JsonValue.Create("0.1.104"));
 p.Require.JsonValueEquals(Backlog,"/plan_version",
-    JsonValue.Create(target?"0.1.103":"0.1.102"));
-foreach(var(pointer,value) in new (string,string)[]
+    JsonValue.Create(target?"0.1.104":"0.1.103"));
+p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("in_progress"));
+foreach(var (pointer,value) in new (string,string)[]
 {
-    ("/status","in_progress"),("/releases/5/status","done"),
-    ("/releases/6/status","in_progress"),("/work_packages/13/status","done"),
-    ("/work_packages/14/status",target?"done":"in_progress"),
-    ("/chunks/43/status","done"),("/chunks/44/status","done"),
-    ("/chunks/45/status","done"),("/chunks/46/status","done"),
-    ("/chunks/47/status","done"),("/chunks/48/status","done"),
-    ("/chunks/49/status","done"),("/chunks/50/id",Phase),
-    ("/chunks/50/kind","document"),
-    ("/chunks/50/status",target?"done":"in_progress"),
-    ("/chunks/50/tasks/0/id","M6-W02-C05-T1"),
-    ("/chunks/50/tasks/0/status","done"),
-    ("/chunks/50/tasks/1/id",Task),
-    ("/chunks/50/tasks/1/status",target?"done":"planned")
+    ("/releases/5/status","done"),("/releases/6/id",Milestone),
+    ("/releases/6/version","1.1.0"),("/releases/6/gate","G-M6"),
+    ("/releases/6/status",target?"done":"in_progress"),
+    ("/releases/7/status","planned"),
+    ("/work_packages/13/id","M6-W01"),("/work_packages/13/status","done"),
+    ("/work_packages/14/id","M6-W02"),("/work_packages/14/status","done")
 })p.Require.JsonValueEquals(Backlog,pointer,JsonValue.Create(value));
-foreach(var index in new[]{0,1,2})
+p.ProjectPlan.RequireNodeState("M5","done");
+p.ProjectPlan.RequireNodeState(Milestone,target?"done":"in-progress");
+p.ProjectPlan.RequireNodeState("M6-W01","done");
+p.ProjectPlan.RequireNodeState("M6-W02","done");
+p.ProjectPlan.RequireNodeState("M7","not-ready");
+
+var phases=new (string Id,string Status)[]
 {
-    p.Require.JsonValueEquals(Backlog,
-        "/chunks/50/tasks/0/subtasks/"+index+"/status",JsonValue.Create("done"));
-    p.Require.JsonValueEquals(Backlog,
-        "/chunks/50/tasks/1/subtasks/"+index+"/status",
-        JsonValue.Create(target?"done":"planned"));
+    ("M6-W01-C01","bounded-curve-explicit-unit-conditioning-extrapolation-refusals-qualified"),
+    ("M6-W01-C02","bounded-univariate-residual-and-regularity-audit-qualified"),
+    ("M6-W01-C03","bounded-differential-declared-regularity-and-ode-regime-audit-qualified"),
+    ("M6-W02-C01","bounded-exact-signed-and-intermediate-bit-audit-local-nuget-qualified"),
+    ("M6-W02-C02","bounded-managed-special-angle-gamma-branch-risk-audit-qualified"),
+    ("M6-W02-C03","bounded-cross-family-scientific-boundary-integration-local-nuget-qualified"),
+    ("M6-W02-C03-S01","bounded-finite-euclidean-2d-3d-resolution-and-projection-risk-local-nuget-qualified"),
+    ("M6-W02-C03-S02","bounded-direct-dft-explicit-sampling-linear-topology-cancellation-local-nuget-qualified"),
+    ("M6-W02-C03-S03","bounded-uniform-grid-interval-and-numeric-risk-local-nuget-qualified"),
+    ("M6-W02-C04","bounded-actual-day-finance-root-topology-local-nuget-qualified"),
+    ("M6-W02-C05","owner-gated-scientific-adoption-no-cutover-and-notices-qualified")
+};
+if(phases.Length!=11 || phases.Select(x=>x.Id).Distinct(StringComparer.Ordinal).Count()!=11)
+    throw new InvalidOperationException("The accepted M6 release must contain exactly eleven unique phases.");
+var proofPaths=new List<string>();
+var proofSha=new List<string>();
+foreach(var phase in phases)
+{
+    var proof="docs/planning/evidence/"+phase.Id+"-T2-"+
+        (phase.Id=="M6-W02-C05"?"qualified":"boundaries-qualified")+".json";
+    p.ProjectPlan.RequireNodeState(phase.Id,"done");
+    var record=p.Require.JsonValueEquals(proof,"/status",JsonValue.Create(phase.Status));
+    p.Require.JsonValueEquals(proof,"/m6_release_done",JsonValue.Create(false));
+    var hash=record.AfterSha256 ??
+        throw new InvalidOperationException("Missing DWF bounded evidence hash: "+proof);
+    proofPaths.Add(proof);
+    proofSha.Add("M6-GATE-PHASE:"+phase.Id+":"+hash);
 }
+p.Require.JsonValueEquals(Numerical,"/status",
+    JsonValue.Create("m6-w01-all-three-numerical-families-local-nuget-qualified"));
+p.Require.JsonValueEquals(Numerical,"/local_product_version",JsonValue.Create("1.1.0-preview.6"));
+p.Require.JsonValueEquals(Numerical,"/actual_inspected_package_sha256",
+    JsonValue.Create(AnalysisSha));
+p.Require.JsonValueEquals(Numerical,"/actual_inspected_package_bytes",
+    JsonValue.Create(AnalysisBytes));
+p.Require.JsonValueEquals(Numerical,"/source_free_consumer_count",JsonValue.Create(3));
+p.Require.JsonValueEquals(Numerical,"/independent_consumer_probes_passed",JsonValue.Create(24));
+p.Require.JsonValueEquals(Numerical,"/m6_w01_work_package_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Numerical,"/m6_release_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Scientific,"/local_product_version",JsonValue.Create("1.1.0-preview.14"));
+p.Require.JsonValueEquals(Scientific,"/actual_inspected_package_sha256",
+    JsonValue.Create(ScientificSha));
+p.Require.JsonValueEquals(Scientific,"/actual_inspected_package_bytes",
+    JsonValue.Create(ScientificBytes));
+p.Require.JsonValueEquals(Scientific,"/m6_release_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(Last,"/status",
+    JsonValue.Create("owner-gated-scientific-adoption-no-cutover-and-notices-qualified"));
+p.Require.JsonValueEquals(Last,"/m6_w02_work_package_done",JsonValue.Create(true));
+p.Require.JsonValueEquals(Last,"/owner_approval_obtained",JsonValue.Create(false));
+p.Require.JsonValueEquals(Last,"/external_cutover_performed",JsonValue.Create(false));
+p.Require.JsonValueEquals(Last,"/publicly_published",JsonValue.Create(false));
+p.Require.JsonValueEquals(Last,"/m6_release_done",JsonValue.Create(false));
+p.Require.JsonValueEquals(
+    "docs/planning/releases/m5-v1-publication-boundary.json",
+    "/owner/stable_v1_publication_authorized",JsonValue.Create(false));
+p.Require.JsonValueEquals(
+    "docs/planning/releases/m5-v1-publication-boundary.json",
+    "/publication/public_nuget_published",JsonValue.Create(false));
 p.Require.TextContains("docs/planning/ValidateNativeDwfAdoption.cs",
     "Require(expected.Count == 523,");
-p.ProjectPlan.RequireNodeState("M5","done");
-p.ProjectPlan.RequireNodeState("M6-W01","done");
-p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
-p.ProjectPlan.RequireNodeState(Work,target?"done":"in-progress");
-foreach(var id in new[]{"M6-W02-C01","M6-W02-C02","M6-W02-C03",
-    "M6-W02-C03-S01","M6-W02-C03-S02","M6-W02-C03-S03","M6-W02-C04"})
-    p.ProjectPlan.RequireNodeState(id,"done");
-p.ProjectPlan.RequireNodeState(Phase,target?"done":"in-progress");
-p.ProjectPlan.RequireNodeState("M6-W02-C05-T1","done");
-foreach(var id in new[]{"M6-W02-C05-T1-A","M6-W02-C05-T1-B","M6-W02-C05-T1-C"})
-    p.ProjectPlan.RequireNodeState(id,"done");
-foreach(var id in new[]{Task,Question,Observation,DecisionNode})
-    p.ProjectPlan.RequireNodeState(id,target?"done":"not-ready");
+p.Require.TextContains("src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "<Version>1.1.0-preview.6</Version>");
+p.Require.TextContains("src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "<Version>1.1.0-preview.14</Version>");
 if(!target)
 {
-    foreach(var file in new[]{Decision,Notices,Qualified})
+    foreach(var file in new[]{Validator,Decision,Recipe,Gate})
         p.Require.FileMissing(file);
 }
 else
 {
-    p.Require.JsonValueEquals(Qualified,"/status",JsonValue.Create(Status));
-    p.Require.JsonValueEquals(Qualified,"/m6_w02_c05_t2_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m6_w02_c05_parent_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m6_w02_work_package_done",JsonValue.Create(true));
-    p.Require.JsonValueEquals(Qualified,"/m6_release_done",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/owner_approval_obtained",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/publicly_published",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/external_cutover_performed",JsonValue.Create(false));
-    p.Require.JsonValueEquals(Qualified,"/new_scientific_tests_executed",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Gate,"/status",JsonValue.Create(Status));
+    p.Require.JsonValueEquals(Gate,"/gate",JsonValue.Create("G-M6"));
+    p.Require.JsonValueEquals(Gate,"/m6_milestone_done",JsonValue.Create(true));
+    p.Require.JsonValueEquals(Gate,"/qualified_phases",JsonValue.Create(11));
+    p.Require.JsonValueEquals(Gate,"/qualified_tasks",JsonValue.Create(22));
+    p.Require.JsonValueEquals(Gate,"/qualified_subtasks",JsonValue.Create(66));
+    p.Require.JsonValueEquals(Gate,"/packages_publicly_published",JsonValue.Create(false));
+    p.Require.JsonValueEquals(Gate,"/stable_release_certified",JsonValue.Create(false));
 }
-
+var validatorWrite=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
 var decisionWrite=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
-var noticesWrite=p.Files.ReplaceFromStaged("staged/"+Notices,Notices);
+var recipeWrite=p.Files.ReplaceFromStaged("staged/"+Recipe,Recipe);
+var validatorSha=validatorWrite.AfterSha256 ??
+    throw new InvalidOperationException("Missing gate validator SHA-256.");
 var decisionSha=decisionWrite.AfterSha256 ??
-    throw new InvalidOperationException("Missing T2 decision source SHA-256.");
-var noticesSha=noticesWrite.AfterSha256 ??
-    throw new InvalidOperationException("Missing T2 notices source SHA-256.");
-foreach(var snippet in new[]{"## Question","## Observation","## Decision",
-    "No automatic external cutover","G-M6 release gate",
-    "owner-authorized","1.1.0-preview.14"})
-    p.Require.TextContains(Decision,snippet);
-foreach(var snippet in new[]{"## Family dispositions","Retain in Math",
-    "Semver and contract-change gates","Notices, rights and operational gates",
-    "37,270 bytes","no family is removed"})
-    p.Require.TextContains(Notices,snippet);
-Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
+    throw new InvalidOperationException("Missing gate decision SHA-256.");
+var recipeSha=recipeWrite.AfterSha256 ??
+    throw new InvalidOperationException("Missing gate recipe SHA-256.");
+p.Require.TextContains(Validator,"M6-GATE-PHASE:");
+p.Require.TextContains(Decision,"no public NuGet",StringComparison.OrdinalIgnoreCase);
+p.Require.TextContains(Recipe,"G-M6");
 if(!target)
 {
+    Required(root,540000,"dotnet","restore","dw.tools.math.slnx","--locked-mode");
+    Required(root,720000,"dotnet","test","dw.tools.math.slnx",
+        "--configuration","Release","--no-restore");
+    var baselineCheck=Required(root,180000,"dotnet","run","--file",Validator,"--","--check");
+    if(!baselineCheck.Contains(Marker,StringComparison.Ordinal))
+        throw new InvalidOperationException("The independent G-M6 pre-transition gate marker was not observed.");
     var manifest=new JsonObject
     {
-        ["schema_version"]=1,
-        ["id"]="M6-W02-C05-T2-qualified",
-        ["status"]=Status,
-        ["question"]="Which exact owner, semver, source pin, notices and independent-consumer gates apply before any scientific provider adoption or removal?",
-        ["observation"]="RS103 admitted seven historical family contracts; RS102 inspected preview.14 with seven source-free clients. Owner release permission and Decision reuse approval are absent.",
-        ["decision"]="Retain all seven Math families. Defer any adoption, removal, public publication or external cutover pending independently verified owner and consumer gates.",
-        ["prior_documentary_qualification"]=Prior,
-        ["prior_scientific_qualification"]=PriorScientific,
-        ["prior_package_version"]=LatestVersion,
-        ["prior_package_sha256"]=LatestArchiveSha,
-        ["prior_package_bytes"]=LatestArchiveBytes,
-        ["historical_family_count"]=FamilyCount,
-        ["historical_source_free_consumer_count"]=RetainedConsumerCount,
-        ["historical_receipts_preserved"]=true,
-        ["family_disposition"]="retain-all-seven-pending-explicit-owner-action",
-        ["removed_family_count"]=0,
-        ["external_adoption_authorized"]=false,
-        ["owner_approval_required"]=true,
-        ["owner_approval_obtained"]=false,
-        ["semver_and_notices_review_required"]=true,
-        ["compatibility_and_rollback_review_required"]=true,
-        ["immutable_source_and_package_pins_required"]=true,
-        ["target_runtime_os_independent_qualification_required"]=true,
-        ["decision_request_transmitted"]=false,
-        ["decision_duplicate_verified"]=false,
-        ["decision_sibling_modified"]=false,
+        ["schema_version"]=1,["id"]="M6-gate",["status"]=Status,
+        ["milestone"]=Milestone,["gate"]="G-M6",
+        ["release_version"]="1.1.0-local-evidence-only",
+        ["plan_version"]="0.1.104",
+        ["question"]="Do eleven admitted finite-domain M6 phases and independent package receipts support a local scientific milestone without public release?",
+        ["observation"]="All eleven phases and their 22 tasks and 66 subtasks are done. Separate historical analysis and scientific NuGet receipts retain ten source-free eight-probe consumers. A fresh full solution test and the independent local-science gate succeed.",
+        ["decision"]="Qualify the locally bounded M6 scientific milestone only; no stable/public release, foreign provider, Decision adoption or license change is authorized.",
+        ["qualified_phases"]=11,["qualified_tasks"]=22,["qualified_subtasks"]=66,
+        ["qualified_phase_evidence"]=p.Json.StringArray(proofPaths.ToArray()),
+        ["qualified_phase_evidence_sha256"]=p.Json.StringArray(proofSha.ToArray()),
+        ["numerical_work_package_evidence"]=Numerical,
+        ["scientific_work_package_evidence"]=Last,
+        ["scientific_latest_package_evidence"]=Scientific,
+        ["analysis_historical_package_version"]="1.1.0-preview.6",
+        ["analysis_historical_archive_sha256"]=AnalysisSha,
+        ["analysis_historical_archive_bytes"]=AnalysisBytes,
+        ["scientific_historical_package_version"]="1.1.0-preview.14",
+        ["scientific_historical_archive_sha256"]=ScientificSha,
+        ["scientific_historical_archive_bytes"]=ScientificBytes,
+        ["historical_source_free_consumers"]=10,
+        ["historical_source_free_probes"]=80,
+        ["new_nuget_archives_built"]=false,
+        ["historical_receipts_not_rerun"]=true,
+        ["locked_solution_restore_passed"]=true,
+        ["full_solution_tests_passed"]=true,
+        ["independent_read_only_gate_passed"]=true,
+        ["gate_validator"]=Validator,["gate_validator_sha256"]=validatorSha,
+        ["decision_document"]=Decision,["decision_document_sha256"]=decisionSha,
+        ["release_recipe"]=Recipe,["release_recipe_sha256"]=recipeSha,
+        ["m6_milestone_done"]=true,
+        ["packages_publicly_published"]=false,
+        ["stable_release_certified"]=false,
+        ["owner_stable_publication_approved"]=false,
+        ["foreign_provider_adopted"]=false,
         ["external_cutover_performed"]=false,
-        ["publicly_published"]=false,
-        ["new_scientific_tests_executed"]=false,
-        ["new_scientific_package_built"]=false,
-        ["decision_document"]=Decision,
-        ["decision_document_sha256"]=decisionSha,
-        ["notices_document"]=Notices,
-        ["notices_document_sha256"]=noticesSha,
-        ["m6_w02_c05_t1_done"]=true,
-        ["m6_w02_c05_t2_done"]=true,
-        ["m6_w02_c05_parent_done"]=true,
-        ["m6_w02_work_package_done"]=true,
-        ["m6_release_done"]=false,
-        ["dotnet_sdk"]=Required(root,"dotnet","--version").Trim(),
+        ["decision_owner_approval_obtained"]=false,
+        ["other_os_rids_certified"]=false,
+        ["cross_version_abi_certified"]=false,
+        ["dotnet_sdk"]=Required(root,30000,"dotnet","--version").Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["next_scope"]="Independent G-M6 release gate: verify all required M6 chunks and scientific local package/consumer evidence; preserve explicit owner/publication blockers.",
+        ["next_scope"]="M7 advanced extension admission and independent oracles require owner planning decision; no automatic external cutover or stable release.",
         ["nonclaims"]=p.Json.StringArray(
-            "No new numerical code, scientific tests, package pack, stable or public release was executed by this document task.",
-            "No Decision/AURA/MCDM/dw.discovery integration, sibling mutation, transmitted request, owner approval or provider cutover.",
-            "Historic source/package identities remain pinned; no additional OS/ABI, rights grant or certified numeric error guarantee.",
-            "C05 and W02 local planning completion is distinct from the unfinished M6 gate and external publication authorization.")
+            "Milestone M6 1.1.0 is local acceptance, not a compiled, signed or published stable NuGet 1.1.0 product.",
+            "Historical source-free NuGet archives and ten consumers were not rebuilt or rerun during this release gate.",
+            "No new owner publication/license permission, Decision/AURA/MCDM acceptance or sibling repository mutation.",
+            "No additional OS/ABI certification, general FFT/interval/tensor/PDE capability or certified error theorem.")
     };
-    p.Files.WriteComplete(Qualified,
+    p.Files.WriteComplete(Gate,
         manifest.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
     p.Json.EditObject(Backlog,doc=>
     {
-        if((string?)doc["plan_version"]!="0.1.102")
-            throw new InvalidOperationException("Unexpected RS104 baseline backlog version.");
+        if((string?)doc["plan_version"]!="0.1.103")
+            throw new InvalidOperationException("Unexpected G-M6 pre-gate backlog version.");
         var release=doc["releases"]!.AsArray()[6]!.AsObject();
-        var workPackage=doc["work_packages"]!.AsArray()[14]!.AsObject();
-        var chunk=doc["chunks"]!.AsArray()[50]!.AsObject();
-        var task=chunk["tasks"]!.AsArray()[1]!.AsObject();
         if((string?)release["id"]!=Milestone ||
             (string?)release["status"]!="in_progress" ||
-            (string?)workPackage["id"]!=Work ||
-            (string?)workPackage["status"]!="in_progress" ||
-            (string?)chunk["id"]!=Phase ||
-            (string?)chunk["kind"]!="document" ||
-            (string?)chunk["status"]!="in_progress" ||
-            (string?)task["id"]!=Task ||
-            (string?)task["status"]!="planned")
-            throw new InvalidOperationException("Scientific adoption T2 baseline changed.");
-        doc["plan_version"]="0.1.103";
-        chunk["status"]="done";
-        chunk["refinement"]="RS103 independently qualified seven historical family pins and a targeted Decision assessment proposal. RS104 documents semver/notices/rights and an explicit retain-and-defer decision without external owner approval. C05 T1/T2 are now done, W02 all phases complete. The separate G-M6 release gate remains open.";
-        chunk["readiness"]="C05 documentary acceptance complete: seven family oracle/limits/source/provider pins and historical source-free receipts; owner-gated semver, notices, compatibility and removal disposition. No automatic external cutover, public release or external adoption is claimed.";
-        chunk["files"]=p.Json.StringArray(chunk["files"]!.AsArray()
-            .Select(item=>item!.GetValue<string>())
-            .Concat(new[]{Decision,Notices,Qualified}).Distinct(StringComparer.Ordinal).ToArray());
-        chunk["evidence"]=p.Json.StringArray(chunk["evidence"]!.AsArray()
-            .Select(item=>item!.GetValue<string>())
-            .Concat(new[]{Qualified}).Distinct(StringComparer.Ordinal).ToArray());
-        chunk["commands"]=p.Json.StringArray(
-            "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
-            "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
-            "dotnet run --file docs/planning/ValidateTransferArchitecture.cs");
-        task["status"]="done";
-        task["evidence"]=p.Json.StringArray(Qualified);
-        foreach(var sub in task["subtasks"]!.AsArray().Select(node=>node!.AsObject()))
-        {
-            if((string?)sub["status"]!="planned")
-                throw new InvalidOperationException("Documentary T2 Q/O/D subtask unexpectedly advanced.");
-            sub["status"]="done";
-            sub["evidence"]=p.Json.StringArray(Qualified);
-        }
-        workPackage["status"]="done";
-        workPackage["evidence"]=p.Json.StringArray(Prior,Qualified);
+            (string?)release["gate"]!="G-M6" ||
+            (string?)doc["work_packages"]!.AsArray()[13]!["status"]!="done" ||
+            (string?)doc["work_packages"]!.AsArray()[14]!["status"]!="done")
+            throw new InvalidOperationException("Unqualified M6 release baseline.");
+        doc["plan_version"]="0.1.104";
+        release["status"]="done";
+        var acceptedEvidence=release["evidence"]!.AsArray()
+            .Select(x=>x!.GetValue<string>())
+            .Concat(new[]{Gate}).Distinct(StringComparer.Ordinal).ToArray();
+        release["evidence"]=p.Json.StringArray(acceptedEvidence);
     });
-    foreach(var id in new[]{Task,Question})
-        p.ProjectPlan.TransitionNode(id,"not-ready","ready");
-    foreach(var id in new[]{Task,Question})
-        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
-    p.ProjectPlan.ConvergeNodeToDone(Question);
-    foreach(var id in new[]{Observation,DecisionNode})
-    {
-        p.ProjectPlan.TransitionNode(id,"not-ready","ready");
-        p.ProjectPlan.TransitionNode(id,"ready","in-progress");
-        p.ProjectPlan.ConvergeNodeToDone(id);
-    }
-    p.ProjectPlan.ConvergeNodeToDone(Task);
-    p.ProjectPlan.ConvergeNodeToDone(Phase);
-    p.ProjectPlan.ConvergeNodeToDone(Work);
+    p.ProjectPlan.ConvergeNodeToDone(Milestone);
 }
-foreach(var id in new[]{Question,Observation,DecisionNode,Task,Phase,Work})
-    p.ProjectPlan.RequireNodeState(id,"done");
-p.ProjectPlan.RequireNodeState(Milestone,"in-progress");
+p.ProjectPlan.RequireNodeState(Milestone,"done");
+p.ProjectPlan.RequireNodeState("M7","not-ready");
 p.Json.EditObject(State,state=>
 {
-    if((string?)state["pendingRun"]!="RS104" ||
-        (string?)state["activeMilestone"]!=Milestone ||
-        (string?)state["activeWorkPackage"]!=(target?null:Work) ||
-        (string?)state["activePhase"]!=(target?null:Phase) ||
+    if((string?)state["pendingRun"]!="RS105" ||
+        (string?)state["activeMilestone"]!=(target?null:Milestone) ||
+        state["activeWorkPackage"] is not null ||
+        state["activePhase"] is not null ||
         state["activeTask"] is not null ||
         state["activeSubtask"] is not null)
-        throw new InvalidOperationException("Unexpected RS104 owner-gate workflow cursor.");
-    state["activeWorkPackage"]=null;
-    state["activePhase"]=null;
+        throw new InvalidOperationException("Unexpected G-M6 release-milestone cursor.");
+    state["activeMilestone"]=null;
 });
 if(!target)
-    Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
-Required(root,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
-Required(root,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
+    Required(root,240000,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--write");
+Required(root,180000,"dotnet","run","--file","docs/planning/ValidateNativeDwfAdoption.cs");
+Required(root,180000,"dotnet","run","--file","docs/planning/ValidatePlan.cs","--","--check");
+var finalGate=Required(root,180000,"dotnet","run","--file",Validator,"--","--check");
+if(!finalGate.Contains(Marker,StringComparison.Ordinal))
+    throw new InvalidOperationException("Independent G-M6 completed-target gate marker absent.");
 return p.Complete();
 
-static string Required(string root,string executable,params string[] args)
+static string Required(string root,int timeoutMilliseconds,string executable,params string[] args)
 {
     using var process=new Process{StartInfo=new ProcessStartInfo
     {
-        FileName=executable, WorkingDirectory=root,
-        UseShellExecute=false, RedirectStandardOutput=true,
-        RedirectStandardError=true
+        FileName=executable,WorkingDirectory=root,UseShellExecute=false,
+        RedirectStandardOutput=true,RedirectStandardError=true
     }};
     process.StartInfo.Environment["DOTNET_NOLOGO"]="1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
     foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
     if(!process.Start())
-        throw new InvalidOperationException("Cannot execute documentary validation.");
+        throw new InvalidOperationException("G-M6 gate process did not start: "+executable);
     var stdout=process.StandardOutput.ReadToEndAsync();
     var stderr=process.StandardError.ReadToEndAsync();
-    if(!process.WaitForExit(300000))
+    if(!process.WaitForExit(timeoutMilliseconds))
     {
         process.Kill(entireProcessTree:true);
-        throw new TimeoutException("RS104 documentary gate validator timed out.");
+        throw new TimeoutException("Independent G-M6 command timed out: "+executable);
     }
     var output=stdout.GetAwaiter().GetResult()+"\n"+stderr.GetAwaiter().GetResult();
-    Console.WriteLine(output);
+    Console.WriteLine(output.Length>6000?output[^6000..]:output);
     if(process.ExitCode!=0)
-        throw new InvalidOperationException("DWF RS104 validation failed: "+output[..Math.Min(output.Length,2000)]);
+        throw new InvalidOperationException("G-M6 command failed: "+executable+
+            " "+string.Join(" ",args)+"\n"+output[..Math.Min(output.Length,2500)]);
     return output;
 }
