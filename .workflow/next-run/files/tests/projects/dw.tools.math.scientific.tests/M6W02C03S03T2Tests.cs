@@ -181,7 +181,7 @@ public sealed class M6W02C03S03T2Tests
     { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e5d,1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
 
     [TestMethod] public void DifferenceRelativeRiskAtNegativePosition()
-    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([-1e6d,-1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
+    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([-1e5d,-1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
 
     [TestMethod] public void DifferenceResolvableDeltaAccepted()
     { Same(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e5d,1e5d+1e-4d],[0d,1d],1d),[1e-4d],1d,2,1e-9d); }
