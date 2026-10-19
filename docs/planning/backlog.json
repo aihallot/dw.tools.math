@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.93",
+  "plan_version": "0.1.94",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7461,7 +7461,7 @@
       "title": "Finite direct DFT and linear convolution",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C03-S01"
       ],
@@ -7486,40 +7486,76 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S02"
       ],
-      "refinement": "RS092 structural split candidate only; no code or product qualification.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine bounded exact source files, compiled red, independent tests, active runner and NuGet oracles before ready.",
+      "refinement": "RS092 created independent S02 and RS094 completed S01. RS095 T1 qualifies a bounded BCL-only direct complex DFT and normalized inverse, and real zero-extended linear convolution with one compiled RED, 59 GREEN, 404 retained scientific tests, four Math regressions and three SHA-equal isolated preview.7 package consumers. S02-T2, S03 and parent C03 stay unfinished.",
+      "files": [
+        "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+        "src/projects/dw.tools.math.scientific/FiniteSignal64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S02T1RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S02T1Tests.cs",
+        "tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s01-t2/Program.cs",
+        "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c02-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-s02-t1/m6-direct-signal-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s02-t1/Program.cs",
+        "tests/consumers/m6-w02-c03-s02-t1/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c03-s02-t1-direct-signals.md",
+        "docs/distribution/m6-direct-signals.md",
+        "docs/planning/evidence/M6-W02-C03-S02-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S02T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s02-t1/m6-direct-signal-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj -c Release"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C03-S02-T1-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json"
+      ],
+      "readiness": "S02 T1 qualified within 1..32 finite complex/real samples, explicit direct negative forward sign, 1/N inverse and zero-extended linear convolution; S02 T2 aliasing, conditioning, extended refusals and aggregate gate remain planned.",
       "tasks": [
         {
           "id": "M6-W02-C03-S02-T1",
           "title": "Contract and outcome",
           "behavior": "Finite direct DFT and linearly indexed convolution with explicit sign, inverse normalization, and bounded allocations.",
           "test_case": "DFT impulse [1,0,0,0] is [1,1,1,1]; convolution [1,2] with [1,1] is [1,3,2].",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C03-S02-T1-contract-red.json",
+            "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C03-S02-T1-R",
               "title": "RED",
               "description": "Observe a compiled independent RED for DFT impulse [1,0,0,0] is [1,1,1,1]; convolution [1,2] with [1,1] is [1,3,2].",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S02-T1-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S02-T1-G",
               "title": "GREEN",
               "description": "Implement only the finite accepted scope: Finite direct DFT and linearly indexed convolution with explicit sign, inverse normalization, and bounded allocations.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S02-T1-V",
               "title": "Verify and document",
               "description": "Verify the independent finite oracles, explicit boundaries and retained Math regressions for M6-W02-C03-S02-T1",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json"
+              ]
             }
           ]
         },
