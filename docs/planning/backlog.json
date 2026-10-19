@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.98",
+  "plan_version": "0.1.99",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7197,7 +7197,7 @@
       "title": "Geometry, signals, and time series",
       "kind": "code",
       "size": "L",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W02-C02",
         "M6-W01-C03"
@@ -7223,7 +7223,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03Tests"
       ],
-      "refinement": "RS092 retained original size-L C03 and separately split S01/S02/S03, all now done. RS099 qualifies only original C03 T1 with one compiled missing API RED, 56 GREEN, 701 retained scientific tests, four Math regressions and five SHA-equal isolated preview.11 clients. Cross-family all-or-none numeric composition is accepted; original C03 T2 and M6-W02/M6 remain unfinished.",
+      "refinement": "RS092 accepted split S01/S02/S03, each fully qualified. RS099 T1 delivered all-or-none seven-result direct composition. RS100 T2 independently qualifies explicit caller unit/discrete/linear policies, all seven conservative audits, one compiled RED, 78 GREEN, 758 retained scientific tests, four Math regressions and six isolated SHA-equal local preview.12 clients. Original C03 closes; C04/C05, W02 and M6 remain open.",
       "files": [
         "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
         "src/projects/dw.tools.math.scientific/M6W02C03Contract.cs",
@@ -7243,13 +7243,24 @@
         "docs/planning/decisions/m6-w02-c03-t1-scientific-aggregate.md",
         "docs/distribution/m6-scientific-aggregate.md",
         "docs/planning/evidence/M6-W02-C03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-T1-qualified.json",
+        "src/projects/dw.tools.math.scientific/M6W02C03BoundaryAggregate64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03T2RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03T2Tests.cs",
+        "tests/consumers/m6-w02-c03-t2/m6-scientific-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c03-t2-cross-family-boundaries.md",
+        "docs/distribution/m6-cross-family-boundaries.md",
+        "docs/planning/evidence/M6-W02-C03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03T2",
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-t2/m6-scientific-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-t1/m6-scientific-families-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj -c Release",
@@ -7258,9 +7269,11 @@
       ],
       "evidence": [
         "docs/planning/evidence/M6-W02-C03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
       ],
-      "readiness": "Original C03 T1 independently qualified cross-family geometry, direct signals and uniform-series outcome composition with typed all-or-none refusals; C03 T2 cross-family boundary audits and parent C03 release gate remain open.",
+      "readiness": "Original C03 T1\u002BT2 and split S01/S02/S03 contracts independently qualified within finite 2D/3D Cartesian, 1..32 direct discrete signal and numeric uniform-grid budgets, explicit caller-managed units and no scientific error theorem. M6-W02/C04/C05 and milestone M6 remain open.",
       "tasks": [
         {
           "id": "M6-W02-C03-T1",
@@ -7307,29 +7320,38 @@
           "title": "Boundaries and integration",
           "behavior": "Split this L block before ready into geometry, signal, and series; specify FFT convention, aliasing, and irregular time.",
           "test_case": "Split this L block before ready into geometry, signal, and series; specify FFT convention, aliasing, and irregular time.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C03-T2-contract-red.json",
+            "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C03-T2-R",
               "title": "RED",
               "description": "Write and execute a targeted independent test: Split this L block before ready into geometry, signal, and series; specify FFT convention, aliasing, and irregular time.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C03-T2-G",
               "title": "GREEN",
               "description": "Implement only: Split this L block before ready into geometry, signal, and series; specify FFT convention, aliasing, and irregular time.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C03-T2-V",
               "title": "Verify and document",
               "description": "Run the refined filter, retain result/oracle/limits, and update contract, evidence, and status for M6-W02-C03-T2.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
