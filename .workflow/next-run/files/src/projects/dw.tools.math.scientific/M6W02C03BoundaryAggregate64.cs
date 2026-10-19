@@ -88,7 +88,10 @@ public static class M6W02C03BoundaryAggregate64
     {
         if (cancellationToken.IsCancellationRequested)
             return Refuse(M6W02C03BoundaryStatus64.Cancelled);
-        if (request?.Scientific is not { } input)
+        if (request is null)
+            return Refuse(M6W02C03BoundaryStatus64.InvalidRequest);
+        var input = request.Scientific;
+        if (input is null)
             return Refuse(M6W02C03BoundaryStatus64.InvalidRequest);
         if (request.UnitPolicy != M6W02C03UnitPolicy64.CallerManagesIndependentUnits)
             return Refuse(M6W02C03BoundaryStatus64.UnitPolicyRequired);
