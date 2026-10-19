@@ -4,12 +4,12 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.13";
+const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.14";
 if (args.Length != 1)
     throw new ArgumentException("One local cross-family scientific archive is required.");
 var archive = Path.GetFullPath(args[0]);
 if (Path.GetFileName(archive) != Id + "." + Version + ".nupkg" ||
-    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c04-t1-local-feed")
+    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c04-t2-local-feed")
     throw new InvalidOperationException("Only the exact local cross-family archive is accepted.");
 var bytes = File.ReadAllBytes(archive);
 using (var source = new MemoryStream(bytes, writable: false))
