@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.105",
+  "plan_version": "0.1.106",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8160,7 +8160,7 @@
       "title": "Arbitrary precision, intervals, and uncertainty",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W02-C05"
       ],
@@ -8182,22 +8182,27 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS106 T1 qualifies a BCL-only exact cancellation and adjacent-double rational enclosure oracle, documents existing exact-rational reuse and conditional provider costs. This spike delivers no precision/interval API, certifying interval engine or public package. T2 stays planned for admission/deferral, version, license and rounding gates.",
+      "refinement": "T1 retained two BCL-only independent integer/rational reference oracles and a provider screening matrix. RS107 T2 explicitly defers new high-precision/interval provider and API until all three review triggers (consumer need, source/license/RID/cost evidence, per-operation rounding and independent consumer tests) are independently qualified. No provider cutover or new product capability.",
       "files": [
         "docs/planning/decisions/m7-w01-c01.md",
         "docs/planning/decisions/m7-w01-c01-provider-screen.md",
         "docs/planning/ValidateM7PrecisionAdmission.cs",
-        "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+        "docs/planning/decisions/m7-w01-c01-t2.md",
+        "docs/distribution/m7-precision-interval-deferral.md",
+        "docs/planning/ValidateM7PrecisionBoundary.cs",
+        "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7PrecisionAdmission.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7PrecisionBoundary.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+        "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
       ],
-      "readiness": "T1 Q/O/D research qualified with two independent finite oracles, explicit noncertification, and a bounded candidate-provider screen. T2 is pending; no external numeric provider or precise rounding contract has been selected.",
+      "readiness": "M7-W01-C01 research spike complete by a documented provider-deferral decision with three review triggers, not by delivery of an arbitrary-precision or interval engine. Existing Math exact and binary64 contracts remain admitted; M7-W01-C02 remains planned.",
       "tasks": [
         {
           "id": "M7-W01-C01-T1",
@@ -8243,29 +8248,37 @@
           "title": "Boundaries and integration",
           "behavior": "Produce admission ADR or deferral with trigger; do not invent physical uncertainty or certified intervals from epsilon.",
           "test_case": "Produce admission ADR or deferral with trigger; do not invent physical uncertainty or certified intervals from epsilon.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Produce admission ADR or deferral with trigger; do not invent physical uncertainty or certified intervals from epsilon.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Produce admission ADR or deferral with trigger; do not invent physical uncertainty or certified intervals from epsilon.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W01-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T2-qualified.json"
+              ]
             }
           ]
         }
