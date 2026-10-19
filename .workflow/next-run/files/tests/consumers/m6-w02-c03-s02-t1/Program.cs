@@ -31,8 +31,10 @@ static void Require(bool success, string reason)
 }
 static void DftNear(FiniteDirectDftOutcome64 outcome, params Complex[] expected)
 {
-    Require(outcome.Succeeded && outcome.Bins is { } bins &&
-        bins.Length == expected.Length && !outcome.ErrorBoundGuaranteed,
+    var bins = outcome.Bins ??
+        throw new InvalidOperationException("Direct DFT outcome has no bins.");
+    Require(outcome.Succeeded && bins.Length == expected.Length &&
+        !outcome.ErrorBoundGuaranteed,
         "Expected finite approximate direct DFT outcome.");
     for (var i = 0; i < bins.Length; i++)
         Require(global::System.Math.Abs(bins[i].Real - expected[i].Real) < 1e-10d &&
@@ -41,11 +43,13 @@ static void DftNear(FiniteDirectDftOutcome64 outcome, params Complex[] expected)
 }
 static void ConvolutionNear(FiniteLinearConvolutionOutcome64 outcome, params double[] expected)
 {
-    Require(outcome.Succeeded && outcome.Samples is { } values &&
-        values.Length == expected.Length && !outcome.ErrorBoundGuaranteed,
+    var values = outcome.Samples ??
+        throw new InvalidOperationException("Linear convolution outcome has no samples.");
+    Require(outcome.Succeeded && values.Length == expected.Length &&
+        !outcome.ErrorBoundGuaranteed,
         "Expected finite approximate nonperiodic convolution.");
     for (var i = 0; i < expected.Length; i++)
-        Require(global::System.Math.Abs(outcome.Samples![i] - expected[i]) < 1e-12d,
+        Require(global::System.Math.Abs(values[i] - expected[i]) < 1e-12d,
             "Convolution value differs from zero-extended oracle.");
 }
 static void DftRefused(FiniteDirectDftOutcome64 outcome, FiniteSignalStatus64 status)
