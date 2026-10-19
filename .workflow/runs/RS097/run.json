@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "RS097",
+  "title": "Qualify bounded uniform-series first differences and sliding arithmetic means",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded uniform-series differences and moving averages",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W02",
+    "M6-W02-C03-S03",
+    "M6-W02-C03-S03-T1",
+    "M6-W02-C03-S03-T1-R",
+    "M6-W02-C03-S03-T1-G",
+    "M6-W02-C03-S03-T1-V"
+  ],
+  "contribution": {
+    "summary": "Qualify bounded uniformly sampled first differences and valid-window moving arithmetic means, with explicit positive finite sample interval and typed nonpartial outcomes. Observe one compiled missing-API RED, pass 60 GREEN and 533 retained scientific tests, four Math regressions, and four SHA-equal isolated preview.9 NuGet consumers. Close only S03-T1 R/G/V and T1; keep S03-T2, S03, original C03, M6-W02 and M6 unfinished.",
+    "value": "Admit 1..32 finite samples, raw adjacent deltas (not derivatives), complete-window arithmetic means and caller-supplied uniform spacing metadata. Preserve input/output budgets, cancellation, strict interval/window refusals and no implicit time units, forecasting, irregular-time resampling or certified binary64 error bound.",
+    "debtChanges": [
+      "Observe one independently compiled reflection RED for absent public FiniteUniformSeries64 before staging source; compiler failure is not RED evidence.",
+      "Recover RED and pass 60 GREEN tests covering [1,3,6] differences [2,3], two-point means [2,4.5], signed inputs and finite 32-point budgets.",
+      "Keep first differences as adjacent deltas, not derivatives: return caller-declared positive finite sample interval without numerical division.",
+      "Use complete moving-average windows only, length N-window\u002B1; no padding, weighted smoothing, implicit resampling, extrapolation or forecasting.",
+      "Refuse null, missing/NaN, nonfinite, out-of-range, nonpositive interval, invalid window and pre-cancelled input with no partial data.",
+      "Preserve 69 S02-T2, 60 S02-T1, 53 S01-T2, 25 S01-T1 and 326 C01/C02 scientific tests plus four Math regression projects.",
+      "Pack and inspect one actual local scientific preview.9 NuGet assembly/nuspec with SHA-256 and no unsupported foreign package dependency.",
+      "Requalify four independently cached eight-probe source-free consumers pinned to preview.9 from cleared local feed with identical package SHA.",
+      "Close exactly S03-T1-R/G/V and S03-T1 in backlog and native DWF; S03-T2, S03 phase, parent C03, M6-W02 and M6 remain open."
+    ],
+    "nextAction": "After durable RS097 success, prepare RS098 on S03-T2: sampled-interval/window conditioning, irregular-time and missing-sample refusal, cancellation, boundary integration and independent source-free NuGet oracles. Close S03 only after T2; retain original C03 and M6 gates.",
+    "achievements": [
+      {
+        "projectNode": "M6-W02-C03-S03-T1-R",
+        "achievement": "Observe one compiled missing-public uniform-series first-difference and moving-average facade RED before provider source is staged."
+      },
+      {
+        "projectNode": "M6-W02-C03-S03-T1-G",
+        "achievement": "Recover compiled RED and pass 60 independent finite, interval, moving-window, cancellation and nonpartial refusal GREEN tests."
+      },
+      {
+        "projectNode": "M6-W02-C03-S03-T1-V",
+        "achievement": "Retain 533 qualified scientific tests and four Math regressions, then SHA-inspect one local preview.9 NuGet archive through four isolated eight-probe clients."
+      },
+      {
+        "projectNode": "M6-W02-C03-S03-T1",
+        "achievement": "Qualify bounded uniform-series adjacent differences and complete-window arithmetic means with caller-supplied positive interval metadata; reserve S03 T2 and aggregate gates."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W02-C03-S03-T1-contract-red.json",
+    "docs/planning/evidence/M6-W02-C03-S03-T1-qualified.json",
+    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "src/projects/dw.tools.math.scientific/FiniteUniformSeries64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C03S03T1RedTests.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C03S03T1Tests.cs",
+    "tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s02-t2/Program.cs",
+    "tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s01-t2/Program.cs",
+    "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c02-t2/Program.cs",
+    "tests/consumers/m6-w02-c03-s03-t1/m6-uniform-series-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s03-t1/Program.cs",
+    "tests/consumers/m6-w02-c03-s03-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w02-c03-s03-t1-uniform-series.md",
+    "docs/distribution/m6-uniform-series.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
