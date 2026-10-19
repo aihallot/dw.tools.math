@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "RS095",
+  "title": "Qualify bounded direct complex DFT and real linear convolution",
+  "state": "prepared",
+  "commitMessage": "feat: qualify bounded direct DFT and linear convolution in Math scientific",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6",
+    "M6-W02",
+    "M6-W02-C03-S02",
+    "M6-W02-C03-S02-T1",
+    "M6-W02-C03-S02-T1-R",
+    "M6-W02-C03-S02-T1-G",
+    "M6-W02-C03-S02-T1-V"
+  ],
+  "contribution": {
+    "summary": "RS095 retry 1 corrects pre-attempt CS0165: the NuGet DFT consumer used pattern variable bins after Require(bool); bins and convolution samples are now initialized explicitly. Zero attempts allocated. Qualify one compiled missing-public-API RED, 59 GREEN, 404 retained scientific tests, four Math regressions and three SHA-equal preview.7 consumers. Close S02-T1 R/G/V and T1 only; leave S02-T2, S02, S03, C03, M6-W02 and M6 open.",
+    "value": "Provide finite 1..32-sample managed O(N^2) DFT and real noncircular convolution contracts with explicit input/output budgets, typed nonpartial refusals and cancellation. Preserve approximate binary64 semantics, independent oracles, no invented FFT, physical units, certified error bounds or downstream agent adoption.",
+    "debtChanges": [
+      "Observe one genuinely compiled independent missing-public direct-signal API RED before staging the new facade; compiler failure does not count as RED.",
+      "Recover the RED and pass 59 separate numerical GREEN tests for complex DFT sign/inverse, real convolution, dimensions, finite budget and cancellation.",
+      "Specify forward negative-exponent direct O(N^2) DFT, inverse positive exponent with 1/N normalization, no FFT or alias-free signal theorem.",
+      "Qualify real zero-extended linear convolution of two length-1..32 arrays with output length N\u002BM-1, not periodic/circular convolution.",
+      "Bound binary64 input components to 1e6 absolute and results to 4e13 absolute; type InvalidLength, InvalidInput, OutsideQualifiedRange and Cancelled refusals.",
+      "Preserve 53 S01-T2, 25 S01-T1, 88 C02-T2, 80 C02-T1, 88 C01-T2 and 70 C01-T1 scientific tests plus four Math regressions.",
+      "Pack and inspect a real local scientific preview.7 archive with net10 DLL, nuspec identity, no foreign NuGet dependencies and exact SHA-256.",
+      "Verify three independently cached source-free eight-probe NuGet consumers, each pinned to preview.7 and agreeing on actual archive byte count and SHA.",
+      "Close S02-T1-R/G/V and T1 only in both accepted backlog and DWF plan; keep S02-T2, S02 phase, S03, parent C03 and M6 gates uncompleted.",
+      "RS095 retry 1 fixes pre-attempt compiler CS0165: a pattern variable declared inside Require(bool) is not definitely assigned afterward. Initialize required DFT bins and convolution samples explicitly before validation and iteration."
+    ],
+    "nextAction": "After durable RS095 success, prepare RS096 on M6-W02-C03-S02-T2: direct DFT sign/inverse, aliasing, finite intermediate, cancellation and linear-versus-circular boundary audits with independent RED/GREEN and NuGet evidence. Keep S03, original C03 and M6 open.",
+    "achievements": [
+      {
+        "projectNode": "M6-W02-C03-S02-T1-R",
+        "achievement": "Observe one compiled independent missing-public finite direct DFT and linear convolution API RED before staging the numerical facade."
+      },
+      {
+        "projectNode": "M6-W02-C03-S02-T1-G",
+        "achievement": "Recover the RED and pass 59 independent direct complex DFT, inverse, real zero-extended convolution and typed refusal GREEN tests."
+      },
+      {
+        "projectNode": "M6-W02-C03-S02-T1-V",
+        "achievement": "Verify 404 retained scientific tests and four Math regressions, and SHA-inspect one actual preview.7 NuGet archive through three isolated eight-probe clients."
+      },
+      {
+        "projectNode": "M6-W02-C03-S02-T1",
+        "achievement": "Qualify finite O(N^2) complex DFT with explicit sign/inverse and bounded real linear convolution; preserve S02-T2, S02 and parent gates."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M6.md",
+    "docs/planning/evidence/M6-W02-C03-S02-T1-contract-red.json",
+    "docs/planning/evidence/M6-W02-C03-S02-T1-qualified.json",
+    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "src/projects/dw.tools.math.scientific/FiniteSignal64.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C03S02T1RedTests.cs",
+    "tests/projects/dw.tools.math.scientific.tests/M6W02C03S02T1Tests.cs",
+    "tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s01-t2/Program.cs",
+    "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c02-t2/Program.cs",
+    "tests/consumers/m6-w02-c03-s02-t1/m6-direct-signal-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s02-t1/Program.cs",
+    "tests/consumers/m6-w02-c03-s02-t1/NuGet.Config",
+    "docs/planning/decisions/m6-w02-c03-s02-t1-direct-signals.md",
+    "docs/distribution/m6-direct-signals.md"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
