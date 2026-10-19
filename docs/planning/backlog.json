@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.104",
+  "plan_version": "0.1.105",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -207,7 +207,7 @@
       "version": "1.2.0-candidate",
       "title": "Advanced extensions and scope decisions",
       "outcome": "Qualify advanced needs and deliver only those admitted by ADR; make deferrals explicit.",
-      "status": "planned",
+      "status": "in_progress",
       "gate": "G-M7",
       "required_chunks": [
         "M7-W01-C01",
@@ -510,7 +510,7 @@
       "id": "M7-W01",
       "release": "M7",
       "title": "Advanced models",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.advanced/",
         "tests/projects/dw.tools.math.advanced.tests/",
@@ -8160,7 +8160,7 @@
       "title": "Arbitrary precision, intervals, and uncertainty",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C05"
       ],
@@ -8182,40 +8182,59 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS106 T1 qualifies a BCL-only exact cancellation and adjacent-double rational enclosure oracle, documents existing exact-rational reuse and conditional provider costs. This spike delivers no precision/interval API, certifying interval engine or public package. T2 stays planned for admission/deferral, version, license and rounding gates.",
+      "files": [
+        "docs/planning/decisions/m7-w01-c01.md",
+        "docs/planning/decisions/m7-w01-c01-provider-screen.md",
+        "docs/planning/ValidateM7PrecisionAdmission.cs",
+        "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7PrecisionAdmission.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+      ],
+      "readiness": "T1 Q/O/D research qualified with two independent finite oracles, explicit noncertification, and a bounded candidate-provider screen. T2 is pending; no external numeric provider or precise rounding contract has been selected.",
       "tasks": [
         {
           "id": "M7-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Study high-precision providers and interval arithmetic; propose a justified subset with cost.",
           "test_case": "Compare an ill-conditioned computation and inclusion of a reference interval; distinguish computational precision from measured error.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C01-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Study high-precision providers and interval arithmetic; propose a justified subset with cost.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C01-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Compare an ill-conditioned computation and inclusion of a reference interval; distinguish computational precision from measured error.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W01-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C01-T1-qualified.json"
+              ]
             }
           ]
         },
