@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.101",
+  "plan_version": "0.1.102",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8022,7 +8022,7 @@
       "title": "Optional adoption and scientific gate",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M6-W02-C03",
         "M6-W02-C04"
@@ -8045,40 +8045,59 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS102 completed all scientific C01/C02/C03/C04 families. RS103 T1 admits seven independent historical source/evidence/preview pins, each with oracle and bounded domain, and publishes one owner-gated scalar-bisection Decision assessment. No package build, new scientific tests, sibling edit or cutover. C05-T2 and M6 release gates remain open.",
+      "files": [
+        "docs/planning/decisions/m6-w02-c05.md",
+        "docs/distribution/m6-scientific-family-adoption.md",
+        "docs/planning/requests/decision-bounded-bracketed-root-assessment.md",
+        "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+      ],
+      "readiness": "C05 T1 documentation qualified on seven family receipts with pinned source identities, source-free consumer evidence, exact independent oracles, a Decision owner-review request and explicit non-adoption limits; C05 T2 semver/notices/owner disposition is planned.",
       "tasks": [
         {
           "id": "M6-W02-C05-T1",
           "title": "Contract and outcome",
           "behavior": "Publish admitted-family contracts, consumer tests, and targeted deduplication requests.",
           "test_case": "Every extension has oracle, limits, and provider pin; a Decision request identifies the primitive and stable contract to preserve.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C05-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Publish admitted-family contracts, consumer tests, and targeted deduplication requests.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C05-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Every extension has oracle, limits, and provider pin; a Decision request identifies the primitive and stable contract to preserve.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C05-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M6-W02-C05-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+              ]
             }
           ]
         },
