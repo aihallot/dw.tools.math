@@ -158,22 +158,29 @@ foreach(var family in pins)
     if(!File.Exists(Path.Combine(root,family.Source)))
         throw new InvalidOperationException("Missing accepted source path: "+family.Source);
 }
-var priorReceipt=JsonNode.Parse(File.ReadAllText(Path.Combine(root,Prior)))?.AsObject()
-    ?? throw new InvalidOperationException("Durable RS102 receipt is not JSON.");
-var clients=priorReceipt["isolated_consumer_receipts"]?.AsArray()
-    ?? throw new InvalidOperationException("Missing historical consumer receipts.");
-if(clients.Count!=PriorSourceFreeClients)
-    throw new InvalidOperationException("RS102 archive must have seven isolated consumer receipts.");
-foreach(var entry in clients)
+var receiptProjects=new[]
 {
-    var client=entry?.AsObject()
-        ?? throw new InvalidOperationException("Null historical consumer receipt.");
-    if((string?)client["package_sha256"]!=LatestArchiveSha ||
-        (long?)client["package_bytes"]!=LatestArchiveBytes ||
-        (int?)client["independent_probes"]!=8 ||
-        (int?)client["project_references"]!=0)
-        throw new InvalidOperationException("Historical source-free package SHA/probe receipt drifted.");
-}
+    "tests/consumers/m6-w02-c04-t2/m6-dated-finance-consumer.csproj",
+    "tests/consumers/m6-w02-c04-t1/m6-effective-finance-consumer.csproj",
+    "tests/consumers/m6-w02-c03-t2/m6-scientific-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c03-t1/m6-scientific-families-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj",
+    "tests/consumers/m6-w02-c02-t2/m6-special-function-boundary-consumer.csproj"
+};
+if(receiptProjects.Length!=PriorSourceFreeClients ||
+    receiptProjects.Distinct(StringComparer.Ordinal).Count()!=PriorSourceFreeClients)
+    throw new InvalidOperationException("Expected exactly seven unique historical client projects.");
+p.Require.JsonValueEquals(Prior,"/isolated_consumer_receipts",
+    p.Json.Array(receiptProjects.Select(project=>(JsonNode)new JsonObject
+    {
+        ["project"]=project,
+        ["marker"]="dw.tools.math/"+Path.GetFileNameWithoutExtension(project)+"/1.1 qualified; probes=8",
+        ["package_sha256"]=LatestArchiveSha,
+        ["package_bytes"]=LatestArchiveBytes,
+        ["independent_probes"]=8,
+        ["project_references"]=0
+    }).ToArray()));
 var hashes=new Dictionary<string,string>(StringComparer.Ordinal);
 foreach(var file in new[]{Decision,Catalog,Request})
 {
@@ -207,14 +214,12 @@ if(!decisionText.Contains("Question",StringComparison.Ordinal) ||
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 if(!target)
 {
-    var admitted=new JsonArray();
-    foreach(var family in pins)
-        admitted.Add(new JsonObject
-        {
-            ["family"]=family.Name,["evidence"]=family.Evidence,
-            ["source"]=family.Source,["source_sha256"]=family.SourceSha256,
-            ["historical_provider_version"]=family.Version,["oracle"]=family.Oracle
-        });
+    var admitted=p.Json.Array(pins.Select(family=>(JsonNode)new JsonObject
+    {
+        ["family"]=family.Name,["evidence"]=family.Evidence,
+        ["source"]=family.Source,["source_sha256"]=family.SourceSha256,
+        ["historical_provider_version"]=family.Version,["oracle"]=family.Oracle
+    }).ToArray());
     var manifest=new JsonObject
     {
         ["schema_version"]=1,["id"]="M6-W02-C05-T1-qualified",
