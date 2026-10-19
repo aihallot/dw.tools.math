@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS108",
+  "title": "Qualify bounded tensor shape and resource research oracles",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M7 tensor shape and resource research oracles",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C02",
+    "M7-W01-C02-T1",
+    "M7-W01-C02-T1-A",
+    "M7-W01-C02-T1-B",
+    "M7-W01-C02-T1-C"
+  ],
+  "contribution": {
+    "summary": "Qualify M7-W01-C02-T1 as bounded tensor research: demonstrate an independent 2x2x2 row-major sum/index oracle, explicit shape mismatch and 64-element/512-byte refusal limits, and a provider/ownership screen. Complete T1 Q/O/D only; keep C02/W01/M7 active. No tensor API, external provider, GPU, implicit broadcasting or public package.",
+    "value": "Record one local BCL-only read-only oracle program, its exact reference values, shape/count/budget negative cases and staged source SHA identities. Keep current Math numerical contracts and deferred C01 precision disposition intact. Candidate tensor provider/consumer admission and size/shape policy remain separate T2 work.",
+    "debtChanges": [
+      "No tensor product API is delivered by research-only rank-three BCL shape/index witnesses.",
+      "Tensor adoption requires a named operation and consumer, layout/type/stride and resource budgets plus independent refusal tests.",
+      "Reject implicit broadcast, reshape, sparse conversion, hidden copies and cross-rank assumptions in future contracts.",
+      "Any managed/native provider needs immutable source/version, license/notices, target RID and source-free consumer proof before adoption.",
+      "C02-T2, C02 phase, W01 and M7 remain incomplete; tensor research does not authorize AURA job/UI integration."
+    ],
+    "nextAction": "On durable RS108 success, prepare M7-W01-C02-T2 to decide an explicitly bounded tensor API with real consumer/source-free tests or defer with a review trigger. Do not infer an advanced tensor engine or copy AURA scheduling and UI code.",
+    "achievements": [
+      {
+        "projectNode": "M7-W01-C02-T1-A",
+        "achievement": "Bound the rank-three tensor research question, existing Math contracts and explicit 2x2x2 independent reference oracles."
+      },
+      {
+        "projectNode": "M7-W01-C02-T1-B",
+        "achievement": "Verify BCL dense sum/index, shape incompatibility and 64-element/512-byte pre-allocation refusal witnesses."
+      },
+      {
+        "projectNode": "M7-W01-C02-T1-C",
+        "achievement": "Record conditional tensor-provider/consumer admission criteria, ownership boundaries and no delivered tensor API."
+      },
+      {
+        "projectNode": "M7-W01-C02-T1",
+        "achievement": "Qualify tensor shape and finite resource research Q/O/D with independent local evidence; leave T2 and C02 open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W01-C02-T1-qualified.json",
+    "docs/planning/decisions/m7-w01-c02.md",
+    "docs/planning/decisions/m7-w01-c02-provider-screen.md",
+    "docs/planning/ValidateM7TensorAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-tensor-oracle",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7TensorAdmission.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
