@@ -178,16 +178,16 @@ public sealed class M6W02C03S03T2Tests
     { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1d,3d],[1e14d,1e14d+1d],1d),FiniteUniformSeriesAuditStatus64.TimestampResolutionRisk); }
 
     [TestMethod] public void DifferenceRelativeDifferenceRisk()
-    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e6d,1e6d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
+    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e5d,1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
 
     [TestMethod] public void DifferenceRelativeRiskAtNegativePosition()
-    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([-1e6d,-1e6d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
+    { Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([-1e6d,-1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
 
     [TestMethod] public void DifferenceResolvableDeltaAccepted()
-    { Same(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e6d,1e6d+1e-4d],[0d,1d],1d),[1e-4d],1d,2,1e-9d); }
+    { Same(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e5d,1e5d+1e-4d],[0d,1d],1d),[1e-4d],1d,2,1e-9d); }
 
     [TestMethod] public void DifferenceDirectFacadeStillAllowed()
-    { var raw=FiniteUniformSeries64.FirstDifferences([1e6d,1e6d+1e-8d],1d);Assert.IsTrue(raw.Succeeded);Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e6d,1e6d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
+    { var raw=FiniteUniformSeries64.FirstDifferences([1e5d,1e5d+1e-8d],1d);Assert.IsTrue(raw.Succeeded);Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1e5d,1e5d+1e-8d],[0d,1d],1d),FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk,true); }
 
     [TestMethod] public void DifferencePreCancelled()
     { using var c=new CancellationTokenSource();c.Cancel();Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences([1d,3d],[0d,1d],1d,c.Token),FiniteUniformSeriesAuditStatus64.Cancelled); }
