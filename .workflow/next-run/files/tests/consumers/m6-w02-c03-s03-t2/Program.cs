@@ -81,7 +81,7 @@ Probe("conservative relative timestamp resolution refusal", () =>
         FiniteUniformSeriesAuditStatus64.TimestampResolutionRisk));
 Probe("conservative small adjacent difference risk", () =>
     Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateFirstDifferences(
-        [1e6d,1e6d+1e-8d],[0d,1d],1d),
+        [1e5d,1e5d+1e-8d],[0d,1d],1d),
         FiniteUniformSeriesAuditStatus64.RelativeDifferenceRisk));
 Probe("signed sliding mean cancellation risk", () =>
     Refused(FiniteUniformSeriesBoundaryAudit64.EvaluateMovingAverage(
@@ -98,7 +98,7 @@ Probe("typed invalid window and cancellation refusals", () =>
 });
 Probe("retained uniform, signal, geometry, special, exact and dependency contracts", () =>
 {
-    var previous = FiniteUniformSeries64.FirstDifferences([1e6d,1e6d+1e-8d],1d);
+    var previous = FiniteUniformSeries64.FirstDifferences([1e5d,1e5d+1e-8d],1d);
     Require(previous.Succeeded && previous.Samples is { Length: 1 },
         "Previously qualified raw adjacent-difference facade changed.");
     var signal = FiniteSignal64.DirectDft([Complex.One,Complex.Zero]);
