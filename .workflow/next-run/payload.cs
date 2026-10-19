@@ -67,18 +67,14 @@ var phases=new (string Id,string Status)[]
 if(phases.Length!=11 || phases.Select(x=>x.Id).Distinct(StringComparer.Ordinal).Count()!=11)
     throw new InvalidOperationException("The accepted M6 release must contain exactly eleven unique phases.");
 var proofPaths=new List<string>();
-var proofSha=new List<string>();
 foreach(var phase in phases)
 {
     var proof="docs/planning/evidence/"+phase.Id+"-T2-"+
         (phase.Id=="M6-W02-C05"?"qualified":"boundaries-qualified")+".json";
     p.ProjectPlan.RequireNodeState(phase.Id,"done");
-    var record=p.Require.JsonValueEquals(proof,"/status",JsonValue.Create(phase.Status));
+    p.Require.JsonValueEquals(proof,"/status",JsonValue.Create(phase.Status));
     p.Require.JsonValueEquals(proof,"/m6_release_done",JsonValue.Create(false));
-    var hash=record.AfterSha256 ??
-        throw new InvalidOperationException("Missing DWF bounded evidence hash: "+proof);
     proofPaths.Add(proof);
-    proofSha.Add("M6-GATE-PHASE:"+phase.Id+":"+hash);
 }
 p.Require.JsonValueEquals(Numerical,"/status",
     JsonValue.Create("m6-w01-all-three-numerical-families-local-nuget-qualified"));
@@ -152,6 +148,15 @@ if(!target)
     var baselineCheck=Required(root,180000,"dotnet","run","--file",Validator,"--","--check");
     if(!baselineCheck.Contains(Marker,StringComparison.Ordinal))
         throw new InvalidOperationException("The independent G-M6 pre-transition gate marker was not observed.");
+    var proofSha=baselineCheck.Split('\n',StringSplitOptions.RemoveEmptyEntries)
+        .Select(line=>line.Trim())
+        .Where(line=>line.StartsWith("M6-GATE-PHASE:",StringComparison.Ordinal))
+        .ToArray();
+    if(proofSha.Length!=phases.Length || proofSha.Where((line,index)=>
+       !line.StartsWith("M6-GATE-PHASE:"+phases[index].Id+":",StringComparison.Ordinal)
+       || line.Split(':')[^1].Length!=64
+       || !line.Split(':')[^1].All(Uri.IsHexDigit)).Any())
+        throw new InvalidOperationException("The independent read-only gate did not produce all eleven bounded source/evidence SHA-256 receipts.");
     var manifest=new JsonObject
     {
         ["schema_version"]=1,["id"]="M6-gate",["status"]=Status,
@@ -163,7 +168,7 @@ if(!target)
         ["decision"]="Qualify the locally bounded M6 scientific milestone only; no stable/public release, foreign provider, Decision adoption or license change is authorized.",
         ["qualified_phases"]=11,["qualified_tasks"]=22,["qualified_subtasks"]=66,
         ["qualified_phase_evidence"]=p.Json.StringArray(proofPaths.ToArray()),
-        ["qualified_phase_evidence_sha256"]=p.Json.StringArray(proofSha.ToArray()),
+        ["qualified_phase_evidence_sha256"]=p.Json.StringArray(proofSha),
         ["numerical_work_package_evidence"]=Numerical,
         ["scientific_work_package_evidence"]=Last,
         ["scientific_latest_package_evidence"]=Scientific,
