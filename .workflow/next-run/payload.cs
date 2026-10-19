@@ -202,7 +202,7 @@ if(!decisionText.Contains("Question",StringComparison.Ordinal) ||
     !decisionText.Contains("Decision",StringComparison.Ordinal) ||
     !reuseText.Contains("f(x)=x-0.1",StringComparison.Ordinal) ||
     !reuseText.Contains("f(x)=x*x-4",StringComparison.Ordinal) ||
-    !reuseText.Contains("not a confirmed duplicate",StringComparison.OrdinalIgnoreCase))
+    !reuseText.Contains("No duplicate implementation",StringComparison.OrdinalIgnoreCase))
     throw new InvalidOperationException("Missing exact document Q/O/D or owner-gated root assessment criteria.");
 Required(root,"dotnet","run","--file","docs/planning/ValidateTransferArchitecture.cs");
 if(!target)
