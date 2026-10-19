@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS106",
+  "title": "Qualify bounded precision and interval research oracles",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M7 precision and interval research oracles",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C01",
+    "M7-W01-C01-T1",
+    "M7-W01-C01-T1-A",
+    "M7-W01-C01-T1-B",
+    "M7-W01-C01-T1-C"
+  ],
+  "contribution": {
+    "summary": "Qualify M7-W01-C01-T1 as a bounded research Q/O/D: compare exact BigInteger cancellation against binary64, prove one rational 1/10 enclosure from adjacent IEEE 754 doubles, and screen provider strategies. Keep M7/W01/C01 active and T2 planned. No new precision/interval API, provider, package, public release or sibling integration.",
+    "value": "Supply two independently hand-checkable BCL numeric reference cases, Q/O/D admission notes and an explicit managed/native provider cost and qualification matrix. Distinguish calculation precision, arithmetic enclosure and physical measurement uncertainty. Record the oracle execution only after DWF runs, leaving provider adoption/deferral for T2.",
+    "debtChanges": [
+      "Arbitrary real precision and certified interval evaluation remain unadmitted; do not imply they exist from exact BigInteger witnesses.",
+      "One adjacent-double enclosure of 1/10 is not a general outward-rounding guarantee or a statistical/physical uncertainty bound.",
+      "Candidate managed and native providers require exact source/version, license/notices, TFM/RID and offline runtime inspection.",
+      "Before any public precision API: bound memory/time/operation domains, cancellation, overflow and independent consumer oracles.",
+      "M7-W01-C01-T2, C01, W01 and M7 remain unfinished; completed spike research is not delivered product functionality."
+    ],
+    "nextAction": "On durable RS106 success, prepare T2 to admit a bounded provider contract only with independent source/version/license/RID/rounding and consumer qualification, or explicitly defer with trigger. Preserve the existing Math exact contracts and unapproved external/public boundaries.",
+    "achievements": [
+      {
+        "projectNode": "M7-W01-C01-T1-A",
+        "achievement": "Fix the accepted precision research question, existing exact-rational baseline and two independently falsifiable finite numerical oracles."
+      },
+      {
+        "projectNode": "M7-W01-C01-T1-B",
+        "achievement": "Execute BCL-only exact cancellation and adjacent-double 1/10 enclosure checks; record a bounded candidate-provider cost and evidence screen."
+      },
+      {
+        "projectNode": "M7-W01-C01-T1-C",
+        "achievement": "Defer unqualified high-precision/interval providers while admitting only exact research fixtures, owner gates and T2 decision criteria."
+      },
+      {
+        "projectNode": "M7-W01-C01-T1",
+        "achievement": "Complete the research Q/O/D with exact oracle evidence and a provider matrix, without claiming any new scientific runtime capability."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+    "docs/planning/decisions/m7-w01-c01.md",
+    "docs/planning/decisions/m7-w01-c01-provider-screen.md",
+    "docs/planning/ValidateM7PrecisionAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-precision-oracle",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7PrecisionAdmission.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
