@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "RS107",
+  "title": "Defer unqualified precision providers and close M7 C01 research spike",
+  "state": "prepared",
+  "commitMessage": "docs: qualify precision provider deferral and close M7 C01",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C01",
+    "M7-W01-C01-T2",
+    "M7-W01-C01-T2-A",
+    "M7-W01-C01-T2-B",
+    "M7-W01-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Complete M7-W01-C01-T2 Q/O/D by an explicit high-precision/interval provider deferral. Reverify RS106 exact oracles, source SHA pins, absence of qualified third-party providers and three mandatory review triggers. Close only C01 as a research spike; leave W01/M7 open, without delivering a precision API or package.",
+    "value": "An independent BCL-only gate checks T1 provenance, native/backlog transitions and the not-admitted candidate matrix. Document required future consumer need, pinned source/license/RID/cost and operation-by-operation rounding/oracles with an isolated source-free consumer. No external license/provider is inferred or adopted.",
+    "debtChanges": [
+      "Do not equate completed M7 C01 research with a delivered arbitrary-precision real or certified interval API.",
+      "Provider re-entry needs all three triggers: observed consumer gap; exact source/license/RID/cost; independent rounding and source-free consumer qualification.",
+      "One bounded rational enclosure is not a general interval theorem and says nothing about measured uncertainty or statistical confidence.",
+      "External package/version/rights/semver and OS/RID evidence remain unobserved; no automatic provider or sibling adoption is authorized.",
+      "M7-W01 and M7 remain active; C02 tensor research and all later advanced extensions require distinct oracles and admission decisions."
+    ],
+    "nextAction": "After durable RS107 success, prepare M7-W01-C02-T1: bound tensor-shape research with independent 2x2x2 reference, invalid dimensions, size budget and consumer need; no advanced tensor library or external Math/AURA cutover unless separately accepted.",
+    "achievements": [
+      {
+        "projectNode": "M7-W01-C01-T2-A",
+        "achievement": "Define strict provider admission/deferral criteria including caller need and the three independent future review triggers."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2-B",
+        "achievement": "Reverify two retained exact T1 oracles and source SHA receipts, screen unqualified providers and prove no integration was authorized."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2-C",
+        "achievement": "Issue explicit defer-with-review-trigger decision, preserving rights, rounding and measurement uncertainty nonclaims."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2",
+        "achievement": "Qualify Q/O/D precision provider boundary decision and independent local deferral gate without building a new package."
+      },
+      {
+        "projectNode": "M7-W01-C01",
+        "achievement": "Close the M7 precision and interval research spike through qualified provider deferral, not delivered numerical runtime capabilities."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W01-C01-T2-qualified.json",
+    "docs/planning/decisions/m7-w01-c01-t2.md",
+    "docs/distribution/m7-precision-interval-deferral.md",
+    "docs/planning/ValidateM7PrecisionBoundary.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-precision-deferral",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7PrecisionBoundary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
