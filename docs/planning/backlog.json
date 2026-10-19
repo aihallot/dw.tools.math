@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.102",
+  "plan_version": "0.1.103",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -492,13 +492,17 @@
       "id": "M6-W02",
       "release": "M6",
       "title": "Complementary scientific families",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.scientific/",
         "tests/projects/dw.tools.math.scientific.tests/",
         "docs/"
       ],
-      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages."
+      "path_policy": "Proposed; exact files and runnable commands must be refined before ready; no empty product packages.",
+      "evidence": [
+        "docs/planning/evidence/M6-W02-C05-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
+      ]
     },
     {
       "id": "M7-W01",
@@ -8022,7 +8026,7 @@
       "title": "Optional adoption and scientific gate",
       "kind": "document",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W02-C03",
         "M6-W02-C04"
@@ -8045,12 +8049,15 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS102 completed all scientific C01/C02/C03/C04 families. RS103 T1 admits seven independent historical source/evidence/preview pins, each with oracle and bounded domain, and publishes one owner-gated scalar-bisection Decision assessment. No package build, new scientific tests, sibling edit or cutover. C05-T2 and M6 release gates remain open.",
+      "refinement": "RS103 independently qualified seven historical family pins and a targeted Decision assessment proposal. RS104 documents semver/notices/rights and an explicit retain-and-defer decision without external owner approval. C05 T1/T2 are now done, W02 all phases complete. The separate G-M6 release gate remains open.",
       "files": [
         "docs/planning/decisions/m6-w02-c05.md",
         "docs/distribution/m6-scientific-family-adoption.md",
         "docs/planning/requests/decision-bounded-bracketed-root-assessment.md",
-        "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C05-T1-qualified.json",
+        "docs/planning/decisions/m6-w02-c05-t2.md",
+        "docs/distribution/m6-scientific-adoption-notices.md",
+        "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
       ],
       "commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
@@ -8058,9 +8065,10 @@
         "dotnet run --file docs/planning/ValidateTransferArchitecture.cs"
       ],
       "evidence": [
-        "docs/planning/evidence/M6-W02-C05-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C05-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
       ],
-      "readiness": "C05 T1 documentation qualified on seven family receipts with pinned source identities, source-free consumer evidence, exact independent oracles, a Decision owner-review request and explicit non-adoption limits; C05 T2 semver/notices/owner disposition is planned.",
+      "readiness": "C05 documentary acceptance complete: seven family oracle/limits/source/provider pins and historical source-free receipts; owner-gated semver, notices, compatibility and removal disposition. No automatic external cutover, public release or external adoption is claimed.",
       "tasks": [
         {
           "id": "M6-W02-C05-T1",
@@ -8106,29 +8114,37 @@
           "title": "Boundaries and integration",
           "behavior": "No automatic external cutover; require semver/notices update; remove a family only through owner disposition.",
           "test_case": "No automatic external cutover; require semver/notices update; remove a family only through owner disposition.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C05-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: No automatic external cutover; require semver/notices update; remove a family only through owner disposition.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C05-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: No automatic external cutover; require semver/notices update; remove a family only through owner disposition.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C05-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M6-W02-C05-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C05-T2-qualified.json"
+              ]
             }
           ]
         }
