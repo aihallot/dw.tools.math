@@ -4,12 +4,12 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Dw.Tools.Math.Scientific;
 
-const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.9";
+const string Id = "dw.tools.math.scientific", Version = "1.1.0-preview.10";
 if (args.Length != 1)
     throw new ArgumentException("One local uniform-series NuGet archive is required.");
 var archive = Path.GetFullPath(args[0]);
 if (Path.GetFileName(archive) != Id + "." + Version + ".nupkg" ||
-    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c03-s03-t1-local-feed")
+    Path.GetFileName(Path.GetDirectoryName(archive)) != "m6-w02-c03-s03-t2-local-feed")
     throw new InvalidOperationException("Only the pinned S03-T1 local archive is accepted.");
 var bytes = File.ReadAllBytes(archive);
 using (var buffer = new MemoryStream(bytes, writable: false))
