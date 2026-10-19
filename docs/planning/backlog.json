@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.96",
+  "plan_version": "0.1.97",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -7623,7 +7623,7 @@
       "title": "Finite uniformly sampled time series",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M6-W02-C03-S02"
       ],
@@ -7648,7 +7648,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S03"
       ],
-      "refinement": "RS096 completed S02; RS097 T1 independently qualifies bounded first differences and complete-window moving arithmetic means over caller-asserted uniform samples, one compiled missing-API RED, 60 GREEN, 533 retained scientific tests, four Math regressions and four SHA-equal isolated preview.9 NuGet clients. S03-T2, parent C03 and M6 gates remain open.",
+      "refinement": "RS097 T1 qualified finite uniform-series adjacent differences and valid-window arithmetic means; RS098 T2 independently qualifies explicit monotonic time coordinates, irregular-time and numerical risk refusals with one compiled RED, 106 GREEN, 594 retained scientific tests, four Math regressions and five SHA-identical preview.10 package consumers. Original C03 aggregate T1/T2 and M6 remain open.",
       "files": [
         "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
         "src/projects/dw.tools.math.scientific/FiniteUniformSeries64.cs",
@@ -7666,13 +7666,24 @@
         "docs/planning/decisions/m6-w02-c03-s03-t1-uniform-series.md",
         "docs/distribution/m6-uniform-series.md",
         "docs/planning/evidence/M6-W02-C03-S03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-S03-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-S03-T1-qualified.json",
+        "src/projects/dw.tools.math.scientific/FiniteUniformSeriesBoundaryAudit64.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S03T2RedTests.cs",
+        "tests/projects/dw.tools.math.scientific.tests/M6W02C03S03T2Tests.cs",
+        "tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj",
+        "tests/consumers/m6-w02-c03-s03-t2/Program.cs",
+        "tests/consumers/m6-w02-c03-s03-t2/NuGet.Config",
+        "docs/planning/decisions/m6-w02-c03-s03-t2-uniform-grid-audit.md",
+        "docs/distribution/m6-uniform-grid-audit.md",
+        "docs/planning/evidence/M6-W02-C03-S03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S03-T2-boundaries-qualified.json"
       ],
       "commands": [
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore",
-        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S03T1",
+        "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --filter FullyQualifiedName~M6W02C03S03T2",
         "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release",
+        "dotnet run --project tests/consumers/m6-w02-c03-s03-t2/m6-uniform-series-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s03-t1/m6-uniform-series-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s02-t2/m6-direct-signal-boundary-consumer.csproj -c Release",
         "dotnet run --project tests/consumers/m6-w02-c03-s01-t2/m6-finite-geometry-boundary-consumer.csproj -c Release",
@@ -7680,9 +7691,11 @@
       ],
       "evidence": [
         "docs/planning/evidence/M6-W02-C03-S03-T1-contract-red.json",
-        "docs/planning/evidence/M6-W02-C03-S03-T1-qualified.json"
+        "docs/planning/evidence/M6-W02-C03-S03-T1-qualified.json",
+        "docs/planning/evidence/M6-W02-C03-S03-T2-contract-red.json",
+        "docs/planning/evidence/M6-W02-C03-S03-T2-boundaries-qualified.json"
       ],
-      "readiness": "S03 T1 qualified for 1..32 finite samples, explicit finite positive interval metadata and complete sliding windows; no implicit units, derivative, irregular resampling, forecast, S03 T2 or parent aggregate completion.",
+      "readiness": "S03 T1/T2 qualified for 1..32 bounded binary64 samples and explicit finite monotonic timing with conservative ratio heuristics; no forecast, resampling, inferred units or original C03 aggregate completion.",
       "tasks": [
         {
           "id": "M6-W02-C03-S03-T1",
@@ -7729,29 +7742,38 @@
           "title": "Boundaries and integration",
           "behavior": "No irregular-time resampling or forecasting; reject missing values, nonpositive sample intervals and oversized windows.",
           "test_case": "No irregular-time resampling or forecasting; reject missing values, nonpositive sample intervals and oversized windows.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M6-W02-C03-S03-T2-contract-red.json",
+            "docs/planning/evidence/M6-W02-C03-S03-T2-boundaries-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M6-W02-C03-S03-T2-R",
               "title": "RED",
               "description": "Observe a compiled independent RED for Differences of [1,3,6] are [2,3]; two-sample moving averages are [2,4.5].",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S03-T2-contract-red.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S03-T2-G",
               "title": "GREEN",
               "description": "Implement only the finite accepted scope: Bounded uniformly sampled first differences and sliding arithmetic means with explicit sample interval and finite windows.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S03-T2-boundaries-qualified.json"
+              ]
             },
             {
               "id": "M6-W02-C03-S03-T2-V",
               "title": "Verify and document",
               "description": "Verify the independent finite oracles, explicit boundaries and retained Math regressions for M6-W02-C03-S03-T2",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M6-W02-C03-S03-T2-boundaries-qualified.json"
+              ]
             }
           ]
         }
