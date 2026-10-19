@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 1,
+  "id": "RS107",
+  "title": "Defer unqualified precision providers and close M7 C01 research spike",
+  "commitMessage": "docs: qualify precision provider deferral and close M7 C01",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C01",
+    "M7-W01-C01-T2",
+    "M7-W01-C01-T2-A",
+    "M7-W01-C01-T2-B",
+    "M7-W01-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Complete M7-W01-C01-T2 Q/O/D by an explicit high-precision/interval provider deferral. Reverify RS106 exact oracles, source SHA pins, absence of qualified third-party providers and three mandatory review triggers. Close only C01 as a research spike; leave W01/M7 open, without delivering a precision API or package.",
+    "value": "An independent BCL-only gate checks T1 provenance, native/backlog transitions and the not-admitted candidate matrix. Document required future consumer need, pinned source/license/RID/cost and operation-by-operation rounding/oracles with an isolated source-free consumer. No external license/provider is inferred or adopted.",
+    "nextAction": "After durable RS107 success, prepare M7-W01-C02-T1: bound tensor-shape research with independent 2x2x2 reference, invalid dimensions, size budget and consumer need; no advanced tensor library or external Math/AURA cutover unless separately accepted.",
+    "debtChanges": [
+      "Do not equate completed M7 C01 research with a delivered arbitrary-precision real or certified interval API.",
+      "Provider re-entry needs all three triggers: observed consumer gap; exact source/license/RID/cost; independent rounding and source-free consumer qualification.",
+      "One bounded rational enclosure is not a general interval theorem and says nothing about measured uncertainty or statistical confidence.",
+      "External package/version/rights/semver and OS/RID evidence remain unobserved; no automatic provider or sibling adoption is authorized.",
+      "M7-W01 and M7 remain active; C02 tensor research and all later advanced extensions require distinct oracles and admission decisions."
+    ],
+    "achievements": [
+      {
+        "projectNode": "M7-W01-C01-T2-A",
+        "achievement": "Define strict provider admission/deferral criteria including caller need and the three independent future review triggers."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2-B",
+        "achievement": "Reverify two retained exact T1 oracles and source SHA receipts, screen unqualified providers and prove no integration was authorized."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2-C",
+        "achievement": "Issue explicit defer-with-review-trigger decision, preserving rights, rounding and measurement uncertainty nonclaims."
+      },
+      {
+        "projectNode": "M7-W01-C01-T2",
+        "achievement": "Qualify Q/O/D precision provider boundary decision and independent local deferral gate without building a new package."
+      },
+      {
+        "projectNode": "M7-W01-C01",
+        "achievement": "Close the M7 precision and interval research spike through qualified provider deferral, not delivered numerical runtime capabilities."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W01-C01-T2-qualified.json",
+    "docs/planning/decisions/m7-w01-c01-t2.md",
+    "docs/distribution/m7-precision-interval-deferral.md",
+    "docs/planning/ValidateM7PrecisionBoundary.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/decisions/m7-w01-c01-t2.md",
+      "sourcePath": "files/docs/planning/decisions/m7-w01-c01-t2.md"
+    },
+    {
+      "path": "docs/distribution/m7-precision-interval-deferral.md",
+      "sourcePath": "files/docs/distribution/m7-precision-interval-deferral.md"
+    },
+    {
+      "path": "docs/planning/ValidateM7PrecisionBoundary.cs",
+      "sourcePath": "files/docs/planning/ValidateM7PrecisionBoundary.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M7-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M7-W01-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS106"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/correctionMode",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.59"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "docs: qualify M7 precision and interval research oracles"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS106/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.105"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/6/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/7/id",
+      "expectedValue": "M7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/7/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/15/id",
+      "expectedValue": "M7-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/15/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/work_packages/16/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/50/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/id",
+      "expectedValue": "M7-W01-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/kind",
+      "expectedValue": "spike"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/0/id",
+      "expectedValue": "M7-W01-C01-T1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/1/id",
+      "expectedValue": "M7-W01-C01-T2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/52/id",
+      "expectedValue": "M7-W01-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/52/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/53/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/id",
+      "expectedValue": "M7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/id",
+      "expectedValue": "M7-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/id",
+      "expectedValue": "M7-W01-C01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/0/id",
+      "expectedValue": "M7-W01-C01-T1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/1/id",
+      "expectedValue": "M7-W01-C01-T2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/1/id",
+      "expectedValue": "M7-W01-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/0/subtasks/0/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/1/subtasks/0/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/0/subtasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/1/subtasks/0/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/0/subtasks/1/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/1/subtasks/1/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/0/subtasks/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/1/subtasks/1/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/0/subtasks/2/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/chunks/51/tasks/1/subtasks/2/status",
+      "expectedValue": "planned"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/0/subtasks/2/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/workPackages/0/phases/0/tasks/1/subtasks/2/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "m7-c01-t1-bcl-exact-precision-interval-oracles-provider-screen-qualified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/exact_integer_result",
+      "expectedValue": "1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/observed_binary64_cancellation",
+      "expectedValue": "0"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/reference_tenth_enclosed",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/independent_oracle_cases",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/precision_reference_oracles_run",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/one_constant_enclosure_is_general_interval_certification",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/external_provider_adopted",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/public_precision_api_delivered",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/t1_done",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/t2_done",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/m7_w01_c01_parent_done",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/m7_w01_work_package_done",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M7-W01-C01-T1-qualified.json",
+      "jsonPointer": "/m7_release_done",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-gate.json",
+      "jsonPointer": "/status",
+      "expectedValue": "m6-independent-local-analysis-scientific-release-gate-qualified-unpublished"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-gate.json",
+      "jsonPointer": "/m6_milestone_done",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M6-gate.json",
+      "jsonPointer": "/packages_publicly_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "10.0.401"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/rollForward",
+      "expectedValue": "latestPatch"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/allowPrerelease",
+      "expectedValue": false
+    },
+    {
+      "repositoryPath": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "expectedText": "Require(expected.Count == 523,",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "docs/planning/ValidateM7PrecisionAdmission.cs",
+      "expectedText": "M7-PRECISION-ORACLE:DECIMAL-TENTH:ADJACENT-BINARY64-ENCLOSURE=TRUE",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m7-precision-deferral",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7PrecisionBoundary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    }
+  ]
+}
