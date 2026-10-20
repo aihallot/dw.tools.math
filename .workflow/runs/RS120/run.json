@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS120",
+  "title": "Qualify Math family coverage and external ownership inventory",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M7 coverage and owner inventory",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W02",
+    "M7-W02-C02",
+    "M7-W02-C02-T1",
+    "M7-W02-C02-T1-A",
+    "M7-W02-C02-T1-B",
+    "M7-W02-C02-T1-C"
+  ],
+  "contribution": {
+    "summary": "Qualify M7-W02-C02-T1 as an independent source-of-truth ownership inventory: audit 106 requirements with 53 chunk owners, 20 framing sources, six explicit dispositions, four Math-local dependency gates and three unsent AURA/Decision/MCDM requests. Complete only C02 T1 Q/O/D, preserving 541 native nodes and the explicit distinction between shipped Math features, researched/deferred APIs and external ownership.",
+    "value": "A read-only BCL C# checker verifies unique requirement IDs and owner/release/acceptance links, valid source targets, disposition reasons/review triggers and Math-local evidence paths. It confirms unsent request status without inventing external approvals, validates prior W01 research and formal C01 source SHA identities, and projects the exact C02 target. No new packages, external communications or milestones. The checker reads target evidence string fields through its defined Text helper; the pre-attempt CS0103 source defect was corrected before this reselection, without claiming execution success. The next pre-attempt RS120 refusal identified unused CountsMarker/ScopeMarker constants (CS0219); both now drive the expected output. Compilation and execution remain unobserved after this correction.",
+    "debtChanges": [
+      "Backlog linkage and source inventory do not prove every accepted mathematical capability is publicly shipped or that a recipient integrated it.",
+      "Three owner-directed AURA/Decision/MCDM draft requests remain untransmitted; local Math dependency gates are not external acknowledgments.",
+      "Deferred precision, tensor, DAG, PlotModel and formal proof providers require their original consumer/resource/trusted-base/licensing/source-free gates.",
+      "Four externally owned domains and two excluded universal capabilities retain explicit owners and review triggers, not automatic transfers.",
+      "M7-W02-C02 T2 and final W02/M7 gates remain pending; no new program/milestone or public package may be inferred from RS120."
+    ],
+    "nextAction": "After durable RS120 success, prepare M7-W02-C02-T2 to finalize the coverage/program decision and missing external responses, respecting independently evidenced product versus research states; close C02 only through its own owner gate. W02 work-package and M7 release gates remain separate.",
+    "achievements": [
+      {
+        "projectNode": "M7-W02-C02-T1-A",
+        "achievement": "Define exact owner/source/recipient coverage criteria and distinguish shipped, researched-deferred, externally owned and excluded states."
+      },
+      {
+        "projectNode": "M7-W02-C02-T1-B",
+        "achievement": "Audit 106 requirement IDs, 53 owners, 20 framing sources, six dispositions, four local gates and three unsent drafts."
+      },
+      {
+        "projectNode": "M7-W02-C02-T1-C",
+        "achievement": "Record an owner-gated proposed follow-up inventory with no invented external response or authorized next-milestone delivery."
+      },
+      {
+        "projectNode": "M7-W02-C02-T1",
+        "achievement": "Complete bounded coverage and response-status Q/O/D by source-pinned read-only C# checks, leaving C02 T2 open."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W02-C02-T1-qualified.json",
+    "docs/planning/decisions/m7-w02-c02-t1.md",
+    "docs/distribution/m7-coverage-ownership-inventory.md",
+    "docs/planning/ValidateM7CoverageInventory.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-coverage-inventory",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7CoverageInventory.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
