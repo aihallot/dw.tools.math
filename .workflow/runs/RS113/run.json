@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS113",
+  "title": "Qualify finite reciprocal PlotModel segment and point-budget research",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M7 reciprocal PlotModel research oracles",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C03-S02",
+    "M7-W01-C03-S02-T1",
+    "M7-W01-C03-S02-T1-A",
+    "M7-W01-C03-S02-T1-B",
+    "M7-W01-C03-S02-T1-C"
+  ],
+  "contribution": {
+    "summary": "Qualify M7-W01-C03-S02-T1 as bounded reciprocal PlotModel data research. Independently check four finite points in two disconnected segments for the 1/x pole at zero, including a grid omitting zero, and reject invalid/nonfinite or over-budget inputs without partial results. Complete T1 Q/O/D only; no renderer, public PlotModel, AURA executor or new package.",
+    "value": "A source-only BCL checker tests explicit [-2,-1,0,1,2] segments and skipped-zero topology, an exact eight-sample limit, finite values, monotonic-grid refusals and no partial points. Record SHA-pinned research decision and Math/AURA ownership while retaining RS112\u0027s completed pure DAG deferral. Keep S02 T2, original C03, W01 and M7 open.",
+    "debtChanges": [
+      "The finite reciprocal plot fixture is not a PlotModel product API, adaptive sampler, renderer or general discontinuity detector.",
+      "Known 1/x pole segmentation must not be generalized silently to arbitrary singularities or inferred continuity from epsilon.",
+      "Public plotting needs a named Math consumer, explicit domain/grid/segment and finite resource/cancellation/partial-result policies.",
+      "Graphical rendering and AURA task/resource/permission orchestration remain outside Math; no provider or sibling cutover.",
+      "S02 T2, original size-L C03, M7-W01 and M7 release remain incomplete after this research T1."
+    ],
+    "nextAction": "After durable RS113 success, prepare M7-W01-C03-S02-T2 to decide finite PlotModel points/segments/domain/budget/partial-output and graphical rendering owner boundaries. Admit no public model or chart renderer without an independent consumer or explicitly defer with a review trigger.",
+    "achievements": [
+      {
+        "projectNode": "M7-W01-C03-S02-T1-A",
+        "achievement": "Fix a finite reciprocal-only PlotModel research question, known-pole topology, point quotas and distinct Math/AURA ownership."
+      },
+      {
+        "projectNode": "M7-W01-C03-S02-T1-B",
+        "achievement": "Prove two disconnected reciprocal segments with four finite points, omitted-zero break and deterministic invalid/nonfinite/budget refusals."
+      },
+      {
+        "projectNode": "M7-W01-C03-S02-T1-C",
+        "achievement": "Record research-only point/segment and renderer non-delivery disposition, preserving a separate T2 owner admission gate."
+      },
+      {
+        "projectNode": "M7-W01-C03-S02-T1",
+        "achievement": "Complete bounded 1/x PlotModel T1 Q/O/D with independent BCL witness groups and no public graph/renderer capability."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json",
+    "docs/planning/decisions/m7-w01-c03-s02-t1.md",
+    "docs/planning/decisions/m7-w01-c03-s02-ownership.md",
+    "docs/planning/ValidateM7PlotSampling.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-plot-sampling",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7PlotSampling.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
