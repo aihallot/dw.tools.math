@@ -305,7 +305,7 @@ if(target)
         Get(e,"validator_sha256")==Sha("docs/planning/ValidateM7AdvancedWorkPackage.cs"),
         "Completed W01 target evidence would overclaim product or lack exact source pins.");
     var evidencePaths=wp.GetProperty("evidence").EnumerateArray()
-        .Select(x=>x.GetString()).ToArray();
+        .Select(x=>x.GetString() ?? "").ToArray();
     Need(evidencePaths.Length==11 &&
         evidencePaths.Contains(Evidence,StringComparer.Ordinal) &&
         evidencePaths.Distinct(StringComparer.Ordinal).Count()==11,
