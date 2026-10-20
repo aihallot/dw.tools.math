@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.118",
+  "plan_version": "0.1.119",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8978,7 +8978,7 @@
       "title": "Coverage review and follow-up program",
       "kind": "document",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M7-W02-C01"
       ],
@@ -9000,40 +9000,59 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS120 T1 independently verifies 106 accepted Math requirement IDs with 53 owning chunks, 20 source-coverage targets, four external-owner and two excluded dispositions, four Math-side satisfied dependency gates and three explicit unsent AURA/Decision/MCDM drafts. Formal and advanced research remain provider-deferred; no new package, external response or owner-authorized milestone is inferred.",
+      "files": [
+        "docs/planning/decisions/m7-w02-c02-t1.md",
+        "docs/distribution/m7-coverage-ownership-inventory.md",
+        "docs/planning/ValidateM7CoverageInventory.cs",
+        "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7CoverageInventory.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+      ],
+      "readiness": "Math owner/source coverage inventory qualified from a read-only BCL validator, canonical planning, SHA-pinned prior scientific receipts and unsent request evidence. C02 T2 must separately decide program/release boundaries and actual recipient statuses before a document-phase/work-package closure.",
       "tasks": [
         {
           "id": "M7-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Review all framed families, migration debt, and external responses; propose subsequent milestones.",
           "test_case": "No requirement lacks an owner: delivered, researched/deferred with reason and trigger, or externally owned; final corpus is auditable.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W02-C02-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Review all framed families, migration debt, and external responses; propose subsequent milestones.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C02-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: No requirement lacks an owner: delivered, researched/deferred with reason and trigger, or externally owned; final corpus is auditable.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C02-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W02-C02-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C02-T1-qualified.json"
+              ]
             }
           ]
         },
