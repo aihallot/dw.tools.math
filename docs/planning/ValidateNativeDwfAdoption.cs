@@ -17,7 +17,7 @@ try
     var expected = BuildExpected(backlog);
     var actual = BuildActual(plan);
 
-    Require(expected.Count == 523, $"Expected product projection count changed: {expected.Count}.");
+    Require(expected.Count == 541, $"Expected product projection count changed: {expected.Count}.");
     Require(actual.Count == expected.Count, $"Native DWF node count {actual.Count} differs from expected {expected.Count}.");
 
     foreach (var pair in expected)

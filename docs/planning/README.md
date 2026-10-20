@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.108. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.109. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -24,7 +24,7 @@ M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical
 - [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)
 - [Resource policy](resource-cost-policy.md)
 
-Scope: 8 releases, 17 work packages, 56 chunks, 112 tasks, 336 subtasks, 106 requirements.
+Scope: 8 releases, 17 work packages, 58 chunks, 116 tasks, 348 subtasks, 106 requirements.
 
 Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.
 

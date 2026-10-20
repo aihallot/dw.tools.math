@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.108",
+  "plan_version": "0.1.109",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -213,6 +213,8 @@
         "M7-W01-C01",
         "M7-W01-C02",
         "M7-W01-C03",
+        "M7-W01-C03-S01",
+        "M7-W01-C03-S02",
         "M7-W02-C01",
         "M7-W02-C02"
       ],
@@ -8446,11 +8448,11 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
+      "refinement": "RS110 decomposes the accepted size-L C03 research into S01 (pure DAG sharing/cycle/resource bounded study) and S02 (finite PlotModel discontinuity/point-quota study), preserving aggregate C03 Q/O/D and distinct AURA rendering ownership. The parent stays planned pending both split decisions.",
       "files": [],
       "commands": [],
       "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "readiness": "Size-L split completed structurally before any parent readiness: S01 active, S02 planned and sequentially dependent. Original C03 aggregate remains planned until both split research phases are independently qualified.",
       "tasks": [
         {
           "id": "M7-W01-C03-T1",
@@ -8509,6 +8511,226 @@
               "id": "M7-W01-C03-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W01-C03-T2; a completed document or spike is not itself a delivered product capability.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M7-W01-C03-S01",
+      "tag": "advanced",
+      "release": "M7",
+      "work_package": "M7-W01",
+      "parent_chunk": "M7-W01-C03",
+      "title": "Pure bounded DAG sharing and cycle refusal",
+      "kind": "spike",
+      "size": "M",
+      "status": "in_progress",
+      "depends_on": [
+        "M7-W01-C02"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M7-W01-C03-R1",
+        "M7-W01-C03-R2"
+      ],
+      "deliverables": "Study memoized pure diamond-graph evaluation, one shared node, deterministic cycle rejection and bounded node/edge/depth budgets.",
+      "acceptance": "One diamond DAG evaluates the shared source only once and rejects a directed cycle; finite cap refuses before executing a large graph.",
+      "boundary_acceptance": "No AURA scheduler, shared mutable resources, agent/job graph runtime or product DAG API is admitted.",
+      "test_suites": [
+        "PLANNING"
+      ],
+      "proposed_files": [
+        "docs/planning/decisions/m7-w01-c03-split.md"
+      ],
+      "proposed_test_file": null,
+      "proposed_commands": [
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "refinement": "RS110 accepted size-L split: independent finite research questions, no new Math/AURA runtime or provider qualification.",
+      "files": [
+        "docs/planning/decisions/m7-w01-c03-split.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/ValidateM7DagSplit.cs",
+        "docs/planning/evidence/M7-W01-C03-split-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7DagSplit.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [],
+      "readiness": "S01 active after split; upcoming T1 must establish independent pure DAG sharing, cycle, resource and ownership oracles. No product engine admitted.",
+      "tasks": [
+        {
+          "id": "M7-W01-C03-S01-T1",
+          "title": "Contract and outcome",
+          "behavior": "Study memoized pure diamond-graph evaluation, one shared node, deterministic cycle rejection and bounded node/edge/depth budgets.",
+          "test_case": "One diamond DAG evaluates the shared source only once and rejects a directed cycle; finite cap refuses before executing a large graph.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M7-W01-C03-S01-T1-A",
+              "title": "Question",
+              "description": "Fix the independent finite research question, scope and non-delivery criterion.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S01-T1-B",
+              "title": "Observation",
+              "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S01-T1-C",
+              "title": "Decision",
+              "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M7-W01-C03-S01-T2",
+          "title": "Boundaries and integration",
+          "behavior": "No AURA scheduler, shared mutable resources, agent/job graph runtime or product DAG API is admitted.",
+          "test_case": "No AURA scheduler, shared mutable resources, agent/job graph runtime or product DAG API is admitted.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M7-W01-C03-S01-T2-A",
+              "title": "Question",
+              "description": "Fix the independent finite research question, scope and non-delivery criterion.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S01-T2-B",
+              "title": "Observation",
+              "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S01-T2-C",
+              "title": "Decision",
+              "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M7-W01-C03-S02",
+      "tag": "advanced",
+      "release": "M7",
+      "work_package": "M7-W01",
+      "parent_chunk": "M7-W01-C03",
+      "title": "Finite PlotModel and discontinuity sampling",
+      "kind": "spike",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M7-W01-C03-S01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M7-W01-C03-R1",
+        "M7-W01-C03-R2"
+      ],
+      "deliverables": "Study bounded point/segment representation for sampling finite mathematical functions without owning chart rendering.",
+      "acceptance": "Finite 1/x sampling must not connect points across the discontinuity at zero; explicit point quotas and segment breaks.",
+      "boundary_acceptance": "No UI/graphics engine, automatic interpolation over poles, dynamic stream or AURA rendering dependency.",
+      "test_suites": [
+        "PLANNING"
+      ],
+      "proposed_files": [
+        "docs/planning/decisions/m7-w01-c03-split.md"
+      ],
+      "proposed_test_file": null,
+      "proposed_commands": [
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "refinement": "RS110 accepted size-L split: independent finite research questions, no new Math/AURA runtime or provider qualification.",
+      "files": [
+        "docs/planning/decisions/m7-w01-c03-split.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/ValidateM7DagSplit.cs",
+        "docs/planning/evidence/M7-W01-C03-split-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7DagSplit.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [],
+      "readiness": "S02 stays planned until S01 evidence; finite discontinuity/PlotModel oracle and point-quota review must be independently qualified.",
+      "tasks": [
+        {
+          "id": "M7-W01-C03-S02-T1",
+          "title": "Contract and outcome",
+          "behavior": "Study bounded point/segment representation for sampling finite mathematical functions without owning chart rendering.",
+          "test_case": "Finite 1/x sampling must not connect points across the discontinuity at zero; explicit point quotas and segment breaks.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M7-W01-C03-S02-T1-A",
+              "title": "Question",
+              "description": "Fix the independent finite research question, scope and non-delivery criterion.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S02-T1-B",
+              "title": "Observation",
+              "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S02-T1-C",
+              "title": "Decision",
+              "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M7-W01-C03-S02-T2",
+          "title": "Boundaries and integration",
+          "behavior": "No UI/graphics engine, automatic interpolation over poles, dynamic stream or AURA rendering dependency.",
+          "test_case": "No UI/graphics engine, automatic interpolation over poles, dynamic stream or AURA rendering dependency.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M7-W01-C03-S02-T2-A",
+              "title": "Question",
+              "description": "Fix the independent finite research question, scope and non-delivery criterion.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S02-T2-B",
+              "title": "Observation",
+              "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M7-W01-C03-S02-T2-C",
+              "title": "Decision",
+              "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
               "status": "planned",
               "evidence": []
             }
