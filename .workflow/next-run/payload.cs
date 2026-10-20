@@ -126,7 +126,7 @@ if(!target)
            (string?)parent["kind"]!="spike" ||
            (string?)parent["size"]!="L" ||
            (string?)parent["status"]!="planned" ||
-           chunks.Any(c=>new[]{S01,S02}.Contains((string?)c!["id"],StringComparer.Ordinal)))
+           chunks.Any(c=>string.Equals((string?)c!["id"],S01,StringComparison.Ordinal)||string.Equals((string?)c!["id"],S02,StringComparison.Ordinal)))
             throw new InvalidOperationException("M7 C03 accepted baseline already diverged.");
         doc["plan_version"]="0.1.109";
         release["required_chunks"]=p.Json.StringArray(
@@ -159,7 +159,7 @@ if(!target)
            (string?)w01["id"]!=Work ||
            (string?)phases[2]!["id"]!=Parent ||
            (string?)phases[2]!["state"]!="not-ready" ||
-           phases.Any(c=>new[]{S01,S02}.Contains((string?)c!["id"],StringComparer.Ordinal)))
+           phases.Any(c=>string.Equals((string?)c!["id"],S01,StringComparison.Ordinal)||string.Equals((string?)c!["id"],S02,StringComparison.Ordinal)))
             throw new InvalidOperationException("Unrecognized original native C03 parent.");
         phases.Insert(3,(JsonNode)BuildNativePhase(S01,
             "Pure bounded DAG sharing and cycle refusal","M7-W01-C02"));
