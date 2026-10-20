@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.109",
+  "plan_version": "0.1.110",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8549,49 +8549,63 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "refinement": "RS110 accepted size-L split: independent finite research questions, no new Math/AURA runtime or provider qualification.",
+      "refinement": "RS110 staged two separate medium DAG and PlotModel research phases. RS111 T1 independently qualifies a pure four-node diamond: exact shared-once root 13 and deterministic cycle/unknown/duplicate/8-node/10-edge/4-depth/overflow refusals with no published partial result. No graph runtime, AURA scheduling or renderer is admitted.",
       "files": [
         "docs/planning/decisions/m7-w01-c03-split.md",
         "docs/planning/ValidateNativeDwfAdoption.cs",
         "docs/planning/ValidateM7DagSplit.cs",
-        "docs/planning/evidence/M7-W01-C03-split-qualified.json"
+        "docs/planning/evidence/M7-W01-C03-split-qualified.json",
+        "docs/planning/decisions/m7-w01-c03-s01-t1.md",
+        "docs/planning/decisions/m7-w01-c03-s01-owner-screen.md",
+        "docs/planning/ValidateM7DagAdmission.cs",
+        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7DagSplit.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7DagAdmission.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "evidence": [],
-      "readiness": "S01 active after split; upcoming T1 must establish independent pure DAG sharing, cycle, resource and ownership oracles. No product engine admitted.",
+      "evidence": [
+        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+      ],
+      "readiness": "DAG S01 T1 independent BCL oracles and Q/O/D research decision qualified; T2 must still decide identity/resources, cancellation and owner-gated provider admission or deferral before S01 phase closure.",
       "tasks": [
         {
           "id": "M7-W01-C03-S01-T1",
           "title": "Contract and outcome",
           "behavior": "Study memoized pure diamond-graph evaluation, one shared node, deterministic cycle rejection and bounded node/edge/depth budgets.",
           "test_case": "One diamond DAG evaluates the shared source only once and rejects a directed cycle; finite cap refuses before executing a large graph.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C03-S01-T1-A",
               "title": "Question",
               "description": "Fix the independent finite research question, scope and non-delivery criterion.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S01-T1-B",
               "title": "Observation",
               "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S01-T1-C",
               "title": "Decision",
               "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+              ]
             }
           ]
         },
