@@ -60,10 +60,12 @@ static BigInteger[] Coefficients(JsonElement array)
     for(var i=0;i<cells.Length;i++)
     {
         var literal=cells[i].GetString();
-        Need(!string.IsNullOrWhiteSpace(literal)&&
-             BigInteger.TryParse(literal,NumberStyles.AllowLeadingSign,
-                 CultureInfo.InvariantCulture,out var integer)&&
-             integer.ToString(CultureInfo.InvariantCulture)==literal,
+        if(string.IsNullOrWhiteSpace(literal))
+            throw new InvalidOperationException("A certificate coefficient must not be empty.");
+        if(!BigInteger.TryParse(literal,NumberStyles.AllowLeadingSign,
+            CultureInfo.InvariantCulture,out var integer))
+            throw new InvalidOperationException("A certificate coefficient is not a valid integer.");
+        Need(integer.ToString(CultureInfo.InvariantCulture)==literal,
             "Coefficient must be a canonical signed base-10 integer.");
         output[i]=integer;
     }
