@@ -33,4 +33,4 @@ Research-only finite limits: **8 DAG nodes / 10 edges / depth 4**; **8 samples /
 
 ## Scope and next checkpoint
 
-RS116 finishes **only C03/T2 research**, with three Q/O/D subtasks and parent completion achievements. It does not finish M7-W01 or M7. The next DWF step is a separate M7-W01 checkpoint to reconcile all three accepted advanced-model spike outcomes; M7-W02 and release M7 must remain open. No sibling writes, chart rendering, job execution, public packages or external provider are authorized.
+RS116 retains exactly **541 native DWF nodes** and finishes **only C03/T2 research**, with three Q/O/D subtasks and parent completion achievements. It does not finish M7-W01 or M7. The next DWF step is a separate M7-W01 checkpoint to reconcile all three accepted advanced-model spike outcomes; M7-W02 and release M7 must remain open. No sibling writes, chart rendering, job execution, public packages or external provider are authorized.
