@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "RS119",
+  "title": "Defer unqualified proof providers and close formal research",
+  "state": "prepared",
+  "commitMessage": "docs: qualify formal provider deferral and close M7 C01",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W02",
+    "M7-W02-C01",
+    "M7-W02-C01-T2",
+    "M7-W02-C01-T2-A",
+    "M7-W02-C01-T2-B",
+    "M7-W02-C01-T2-C"
+  ],
+  "contribution": {
+    "summary": "Qualify M7-W02-C01-T2 as an explicit Lean/Rocq/SMT provider and public proof API deferral. Recheck RS118\u0027s source-pinned Z[x] polynomial certificate, exact [-1,0,1] convolution and invalid/unproved statuses; require three consumer, trusted-base/resource and source/rights/RID/source-free review gates. Close C01 as research only; keep W02, C02 and M7 open.",
+    "value": "An independent read-only C# gate verifies prior fixture/decision/verifier SHA-256 identities, recomputes the finite coefficient certificate and proves wrong/truncated witnesses invalid and missing/hole/timeout/provider errors unproved. Document trust in local BCL BigInteger only; no external kernel, solver, formal Math API, source-free recipient or automatic provider cutover.",
+    "debtChanges": [
+      "One independently verified finite polynomial coefficient witness is not a general theorem prover, Lean/Rocq kernel proof or SMT certificate checker.",
+      "Bad or partial complete certificates are invalid; holes, timeouts, missing receipts and failed provider outputs remain unproved, never silently promoted.",
+      "A future formal provider requires a named consumer, pinned trusted base/source/version/license/RID, bounded errors/resources and an isolated source-free recipient.",
+      "Math may own a qualified certificate data contract only; AURA retains provider invocation, scheduling, permissions and orchestration.",
+      "M7-W02-C02 coverage review, W02 portfolio closure and M7 1.2.0-candidate release remain incomplete after RS119."
+    ],
+    "nextAction": "After durable RS119 success, prepare M7-W02-C02-T1 to independently inventory accepted Math families, migration debt and external owner response status; distinguish shipped, local-only, deferred and outside-owner entries. Keep M7 release gate open until the coverage review and follow-up program are qualified.",
+    "achievements": [
+      {
+        "projectNode": "M7-W02-C01-T2-A",
+        "achievement": "Define named formal consumer, complete certificate/trusted-base domain, bounded failure/resources and source-free owner admission conditions."
+      },
+      {
+        "projectNode": "M7-W02-C01-T2-B",
+        "achievement": "Verify historical certificate/source SHA pins and independently reproduce exact convolution and invalid versus unproved negative verdicts."
+      },
+      {
+        "projectNode": "M7-W02-C01-T2-C",
+        "achievement": "Explicitly defer Lean/Rocq/SMT toolchains and public Math proof APIs with three future admission triggers, no kernel claims."
+      },
+      {
+        "projectNode": "M7-W02-C01-T2",
+        "achievement": "Qualify bounded formal provider/trusted-base disposition through a read-only C# source-pinned owner gate."
+      },
+      {
+        "projectNode": "M7-W02-C01",
+        "achievement": "Close formal interoperability as a finite certificate research spike; no external proof kernel, solver, public package or Math formal API delivered."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W02-C01-T2-qualified.json",
+    "docs/planning/decisions/m7-w02-c01-t2.md",
+    "docs/distribution/m7-formal-toolchain-deferral.md",
+    "docs/planning/ValidateM7FormalBoundary.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-formal-trusted-base",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7FormalBoundary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
