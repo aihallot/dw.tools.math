@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.111",
+  "plan_version": "0.1.112",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8664,7 +8664,7 @@
       "title": "Finite PlotModel and discontinuity sampling",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M7-W01-C03-S01"
       ],
@@ -8686,49 +8686,63 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "refinement": "RS110 accepted size-L split: independent finite research questions, no new Math/AURA runtime or provider qualification.",
+      "refinement": "RS112 closed S01 as independently qualified pure DAG research with no runtime. RS113 S02 T1 independently qualifies finite reciprocal 1/x point/segment data: four points and two unconnected segments across the known pole, including absent-zero gaps, plus 8-sample/8-point/2-segment and invalid/nonfinite refusal budgets. No renderer or public PlotModel API.",
       "files": [
         "docs/planning/decisions/m7-w01-c03-split.md",
         "docs/planning/ValidateNativeDwfAdoption.cs",
         "docs/planning/ValidateM7DagSplit.cs",
-        "docs/planning/evidence/M7-W01-C03-split-qualified.json"
+        "docs/planning/evidence/M7-W01-C03-split-qualified.json",
+        "docs/planning/decisions/m7-w01-c03-s02-t1.md",
+        "docs/planning/decisions/m7-w01-c03-s02-ownership.md",
+        "docs/planning/ValidateM7PlotSampling.cs",
+        "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7DagSplit.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7PlotSampling.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "evidence": [],
-      "readiness": "S02 stays planned until S01 evidence; finite discontinuity/PlotModel oracle and point-quota review must be independently qualified.",
+      "evidence": [
+        "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
+      ],
+      "readiness": "S02 T1 Q/O/D finite reciprocal research qualified by BCL-only reference oracles, explicit known-pole topology and no-partial-result refusals. S02 T2 must still decide provider/owner, point budget and PlotModel product admission or deferral.",
       "tasks": [
         {
           "id": "M7-W01-C03-S02-T1",
           "title": "Contract and outcome",
           "behavior": "Study bounded point/segment representation for sampling finite mathematical functions without owning chart rendering.",
           "test_case": "Finite 1/x sampling must not connect points across the discontinuity at zero; explicit point quotas and segment breaks.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C03-S02-T1-A",
               "title": "Question",
               "description": "Fix the independent finite research question, scope and non-delivery criterion.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S02-T1-B",
               "title": "Observation",
               "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S02-T1-C",
               "title": "Decision",
               "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S02-T1-qualified.json"
+              ]
             }
           ]
         },
