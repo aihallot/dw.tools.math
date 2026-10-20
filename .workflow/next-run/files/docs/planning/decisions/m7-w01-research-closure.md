@@ -36,7 +36,7 @@ For each family, its previously documented **three mandatory gates** must all be
 
 Math may own admitted mathematical representation and pure numeric operations. **AURA or client owners** retain agents, scheduling, resource invocation, permission policy, UI chart rendering, axes and graphical interaction. No `dw.tools.math.advanced` package or `dw.discovery` interface is created; no sibling is modified.
 
-Research caps (64 tensor elements/512 coordinate study bytes for that reference, DAG 8/10/4, PlotModel 8/8/2) are **not** production limits, certified precision/uncertainty, total memory accounting, cancellation service levels or interoperability evidence.
+Research caps (64 tensor elements / 512 bytes of integer-study storage, DAG 8/10/4, PlotModel 8/8/2) are **not** production limits, certified precision/uncertainty, total memory accounting, cancellation service levels or interoperability evidence.
 
 M7-W02 **Formal interoperability and proofs** and **Coverage review and follow-up program** are still planned/not-ready. M7 `1.2.0-candidate` remains **in-progress**; closure of W01 cannot certify an M7 release, consumer package, public NuGet publication or a proof provider.
 
