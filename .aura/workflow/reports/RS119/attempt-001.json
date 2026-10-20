@@ -1,0 +1,1940 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS119",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-20T17:04:03.5833265+00:00",
+  "completedAtUtc": "2026-10-20T17:04:13.6166989+00:00",
+  "durationMilliseconds": 10033,
+  "projectNodes": [
+    "M7",
+    "M7-W02",
+    "M7-W02-C01",
+    "M7-W02-C01-T2",
+    "M7-W02-C01-T2-A",
+    "M7-W02-C01-T2-B",
+    "M7-W02-C01-T2-C"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W02-C01-T2-qualified.json",
+    "docs/planning/decisions/m7-w02-c01-t2.md",
+    "docs/distribution/m7-formal-toolchain-deferral.md",
+    "docs/planning/ValidateM7FormalBoundary.cs"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/README.md",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/distribution/m7-formal-toolchain-deferral.md",
+    "docs/planning/ValidateM7FormalBoundary.cs",
+    "docs/planning/decisions/m7-w02-c01-t2.md",
+    "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS119/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-c2c6a929613f4847bf7e26daebb5825d\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 9793,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS119 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS118/attempt-001.json run=RS118 attempt=1 lineage=exact\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/certificate_verdict\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/certificate_kind\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/certificate_domain\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/reference_degree\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/reference_coefficient_count\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/independent_oracle_groups\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/altered_certificate_rejected\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/truncated_certificate_rejected\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/hole_unproved\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/timeout_unproved\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/provider_failure_unproved\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/t1_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/t2_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/c01_phase_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/m7_w02_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/m7_release_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/external_prover_adopted\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/general_proof_kernel_certified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/source_free_consumer_qualified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W02-C01-T1-qualified.json pointer=/public_formal_api_delivered\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W01-work-package-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W01-work-package-qualified.json pointer=/m7_w01_work_package_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W01-work-package-qualified.json pointer=/m7_release_done\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M7-W01-work-package-qualified.json pointer=/new_advanced_product_delivered\r\n[require.text-contains] VERIFIED path=docs/planning/ValidateNativeDwfAdoption.cs semantic text found\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/6/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/6/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/7/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/releases/7/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/15/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/15/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/16/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/work_packages/16/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/53/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/54/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/55/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/kind\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/size\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/0/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/0/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/1/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/1/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/57/id\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/57/kind\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/57/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/0/subtasks/0/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/1/subtasks/0/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/0/subtasks/1/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/1/subtasks/1/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/0/subtasks/2/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/chunks/56/tasks/1/subtasks/2/status\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T1-A state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T1-B state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T1-C state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-A state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-B state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-C state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C02-T1 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C02-T2 state=not-ready\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/ValidateM7FormalBoundary.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/M7-W02-C01-T2-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m7-w02-c01-t2.md bytes=5577\r\n[files.replace-from-staged] CHANGED path=docs/distribution/m7-formal-toolchain-deferral.md bytes=4091\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM7FormalBoundary.cs bytes=12654\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/m7-w02-c01-t2.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/m7-formal-toolchain-deferral.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidateM7FormalBoundary.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidateM7FormalBoundary.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidateM7FormalBoundary.cs semantic text found\r\nM7-FORMAL-CERTIFICATE:Z-POLYNOMIAL:PRODUCT=-1,0,1;VERDICT=verified-finite-identity\r\nM7-FORMAL-CERTIFICATE:NEGATIVE:ALTERED=invalid-certificate;TRUNCATED=invalid-certificate;HOLE=unproved;TIMEOUT=unproved;PROVIDER-FAILURE=unproved\r\ndw.tools.math/m7-w02-c01-t1-independent-certificate/1.2 qualified; z-polynomial=-1,0,1; altered=invalid; hole=unproved; timeout=unproved; provider=none\r\n\n\r\nM7-FORMAL-BOUNDARY:POLYNOMIAL=-1,0,1;CERTIFICATE=verified-finite-identity;TRUSTED-BASE=local-bcl-only\r\nM7-FORMAL-BOUNDARY:UNPROVED:HOLE=true;TIMEOUT=true;PROVIDER-FAILURE=true;MISSING=true;ALTERED=invalid-certificate\r\ndw.tools.math/m7-w02-c01-t2-formal-provider-deferral/1.2 qualified; fixture=replayed; statuses=verified,invalid,unproved; triggers=3; prover=none; c01=done\r\n\n\r\n10.0.402\r\n\n\r\n[files.write-complete] CHANGED path=docs/planning/evidence/M7-W02-C01-T2-qualified.json bytes=4407\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2 ready-\u003Ein-progress\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-A not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-A ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-B not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-B ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-C not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-C ready-\u003Ein-progress\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M7-W02-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-A state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-B state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C01-T2-C state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7-W02-C02 state=not-ready\r\n[json.edit-object] CHANGED path=.aura/workflow/state.json semantic object updated\r\nplanning valid: 0.1.118 | 58 chunks | 6dd9d739a42425799b7a12d1d5e7d72d38652224c58b13011606981c61497089 | mode --write\r\n\n\r\nnative DWF adoption valid: nodes=541 milestones=8 workPackages=17 phases=56 tasks=112 subtasks=330 c02=done\r\n\n\r\nplanning valid: 0.1.118 | 58 chunks | 6dd9d739a42425799b7a12d1d5e7d72d38652224c58b13011606981c61497089 | mode --check\r\n\n\r\nM7-FORMAL-BOUNDARY:POLYNOMIAL=-1,0,1;CERTIFICATE=verified-finite-identity;TRUSTED-BASE=local-bcl-only\r\nM7-FORMAL-BOUNDARY:UNPROVED:HOLE=true;TIMEOUT=true;PROVIDER-FAILURE=true;MISSING=true;ALTERED=invalid-certificate\r\ndw.tools.math/m7-w02-c01-t2-formal-provider-deferral/1.2 qualified; fixture=replayed; statuses=verified,invalid,unproved; triggers=3; prover=none; c01=done\r\n\n\r\n[payload] OK operations=136 changed=19 no-change=0 verified=117 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS119/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS119 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "797ff9ce0b02a9c7fa8b5bf0326d74b4fe30d012b980b6c3e241897551976603",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS118/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS118 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a64a420de9e7d529602ee1f14f05fb82f9df41411385654b8b9f12d031083bec",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/certificate_verdict",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/certificate_kind",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/certificate_domain",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/reference_degree",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/reference_coefficient_count",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/independent_oracle_groups",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/altered_certificate_rejected",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/truncated_certificate_rejected",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/hole_unproved",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/timeout_unproved",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/provider_failure_unproved",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/t1_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/t2_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/c01_phase_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m7_w02_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m7_release_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/external_prover_adopted",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/general_proof_kernel_certified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/source_free_consumer_qualified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/public_formal_api_delivered",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m7_w01_work_package_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/m7_release_done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M7-W01-work-package-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/new_advanced_product_delivered",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/6/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/6/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/7/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/releases/7/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/15/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/15/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/16/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/work_packages/16/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/53/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/54/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/55/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/kind",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/size",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/0/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/0/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/1/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/1/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/57/id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/57/kind",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/57/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/0/subtasks/0/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/1/subtasks/0/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/0/subtasks/1/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/1/subtasks/1/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/0/subtasks/2/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/chunks/56/tasks/1/subtasks/2/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T1-A state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T1-B state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T1-C state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-A state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-B state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-C state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C02-T1 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C02-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/ValidateM7FormalBoundary.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/M7-W02-C01-T2-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 1,
+        "Summary": "bytes=5577",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "36c7217223fd1e39b813850087b0820b36709ee49e447dc6ce369b738bce3727",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 1,
+        "Summary": "bytes=4091",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "61bfecee26ed3fb9627b26f2eaa93bf73ac74f311edaa1e9727963382d6f0b95",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM7FormalBoundary.cs",
+        "Status": 1,
+        "Summary": "bytes=12654",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "dc2aedf1458444b56097e47bd09337e0d7910e84f97f2cdf04dd2b12bc152a83",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/m7-w02-c01-t2.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/m7-formal-toolchain-deferral.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidateM7FormalBoundary.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidateM7FormalBoundary.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidateM7FormalBoundary.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/M7-W02-C01-T2-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=4407",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6e7f27a63009198bdac225e4941cbfebc1eef23156c50fd3e112112fe44d108d",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "51faec11790a0207477920e5c8a793206605d5d77546fb12ca29e11e18070c6a",
+        "AfterSha256": "6dd9d739a42425799b7a12d1d5e7d72d38652224c58b13011606981c61497089",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "afe28771e24f86463de807b09c57f686479e385975b0e9f36f3b5f3c8e634a64",
+        "AfterSha256": "38ca232bb8f3aefd146ff73d0483ff2f4adeea9eb8af085eea4c74d8d8ff51b5",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2 ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "38ca232bb8f3aefd146ff73d0483ff2f4adeea9eb8af085eea4c74d8d8ff51b5",
+        "AfterSha256": "b7f80f0168aa5c807cf47bc7fa40fe94dbc49567455cf112f8d120c64ad7e5bb",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-A not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "b7f80f0168aa5c807cf47bc7fa40fe94dbc49567455cf112f8d120c64ad7e5bb",
+        "AfterSha256": "4cbbee1c173654828d847552ad9ea696200b0bf5e6c70fc8f14ad5e28a44fc01",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-A ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "4cbbee1c173654828d847552ad9ea696200b0bf5e6c70fc8f14ad5e28a44fc01",
+        "AfterSha256": "e26e84e19be7c4fc31f1da0bc340934b9cda9d1a4b4315c2a651a37f8d2c8f24",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-A in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "e26e84e19be7c4fc31f1da0bc340934b9cda9d1a4b4315c2a651a37f8d2c8f24",
+        "AfterSha256": "9b4d329127db3deabeddf63171f27047e8cb0ed604a53c45f1ae5597285e8658",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-B not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "9b4d329127db3deabeddf63171f27047e8cb0ed604a53c45f1ae5597285e8658",
+        "AfterSha256": "256535553e5979acbdcfd9333f1536a429661ba530225b383a107d95675cd21d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-B ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "256535553e5979acbdcfd9333f1536a429661ba530225b383a107d95675cd21d",
+        "AfterSha256": "27224e8a6a6d2af3ef684913b77d6d1d7e7301e7edd15376fefaa5ade692abe4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-B in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "27224e8a6a6d2af3ef684913b77d6d1d7e7301e7edd15376fefaa5ade692abe4",
+        "AfterSha256": "dc8c8a41f52f4a9bc4ae86095c4b9df6580397046dfba3587eeb4a1dcb0ffa32",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-C not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "dc8c8a41f52f4a9bc4ae86095c4b9df6580397046dfba3587eeb4a1dcb0ffa32",
+        "AfterSha256": "5facee77d1dc19ce0357aa4d35ab4d6a19d27616f2a27071e7b58c824aad105c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-C ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "5facee77d1dc19ce0357aa4d35ab4d6a19d27616f2a27071e7b58c824aad105c",
+        "AfterSha256": "8c1d5f9794d2ef1aa7ef4b6ca63203f893180709a97ee6c9d3513476059b97fe",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2-C in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "8c1d5f9794d2ef1aa7ef4b6ca63203f893180709a97ee6c9d3513476059b97fe",
+        "AfterSha256": "02b94b65407d3d16806179cab9cbaaa0ee2a44c1c4683347e947f004dfa16f66",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01-T2 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "02b94b65407d3d16806179cab9cbaaa0ee2a44c1c4683347e947f004dfa16f66",
+        "AfterSha256": "5e8dba1ccc646ef040a92c868901f037a722588d1a119979d395416690d455d9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M7-W02-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "5e8dba1ccc646ef040a92c868901f037a722588d1a119979d395416690d455d9",
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-A state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-B state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C01-T2-C state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7-W02-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "650164d682878ee49d00863d3c34bb35f952dc104ce748981f0909907859ab95",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": ".aura/workflow/state.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "3c04808d352f05f01a037662a0a6b8e5ba991e1b73b4a7bf178e715b885cc40f",
+        "AfterSha256": "63a9a4ff74175d680220db74e709244134ead475a23277af8d5837b9fda448b6",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m7-formal-trusted-base",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261020T170246Z-cf169cfa1aea5608",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "eb6b996959f9ec4226503d40a4692d6d2eada5ad",
+  "invocationStartedAtUtc": "2026-10-20T17:02:46.5582232+00:00",
+  "invocationDurationMilliseconds": 87058,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS119",
+      "title": "Defer unqualified proof providers and close formal research",
+      "projectNodes": [
+        "M7",
+        "M7-W02",
+        "M7-W02-C01",
+        "M7-W02-C01-T2",
+        "M7-W02-C01-T2-A",
+        "M7-W02-C01-T2-B",
+        "M7-W02-C01-T2-C"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify M7-W02-C01-T2 as an explicit Lean/Rocq/SMT provider and public proof API deferral. Recheck RS118\u0027s source-pinned Z[x] polynomial certificate, exact [-1,0,1] convolution and invalid/unproved statuses; require three consumer, trusted-base/resource and source/rights/RID/source-free review gates. Close C01 as research only; keep W02, C02 and M7 open.",
+      "value": "An independent read-only C# gate verifies prior fixture/decision/verifier SHA-256 identities, recomputes the finite coefficient certificate and proves wrong/truncated witnesses invalid and missing/hole/timeout/provider errors unproved. Document trust in local BCL BigInteger only; no external kernel, solver, formal Math API, source-free recipient or automatic provider cutover.",
+      "debtChanges": [
+        "One independently verified finite polynomial coefficient witness is not a general theorem prover, Lean/Rocq kernel proof or SMT certificate checker.",
+        "Bad or partial complete certificates are invalid; holes, timeouts, missing receipts and failed provider outputs remain unproved, never silently promoted.",
+        "A future formal provider requires a named consumer, pinned trusted base/source/version/license/RID, bounded errors/resources and an isolated source-free recipient.",
+        "Math may own a qualified certificate data contract only; AURA retains provider invocation, scheduling, permissions and orchestration.",
+        "M7-W02-C02 coverage review, W02 portfolio closure and M7 1.2.0-candidate release remain incomplete after RS119."
+      ],
+      "nextAction": "After durable RS119 success, prepare M7-W02-C02-T1 to independently inventory accepted Math families, migration debt and external owner response status; distinguish shipped, local-only, deferred and outside-owner entries. Keep M7 release gate open until the coverage review and follow-up program are qualified.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M7-W02-C01-T2-A",
+          "achievement": "Define named formal consumer, complete certificate/trusted-base domain, bounded failure/resources and source-free owner admission conditions."
+        },
+        {
+          "projectNode": "M7-W02-C01-T2-B",
+          "achievement": "Verify historical certificate/source SHA pins and independently reproduce exact convolution and invalid versus unproved negative verdicts."
+        },
+        {
+          "projectNode": "M7-W02-C01-T2-C",
+          "achievement": "Explicitly defer Lean/Rocq/SMT toolchains and public Math proof APIs with three future admission triggers, no kernel claims."
+        },
+        {
+          "projectNode": "M7-W02-C01-T2",
+          "achievement": "Qualify bounded formal provider/trusted-base disposition through a read-only C# source-pinned owner gate."
+        },
+        {
+          "projectNode": "M7-W02-C01",
+          "achievement": "Close formal interoperability as a finite certificate research spike; no external proof kernel, solver, public package or Math formal API delivered."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        ".aura/workflow/state.json",
+        "docs/distribution/m7-formal-toolchain-deferral.md",
+        "docs/planning/README.md",
+        "docs/planning/ValidateM7FormalBoundary.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m7-w02-c01-t2.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/evidence/M7-W02-C01-T2-qualified.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M7.md"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m7-formal-trusted-base",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M7",
+        "objective": "Advanced extensions and scope decisions",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "in-progress",
+        "completionCondition": "Complete every required product chunk for M7 in docs/planning/backlog.json and satisfy its accepted release gate."
+      },
+      {
+        "id": "M7-W02",
+        "objective": "Proofs and openness",
+        "kind": "work-package",
+        "parentId": "M7",
+        "state": "in-progress",
+        "completionCondition": "Complete all accepted product phases belonging to M7-W02 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M7-W02-C01",
+        "objective": "Formal interoperability and proofs",
+        "kind": "phase",
+        "parentId": "M7-W02",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M7-W02-C01 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M7-W02-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M7-W02-C01",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M7-W02-C01-T2 in docs/planning/backlog.json."
+      },
+      {
+        "id": "M7-W02-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-A in docs/planning/backlog.json."
+      },
+      {
+        "id": "M7-W02-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-B in docs/planning/backlog.json."
+      },
+      {
+        "id": "M7-W02-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "state": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-C in docs/planning/backlog.json."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M7-W02-C01",
+        "objective": "Formal interoperability and proofs",
+        "kind": "phase",
+        "parentId": "M7-W02",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M7-W02-C01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Close formal interoperability as a finite certificate research spike; no external proof kernel, solver, public package or Math formal API delivered."
+      },
+      {
+        "id": "M7-W02-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M7-W02-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M7-W02-C01-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Qualify bounded formal provider/trusted-base disposition through a read-only C# source-pinned owner gate."
+      },
+      {
+        "id": "M7-W02-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Define named formal consumer, complete certificate/trusted-base domain, bounded failure/resources and source-free owner admission conditions."
+      },
+      {
+        "id": "M7-W02-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Verify historical certificate/source SHA pins and independently reproduce exact convolution and invalid versus unproved negative verdicts."
+      },
+      {
+        "id": "M7-W02-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Explicitly defer Lean/Rocq/SMT toolchains and public Math proof APIs with three future admission triggers, no kernel claims."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M7-W02-C01",
+        "objective": "Formal interoperability and proofs",
+        "kind": "phase",
+        "parentId": "M7-W02",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted deliverable, acceptance, and boundary criteria for M7-W02-C01 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Close formal interoperability as a finite certificate research spike; no external proof kernel, solver, public package or Math formal API delivered."
+      },
+      {
+        "id": "M7-W02-C01-T2",
+        "objective": "Boundaries and integration",
+        "kind": "task",
+        "parentId": "M7-W02-C01",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted behavior and test case for M7-W02-C01-T2 in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Qualify bounded formal provider/trusted-base disposition through a read-only C# source-pinned owner gate."
+      },
+      {
+        "id": "M7-W02-C01-T2-A",
+        "objective": "Question",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-A in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Define named formal consumer, complete certificate/trusted-base domain, bounded failure/resources and source-free owner admission conditions."
+      },
+      {
+        "id": "M7-W02-C01-T2-B",
+        "objective": "Observation",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-B in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Verify historical certificate/source SHA pins and independently reproduce exact convolution and invalid versus unproved negative verdicts."
+      },
+      {
+        "id": "M7-W02-C01-T2-C",
+        "objective": "Decision",
+        "kind": "subtask",
+        "parentId": "M7-W02-C01-T2",
+        "beforeState": "not-ready",
+        "afterState": "done",
+        "completionCondition": "Satisfy the accepted subtask description for M7-W02-C01-T2-C in docs/planning/backlog.json.",
+        "completed": true,
+        "achievement": "Explicitly defer Lean/Rocq/SMT toolchains and public Math proof APIs with three future admission triggers, no kernel claims."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS119",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS119",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "eb6b996959f9ec4226503d40a4692d6d2eada5ad",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "df2717aeef380bb1ca07b54b28be6403ac5a700fd1413348e20363f224634c22"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: qualify formal provider deferral and close M7 C01",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

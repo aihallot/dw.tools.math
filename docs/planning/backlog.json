@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.117",
+  "plan_version": "0.1.118",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8845,7 +8845,7 @@
       "title": "Formal interoperability and proofs",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M7-W01-C03"
       ],
@@ -8867,23 +8867,28 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS118 T1 researches formal interoperability via an independently replayed finite Z[x] coefficient certificate, exact multiplication result [-1,0,1], and unproved hole/timeout/provider-failure statuses. Lean/Rocq/SMT are candidate categories only; no external trusted kernel, source/rights/RID or source-free recipient is qualified.",
+      "refinement": "RS118 T1 independently replayed one fixed Z[x] polynomial certificate with exact BigInteger coefficients [-1,0,1], invalid modified/incomplete evidence and unproved hole/timeout statuses. RS119 T2 pins that evidence and explicitly defers Lean/Rocq/SMT kernels, external proof providers and public APIs until named caller, trusted-base/refusal/resource and source-license-RID/source-free owner gates are independently qualified.",
       "files": [
         "docs/planning/fixtures/m7-polynomial-identity-certificate.json",
         "docs/planning/decisions/m7-w02-c01-t1.md",
         "docs/distribution/m7-formal-provider-screen.md",
         "docs/planning/ValidateM7FormalCertificate.cs",
-        "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+        "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "docs/planning/decisions/m7-w02-c01-t2.md",
+        "docs/distribution/m7-formal-toolchain-deferral.md",
+        "docs/planning/ValidateM7FormalBoundary.cs",
+        "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7FormalCertificate.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7FormalBoundary.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+        "docs/planning/evidence/M7-W02-C01-T1-qualified.json",
+        "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
       ],
-      "readiness": "Finite exact polynomial certificate BCL replay and false/unknown result refusals qualified as research Q/O/D only. C01 T2 must still decide owner/toolchain/trusted base and external formal integration admission or deferral before C01 can close.",
+      "readiness": "C01 finite formal interoperability research complete with source-pinned local verifier/certificate and an explicit provider/API deferral. No installed kernel/prover, general certificate engine, public package or source-free client. M7-W02-C02 coverage review remains separate and planned.",
       "tasks": [
         {
           "id": "M7-W02-C01-T1",
@@ -8929,29 +8934,37 @@
           "title": "Boundaries and integration",
           "behavior": "Build no home-grown theorem prover; expose provider/version and trusted base; qualify license/toolchain.",
           "test_case": "Build no home-grown theorem prover; expose provider/version and trusted base; qualify license/toolchain.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W02-C01-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Build no home-grown theorem prover; expose provider/version and trusted base; qualify license/toolchain.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C01-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Build no home-grown theorem prover; expose provider/version and trusted base; qualify license/toolchain.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C01-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W02-C01-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T2-qualified.json"
+              ]
             }
           ]
         }
