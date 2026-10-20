@@ -185,7 +185,7 @@ foreach(var requirement in requirements)
     owners.Add(owner);
 }
 Need(owners.Count==53,"Original 53 accepted owning product chunks must remain identifiable.");
-Console.WriteLine("M7-COVERAGE:REQUIREMENTS=106;OWNERS=53;SOURCES=20;DISPOSITIONS=6;EXTERNAL-DEPS=4;DRAFTS=3");
+Console.WriteLine(CountsMarker);
 
 var sources=backlog.GetProperty("source_coverage").EnumerateArray().ToArray();
 var ids=new HashSet<string>(StringComparer.Ordinal);
@@ -262,7 +262,7 @@ foreach(var term in new[]{"## Structural and provenance counts",
     "No release decision","source-free","541 nodes"})
     Has(screen,term,"Coverage/ownership distribution");
 
-Console.WriteLine("M7-COVERAGE:SCOPE:CHUNKS=58;DONE=57;W02-C02=IN-PROGRESS;M7=OPEN;PUBLIC-PRODUCT=false");
+Console.WriteLine(ScopeMarker);
 if(target)
 {
     using var evidenceDoc=Open(Evidence);
