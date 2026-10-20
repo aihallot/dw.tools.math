@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "RS110",
+  "title": "Split M7 DAG and PlotModel research before size-L readiness",
+  "state": "prepared",
+  "commitMessage": "chore: split M7 DAG and PlotModel into bounded research phases",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W01",
+    "M7-W01-C03"
+  ],
+  "contribution": {
+    "summary": "Split the accepted size-L M7-W01-C03 research phase into two bounded size-M units, pure DAG sharing/cycles and finite discontinuity PlotModel. Add 18 durable native planning nodes with exact backlog parity, preserving the original C03 and M7/W01 lifecycle states. Activate S01 for later independent oracles. This is structural research preparation, not a delivered graph or renderer.",
+    "value": "The independent C# split gate verifies 2 phases, 4 Q/O/D tasks, 12 subtasks and 541 projected DWF nodes without rewriting existing IDs. It checks split dependencies, explicit Math/AURA separation, no copied AURA scheduler, and unchanged M6/RS109 local-only scientific boundaries. No DAG/PlotModel oracles or advanced package are claimed.",
+    "debtChanges": [
+      "Size-L original C03 remains planned and cannot complete before both split research phases and its own aggregate acceptance.",
+      "S01 starts as a research phase only; its Q/O/D tasks have not executed a DAG oracle or delivered a runtime API.",
+      "S02 requires S01 completion and independent finite 1/x discontinuity and PlotModel budget evidence.",
+      "No AURA job scheduler, chart renderer, asynchronous executor, third-party library or public product package is admitted."
+    ],
+    "nextAction": "After durable RS110 success, prepare RS111 on M7-W01-C03-S01-T1, now an existing DWF node. Qualify one pure diamond DAG shared-node computation, deterministic cycle refusal and finite node/edge/depth quotas in C#, keeping AURA scheduling and graphical rendering out of Math. Audit RS110 as retry 1 and first-pass NO: one earlier CS0161 refusal occurred before allocation of any attempt.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/decisions/m7-w01-c03-split.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM7DagSplit.cs",
+    "docs/planning/evidence/M7-W01-C03-split-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-dag-split",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7DagSplit.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
