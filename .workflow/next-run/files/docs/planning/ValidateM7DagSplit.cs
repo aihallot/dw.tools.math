@@ -174,3 +174,4 @@ Need(Get(e,"status")=="m7-c03-bounded-dag-plotmodel-split-qualified" &&
      Get(e,"native_validator_sha256")==Hash(Validator),
      "Split evidence cannot certify an unsplit or product-delivered target.");
 Console.WriteLine(Marker);
+return 0;
