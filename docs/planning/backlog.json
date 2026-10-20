@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.107",
+  "plan_version": "0.1.108",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8292,7 +8292,7 @@
       "title": "Tensors and advanced structures",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M7-W01-C01"
       ],
@@ -8314,22 +8314,27 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS108 T1 studies a finite BCL rank-three 2x2x2 row-major reference: sum 36, cell [1,0,1]=6, equal-size incompatible shapes, zero dimension and 64-element/512-byte cap. The owner/provider screen admits only research fixtures, no third-party tensor API, GPU, sparse/broadcast or arbitrary precision inference. C02-T2 remains planned.",
+      "refinement": "RS108 T1 independently qualified finite 2x2x2 row-major shape/sum, incompatibility and a 64-element/512-byte budget. RS109 T2 defers a new Tensor API/provider pending named consumer gap, bounded rank/shape/resources, and source/license/RID and independent source-free consumer evidence. Complete C02 as a research spike only; no package or AURA engine is delivered.",
       "files": [
         "docs/planning/decisions/m7-w01-c02.md",
         "docs/planning/decisions/m7-w01-c02-provider-screen.md",
         "docs/planning/ValidateM7TensorAdmission.cs",
-        "docs/planning/evidence/M7-W01-C02-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C02-T1-qualified.json",
+        "docs/planning/decisions/m7-w01-c02-t2.md",
+        "docs/distribution/m7-tensor-shape-deferral.md",
+        "docs/planning/ValidateM7TensorBoundary.cs",
+        "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7TensorAdmission.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7TensorBoundary.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M7-W01-C02-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C02-T1-qualified.json",
+        "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
       ],
-      "readiness": "C02 T1 Q/O/D independently checks bounded shape, indexing and memory refusals. Provider/consumer evaluation remains for T2; a completed T1 spike is not a delivered tensor library.",
+      "readiness": "C02 research spike complete through explicit tensor-provider deferral and three owner-gated review triggers. Current Math matrix/array contracts remain; next size-L DAG/PlotModel C03 needs splitting before readiness.",
       "tasks": [
         {
           "id": "M7-W01-C02-T1",
@@ -8375,29 +8380,37 @@
           "title": "Boundaries and integration",
           "behavior": "Without a documented consumer, defer explicitly; a completed spike is not a delivered Tensor API.",
           "test_case": "Without a documented consumer, defer explicitly; a completed spike is not a delivered Tensor API.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C02-T2-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Without a documented consumer, defer explicitly; a completed spike is not a delivered Tensor API.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C02-T2-B",
               "title": "Observation",
               "description": "Collect bounded evidence: Without a documented consumer, defer explicitly; a completed spike is not a delivered Tensor API.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C02-T2-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W01-C02-T2; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C02-T2-qualified.json"
+              ]
             }
           ]
         }
