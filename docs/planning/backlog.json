@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.116",
+  "plan_version": "0.1.117",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -537,7 +537,7 @@
       "id": "M7-W02",
       "release": "M7",
       "title": "Proofs and openness",
-      "status": "planned",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.formal/",
         "tests/projects/dw.tools.math.formal.tests/",
@@ -8845,7 +8845,7 @@
       "title": "Formal interoperability and proofs",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M7-W01-C03"
       ],
@@ -8867,40 +8867,60 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; refine exact files, independent oracle, active runner syntax and cost before ready; split L blocks first.",
+      "refinement": "RS118 T1 researches formal interoperability via an independently replayed finite Z[x] coefficient certificate, exact multiplication result [-1,0,1], and unproved hole/timeout/provider-failure statuses. Lean/Rocq/SMT are candidate categories only; no external trusted kernel, source/rights/RID or source-free recipient is qualified.",
+      "files": [
+        "docs/planning/fixtures/m7-polynomial-identity-certificate.json",
+        "docs/planning/decisions/m7-w02-c01-t1.md",
+        "docs/distribution/m7-formal-provider-screen.md",
+        "docs/planning/ValidateM7FormalCertificate.cs",
+        "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7FormalCertificate.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+      ],
+      "readiness": "Finite exact polynomial certificate BCL replay and false/unknown result refusals qualified as research Q/O/D only. C01 T2 must still decide owner/toolchain/trusted base and external formal integration admission or deferral before C01 can close.",
       "tasks": [
         {
           "id": "M7-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Compare Lean/Rocq/SMT integration for a small subset; keep proof, certificate, and derivation distinct.",
           "test_case": "A polynomial identity carries an independently verified certificate; failure/hole/timeout remains unproved.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W02-C01-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Compare Lean/Rocq/SMT integration for a small subset; keep proof, certificate, and derivation distinct.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C01-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: A polynomial identity carries an independently verified certificate; failure/hole/timeout remains unproved.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W02-C01-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W02-C01-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W02-C01-T1-qualified.json"
+              ]
             }
           ]
         },
