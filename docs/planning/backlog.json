@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.110",
+  "plan_version": "0.1.111",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8527,7 +8527,7 @@
       "title": "Pure bounded DAG sharing and cycle refusal",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M7-W01-C02"
       ],
@@ -8549,7 +8549,7 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
-      "refinement": "RS110 staged two separate medium DAG and PlotModel research phases. RS111 T1 independently qualifies a pure four-node diamond: exact shared-once root 13 and deterministic cycle/unknown/duplicate/8-node/10-edge/4-depth/overflow refusals with no published partial result. No graph runtime, AURA scheduling or renderer is admitted.",
+      "refinement": "RS111 qualified four-node/four-edge pure DAG root-13 and shared-once, exact cycle/identity/resource/overflow refusals with no partial results. RS112 T2 explicitly defers public DAG engines and AURA orchestration until consumer need, pure graph identity/cancellation/budget policy, source/rights/RID and independent package-only recipient oracles are qualified. S01 closes as research only.",
       "files": [
         "docs/planning/decisions/m7-w01-c03-split.md",
         "docs/planning/ValidateNativeDwfAdoption.cs",
@@ -8558,17 +8558,22 @@
         "docs/planning/decisions/m7-w01-c03-s01-t1.md",
         "docs/planning/decisions/m7-w01-c03-s01-owner-screen.md",
         "docs/planning/ValidateM7DagAdmission.cs",
-        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json",
+        "docs/planning/decisions/m7-w01-c03-s01-t2.md",
+        "docs/distribution/m7-pure-dag-deferral.md",
+        "docs/planning/ValidateM7DagBoundary.cs",
+        "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
       ],
       "commands": [
-        "dotnet run --file docs/planning/ValidateM7DagAdmission.cs -- --check",
+        "dotnet run --file docs/planning/ValidateM7DagBoundary.cs -- --check",
         "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
       ],
       "evidence": [
-        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json"
+        "docs/planning/evidence/M7-W01-C03-S01-T1-qualified.json",
+        "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
       ],
-      "readiness": "DAG S01 T1 independent BCL oracles and Q/O/D research decision qualified; T2 must still decide identity/resources, cancellation and owner-gated provider admission or deferral before S01 phase closure.",
+      "readiness": "S01 research spike done through SHA-verified local pure graph oracles and an explicit defer-with-review-trigger decision; no public DAG runtime, scheduler or graphics renderer was delivered. S02 remains planned and depends on S01.",
       "tasks": [
         {
           "id": "M7-W01-C03-S01-T1",
@@ -8614,29 +8619,37 @@
           "title": "Boundaries and integration",
           "behavior": "No AURA scheduler, shared mutable resources, agent/job graph runtime or product DAG API is admitted.",
           "test_case": "No AURA scheduler, shared mutable resources, agent/job graph runtime or product DAG API is admitted.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C03-S01-T2-A",
               "title": "Question",
               "description": "Fix the independent finite research question, scope and non-delivery criterion.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S01-T2-B",
               "title": "Observation",
               "description": "Record exact hand-checkable local BCL oracle, negative cases and numeric/resource limits.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-S01-T2-C",
               "title": "Decision",
               "description": "Document acceptance or deferral with owner, rights, resource and AURA boundary; never invent product delivery.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-S01-T2-qualified.json"
+              ]
             }
           ]
         }
