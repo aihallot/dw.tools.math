@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.113",
+  "plan_version": "0.1.114",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -8426,7 +8426,7 @@
       "title": "Local DAG and mathematical visualization",
       "kind": "spike",
       "size": "L",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M7-W01-C02"
       ],
@@ -8448,40 +8448,59 @@
       "proposed_commands": [
         "dotnet run --file docs/planning/ValidatePlan.cs"
       ],
-      "refinement": "RS110 decomposes the accepted size-L C03 research into S01 (pure DAG sharing/cycle/resource bounded study) and S02 (finite PlotModel discontinuity/point-quota study), preserving aggregate C03 Q/O/D and distinct AURA rendering ownership. The parent stays planned pending both split decisions.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "Size-L split completed structurally before any parent readiness: S01 active, S02 planned and sequentially dependent. Original C03 aggregate remains planned until both split research phases are independently qualified.",
+      "refinement": "RS110 split the accepted size-L C03 into two medium research phases. RS111/112 completed pure diamond DAG/cycle reference and explicit runtime deferral. RS113/114 completed reciprocal 1/x two-disconnected-segment reference and PlotModel renderer deferral. RS115 T1 independently rechecks four source SHA-pinned receipts and both hand-computable oracles, retaining C03 T2 for separate quota/ownership gate.",
+      "files": [
+        "docs/planning/decisions/m7-w01-c03-t1.md",
+        "docs/distribution/m7-dag-plot-aggregate-screen.md",
+        "docs/planning/ValidateM7DagPlotAggregate.cs",
+        "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/planning/ValidateM7DagPlotAggregate.cs -- --check",
+        "dotnet run --file docs/planning/ValidateNativeDwfAdoption.cs",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
+      "evidence": [
+        "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+      ],
+      "readiness": "Original size-L C03 in progress after independent S01/S02 completion and aggregate T1 acceptance: exact diamond root 13/shared-once, known-pole 1/x no bridge, limited research quotas and explicit no-DAG/no-renderer product claims. Parent T2 and W01/M7 release gates remain pending.",
       "tasks": [
         {
           "id": "M7-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify shared-computation needs and a PlotModel separated from graphical rendering; decide ownership with AURA.",
           "test_case": "A diamond DAG shares a pure node and rejects cycles; sampling 1/x does not connect across the discontinuity at zero.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+          ],
           "subtasks": [
             {
               "id": "M7-W01-C03-T1-A",
               "title": "Question",
               "description": "Fix the scope and decision criterion: Qualify shared-computation needs and a PlotModel separated from graphical rendering; decide ownership with AURA.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-T1-B",
               "title": "Observation",
               "description": "Collect bounded evidence: A diamond DAG shares a pure node and rejects cycles; sampling 1/x does not connect across the discontinuity at zero.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+              ]
             },
             {
               "id": "M7-W01-C03-T1-C",
               "title": "Decision",
               "description": "Record conclusion, alternatives, limits, and next step for M7-W01-C03-T1; a completed document or spike is not itself a delivered product capability.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                "docs/planning/evidence/M7-W01-C03-T1-qualified.json"
+              ]
             }
           ]
         },
