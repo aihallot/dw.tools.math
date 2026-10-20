@@ -13,6 +13,8 @@ The original `M7-W01-C03` remains the **size-L aggregate research phase**. Its t
 
 The original parent acceptance preserves **both** independent witness families (diamond sharing/cycle and discontinuity), and the parent boundary still requires explicit caps and prohibits importing AURA scheduling. No new source package or deployed capability is created by the split.
 
+This structural split is required **before readiness** of the original L-sized C03 phase; readiness does not by itself confer product acceptance.
+
 ## DWF structural and product plan requirements
 
 - Stable mapping remains `release → milestone`, `work_package → workPackage`, `chunk → phase`, `task → task`, `subtask → subtask`.
