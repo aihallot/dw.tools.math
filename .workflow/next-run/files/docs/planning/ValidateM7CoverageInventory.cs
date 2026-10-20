@@ -267,7 +267,7 @@ if(target)
 {
     using var evidenceDoc=Open(Evidence);
     var evidence=evidenceDoc.RootElement;
-    Need(Get(evidence,"status")==Status &&
+    Need(Text(evidence,"status")==Status &&
          evidence.GetProperty("requirements_checked").GetInt32()==106 &&
          evidence.GetProperty("distinct_requirement_owners").GetInt32()==53 &&
          evidence.GetProperty("source_coverage_rows").GetInt32()==20 &&
@@ -283,9 +283,9 @@ if(target)
          !Flag(evidence,"external_responses_confirmed") &&
          !Flag(evidence,"public_product_delivered") &&
          !Flag(evidence,"external_requests_transmitted") &&
-         Get(evidence,"decision_sha256")==Sha(Decision) &&
-         Get(evidence,"distribution_sha256")==Sha(Screen) &&
-         Get(evidence,"validator_sha256")==Sha(
+         Text(evidence,"decision_sha256")==Sha(Decision) &&
+         Text(evidence,"distribution_sha256")==Sha(Screen) &&
+         Text(evidence,"validator_sha256")==Sha(
              "docs/planning/ValidateM7CoverageInventory.cs"),
          "Completed coverage T1 evidence may not claim external responses or product delivery.");
 }
