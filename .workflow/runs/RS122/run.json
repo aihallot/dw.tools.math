@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "RS122",
+  "title": "Close M7 formal research and coverage document work package",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M7 W02 research and document closure",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7",
+    "M7-W02"
+  ],
+  "contribution": {
+    "summary": "Qualify and close the accepted M7-W02 work package after independently verifying both completed formal-research and owner-coverage document phases, four tasks, twelve Q/O/D children, four scientific/documentary receipts and the 541-node native plan. Preserve separate M7 release and external recipient gates.",
+    "value": "A BCL-only read-only checker verifies the RS121 first-pass report; source SHA pins for C01/C02 T1/T2 and prior W01 research; 106 accepted requirement IDs, 20 source entries, six dispositions; and all W02 child nodes. Three AURA/Decision/MCDM drafts remain unsent, advanced/formal providers deferred and public product flags false. Only the M7-W02 parent transitions to done with a new source-pinned receipt; M7 stays in progress.",
+    "debtChanges": [
+      "W02 completion covers accepted research and documentation, not a shipped general proof kernel, public formal APIs or all Math requirements as implemented products.",
+      "AURA, Decision and MCDM requests remain draft/unsent and require recipient revision, authorization, compatibility, provenance and rollback evidence.",
+      "Precision, tensor, DAG, PlotModel and proof-provider research retains named-consumer, source-free, rights, resource and trusted-base acceptance gates.",
+      "The M7 1.2.0-candidate release, publication/rights decision and future program remain unapproved; no external or sibling mutation is authorized."
+    ],
+    "nextAction": "After durable RS122 success, independently review the M7 G-M7 milestone gate, scientific reproducibility, source rights and public distribution authority. Do not infer publication, recipient adoption or new roadmap approval from completed research/document scope.",
+    "achievements": [
+      {
+        "projectNode": "M7-W02",
+        "achievement": "Close the two accepted M7-W02 formal research and coverage document phases as one source-pinned work package, preserving explicit external deferrals and an open M7 release gate."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M7.md",
+    "docs/planning/evidence/M7-W02-work-package-qualified.json",
+    "docs/planning/decisions/m7-w02-work-package-closure.md",
+    "docs/distribution/m7-w02-work-package-research-matrix.md",
+    "docs/planning/ValidateM7ProofsWorkPackage.cs"
+  ],
+  "validations": [
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m7-w02-portfolio",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM7ProofsWorkPackage.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    }
+  ]
+}
