@@ -239,8 +239,8 @@ if(reflect)
         Need(File.Exists(file)&&new FileInfo(file).Length>0,
             "Release composition graph DLL missing: "+id);
     AssemblyLoadContext.Default.Resolving+=(ctx,name)=>
-        binaries.TryGetValue(name.Name??"",out var file)?
-            ctx.LoadFromAssemblyPath(file):null;
+        binaries.TryGetValue(name.Name??"",out var resolvedPath)?
+            ctx.LoadFromAssemblyPath(resolvedPath):null;
     var loaded=new Dictionary<string,Assembly>(StringComparer.Ordinal);
     foreach(var (id,file) in binaries)
         loaded[id]=AssemblyLoadContext.Default.LoadFromAssemblyPath(file);
@@ -288,6 +288,14 @@ if(File.Exists(Local(Evidence)))
          Text(r,"matrix_sha256")==SHA(Matrix)&&
          Text(r,"validator_sha256")==SHA(Validator),
          "RS132 target does not establish only bounded CLR source reflection");
+    var commandIds=new[]{"locked-solution-restore",
+        "composition-release-build","four-static-clr-reflection"};
+    var commands=r.GetProperty("command_receipts").EnumerateArray().ToArray();
+    Need(commands.Length==3,"Expected three local execution records");
+    for(var i=0;i<commandIds.Length;i++)
+        Need(Text(commands[i],"id")==commandIds[i]&&
+             commands[i].GetProperty("exit_code").GetInt32()==0,
+             "A required source build or reflection failed: "+commandIds[i]);
     var rows=r.GetProperty("observed_bindings").EnumerateArray().ToArray();
     for(var i=0;i<methods.Length;i++)
     {
