@@ -108,6 +108,11 @@ if(!target)
         "restore","dw.tools.math.slnx","--locked-mode").Receipt);
     checks.Add(Execute(root,"solution-release-build","dotnet",
         "build","dw.tools.math.slnx","-c","Release","--no-restore").Receipt);
+    foreach(var family in new[]{"distribution","analysis","scientific"})
+        checks.Add(Execute(root,"focused-"+family,"dotnet",
+            "test","tests/projects/dw.tools.math."+family+".tests/dw.tools.math."+
+                family+".tests.csproj",
+            "-c","Release","--no-build","--no-restore").Receipt);
     checks.Add(Execute(root,"solution-release-tests","dotnet",
         "test","dw.tools.math.slnx","-c","Release","--no-build","--no-restore").Receipt);
     var packRoot=Path.Combine(root,PackDirectory.Replace('/',Path.DirectorySeparatorChar));
@@ -175,6 +180,7 @@ if(!target)
         ["historical_m6_source_free_consumers"]=10,
         ["historical_m6_source_free_probes"]=80,
         ["locked_restore_passed"]=true,["release_build_passed"]=true,
+        ["focused_regressions_passed"]=true,
         ["full_solution_tests_passed"]=true,
         ["representative_local_packs_passed"]=true,
         ["all_thirteen_packages_repacked"]=false,
