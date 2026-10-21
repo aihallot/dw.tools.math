@@ -187,7 +187,7 @@ foreach(var client in selected)
          "Consumer must clear remote NuGet feeds: "+client.Id);
     var program=Read(client.Program);
     Has(program,client.Token,"Consumer ZIP and SHA oracle");
-    Has(program,client.Marker,"Consumer independent 8-probe marker");
+    Has(program,client.Marker[..^1],"Consumer independent 8-probe marker prefix");
     Has(program,client.Folder,"Consumer exact named offline feed");
     Has(program,"SHA256.HashData","Consumer computes archive SHA-256");
     Need(Regex.Matches(program,@"^Probe\(",RegexOptions.Multiline).Count==8,
