@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS125",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-21T10:21:31.6459793+00:00",
+  "completedAtUtc": "2026-10-21T10:21:59.6625831+00:00",
+  "durationMilliseconds": 28016,
+  "projectNodes": [
+    "M7"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    ".aura/workflow/plan/project.json",
+    "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+    "docs/distribution/post-m7-source-free-consumer-matrix.md",
+    "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+    "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/post-m7-source-free-consumer-matrix.md",
+    "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+    "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+    "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS125/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-4474ff7abc834a45896688e69b6059ea\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 27888,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS125 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS124/attempt-001.json run=RS124 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/source_projects\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/test_projects\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/fresh_local_package_archives\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/fresh_source_free_consumer_rerun\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/native_nodes_retained\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS124-post-m7-delivery-qualified.json pointer=/publicly_published\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS124/attempt-001.json pointer=/priorInvocationFailures/count\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS124/attempt-001.json pointer=/priorInvocationFailures/preparationFailureCount\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS124/attempt-001.json pointer=/priorInvocationFailures/firstPassSucceeded\r\n[require.text-contains] VERIFIED path=docs/coordination/requests/README.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/discovery/README.md semantic text found\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/post-m7-source-free-consumer-matrix.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/ValidatePostM7ConsumerIsolation.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md bytes=5659\r\n[files.replace-from-staged] CHANGED path=docs/distribution/post-m7-source-free-consumer-matrix.md bytes=3621\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidatePostM7ConsumerIsolation.cs bytes=14001\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/post-m7-source-free-consumer-qualification.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/post-m7-source-free-consumer-matrix.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/post-m7-source-free-consumer-matrix.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/post-m7-source-free-consumer-matrix.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ConsumerIsolation.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ConsumerIsolation.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ConsumerIsolation.cs semantic text found\r\nRS125 baseline-isolated-consumer-check exit=0 elapsed_ms=3495\r\nRS125 source-locked-restore exit=0 elapsed_ms=1571\r\nRS125 analysis-source-build exit=0 elapsed_ms=1012\r\nRS125 scientific-source-build exit=0 elapsed_ms=1061\r\nRS125 analysis-local-pack exit=0 elapsed_ms=1235\r\nRS125 scientific-local-pack exit=0 elapsed_ms=1285\r\nRS125 analysis-offline-restore exit=0 elapsed_ms=1206\r\nRS125 analysis-source-free-consumer exit=0 elapsed_ms=2568\r\nRS125 scientific-offline-restore exit=0 elapsed_ms=1157\r\nRS125 scientific-source-free-consumer exit=0 elapsed_ms=12127\r\nRS125 dotnet-sdk exit=0 elapsed_ms=166\r\n[files.write-complete] CHANGED path=docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json bytes=10042\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\nRS125 target-consumer-check exit=0 elapsed_ms=399\r\n[payload] OK operations=40 changed=4 no-change=0 verified=36 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS125/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS125 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0e657815d015cdde922958a0d95f7476e02364e3a6abf0dea11a65b935ce7072",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS124/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS124 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2cd1820f76c53600d7bd0e918ed88347dbf040472aad740ad44f37751e3c05f3",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/source_projects",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/test_projects",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/fresh_local_package_archives",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/fresh_source_free_consumer_rerun",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/native_nodes_retained",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/publicly_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS124/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/priorInvocationFailures/count",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS124/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/priorInvocationFailures/preparationFailureCount",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS124/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/priorInvocationFailures/firstPassSucceeded",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/coordination/requests/README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/discovery/README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 1,
+        "Summary": "bytes=5659",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e748eb7b5f8072c7ca84a74c773e129cd2756261becb6aaad721a7445b0fb0aa",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "Status": 1,
+        "Summary": "bytes=3621",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d63e25371d063f4fa77c1b69e1be5e5aa5d74dd40f55798a682991b7bfd56471",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "Status": 1,
+        "Summary": "bytes=14001",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ca3260e088363311694a96ee22b492e4855b3eb9dc764794b7075b1a744cdac4",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=OrdinalIgnoreCase normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=10042",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f91749feed7bdab42a9ec2ed208592cbd96d2469c708e4a2f57fff8b415d0d90",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "source-free-clients",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261021T102000Z-d408021ff2b31994",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "3e0ca045e8765d50f6141cf47082d157c43c19c6",
+  "invocationStartedAtUtc": "2026-10-21T10:20:00.2033155+00:00",
+  "invocationDurationMilliseconds": 119459,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS125",
+      "title": "Freshly qualify offline source-free Math analysis and scientific NuGet consumers",
+      "projectNodes": [
+        "M7"
+      ]
+    },
+    "declared": {
+      "summary": "Freshly qualify two current-source Math preview NuGet packages through their existing independent offline source-free consumer applications. Rebuild and locally repack analysis and scientific, restore clients solely from separate local feeds into an isolated NuGet cache, and require all sixteen historical boundary probes to succeed again. Keep the completed M0-M7 DWF plan unchanged and publish nothing.",
+      "value": "RS125 source-pins the RS124 delivery receipt and truthful pre-attempt refusal history, inspects exact PackageReferences without ProjectReferences and clear-feed configs, compiles current Math analysis/scientific packages, then executes two independently asserting NuGet-only clients. The existing clients inspect their current archive bytes and report SHA-256, size and eight verified probes each. One BCL checker validates nine successful local commands, two consumers and sixteen probes; external adoption, generated Discovery, broad ABI and public release remain unclaimed.",
+      "debtChanges": [
+        "Two freshly executed source-free clients do not requalify the other historical consumer folders, all thirteen preview archives or all Math public APIs.",
+        "Even matching package identities and current numeric probes do not certify cross-version binary ABI, additional RIDs or a stable public semver promise.",
+        "Discovery agent skills and CLR bindings remain candidates; AURA/Decision/MCDM requests are not transmitted or accepted.",
+        "Eight completed milestones and 541 DWF nodes remain unchanged; no new completion achievement or approved successor roadmap is inferred."
+      ],
+      "nextAction": "After verified RS125 delivery, separately qualify the multi-package distribution client and current API/ABI support contract, or request an owner decision for additional scope. No client transmission, public publication or synthetic M8 is authorized.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/post-m7-source-free-consumer-matrix.md",
+        "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+        "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+        "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "source-free-clients",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M7",
+        "objective": "Advanced extensions and scope decisions",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M7 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS125",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS125",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "3e0ca045e8765d50f6141cf47082d157c43c19c6",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "3e438f6cfb6b866dd987fd9b2bd83578bdc13e4944f7e8cd04af61b2bba303df"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: qualify fresh offline Math NuGet consumers without publication",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

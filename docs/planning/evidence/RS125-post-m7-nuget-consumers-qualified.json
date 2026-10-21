@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "id": "RS125-post-m7-nuget-consumers-qualified",
+  "status": "rs125-two-fresh-isolated-source-free-nuget-consumers-qualified-unpublished",
+  "question": "Do fresh current-source local analysis and scientific packages pass independent isolated source-free NuGet consumers without external feeds or publication?",
+  "observation": "The analysis and scientific packages were freshly built and packed locally, restored from named offline feeds into a dedicated ignored NuGet cache and consumed by two existing independently asserting eight-probe executable clients.",
+  "decision": "Admit only these two specific observed source-free net10 package consumers and sixteen bounded probes; do not infer publication, stable ABI, cross-RID support, broker discovery, integration or the remaining historic clients.",
+  "prior_delivery_evidence": "docs/planning/evidence/RS124-post-m7-delivery-qualified.json",
+  "decision_document": "docs/planning/decisions/post-m7-source-free-consumer-qualification.md",
+  "decision_sha256": "e748eb7b5f8072c7ca84a74c773e129cd2756261becb6aaad721a7445b0fb0aa",
+  "distribution_document": "docs/distribution/post-m7-source-free-consumer-matrix.md",
+  "distribution_sha256": "d63e25371d063f4fa77c1b69e1be5e5aa5d74dd40f55798a682991b7bfd56471",
+  "validator": "docs/planning/ValidatePostM7ConsumerIsolation.cs",
+  "validator_sha256": "ca3260e088363311694a96ee22b492e4855b3eb9dc764794b7075b1a744cdac4",
+  "source_free_consumers": 2,
+  "fresh_consumer_probes": 16,
+  "fresh_packages_built": 2,
+  "native_nodes_retained": 541,
+  "backlog_plan_version": "0.1.122",
+  "previous_rs124_attempt": 1,
+  "previous_rs124_preparation_refusals": 1,
+  "previous_rs124_first_pass": false,
+  "offline_local_feeds_only": true,
+  "isolated_nuget_package_cache": true,
+  "publicly_published": false,
+  "external_requests_transmitted": false,
+  "external_approvals_received": false,
+  "discovery_skill_generated": false,
+  "cross_version_abi_certified": false,
+  "other_os_rids_certified": false,
+  "all_historical_consumers_rerun": false,
+  "all_thirteen_packages_repacked": false,
+  "m0_m7_plan_mutated": false,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "command_receipts": [
+    {
+      "id": "source-locked-restore",
+      "exit_code": 0,
+      "command": "dotnet restore dw.tools.math.slnx --locked-mode",
+      "elapsed_ms": 1571,
+      "output_excerpt": "  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "analysis-source-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj -c Release --no-restore",
+      "elapsed_ms": 1012,
+      "output_excerpt": "  dw.tools.math.analysis -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis\\Release\\net10.0\\dw.tools.math.analysis.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.76\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "scientific-source-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj -c Release --no-restore",
+      "elapsed_ms": 1061,
+      "output_excerpt": "  dw.tools.math.scientific -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.scientific\\Release\\net10.0\\dw.tools.math.scientific.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.77\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "analysis-local-pack",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj -c Release --no-build --no-restore --output build/artifacts/m6-w01-c03-t2-local-feed",
+      "elapsed_ms": 1235,
+      "output_excerpt": "  The package dw.tools.math.analysis.1.1.0-preview.6 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w01-c03-t2-local-feed\\dw.tools.math.analysis.1.1.0-preview.6.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "scientific-local-pack",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj -c Release --no-build --no-restore --output build/artifacts/m6-w02-c04-t2-local-feed",
+      "elapsed_ms": 1285,
+      "output_excerpt": "  The package dw.tools.math.scientific.1.1.0-preview.14 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w02-c04-t2-local-feed\\dw.tools.math.scientific.1.1.0-preview.14.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "analysis-offline-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w01-c03-t2-local-feed --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs125-isolated-packages -p:NuGetAudit=false",
+      "elapsed_ms": 1206,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m6-w01-c03-t2\\m6-differential-boundary-consumer.csproj (in 206 ms).\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "analysis-source-free-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj -c Release --no-restore -- D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w01-c03-t2-local-feed\\dw.tools.math.analysis.1.1.0-preview.6.nupkg",
+      "elapsed_ms": 2568,
+      "output_excerpt": "M6-W01-C03-T2-CONSUMER-SHA256:dw.tools.math.analysis:1.1.0-preview.6:27832:0bfbfc932befcb4d2b30e81d3a83ffce5837e4d4d80d2b31a33b3be60973247d\r\ndw.tools.math/m6-differential-boundary-consumer/1.1 qualified; probes=8\r\n\n",
+      "source_free_consumer_execution": true
+    },
+    {
+      "id": "scientific-offline-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tests/consumers/m6-w02-c04-t2/m6-dated-finance-consumer.csproj --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w02-c04-t2-local-feed --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs125-isolated-packages -p:NuGetAudit=false",
+      "elapsed_ms": 1157,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m6-w02-c04-t2\\m6-dated-finance-consumer.csproj (in 217 ms).\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "scientific-source-free-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tests/consumers/m6-w02-c04-t2/m6-dated-finance-consumer.csproj -c Release --no-restore -- D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m6-w02-c04-t2-local-feed\\dw.tools.math.scientific.1.1.0-preview.14.nupkg",
+      "elapsed_ms": 12127,
+      "output_excerpt": "M6-W02-C04-T2-CONSUMER-SHA256:dw.tools.math.scientific:1.1.0-preview.14:37268:a6172ce5dc0773934aec441ace211cca17250127e1c40a3b79e3e3d9cd8ffbf7\r\ndw.tools.math/m6-dated-finance-consumer/1.1 qualified; probes=8\r\n\n",
+      "source_free_consumer_execution": true
+    }
+  ],
+  "consumer_results": [
+    {
+      "package_id": "dw.tools.math.analysis",
+      "version": "1.1.0-preview.6",
+      "probes": 8,
+      "archive_sha256": "0bfbfc932befcb4d2b30e81d3a83ffce5837e4d4d80d2b31a33b3be60973247d",
+      "archive_bytes": 27832,
+      "archive_relative_path": "build/artifacts/m6-w01-c03-t2-local-feed/dw.tools.math.analysis.1.1.0-preview.6.nupkg",
+      "source_free": true,
+      "offline_feed": true,
+      "isolated_cache": true,
+      "consumer_project": "tests/consumers/m6-w01-c03-t2/m6-differential-boundary-consumer.csproj",
+      "qualified_marker": "dw.tools.math/m6-differential-boundary-consumer/1.1 qualified; probes=8"
+    },
+    {
+      "package_id": "dw.tools.math.scientific",
+      "version": "1.1.0-preview.14",
+      "probes": 8,
+      "archive_sha256": "a6172ce5dc0773934aec441ace211cca17250127e1c40a3b79e3e3d9cd8ffbf7",
+      "archive_bytes": 37268,
+      "archive_relative_path": "build/artifacts/m6-w02-c04-t2-local-feed/dw.tools.math.scientific.1.1.0-preview.14.nupkg",
+      "source_free": true,
+      "offline_feed": true,
+      "isolated_cache": true,
+      "consumer_project": "tests/consumers/m6-w02-c04-t2/m6-dated-finance-consumer.csproj",
+      "qualified_marker": "dw.tools.math/m6-dated-finance-consumer/1.1 qualified; probes=8"
+    }
+  ],
+  "next_scope": "Qualify current source-free multi-package distribution consumption and/or public API/ABI stability separately. No automatic publication, recipient request transmission or M8 admission.",
+  "nonclaims": [
+    "These two consumers prove only their recorded current-source local preview packages and sixteen exact boundary checks.",
+    "Historical additional Math clients, cross-version ABI and other platforms were not newly qualified.",
+    "No public NuGet publication, external AURA/Decision/MCDM adoption or generated Discovery skill occurred.",
+    "The previously completed Math native 541-node roadmap and accepted backlog remain unchanged."
+  ]
+}
