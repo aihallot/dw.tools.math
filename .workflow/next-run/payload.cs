@@ -1,31 +1,35 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
+const string PriorReport=".aura/workflow/reports/RS130/attempt-001.json";
+const string PriorReceipt="docs/planning/evidence/RS130-post-m7-readme-qualified.json";
 const string Backlog="docs/planning/backlog.json";
-const string PriorReport=".aura/workflow/reports/RS129/attempt-001.json";
-const string PriorReceipt="docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json";
-const string Readme="README.md";
-const string Guide="docs/distribution/current-local-consumption.md";
-const string Decision="docs/planning/decisions/post-m7-readme-reconciliation.md";
-const string Validator="docs/planning/ValidatePostM7ReadmeStatus.cs";
-const string Evidence="docs/planning/evidence/RS130-post-m7-readme-qualified.json";
-const string Status="rs130-current-math-readme-and-immutable-historical-proof-reconciled-unpublished";
-const string Counts="MATH-RS130:PACKAGES=13;REPORTS=5;CONSUMERS=7;PROBES=95;EXACT-SMOKE=PASS;NODES=541";
-const string Scope="MATH-RS130:DOCS=CURRENT;LEGACY-ANCHOR=ARCHIVED;SOURCE-PINS=UNCHANGED;PUBLICATION=false;EXTERNAL=false";
-const string Marker="dw.tools.math/rs130-readme-reconciliation/1.0 qualified; current=2026-10-21; archive=2026-10-07; public=false";
-const string Historical="Status on 2026-10-07: initial planning; no mathematical engine has been implemented in this repository yet.";
-const string Current="As of 2026-10-21: implemented libraries and local delivery qualification completed; no public NuGet release.";
+const string DiscoveryReadme="docs/discovery/README.md";
+const string Decision="docs/planning/decisions/post-m7-discovery-portable-conformance.md";
+const string Validator="docs/discovery/qualification/ValidateDwfPortableProtocolGate.cs";
+const string Evidence="docs/discovery/qualification/RS131-portable-protocol-qualified.json";
+const string PortableVerifier="docs/discovery/qualification/ValidatePortableProtocol.cs";
+const string Status="rs131-math-csharp-portable-discovery-corpus-qualified-without-agent-skill";
+const string Counts="MATH-DISCOVERY-RS131:CASES=13;ACCEPT=2;REJECT=11;CANDIDATE-STATIC=4;NATIVE=541";
+const string Scope="MATH-DISCOVERY-RS131:PORTABLE-CSHARP=true;CLR-BINDINGS=false;SKILL=false;BROKER=false;EXTERNAL=false";
+const string Marker="dw.tools.math/rs131-portable-discovery/1.0 qualified; cases=13; accepted=2; rejected=11; generated=false";
+const string SchemaSha="678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170";
+const string FixturesSha="5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e";
+const string ProtocolGitBlob="cd589183991774d1560129139f903dc8112c74b3";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Evidence));
-p.Workflow.RequireCurrentRun("RS130",null,null,null,null,null);
-p.Workflow.RequirePriorSuccess("RS129",1,
-    "docs: qualify post-M7 Math delivery evidence portfolio without publication",
+p.Workflow.RequireCurrentRun("RS131",null,null,null,null,null);
+p.Workflow.RequirePriorSuccess("RS130",1,
+    "docs: reconcile current Math README with qualified local delivery",
     "0.1.59",0,0,0,true);
 p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create("0.1.122"));
 p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("done"));
@@ -33,158 +37,215 @@ p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/count",JsonValue
 p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/firstPassSucceeded",
     JsonValue.Create(true));
 p.Require.JsonValueEquals(PriorReceipt,"/status",
-    JsonValue.Create("rs129-source-pinned-post-m7-local-delivery-portfolio-qualified-unpublished"));
-p.Require.JsonValueEquals(PriorReceipt,"/readme_current",JsonValue.Create(false));
-p.Require.JsonValueEquals(PriorReceipt,"/verified_run_reports",JsonValue.Create(5));
-p.Require.JsonValueEquals(PriorReceipt,"/freshly_packed_package_roster",JsonValue.Create(13));
-p.Require.JsonValueEquals(PriorReceipt,"/fresh_consumer_executions",JsonValue.Create(7));
-p.Require.JsonValueEquals(PriorReceipt,"/numbered_consumer_probes",JsonValue.Create(95));
+    JsonValue.Create("rs130-current-math-readme-and-immutable-historical-proof-reconciled-unpublished"));
+p.Require.JsonValueEquals(PriorReceipt,"/approved_sequence",JsonValue.Create("A-B-D"));
 p.Require.JsonValueEquals(PriorReceipt,"/native_nodes_retained",JsonValue.Create(541));
+p.Require.JsonValueEquals(PriorReceipt,"/discovery_skill_generated",JsonValue.Create(false));
+p.Require.JsonValueEquals(PriorReceipt,"/future_program_approved",JsonValue.Create(false));
 p.Require.JsonValueEquals(PriorReceipt,"/publicly_published",JsonValue.Create(false));
 p.Require.JsonValueEquals(PriorReceipt,"/external_requests_transmitted",JsonValue.Create(false));
-p.Require.JsonValueEquals(PriorReceipt,"/discovery_skill_generated",JsonValue.Create(false));
-p.Require.TextContains(Readme,Historical);
 p.Require.TextContains("docs/coordination/requests/README.md","have not been sent");
-p.Require.TextContains("docs/discovery/README.md","No generated Math skill");
-foreach(var node in new[]{"M5","M6","M7"})
-    p.ProjectPlan.RequireNodeState(node,"done");
+p.Require.TextContains(DiscoveryReadme,"No generated Math skill");
+p.ProjectPlan.RequireNodeState("M7","done");
+p.ProjectPlan.RequireNodeState("M3","done");
 
 if(!target)
 {
-    foreach(var f in new[]{Guide,Decision,Validator,Evidence})
-        p.Require.FileMissing(f);
+    foreach(var destination in new[]{Decision,Validator,Evidence})
+        p.Require.FileMissing(destination);
 }
 else
 {
     p.Require.JsonValueEquals(Evidence,"/status",JsonValue.Create(Status));
-    p.Require.JsonValueEquals(Evidence,"/source_projects",JsonValue.Create(13));
-    p.Require.JsonValueEquals(Evidence,"/independent_consumer_executions",JsonValue.Create(7));
-    p.Require.JsonValueEquals(Evidence,"/numbered_probes_historical",JsonValue.Create(95));
+    p.Require.JsonValueEquals(Evidence,"/total_cases",JsonValue.Create(13));
+    p.Require.JsonValueEquals(Evidence,"/accepted_cases",JsonValue.Create(2));
+    p.Require.JsonValueEquals(Evidence,"/rejected_cases",JsonValue.Create(11));
+    p.Require.JsonValueEquals(Evidence,"/candidate_static_operations",JsonValue.Create(4));
     p.Require.JsonValueEquals(Evidence,"/native_nodes_retained",JsonValue.Create(541));
-    p.Require.JsonValueEquals(Evidence,"/approved_sequence",JsonValue.Create("A-B-D"));
-    foreach(var (key,flag) in new (string,bool)[]
+    foreach(var (pointer,value) in new (string,bool)[]
     {
-        ("/readme_current",true),("/archived_baseline_preserved",true),
-        ("/historical_source_pins_preserved",true),
-        ("/exact_quantity_smoke_passed",true),
+        ("/csharp_protocol_verifier_executed",true),
+        ("/csharp_portable_envelope_conformant",true),
+        ("/candidate_source_pins_match",true),
+        ("/selected_clr_bindings_reflected",false),
+        ("/compiled_binding_examples",false),
+        ("/generated_math_skill",false),
+        ("/broker_ready",false),
+        ("/math_decision_runtime_interoperability_certified",false),
+        ("/new_discovery_work_package_admitted",false),
         ("/m0_m7_plan_mutated",false),
-        ("/publicly_published",false),("/external_requests_transmitted",false),
-        ("/external_approvals_received",false),("/cross_version_abi_certified",false),
-        ("/other_os_rids_certified",false),("/discovery_skill_generated",false),
-        ("/future_program_approved",false)
+        ("/publicly_published",false),
+        ("/external_requests_transmitted",false),
+        ("/external_approvals_received",false)
     })
-        p.Require.JsonValueEquals(Evidence,key,JsonValue.Create(flag));
+        p.Require.JsonValueEquals(Evidence,pointer,JsonValue.Create(value));
 }
-var readmeChange=p.Files.ReplaceFromStaged("staged/"+Readme,Readme);
-var guideChange=p.Files.ReplaceFromStaged("staged/"+Guide,Guide);
-var decisionChange=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
-var validatorChange=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
-var readmeSha=readmeChange.AfterSha256 ??
-    throw new InvalidOperationException("Missing RS130 current README identity.");
-var guideSha=guideChange.AfterSha256 ??
-    throw new InvalidOperationException("Missing RS130 local package guide identity.");
-var decisionSha=decisionChange.AfterSha256 ??
-    throw new InvalidOperationException("Missing RS130 documentation decision identity.");
-var validatorSha=validatorChange.AfterSha256 ??
-    throw new InvalidOperationException("Missing RS130 independent validator identity.");
-p.Require.TextContains(Readme,Current);
-p.Require.TextContains(Readme,Historical);
-p.Require.TextContains(Readme,"## Historical baseline (2026-10-07)");
-p.Require.TextContains(Guide,"## Verified package roster (13 packable projects)");
-p.Require.TextContains(Guide,"## Verified evidence by run");
-p.Require.TextContains(Decision,"## The exact historical-anchor problem and resolution");
-foreach(var marker in new[]{Counts,Scope,Marker})
-    p.Require.TextContains(Validator,marker);
-var initial=Check(root,"readme-baseline");
-foreach(var marker in new[]{Counts,Scope,Marker})
-    if(!initial.Contains(marker,StringComparison.Ordinal))
+var readmeOutput=p.Files.ReplaceFromStaged("staged/"+DiscoveryReadme,DiscoveryReadme);
+var decisionOutput=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
+var validatorOutput=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
+var readmeSha=readmeOutput.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged Discovery status identity.");
+var decisionSha=decisionOutput.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged Discovery decision identity.");
+var validatorSha=validatorOutput.AfterSha256 ??
+    throw new InvalidOperationException("Missing staged independent CSharp checker identity.");
+foreach(var item in new[]{"RS131","No generated Math skill","RS131-portable-protocol-qualified.json","issue #139"})
+    p.Require.TextContains(DiscoveryReadme,item);
+foreach(var item in new[]{
+    "## Authorized stage B and strict scope",
+    "## Immutable verified inputs",
+    "## Execution, validation and evidence",
+    "## Native planning boundary for next B runs",
+    "## Nonclaims and next action"})
+    p.Require.TextContains(Decision,item,StringComparison.OrdinalIgnoreCase);
+foreach(var item in new[]{Counts,Scope,Marker})
+    p.Require.TextContains(Validator,item);
+var baseline=Run(root,"discovery-source-baseline","dotnet",
+    "run","--file",Validator,"--","--check");
+foreach(var item in new[]{Counts,Scope,Marker})
+    if(!baseline.Contains(item,StringComparison.Ordinal))
         throw new InvalidOperationException(
-            "RS130 independent README baseline missing marker: "+marker);
+            "Independent RS131 baseline evidence missing: "+item);
+
 if(!target)
 {
+    var verified=Run(root,"portable-csharp-13-fixtures","dotnet",
+        "run","--file",PortableVerifier);
+    foreach(var item in new[]{
+        "DECISION_COMMIT 5d3af8580ea984425b314d589def18e031172c2c",
+        "PROTOCOL dw.discovery/1.0.0-draft.1 manifest-schema=2",
+        "SCHEMA_SHA256 "+SchemaSha,
+        "FIXTURE_SHA256 "+FixturesSha,
+        "RESULT PASS 13/13 (2 accepted, 11 rejected) independent Math C# envelope verifier"
+    })
+        if(!verified.Contains(item,StringComparison.Ordinal))
+            throw new InvalidOperationException(
+                "Actual Math C# portable protocol evidence missing: "+item);
+    var expected=new (string Name,bool Accept)[]
+    {
+        ("valid-math-envelope",true),
+        ("valid-decision-envelope",true),
+        ("unknown-schema",false),
+        ("unknown-protocol",false),
+        ("documented-leak",false),
+        ("wrong-owner",false),
+        ("stale-signature",false),
+        ("missing-limits",false),
+        ("premature-broker-ready",false),
+        ("metadata-authorization",false),
+        ("bogus-version",false),
+        ("duplicate-capability",false),
+        ("catalogue-leak",false)
+    };
+    var actualLines=verified.Split('\n',
+        StringSplitOptions.TrimEntries|StringSplitOptions.RemoveEmptyEntries)
+        .Where(line=>line.StartsWith("CASE ",StringComparison.Ordinal))
+        .ToArray();
+    if(actualLines.Length!=expected.Length)
+        throw new InvalidOperationException(
+            "CSharp verifier must emit exactly thirteen scenario verdicts.");
+    var cases=new List<JsonNode>();
+    for(var i=0;i<expected.Length;i++)
+    {
+        var (name,accept)=expected[i];
+        var verdict=accept?"accept":"reject";
+        var expectedLine="CASE "+name+": expected="+verdict+
+            " observed="+verdict+" PASS";
+        if(!actualLines[i].Equals(expectedLine,StringComparison.Ordinal))
+            throw new InvalidOperationException(
+                "Actual portable C# scenario mismatch: "+name);
+        cases.Add(new JsonObject
+        {
+            ["name"]=name,["expected_accept"]=accept,
+            ["observed_accept"]=accept,["passed"]=true
+        });
+    }
+    var sdk=Run(root,"observed-dotnet-sdk","dotnet","--version");
     var receipt=new JsonObject
     {
-        ["schema_version"]=1,
-        ["id"]="RS130-post-m7-readme-qualified",
+        ["schema_version"]=1,["id"]="RS131-portable-protocol-qualified",
         ["status"]=Status,
-        ["question"]="Can Math present its current locally verified delivery without rewriting historical evidence or falsely implying public release, stable ABI or external adoption?",
-        ["observation"]="The README now leads with the 2026-10-21 current local delivery status and links to a 13-package consumer guide. The 2026-10-07 initial-plan sentence appears exactly once, solely in a marked historical archive section. Source-pinned old checkers and evidence remain unchanged.",
-        ["decision"]="Accept truthful updated README and package guidance, with historical source markers preserved and no product release or DWF progress movement. Next authorized sequence: B Discovery/AURA qualification, then D interproject coordination; actual outbound transmission remains separately owner gated.",
-        ["readme"]=Readme,["readme_sha256"]=readmeSha,
-        ["guide"]=Guide,["guide_sha256"]=guideSha,
+        ["question"]="Can the existing independent Math C# verifier actually reproduce all thirteen Decision-pinned portable dw.discovery draft-1 envelope decisions under a controlled local DWF run?",
+        ["observation"]="The original Math C# file-based verifier exited zero and emitted thirteen exact ordered PASS decisions, two accepted and eleven rejected, with pinned Decision commit, portable protocol/schema identity and checked SHA-256 source bytes. The four proposed static Math source files still match their candidate Git blob pins.",
+        ["decision"]="Admit only bounded portable-envelope C# conformance evidence; postpone new CLR binding, compiled invocation examples, a deterministic Math skill/manifest, BrokerReady or AURA integration until a supported new-work-package DWF topology and independent product qualification exist.",
+        ["discovery_readme"]=DiscoveryReadme,
+        ["discovery_readme_sha256"]=readmeSha,
         ["decision_document"]=Decision,["decision_sha256"]=decisionSha,
         ["validator"]=Validator,["validator_sha256"]=validatorSha,
-        ["previous_portfolio_evidence"]=PriorReceipt,
-        ["readme_current"]=true,
-        ["archived_baseline_preserved"]=true,
-        ["historical_source_pins_preserved"]=true,
-        ["source_projects"]=13,
-        ["independent_consumer_executions"]=7,
-        ["numbered_probes_historical"]=95,
-        ["exact_quantity_smoke_passed"]=true,
-        ["native_nodes_retained"]=541,
-        ["backlog_plan_version"]="0.1.122",
-        ["approved_sequence"]="A-B-D",
+        ["portable_verifier"]=PortableVerifier,
+        ["portable_verifier_git_blob"]=ProtocolGitBlob,
+        ["protocol_id"]="dw.discovery",["protocol_version"]="1.0.0-draft.1",
+        ["manifest_schema_version"]=2,
+        ["decision_source_commit"]="5d3af8580ea984425b314d589def18e031172c2c",
+        ["schema_sha256"]=SchemaSha,["fixtures_sha256"]=FixturesSha,
+        ["total_cases"]=13,["accepted_cases"]=2,["rejected_cases"]=11,
+        ["case_results"]=p.Json.Array(cases.ToArray()),
+        ["candidate_static_operations"]=4,["candidate_source_pins_match"]=true,
+        ["native_nodes_retained"]=541,["backlog_plan_version"]="0.1.122",
+        ["prior_rs130_first_pass"]=true,
+        ["csharp_protocol_verifier_executed"]=true,
+        ["csharp_portable_envelope_conformant"]=true,
+        ["selected_clr_bindings_reflected"]=false,
+        ["compiled_binding_examples"]=false,
+        ["generated_math_skill"]=false,
+        ["broker_ready"]=false,
+        ["math_decision_runtime_interoperability_certified"]=false,
+        ["new_discovery_work_package_admitted"]=false,
         ["m0_m7_plan_mutated"]=false,
         ["publicly_published"]=false,
         ["external_requests_transmitted"]=false,
         ["external_approvals_received"]=false,
-        ["cross_version_abi_certified"]=false,
-        ["other_os_rids_certified"]=false,
-        ["discovery_skill_generated"]=false,
-        ["future_program_approved"]=false,
-        ["next_scope"]="After verified RS130 first qualify broker-neutral Math Discovery protocols, actual agent callable functions and scoped CLR binding without fake native progress. Only then prepare owner-approved outbound coordination to AURA/Decision/MCDM. No publication.",
+        ["dotnet_sdk"]=sdk.Trim(),
+        ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
+        ["next_scope"]="Require an independently supported DWF topology admission for the proposed new Math M3-W03 work package before implementation of a selected CLR binder, compiled examples and generated Math skill. Workflow issue #139 remains a feedback request; do not hand-edit native plan or claim BrokerReady.",
         ["nonclaims"]=p.Json.StringArray(
-            "This run reconciles only documentation; it does not freshly build, package or rerun Math product consumers.",
-            "The 2026-10-07 status remains an explicitly archived historical baseline, never the 2026-10-21 active product claim.",
-            "The RS124-RS129 first-pass and prior source SHA records were not rewritten to accommodate this README update.",
-            "The 13 local preview packages, 7 consumer executions and 95 probes do not imply public release or universal API/ABI support.",
-            "No dw.discovery skill, AURA/Decision/MCDM adoption, new M8 milestone, provider or cross-repository change was delivered.")
+            "The original historical JavaScript portable preflight is not relabelled as Math C# evidence.",
+            "Math C# conformance of thirteen synthetic envelope fixtures is not Math/Decision runtime interoperability.",
+            "Four pinned source-level static candidates are not reflected CLR bindings, compiled examples or a generated public skill.",
+            "No AURA broker adapter/authorization, client migration, NuGet publication or new M3-W03 native work package is delivered.",
+            "The original M0-M7 accepted 541-node plan remains done without progress transitions or achievements.")
     };
     p.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
 }
 p.ProjectPlan.RequireNodeState("M7","done");
-p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create("0.1.122"));
 p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("done"));
-var final=Check(root,"readme-target");
+p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create("0.1.122"));
+var final=Run(root,"discovery-source-target","dotnet",
+    "run","--file",Validator,"--","--check");
 if(!final.Contains(Marker,StringComparison.Ordinal))
-    throw new InvalidOperationException("RS130 independent README target refused.");
+    throw new InvalidOperationException("RS131 independent protocol receipt refused.");
 return p.Complete();
 
-static string Check(string root,string name)
+static string Run(string root,string id,string executable,params string[] args)
 {
     using var process=new Process
     {
         StartInfo=new ProcessStartInfo
         {
-            FileName="dotnet",WorkingDirectory=root,
+            FileName=executable,WorkingDirectory=root,
             UseShellExecute=false,RedirectStandardOutput=true,
             RedirectStandardError=true
         }
     };
     process.StartInfo.Environment["DOTNET_NOLOGO"]="1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
-    foreach(var argument in new[]{"run","--file",
-        "docs/planning/ValidatePostM7ReadmeStatus.cs",
-        "--","--check"})
-        process.StartInfo.ArgumentList.Add(argument);
+    foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
     if(!process.Start())
-        throw new InvalidOperationException(
-            "Cannot run independent README verifier: "+name);
+        throw new InvalidOperationException("RS131 command failed to start: "+id);
     var stdout=process.StandardOutput.ReadToEndAsync();
     var stderr=process.StandardError.ReadToEndAsync();
-    if(!process.WaitForExit(180000))
+    if(!process.WaitForExit(240000))
     {
         process.Kill(entireProcessTree:true);
-        throw new TimeoutException("RS130 independent README verifier timed out: "+name);
+        throw new TimeoutException("RS131 bounded command timed out: "+id);
     }
-    var result=stdout.GetAwaiter().GetResult()+"\n"+
+    var output=stdout.GetAwaiter().GetResult()+"\n"+
         stderr.GetAwaiter().GetResult();
     if(process.ExitCode!=0)
-        throw new InvalidOperationException("RS130 "+name+
-            " failed exit="+process.ExitCode+"\n"+
-            result[..Math.Min(2600,result.Length)]);
-    Console.WriteLine("RS130 "+name+" exit=0");
-    return result;
+        throw new InvalidOperationException("RS131 local command failed: "+id+
+            " exit="+process.ExitCode+"\n"+
+            output[..Math.Min(2600,output.Length)]);
+    Console.WriteLine("RS131 "+id+" exit=0");
+    return output;
 }
