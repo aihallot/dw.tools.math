@@ -1,0 +1,728 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS130",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-10-21T17:10:36.5801974+00:00",
+  "completedAtUtc": "2026-10-21T17:10:40.3503447+00:00",
+  "durationMilliseconds": 3770,
+  "projectNodes": [
+    "M7"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/distribution/current-local-consumption.md",
+    "docs/planning/decisions/post-m7-readme-reconciliation.md",
+    "docs/planning/ValidatePostM7ReadmeStatus.cs",
+    "docs/planning/evidence/RS130-post-m7-readme-qualified.json"
+  ],
+  "changedPaths": [
+    "README.md",
+    "docs/distribution/current-local-consumption.md",
+    "docs/planning/ValidatePostM7ReadmeStatus.cs",
+    "docs/planning/decisions/post-m7-readme-reconciliation.md",
+    "docs/planning/evidence/RS130-post-m7-readme-qualified.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.59",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "7bdd905b24d903cabaa8217d9230fe4b0f1162c1cabfecf77c70bc29804fc9d5"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS130/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1200,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-f57205c93a594b7f94ebcc0384a9c6cc\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1200000,
+      "DurationMilliseconds": 3533,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS130 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS129/attempt-001.json run=RS129 attempt=1 lineage=exact\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS129/attempt-001.json pointer=/priorInvocationFailures/count\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS129/attempt-001.json pointer=/priorInvocationFailures/firstPassSucceeded\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/readme_current\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/verified_run_reports\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/freshly_packed_package_roster\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/fresh_consumer_executions\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/numbered_consumer_probes\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/native_nodes_retained\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/publicly_published\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/external_requests_transmitted\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json pointer=/discovery_skill_generated\r\n[require.text-contains] VERIFIED path=README.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/coordination/requests/README.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/discovery/README.md semantic text found\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M5 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M6 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.file-missing] VERIFIED path=docs/distribution/current-local-consumption.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/decisions/post-m7-readme-reconciliation.md path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/ValidatePostM7ReadmeStatus.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/planning/evidence/RS130-post-m7-readme-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=README.md bytes=5767\r\n[files.replace-from-staged] CHANGED path=docs/distribution/current-local-consumption.md bytes=6052\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/post-m7-readme-reconciliation.md bytes=5466\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidatePostM7ReadmeStatus.cs bytes=14672\r\n[require.text-contains] VERIFIED path=README.md semantic text found\r\n[require.text-contains] VERIFIED path=README.md semantic text found\r\n[require.text-contains] VERIFIED path=README.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/current-local-consumption.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/current-local-consumption.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/decisions/post-m7-readme-reconciliation.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ReadmeStatus.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ReadmeStatus.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/planning/ValidatePostM7ReadmeStatus.cs semantic text found\r\nRS130 readme-baseline exit=0\r\n[files.write-complete] CHANGED path=docs/planning/evidence/RS130-post-m7-readme-qualified.json bytes=3239\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\nRS130 readme-target exit=0\r\n[payload] OK operations=43 changed=5 no-change=0 verified=38 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS130/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS130 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "093de8acb6b776a91bb38132e06127dcbb559110abde837806f2d5d55dcb7df6",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS129/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS129 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b6541656d9adaa99e4c6ac44e0ad18c0258ff458f4acd89d21ee9ade3c423fb7",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS129/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/priorInvocationFailures/count",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS129/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/priorInvocationFailures/firstPassSucceeded",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/readme_current",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/verified_run_reports",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/freshly_packed_package_roster",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/fresh_consumer_executions",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/numbered_consumer_probes",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/native_nodes_retained",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/publicly_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/external_requests_transmitted",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/discovery_skill_generated",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/coordination/requests/README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/discovery/README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M5 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M6 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/current-local-consumption.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/decisions/post-m7-readme-reconciliation.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/planning/evidence/RS130-post-m7-readme-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=5767",
+        "Details": null,
+        "BeforeSha256": "64c43d4aa6c58e65346e9c75def377bac490f823d828a42514b9f01694d2ab2f",
+        "AfterSha256": "e062c1b4751acf6597670130196224c7716f6846b47987b487467400511b44e1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/current-local-consumption.md",
+        "Status": 1,
+        "Summary": "bytes=6052",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279eca247173a670e05777be1e70836aff4bc8bc7e5d1b6154bc413c5ed24aed",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/post-m7-readme-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=5466",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "49de624ea2c8e1a6151388cc4655b756897916f549408d0604a640daebf47077",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "Status": 1,
+        "Summary": "bytes=14672",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5203e2214b3ad9adafdafb866c63585b2b6536440914ba2713ce99a933749e99",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "README.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/current-local-consumption.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/current-local-consumption.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/decisions/post-m7-readme-reconciliation.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/planning/evidence/RS130-post-m7-readme-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=3239",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1e8634fb7fc95d96b3d76c3e3b4e4063873f23b5b66d828396847d326e32ed02",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "readme-current",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "historical-inventory",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "historical-portfolio",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261021T170910Z-94def4afadba823c",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "2e3ca3c1b95ba055b52dad8f7040e7fed91693cd",
+  "invocationStartedAtUtc": "2026-10-21T17:09:10.5460541+00:00",
+  "invocationDurationMilliseconds": 89804,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS130",
+      "title": "Reconcile current Math README and delivery guide while preserving historic DWF source pins",
+      "projectNodes": [
+        "M7"
+      ]
+    },
+    "declared": {
+      "summary": "Reconcile dw.tools.math\u0027s public README with durable post-M7 local delivery truth, preserving immutable historical DWF source pins. Replace the initial-planning front-page claim with verified 13-package/7-consumer/95-probe status, add practical local-only package guidance and independently check that the dated 2026-10-07 snapshot is retained solely as an archive. No publication, product changes or new milestone.",
+      "value": "The bounded RS130 documentation run installs a new README, a verified thirteen-package consumption guide, a provenance decision and a read-only C# verifier. The validator checks RS129 attempt 001 first-pass success, its source-pinned five-report portfolio, unchanged historical RS124 checker bytes, one archived original README sentence, all 541 completed nodes, unsent coordination requests and Discovery nonclaims. Historical inventory and portfolio checkers are run again as validations, without editing their SHA-pinned files or any prior receipt.",
+      "debtChanges": [
+        "Historical RS124/RS129 checkers retain their original dated README string as an archived anchor; prior receipts remain immutable historical observations.",
+        "The 13 locally packed preview packages, 7 source-free client executions and 95 probes do not prove public release, ABI compatibility or another RID.",
+        "Math Discovery skill and actual CLR broker bindings remain candidates; future stage B must qualify them, not advertise them prematurely.",
+        "AURA/Decision/MCDM requests are drafts only. Stage D permits review/preparation, not unauthorized outward transmission.",
+        "No change to accepted backlog 0.1.122 or the 541-node native DWF plan; RS130 has zero completion achievements."
+      ],
+      "nextAction": "On confirmed RS130 push, prepare the already owner-approved next stage B: a separately bounded Math dw.discovery/AURA qualification, verifying supported DWF planning, portable protocol evidence and genuinely callable APIs. Stage D coordination only after B; no request is transmitted or public package released without explicit authorization.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "README.md",
+        "docs/distribution/current-local-consumption.md",
+        "docs/planning/ValidatePostM7ReadmeStatus.cs",
+        "docs/planning/decisions/post-m7-readme-reconciliation.md",
+        "docs/planning/evidence/RS130-post-m7-readme-qualified.json"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "readme-current",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "historical-inventory",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "historical-portfolio",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M7",
+        "objective": "Advanced extensions and scope decisions",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M7 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS130",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS130",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "2e3ca3c1b95ba055b52dad8f7040e7fed91693cd",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "8acb3e9bfc3201608ca5c8ccee19a2e71c82f268df17d489667eb7b0e90a920d"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: reconcile current Math README with qualified local delivery",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
