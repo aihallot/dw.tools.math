@@ -190,7 +190,7 @@ foreach(var (id,version,dependencies) in expected)
          "Local package identifier, version or restore contract changed: "+id);
     var found=xml.Descendants().Where(x=>x.Name.LocalName=="ProjectReference")
         .Select(x=>(string?)x.Attribute("Include")??"")
-        .Select(Path.GetFileNameWithoutExtension).ToArray();
+        .Select(link=>Path.GetFileNameWithoutExtension(link)).ToArray();
     Need(found.Length==dependencies.Length&&
          found.OrderBy(x=>x,StringComparer.Ordinal)
              .SequenceEqual(dependencies.OrderBy(x=>x,StringComparer.Ordinal)),
