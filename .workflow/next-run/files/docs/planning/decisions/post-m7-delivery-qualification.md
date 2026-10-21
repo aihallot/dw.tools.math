@@ -24,8 +24,9 @@ The controlled RS124 payload installs this decision, a distribution inventory an
 
 1. `dotnet restore dw.tools.math.slnx --locked-mode`
 2. `dotnet build dw.tools.math.slnx -c Release --no-restore`
-3. `dotnet test dw.tools.math.slnx -c Release --no-build --no-restore`
-4. `dotnet pack` the three representative `distribution`, `analysis` and `scientific` csprojs to a **local ignored** `build/artifacts/rs124-local-packages/` directory using `--no-build --no-restore`.
+3. Focused Release regressions for `dw.tools.math.distribution.tests`, `dw.tools.math.analysis.tests` and `dw.tools.math.scientific.tests` with `--no-build --no-restore`.
+4. `dotnet test dw.tools.math.slnx -c Release --no-build --no-restore`
+5. `dotnet pack` the three representative `distribution`, `analysis` and `scientific` csprojs to a **local ignored** `build/artifacts/rs124-local-packages/` directory using `--no-build --no-restore`.
 
 Each successful command records actual exit code zero, stdout/stderr SHA-256, observed SDK and RID. Each selected archive is checked for actual existence and byte SHA-256; representative package tests are not equivalent to repacking all thirteen libraries or source-free consumer reruns. Failure aborts RS124 before a success receipt; no old historical witness is retroactively refreshed.
 
