@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -18,6 +19,7 @@ const string M7="docs/planning/evidence/M7-internal-gate-qualified.json";
 const string Decision="docs/planning/decisions/post-m7-delivery-qualification.md";
 const string Matrix="docs/distribution/post-m7-delivery-inventory.md";
 const string Evidence="docs/planning/evidence/RS124-post-m7-delivery-qualified.json";
+const string PackageDirectory="build/artifacts/rs124-local-packages";
 const string Status="rs124-current-source-build-test-and-three-local-packages-qualified-unpublished";
 const string Marker="dw.tools.math/rs124-post-m7-delivery/1.0 inventory-qualified; source=13; tests=11; historical-consumers=47; public=false";
 const string Counts="MATH-DELIVERY:SOURCE=13;TESTS=11;SOLUTION=24;HISTORICAL-CONSUMER-DIRS=47";
@@ -68,8 +70,9 @@ static int NotDone(JsonElement node)
     return n;
 }
 
-Need(args.Length==0||(args.Length==1&&args[0]=="--check"),
-     "Only read-only --check is supported.");
+Need(args.Length==0||(args.Length==1&&
+     (args[0]=="--check"||args[0]=="--packages")),
+     "Only read-only --check or --packages is supported.");
 using var backlogDoc=Open(Backlog);
 using var nativeDoc=Open(Native);
 using var priorDoc=Open(Prior);
@@ -284,11 +287,61 @@ if(target)
          !Flag(receipt,"external_approvals_received")&&
          !Flag(receipt,"generated_discovery_skill_delivered")&&
          !Flag(receipt,"all_thirteen_packages_repacked")&&
+         receipt.GetProperty("local_archive_manifest").GetArrayLength()==3&&
+         receipt.GetProperty("command_receipts").GetArrayLength()==8&&
          Text(receipt,"decision_sha256")==Sha(Decision)&&
          Text(receipt,"distribution_sha256")==Sha(Matrix)&&
          Text(receipt,"validator_sha256")==Sha(
              "docs/planning/ValidatePostM7DeliveryInventory.cs"),
          "Target receipt must prove only fresh local checks, not publication.");
+}
+
+if(args.Length==1&&args[0]=="--packages")
+{
+    var expectedPackages=new (string Id,string Version)[]
+    {
+        ("dw.tools.math.distribution","1.0.0-preview.4"),
+        ("dw.tools.math.analysis","1.1.0-preview.6"),
+        ("dw.tools.math.scientific","1.1.0-preview.14")
+    };
+    var folder=Local(PackageDirectory);
+    Need(Directory.Exists(folder),
+        "The local pack command did not create the output directory.");
+    var observed=Directory.GetFiles(folder,"*.nupkg",SearchOption.TopDirectoryOnly);
+    Need(observed.Length==expectedPackages.Length,
+        "Exactly three fresh representative local NuGet archives are required.");
+    foreach(var (id,version) in expectedPackages)
+    {
+        var relative=PackageDirectory+"/"+id+"."+version+".nupkg";
+        var absolute=Local(relative);
+        Need(File.Exists(absolute),"Locally packed NuGet archive missing: "+id);
+        using(var input=File.OpenRead(absolute))
+        using(var zip=new ZipArchive(input,ZipArchiveMode.Read))
+        {
+            var nuspec=zip.Entries.SingleOrDefault(x=>
+                x.FullName.EndsWith(".nuspec",StringComparison.OrdinalIgnoreCase));
+            Need(nuspec is not null,"NuGet package nuspec missing: "+id);
+            using var reader=new StreamReader(nuspec!.Open());
+            var xml=XDocument.Parse(reader.ReadToEnd());
+            var metadata=xml.Descendants().SingleOrDefault(x=>
+                x.Name.LocalName=="metadata");
+            Need(metadata is not null,"NuGet package metadata missing: "+id);
+            var observedId=metadata!.Elements().SingleOrDefault(x=>
+                x.Name.LocalName=="id")?.Value;
+            var observedVersion=metadata.Elements().SingleOrDefault(x=>
+                x.Name.LocalName=="version")?.Value;
+            Need(observedId==id&&observedVersion==version,
+                "Local package identity differs from declared source: "+id);
+            Need(zip.Entries.Any(x=>x.FullName.Equals(
+                "lib/net10.0/"+id+".dll",StringComparison.OrdinalIgnoreCase)),
+                "Local package does not carry the compiled net10 assembly: "+id);
+        }
+        var bytes=new FileInfo(absolute).Length;
+        var archiveSha=Sha(relative);
+        Need(bytes>0&&archiveSha.Length==64,
+            "Local package size or SHA-256 invalid: "+id);
+        Console.WriteLine("RS124-PACK|"+id+"|"+version+"|"+archiveSha+"|"+bytes);
+    }
 }
 Console.WriteLine(Counts);
 Console.WriteLine(Scope);
