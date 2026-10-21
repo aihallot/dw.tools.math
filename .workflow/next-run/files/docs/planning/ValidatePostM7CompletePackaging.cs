@@ -344,14 +344,14 @@ if(target)
          Text(receipt,"validator_sha256")==Sha(Validator),
          "Target receipt lacks exact current packaging and nonpublication proof.");
     var expectedIds=new[]{
-        "source-locked-restore","solution-release-build",
+        "locked-solution-restore","release-solution-build",
         "pack-dw.tools.math.foundation","pack-dw.quantities",
         "pack-dw.quantities.standard","pack-dw.quantities.expression",
         "pack-dw.tools.math.ir","pack-dw.tools.math.composition",
         "pack-dw.tools.math.numerics","pack-dw.tools.math.statistics",
         "pack-dw.tools.math.symbolics","pack-dw.tools.math.codecs",
         "pack-dw.tools.math.distribution","pack-dw.tools.math.analysis",
-        "pack-dw.tools.math.scientific","independent-package-audit",
+        "pack-dw.tools.math.scientific","independent-thirteen-package-audit",
         "m3-offline-restore","m3-source-free-consumer",
         "exact-offline-restore","exact-source-free-consumer"
     };
