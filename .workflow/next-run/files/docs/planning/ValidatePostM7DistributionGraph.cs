@@ -23,6 +23,7 @@ const string ConsumerConfig="tests/consumers/m5-w02-c02-t2/NuGet.Config";
 const string Decision="docs/planning/decisions/post-m7-distribution-graph-qualification.md";
 const string Matrix="docs/distribution/post-m7-seven-package-surface-matrix.md";
 const string Evidence="docs/planning/evidence/RS126-post-m7-distribution-qualified.json";
+const string Validator="docs/planning/ValidatePostM7DistributionGraph.cs";
 const string Feed="build/artifacts/m5-w02-c02-t2-local-feed";
 const string Status="rs126-fresh-seven-package-offline-distribution-surface-qualified-unpublished";
 const string Counts="MATH-RS126:PACKAGES=7;SOURCE-FREE-CONSUMERS=1;FRESH-PROBES=8;NATIVE=541";
@@ -243,7 +244,7 @@ foreach(var term in new[]{
     "## Closed dependency and package roster",
     "## Independent current consumer",
     "## Historical versus fresh and release restrictions",
-    "No GitHub Actions","API surface","probes=8"
+    "No Python","API surface","probes=8"
 }) Has(matrix,term,"RS126 distribution matrix");
 
 if(packageMode)
@@ -332,7 +333,7 @@ if(target)
          Text(receipt,"decision_sha256")==Sha(Decision)&&
          Text(receipt,"distribution_sha256")==Sha(Matrix)&&
          Text(receipt,"validator_sha256")==Sha(
-             "docs/planning/ValidatePostM7DistributionGraph.cs"),
+             Validator),
          "Target success receipt overclaims public/ABI or lacks real consumers.");
     var expectedCommands=new[]{
         "source-locked-restore","distribution-release-build",
