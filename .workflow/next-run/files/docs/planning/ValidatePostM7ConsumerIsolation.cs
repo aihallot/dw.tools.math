@@ -207,7 +207,7 @@ foreach(var term in new[]{"## Question and authority","## Pinned baseline",
 var matrix=Read(Matrix);
 foreach(var term in new[]{"## Source-to-package-to-consumer table",
     "## Historical versus fresh evidence","## Receipt and release boundary",
-    "probes=8","NuGet.Config","unpublished"})
+    "probes=8","NuGet.Config","No GitHub Actions"})
     Has(matrix,term,"RS125 consumer matrix");
 
 if(target)
