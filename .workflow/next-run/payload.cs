@@ -1,14 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Xml.Linq;
 using Dw.Tools.Workflow.Payloads;
 
 const string Prior=".aura/workflow/reports/RS123/attempt-001.json";
@@ -103,7 +100,7 @@ foreach(var text in new[]{Marker,Counts,Scope})
 
 if(!target)
 {
-    var checks=new JsonArray();
+    var checks=new List<JsonNode>();
     checks.Add(Execute(root,"locked-restore","dotnet",
         "restore","dw.tools.math.slnx","--locked-mode").Receipt);
     checks.Add(Execute(root,"solution-release-build","dotnet",
@@ -115,48 +112,47 @@ if(!target)
             "-c","Release","--no-build","--no-restore").Receipt);
     checks.Add(Execute(root,"solution-release-tests","dotnet",
         "test","dw.tools.math.slnx","-c","Release","--no-build","--no-restore").Receipt);
-    var packRoot=Path.Combine(root,PackDirectory.Replace('/',Path.DirectorySeparatorChar));
-    Directory.CreateDirectory(packRoot);
-    var packed=new JsonArray();
+    var packed=new List<JsonNode>();
     foreach(var (id,version) in new[]{
         ("dw.tools.math.distribution","1.0.0-preview.4"),
         ("dw.tools.math.analysis","1.1.0-preview.6"),
         ("dw.tools.math.scientific","1.1.0-preview.14")
     })
-    {
         checks.Add(Execute(root,"local-pack-"+id,"dotnet",
             "pack","src/projects/"+id+"/"+id+".csproj",
             "-c","Release","--no-build","--no-restore",
             "--output",PackDirectory).Receipt);
-        var packageFile=Path.Combine(packRoot,id+"."+version+".nupkg");
-        if(!File.Exists(packageFile))
-            throw new InvalidOperationException("Fresh local NuGet archive missing: "+id);
-        using(var file=File.OpenRead(packageFile))
-        using(var zip=new ZipArchive(file,ZipArchiveMode.Read,leaveOpen:false))
-        {
-            var nuspec=zip.Entries.SingleOrDefault(e=>
-                e.FullName.EndsWith(".nuspec",StringComparison.OrdinalIgnoreCase))??
-                throw new InvalidOperationException("No nuspec in local package: "+id);
-            using var reader=new StreamReader(nuspec.Open());
-            var xml=XDocument.Parse(reader.ReadToEnd());
-            var metadata=xml.Descendants().SingleOrDefault(x=>
-                x.Name.LocalName=="metadata")??
-                throw new InvalidOperationException("Missing nuspec metadata: "+id);
-            var actualId=metadata.Elements().SingleOrDefault(x=>
-                x.Name.LocalName=="id")?.Value;
-            var actualVersion=metadata.Elements().SingleOrDefault(x=>
-                x.Name.LocalName=="version")?.Value;
-            if(actualId!=id||actualVersion!=version||
-               !zip.Entries.Any(e=>e.FullName.Equals(
-                   "lib/net10.0/"+id+".dll",StringComparison.OrdinalIgnoreCase)))
-                throw new InvalidOperationException("Local package nuspec or net10 assembly mismatch: "+id);
-        }
+    var packInspection=Execute(root,"independent-local-package-inspection",
+        "dotnet","run","--file",Validator,"--","--packages");
+    checks.Add(packInspection.Receipt);
+    var packageLines=packInspection.Output.Split('\n',
+        StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries)
+        .Where(line=>line.StartsWith("RS124-PACK|",StringComparison.Ordinal))
+        .ToArray();
+    var declaredPackages=new[]{
+        ("dw.tools.math.distribution","1.0.0-preview.4"),
+        ("dw.tools.math.analysis","1.1.0-preview.6"),
+        ("dw.tools.math.scientific","1.1.0-preview.14")
+    };
+    if(packageLines.Length!=declaredPackages.Length)
+        throw new InvalidOperationException(
+            "Independent CSharp package verifier did not return exactly three receipts.");
+    for(var index=0;index<declaredPackages.Length;index++)
+    {
+        var (id,version)=declaredPackages[index];
+        var data=packageLines[index].Split('|');
+        if(data.Length!=5||data[0]!="RS124-PACK"||
+           data[1]!=id||data[2]!=version||
+           data[3].Length!=64||
+           data[3].Any(ch=>!((ch>='0'&&ch<='9')||(ch>='a'&&ch<='f')))||
+           !long.TryParse(data[4],out var packageBytes)||packageBytes<=0)
+            throw new InvalidOperationException(
+                "Unexpected independent NuGet package proof for "+id);
         packed.Add(new JsonObject
         {
             ["package_id"]=id,["version"]=version,
             ["relative_path"]=PackDirectory+"/"+id+"."+version+".nupkg",
-            ["byte_length"]=new FileInfo(packageFile).Length,
-            ["sha256"]=Hash(File.ReadAllBytes(packageFile)),
+            ["byte_length"]=packageBytes,["sha256"]=data[3],
             ["scope"]="ephemeral-local-only-not-published"
         });
     }
@@ -195,8 +191,8 @@ if(!target)
         ["m0_to_m7_native_plan_mutated"]=false,
         ["dotnet_sdk"]=sdk.Output.Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["command_receipts"]=checks,
-        ["local_archive_manifest"]=packed,
+        ["command_receipts"]=p.Json.Array(checks.ToArray()),
+        ["local_archive_manifest"]=p.Json.Array(packed.ToArray()),
         ["next_scope"]="Owner chooses deeper source-free/API-ABI/packaging qualification or a supported DWF new-roadmap admission. No M8, publication or recipient transmission is selected.",
         ["nonclaims"]=p.Json.StringArray(
             "Thirteen declared packable projects are not thirteen newly qualified NuGet archives; only three representative archives were freshly packed.",
@@ -215,8 +211,6 @@ if(!checkedTarget.Output.Contains(Marker,StringComparison.Ordinal))
     throw new InvalidOperationException("RS124 independent target inventory rejected.");
 return p.Complete();
 
-static string Hash(byte[] bytes)=>
-    Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 static (JsonObject Receipt,string Output) Execute(
     string root,string id,string executable,params string[] args)
 {
@@ -251,7 +245,6 @@ static (JsonObject Receipt,string Output) Execute(
         ["id"]=id,["command"]=executable+" "+string.Join(" ",args),
         ["exit_code"]=process.ExitCode,
         ["duration_milliseconds"]=clock.ElapsedMilliseconds,
-        ["output_sha256"]=Hash(Encoding.UTF8.GetBytes(output)),
         ["output_excerpt"]=output[..Math.Min(output.Length,1200)],
         ["successful_local_execution"]=true
     },output);
