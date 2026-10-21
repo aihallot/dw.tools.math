@@ -179,7 +179,7 @@ foreach(var token in new[]{
     "7 independent source-free consumer executions",
     "95 numbered functional probes",
     "unnumbered exact-quantity smoke",
-    "No public NuGet release",
+    "no public NuGet release",
     "docs/distribution/current-local-consumption.md",
     "docs/planning/evidence/RS129-post-m7-delivery-portfolio-qualified.json",
     "docs/discovery/README.md",
