@@ -275,6 +275,7 @@ if(target)
          receipt.GetProperty("native_nodes_retained").GetInt32()==541&&
          Flag(receipt,"locked_restore_passed")&&
          Flag(receipt,"release_build_passed")&&
+         Flag(receipt,"focused_regressions_passed")&&
          Flag(receipt,"full_solution_tests_passed")&&
          Flag(receipt,"representative_local_packs_passed")&&
          !Flag(receipt,"public_release_authorized")&&
