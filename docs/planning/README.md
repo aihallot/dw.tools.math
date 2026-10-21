@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.121. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.122. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -15,7 +15,7 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 | [M4](versions/M4.md) | 0.5.0-preview | Preserve domains and assumptions across bounded symbolic operations. | done |
 | [M5](versions/M5.md) | 1.0.0 | Qualify the first coherent numerical/symbolic platform usable without AURA. | done |
 | [M6](versions/M6.md) | 1.1.0 | Extend useful families through qualified contracts and providers without absorbing decision domains. | done |
-| [M7](versions/M7.md) | 1.2.0-candidate | Qualify advanced needs and deliver only those admitted by ADR; make deferrals explicit. | in_progress |
+| [M7](versions/M7.md) | 1.2.0-candidate | Qualify advanced needs and deliver only those admitted by ADR; make deferrals explicit. | done |
 
 M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.
 
