@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "id": "RS126-post-m7-distribution-qualified",
+  "status": "rs126-fresh-seven-package-offline-distribution-surface-qualified-unpublished",
+  "question": "Can current-source seven-package Math net10 preview distribution qualify with an independent offline source-free consumer and public API surface fingerprints, without claiming cross-version compatibility or publication?",
+  "observation": "Seven current-source local NuGet packages with exact dependency graph were packed and inspected, restored from one local feed in a fresh isolated cache, and independently consumed with eight mathematical, metadata and refusal probes.",
+  "decision": "Admit only this observed current-source seven-package distribution graph and one local eight-probe source-free consumer. Per-archive public API and managed DLL SHA-256 are current fingerprints, not cross-version ABI guarantees.",
+  "previous_consumer_evidence": "docs/planning/evidence/RS125-post-m7-nuget-consumers-qualified.json",
+  "decision_document": "docs/planning/decisions/post-m7-distribution-graph-qualification.md",
+  "decision_sha256": "21fffc56d01a81d7d5e5d398ca1807daa218fc39e846304b80fd40f03e802ab0",
+  "distribution_document": "docs/distribution/post-m7-seven-package-surface-matrix.md",
+  "distribution_sha256": "a9965bb29a75adbdc1c5d00a38fc98ab7820171a5ee063bc690312605f13cca1",
+  "validator": "docs/planning/ValidatePostM7DistributionGraph.cs",
+  "validator_sha256": "517c2604d75ae7860504a63de591c792201838e78a6585d5dc2877e797b03cde",
+  "packages_packed": 7,
+  "source_free_consumers": 1,
+  "fresh_consumer_probes": 8,
+  "native_nodes_retained": 541,
+  "backlog_plan_version": "0.1.122",
+  "previous_rs125_attempt": 1,
+  "previous_rs125_first_pass": true,
+  "offline_local_feed_only": true,
+  "isolated_nuget_package_cache": true,
+  "publicly_published": false,
+  "external_requests_transmitted": false,
+  "external_approvals_received": false,
+  "discovery_skill_generated": false,
+  "cross_version_abi_certified": false,
+  "other_os_rids_certified": false,
+  "all_historical_consumers_rerun": false,
+  "all_thirteen_packages_repacked": false,
+  "new_advanced_public_product_delivered": false,
+  "m0_m7_plan_mutated": false,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "command_receipts": [
+    {
+      "id": "source-locked-restore",
+      "exit_code": 0,
+      "command": "dotnet restore dw.tools.math.slnx --locked-mode",
+      "elapsed_ms": 4945,
+      "output_excerpt": "  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "distribution-release-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj -c Release --no-restore",
+      "elapsed_ms": 5637,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.numerics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics\\Release\\net10.0\\dw.tools.math.numerics.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.symbolics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics\\Release\\net10.0\\dw.tools.math.symbolics.dll\r\n  dw.tools.math.codecs -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs\\Release\\net10.0\\dw.tools.math.codecs.dll\r\n  dw.tools.math.distribution -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution\\Release\\net10.0\\dw.tools.math.distribution.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:05.08\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.quantities",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 2115,
+      "output_excerpt": "  The package dw.quantities.0.2.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.quantities.0.2.0-preview.1.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.ir",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 2035,
+      "output_excerpt": "  The package dw.tools.math.ir.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.ir.0.3.0-preview.1.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.codecs",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 1678,
+      "output_excerpt": "  The package dw.tools.math.codecs.1.0.0-preview.8 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.codecs.1.0.0-preview.8.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.symbolics",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 1485,
+      "output_excerpt": "  The package dw.tools.math.symbolics.0.5.0-preview.10 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.symbolics.0.5.0-preview.10.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.numerics",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 1497,
+      "output_excerpt": "  The package dw.tools.math.numerics.0.4.0-preview.4 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.numerics.0.4.0-preview.4.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.composition",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 1478,
+      "output_excerpt": "  The package dw.tools.math.composition.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.composition.0.3.0-preview.1.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "pack-dw.tools.math.distribution",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj -c Release --no-build --no-restore --output build/artifacts/m5-w02-c02-t2-local-feed",
+      "elapsed_ms": 1664,
+      "output_excerpt": "  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.distribution.1.0.0-preview.4.nupkg\u0027.\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "independent-package-audit",
+      "exit_code": 0,
+      "command": "dotnet run --file docs/planning/ValidatePostM7DistributionGraph.cs -- --packages",
+      "elapsed_ms": 466,
+      "output_excerpt": "RS126-PACK|dw.quantities|0.2.0-preview.1|14737|89c7759bb3be7009589e28b8943f208cdde47f7144c35efbe7098727ce1169c0\r\nRS126-PACK|dw.tools.math.ir|0.3.0-preview.1|21908|88abc81e4f8d7d8ad096f1cf1e75c686338af210701154d27825217cb3437b78\r\nRS126-PACK|dw.tools.math.codecs|1.0.0-preview.8|35088|a963c2a7721f2ff68c8a78d878f3c189ac7ccf4a325b4ceb37924e961bfbfbbe\r\nRS126-PACK|dw.tools.math.symbolics|0.5.0-preview.10|34693|16c4e65f35463c0a6ac2efe69d60dc66d8608ac1745ddf7c6bf2cb6932fafc43\r\nRS126-PACK|dw.tools.math.numerics|0.4.0-preview.4|18293|0c36822b3bef63acadd6fcd9feae64e266817bcc0be4ede36f788035648f76ea\r\nRS126-PACK|dw.tools.math.composition|0.3.0-preview.1|17082|5bcc29ec045d7a30057d76b09c888c8b95d78d51c825716204629aab07efac93\r\nRS126-PACK|dw.tools.math.distribution|1.0.0-preview.4|25865|51a42778b56f23cfd909f697ad4bae963f710e6c23ef2921db6572d71aa3887b\r\nMATH-RS126:PACKAGES=7;SOURCE-FREE-CONSUMERS=1;FRESH-PROBES=8;NATIVE=541\r\nMATH-RS126:SCOPE=NO-PROGRESS;LOCAL-NUGET=true;API-SHA=OBSERVED-ONLY;PUBLICATION=false\r\ndw.tools.math/rs126-multipackage-surface/1.0 qualified; archive-graph=7; probes=8; abi-certified=false\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "distribution-offline-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tests/consumers/m5-w02-c02-t2/m5-managed-api-boundary-consumer.csproj --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs126-isolated-packages -p:NuGetAudit=false",
+      "elapsed_ms": 1413,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m5-w02-c02-t2\\m5-managed-api-boundary-consumer.csproj (in 388 ms).\r\n\n",
+      "source_free_consumer_execution": false
+    },
+    {
+      "id": "distribution-source-free-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tests/consumers/m5-w02-c02-t2/m5-managed-api-boundary-consumer.csproj -c Release --no-restore -- D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.quantities.0.2.0-preview.1.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.ir.0.3.0-preview.1.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.codecs.1.0.0-preview.8.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.symbolics.0.5.0-preview.10.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.numerics.0.4.0-preview.4.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.composition.0.3.0-preview.1.nupkg D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m5-w02-c02-t2-local-feed\\dw.tools.math.distribution.1.0.0-preview.4.nupkg",
+      "elapsed_ms": 4391,
+      "output_excerpt": "M5-W02-C02-T2-SURFACE-SHA256:dw.quantities:0.2.0-preview.1:6d332ff8e5fe6da3dcbe7805a9effdefdfe88a9ea9261665453fd0beab9a730b:692e6e696130da7736b230cbb9bf7cb9432c0b2cd284c9ef0cae9666c5e460b5\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.ir:0.3.0-preview.1:29b93a7b9f429932dc9d5ff83f2f79aa32d338091f4f34fabf941b791b205be9:2c3ad45db077226812a861fcf19e8a4e2be0c1f1c413e38b2f564647a60482db\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.codecs:1.0.0-preview.8:8bdd0c88d4ad8701caa16ef9d63529ff0bb937dd4b078255c40f53dce991614e:b3fefff02e94b85917a2f36a49cd694c435fbe35db88685ac8499b7fa73e2b18\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.symbolics:0.5.0-preview.10:afef3886a8fed77a88b13a36411a46c08c5a19b33c64d75585636aaaa37aa620:4cb2da8de7c2213adbce5e57e5d1abf305e90f1d62650cead95e7b07aa8fc345\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.numerics:0.4.0-preview.4:5d9316db9660d91ea8be4e1a50c019a6f4769c7a83676ba16884316dec225656:ee5beb8c7ed1dd87a4985e8f0baf5251d85599d990054d3fa252662e43ec8d10\r\nM5-W02-C02-T2-SURFACE-SHA256:dw.tools.math.composition:0.3.0-preview.1:6d2bce2a4f3a73b48fa8449fa161f4fdfb1caeef2aa9c4611d53f6b159053d0b:c456632aecf51c484dad41ba364afb961be2c7f33c9e6d939f26d545f500eaf3\r\nM5-W02-C02-T2-SURF",
+      "source_free_consumer_execution": true
+    }
+  ],
+  "package_results": [
+    {
+      "package_id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.quantities.0.2.0-preview.1.nupkg",
+      "archive_bytes": 14737,
+      "archive_sha256": "89c7759bb3be7009589e28b8943f208cdde47f7144c35efbe7098727ce1169c0",
+      "public_api_sha256": "6d332ff8e5fe6da3dcbe7805a9effdefdfe88a9ea9261665453fd0beab9a730b",
+      "managed_assembly_sha256": "692e6e696130da7736b230cbb9bf7cb9432c0b2cd284c9ef0cae9666c5e460b5",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.ir.0.3.0-preview.1.nupkg",
+      "archive_bytes": 21908,
+      "archive_sha256": "88abc81e4f8d7d8ad096f1cf1e75c686338af210701154d27825217cb3437b78",
+      "public_api_sha256": "29b93a7b9f429932dc9d5ff83f2f79aa32d338091f4f34fabf941b791b205be9",
+      "managed_assembly_sha256": "2c3ad45db077226812a861fcf19e8a4e2be0c1f1c413e38b2f564647a60482db",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.codecs",
+      "version": "1.0.0-preview.8",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.codecs.1.0.0-preview.8.nupkg",
+      "archive_bytes": 35088,
+      "archive_sha256": "a963c2a7721f2ff68c8a78d878f3c189ac7ccf4a325b4ceb37924e961bfbfbbe",
+      "public_api_sha256": "8bdd0c88d4ad8701caa16ef9d63529ff0bb937dd4b078255c40f53dce991614e",
+      "managed_assembly_sha256": "b3fefff02e94b85917a2f36a49cd694c435fbe35db88685ac8499b7fa73e2b18",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.symbolics",
+      "version": "0.5.0-preview.10",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.symbolics.0.5.0-preview.10.nupkg",
+      "archive_bytes": 34693,
+      "archive_sha256": "16c4e65f35463c0a6ac2efe69d60dc66d8608ac1745ddf7c6bf2cb6932fafc43",
+      "public_api_sha256": "afef3886a8fed77a88b13a36411a46c08c5a19b33c64d75585636aaaa37aa620",
+      "managed_assembly_sha256": "4cb2da8de7c2213adbce5e57e5d1abf305e90f1d62650cead95e7b07aa8fc345",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.numerics",
+      "version": "0.4.0-preview.4",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.numerics.0.4.0-preview.4.nupkg",
+      "archive_bytes": 18293,
+      "archive_sha256": "0c36822b3bef63acadd6fcd9feae64e266817bcc0be4ede36f788035648f76ea",
+      "public_api_sha256": "5d9316db9660d91ea8be4e1a50c019a6f4769c7a83676ba16884316dec225656",
+      "managed_assembly_sha256": "ee5beb8c7ed1dd87a4985e8f0baf5251d85599d990054d3fa252662e43ec8d10",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.composition",
+      "version": "0.3.0-preview.1",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.composition.0.3.0-preview.1.nupkg",
+      "archive_bytes": 17082,
+      "archive_sha256": "5bcc29ec045d7a30057d76b09c888c8b95d78d51c825716204629aab07efac93",
+      "public_api_sha256": "6d2bce2a4f3a73b48fa8449fa161f4fdfb1caeef2aa9c4611d53f6b159053d0b",
+      "managed_assembly_sha256": "c456632aecf51c484dad41ba364afb961be2c7f33c9e6d939f26d545f500eaf3",
+      "scope": "fresh-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.distribution",
+      "version": "1.0.0-preview.4",
+      "archive_relative_path": "build/artifacts/m5-w02-c02-t2-local-feed/dw.tools.math.distribution.1.0.0-preview.4.nupkg",
+      "archive_bytes": 25865,
+      "archive_sha256": "51a42778b56f23cfd909f697ad4bae963f710e6c23ef2921db6572d71aa3887b",
+      "public_api_sha256": "07b96952264393441f55ad618e174cbaf59aec9bfbb7d47cfa8f5a7fe514ccfd",
+      "managed_assembly_sha256": "203f99c47a1c928670ddf1ddf0654e54606640101ec5bb1f68b45b98b42a8b6b",
+      "scope": "fresh-local-only-not-published"
+    }
+  ],
+  "next_scope": "Independent version-pinned API/ABI comparison or remaining source-free preview consumers require separate scope; no automatic publication, external integration or M8.",
+  "nonclaims": [
+    "Current public surface hashes and one source-free consumer do not certify cross-version source or binary ABI, future builds or other RIDs.",
+    "Seven locally packed net10 Math archives were not published to any public NuGet feed and their stable licensing remains owner gated.",
+    "Historic consumer receipts from M5, M6, RS124 and RS125 remain separate; only eight new RS126 probes are counted.",
+    "No agent Discovery implementation, AURA/Decision/MCDM cutover, new provider or change to 541 completed native nodes occurred."
+  ]
+}
