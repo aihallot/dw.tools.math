@@ -74,10 +74,13 @@ static int Remaining(JsonElement node)
 static void CheckClient(string project,string[] references,string configPath,
     string localFeedName,string sourcePath,string passToken,int probes)
 {
-    var projectSource=Read(project);
-    var doc=XDocument.Parse(projectSource);
-    Need(projectSource.Contains("<TargetFramework>net10.0</TargetFramework>",
-             StringComparison.Ordinal)&&
+    var doc=XDocument.Parse(Read(project));
+    var declaredFramework=doc.Descendants().FirstOrDefault(x=>
+        x.Name.LocalName=="TargetFramework")?.Value.Trim();
+    var inheritedFramework=Property(
+        XDocument.Parse(Read("Directory.Build.props")),"TargetFramework");
+    Need(inheritedFramework=="net10.0"&&
+         (declaredFramework??inheritedFramework)=="net10.0"&&
          Property(doc,"ManagePackageVersionsCentrally")=="false"&&
          Property(doc,"IsPackable")=="false"&&
          !doc.Descendants().Any(x=>x.Name.LocalName=="ProjectReference"),
