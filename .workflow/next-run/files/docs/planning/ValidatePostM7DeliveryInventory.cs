@@ -288,12 +288,32 @@ if(target)
          !Flag(receipt,"generated_discovery_skill_delivered")&&
          !Flag(receipt,"all_thirteen_packages_repacked")&&
          receipt.GetProperty("local_archive_manifest").GetArrayLength()==3&&
-         receipt.GetProperty("command_receipts").GetArrayLength()==8&&
+         receipt.GetProperty("command_receipts").GetArrayLength()==10&&
          Text(receipt,"decision_sha256")==Sha(Decision)&&
          Text(receipt,"distribution_sha256")==Sha(Matrix)&&
          Text(receipt,"validator_sha256")==Sha(
              "docs/planning/ValidatePostM7DeliveryInventory.cs"),
          "Target receipt must prove only fresh local checks, not publication.");
+    var archiveRows=receipt.GetProperty("local_archive_manifest")
+        .EnumerateArray().ToArray();
+    var archiveIds=new HashSet<string>(StringComparer.Ordinal);
+    foreach(var archive in archiveRows)
+    {
+        var name=Text(archive,"package_id");
+        var recordVersion=Text(archive,"version");
+        var recordHash=Text(archive,"sha256");
+        var expectedEntry=expected.SingleOrDefault(x=>x.Id==name);
+        Need(archiveIds.Add(name)&&expectedEntry.Id==name&&
+             expectedEntry.Version==recordVersion&&
+             archive.GetProperty("byte_length").GetInt64()>0&&
+             recordHash.Length==64&&
+             recordHash.All(ch=>
+                 (ch>='0'&&ch<='9')||(ch>='a'&&ch<='f')),
+             "One representative archive receipt is missing or invalid: "+name);
+    }
+    Need(archiveIds.Count==3,
+        "Archive manifest lacks one of the three representative packages.");
+
 }
 
 if(args.Length==1&&args[0]=="--packages")
