@@ -20,9 +20,9 @@ The pinned files were independently fetched into Math and their Git blob identit
 dotnet run --file docs/discovery/qualification/ValidatePortableProtocol.cs
 ```
 
-The current [portable preflight receipt](qualification/portable-protocol-preflight.json) records what was independently **executed in the assistant environment**, with its own language and limitations clearly identified. A C# source file, a passed JavaScript preflight, and byte-identical fixtures are not proof that the Math C# program compiled, ran or produced a generated Math agent manifest.
+The earlier [portable preflight receipt](qualification/portable-protocol-preflight.json) is an assistant-environment **JavaScript observation**, not an execution of Math C#. In the selected RS131 gate, the independent Math C# verifier will execute under DWF and its actual status, 13 per-case verdicts (2 accepted, 11 rejected), SDK/RID, and pinned SHA-256 identities will be recorded in [RS131 C# protocol evidence](qualification/RS131-portable-protocol-qualified.json) **only upon successful DWF completion**. A qualified portable envelope is not an agent callable binding or broker runtime.
 
-Do **not** label Math/Decision interoperability as qualified until the C# test executes under the accepted DWF contract, the durable run report is published, and actual selected Math CLR bindings plus a generated Math-owned manifest pass separate qualification. No new DWF run has been selected merely for documentation.
+**Do not label full Math/Decision interoperability as qualified** until actual selected Math CLR bindings, compiled examples and a generated Math-owned manifest/skill also pass their own admitted DWF qualification. A passed portable corpus alone grants no BrokerReady or AURA authorization.
 
 ## Math API scope
 
@@ -38,9 +38,9 @@ See the [dedicated proposed backlog extension](../planning/proposals/math-agent-
 
 The generic native-DWF authoring and safe sibling-continuation request is tracked in [Workflow issue #139](https://github.com/aihallot/dw.tools.workflow/issues/139). The issue is feedback, not a delivered SDK feature.
 
-Current DWF state after RS040: M3 and M3-W01 are in progress, `M3-W01-C02` is the active numerical phase, and its T2 boundary work is still planned. Introducing `M3-W03` requires an explicitly supported topology authoring/reconciliation step. The current SDK has a typed `EnsurePhaseWithTasks` for an **existing** work package, not a typed new-work-package builder; the Math native-plan validator currently fixes 8 milestones, 17 work packages, 53 phases and 496 mapped nodes. Do not hand-write a fake native `ProjectPlan` transition or smuggle Discovery into a numerical task.
+Current DWF state after RS130 (2026-10-21): the accepted backlog v`0.1.122` and all **541 native DWF nodes across M0–M7 are done**; RS130 finished first-pass and reconciled the public README. The installed Math DWF 0.1.59 SDK exposes `EnsurePhaseWithTasks` only below an **existing** work package; an approved typed new-work-package constructor is not available in its documented SDK. [Workflow issue #139](https://github.com/aihallot/dw.tools.workflow/issues/139) remains open. The proposed `M3-W03` is a distinct **draft**, not merged into the accepted plan. Do not edit workflow plan JSON directly or smuggle Discovery into a completed numerical task.
 
-**Next safe execution path:** qualify a supported native-DWF roadmap extension first (or request a workflow feedback capability from the owning Workflow project). Only then select the Discovery C01 run with its own native project nodes and RED/GREEN evidence. Keep M2 qualification immutable and do not claim cross-repo interoperability until Math executes the pinned Decision suite itself.
+**Next safe execution path:** RS131 is a bounded **evidence-only C# protocol gate** scoped to the already-completed M7, with zero achievements or roadmap mutations. It does not admit a product Discovery work package. For the later CLR binder and generator/skill implementation, first establish a supported DWF topology/rebaseline, then independently qualify C01/C02/C03 under their admitted scope. Keep the older M2/M3 Math qualifications immutable.
 
 ## Planned output once executed
 
