@@ -27,7 +27,7 @@ All are net10-class projects via `Directory.Build.props`, with `IsPackable=true`
 | Dimension | Historical recorded evidence | What RS124 actually rechecks |
 |---|---|---|
 | Source/plan | M0–M7 all accepted under backlog `0.1.122`; 541 DWF nodes done | Current solution paths, 13 + 11 project metadata, exact DWF and source identities |
-| Local M5 packaging | M5 gate records 7 local archives, three prior source-free consumers, **no public release** | Fresh Release solution restore/build/test and representative `distribution` local pack |
+| Local M5 packaging | M5 gate records 7 local archives, three prior source-free consumers, **no public release** | Fresh Release solution restore/build, focused distribution/analysis/scientific regressions, full solution tests and representative `distribution` local pack |
 | Local M6 packaging | M6 gate records `analysis 1.1.0-preview.6` and `scientific 1.1.0-preview.14` historical package receipts and 10 earlier consumer runs | Fresh representative `analysis` and `scientific` local packs; no invented new source-free tests |
 | Discovery for agents | Local protocol fixture and candidate API seed only | Source existence and explicit no-generated-skill boundary, **no claim of broker integration** |
 | Advanced M7 research | Four families and finite formal witness **studied/deferred** | Continue to distinguish research from shipped modules; no new provider pack |
