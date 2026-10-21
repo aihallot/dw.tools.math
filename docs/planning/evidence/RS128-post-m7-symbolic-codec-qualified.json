@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "id": "RS128-post-m7-symbolic-codec-qualified",
+  "status": "rs128-four-local-symbolic-codec-packages-two-source-free-consumers-qualified-unpublished",
+  "question": "Do the current-source bounded symbolics and exact Markdown/OMML NuGet clients pass their original forty independent probes from a fresh isolated four-package local feed?",
+  "observation": "Four local preview Math archives were built and ZIP/dependency/SHA qualified. Two pre-existing source-free clients restored only from the local feed in a private cache and reran thirty-two symbolic and eight codec/OMML probes.",
+  "decision": "Admit these two local source-free client executions on the observed host. No general symbolic proof engine, Office document fidelity, ABI promise, publication, downstream migration or new roadmap is established.",
+  "prior_distribution_evidence": "docs/planning/evidence/RS127-post-m7-complete-packaging-qualified.json",
+  "decision_document": "docs/planning/decisions/post-m7-symbolic-codec-consumers.md",
+  "decision_sha256": "346a3304ef4ccd8d3e0d273c2a89a8ea548dda72931c9f4710a61cb8c45b9f1a",
+  "distribution_document": "docs/distribution/post-m7-symbolic-codec-consumer-matrix.md",
+  "distribution_sha256": "af637ba7ce80ea6b635ab0c94d4e883184f674d7e977ac40cb8dafebe7ca349e",
+  "validator": "docs/planning/ValidatePostM7SymbolicCodecConsumers.cs",
+  "validator_sha256": "50161c4b4a45d7ac829dd050be6cb48d5c8caf1b202e8d37e6be0cce580d4c03",
+  "packages_packed": 4,
+  "source_free_consumers": 2,
+  "fresh_consumer_probes": 40,
+  "native_nodes_retained": 541,
+  "backlog_plan_version": "0.1.122",
+  "previous_rs127_attempt": 1,
+  "previous_rs127_first_pass": false,
+  "previous_rs127_preparation_refusals": 2,
+  "offline_feed_only": true,
+  "isolated_package_cache": true,
+  "publicly_published": false,
+  "external_requests_transmitted": false,
+  "external_approvals_received": false,
+  "discovery_skill_generated": false,
+  "cross_version_abi_certified": false,
+  "other_os_rids_certified": false,
+  "m0_m7_plan_mutated": false,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "command_receipts": [
+    {
+      "id": "source-locked-restore",
+      "exit_code": 0,
+      "command": "dotnet restore dw.tools.math.slnx --locked-mode",
+      "elapsed_ms": 1645,
+      "output_excerpt": "  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "symbolics-release-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj -c Release --no-restore",
+      "elapsed_ms": 3102,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.symbolics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.symbolics\\Release\\net10.0\\dw.tools.math.symbolics.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.67\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "codecs-release-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj -c Release --no-restore",
+      "elapsed_ms": 1354,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.codecs -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.codecs\\Release\\net10.0\\dw.tools.math.codecs.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.12\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "pack-dw.quantities",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release --no-build --no-restore --output build/artifacts/rs128-symbolic-codec-feed",
+      "elapsed_ms": 1201,
+      "output_excerpt": "  The package dw.quantities.0.2.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed\\dw.quantities.0.2.0-preview.1.nupkg\u0027.\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "pack-dw.tools.math.ir",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj -c Release --no-build --no-restore --output build/artifacts/rs128-symbolic-codec-feed",
+      "elapsed_ms": 1130,
+      "output_excerpt": "  The package dw.tools.math.ir.0.3.0-preview.1 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed\\dw.tools.math.ir.0.3.0-preview.1.nupkg\u0027.\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "pack-dw.tools.math.symbolics",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj -c Release --no-build --no-restore --output build/artifacts/rs128-symbolic-codec-feed",
+      "elapsed_ms": 1331,
+      "output_excerpt": "  The package dw.tools.math.symbolics.0.5.0-preview.10 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed\\dw.tools.math.symbolics.0.5.0-preview.10.nupkg\u0027.\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "pack-dw.tools.math.codecs",
+      "exit_code": 0,
+      "command": "dotnet pack src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj -c Release --no-build --no-restore --output build/artifacts/rs128-symbolic-codec-feed",
+      "elapsed_ms": 1443,
+      "output_excerpt": "  The package dw.tools.math.codecs.1.0.0-preview.8 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed\\dw.tools.math.codecs.1.0.0-preview.8.nupkg\u0027.\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "independent-local-package-audit",
+      "exit_code": 0,
+      "command": "dotnet run --file docs/planning/ValidatePostM7SymbolicCodecConsumers.cs -- --packages",
+      "elapsed_ms": 449,
+      "output_excerpt": "RS128-PACK|dw.quantities|0.2.0-preview.1|14734|6010c2ab7d24e4308138c25d8557fe39fb458f8c5758447caf24429a371dc389\r\nRS128-PACK|dw.tools.math.ir|0.3.0-preview.1|21912|6345ae01c375402708ac2707d858d6599ed2e2922f065bb6638cd27ca9570761\r\nRS128-PACK|dw.tools.math.symbolics|0.5.0-preview.10|34689|2a58b60eebb9f05cf6c2beefd8d399c64d12fa79839e2a319e5d6ef83d99accc\r\nRS128-PACK|dw.tools.math.codecs|1.0.0-preview.8|35085|1c2872897dd4844f5bf4c517c0b8146874c4e657133af435e0062f52d13ed406\r\nMATH-RS128:PACKAGES=4;CONSUMERS=2;M4-PROBES=32;M5-PROBES=8;NATIVE=541\r\nMATH-RS128:SCOPE=NO-PROGRESS;LOCAL-FEED=true;EXTERNAL=false;PUBLICATION=false;ABI=false\r\ndw.tools.math/rs128-symbolic-codec-consumers/1.0 qualified; packages=4; consumers=2; probes=40; public=false\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "m4-offline-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tests/consumers/m4-gate/m4-gate-consumer.csproj --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-isolated-packages -p:NuGetAudit=false",
+      "elapsed_ms": 1214,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m4-gate\\m4-gate-consumer.csproj (in 293 ms).\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "m4-source-free-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tests/consumers/m4-gate/m4-gate-consumer.csproj -c Release --no-restore",
+      "elapsed_ms": 12433,
+      "output_excerpt": "dw.tools.math/m4-nuget-gate/0.5 qualified; probes=32\r\n\n",
+      "source_free_consumer": true
+    },
+    {
+      "id": "m5-offline-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-symbolic-codec-feed --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs128-isolated-packages -p:NuGetAudit=false",
+      "elapsed_ms": 1175,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\consumers\\m5-w01-c04-t2\\m5-math-display-boundary-consumer.csproj (in 222 ms).\r\n\n",
+      "source_free_consumer": false
+    },
+    {
+      "id": "m5-source-free-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj -c Release --no-restore",
+      "elapsed_ms": 12407,
+      "output_excerpt": "dw.tools.math/m5-markdown-omml-boundary-consumer/1.0 qualified; probes=8\r\n\n",
+      "source_free_consumer": true
+    }
+  ],
+  "package_results": [
+    {
+      "package_id": "dw.quantities",
+      "version": "0.2.0-preview.1",
+      "archive_relative_path": "build/artifacts/rs128-symbolic-codec-feed/dw.quantities.0.2.0-preview.1.nupkg",
+      "archive_bytes": 14734,
+      "archive_sha256": "6010c2ab7d24e4308138c25d8557fe39fb458f8c5758447caf24429a371dc389",
+      "scope": "fresh-current-local-net10-only"
+    },
+    {
+      "package_id": "dw.tools.math.ir",
+      "version": "0.3.0-preview.1",
+      "archive_relative_path": "build/artifacts/rs128-symbolic-codec-feed/dw.tools.math.ir.0.3.0-preview.1.nupkg",
+      "archive_bytes": 21912,
+      "archive_sha256": "6345ae01c375402708ac2707d858d6599ed2e2922f065bb6638cd27ca9570761",
+      "scope": "fresh-current-local-net10-only"
+    },
+    {
+      "package_id": "dw.tools.math.symbolics",
+      "version": "0.5.0-preview.10",
+      "archive_relative_path": "build/artifacts/rs128-symbolic-codec-feed/dw.tools.math.symbolics.0.5.0-preview.10.nupkg",
+      "archive_bytes": 34689,
+      "archive_sha256": "2a58b60eebb9f05cf6c2beefd8d399c64d12fa79839e2a319e5d6ef83d99accc",
+      "scope": "fresh-current-local-net10-only"
+    },
+    {
+      "package_id": "dw.tools.math.codecs",
+      "version": "1.0.0-preview.8",
+      "archive_relative_path": "build/artifacts/rs128-symbolic-codec-feed/dw.tools.math.codecs.1.0.0-preview.8.nupkg",
+      "archive_bytes": 35085,
+      "archive_sha256": "1c2872897dd4844f5bf4c517c0b8146874c4e657133af435e0062f52d13ed406",
+      "scope": "fresh-current-local-net10-only"
+    }
+  ],
+  "consumer_results": [
+    {
+      "id": "m4",
+      "project": "tests/consumers/m4-gate/m4-gate-consumer.csproj",
+      "probes": 32,
+      "passed": true,
+      "source_free": true,
+      "offline_feed_only": true,
+      "isolated_cache": true,
+      "qualified_marker": "dw.tools.math/m4-nuget-gate/0.5 qualified; probes=32"
+    },
+    {
+      "id": "m5",
+      "project": "tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj",
+      "probes": 8,
+      "passed": true,
+      "source_free": true,
+      "offline_feed_only": true,
+      "isolated_cache": true,
+      "qualified_marker": "dw.tools.math/m5-markdown-omml-boundary-consumer/1.0 qualified; probes=8"
+    }
+  ],
+  "next_scope": "Owner may select further isolated source-free clients or a version-pinned ABI audit where historical package bytes are genuinely available. No automatic M8, publication or recipient request transmission.",
+  "nonclaims": [
+    "Eight M5 display probes do not certify complete Office documents, typography or lossless arbitrary Markdown conversions.",
+    "Thirty-two M4 symbolic probes do not create a general CAS, unconstrained symbolic engine or proof kernel.",
+    "A fresh four-package local feed and two consumers do not certify public release, cross-version ABI or other RIDs.",
+    "AURA, Decision and MCDM requests remain unsent; the 541-node DWF plan remains unchanged."
+  ]
+}
