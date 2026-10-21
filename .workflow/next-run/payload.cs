@@ -8,230 +8,221 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string PriorReport=".aura/workflow/reports/RS126/attempt-001.json";
-const string PriorReceipt="docs/planning/evidence/RS126-post-m7-distribution-qualified.json";
+const string PriorReport=".aura/workflow/reports/RS127/attempt-001.json";
+const string PriorReceipt="docs/planning/evidence/RS127-post-m7-complete-packaging-qualified.json";
 const string Backlog="docs/planning/backlog.json";
-const string Decision="docs/planning/decisions/post-m7-complete-local-packaging.md";
-const string Matrix="docs/distribution/post-m7-complete-package-matrix.md";
-const string Validator="docs/planning/ValidatePostM7CompletePackaging.cs";
-const string Evidence="docs/planning/evidence/RS127-post-m7-complete-packaging-qualified.json";
-const string Status="rs127-thirteen-fresh-local-packages-two-independent-consumers-qualified-unpublished";
-const string Counts="MATH-RS127:PACKAGES=13;NEW-CONSUMERS=2;M3-PROBES=31;EXACT-SMOKE=PASS;NATIVE=541";
-const string Scope="MATH-RS127:SCOPE=M0-M7-UNCHANGED;LOCAL-NUGET=true;PUBLICATION=false;ABI=false";
-const string Marker="dw.tools.math/rs127-complete-current-packaging/1.0 qualified; packages=13; consumers=2; m3=31; exact=pass";
-const string Feed="build/artifacts/rs127-complete-local-feed";
-const string NuGetCache="build/artifacts/rs127-isolated-packages";
-const string M3Project="tests/consumers/m3-gate/m3-gate-consumer.csproj";
-const string ExactProject="tests/consumers/exact-math-smoke/exact-math-smoke.csproj";
+const string Decision="docs/planning/decisions/post-m7-symbolic-codec-consumers.md";
+const string Matrix="docs/distribution/post-m7-symbolic-codec-consumer-matrix.md";
+const string Validator="docs/planning/ValidatePostM7SymbolicCodecConsumers.cs";
+const string Evidence="docs/planning/evidence/RS128-post-m7-symbolic-codec-qualified.json";
+const string Status="rs128-four-local-symbolic-codec-packages-two-source-free-consumers-qualified-unpublished";
+const string Counts="MATH-RS128:PACKAGES=4;CONSUMERS=2;M4-PROBES=32;M5-PROBES=8;NATIVE=541";
+const string Scope="MATH-RS128:SCOPE=NO-PROGRESS;LOCAL-FEED=true;EXTERNAL=false;PUBLICATION=false;ABI=false";
+const string Marker="dw.tools.math/rs128-symbolic-codec-consumers/1.0 qualified; packages=4; consumers=2; probes=40; public=false";
+const string Feed="build/artifacts/rs128-symbolic-codec-feed";
+const string Cache="build/artifacts/rs128-isolated-packages";
+const string M4Project="tests/consumers/m4-gate/m4-gate-consumer.csproj";
+const string M5Project="tests/consumers/m5-w01-c04-t2/m5-math-display-boundary-consumer.csproj";
 
 var p=PayloadContext.Create();
 var root=p.RepositoryRoot;
 var target=File.Exists(Path.Combine(root,Evidence));
-p.Workflow.RequireCurrentRun("RS127",null,null,null,null,null);
-p.Workflow.RequirePriorSuccess("RS126",1,
-    "docs: qualify offline Math distribution package graph and API surface",
-    "0.1.59",0,0,0,true);
+p.Workflow.RequireCurrentRun("RS128",null,null,null,null,null);
+p.Workflow.RequirePriorSuccess("RS127",1,
+    "docs: qualify full local Math package inventory and isolated clients",
+    "0.1.59",2,2,0,false);
 p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create("0.1.122"));
 p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("done"));
-p.Require.JsonValueEquals(PriorReceipt,"/status",
-    JsonValue.Create("rs126-fresh-seven-package-offline-distribution-surface-qualified-unpublished"));
-p.Require.JsonValueEquals(PriorReceipt,"/packages_packed",JsonValue.Create(7));
-p.Require.JsonValueEquals(PriorReceipt,"/source_free_consumers",JsonValue.Create(1));
-p.Require.JsonValueEquals(PriorReceipt,"/fresh_consumer_probes",JsonValue.Create(8));
+p.Require.JsonValueEquals(PriorReceipt,"/status",JsonValue.Create(
+    "rs127-thirteen-fresh-local-packages-two-independent-consumers-qualified-unpublished"));
+p.Require.JsonValueEquals(PriorReceipt,"/packages_packed",JsonValue.Create(13));
+p.Require.JsonValueEquals(PriorReceipt,"/source_free_consumers",JsonValue.Create(2));
+p.Require.JsonValueEquals(PriorReceipt,"/m3_fresh_probes",JsonValue.Create(31));
 p.Require.JsonValueEquals(PriorReceipt,"/native_nodes_retained",JsonValue.Create(541));
 p.Require.JsonValueEquals(PriorReceipt,"/publicly_published",JsonValue.Create(false));
 p.Require.JsonValueEquals(PriorReceipt,"/cross_version_abi_certified",JsonValue.Create(false));
-p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/count",JsonValue.Create(0));
+p.Require.JsonValueEquals(PriorReceipt,"/external_requests_transmitted",JsonValue.Create(false));
+p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/count",JsonValue.Create(2));
+p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/preparationFailureCount",
+    JsonValue.Create(2));
 p.Require.JsonValueEquals(PriorReport,"/priorInvocationFailures/firstPassSucceeded",
-    JsonValue.Create(true));
+    JsonValue.Create(false));
 p.Require.TextContains("docs/coordination/requests/README.md","have not been sent");
 p.Require.TextContains("docs/discovery/README.md","No generated Math skill");
-foreach(var id in new[]{"M5","M6","M7"})
-    p.ProjectPlan.RequireNodeState(id,"done");
+foreach(var node in new[]{"M5","M6","M7"})
+    p.ProjectPlan.RequireNodeState(node,"done");
+
 if(!target)
 {
-    foreach(var sourcePath in new[]{Decision,Matrix,Validator,Evidence})
-        p.Require.FileMissing(sourcePath);
+    foreach(var file in new[]{Decision,Matrix,Validator,Evidence})
+        p.Require.FileMissing(file);
 }
 else
 {
     p.Require.JsonValueEquals(Evidence,"/status",JsonValue.Create(Status));
     foreach(var (pointer,number) in new (string,int)[]
     {
-        ("/source_projects",13),("/test_projects",11),
-        ("/packages_packed",13),("/source_free_consumers",2),
-        ("/m3_fresh_probes",31),("/native_nodes_retained",541)
+        ("/packages_packed",4),("/source_free_consumers",2),
+        ("/fresh_consumer_probes",40),("/native_nodes_retained",541)
     })
         p.Require.JsonValueEquals(Evidence,pointer,JsonValue.Create(number));
-    foreach(var (pointer,expected) in new (string,bool)[]
+    foreach(var (pointer,flag) in new (string,bool)[]
     {
-        ("/exact_quantity_smoke_passed",true),
         ("/offline_feed_only",true),("/isolated_package_cache",true),
-        ("/foundation_source_free_consumer_rerun",false),
         ("/publicly_published",false),
         ("/external_requests_transmitted",false),
         ("/external_approvals_received",false),
+        ("/discovery_skill_generated",false),
         ("/cross_version_abi_certified",false),
         ("/other_os_rids_certified",false),
-        ("/discovery_skill_generated",false),
-        ("/all_historical_consumers_rerun",false),
         ("/m0_m7_plan_mutated",false)
     })
-        p.Require.JsonValueEquals(Evidence,pointer,JsonValue.Create(expected));
+        p.Require.JsonValueEquals(Evidence,pointer,JsonValue.Create(flag));
 }
-var decisionOutput=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
-var matrixOutput=p.Files.ReplaceFromStaged("staged/"+Matrix,Matrix);
-var validatorOutput=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
-var decisionSha=decisionOutput.AfterSha256 ??
-    throw new InvalidOperationException("RS127 canonical decision SHA absent.");
-var matrixSha=matrixOutput.AfterSha256 ??
-    throw new InvalidOperationException("RS127 canonical package matrix SHA absent.");
-var validatorSha=validatorOutput.AfterSha256 ??
-    throw new InvalidOperationException("RS127 independent BCL verifier SHA absent.");
-foreach(var term in new[]{"## Owner-selected scope",
-    "## Source-controlled acceptance inventory",
-    "## DWF-controlled reproducibility",
-    "## Technical meaning and next choice"})
+var decisionWrite=p.Files.ReplaceFromStaged("staged/"+Decision,Decision);
+var matrixWrite=p.Files.ReplaceFromStaged("staged/"+Matrix,Matrix);
+var validatorWrite=p.Files.ReplaceFromStaged("staged/"+Validator,Validator);
+var decisionSha=decisionWrite.AfterSha256 ??
+    throw new InvalidOperationException("Missing RS128 decision SHA.");
+var matrixSha=matrixWrite.AfterSha256 ??
+    throw new InvalidOperationException("Missing RS128 distribution matrix SHA.");
+var validatorSha=validatorWrite.AfterSha256 ??
+    throw new InvalidOperationException("Missing RS128 independent validator SHA.");
+foreach(var term in new[]{
+    "## Authorization and purpose","## Verified input and exact science scope",
+    "## One bounded DWF qualification chain","## Decision and remaining debts"})
     p.Require.TextContains(Decision,term,StringComparison.OrdinalIgnoreCase);
-foreach(var term in new[]{"## Complete package graph",
-    "## Fresh source-free consumers",
-    "## Qualification lineage and pending gaps"})
+foreach(var term in new[]{
+    "## Four-package closed dependency graph",
+    "## Two independent existing consumers",
+    "## Scientific nonclaims and historical continuity"})
     p.Require.TextContains(Matrix,term,StringComparison.OrdinalIgnoreCase);
-foreach(var term in new[]{Status,Marker,Counts,Scope})
+foreach(var term in new[]{Status,Counts,Scope,Marker})
     p.Require.TextContains(Validator,term);
-var initial=Run(root,"baseline-complete-package-check","dotnet",false,
+var baseline=Execute(root,"baseline-symbolic-codec-gate","dotnet",false,
     "run","--file",Validator,"--","--check");
-foreach(var marker in new[]{Counts,Scope,Marker})
-    if(!initial.Output.Contains(marker,StringComparison.Ordinal))
-        throw new InvalidOperationException("RS127 baseline package marker missing: "+marker);
+foreach(var term in new[]{Counts,Scope,Marker})
+    if(!baseline.Output.Contains(term,StringComparison.Ordinal))
+        throw new InvalidOperationException("RS128 independent source baseline marker missing: "+term);
 
 if(!target)
 {
-    var steps=new List<JsonNode>();
-    var results=new List<JsonNode>();
-    var consumers=new List<JsonNode>();
-    steps.Add(Run(root,"locked-solution-restore","dotnet",false,
+    var commands=new List<JsonNode>();
+    var archiveResults=new List<JsonNode>();
+    var clientResults=new List<JsonNode>();
+    commands.Add(Execute(root,"source-locked-restore","dotnet",false,
         "restore","dw.tools.math.slnx","--locked-mode").Receipt);
-    steps.Add(Run(root,"release-solution-build","dotnet",false,
-        "build","dw.tools.math.slnx","-c","Release","--no-restore").Receipt);
+    foreach(var family in new[]{"symbolics","codecs"})
+        commands.Add(Execute(root,family+"-release-build","dotnet",false,
+            "build","src/projects/dw.tools.math."+family+
+                "/dw.tools.math."+family+".csproj",
+            "-c","Release","--no-restore").Receipt);
     var packages=new (string Id,string Version)[]
     {
-        ("dw.tools.math.foundation","0.1.0-preview.1"),
         ("dw.quantities","0.2.0-preview.1"),
-        ("dw.quantities.standard","0.2.0-preview.1"),
-        ("dw.quantities.expression","0.2.0-preview.1"),
         ("dw.tools.math.ir","0.3.0-preview.1"),
-        ("dw.tools.math.composition","0.3.0-preview.1"),
-        ("dw.tools.math.numerics","0.4.0-preview.4"),
-        ("dw.tools.math.statistics","0.4.0-preview.6"),
         ("dw.tools.math.symbolics","0.5.0-preview.10"),
-        ("dw.tools.math.codecs","1.0.0-preview.8"),
-        ("dw.tools.math.distribution","1.0.0-preview.4"),
-        ("dw.tools.math.analysis","1.1.0-preview.6"),
-        ("dw.tools.math.scientific","1.1.0-preview.14")
+        ("dw.tools.math.codecs","1.0.0-preview.8")
     };
     foreach(var (id,version) in packages)
-        steps.Add(Run(root,"pack-"+id,"dotnet",false,
+        commands.Add(Execute(root,"pack-"+id,"dotnet",false,
             "pack","src/projects/"+id+"/"+id+".csproj",
-            "-c","Release","--no-build","--no-restore",
-            "--output",Feed).Receipt);
-    var archiveAudit=Run(root,"independent-thirteen-package-audit","dotnet",false,
-        "run","--file",Validator,"--","--packages");
-    steps.Add(archiveAudit.Receipt);
-    var outputs=archiveAudit.Output.Split('\n',
+            "-c","Release","--no-build","--no-restore","--output",Feed).Receipt);
+    var inspected=Execute(root,"independent-local-package-audit",
+        "dotnet",false,"run","--file",Validator,"--","--packages");
+    commands.Add(inspected.Receipt);
+    var packageRows=inspected.Output.Split('\n',
         StringSplitOptions.TrimEntries|StringSplitOptions.RemoveEmptyEntries)
-        .Where(x=>x.StartsWith("RS127-PACK|",StringComparison.Ordinal))
+        .Where(row=>row.StartsWith("RS128-PACK|",StringComparison.Ordinal))
         .ToArray();
-    if(outputs.Length!=packages.Length)
-        throw new InvalidOperationException("Thirteen independent ZIP identities required.");
+    if(packageRows.Length!=packages.Length)
+        throw new InvalidOperationException(
+            "Independent RS128 archive audit must return four exact ZIP receipts.");
     for(var i=0;i<packages.Length;i++)
     {
-        var fields=outputs[i].Split('|');
-        if(fields.Length!=5||fields[0]!="RS127-PACK"||
-           fields[1]!=packages[i].Id||fields[2]!=packages[i].Version||
-           !long.TryParse(fields[3],out var byteLength)||byteLength<=0||
-           !Hex64(fields[4]))
+        var values=packageRows[i].Split('|');
+        if(values.Length!=5||values[0]!="RS128-PACK"||
+           values[1]!=packages[i].Id||values[2]!=packages[i].Version||
+           !long.TryParse(values[3],out var length)||length<=0||length>4_194_304||
+           !Hex64(values[4]))
             throw new InvalidOperationException(
-                "Wrong independently observed local package SHA/identity: "+packages[i].Id);
-        results.Add(new JsonObject
+                "Incorrect independent nupkg size/SHA for "+packages[i].Id);
+        archiveResults.Add(new JsonObject
         {
-            ["package_id"]=packages[i].Id,
-            ["version"]=packages[i].Version,
-            ["archive_bytes"]=byteLength,
-            ["archive_sha256"]=fields[4],
+            ["package_id"]=packages[i].Id,["version"]=packages[i].Version,
             ["archive_relative_path"]=Feed+"/"+packages[i].Id+"."+
                 packages[i].Version+".nupkg",
-            ["scope"]="fresh-local-net10-not-published"
+            ["archive_bytes"]=length,["archive_sha256"]=values[4],
+            ["scope"]="fresh-current-local-net10-only"
         });
     }
     var localFeed=Path.Combine(root,Feed.Replace('/',Path.DirectorySeparatorChar));
-    var localCache=Path.Combine(root,NuGetCache.Replace('/',Path.DirectorySeparatorChar));
-    foreach(var (id,csproj,expectedMarker,probes) in new[]{
-        ("m3",M3Project,"dw.tools.math/m3-nuget-gate/0.4 qualified; probes=31",31),
-        ("exact",ExactProject,"dw.tools.math/exact-consumer/0.2 qualified",0)
+    var localCache=Path.Combine(root,Cache.Replace('/',Path.DirectorySeparatorChar));
+    foreach(var (family,client,probes,success) in new[]{
+        ("m4",M4Project,32,
+            "dw.tools.math/m4-nuget-gate/0.5 qualified; probes=32"),
+        ("m5",M5Project,8,
+            "dw.tools.math/m5-markdown-omml-boundary-consumer/1.0 qualified; probes=8")
     })
     {
-        steps.Add(Run(root,id+"-offline-restore","dotnet",true,
-            "restore",csproj,"--source",localFeed,
+        commands.Add(Execute(root,family+"-offline-restore","dotnet",true,
+            "restore",client,"--source",localFeed,
             "--packages",localCache,"-p:NuGetAudit=false").Receipt);
-        var consumer=Run(root,id+"-source-free-consumer","dotnet",true,
-            "run","--project",csproj,"-c","Release","--no-restore");
-        steps.Add(consumer.Receipt);
-        if(!consumer.Output.Contains(expectedMarker,StringComparison.Ordinal))
-            throw new InvalidOperationException("Independent source-free client failed: "+id);
-        consumers.Add(new JsonObject
+        var observed=Execute(root,family+"-source-free-consumer",
+            "dotnet",true,"run","--project",client,
+            "-c","Release","--no-restore");
+        commands.Add(observed.Receipt);
+        if(!observed.Output.Contains(success,StringComparison.Ordinal))
+            throw new InvalidOperationException("Independent consumer probes failed: "+family);
+        clientResults.Add(new JsonObject
         {
-            ["id"]=id,["project"]=csproj,["passed"]=true,
-            ["source_free"]=true,["local_feed_only"]=true,
-            ["isolated_package_cache"]=true,["probes"]=probes,
-            ["qualified_marker"]=expectedMarker
+            ["id"]=family,["project"]=client,["probes"]=probes,
+            ["passed"]=true,["source_free"]=true,
+            ["offline_feed_only"]=true,["isolated_cache"]=true,
+            ["qualified_marker"]=success
         });
     }
-    if(steps.Count!=20||results.Count!=13||consumers.Count!=2)
+    if(commands.Count!=12||archiveResults.Count!=4||
+       clientResults.Count!=2)
         throw new InvalidOperationException(
-            "Complete-package run requires twenty commands, thirteen packages and two clients.");
-    var sdk=Run(root,"observed-sdk","dotnet",false,"--version");
+            "RS128 expected twelve local commands, four packages and two consumers.");
+    var sdk=Execute(root,"observed-sdk","dotnet",false,"--version");
     var receipt=new JsonObject
     {
         ["schema_version"]=1,
-        ["id"]="RS127-post-m7-complete-packaging-qualified",
+        ["id"]="RS128-post-m7-symbolic-codec-qualified",
         ["status"]=Status,
-        ["question"]="Can all thirteen currently accepted Math net10 libraries be packed from one local source tree and independently consumed for quantities and statistics, without publication or DWF progress changes?",
-        ["observation"]="One locked solution restore and Release build, thirteen exact local NuGet archives, independent ZIP/nuspec/dependency SHA inspection and two isolated source-free consumers succeeded. M3 provided 31 asserted probes; the exact quantity smoke passed without an invented numeric count.",
-        ["decision"]="Admit a complete local thirteen-package snapshot and the two specific observed NuGet consumers only. Foundation was archive-checked, not independently smoke-rerun; public, ABI, other-RID, Discovery, external adoption and new-roadmap gates remain open.",
-        ["previous_distribution_evidence"]=PriorReceipt,
+        ["question"]="Do the current-source bounded symbolics and exact Markdown/OMML NuGet clients pass their original forty independent probes from a fresh isolated four-package local feed?",
+        ["observation"]="Four local preview Math archives were built and ZIP/dependency/SHA qualified. Two pre-existing source-free clients restored only from the local feed in a private cache and reran thirty-two symbolic and eight codec/OMML probes.",
+        ["decision"]="Admit these two local source-free client executions on the observed host. No general symbolic proof engine, Office document fidelity, ABI promise, publication, downstream migration or new roadmap is established.",
+        ["prior_distribution_evidence"]=PriorReceipt,
         ["decision_document"]=Decision,["decision_sha256"]=decisionSha,
         ["distribution_document"]=Matrix,["distribution_sha256"]=matrixSha,
         ["validator"]=Validator,["validator_sha256"]=validatorSha,
-        ["source_projects"]=13,["test_projects"]=11,
-        ["packages_packed"]=13,["source_free_consumers"]=2,
-        ["m3_fresh_probes"]=31,["exact_quantity_smoke_passed"]=true,
-        ["native_nodes_retained"]=541,
+        ["packages_packed"]=4,["source_free_consumers"]=2,
+        ["fresh_consumer_probes"]=40,["native_nodes_retained"]=541,
         ["backlog_plan_version"]="0.1.122",
-        ["previous_rs126_attempt"]=1,
-        ["previous_rs126_first_pass"]=true,
-        ["offline_feed_only"]=true,
-        ["isolated_package_cache"]=true,
-        ["foundation_source_free_consumer_rerun"]=false,
+        ["previous_rs127_attempt"]=1,["previous_rs127_first_pass"]=false,
+        ["previous_rs127_preparation_refusals"]=2,
+        ["offline_feed_only"]=true,["isolated_package_cache"]=true,
         ["publicly_published"]=false,
         ["external_requests_transmitted"]=false,
         ["external_approvals_received"]=false,
+        ["discovery_skill_generated"]=false,
         ["cross_version_abi_certified"]=false,
         ["other_os_rids_certified"]=false,
-        ["discovery_skill_generated"]=false,
-        ["all_historical_consumers_rerun"]=false,
         ["m0_m7_plan_mutated"]=false,
         ["dotnet_sdk"]=sdk.Output.Trim(),
         ["observed_runtime_identifier"]=RuntimeInformation.RuntimeIdentifier,
-        ["command_receipts"]=p.Json.Array(steps.ToArray()),
-        ["package_results"]=p.Json.Array(results.ToArray()),
-        ["consumer_results"]=p.Json.Array(consumers.ToArray()),
-        ["next_scope"]="Owner choice: pinned genuine cross-version API/ABI comparison, remaining source-free consumers, stale public docs audit, or authorized supported new roadmap. No M8 or release is selected.",
+        ["command_receipts"]=p.Json.Array(commands.ToArray()),
+        ["package_results"]=p.Json.Array(archiveResults.ToArray()),
+        ["consumer_results"]=p.Json.Array(clientResults.ToArray()),
+        ["next_scope"]="Owner may select further isolated source-free clients or a version-pinned ABI audit where historical package bytes are genuinely available. No automatic M8, publication or recipient request transmission.",
         ["nonclaims"]=p.Json.StringArray(
-            "A complete thirteen-package local feed is not a public stable package release or proof that every mathematical operation has been implemented.",
-            "Thirty-one checked M3 cases and one passing unnumbered exact smoke cannot certify all statistical, algebraic, parser or dimensional uses.",
-            "No fresh source-free foundation test, cross-version ABI guarantee, external recipient migration, generated Discovery skill or other-RID certification was obtained.",
-            "M0–M7 remains accepted done with all 541 native nodes unchanged; no new completion achievement or product milestone was created.")
+            "Eight M5 display probes do not certify complete Office documents, typography or lossless arbitrary Markdown conversions.",
+            "Thirty-two M4 symbolic probes do not create a general CAS, unconstrained symbolic engine or proof kernel.",
+            "A fresh four-package local feed and two consumers do not certify public release, cross-version ABI or other RIDs.",
+            "AURA, Decision and MCDM requests remain unsent; the 541-node DWF plan remains unchanged.")
     };
     p.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions{WriteIndented=true})+"\n");
@@ -239,21 +230,20 @@ if(!target)
 p.ProjectPlan.RequireNodeState("M7","done");
 p.Require.JsonValueEquals(Backlog,"/plan_version",JsonValue.Create("0.1.122"));
 p.Require.JsonValueEquals(Backlog,"/status",JsonValue.Create("done"));
-var verified=Run(root,"target-complete-package-check","dotnet",false,
+var checkedTarget=Execute(root,"target-symbolic-codec-gate","dotnet",false,
     "run","--file",Validator,"--","--check");
-if(!verified.Output.Contains(Marker,StringComparison.Ordinal))
-    throw new InvalidOperationException("RS127 source-pinned target package gate failed.");
+if(!checkedTarget.Output.Contains(Marker,StringComparison.Ordinal))
+    throw new InvalidOperationException("Independent RS128 target science gate refused.");
 return p.Complete();
 
 static bool Hex64(string value)=>value.Length==64&&
-    value.All(x=>(x>='0'&&x<='9')||(x>='a'&&x<='f'));
-static (JsonObject Receipt,string Output) Run(
-    string root,string id,string executable,bool isolated,
-    params string[] args)
+    value.All(c=>(c>='0'&&c<='9')||(c>='a'&&c<='f'));
+static (JsonObject Receipt,string Output) Execute(
+    string root,string id,string command,bool isolated,params string[] args)
 {
     using var process=new Process{StartInfo=new ProcessStartInfo
     {
-        FileName=executable,WorkingDirectory=root,
+        FileName=command,WorkingDirectory=root,
         UseShellExecute=false,RedirectStandardOutput=true,
         RedirectStandardError=true
     }};
@@ -261,33 +251,33 @@ static (JsonObject Receipt,string Output) Run(
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"]="1";
     if(isolated)
         process.StartInfo.Environment["NUGET_PACKAGES"]=Path.Combine(
-            root,"build","artifacts","rs127-isolated-packages");
-    foreach(var arg in args) process.StartInfo.ArgumentList.Add(arg);
-    var clock=Stopwatch.StartNew();
+            root,"build","artifacts","rs128-isolated-packages");
+    foreach(var arg in args)process.StartInfo.ArgumentList.Add(arg);
+    var watch=Stopwatch.StartNew();
     if(!process.Start())
-        throw new InvalidOperationException("RS127 local process did not start: "+id);
+        throw new InvalidOperationException("RS128 local command could not start: "+id);
     var stdout=process.StandardOutput.ReadToEndAsync();
     var stderr=process.StandardError.ReadToEndAsync();
     if(!process.WaitForExit(420000))
     {
         process.Kill(entireProcessTree:true);
-        throw new TimeoutException("RS127 local command timed out: "+id);
+        throw new TimeoutException("RS128 bounded command timed out: "+id);
     }
     var output=stdout.GetAwaiter().GetResult()+"\n"+
         stderr.GetAwaiter().GetResult();
-    clock.Stop();
+    watch.Stop();
     if(process.ExitCode!=0)
-        throw new InvalidOperationException("RS127 local command failure: "+id+
+        throw new InvalidOperationException("RS128 local command failed: "+id+
             " exit="+process.ExitCode+"\n"+
             output[..Math.Min(output.Length,2600)]);
-    Console.WriteLine("RS127 "+id+" exit=0 elapsed_ms="+clock.ElapsedMilliseconds);
+    Console.WriteLine("RS128 "+id+" exit=0 elapsed_ms="+watch.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"]=id,["exit_code"]=process.ExitCode,
-        ["command"]=executable+" "+string.Join(" ",args),
-        ["elapsed_ms"]=clock.ElapsedMilliseconds,
-        ["output_excerpt"]=output[..Math.Min(output.Length,1200)],
-        ["independent_consumer"]=id.EndsWith("-source-free-consumer",
+        ["command"]=command+" "+string.Join(" ",args),
+        ["elapsed_ms"]=watch.ElapsedMilliseconds,
+        ["output_excerpt"]=output[..Math.Min(output.Length,1100)],
+        ["source_free_consumer"]=id.EndsWith("-source-free-consumer",
             StringComparison.Ordinal)
     },output);
 }
