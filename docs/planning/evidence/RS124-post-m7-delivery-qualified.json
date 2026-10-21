@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "id": "RS124-post-m7-delivery-qualified",
+  "status": "rs124-current-source-build-test-and-three-local-packages-qualified-unpublished",
+  "question": "Which Math libraries, tests and local archives can be freshly qualified without reopening the completed M0-M7 plan or publishing?",
+  "observation": "Thirteen source csprojs and eleven test projects remain in the source solution; forty-seven consumer directories are historical. Fresh local locked restore, Release build/test and three representative package creation/inspection completed under the controlled run.",
+  "decision": "Accept local current-source build/test and only three fresh package SHA-qualified archives. Historical downstream consumers, the stale root README, candidate Discovery and all public/external/ABI/rights gates remain outstanding.",
+  "decision_document": "docs/planning/decisions/post-m7-delivery-qualification.md",
+  "decision_sha256": "c5635a1c82b09d47c8e91a37b9b45f0f7d2bc71d1ab73e2fd50ef2c7540aa64f",
+  "distribution_document": "docs/distribution/post-m7-delivery-inventory.md",
+  "distribution_sha256": "e940785a3a9191628848167dde2efedae97e3aedeff44083a64c7ec8023ee0c1",
+  "validator": "docs/planning/ValidatePostM7DeliveryInventory.cs",
+  "validator_sha256": "bad8dc0a6124de1a037c9b4bb86ba569f2f6615f1cc9de3256ffff6411295a96",
+  "source_projects": 13,
+  "test_projects": 11,
+  "historical_consumer_directories": 47,
+  "fresh_local_package_archives": 3,
+  "native_nodes_retained": 541,
+  "backlog_plan_version": "0.1.122",
+  "historical_m5_local_archives": 7,
+  "historical_m6_source_free_consumers": 10,
+  "historical_m6_source_free_probes": 80,
+  "locked_restore_passed": true,
+  "release_build_passed": true,
+  "focused_regressions_passed": true,
+  "full_solution_tests_passed": true,
+  "representative_local_packs_passed": true,
+  "all_thirteen_packages_repacked": false,
+  "fresh_source_free_consumer_rerun": false,
+  "public_release_authorized": false,
+  "publicly_published": false,
+  "external_requests_transmitted": false,
+  "external_approvals_received": false,
+  "generated_discovery_skill_delivered": false,
+  "cross_version_abi_certified": false,
+  "other_os_rids_certified": false,
+  "new_advanced_public_product_delivered": false,
+  "m0_to_m7_native_plan_mutated": false,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "command_receipts": [
+    {
+      "id": "locked-restore",
+      "command": "dotnet restore dw.tools.math.slnx --locked-mode",
+      "exit_code": 0,
+      "duration_milliseconds": 1991,
+      "output_excerpt": "  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "solution-release-build",
+      "command": "dotnet build dw.tools.math.slnx -c Release --no-restore",
+      "exit_code": 0,
+      "duration_milliseconds": 10114,
+      "output_excerpt": "  dw.tools.math.foundation -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation\\Release\\net10.0\\dw.tools.math.foundation.dll\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.analysis -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis\\Release\\net10.0\\dw.tools.math.analysis.dll\r\n  dw.tools.math.scientific -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.scientific\\Release\\net10.0\\dw.tools.math.scientific.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.tools.math.statistics -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.statistics\\Release\\net10.0\\dw.tools.math.statistics.dll\r\n  dw.tools.math.analysis.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\",
+      "successful_local_execution": true
+    },
+    {
+      "id": "focused-distribution",
+      "command": "dotnet test tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj -c Release --no-build --no-restore",
+      "exit_code": 0,
+      "duration_milliseconds": 4461,
+      "output_excerpt": "Test run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   155, Skipped:     0, Total:   155, Duration: 373 ms - dw.tools.math.distribution.tests.dll (net10.0)\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "focused-analysis",
+      "command": "dotnet test tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj -c Release --no-build --no-restore",
+      "exit_code": 0,
+      "duration_milliseconds": 3129,
+      "output_excerpt": "Test run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.analysis.tests\\Release\\net10.0\\dw.tools.math.analysis.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   328, Skipped:     0, Total:   328, Duration: 164 ms - dw.tools.math.analysis.tests.dll (net10.0)\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "focused-scientific",
+      "command": "dotnet test tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj -c Release --no-build --no-restore",
+      "exit_code": 0,
+      "duration_milliseconds": 3235,
+      "output_excerpt": "Test run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.scientific.tests\\Release\\net10.0\\dw.tools.math.scientific.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\n\r\nPassed!  - Failed:     0, Passed:   995, Skipped:     0, Total:   995, Duration: 369 ms - dw.tools.math.scientific.tests.dll (net10.0)\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "solution-release-tests",
+      "command": "dotnet test dw.tools.math.slnx -c Release --no-build --no-restore",
+      "exit_code": 0,
+      "duration_milliseconds": 7492,
+      "output_excerpt": "Test run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition.tests\\Release\\net10.0\\dw.tools.math.composition.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.distribution.tests\\Release\\net10.0\\dw.tools.math.distribution.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.foundation.tests\\Release\\net10.0\\dw.tools.math.foundation.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir.tests\\Release\\net10.0\\dw.tools.math.ir.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.numerics.tests\\Release\\net10.0\\dw.tools.math.numerics.tests.dll (.NETCoreApp,Version=v10.0)\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\",
+      "successful_local_execution": true
+    },
+    {
+      "id": "local-pack-dw.tools.math.distribution",
+      "command": "dotnet pack src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj -c Release --no-build --no-restore --output build/artifacts/rs124-local-packages",
+      "exit_code": 0,
+      "duration_milliseconds": 1553,
+      "output_excerpt": "  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs124-local-packages\\dw.tools.math.distribution.1.0.0-preview.4.nupkg\u0027.\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "local-pack-dw.tools.math.analysis",
+      "command": "dotnet pack src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj -c Release --no-build --no-restore --output build/artifacts/rs124-local-packages",
+      "exit_code": 0,
+      "duration_milliseconds": 1236,
+      "output_excerpt": "  The package dw.tools.math.analysis.1.1.0-preview.6 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs124-local-packages\\dw.tools.math.analysis.1.1.0-preview.6.nupkg\u0027.\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "local-pack-dw.tools.math.scientific",
+      "command": "dotnet pack src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj -c Release --no-build --no-restore --output build/artifacts/rs124-local-packages",
+      "exit_code": 0,
+      "duration_milliseconds": 1175,
+      "output_excerpt": "  The package dw.tools.math.scientific.1.1.0-preview.14 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs124-local-packages\\dw.tools.math.scientific.1.1.0-preview.14.nupkg\u0027.\r\n\n",
+      "successful_local_execution": true
+    },
+    {
+      "id": "independent-local-package-inspection",
+      "command": "dotnet run --file docs/planning/ValidatePostM7DeliveryInventory.cs -- --packages",
+      "exit_code": 0,
+      "duration_milliseconds": 414,
+      "output_excerpt": "RS124-PACK|dw.tools.math.distribution|1.0.0-preview.4|bcfa598182b4c6c66e2483cb731608a458a80b036fa2d08b3b4d0a0ee9cc867f|25865\r\nRS124-PACK|dw.tools.math.analysis|1.1.0-preview.6|a1547fd1f34fd6a173d401a4052cd16d7a1a1ad5531c09d90cebfe8326feb666|27832\r\nRS124-PACK|dw.tools.math.scientific|1.1.0-preview.14|9ad14450c2303dc9db22771e6e19843432f2114c0c14c64854ec9e2aa38bacf1|37265\r\nMATH-DELIVERY:SOURCE=13;TESTS=11;SOLUTION=24;HISTORICAL-CONSUMER-DIRS=47\r\nMATH-DELIVERY:SCOPE:M0-M7=UNCHANGED;NODES=541;PACKS-TARGET=3;RELEASE=false;DISCOVERY-CANDIDATE=true\r\ndw.tools.math/rs124-post-m7-delivery/1.0 inventory-qualified; source=13; tests=11; historical-consumers=47; public=false\r\n\n",
+      "successful_local_execution": true
+    }
+  ],
+  "local_archive_manifest": [
+    {
+      "package_id": "dw.tools.math.distribution",
+      "version": "1.0.0-preview.4",
+      "relative_path": "build/artifacts/rs124-local-packages/dw.tools.math.distribution.1.0.0-preview.4.nupkg",
+      "byte_length": 25865,
+      "sha256": "bcfa598182b4c6c66e2483cb731608a458a80b036fa2d08b3b4d0a0ee9cc867f",
+      "scope": "ephemeral-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.analysis",
+      "version": "1.1.0-preview.6",
+      "relative_path": "build/artifacts/rs124-local-packages/dw.tools.math.analysis.1.1.0-preview.6.nupkg",
+      "byte_length": 27832,
+      "sha256": "a1547fd1f34fd6a173d401a4052cd16d7a1a1ad5531c09d90cebfe8326feb666",
+      "scope": "ephemeral-local-only-not-published"
+    },
+    {
+      "package_id": "dw.tools.math.scientific",
+      "version": "1.1.0-preview.14",
+      "relative_path": "build/artifacts/rs124-local-packages/dw.tools.math.scientific.1.1.0-preview.14.nupkg",
+      "byte_length": 37265,
+      "sha256": "9ad14450c2303dc9db22771e6e19843432f2114c0c14c64854ec9e2aa38bacf1",
+      "scope": "ephemeral-local-only-not-published"
+    }
+  ],
+  "next_scope": "Owner chooses deeper source-free/API-ABI/packaging qualification or a supported DWF new-roadmap admission. No M8, publication or recipient transmission is selected.",
+  "nonclaims": [
+    "Thirteen declared packable projects are not thirteen newly qualified NuGet archives; only three representative archives were freshly packed.",
+    "The forty-seven local consumer folders and prior M5/M6 source-free tests were not rerun.",
+    "No public registry publication, multi-RID support, Discovery agent skill, client migration or new release permission was proven.",
+    "The accepted 541-node M0-M7 plan stays unchanged; no new milestone or completion achievement is invented."
+  ]
+}
