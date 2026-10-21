@@ -294,6 +294,24 @@ if(target)
          Text(receipt,"validator_sha256")==Sha(
              "docs/planning/ValidatePostM7DeliveryInventory.cs"),
          "Target receipt must prove only fresh local checks, not publication.");
+    var commandSteps=receipt.GetProperty("command_receipts")
+        .EnumerateArray().ToArray();
+    var expectedCommands=new[]{
+        "locked-restore","solution-release-build",
+        "focused-distribution","focused-analysis","focused-scientific",
+        "solution-release-tests",
+        "local-pack-dw.tools.math.distribution",
+        "local-pack-dw.tools.math.analysis",
+        "local-pack-dw.tools.math.scientific",
+        "independent-local-package-inspection"
+    };
+    Need(commandSteps.Length==expectedCommands.Length,
+        "The recorded local execution chain must contain exactly ten commands.");
+    for(var i=0;i<expectedCommands.Length;i++)
+        Need(Text(commandSteps[i],"id")==expectedCommands[i]&&
+             commandSteps[i].GetProperty("exit_code").GetInt32()==0&&
+             Flag(commandSteps[i],"successful_local_execution"),
+             "A required local command receipt is missing or failed: "+expectedCommands[i]);
     var archiveRows=receipt.GetProperty("local_archive_manifest")
         .EnumerateArray().ToArray();
     var archiveIds=new HashSet<string>(StringComparer.Ordinal);
