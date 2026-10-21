@@ -1,0 +1,31 @@
+# RS127 — complete current 13-package local graph and remaining family consumers
+
+## Owner-selected scope
+
+The owner authorized **track A: qualify dw.tools.math delivery without publication**. RS124 qualified a fresh Release solution test suite and 3 preview archives; RS125 qualified two freshly packaged source-free analysis/scientific consumers with 16 probes; RS126 qualified the seven-package exact/symbolic distribution through one independent NuGet consumer with eight probes. All are source-local observations, not public releases.
+
+RS127 performs one meaningful remaining product-delivery boundary: pack **all 13 currently declared product libraries** from the same current source tree, and run **two additional existing source-free consumers** against a clean local NuGet feed. No product/API implementation change, new roadmap or release authorization occurs. The native M0–M7 DWF roadmap remains 541/541 done; `projectNodes=["M7"]` is **evidence scope only** with zero new completion achievements.
+
+## Source-controlled acceptance inventory
+
+- `dw.tools.math.slnx` includes 13 packable source projects and 11 test projects, targeting `net10.0` with warnings as errors. Their explicit distinct PackageId/Version metadata and existing local ProjectReferences form a closed Math-only dependency graph.
+- The RS126 seven-package graph covers `dw.quantities`, IR, codecs, symbolics, numerics, composition and distribution. The other six source projects are `dw.tools.math.foundation`, `dw.quantities.standard`, `dw.quantities.expression`, `dw.tools.math.statistics`, `dw.tools.math.analysis`, and `dw.tools.math.scientific`. Four were not freshly packed in RS124–RS126: foundation, standard, expression and statistics. RS127 **freshly packs all thirteen together** rather than inferring retained archives from prior disposable runs.
+- Existing `tests/consumers/m3-gate` has two **exact** NuGet PackageReferences: `dw.tools.math.numerics [0.4.0-preview.4]` and `dw.tools.math.statistics [0.4.0-preview.6]`, zero `ProjectReference`, net10.0 and source-limited local `NuGet.Config`. Its `Program.cs` independently asserts **31** numerical/statistical, invalid-input, provider/refusal and package-isolation oracles. It emits `dw.tools.math/m3-nuget-gate/0.4 qualified; probes=31`.
+- Existing `tests/consumers/exact-math-smoke` pins `dw.quantities`, `dw.quantities.expression` and `dw.quantities.standard` at `[0.2.0-preview.1]`, with zero `ProjectReference`, net10.0 and a local `NuGet.Config`. Its csproj inherits the effective `net10.0` target from the repository `Directory.Build.props`, whereas the M3 consumer declares `TargetFramework` directly. The independent checker validates both forms of the legitimate MSBuild property contract. Its `Program.cs` checks rational arithmetic, inherited units, dimensional conversion, bounded parsing, explicit profiles and refusal semantics, emitting `dw.tools.math/exact-consumer/0.2 qualified`. This is **one program pass**, not a fabricated numeric count of additional probes.
+- `dw.tools.math.foundation 0.1.0-preview.1` receives a fresh package ZIP/dependency/assembly qualification only. The current package smoke program is not independently reexecuted by RS127; the receipt must **not claim** a new source-free foundation consumer.
+
+## DWF-controlled reproducibility
+
+A read-only BCL C# oracle `docs/planning/ValidatePostM7CompletePackaging.cs` verifies current product, source projects, all 13 PackageIds/Versions/direct dependencies, the existing consumer project and feed boundaries, RS126 first-pass and previous evidence; it must preserve all 541 completed native nodes and 0.1.122 backlog.
+
+The controlled payload then executes **20 mandatory steps**: locked solution restore; Release solution build; 13 independent local `dotnet pack --no-build --no-restore` invocations into ignored `build/artifacts/rs127-complete-local-feed`; the independent read-only `--packages` verifier that emits 13 exact `RS127-PACK|id|version|bytes|sha256` lines; and two local-only client restores and runs. Both restores explicitly override inherited package feeds with the single absolute local feed and force isolated `NUGET_PACKAGES` under `build/artifacts/rs127-isolated-packages`; both consumers run with `--no-restore`, and no source ProjectReference. On failure, no green RS127 receipt may be written.
+
+On success, the source-pinned `docs/planning/evidence/RS127-post-m7-complete-packaging-qualified.json` records the thirteen independently checked archive byte lengths/SHA-256s, explicit direct NuGet dependency edges, observed SDK/RID, twenty exit-code-zero receipts, exactly **two fresh independent consumer passes** and **31 counted M3 probes plus an unnumbered exact-quantity smoke success**. No assertion of a public 1.2.0 release, multi-RID compatibility, all historic clients replayed, full cross-version ABI stability, generalized proof/advanced providers, generated Math Discovery skill or external adoption is permitted.
+
+## Technical meaning and next choice
+
+The result is a **complete current-source local packaging snapshot**, not proof that every existing package's entire public API is supported or that cross-version ABI is stable. The M3 gate covers selected statistical/numerical contracts; the exact smoke covers selected quantity/units/parser contracts. Source-free M5 and M6 customers already qualified under RS125/RS126 remain separate evidence, not repeated or retroactively aggregated as new probes.
+
+Next, decide whether to assess present API/ABI compatibility against **genuinely available pinned prior binaries**, qualify more historical consumers, resolve the outdated root README, or admit a DWF-supported product continuation. Publication and AURA/Decision/MCDM requests need separate user/owner decisions. No synthetic M8, publication or transmitted request is part of this run.
+
+**Cost boundary:** zero subagents, one locked full solution restore and Release build, 13 bounded local package steps, two source-free consumer restores and runs, independent package audit, C# validator plus structural DWF guards. No Python, remote NuGet feed, GitHub CI, provider installation, sibling edits or output outside ignored `/build`.
