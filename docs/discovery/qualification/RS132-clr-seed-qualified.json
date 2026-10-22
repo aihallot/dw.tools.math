@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "id": "RS132-clr-seed-qualified",
+  "status": "rs132-four-candidate-static-clr-signatures-reflected-no-agent-skill",
+  "question": "Do four deliberately selected candidate Math static operations bind to exactly one public CLR signature each in current compiled local assemblies?",
+  "observation": "The local Math composition/IR dependency closure built in Release. The independent BCL reflection verifier matched each exact public static method, parameter and return type, and returned four canonical signature SHA-256 identifiers.",
+  "decision": "Admit only observed source-pinned CLR signature availability for four candidate static operations. Compiled invocation examples, deterministic skill/manifest generation, broker adapters, BrokerReady, DWF work-package admission and actual AURA interoperability are not delivered.",
+  "decision_document": "docs/discovery/qualification/RS132-clr-seed-boundary.md",
+  "decision_sha256": "5391ed7d6e45c07bbf85951bf1a4c2b39001e56ed010f3717e5bd4135a0cea73",
+  "matrix_document": "docs/discovery/qualification/RS132-clr-seed-matrix.md",
+  "matrix_sha256": "9f6c9e686074f5baf83dc782e9f5237a04c7221d1bed4c5621f162be0a394ca3",
+  "validator": "docs/discovery/qualification/ValidateClrSeedReflection.cs",
+  "validator_sha256": "8159606c906e101cea4d2e2683f7f4e3aedc0567c3918fc7910287e5430efacd",
+  "previous_portable_evidence": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+  "selected_seed": 4,
+  "observed_static_bindings": 4,
+  "prior_csharp_protocol_cases": 13,
+  "native_nodes_retained": 541,
+  "backlog_plan_version": "0.1.122",
+  "compiled_assembly_reflection_executed": true,
+  "all_selected_signatures_exact": true,
+  "compiled_invocation_examples": false,
+  "generated_math_skill": false,
+  "broker_ready": false,
+  "json_broker_adapter_qualified": false,
+  "math_decision_runtime_interoperability_certified": false,
+  "new_discovery_work_package_admitted": false,
+  "m0_m7_plan_mutated": false,
+  "publicly_published": false,
+  "external_requests_transmitted": false,
+  "external_approvals_received": false,
+  "dotnet_sdk": "10.0.402",
+  "observed_runtime_identifier": "win-x64",
+  "command_receipts": [
+    {
+      "id": "locked-solution-restore",
+      "exit_code": 0,
+      "command": "dotnet restore dw.tools.math.slnx --locked-mode",
+      "elapsed_ms": 1758,
+      "output_excerpt": "  Determining projects to restore...\r\n  All projects are up-to-date for restore.\r\n\n"
+    },
+    {
+      "id": "composition-release-build",
+      "exit_code": 0,
+      "command": "dotnet build src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj -c Release --no-restore",
+      "elapsed_ms": 2014,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.70\r\n\n"
+    },
+    {
+      "id": "four-static-clr-reflection",
+      "exit_code": 0,
+      "command": "dotnet run --file docs/discovery/qualification/ValidateClrSeedReflection.cs -- --reflect",
+      "elapsed_ms": 599,
+      "output_excerpt": "RS132-CLR|math.quantity.exact-pipeline.evaluate|3c87567627dd8333e1c8f7a3da5fae06d51cef392b31442da96da39876b04a53|dw.tools.math.composition\r\nRS132-CLR|math.replay.try-evaluate|c2ad1eee0f67efb12bac991492a36a2422472794a96a9e3c33ff6db50b66eaaa|dw.tools.math.composition\r\nRS132-CLR|math.ir.canonical.encode|750564fc173570d9c42e0e01898da18656998f2dc126cdf7837841274fada22c|dw.tools.math.ir\r\nRS132-CLR|math.ir.hash.semantic|e31bc04b92e2a8db553c6a5795bfd9616de5e62bff2432bf49d1f727de80897f|dw.tools.math.ir\r\nMATH-RS132:STATIC-CANDIDATES=4;COMPILED-SIGNATURES=4;RS131-CASES=13;NATIVE=541\r\nMATH-RS132:REFLECTION=SOURCE-COMPILED;EXAMPLES=false;SKILL=false;BROKER=false;EXTERNAL=false\r\ndw.tools.math/rs132-clr-seed/1.0 qualified; signatures=4; examples=false; broker=false\r\n\n"
+    }
+  ],
+  "observed_bindings": [
+    {
+      "capability_id": "math.quantity.exact-pipeline.evaluate",
+      "assembly": "dw.tools.math.composition",
+      "canonical_signature": "math.quantity.exact-pipeline.evaluate|dw.tools.math.composition|Dw.Tools.Math.Composition.ExactQuantityPipeline::Evaluate(System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E)=\u003EDw.Tools.Math.Composition.ExactPipelineResult|public-static",
+      "signature_sha256": "3c87567627dd8333e1c8f7a3da5fae06d51cef392b31442da96da39876b04a53",
+      "source_git_blob": "1d689d8dc66691de0c9a3b7f6e7c3751be68ec7d",
+      "broker_ready": false
+    },
+    {
+      "capability_id": "math.replay.try-evaluate",
+      "assembly": "dw.tools.math.composition",
+      "canonical_signature": "math.replay.try-evaluate|dw.tools.math.composition|Dw.Tools.Math.Composition.ExactReplayRunner::TryRun(System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E,Dw.Tools.Math.Composition.ExactReplayContext,Dw.Tools.Math.Composition.ExactReplayCache,System.Threading.CancellationToken)=\u003EDw.Tools.Math.Composition.ExactReplayAttempt|public-static",
+      "signature_sha256": "c2ad1eee0f67efb12bac991492a36a2422472794a96a9e3c33ff6db50b66eaaa",
+      "source_git_blob": "ffffe063ffdb698776d1bed82d683e4bd635dd40",
+      "broker_ready": false
+    },
+    {
+      "capability_id": "math.ir.canonical.encode",
+      "assembly": "dw.tools.math.ir",
+      "canonical_signature": "math.ir.canonical.encode|dw.tools.math.ir|Dw.Tools.Math.Ir.IrCanonicalJsonCodec::Encode(Dw.Tools.Math.Ir.IrNode)=\u003ESystem.String|public-static",
+      "signature_sha256": "750564fc173570d9c42e0e01898da18656998f2dc126cdf7837841274fada22c",
+      "source_git_blob": "4e6e055d94480fb8ac449750b2e4f23eeeec09e9",
+      "broker_ready": false
+    },
+    {
+      "capability_id": "math.ir.hash.semantic",
+      "assembly": "dw.tools.math.ir",
+      "canonical_signature": "math.ir.hash.semantic|dw.tools.math.ir|Dw.Tools.Math.Ir.IrCanonicalHashes::SemanticStructuralSha256(Dw.Tools.Math.Ir.IrNode)=\u003ESystem.String|public-static",
+      "signature_sha256": "e31bc04b92e2a8db553c6a5795bfd9616de5e62bff2432bf49d1f727de80897f",
+      "source_git_blob": "8bbab3059acfad2ee6863a6fd98703798bac688d",
+      "broker_ready": false
+    }
+  ],
+  "next_scope": "The next Discovery implementation requires approved DWF work-package topology and separate compiled invocation examples, generator/manifest and skill acceptance. Coordinate AURA/Decision/MCDM only after B, with specific transmission authorization.",
+  "nonclaims": [
+    "Reflecting four exact methods in current compiled assemblies is not a compiled C# invocation example or a runnable Math agent tool.",
+    "The prior 13/13 C# dw.discovery portable envelope fixtures are not a qualified Math/Decision CLR runtime integration.",
+    "No automatically published helper, instance-matrix method, selected BrokerReady operation, generated agent skill, manifest or AURA adapter was admitted.",
+    "The existing M0-M7 541-node plan remains done; no new M3-W03 work package, public package release or external transmission occurred."
+  ]
+}
