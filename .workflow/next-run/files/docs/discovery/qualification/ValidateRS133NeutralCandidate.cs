@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Xml.Linq;
 
 const string Root = "docs/discovery/qualification/";
 const string Receipt = Root + "RS133-neutral-candidate-qualified.json";
@@ -60,10 +61,32 @@ Need(oldReceipt.RootElement.GetProperty("case_results").GetArrayLength() == 13 &
      !Bool(lastReceipt.RootElement, "generated_math_skill") &&
      !Bool(lastReceipt.RootElement, "broker_ready"), "prior bounded receipts");
 foreach (var file in new[] {
-    Boundary, Tests + "legacy.csproj", Tests + "neutral.csproj",
+    Boundary, Tests + "Directory.Packages.props", Tests + "legacy.csproj", Tests + "neutral.csproj",
     Tests + "LegacyConsumer.cs", Tests + "NeutralConsumer.cs"
 })
     Need(File.Exists(file), "missing staged source " + file);
+// Fail structurally before any restore when a package version is attached
+// directly to PackageReference under central package management.
+var localCentral = XDocument.Load(Tests + "Directory.Packages.props");
+var centralVersions = localCentral.Descendants()
+    .Where(e => e.Name.LocalName == "PackageVersion").ToArray();
+Need(localCentral.Descendants().Any(e =>
+         e.Name.LocalName == "ManagePackageVersionsCentrally" &&
+         e.Value.Trim() == "true") &&
+     centralVersions.Length == 1 &&
+     (string?)centralVersions[0].Attribute("Include") == "dw.discovery" &&
+     (string?)centralVersions[0].Attribute("Version") == "[20260.20261027.1001]",
+     "local RS133 central package pin is missing or ambiguous");
+var neutralProject = XDocument.Load(Tests + "neutral.csproj");
+var packageReferences = neutralProject.Descendants()
+    .Where(e => e.Name.LocalName == "PackageReference").ToArray();
+Need(packageReferences.Length == 1 &&
+     (string?)packageReferences[0].Attribute("Include") == "dw.discovery" &&
+     packageReferences[0].Attribute("Version") is null &&
+     packageReferences[0].Attribute("VersionOverride") is null &&
+     !packageReferences[0].Elements().Any(e =>
+         e.Name.LocalName is "Version" or "VersionOverride"),
+     "NU1008: neutral consumer must use package version from scoped CPM");
 if (File.Exists(Receipt))
 {
     using var doc = Open(Receipt);
@@ -91,7 +114,7 @@ if (File.Exists(Receipt))
          "bounded new current-candidate receipt");
     var files = e.GetProperty("source_files");
     foreach (var file in new[] {
-        Boundary, Tests + "legacy.csproj", Tests + "neutral.csproj",
+        Boundary, Tests + "Directory.Packages.props", Tests + "legacy.csproj", Tests + "neutral.csproj",
         Tests + "LegacyConsumer.cs", Tests + "NeutralConsumer.cs",
         Root + "ValidateRS133NeutralCandidate.cs"
     })

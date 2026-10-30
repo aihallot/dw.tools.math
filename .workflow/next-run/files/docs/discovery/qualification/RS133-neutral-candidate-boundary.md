@@ -21,6 +21,15 @@ be confused with an invocation bridge or additional publication approval.
 
 ## Controlled Windows/.NET 10 execution
 
+The first RS133 invocation was refused before attempt allocation: the neutral
+consumer incorrectly declared a version directly on PackageReference, which
+Math's repository-wide Central Package Management rejects with NU1008.
+Correction preserves the same run, all original validation scope, and a
+strict pinned version in a consumer-local Directory.Packages.props. The
+neutral project has a versionless PackageReference. The root central version
+policy remains unchanged, and the independent C# verifier checks both
+exact XML contracts before any restore.
+
 The DWF payload must verify archive bytes, nuspec ID/version and the packaged
 DLL before restoring. It restores two independently compiled C# console
 consumers using the explicitly selected local-only NuGet source and private

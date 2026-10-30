@@ -47,7 +47,7 @@ p.Require.TextContains("docs/coordination/requests/README.md", "have not been se
 
 var destinations = new[]
 {
-    Boundary, Tests + "legacy.csproj", Tests + "neutral.csproj",
+    Boundary, Tests + "Directory.Packages.props", Tests + "legacy.csproj", Tests + "neutral.csproj",
     Tests + "LegacyConsumer.cs", Tests + "NeutralConsumer.cs", Validator
 };
 if (!target)
@@ -76,6 +76,9 @@ p.Require.TextContains(Boundary, "## Controlled Windows/.NET 10 execution");
 p.Require.TextContains(Boundary, "## Strict exit and nonclaims");
 p.Require.TextContains(Tests + "LegacyConsumer.cs", "LEGACY-MATH-CONSUMER|PASS|4");
 p.Require.TextContains(Tests + "NeutralConsumer.cs", "NEUTRAL-MATH-CONSUMER|EXPECTED-UNSUPPORTED|4");
+p.Require.TextContains("Directory.Packages.props", "<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>");
+p.Require.TextContains(Tests + "Directory.Packages.props",
+    "<PackageVersion Include=\"dw.discovery\" Version=\"[20260.20261027.1001]\" />");
 
 var seedCheck = Run(repository, "seed-check", "dotnet",
     "run", "--file", Validator, "--", "--check");
