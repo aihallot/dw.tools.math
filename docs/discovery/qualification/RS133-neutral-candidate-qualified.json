@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "id": "RS133-neutral-candidate-qualified",
+  "status": "rs133-neutral-1001-profile-incompatible-old-consumer-preserved",
+  "question": "Do four previously qualified direct Math CLR methods work as a fallback, and can the immutable neutral Discovery package currently inspect them as supported candidates?",
+  "observation": "Two independent Math-owned C# consumers were restored and compiled from real Math projects plus exact immutable local Discovery package. Four direct calls succeeded; four neutral opt-in sidecars were correctly refused by the published neutral CLR profile. The unchanged direct consumer succeeded again after the neutral test.",
+  "decision": "Current neutral package is distribution-identifiable but incompatible with the four original Math candidate shapes. Retain existing direct Math consumers and block neutral migration, skill/agent/host exposure and package promotion.",
+  "owner_request_id": "RS142-DISC-029",
+  "request_source_commit": "a780d0816dedfdaa5636dbfe516d6a3cbe0058cc",
+  "neutral_publisher_source_commit": "47055b49cfdfca511f4f4684b239d7118d3821cc",
+  "package_id": "dw.discovery",
+  "package_version": "20260.20261027.1001",
+  "package_feed": "I:/nuget.local",
+  "archive_sha256": "fff0cd1aa9cf81528030f52de012e1aac1fa7a1b98da11b764096bf926f433ec",
+  "packaged_dll_sha256": "70d38e80963378d8df5ea76fcb59a14e79d0c169c8f5926f4018628370b15064",
+  "loaded_dll_sha256": "70d38e80963378d8df5ea76fcb59a14e79d0c169c8f5926f4018628370b15064",
+  "clr_assembly_version": "1.0.0.0",
+  "portable_schema_sha256": "678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170",
+  "portable_fixtures_sha256": "5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e",
+  "previous_portable_receipt": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+  "previous_clr_receipt": "docs/discovery/qualification/RS132-clr-seed-qualified.json",
+  "portable_cases": [
+    {
+      "name": "valid-math-envelope",
+      "expected_accept": true,
+      "observed_accept": true
+    },
+    {
+      "name": "valid-decision-envelope",
+      "expected_accept": true,
+      "observed_accept": true
+    },
+    {
+      "name": "unknown-schema",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "unknown-protocol",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "documented-leak",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "wrong-owner",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "stale-signature",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "missing-limits",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "premature-broker-ready",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "metadata-authorization",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "bogus-version",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "duplicate-capability",
+      "expected_accept": false,
+      "observed_accept": false
+    },
+    {
+      "name": "catalogue-leak",
+      "expected_accept": false,
+      "observed_accept": false
+    }
+  ],
+  "legacy_operations": [
+    {
+      "id": "math.quantity.exact-pipeline.evaluate",
+      "direct_invocation": true
+    },
+    {
+      "id": "math.replay.try-evaluate",
+      "direct_invocation": true
+    },
+    {
+      "id": "math.ir.canonical.encode",
+      "direct_invocation": true
+    },
+    {
+      "id": "math.ir.hash.semantic",
+      "direct_invocation": true
+    }
+  ],
+  "neutral_refusals": [
+    {
+      "id": "math.quantity.exact-pipeline.evaluate",
+      "reason": "sidecar-method-unresolved"
+    },
+    {
+      "id": "math.replay.try-evaluate",
+      "reason": "unsupported-signature"
+    },
+    {
+      "id": "math.ir.canonical.encode",
+      "reason": "unsupported-signature"
+    },
+    {
+      "id": "math.ir.hash.semantic",
+      "reason": "unsupported-signature"
+    }
+  ],
+  "reflected_bindings": [
+    {
+      "id": "math.quantity.exact-pipeline.evaluate",
+      "assembly": "dw.tools.math.composition",
+      "signature_sha256": "3c87567627dd8333e1c8f7a3da5fae06d51cef392b31442da96da39876b04a53"
+    },
+    {
+      "id": "math.replay.try-evaluate",
+      "assembly": "dw.tools.math.composition",
+      "signature_sha256": "c2ad1eee0f67efb12bac991492a36a2422472794a96a9e3c33ff6db50b66eaaa"
+    },
+    {
+      "id": "math.ir.canonical.encode",
+      "assembly": "dw.tools.math.ir",
+      "signature_sha256": "750564fc173570d9c42e0e01898da18656998f2dc126cdf7837841274fada22c"
+    },
+    {
+      "id": "math.ir.hash.semantic",
+      "assembly": "dw.tools.math.ir",
+      "signature_sha256": "e31bc04b92e2a8db553c6a5795bfd9616de5e62bff2432bf49d1f727de80897f"
+    }
+  ],
+  "command_receipts": [
+    {
+      "id": "portable-regression",
+      "exit_code": 0,
+      "command": "dotnet run --file docs/discovery/qualification/ValidatePortableProtocol.cs",
+      "elapsed_ms": 11654,
+      "output_excerpt": "CASE valid-math-envelope: expected=accept observed=accept PASS\r\nCASE valid-decision-envelope: expected=accept observed=accept PASS\r\nCASE unknown-schema: expected=reject observed=reject PASS\r\nCASE unknown-protocol: expected=reject observed=reject PASS\r\nCASE documented-leak: expected=reject observed=reject PASS\r\nCASE wrong-owner: expected=reject observed=reject PASS\r\nCASE stale-signature: expected=reject observed=reject PASS\r\nCASE missing-limits: expected=reject observed=reject PASS\r\nCASE premature-broker-ready: expected=reject observed=reject PASS\r\nCASE metadata-authorization: expected=reject observed=reject PASS\r\nCASE bogus-version: expected=reject observed=reject PASS\r\nCASE duplicate-capability: expected=reject observed=reject PASS\r\nCASE catalogue-leak: expected=reject observed=reject PASS\r\nDECISION_COMMIT 5d3af8580ea984425b314d589def18e031172c2c\r\nPROTOCOL dw.discovery/1.0.0-draft.1 manifest-schema=2\r\nSCHEMA_SHA256 678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170\r\nFIXTURE_SHA256 5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e\r\nRESULT PASS 13/13 (2 accepted, 11 rejected) independent Math C# envelope verifier\r\n\n"
+    },
+    {
+      "id": "legacy-restore",
+      "exit_code": 0,
+      "command": "dotnet restore docs/discovery/qualification/RS133-neutral-consumers/legacy.csproj --source I:/nuget.local -p:NuGetAudit=false",
+      "elapsed_ms": 971,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 81 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.tools.math.ir\\dw.tools.math.ir.csproj (in 86 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.tools.math.composition\\dw.tools.math.composition.csproj (in 86 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\docs\\discovery\\qualification\\RS133-neutral-consumers\\legacy.csproj (in 86 ms).\r\n\n"
+    },
+    {
+      "id": "legacy-build",
+      "exit_code": 0,
+      "command": "dotnet build docs/discovery/qualification/RS133-neutral-consumers/legacy.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 2119,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  legacy -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\legacy\\Release\\net10.0\\dw.tools.math.discovery.legacy.consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.91\r\n\n"
+    },
+    {
+      "id": "legacy-direct",
+      "exit_code": 0,
+      "command": "dotnet run --project docs/discovery/qualification/RS133-neutral-consumers/legacy.csproj -c Release --no-build --no-restore",
+      "elapsed_ms": 11176,
+      "output_excerpt": "LEGACY-CALL|math.quantity.exact-pipeline.evaluate|PASS\r\nLEGACY-CALL|math.replay.try-evaluate|PASS\r\nLEGACY-CALL|math.ir.canonical.encode|PASS\r\nLEGACY-CALL|math.ir.hash.semantic|PASS\r\nLEGACY-MATH-CONSUMER|PASS|4\r\n\n"
+    },
+    {
+      "id": "neutral-restore",
+      "exit_code": 0,
+      "command": "dotnet restore docs/discovery/qualification/RS133-neutral-consumers/neutral.csproj --source I:/nuget.local -p:NuGetAudit=false",
+      "elapsed_ms": 1036,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\docs\\discovery\\qualification\\RS133-neutral-consumers\\neutral.csproj (in 161 ms).\r\n  3 of 4 projects are up-to-date for restore.\r\n\n"
+    },
+    {
+      "id": "neutral-build",
+      "exit_code": 0,
+      "command": "dotnet build docs/discovery/qualification/RS133-neutral-consumers/neutral.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 1323,
+      "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net10.0\\dw.tools.math.composition.dll\r\n  neutral -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\neutral\\Release\\net10.0\\dw.tools.math.discovery.neutral.consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.11\r\n\n"
+    },
+    {
+      "id": "neutral-observe",
+      "exit_code": 0,
+      "command": "dotnet run --project docs/discovery/qualification/RS133-neutral-consumers/neutral.csproj -c Release --no-build --no-restore",
+      "elapsed_ms": 1871,
+      "output_excerpt": "NEUTRAL-IDENTITY|dw.discovery|20260.20261027.1001|PASS\r\nNEUTRAL-PRIMITIVE-CONTROL|PASS\r\nNEUTRAL-UNSUPPORTED|math.quantity.exact-pipeline.evaluate|sidecar-method-unresolved\r\nNEUTRAL-UNSUPPORTED|math.replay.try-evaluate|unsupported-signature\r\nNEUTRAL-UNSUPPORTED|math.ir.canonical.encode|unsupported-signature\r\nNEUTRAL-UNSUPPORTED|math.ir.hash.semantic|unsupported-signature\r\nNEUTRAL-MATH-CONSUMER|EXPECTED-UNSUPPORTED|4\r\n\n"
+    },
+    {
+      "id": "legacy-fallback",
+      "exit_code": 0,
+      "command": "dotnet run --project docs/discovery/qualification/RS133-neutral-consumers/legacy.csproj -c Release --no-build --no-restore",
+      "elapsed_ms": 923,
+      "output_excerpt": "LEGACY-CALL|math.quantity.exact-pipeline.evaluate|PASS\r\nLEGACY-CALL|math.replay.try-evaluate|PASS\r\nLEGACY-CALL|math.ir.canonical.encode|PASS\r\nLEGACY-CALL|math.ir.hash.semantic|PASS\r\nLEGACY-MATH-CONSUMER|PASS|4\r\n\n"
+    },
+    {
+      "id": "clr-regression",
+      "exit_code": 0,
+      "command": "dotnet run --file docs/discovery/qualification/ValidateClrSeedReflection.cs -- --reflect",
+      "elapsed_ms": 12106,
+      "output_excerpt": "RS132-CLR|math.quantity.exact-pipeline.evaluate|3c87567627dd8333e1c8f7a3da5fae06d51cef392b31442da96da39876b04a53|dw.tools.math.composition\r\nRS132-CLR|math.replay.try-evaluate|c2ad1eee0f67efb12bac991492a36a2422472794a96a9e3c33ff6db50b66eaaa|dw.tools.math.composition\r\nRS132-CLR|math.ir.canonical.encode|750564fc173570d9c42e0e01898da18656998f2dc126cdf7837841274fada22c|dw.tools.math.ir\r\nRS132-CLR|math.ir.hash.semantic|e31bc04b92e2a8db553c6a5795bfd9616de5e62bff2432bf49d1f727de80897f|dw.tools.math.ir\r\nMATH-RS132:STATIC-CANDIDATES=4;COMPILED-SIGNATURES=4;RS131-CASES=13;NATIVE=541\r\nMATH-RS132:REFLECTION=SOURCE-COMPILED;EXAMPLES=false;SKILL=false;BROKER=false;EXTERNAL=false\r\ndw.tools.math/rs132-clr-seed/1.0 qualified; signatures=4; examples=false; broker=false\r\n\n"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 136,
+      "output_excerpt": "10.0.403\r\n\n"
+    }
+  ],
+  "source_files": {
+    "docs/discovery/qualification/RS133-neutral-candidate-boundary.md": "d75be1bd21291e7f2e9f456e6faa945355f071ad232b38177f0687b6e5748175",
+    "docs/discovery/qualification/RS133-neutral-consumers/Directory.Packages.props": "9e421fb211a02f3d8b6ee3fef4324dc09ceddb2d8aae64db8ef81bd441da1a31",
+    "docs/discovery/qualification/RS133-neutral-consumers/legacy.csproj": "a65c586d4aed5d1a4cb1c0f9f1d82674f40e9e0e68d97ae5f80058002bf7780b",
+    "docs/discovery/qualification/RS133-neutral-consumers/neutral.csproj": "ca2edf3d5e2f042f7e0363a7f262b19481790193f999d2214a37c7e109fd7154",
+    "docs/discovery/qualification/RS133-neutral-consumers/LegacyConsumer.cs": "e71ff4d92c80be8945844753b53619c5181f152e71438945afa92427f3db8651",
+    "docs/discovery/qualification/RS133-neutral-consumers/NeutralConsumer.cs": "68c28e9dfa2b3564e6fd573b20b58065491615b89d7896d4500cdccc578ff15f",
+    "docs/discovery/qualification/ValidateRS133NeutralCandidate.cs": "042eed9d2e6b31588e2fbafc48b3d7f054007d3580061b598715dbe166eba6ef"
+  },
+  "sdk_version": "10.0.403",
+  "observed_runtime_identifier": "win-x64",
+  "native_nodes_retained": 541,
+  "direct_legacy_invocation_executed": true,
+  "neutral_consumer_executed": true,
+  "old_consumer_fallback_rerun_verified": true,
+  "neutral_math_profile_supported": false,
+  "neutral_migration_qualified": false,
+  "installed_package_rollback_qualified": false,
+  "broker_ready": false,
+  "skill_generated": false,
+  "new_package_published": false,
+  "external_requests_transmitted": false,
+  "next_action": "Neutral owner must support explicit complex DTO/generic/overload binding under an independently released and qualified package; Math must adopt only with a new DWF scope and independent rollback evidence."
+}
