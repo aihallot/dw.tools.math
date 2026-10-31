@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.agent-playbook"
-documentVersion: 9
+documentVersion: 11
 kind: "guidance"
 title: "Agent Playbook"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV022Draft.cs#AgentPlaybook"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV024Draft.cs#AgentPlaybook"
 ---
 # Agent Playbook
 
@@ -110,6 +110,34 @@ Author the thinnest coherent roadmap that preserves known product direction. Kee
 A repeated one-run -> one-milestone -> one-work-package -> one-phase -> one-task chain is a planning smell, not an automatic schema error. Use it only when the product outcome is genuinely atomic and the structure adds durable meaning. Never create upper-level nodes solely because the next RS needs somewhere to attach.
 
 When a newly accepted request does not fit the current roadmap, do not implement it as untracked work. Map it to existing authority, refine lower-level work, or explicitly defer or replan it. Do not invent a second backlog store; repository-owned backlog representation and projection are separate capabilities.
+## Optional .NET NuGet local-feed inspection and planning
+
+Only when the executing tool supports the `nuget` CLI and the repository voluntarily develops .NET packages, an agent may inspect an explicitly selected local feed or preview calendar versions. This is not a requirement for non-.NET repositories and not an additional step before normal `dwf run next`.
+
+Qualified source-command forms (use the appropriate installed launcher for the operator's platform):
+
+- `workflow nuget inspect <package-id> --feed <absolute-local-feed-directory>`
+- `workflow nuget inspect <package-id> --project-root <absolute-project-root> [--feed <absolute-local-feed-directory>]`
+- `workflow nuget plan <package-id> --date <yyyy-MM-dd> --feed <absolute-local-feed-directory>`
+- `workflow nuget plan <package-id> --date <yyyy-MM-dd> --project-root <absolute-project-root>`
+
+The exact, fully qualified project root must be supplied. Its optional `.aura/workflow/nuget-profile.json` declares `schemaVersion: 1`, `enabled: true` and a fully qualified `feedDirectory`. Ordinary workflow initialization and run-next never create or activate it. In the inspect form, explicit `--feed` overrides the project profile. There is no parent-project lookup, global NuGet settings lookup, or implicit local feed default. Current read-only commands never read ambient `NUGET_LOCAL`; the internal resolver's deliberately injected `NUGET_LOCAL` is not a supported implicit CLI fallback. `NUGET_PACKAGES` is a package cache, never the shared publication feed.
+
+Inspection reports separate flat/hierarchical histories, byte hashes and exact overlaps. Planning requires an explicit `--date` and reports original version/layout plus blocker codes for noncanonical aliases, legacy packages and conflicting same-version bytes. `Candidate preview (informational only)` is not a selected/reserved release version or authorization to publish; `Candidate preview: none (blocked)` requires review. Neither command publishes packages or proves reproducible build-to-commit provenance.
+
+Do not infer commands from newer repository source. Use only those available in the installed executable and its active embedded guidance. For eligible .NET projects, local NuGet publication is an optional, **mutating** product-domain operation; it is not part of `dwf run next` or an automatic result of `nuget plan`.
+
+### Optional explicit local NuGet publication — writes to the selected feed
+
+- `workflow nuget publish <package-id> --version <canonical-calendar-version> --feed <absolute-local-feed-directory> --package <absolute-prepared-nupkg> --source-root <absolute-git-worktree-root> --source-commit <lowercase-40-character-sha>`
+
+The operator chooses all inputs explicitly. Publishing does not consult the opt-in project profile, ambient `NUGET_LOCAL`, `NUGET_PACKAGES`, global NuGet configuration, NuGet.org or remote feeds. The prepared `.nupkg` must already exist with matching root nuspec PackageId/PackageVersion; the command does not build it. Use only an explicitly authorized local feed. A newer source command is not installed in older stable/meta drivers.
+
+Requested versions must be canonical and match the next ordinary calendar candidate for the observed PackageId. Legacy versions, normalized NuGet aliases, mixed-layout byte conflicts, already-present targets, skipped ordinals and ambiguous histories are refusals. The `nuget plan` candidate is informational only, not a reservation or authority to publish. The preflight is point-in-time; the publisher performs its final no-overwrite check, but unrelated cross-layout writers can race.
+
+A successful publication writes a hierarchical `.nupkg`, extracted nuspec, SHA512 sidecar and a JSON manifest with package SHA256 and caller-declared Git HEAD. **Git HEAD equality is not reproducible build-to-commit package provenance.** Ordinary local collision evidence does not prove crash recovery or distributed-filesystem safety. Real shared-feed publication, tool promotion and independent consumer adoption require separate explicit owner authorization and release qualification.
+
+
 ## Prepare or correct
 
 - Preserve the active project hierarchy unless the run intentionally advances it.

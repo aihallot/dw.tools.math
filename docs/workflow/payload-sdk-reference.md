@@ -735,32 +735,6 @@ Activates one ready descendant leaf beneath the existing active project hierarch
 payload.ProjectPlan.ActivateReadyContinuation("ST001");
 ```
 
-### `PayloadOperationResult ProjectPlan.ConvergeNodeToDone(string nodeId)`
-
-Converges one exact in-progress project node through the canonical implemented and validated lifecycle states to done, accepting exact done target re-entry.
-
-- **Effect:** `RepositoryMutation`
-- **Idempotence:** No-change when the exact done target already exists; otherwise converges only from canonical in-progress through implemented and validated to done.
-
-**Guarantees**
-
-- Delegates every lifecycle transition and full-plan validation to the existing project-planning contract.
-- Prevalidates the source state before mutation, persists one canonical ProjectTracking JSON write after the complete transition chain, and records complete before/after SHA-256 values.
-
-**Refusals**
-
-- Refuses empty ids, invalid or missing project plans, unknown nodes, any source state other than canonical in-progress or exact done target re-entry, illegal lifecycle transitions, and full-plan validation failures.
-
-**Limits and boundedness**
-
-- Completes one exact canonical project-plan node only; readiness activation, parent completion propagation, workflow-state mutation, arbitrary JSON mutation, automatic repair, and intermediate-state recovery are excluded.
-
-**Example**
-
-```csharp
-payload.ProjectPlan.ConvergeNodeToDone("T001");
-```
-
 ### `PayloadOperationResult ProjectPlan.EnsurePhaseWithTasks(string workPackageId, string phaseId, string phaseTitle, string phaseState, PayloadProjectPlanTaskSpec[] tasks)`
 
 Ensures one exact phase with an explicitly declared ordered task list under one existing work package, accepting only missing-or-exact-target state.
