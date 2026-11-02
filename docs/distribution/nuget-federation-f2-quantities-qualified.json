@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.nuget-federation-quantities-candidate",
+  "status": "rs135-quantities-calendar-candidate-qualified-unpublished",
+  "source_package_id": "dw.quantities",
+  "previous_owner_run": "RS134",
+  "sourceBaselineCommit": "e01cf477bb82f01cb3643921094f3b58b3c217b6",
+  "feed_selector": "NUGET_LOCAL",
+  "native_nodes_retained": 541,
+  "package_published": false,
+  "release_authorized_by_this_run": false,
+  "installed_package_rollback_qualified": false,
+  "source_versions_modified": false,
+  "external_requests_transmitted": false,
+  "discovery_migration_qualified": false,
+  "candidate": {
+    "schemaVersion": 1,
+    "kind": "dw.tools.math.nuget-quantities-candidate",
+    "status": "qualified-local-candidate-not-published",
+    "sourcePackageId": "dw.quantities",
+    "sourceVersion": "0.2.0-preview.1",
+    "packageVersion": "20260.20261102.1001",
+    "versionReserved": false,
+    "sharedCore": "dw.tools.nuget/[20260.20261026.1010]",
+    "sharedCoreDllSha256": "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61",
+    "candidateArchivePath": "build/artifacts/rs135-quantities-candidate/candidate/dw.quantities.20260.20261102.1001.nupkg",
+    "candidateArchiveSha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+    "candidateArchiveBytes": 14747,
+    "candidateDllSha256": "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4",
+    "packageDependencies": 0,
+    "localFeedSelector": "NUGET_LOCAL",
+    "sourceFeedUnchanged": true,
+    "published": false,
+    "oldSourcePackageVersionRetained": true,
+    "compiledSourceFreeConsumerPassed": true,
+    "consumerChecks": 4,
+    "runtime": "win-x64",
+    "sdkVersion": "10.0.403",
+    "commands": [
+      {
+        "id": "f1-inventory-before",
+        "exit_code": 0,
+        "command": "dotnet run --project tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj -c Release --no-build --no-restore -- --inspect .",
+        "elapsed_ms": 8581,
+        "output_excerpt": "{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022status\u0022: \u0022f1-source-and-feed-inventory-qualified-not-published\u0022,\r\n  \u0022feedSource\u0022: \u0022NUGET_LOCAL\u0022,\r\n  \u0022inspectionScope\u0022: \u0022thirteen-Math-package-id-prefixes-top-level-only\u0022,\r\n  \u0022repositoryTool\u0022: \u0022Dw.Tools.NuGet\u0022,\r\n  \u0022repositoryPackageVersion\u0022: \u002220260.20261026.1010\u0022,\r\n  \u0022repositoryPackageSha256\u0022: \u002260836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf\u0022,\r\n  \u0022loadedLibrarySha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022inspectedArchives\u0022: 0,\r\n  \u0022inventorySha256\u0022: \u0022163596d007586c7f0552435300612a75b5a0a5f365e20da8537a5d49ebc907f7\u0022,\r\n  \u0022observedDate\u0022: \u00222026-11-02\u0022,\r\n  \u0022msbuildPropertyQueries\u0022: 13,\r\n  \u0022packageCount\u0022: 13,\r\n  \u0022versionsReserved\u0022: false,\r\n  \u0022feedPublished\u0022: false,\r\n  \u0022packages\u0022: [\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities/dw.quantities.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022ef"
+      },
+      {
+        "id": "source-locked-restore",
+        "exit_code": 0,
+        "command": "dotnet restore src/projects/dw.quantities/dw.quantities.csproj --locked-mode --source I:\\nuget.local -p:NuGetAudit=false",
+        "elapsed_ms": 950,
+        "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 100 ms).\r\n"
+      },
+      {
+        "id": "source-release-build",
+        "exit_code": 0,
+        "command": "dotnet build src/projects/dw.quantities/dw.quantities.csproj -c Release --no-restore -p:NuGetAudit=false",
+        "elapsed_ms": 1096,
+        "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.86\r\n"
+      },
+      {
+        "id": "candidate-pack",
+        "exit_code": 0,
+        "command": "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release --no-build --no-restore -p:PackageVersion=20260.20261102.1001 -p:NuGetAudit=false --output D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\candidate",
+        "elapsed_ms": 1148,
+        "output_excerpt": "  The package dw.quantities.20260.20261102.1001 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\candidate\\dw.quantities.20260.20261102.1001.nupkg\u0027.\r\n"
+      },
+      {
+        "id": "consumer-restore",
+        "exit_code": 0,
+        "command": "dotnet restore D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\consumer\\rs135-quantities-consumer.csproj --configfile D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\consumer\\NuGet.Config --source D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\candidate --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-f2-rs135\\packages -p:NuGetAudit=false",
+        "elapsed_ms": 1000,
+        "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\consumer\\rs135-quantities-consumer.csproj (in 181 ms).\r\n"
+      },
+      {
+        "id": "consumer-release-build",
+        "exit_code": 0,
+        "command": "dotnet build D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\consumer\\rs135-quantities-consumer.csproj -c Release --no-restore -p:NuGetAudit=false",
+        "elapsed_ms": 1120,
+        "output_excerpt": "  rs135-quantities-consumer -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\rs135-quantities-consumer\\Release\\net10.0\\rs135-quantities-consumer.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.90\r\n"
+      },
+      {
+        "id": "consumer-binary-execution",
+        "exit_code": 0,
+        "command": "dotnet run --project D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs135-quantities-candidate\\consumer\\rs135-quantities-consumer.csproj -c Release --no-build --no-restore -- c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4",
+        "elapsed_ms": 1564,
+        "output_excerpt": "MATH-QUANTITIES-CHECK|assembly|PASS\r\nMATH-QUANTITIES-CHECK|loaded-dll|PASS\r\nMATH-QUANTITIES-CHECK|exact-rational|PASS\r\nMATH-QUANTITIES-CHECK|zero-denominator-refusal|PASS\r\nMATH-QUANTITIES-BINARY|PASS|4\r\n"
+      },
+      {
+        "id": "f1-inventory-after",
+        "exit_code": 0,
+        "command": "dotnet run --project tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj -c Release --no-build --no-restore -- --inspect .",
+        "elapsed_ms": 7981,
+        "output_excerpt": "{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022status\u0022: \u0022f1-source-and-feed-inventory-qualified-not-published\u0022,\r\n  \u0022feedSource\u0022: \u0022NUGET_LOCAL\u0022,\r\n  \u0022inspectionScope\u0022: \u0022thirteen-Math-package-id-prefixes-top-level-only\u0022,\r\n  \u0022repositoryTool\u0022: \u0022Dw.Tools.NuGet\u0022,\r\n  \u0022repositoryPackageVersion\u0022: \u002220260.20261026.1010\u0022,\r\n  \u0022repositoryPackageSha256\u0022: \u002260836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf\u0022,\r\n  \u0022loadedLibrarySha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022inspectedArchives\u0022: 0,\r\n  \u0022inventorySha256\u0022: \u0022163596d007586c7f0552435300612a75b5a0a5f365e20da8537a5d49ebc907f7\u0022,\r\n  \u0022observedDate\u0022: \u00222026-11-02\u0022,\r\n  \u0022msbuildPropertyQueries\u0022: 13,\r\n  \u0022packageCount\u0022: 13,\r\n  \u0022versionsReserved\u0022: false,\r\n  \u0022feedPublished\u0022: false,\r\n  \u0022packages\u0022: [\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities/dw.quantities.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022ef"
+      },
+      {
+        "id": "sdk",
+        "exit_code": 0,
+        "command": "dotnet --version",
+        "elapsed_ms": 218,
+        "output_excerpt": "10.0.403\r\n"
+      }
+    ]
+  },
+  "source_files": {
+    "docs/distribution/nuget-federation-f2-quantities.md": "3fc2490f37c2d13c03e004a24eda5fada83b00c17d7a06f9986408fa11e0d917",
+    "docs/distribution/ValidateNugetQuantitiesCandidate.cs": "bc906095b28288ef2911f1e02c6864956803fae4de639d14067d30be6b7f85b6",
+    "tools/dw.tools.math.nuget-candidate/dw.tools.math.nuget-candidate.csproj": "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+    "tools/dw.tools.math.nuget-candidate/Directory.Packages.props": "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+    "tools/dw.tools.math.nuget-candidate/Program.cs": "663d165508202afdd7137381f7a76c87a46fe9d6a006236895daaba1cf443c4e",
+    "tools/dw.tools.math.nuget-candidate/fixtures/QuantitiesBinaryConsumer.cs": "ed590be248e5660d34ebb7d911b11924b11767737ec228e67728b41774c534f0"
+  },
+  "command_receipts": [
+    {
+      "id": "f1-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-f2-rs135\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 1354,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj (in 468 ms).\r\n"
+    },
+    {
+      "id": "f1-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 1273,
+      "output_excerpt": "  dw.tools.math.nuget-preflight -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-preflight\\Release\\net10.0\\dw.tools.math.nuget-preflight.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.03\r\n"
+    },
+    {
+      "id": "tool-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-candidate/dw.tools.math.nuget-candidate.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-f2-rs135\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 1063,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-candidate\\dw.tools.math.nuget-candidate.csproj (in 165 ms).\r\n"
+    },
+    {
+      "id": "tool-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-candidate/dw.tools.math.nuget-candidate.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 1129,
+      "output_excerpt": "  dw.tools.math.nuget-candidate -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-candidate\\Release\\net10.0\\dw.tools.math.nuget-candidate.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.90\r\n"
+    },
+    {
+      "id": "candidate-consumer",
+      "exit_code": 0,
+      "command": "dotnet run --project tools/dw.tools.math.nuget-candidate/dw.tools.math.nuget-candidate.csproj -c Release --no-build --no-restore -- --qualify-quantities .",
+      "elapsed_ms": 25520,
+      "output_excerpt": "{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022kind\u0022: \u0022dw.tools.math.nuget-quantities-candidate\u0022,\r\n  \u0022status\u0022: \u0022qualified-local-candidate-not-published\u0022,\r\n  \u0022sourcePackageId\u0022: \u0022dw.quantities\u0022,\r\n  \u0022sourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n  \u0022packageVersion\u0022: \u002220260.20261102.1001\u0022,\r\n  \u0022versionReserved\u0022: false,\r\n  \u0022sharedCore\u0022: \u0022dw.tools.nuget/[20260.20261026.1010]\u0022,\r\n  \u0022sharedCoreDllSha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022candidateArchivePath\u0022: \u0022build/artifacts/rs135-quantities-candidate/candidate/dw.quantities.20260.20261102.1001.nupkg\u0022,\r\n  \u0022candidateArchiveSha256\u0022: \u0022e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d\u0022,\r\n  \u0022candidateArchiveBytes\u0022: 14747,\r\n  \u0022candidateDllSha256\u0022: \u0022c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4\u0022,\r\n  \u0022packageDependencies\u0022: 0,\r\n  \u0022localFeedSelector\u0022: \u0022NUGET_LOCAL\u0022,\r\n  \u0022sourceFeedUnchanged\u0022: true,\r\n  \u0022published\u0022"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 140,
+      "output_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "sdk_version": "10.0.403",
+  "next_action": "Review notices/rights and candidate source/archive/DLL proof before a separate immutable NUGET_LOCAL publication gate; do not overwrite legacy archives or assume physical package rollback. Qualify other Math libraries in dependency order."
+}
