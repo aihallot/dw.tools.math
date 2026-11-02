@@ -6,22 +6,20 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 const string Root = "docs/distribution/";
-const string Tool = "tools/dw.tools.math.nuget-candidate/";
-const string ToolProject = Tool + "dw.tools.math.nuget-candidate.csproj";
-const string F1Project =
-    "tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj";
-const string Verifier = Root + "ValidateNugetQuantitiesCandidate.cs";
-const string Evidence = Root + "nuget-federation-f2-quantities-qualified.json";
-const string Status = "rs135-quantities-calendar-candidate-qualified-unpublished";
+const string Tool = "tools/dw.tools.math.nuget-release/";
+const string ToolProject = Tool + "dw.tools.math.nuget-release.csproj";
+const string Evidence = Root + "nuget-federation-f3-quantities-publisher-qualified.json";
+const string Verifier = Root + "ValidateNugetQuantitiesReleaseController.cs";
+const string Status = "rs136-math-immutable-local-nuget-publisher-rehearsal-qualified-unpublished";
 
 var payload = PayloadContext.Create();
-var root = payload.RepositoryRoot;
-var target = File.Exists(Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
-
-payload.Workflow.RequireCurrentRun("RS135", null, null, null, null, null);
-payload.Workflow.RequirePriorSuccess("RS134", 1,
-    "docs: qualify Math federated NuGet owner inventory without publication",
-    "0.1.63", 2, 2, 0, false);
+var repository = payload.RepositoryRoot;
+var target = File.Exists(Path.Combine(repository,
+    Evidence.Replace('/', Path.DirectorySeparatorChar)));
+payload.Workflow.RequireCurrentRun("RS136", null, null, null, null, null);
+payload.Workflow.RequirePriorSuccess("RS135", 1,
+    "test: qualify dw.quantities calendar NuGet binary candidate",
+    "0.1.63", 0, 0, 0, true);
 payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.ProjectPlan.RequireNodeState("M3", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
@@ -30,28 +28,29 @@ payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
 payload.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
     JsonValue.Create("0.26"));
-payload.Require.JsonValueEquals(Root + "nuget-federation-f1-qualified.json",
-    "/status", JsonValue.Create("rs134-math-f1-calendar-feed-inventory-no-publication"));
-payload.Require.JsonValueEquals(Root + "nuget-federation-f1-qualified.json",
+payload.Require.JsonValueEquals(
+    Root + "nuget-federation-f2-quantities-qualified.json",
+    "/status", JsonValue.Create("rs135-quantities-calendar-candidate-qualified-unpublished"));
+payload.Require.JsonValueEquals(
+    Root + "nuget-federation-f2-quantities-qualified.json",
+    "/candidate/packageVersion", JsonValue.Create("20260.20261102.1001"));
+payload.Require.JsonValueEquals(
+    Root + "nuget-federation-f2-quantities-qualified.json",
     "/package_published", JsonValue.Create(false));
-payload.Require.JsonValueEquals("docs/discovery/qualification/RS133-neutral-candidate-qualified.json",
-    "/neutral_migration_qualified", JsonValue.Create(false));
 payload.Require.JsonValueEquals(
     "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
     "/authorization/package_from_dw_tools_math", JsonValue.Create(true));
-payload.Require.TextContains("src/projects/dw.quantities/dw.quantities.csproj",
-    "<Version>0.2.0-preview.1</Version>");
-payload.Require.FileExists(F1Project);
-payload.Require.FileExists("tools/dw.tools.math.nuget-preflight/Program.cs");
+payload.Require.JsonValueEquals(
+    "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+    "/authorization/redistribute_from_dw_tools_math", JsonValue.Create(true));
 
 var files = new[]
 {
-    Root + "nuget-federation-f2-quantities.md",
+    Root + "nuget-federation-f3-quantities-publisher.md",
     Verifier,
     ToolProject,
     Tool + "Directory.Packages.props",
-    Tool + "Program.cs",
-    Tool + "fixtures/QuantitiesBinaryConsumer.cs"
+    Tool + "Program.cs"
 };
 if (!target)
 {
@@ -67,91 +66,90 @@ else
 var sourceHashes = new JsonObject();
 foreach (var file in files)
 {
-    var operation = payload.Files.ReplaceFromStaged("staged/" + file, file);
-    sourceHashes[file] = operation.AfterSha256 ??
-        throw new InvalidOperationException("RS135 staged source SHA-256 missing: " + file);
+    var installed = payload.Files.ReplaceFromStaged("staged/" + file, file);
+    sourceHashes[file] = installed.AfterSha256 ??
+        throw new InvalidOperationException("RS136 staged file hash missing: " + file);
 }
-payload.Require.TextContains(Root + "nuget-federation-f2-quantities.md",
-    "## Binary-only compiled consumer");
+payload.Require.TextContains(Root + "nuget-federation-f3-quantities-publisher.md",
+    "## Shared implementation, no second publisher");
 payload.Require.TextContains(Tool + "Program.cs",
-    "--qualify-quantities");
+    "DotNetLocalPackageRepository");
+payload.Require.TextContains(Tool + "Program.cs",
+    "publicationModeEnabledByDwf = false");
 payload.Require.TextContains(Tool + "Directory.Packages.props",
     "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
-payload.Require.TextContains(Tool + "fixtures/QuantitiesBinaryConsumer.cs",
-    "MATH-QUANTITIES-BINARY|PASS|4");
 
-var baseline = Run(root, "baseline-check", "dotnet", [
+var baseline = Run(repository, "baseline-check", "dotnet", [
     "run", "--file", Verifier, "--", "--check"
 ]);
-Need(baseline.Output.Contains("MATH-NUGET-F2:PACKAGE=dw.quantities;BINARY=4;",
-     StringComparison.Ordinal), "independent RS135 baseline audit did not pass");
+Need(baseline.Output.Contains("MATH-NUGET-F3:RS135=FIRST-PASS;", StringComparison.Ordinal),
+    "independent baseline qualification refused");
 if (!target)
 {
     var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL")
-        ?? throw new InvalidOperationException("NUGET_LOCAL must be an existing approved local feed");
+        ?? throw new InvalidOperationException("NUGET_LOCAL is required for source-only restore");
     Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
-        "NUGET_LOCAL must be fully qualified and exist");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-f2-rs135", "packages");
+        "NUGET_LOCAL must be an existing absolute directory");
+    var cache = Path.Combine(repository, ".workflow", "local", "nuget-rs136", "packages");
     var commands = new List<JsonNode>();
-    commands.Add(Run(root, "f1-restore", "dotnet", [
-        "restore", F1Project, "--source", feed, "--packages", cache,
-        "-p:NuGetAudit=false"
-    ]).Receipt);
-    commands.Add(Run(root, "f1-build", "dotnet", [
-        "build", F1Project, "-c", "Release", "--no-restore",
-        "-p:NuGetAudit=false"
-    ]).Receipt);
-    commands.Add(Run(root, "tool-restore", "dotnet", [
+    commands.Add(Run(repository, "tool-restore", "dotnet", [
         "restore", ToolProject, "--source", feed, "--packages", cache,
         "-p:NuGetAudit=false"
     ]).Receipt);
-    commands.Add(Run(root, "tool-build", "dotnet", [
+    commands.Add(Run(repository, "tool-build", "dotnet", [
         "build", ToolProject, "-c", "Release", "--no-restore",
         "-p:NuGetAudit=false"
     ]).Receipt);
-    var candidate = Run(root, "candidate-consumer", "dotnet", [
-        "run", "--project", ToolProject, "-c", "Release",
-        "--no-build", "--no-restore", "--", "--qualify-quantities", "."
+    var rehearsal = Run(repository, "publisher-rehearsal", "dotnet", [
+        "run", "--project", ToolProject, "-c", "Release", "--no-build",
+        "--no-restore", "--", "--rehearse"
     ]);
-    commands.Add(candidate.Receipt);
-    var sdk = Run(root, "sdk", "dotnet", ["--version"]);
+    commands.Add(rehearsal.Receipt);
+    var sdk = Run(repository, "sdk", "dotnet", ["--version"]);
     commands.Add(sdk.Receipt);
-    Need(commands.Count == 6, "RS135 must retain six parent as-run command receipts");
+    Need(commands.Count == 4, "RS136 must record four distinct actual tool commands");
 
-    var observed = JsonNode.Parse(candidate.Output.Trim())?.AsObject()
-        ?? throw new InvalidOperationException("candidate command must return one JSON object");
+    var observed = JsonNode.Parse(rehearsal.Output.Trim())?.AsObject()
+        ?? throw new InvalidOperationException("rehearsal must return one JSON object");
     Need(observed["status"]?.GetValue<string>() ==
-            "qualified-local-candidate-not-published" &&
-         observed["sourcePackageId"]?.GetValue<string>() == "dw.quantities" &&
-         observed["sourceVersion"]?.GetValue<string>() == "0.2.0-preview.1" &&
-         observed["sharedCoreDllSha256"]?.GetValue<string>() ==
-             "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61" &&
-         observed["compiledSourceFreeConsumerPassed"]?.GetValue<bool>() == true &&
-         observed["consumerChecks"]?.GetValue<int>() == 4 &&
-         observed["sourceFeedUnchanged"]?.GetValue<bool>() == true &&
-         observed["published"]?.GetValue<bool>() == false,
-         "Math package candidate did not meet the bounded binary qualification");
+            "real-math-package-disposable-publisher-qualified" &&
+         observed["packageId"]?.GetValue<string>() == "dw.quantities" &&
+         observed["packageVersion"]?.GetValue<string>() == "20260.20261102.1001" &&
+         observed["publisherDllSha256"]?.GetValue<string>() ==
+            "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61" &&
+         observed["controls"]?.GetValue<int>() == 6 &&
+         observed["publishedInDisposableFeed"]?.GetValue<bool>() == true &&
+         observed["collisionRefused"]?.GetValue<bool>() == true &&
+         observed["alteredHashRefused"]?.GetValue<bool>() == true &&
+         observed["cancellationRefused"]?.GetValue<bool>() == true &&
+         observed["candidateIsPublishedToSharedFeed"]?.GetValue<bool>() == false &&
+         observed["sharedFeedTouched"]?.GetValue<bool>() == false &&
+         observed["publicationModeEnabledByDwf"]?.GetValue<bool>() == false,
+         "bounded real-package publisher trial did not meet the source release contract");
+
     var receipt = new JsonObject
     {
         ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.nuget-federation-quantities-candidate",
+        ["kind"] = "dw.tools.math.nuget-release-controller-qualification",
         ["status"] = Status,
         ["source_package_id"] = "dw.quantities",
-        ["previous_owner_run"] = "RS134",
-        ["sourceBaselineCommit"] = "e01cf477bb82f01cb3643921094f3b58b3c217b6",
+        ["sourceBaselineCommit"] = "cc88f8c69a37037ab5c1d2437accf07ff104df26",
+        ["ownerRequest"] = "Math local NuGet federation F1-F3",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
         ["package_published"] = false,
         ["release_authorized_by_this_run"] = false,
         ["installed_package_rollback_qualified"] = false,
+        ["public_license_selected"] = false,
         ["source_versions_modified"] = false,
         ["external_requests_transmitted"] = false,
         ["discovery_migration_qualified"] = false,
-        ["candidate"] = observed,
+        ["rehearsal"] = observed,
         ["source_files"] = sourceHashes,
         ["command_receipts"] = payload.Json.Array(commands.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
-        ["next_action"] = "Review notices/rights and candidate source/archive/DLL proof before a separate immutable NUGET_LOCAL publication gate; do not overwrite legacy archives or assume physical package rollback. Qualify other Math libraries in dependency order."
+        ["next_action"] =
+            "After explicit owner review, invoke the separate guarded local --publish mode only on the candidate's actual creation date with the exact archived RS135 bytes, then independently run --verify and qualify a DWF feed-read receipt. If stale, requalify a fresh version first."
     };
     payload.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
@@ -159,26 +157,26 @@ if (!target)
 payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
-var targetCheck = Run(root, "target-check", "dotnet", [
+var final = Run(repository, "target-check", "dotnet", [
     "run", "--file", Verifier, "--", "--check"
 ]);
-Need(targetCheck.Output.Contains("MATH-NUGET-F2:PUBLISHED=false;ROLLBACK=false;",
-     StringComparison.Ordinal), "RS135 independently recorded receipt is invalid");
+Need(final.Output.Contains("MATH-NUGET-F3:SHARED-PUBLICATION=false;",
+    StringComparison.Ordinal), "independent publisher receipt validation refused");
 return payload.Complete();
 
-static void Need(bool ok, string reason)
+static void Need(bool ok, string message)
 {
-    if (!ok) throw new InvalidOperationException("RS135 candidate: " + reason);
+    if (!ok) throw new InvalidOperationException("RS136: " + message);
 }
 static (JsonObject Receipt, string Output) Run(
-    string root, string id, string executable, string[] args)
+    string repository, string id, string executable, string[] args)
 {
     using var process = new Process
     {
         StartInfo = new ProcessStartInfo
         {
             FileName = executable,
-            WorkingDirectory = root,
+            WorkingDirectory = repository,
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true
@@ -187,33 +185,33 @@ static (JsonObject Receipt, string Output) Run(
     process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
     process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-f2-rs135", "packages");
-    foreach (var argument in args) process.StartInfo.ArgumentList.Add(argument);
-    var watch = Stopwatch.StartNew();
+        Path.Combine(repository, ".workflow", "local", "nuget-rs136", "packages");
+    foreach (var arg in args) process.StartInfo.ArgumentList.Add(arg);
+    var clock = Stopwatch.StartNew();
     Need(process.Start(), "cannot start " + id);
     var stdout = process.StandardOutput.ReadToEndAsync();
     var stderr = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(480000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("RS135 timed out during " + id);
+        throw new TimeoutException("RS136 timed out: " + id);
     }
     var output = stdout.GetAwaiter().GetResult();
     var errors = stderr.GetAwaiter().GetResult();
-    watch.Stop();
+    clock.Stop();
     if (process.ExitCode != 0)
     {
         var diagnostics = output + "\n" + errors;
         throw new InvalidOperationException(id + " exit=" + process.ExitCode +
             "\n" + diagnostics[..System.Math.Min(diagnostics.Length, 3800)]);
     }
-    Console.WriteLine("RS135 " + id + " exit=0 elapsed_ms=" + watch.ElapsedMilliseconds);
+    Console.WriteLine("RS136 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"] = id,
         ["exit_code"] = process.ExitCode,
         ["command"] = executable + " " + string.Join(" ", args),
-        ["elapsed_ms"] = watch.ElapsedMilliseconds,
-        ["output_excerpt"] = output[..System.Math.Min(output.Length, 900)]
+        ["elapsed_ms"] = clock.ElapsedMilliseconds,
+        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1000)]
     }, output);
 }
