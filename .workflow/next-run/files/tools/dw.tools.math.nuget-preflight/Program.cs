@@ -99,14 +99,18 @@ internal static partial class Program
             foreach (var reference in project.References)
                 Need(ids.Contains(reference), "unresolved package dependency: " + project.Id + " -> " + reference);
 
-        var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL");
+        var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL")
+            ?? throw new InvalidDataException(
+                "NUGET_LOCAL must name one existing absolute local feed");
         Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
              Directory.Exists(feed), "NUGET_LOCAL must name one existing absolute local feed");
         var packagesCache = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
-        Need(string.IsNullOrWhiteSpace(packagesCache) ||
-             !string.Equals(Path.GetFullPath(feed),
-                Path.GetFullPath(packagesCache), StringComparison.OrdinalIgnoreCase),
-             "NUGET_PACKAGES is a cache, not the shared publication feed");
+        if (packagesCache is not null && !string.IsNullOrWhiteSpace(packagesCache))
+        {
+            Need(!string.Equals(Path.GetFullPath(feed),
+                     Path.GetFullPath(packagesCache), StringComparison.OrdinalIgnoreCase),
+                 "NUGET_PACKAGES is a cache, not the shared publication feed");
+        }
 
         const string sharedPackageName = "dw.tools.nuget.20260.20261026.1010.nupkg";
         const string sharedPackageSha =
@@ -127,8 +131,8 @@ internal static partial class Program
         var limits = new DotNetLocalRepositoryLimits(
             MaximumItems: 4096, MaximumPackageBytes: 67_108_864,
             MaximumTotalBytes: 1_073_741_824);
-        _ = new DotNetLocalPackageRepository(feed!, limits);
-        var inventory = ScopePackages(feed!, root, ids, limits);
+        _ = new DotNetLocalPackageRepository(feed, limits);
+        var inventory = ScopePackages(feed, root, ids, limits);
         var date = DateOnly.FromDateTime(DateTime.Now);
         Need(date.Year == 2026, "future-year calendar generation needs a separate owner decision");
 

@@ -86,3 +86,29 @@ No preexisting package bytes are replaced, global sources modified or
 remote/public feed used. The current native Math M0–M7 roadmap stays done;
 separate admitted product scope is necessary for delivery work beyond
 an evidence-only F1 assessment.
+
+## RS134 pre-attempt incident review — two failed invocations
+
+The first invocation was refused by DWF's payload authoring guard because the
+payload directly called `Directory.CreateDirectory` for a NuGet cache.
+The same-run correction removed that call; ordinary `dotnet restore --packages`
+owns its isolated cache creation. No attempt was allocated.
+
+The second invocation reached the standalone F1 consumer build and failed with
+two C# nullable warnings treated as errors (`CS8604`): a boolean `Need(...)`
+assertion did not narrow the nullable `NUGET_LOCAL` or `NUGET_PACKAGES`
+values for `Path.GetFullPath` and `Path.Combine`. The same-run correction
+requires an explicit null-throw for the mandatory feed and a guarded branch
+for the optional cache. The original file/path, identity, version, no-feed-write
+and no-publish checks remain intact.
+
+The full bounded RS134 sequence was re-reviewed: run/request authority, staged
+files, exact package reference under scoped central package management, published
+federator identity and DLL hash, thirteen source package projects and dependency
+edges, real MSBuild property queries, isolated package inventory, the five
+read-only validation gates and the baseline/target receipt contract. These
+source-level checks do **not** substitute for compilation or runtime evidence.
+
+Both refusals were **pre-attempt**. Hence attempts allocated remain zero, the
+next invocation is retry 2, and RS134 first-pass is irrevocably NO regardless
+of a later successful allocated attempt. No RS135 is prepared.
