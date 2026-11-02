@@ -85,7 +85,6 @@ if (!target)
     Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
          Directory.Exists(feed), "NUGET_LOCAL must select an existing absolute local feed");
     var cache = Path.Combine(root, ".workflow", "local", "nuget-f1-rs134", "packages");
-    Directory.CreateDirectory(cache);
     var commandReceipts = new List<JsonNode>();
     commandReceipts.Add(Run(root, "restore", "dotnet", [
         "restore", ToolProject, "--source", feed!, "--packages", cache,
