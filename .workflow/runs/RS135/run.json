@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "id": "RS135",
+  "title": "Qualify isolated dw.quantities calendar-version NuGet candidate and exact package-only consumer",
+  "state": "prepared",
+  "commitMessage": "test: qualify dw.quantities calendar NuGet binary candidate",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Qualify one source-owned dw.quantities NuGet calendar candidate with an independent compiled package-only consumer, using existing federated NuGet APIs without local-feed publication.",
+    "value": "Invoke the unchanged RS134 inventory/version preflight before and after the test; pack only dw.quantities with a dynamic PackageVersion, validate actual package and loaded DLL hashes, and execute four exact rational and identity checks.",
+    "debtChanges": [
+      "The source-preview version and previous local archive identities stay immutable; the calendar candidate is dynamically computed, unreserved and unpublished.",
+      "Only standalone dw.quantities is qualified; twelve dependent or other Math packages and their binary graph remain separate gates.",
+      "Notices, explicit release approval, installed-package rollback, other RIDs and Discovery bindings are not qualified by this candidate.",
+      "RS134\u0027s immutable source-pinned preflight and receipt remain unchanged; RS135 reuses its read-only executable and the published NuGet package reader."
+    ],
+    "nextAction": "Review notices, rights, archive identity and binary consumer evidence before a separately authorized immutable NUGET_LOCAL publication gate. Then qualify Math packages in dependency order.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f2-quantities.md",
+    "docs/distribution/ValidateNugetQuantitiesCandidate.cs",
+    "tools/dw.tools.math.nuget-candidate/dw.tools.math.nuget-candidate.csproj",
+    "tools/dw.tools.math.nuget-candidate/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-candidate/fixtures/QuantitiesBinaryConsumer.cs",
+    "docs/distribution/nuget-federation-f2-quantities-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "quantities-candidate",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetQuantitiesCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "nuget-f1-retained",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFederationF1.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
