@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.nuget-release-controller-qualification",
+  "status": "rs136-math-immutable-local-nuget-publisher-rehearsal-qualified-unpublished",
+  "source_package_id": "dw.quantities",
+  "sourceBaselineCommit": "cc88f8c69a37037ab5c1d2437accf07ff104df26",
+  "ownerRequest": "Math local NuGet federation F1-F3",
+  "feed_selector": "NUGET_LOCAL",
+  "native_nodes_retained": 541,
+  "package_published": false,
+  "release_authorized_by_this_run": false,
+  "installed_package_rollback_qualified": false,
+  "public_license_selected": false,
+  "source_versions_modified": false,
+  "external_requests_transmitted": false,
+  "discovery_migration_qualified": false,
+  "rehearsal": {
+    "schemaVersion": 1,
+    "kind": "dw.tools.math.nuget-release-controller-rehearsal",
+    "status": "real-math-package-disposable-publisher-qualified",
+    "packageId": "dw.quantities",
+    "packageVersion": "20260.20261102.1001",
+    "sourceVersion": "0.2.0-preview.1",
+    "sourceArchiveSha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+    "rehearsalArchiveSha256": "ba7eba30ab2f36af9e5e3924a9d0f8fa17e1dfc672e9c9ad7514692d852fd229",
+    "rehearsalDllSha256": "3dd67a902eb6ceb8dffa1f7afe05d085195f4c1ffe5e83a9cafb43eb152018aa",
+    "publisher": "Dw.Tools.NuGet/[20260.20261026.1010]",
+    "publisherDllSha256": "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61",
+    "controls": 6,
+    "candidateIsPublishedToSharedFeed": false,
+    "sharedFeedTouched": false,
+    "publicationModeEnabledByDwf": false,
+    "collisionRefused": true,
+    "alteredHashRefused": true,
+    "cancellationRefused": true,
+    "publishedInDisposableFeed": true,
+    "physicalRollbackQualified": false,
+    "commands": [
+      {
+        "id": "source-restore",
+        "exit_code": 0,
+        "elapsed_ms": 1124,
+        "command": "dotnet restore src/projects/dw.quantities/dw.quantities.csproj --locked-mode --source I:\\nuget.local -p:NuGetAudit=false",
+        "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 108 ms).\r\n"
+      },
+      {
+        "id": "source-build",
+        "exit_code": 0,
+        "elapsed_ms": 1200,
+        "command": "dotnet build src/projects/dw.quantities/dw.quantities.csproj -c Release --no-restore -p:NuGetAudit=false",
+        "output_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:00.94\r\n"
+      },
+      {
+        "id": "source-pack",
+        "exit_code": 0,
+        "elapsed_ms": 1586,
+        "command": "dotnet pack src/projects/dw.quantities/dw.quantities.csproj -c Release --no-build --no-restore -p:PackageVersion=20260.20261102.1001 --output D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs136-rehearsal-466bc4274aaa4fd584d6207840e8d990\\candidate -p:NuGetAudit=false",
+        "output_excerpt": "  The package dw.quantities.20260.20261102.1001 is missing a readme. Go to https://aka.ms/nuget/authoring-best-practices/readme to learn why package readmes are important.\r\n  Successfully created package \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs136-rehearsal-466bc4274aaa4fd584d6207840e8d990\\candidate\\dw.quantities.20260.20261102.1001.nupkg\u0027.\r\n"
+      }
+    ]
+  },
+  "source_files": {
+    "docs/distribution/nuget-federation-f3-quantities-publisher.md": "0a0dd5ef28d03d3f4e61f9dfb36378d7cee068ac6b04b1c6cb4827af1b705184",
+    "docs/distribution/ValidateNugetQuantitiesReleaseController.cs": "e45096a1975cf0b0729b503bf544688abfcbd34646d28fefeb4a66a790edfdb2",
+    "tools/dw.tools.math.nuget-release/dw.tools.math.nuget-release.csproj": "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+    "tools/dw.tools.math.nuget-release/Directory.Packages.props": "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+    "tools/dw.tools.math.nuget-release/Program.cs": "fa460363242e3be1717121d1d1aaa13c41fa864aa3319077dbb8912f70caf6b8"
+  },
+  "command_receipts": [
+    {
+      "id": "tool-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-release/dw.tools.math.nuget-release.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-rs136\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 1826,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-release\\dw.tools.math.nuget-release.csproj (in 604 ms).\r\n"
+    },
+    {
+      "id": "tool-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-release/dw.tools.math.nuget-release.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 1745,
+      "output_excerpt": "  dw.tools.math.nuget-release -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-release\\Release\\net10.0\\dw.tools.math.nuget-release.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.39\r\n"
+    },
+    {
+      "id": "publisher-rehearsal",
+      "exit_code": 0,
+      "command": "dotnet run --project tools/dw.tools.math.nuget-release/dw.tools.math.nuget-release.csproj -c Release --no-build --no-restore -- --rehearse",
+      "elapsed_ms": 6851,
+      "output_excerpt": "{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022kind\u0022: \u0022dw.tools.math.nuget-release-controller-rehearsal\u0022,\r\n  \u0022status\u0022: \u0022real-math-package-disposable-publisher-qualified\u0022,\r\n  \u0022packageId\u0022: \u0022dw.quantities\u0022,\r\n  \u0022packageVersion\u0022: \u002220260.20261102.1001\u0022,\r\n  \u0022sourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n  \u0022sourceArchiveSha256\u0022: \u0022e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d\u0022,\r\n  \u0022rehearsalArchiveSha256\u0022: \u0022ba7eba30ab2f36af9e5e3924a9d0f8fa17e1dfc672e9c9ad7514692d852fd229\u0022,\r\n  \u0022rehearsalDllSha256\u0022: \u00223dd67a902eb6ceb8dffa1f7afe05d085195f4c1ffe5e83a9cafb43eb152018aa\u0022,\r\n  \u0022publisher\u0022: \u0022Dw.Tools.NuGet/[20260.20261026.1010]\u0022,\r\n  \u0022publisherDllSha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022controls\u0022: 6,\r\n  \u0022candidateIsPublishedToSharedFeed\u0022: false,\r\n  \u0022sharedFeedTouched\u0022: false,\r\n  \u0022publicationModeEnabledByDwf\u0022: false,\r\n  \u0022collisionRefused\u0022: true,\r\n  \u0022alteredHashRefused\u0022: true,\r\n  \u0022cancellationRefused\u0022: true,\r\n  \u0022publishedInDisposableFeed\u0022: true,\r\n  \u0022physicalRollbackQualified\u0022: "
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 235,
+      "output_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "sdk_version": "10.0.403",
+  "next_action": "After explicit owner review, invoke the separate guarded local --publish mode only on the candidate\u0027s actual creation date with the exact archived RS135 bytes, then independently run --verify and qualify a DWF feed-read receipt. If stale, requalify a fresh version first."
+}
