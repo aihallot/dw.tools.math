@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "id": "RS139",
+  "title": "Qualify immutable private NuGet publisher for dependent Math Expression package in a disposable feed",
+  "state": "prepared",
+  "commitMessage": "test: qualify Expression immutable local NuGet publisher rehearsal",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Qualify a Math Expression local-release controller against a real linked-source dependent package in a disposable NuGet feed, without writing to NUGET_LOCAL.",
+    "value": "Reuse the published Dw.Tools.NuGet no-overwrite publisher with an exact dw.quantities dependency, verify archive/DLL identity, collisions, digest and cancellation refusals, and run six source-free binary checks.",
+    "debtChanges": [
+      "RS139 qualifies only a disposable release rehearsal. Real NUGET_LOCAL publication requires a separate explicit owner action with the original exact RS138 archive.",
+      "An independently rebuilt rehearsal package may have different bytes from RS138; never treat its SHA as the original candidate or change an existing version.",
+      "Package notices and inherited rights remain private-only; no open-source license, installed-package rollback, crash recovery or other-OS support is newly qualified.",
+      "The already published base dw.quantities and original RS134-RS138 source/evidence remain unchanged; dw.quantities.standard cannot advance until Expression is independently published."
+    ],
+    "nextAction": "After RS139 is durably pushed and physical RS138 bytes are verified, explicitly invoke the guarded --publish then --verify modes for Expression; qualify published readback under DWF before advancing standard units.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f6-expression-publisher.md",
+    "docs/distribution/ValidateNugetExpressionPublisher.cs",
+    "tools/dw.tools.math.nuget-expression-release/dw.tools.math.nuget-expression-release.csproj",
+    "tools/dw.tools.math.nuget-expression-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-expression-release/Program.cs",
+    "docs/distribution/nuget-federation-f6-expression-publisher-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "expression-publisher",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetExpressionPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-f5",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetExpressionCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-f4",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetQuantitiesPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-f1",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFederationF1.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
