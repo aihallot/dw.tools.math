@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "id": "RS142",
+  "title": "Qualify immutable local NuGet publisher for two-dependency Math Standard package in a disposable feed",
+  "commitMessage": "test: qualify Standard immutable local NuGet publisher rehearsal",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Qualify a Standard private NuGet publisher controller by packaging unchanged sources with two exact dependencies and rehearsing no-overwrite publication in a disposable feed.",
+    "value": "Reuse Dw.Tools.NuGet to pack a real Standard archive with pinned base and Expression packages, verify archive/DLL and nuspec identities, collision, altered-digest and cancellation refusals, and run ten source-free binary checks.",
+    "debtChanges": [
+      "RS142 verifies a disposable publisher rehearsal only; a physical NUGET_LOCAL release of the exact original RS141 archive requires a separate explicit owner action.",
+      "A newly packed rehearsal package may differ byte-for-byte from the qualified RS141 candidate; its SHA must never be substituted for that original immutable source.",
+      "Source versions, two original ProjectReference edges, RS137-RS141 receipts and published prerequisite archives remain unchanged; no public package license is selected.",
+      "Installed-package rollback, crash recovery, concurrent publisher assurance, other RID compatibility and Discovery/Decision integration remain unqualified."
+    ],
+    "nextAction": "After RS142 is pushed, review the exact 13604-byte RS141 candidate and private rights; separately run guarded Standard --publish and --verify modes, then qualify actual shared-feed readback under DWF before further dependent releases.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f9-standard-publisher.md",
+    "docs/distribution/ValidateNugetStandardPublisher.cs",
+    "tools/dw.tools.math.nuget-standard-release/dw.tools.math.nuget-standard-release.csproj",
+    "tools/dw.tools.math.nuget-standard-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-standard-release/Program.cs",
+    "docs/distribution/nuget-federation-f9-standard-publisher-qualified.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/distribution/nuget-federation-f9-standard-publisher.md",
+      "sourcePath": "files/docs/distribution/nuget-federation-f9-standard-publisher.md"
+    },
+    {
+      "path": "docs/distribution/ValidateNugetStandardPublisher.cs",
+      "sourcePath": "files/docs/distribution/ValidateNugetStandardPublisher.cs"
+    },
+    {
+      "path": "tools/dw.tools.math.nuget-standard-release/dw.tools.math.nuget-standard-release.csproj",
+      "sourcePath": "files/tools/dw.tools.math.nuget-standard-release/dw.tools.math.nuget-standard-release.csproj"
+    },
+    {
+      "path": "tools/dw.tools.math.nuget-standard-release/Directory.Packages.props",
+      "sourcePath": "files/tools/dw.tools.math.nuget-standard-release/Directory.Packages.props"
+    },
+    {
+      "path": "tools/dw.tools.math.nuget-standard-release/Program.cs",
+      "sourcePath": "files/tools/dw.tools.math.nuget-standard-release/Program.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS141"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.63"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS141/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "test: qualify Standard NuGet candidate with two exact dependencies"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs141-standard-two-dependency-calendar-candidate-qualified-unpublished"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/package_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageId",
+      "expectedValue": "dw.quantities.standard"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageVersion",
+      "expectedValue": "20260.20261103.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateArchivePath",
+      "expectedValue": "build/artifacts/rs141-standard-candidate/candidate/dw.quantities.standard.20260.20261103.1001.nupkg"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateArchiveSha256",
+      "expectedValue": "c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateArchiveBytes",
+      "expectedValue": 13604
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateDllSha256",
+      "expectedValue": "5936468ecbcd8d8c27c04fe07ac8ca1e69dbebc9b7aa5145684f4ddf747fae0d"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageDependencies",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/consumerChecks",
+      "expectedValue": 10
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/independentlyCompiledBinaryConsumer",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/dependencyQuantitiesVersion",
+      "expectedValue": "20260.20261102.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f8-standard-candidate-qualified.json",
+      "jsonPointer": "/candidate/dependencyExpressionVersion",
+      "expectedValue": "20260.20261102.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f7-expression-published-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs140-expression-published-local-binary-independently-verified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f7-expression-published-qualified.json",
+      "jsonPointer": "/physically_published_package_verified",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f7-expression-published-qualified.json",
+      "jsonPointer": "/dependency_package_verified",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f7-expression-published-qualified.json",
+      "jsonPointer": "/observation/archiveSha256",
+      "expectedValue": "d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f7-expression-published-qualified.json",
+      "jsonPointer": "/observation/exactDependencyArchiveSha256",
+      "expectedValue": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f4-quantities-published-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs137-published-local-math-nuget-binary-independently-verified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f4-quantities-published-qualified.json",
+      "jsonPointer": "/physically_published_package_verified",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.122"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/3/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+      "jsonPointer": "/authorization/package_from_dw_tools_math",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+      "jsonPointer": "/authorization/redistribute_from_dw_tools_math",
+      "expectedValue": true
+    },
+    {
+      "repositoryPath": "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+      "expectedText": "<Version>0.2.0-preview.1</Version>",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+      "expectedText": "<ProjectReference Include=\"../dw.quantities/dw.quantities.csproj\" />",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+      "expectedText": "<ProjectReference Include=\"../dw.quantities.expression/dw.quantities.expression.csproj\" />",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "standard-publisher",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStandardPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "retained-standard-f8",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStandardCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "retained-expression-f7",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetExpressionPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "retained-base-f4",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetQuantitiesPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
