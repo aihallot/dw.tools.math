@@ -282,6 +282,10 @@ internal static class Program
     private static JsonDocument ReadJson(string path) =>
         JsonDocument.Parse(File.ReadAllText(path));
 
+    private static string Read(JsonElement element, string key) =>
+        element.GetProperty(key).GetString() ??
+        throw new InvalidDataException("Missing exact owner identity: " + key);
+
     private static string RepoFile(string root, string relative) =>
         Path.Combine(root, relative.Replace('/', Path.DirectorySeparatorChar));
 
