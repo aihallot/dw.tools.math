@@ -6,21 +6,21 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 const string Distribution = "docs/distribution/";
-const string Tool = "tools/dw.tools.math.nuget-ir-release/";
-const string ToolProject = Tool + "dw.tools.math.nuget-ir-release.csproj";
-const string Validator = Distribution + "ValidateNugetIrPublisher.cs";
-const string Evidence = Distribution + "nuget-federation-f12-ir-publisher-qualified.json";
-const string Status = "rs145-ir-immutable-local-publisher-rehearsal-qualified-unpublished";
-const string Accepted = "MATH-IR-F12:REHEARSAL=QUALIFIED;BINARY=15;NATIVE=541";
+const string Tool = "tools/dw.tools.math.nuget-ir-feed-verify/";
+const string Project = Tool + "dw.tools.math.nuget-ir-feed-verify.csproj";
+const string Validator = Distribution + "ValidateNugetIrPublishedFeed.cs";
+const string Evidence = Distribution + "nuget-federation-f13-ir-published-qualified.json";
+const string Status = "rs146-ir-published-local-two-binaries-independently-verified";
+const string Ready = "MATH-IR-F13:SOURCE=READY;READBACK=PENDING;NATIVE=541";
+const string Qualified = "MATH-IR-F13:PHYSICAL=VERIFIED;BINARY=15;DEPENDENCY=1;NATIVE=541";
 
 var payload = PayloadContext.Create();
 var root = payload.RepositoryRoot;
-var complete = File.Exists(
-    Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
-
-payload.Workflow.RequireCurrentRun("RS145", null, null, null, null, null);
-payload.Workflow.RequirePriorSuccess("RS144", 1,
-    "test: qualify IR calendar NuGet candidate with exact Quantities dependency",
+var completed = File.Exists(Path.Combine(root,
+    Evidence.Replace('/', Path.DirectorySeparatorChar)));
+payload.Workflow.RequireCurrentRun("RS146", null, null, null, null, null);
+payload.Workflow.RequirePriorSuccess("RS145", 1,
+    "test: qualify IR immutable local NuGet publisher rehearsal",
     "0.1.63", 0, 0, 0, true);
 payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.ProjectPlan.RequireNodeState("M3", "done");
@@ -36,12 +36,6 @@ payload.Require.JsonValueEquals(
         "rs144-ir-calendared-dependent-nuget-candidate-qualified-unpublished"));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
-    "/candidate/packageId", JsonValue.Create("dw.tools.math.ir"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
-    "/candidate/packageVersion", JsonValue.Create("20260.20261104.1001"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
     "/candidate/candidateArchiveSha256",
     JsonValue.Create("d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480"));
 payload.Require.JsonValueEquals(
@@ -49,164 +43,149 @@ payload.Require.JsonValueEquals(
     "/candidate/candidateDllSha256",
     JsonValue.Create("5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af"));
 payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
-    "/candidate/candidateArchiveBytes", JsonValue.Create(21926));
+    Distribution + "nuget-federation-f12-ir-publisher-qualified.json",
+    "/status", JsonValue.Create(
+        "rs145-ir-immutable-local-publisher-rehearsal-qualified-unpublished"));
 payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
-    "/candidate/packageDependencies", JsonValue.Create(1));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
-    "/candidate/compiledBinaryConsumerChecks", JsonValue.Create(15));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f11-ir-candidate-qualified.json",
+    Distribution + "nuget-federation-f12-ir-publisher-qualified.json",
     "/package_published", JsonValue.Create(false));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f4-quantities-published-qualified.json",
     "/physically_published_package_verified", JsonValue.Create(true));
 payload.Require.JsonValueEquals(
     "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
-    "/authorization/package_from_dw_tools_math", JsonValue.Create(true));
-payload.Require.JsonValueEquals(
-    "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
     "/authorization/redistribute_from_dw_tools_math", JsonValue.Create(true));
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
-    "<Version>0.3.0-preview.1</Version>");
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
-    "<ProjectReference Include=\"../dw.quantities/dw.quantities.csproj\" />");
-payload.Require.FileExists(
-    "tools/dw.tools.math.nuget-ir-candidate/fixtures/IrBinaryConsumer.cs");
+payload.Require.FileExists("tools/dw.tools.math.nuget-ir-candidate/fixtures/IrBinaryConsumer.cs");
+payload.Require.FileExists("tools/dw.tools.math.nuget-ir-release/Program.cs");
 
-var files = new[]
+var sourceFiles = new[]
 {
-    Distribution + "nuget-federation-f12-ir-publisher.md",
+    Distribution + "nuget-federation-f13-ir-published.md",
     Validator,
-    ToolProject,
-    Tool + "Directory.Packages.props",
+    Project,
     Tool + "Program.cs"
 };
-if (!complete)
+if (!completed)
 {
-    foreach (var file in files.Append(Evidence))
+    foreach (var file in sourceFiles.Append(Evidence))
         payload.Require.FileMissing(file);
 }
 else
 {
     payload.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
-    payload.Require.JsonValueEquals(Evidence, "/package_published",
-        JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence, "/native_nodes_retained",
-        JsonValue.Create(541));
+    payload.Require.JsonValueEquals(Evidence,
+        "/physically_published_package_verified", JsonValue.Create(true));
+    payload.Require.JsonValueEquals(Evidence,
+        "/dependency_package_verified", JsonValue.Create(true));
+    payload.Require.JsonValueEquals(Evidence,
+        "/package_published_by_this_run", JsonValue.Create(false));
+    payload.Require.JsonValueEquals(Evidence,
+        "/native_nodes_retained", JsonValue.Create(541));
 }
 var sourceHashes = new JsonObject();
-foreach (var file in files)
+foreach (var file in sourceFiles)
 {
-    var install = payload.Files.ReplaceFromStaged("staged/" + file, file);
-    sourceHashes[file] = install.AfterSha256 ??
-        throw new InvalidDataException("RS145 staged source SHA-256 missing: " + file);
+    var installed = payload.Files.ReplaceFromStaged("staged/" + file, file);
+    sourceHashes[file] = installed.AfterSha256 ??
+        throw new InvalidDataException("RS146 staged source SHA missing: " + file);
 }
 payload.Require.TextContains(
-    Distribution + "nuget-federation-f12-ir-publisher.md",
-    "## Shared publisher, three separate operator modes");
-payload.Require.TextContains(Tool + "Program.cs", "DotNetLocalPackageRepository");
-payload.Require.TextContains(Tool + "Program.cs", "MATH-IR-PUBLISHED|id=");
-payload.Require.TextContains(
-    Tool + "Directory.Packages.props",
-    "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
+    Distribution + "nuget-federation-f13-ir-published.md",
+    "## Independent read-only verification");
+payload.Require.TextContains(Tool + "Program.cs", "MATH-IR-BINARY|PASS|15");
+payload.Require.TextContains(Tool + "Program.cs", "physical-feed-snapshot");
+payload.Require.TextContains(Tool + "Program.cs", "publicationInvoked = false");
+payload.Require.TextContains(Project, "<Compile Include=\"Program.cs\" />");
 
-var initial = Run(root, "baseline-check", "dotnet", [
-    "run", "--file", Validator, "--", "--check"
-]);
-Need(initial.Output.Contains(
-     complete ? Accepted : "MATH-IR-F12:SOURCE=READY;REHEARSAL=PENDING;NATIVE=541",
-     StringComparison.Ordinal),
-     "IR shared-publisher baseline/target validator refused");
+var baseline = Run(root, "baseline-check", "dotnet",
+    ["run", "--file", Validator, "--", "--check"]);
+Need(baseline.Output.Contains(completed ? Qualified : Ready,
+        StringComparison.Ordinal), "RS146 source/lineage baseline check refused");
 
-if (!complete)
+if (!completed)
 {
     var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
-        throw new InvalidDataException(
-            "NUGET_LOCAL is required for exact read-only base dependency restore");
-    Need(!string.IsNullOrWhiteSpace(feed) &&
-         Path.IsPathFullyQualified(feed) &&
-         Directory.Exists(feed),
-         "NUGET_LOCAL must be an existing absolute private feed");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs145", "packages");
-    var commands = new List<JsonNode>();
-    commands.Add(Run(root, "tool-restore", "dotnet", [
-        "restore", ToolProject, "--source", feed, "--packages", cache,
+        throw new InvalidDataException("NUGET_LOCAL must select the private feed");
+    Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
+         Directory.Exists(feed), "NUGET_LOCAL must be an existing absolute directory");
+    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs146", "packages");
+    var receipts = new List<JsonNode>();
+    receipts.Add(Run(root, "tool-restore", "dotnet", [
+        "restore", Project, "--source", feed, "--packages", cache,
         "-p:NuGetAudit=false"
     ]).Receipt);
-    commands.Add(Run(root, "tool-build", "dotnet", [
-        "build", ToolProject, "-c", "Release", "--no-restore",
+    receipts.Add(Run(root, "tool-build", "dotnet", [
+        "build", Project, "-c", "Release", "--no-restore",
         "-p:NuGetAudit=false"
     ]).Receipt);
-    var observedRun = Run(root, "publisher-rehearsal", "dotnet", [
-        "run", "--project", ToolProject, "-c", "Release",
-        "--no-build", "--no-restore", "--", "--rehearse"
+    var verified = Run(root, "ir-feed-verify", "dotnet", [
+        "run", "--project", Project, "-c", "Release",
+        "--no-build", "--no-restore", "--", "--verify-published-ir", "."
     ]);
-    commands.Add(observedRun.Receipt);
+    receipts.Add(verified.Receipt);
     var sdk = Run(root, "sdk", "dotnet", ["--version"]);
-    commands.Add(sdk.Receipt);
-    Need(commands.Count == 4,
-         "all four DWF real child command receipts are required");
-
-    var trial = JsonNode.Parse(observedRun.Output.Trim())?.AsObject() ??
-        throw new InvalidDataException(
-            "shared IR publisher must emit one structured as-run JSON result");
-    Need(trial["status"]?.GetValue<string>() ==
-             "ir-dependent-package-publisher-rehearsal-qualified" &&
-         trial["packageId"]?.GetValue<string>() == "dw.tools.math.ir" &&
-         trial["version"]?.GetValue<string>() == "20260.20261104.1001" &&
-         trial["rs144CandidateArchiveSha256"]?.GetValue<string>() ==
+    receipts.Add(sdk.Receipt);
+    Need(receipts.Count == 4, "four direct command receipts required");
+    var observed = JsonNode.Parse(verified.Output.Trim())?.AsObject() ??
+        throw new InvalidDataException("independent verifier must return an actual JSON object");
+    Need(observed["status"]?.GetValue<string>() ==
+             "ir-published-local-two-binaries-independently-verified" &&
+         observed["packageId"]?.GetValue<string>() == "dw.tools.math.ir" &&
+         observed["packageVersion"]?.GetValue<string>() == "20260.20261104.1001" &&
+         observed["archiveBytes"]?.GetValue<int>() == 21926 &&
+         observed["archiveSha256"]?.GetValue<string>() ==
              "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480" &&
-         trial["rs144CandidateDllSha256"]?.GetValue<string>() ==
+         observed["packagedDllSha256"]?.GetValue<string>() ==
              "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af" &&
-         trial["exactDependencyId"]?.GetValue<string>() == "dw.quantities" &&
-         trial["exactDependencyVersion"]?.GetValue<string>() ==
-             "20260.20261102.1001" &&
-         trial["exactDependencyArchiveSha256"]?.GetValue<string>() ==
+         observed["loadedDllSha256"]?.GetValue<string>() ==
+             "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af" &&
+         observed["declaredDependencyCount"]?.GetValue<int>() == 1 &&
+         observed["publishedPackageSnapshotCount"]?.GetValue<int>() == 2 &&
+         observed["compiledConsumerChecks"]?.GetValue<int>() == 15 &&
+         observed["physicalArchivesInspected"]?.GetValue<bool>() == true &&
+         observed["publishedArchivesUnchanged"]?.GetValue<bool>() == true &&
+         observed["independentPackageReference"]?.GetValue<bool>() == true &&
+         observed["originalMathProjectReferencesUsed"]?.GetValue<bool>() == false &&
+         observed["feedWideInventoryPerformed"]?.GetValue<bool>() == false &&
+         observed["publicationInvoked"]?.GetValue<bool>() == false &&
+         observed["remoteRegistryPublished"]?.GetValue<bool>() == false &&
+         observed["installedPackageRollbackQualified"]?.GetValue<bool>() == false,
+         "new IR published package-only consumer or actual archive is not qualified");
+    var dependency = observed["exactDependencies"]?.AsArray() ??
+        throw new InvalidDataException("exact Quantities dependency absent");
+    Need(dependency.Count == 1 &&
+         dependency[0]?["id"]?.GetValue<string>() == "dw.quantities" &&
+         dependency[0]?["version"]?.GetValue<string>() == "20260.20261102.1001" &&
+         dependency[0]?["archiveBytes"]?.GetValue<int>() == 14747 &&
+         dependency[0]?["archiveSha256"]?.GetValue<string>() ==
              "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d" &&
-         trial["publisherDllSha256"]?.GetValue<string>() ==
-             "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61" &&
-         trial["dependencyCount"]?.GetValue<int>() == 1 &&
-         trial["controls"]?.GetValue<int>() == 7 &&
-         trial["consumerChecks"]?.GetValue<int>() == 15 &&
-         trial["disposableFeedPublished"]?.GetValue<bool>() == true &&
-         trial["publishedToNugetLocal"]?.GetValue<bool>() == false &&
-         trial["collisionRefused"]?.GetValue<bool>() == true &&
-         trial["alteredDigestRefused"]?.GetValue<bool>() == true &&
-         trial["cancelledRefused"]?.GetValue<bool>() == true &&
-         trial["sourceFilesUnchanged"]?.GetValue<bool>() == true &&
-         trial["sourceProjectReferencePreserved"]?.GetValue<bool>() == true &&
-         trial["publishedDependencyUnchanged"]?.GetValue<bool>() == true &&
-         trial["sourceReleaseAuthorization"]?.GetValue<bool>() == false,
-         "independent IR package publisher trial, refusal or consumer did not qualify");
-
+         dependency[0]?["loadedDllSha256"]?.GetValue<string>() ==
+             "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4",
+         "physical Quantities dependency changed");
     var receipt = new JsonObject
     {
         ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.nuget-ir-local-publisher-rehearsal",
+        ["kind"] = "dw.tools.math.nuget-ir-private-feed-independent-qualification",
         ["status"] = Status,
         ["source_package_id"] = "dw.tools.math.ir",
-        ["previous_owner_run"] = "RS144",
-        ["sourceBaselineCommit"] = "762ca5bcd2b86e36a5f116e63b0f55148ac950dc",
+        ["previous_owner_run"] = "RS145",
+        ["sourceBaselineCommit"] = "2306b261920a304189d8a21e31c5d0770f0f0cdc",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
-        ["package_published"] = false,
-        ["release_authorized_by_this_run"] = false,
-        ["source_versions_modified"] = false,
-        ["new_public_license_selected"] = false,
+        ["physically_published_package_verified"] = true,
+        ["dependency_package_verified"] = true,
+        ["package_published_by_this_run"] = false,
+        ["remote_registry_published"] = false,
         ["installed_package_rollback_qualified"] = false,
+        ["new_public_license_selected"] = false,
         ["external_requests_transmitted"] = false,
         ["discovery_migration_qualified"] = false,
-        ["rehearsal"] = trial,
+        ["observation"] = observed,
         ["source_files"] = sourceHashes,
-        ["command_receipts"] = payload.Json.Array(commands.ToArray()),
+        ["command_receipts"] = payload.Json.Array(receipts.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
         ["next_action"] =
-            "After RS145 succeeds, inspect original immutable 21926-byte RS144 IR candidate and rights. Only a separate clean-main operator action may invoke guarded --publish and --verify, followed by a new independent DWF local-feed readback."
+            "After independent IR readback, inspect the next Math package candidate and preserve the separate owner-controlled publication gate."
     };
     payload.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
@@ -215,22 +194,19 @@ if (!complete)
 payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
-var finalCheck = Run(root, "target-check", "dotnet", [
-    "run", "--file", Validator, "--", "--check"
-]);
-Need(finalCheck.Output.Contains(Accepted, StringComparison.Ordinal) &&
-     finalCheck.Output.Contains(
-         "MATH-IR-F12:SHARED-PUBLICATION=false;ROLLBACK=false;PUBLIC=false",
-         StringComparison.Ordinal),
-     "RS145 exact IR publisher receipt target check failed");
+var final = Run(root, "target-check", "dotnet",
+    ["run", "--file", Validator, "--", "--check"]);
+Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
+     final.Output.Contains(
+         "MATH-IR-F13:REPUBLICATION=false;PUBLIC=false;ROLLBACK=false",
+         StringComparison.Ordinal), "IR independent qualification target check failed");
 return payload.Complete();
 
-static void Need(bool good, string reason)
+static void Need(bool okay, string description)
 {
-    if (!good) throw new InvalidDataException("RS145: " + reason);
+    if (!okay) throw new InvalidDataException("RS146: " + description);
 }
-
-static (JsonObject Receipt, string Output) Run(
+static (JsonNode Receipt, string Output) Run(
     string root, string id, string executable, string[] arguments)
 {
     using var process = new Process
@@ -247,34 +223,34 @@ static (JsonObject Receipt, string Output) Run(
     process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
     process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-rs145", "packages");
+        Path.Combine(root, ".workflow", "local", "nuget-rs146", "packages");
     foreach (var argument in arguments)
         process.StartInfo.ArgumentList.Add(argument);
-    var clock = Stopwatch.StartNew();
-    Need(process.Start(), "unable to start RS145 child command " + id);
+    var watch = Stopwatch.StartNew();
+    Need(process.Start(), "could not start RS146 child process " + id);
     var stdout = process.StandardOutput.ReadToEndAsync();
     var stderr = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(540000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("IR publisher command timed out: " + id);
+        throw new TimeoutException("RS146 command timed out: " + id);
     }
     var output = stdout.GetAwaiter().GetResult();
     var errors = stderr.GetAwaiter().GetResult();
-    clock.Stop();
+    watch.Stop();
     if (process.ExitCode != 0)
     {
-        var details = output + "\n" + errors;
+        var diagnostics = output + "\n" + errors;
         throw new InvalidDataException(id + " exit=" + process.ExitCode +
-            "\n" + details[..System.Math.Min(details.Length, 4200)]);
+            "\n" + diagnostics[..System.Math.Min(diagnostics.Length, 4100)]);
     }
-    Console.WriteLine("RS145 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
+    Console.WriteLine("RS146 " + id + " exit=0 elapsed_ms=" + watch.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"] = id,
         ["exit_code"] = process.ExitCode,
         ["command"] = executable + " " + string.Join(" ", arguments),
-        ["elapsed_ms"] = clock.ElapsedMilliseconds,
-        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1100)]
+        ["elapsed_ms"] = watch.ElapsedMilliseconds,
+        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1000)]
     }, output);
 }
