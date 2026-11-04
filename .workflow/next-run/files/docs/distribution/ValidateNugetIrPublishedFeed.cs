@@ -168,6 +168,7 @@ if (finished)
          !Flag(observed, "discoveryMigrationQualified") &&
          Text(observed, "sourceFeed") == "NUGET_LOCAL" &&
          !string.IsNullOrWhiteSpace(Text(observed, "sdkVersion")) &&
+         !string.IsNullOrWhiteSpace(Text(observed, "runtimeVersion")) &&
          !string.IsNullOrWhiteSpace(Text(observed, "osDescription")) &&
          !string.IsNullOrWhiteSpace(Text(observed, "processArchitecture")),
          "IR private-feed physical and binary proof incomplete");
