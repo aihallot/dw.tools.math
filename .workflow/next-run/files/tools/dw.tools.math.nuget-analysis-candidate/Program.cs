@@ -79,17 +79,18 @@ internal static class Program
         var sources = Directory.EnumerateFiles(
                 PathFor(root, "src/projects/dw.tools.math.analysis"), "*.cs",
                 SearchOption.TopDirectoryOnly)
-            .Select(Path.GetFileName).Order(StringComparer.Ordinal).ToArray();
-        Need(sources.SequenceEqual(SourceNames),
+            .Order(StringComparer.Ordinal).ToArray();
+        Need(sources.Select(Path.GetFileName).SequenceEqual(SourceNames,
+                 StringComparer.Ordinal),
             "analysis source set changed from the five qualified owner source files");
         var sourceHashes = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
             [Project] = Sha(projectPath)
         };
-        foreach (var name in sources)
+        foreach (var source in sources)
         {
-            var relative = "src/projects/dw.tools.math.analysis/" + name;
-            sourceHashes[relative] = Sha(PathFor(root, relative));
+            var relative = Path.GetRelativePath(root, source).Replace('\\', '/');
+            sourceHashes[relative] = Sha(source);
         }
         Need(File.Exists(PathFor(root, Fixture)), "thirteen-case independent fixture absent");
         var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
