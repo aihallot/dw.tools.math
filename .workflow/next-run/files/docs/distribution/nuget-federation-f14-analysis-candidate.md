@@ -4,7 +4,7 @@
 
 RS146 succeeded first-pass on GitHub Math `main` at `aea1b730b0897b070239bc0e86255799c8b961f3`, DWF 0.1.63, attempt 001, with independent physical-feed verification of the exact original IR and Quantities binary packages. F13 records 15/15 binary cases, Windows x64, SDK 10.0.403, and no republication.
 
-The F1 observed source inventory lists thirteen Math project packages. Four have separately qualified immutable local publication: `dw.quantities`, `dw.quantities.expression`, `dw.quantities.standard`, and `dw.tools.math.ir`. Among the remaining source projects, `dw.tools.math.analysis` is a bounded, independent numerical package without `ProjectReference` or external `PackageReference`. RS147 selects **only this package** for a new candidate. The original project `src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj` has historical source `Version 1.1.0-preview.6` and five current C# source files. Its version, sources, lock file and tests remain unchanged.
+The F1 observed source inventory lists thirteen Math project packages. Four have separately qualified immutable local publication: `dw.quantities`, `dw.quantities.expression`, `dw.quantities.standard`, and `dw.tools.math.ir`. Among the remaining source projects, `dw.tools.math.analysis` is a bounded, independent numerical package without `ProjectReference` or external `PackageReference`. RS147 selects **only this package** for a new candidate. The original project `src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj` has historical source `Version 1.1.0-preview.6` and seven current C# source files. Its version, sources, lock file and tests remain unchanged.
 
 ## Qualified candidate boundaries
 
