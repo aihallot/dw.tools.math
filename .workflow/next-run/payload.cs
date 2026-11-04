@@ -143,7 +143,7 @@ if (!complete)
          "actual analysis archive or 13-case consumer not qualified");
     var sources = observed["originalSourcesSha256"]?.AsObject() ??
         throw new InvalidDataException("all original analysis source hashes are required");
-    Need(sources.Count == 6, "five source files and original csproj are required");
+    Need(sources.Count == 8, "seven source files and original csproj are required");
     var inner = observed["commandReceipts"]?.AsArray() ??
         throw new InvalidDataException("seven real candidate commands must be recorded");
     Need(inner.Count == 7, "expected seven inner candidate/consumer commands");
