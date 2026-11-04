@@ -193,6 +193,7 @@ internal static class Program
                 discoveryMigrationQualified = false,
                 sourceFeed = "NUGET_LOCAL",
                 sdkVersion = sdk.Output.Trim(),
+                runtimeVersion = RuntimeInformation.FrameworkDescription,
                 osDescription = RuntimeInformation.OSDescription,
                 processArchitecture = RuntimeInformation.ProcessArchitecture.ToString(),
                 commands
