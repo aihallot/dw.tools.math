@@ -22,7 +22,8 @@ internal static class Program
     private static readonly string[] SourceNames =
     [
         "BoundedDifferentialAnalysis64.cs", "BoundedUnivariateAnalysis64.cs",
-        "CurveBoundaryAudit64.cs", "CurvePoint64.cs", "M6W01C01Contract.cs"
+        "CurveBoundaryAudit64.cs", "CurvePoint64.cs", "DifferentialBoundaryAudit64.cs",
+        "M6W01C01Contract.cs", "UnivariateBoundaryAudit64.cs"
     ];
     private static readonly JsonSerializerOptions Pretty = new() { WriteIndented = true };
 
@@ -82,7 +83,7 @@ internal static class Program
             .Order(StringComparer.Ordinal).ToArray();
         Need(sources.Select(Path.GetFileName).SequenceEqual(SourceNames,
                  StringComparer.Ordinal),
-            "analysis source set changed from the five qualified owner source files");
+            "analysis source set changed from the seven qualified owner source files");
         var sourceHashes = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
             [Project] = Sha(projectPath)
