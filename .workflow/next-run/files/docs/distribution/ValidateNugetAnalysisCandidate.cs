@@ -138,8 +138,8 @@ if (File.Exists(Receipt))
         !string.IsNullOrWhiteSpace(Text(observed, "processArchitecture")),
         "analysis candidate identity, platform and binary checks incomplete");
     var originalSources = observed.GetProperty("originalSourcesSha256");
-    Require(originalSources.EnumerateObject().Count() == 6,
-        "exact five original source files and one csproj SHA required");
+    Require(originalSources.EnumerateObject().Count() == 8,
+        "exact seven original source files and one csproj SHA required");
     foreach (var source in originalSources.EnumerateObject())
         Require(File.Exists(source.Name) && Sha(source.Name) == source.Value.GetString(),
             "original analysis source bytes changed: " + source.Name);
