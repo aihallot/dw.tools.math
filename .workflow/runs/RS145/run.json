@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "id": "RS145",
+  "title": "Qualify immutable Math IR local NuGet publisher with exact published Quantities dependency in a disposable feed",
+  "state": "prepared",
+  "commitMessage": "test: qualify IR immutable local NuGet publisher rehearsal",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Qualify a Math IR local publisher controller by rehearsing an exact dependent NuGet archive in a disposable feed, with fifteen independent binary checks and immutable publication refusals.",
+    "value": "Reuse the published Dw.Tools.NuGet no-overwrite publisher for an actual linked-source IR package with one pinned Quantities dependency; verify archive and DLL hashes, collision, digest and cancellation refusals, and a fresh source-free consumer.",
+    "debtChanges": [
+      "RS145 qualifies a disposable-feed release rehearsal only; the original RS144 candidate must not be implicitly published to NUGET_LOCAL.",
+      "Rehearsal archive/DLL fingerprints can differ from original RS144; a later owner --publish action must require exact original 21926 bytes.",
+      "The original six IR sources, ProjectReference, historical Version, all RS134-RS144 receipts and published base package remain unchanged.",
+      "Public licensing, package README/notices, other RID/OS consumers, installed rollback, crash recovery and Discovery/Decision/AURA admission remain outside this gate."
+    ],
+    "nextAction": "After RS145 succeeds, inspect original 21926-byte IR candidate, rights and hashes. Separately use guarded --publish and --verify from clean main, then prepare a read-only independent DWF physical-feed qualification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f12-ir-publisher.md",
+    "docs/distribution/ValidateNugetIrPublisher.cs",
+    "tools/dw.tools.math.nuget-ir-release/dw.tools.math.nuget-ir-release.csproj",
+    "tools/dw.tools.math.nuget-ir-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-ir-release/Program.cs",
+    "docs/distribution/nuget-federation-f12-ir-publisher-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "ir-publisher",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f11",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-standard-f10",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStandardPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-quantities-f4",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetQuantitiesPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
