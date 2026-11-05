@@ -1,0 +1,405 @@
+{
+  "schemaVersion": 1,
+  "id": "RS149",
+  "title": "Independently verify the original physically published Analysis NuGet package and thirteen-case binary consumer",
+  "commitMessage": "test: verify published Analysis NuGet archive and isolated binary consumer",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Independently qualify the physical private Analysis NuGet archive with exact SHA-256 and thirteen package-only binary oracles, without republishing or changing Math sources.",
+    "value": "Reinspect the exact 27,831-byte original RS147 archive in NUGET_LOCAL, validate nuspec and loaded DLL hashes, restore a single-package snapshot with sources cleared, and retain bounded actual run receipts.",
+    "debtChanges": [
+      "Operator --publish and --verify outputs are independent owner evidence; RS149 requires its own read-only physical-feed DWF receipt.",
+      "The qualified RS148 rehearsal archive is not the original candidate and must never replace published Analysis bytes under the same package version.",
+      "No public license, installed rollback, feed-wide inventory, other OS/RID claim, Decision, Discovery or AURA integration is authorized."
+    ],
+    "nextAction": "After successful RS149, inspect a single next dependency-ready Math package source candidate; keep original-package publication a separate owner-controlled gate.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f16-analysis-published.md",
+    "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-analysis-feed-verify/dw.tools.math.nuget-analysis-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-analysis-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f16-analysis-published-qualified.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/distribution/nuget-federation-f16-analysis-published.md",
+      "sourcePath": "files/docs/distribution/nuget-federation-f16-analysis-published.md"
+    },
+    {
+      "path": "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+      "sourcePath": "files/docs/distribution/ValidateNugetAnalysisPublishedFeed.cs"
+    },
+    {
+      "path": "tools/dw.tools.math.nuget-analysis-feed-verify/dw.tools.math.nuget-analysis-feed-verify.csproj",
+      "sourcePath": "files/tools/dw.tools.math.nuget-analysis-feed-verify/dw.tools.math.nuget-analysis-feed-verify.csproj"
+    },
+    {
+      "path": "tools/dw.tools.math.nuget-analysis-feed-verify/Program.cs",
+      "sourcePath": "files/tools/dw.tools.math.nuget-analysis-feed-verify/Program.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS148"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.63"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS148/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "test: qualify Analysis immutable NuGet publisher rehearsal"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs147-independent-analysis-calendar-nuget-candidate-qualified-unpublished"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/package_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageId",
+      "expectedValue": "dw.tools.math.analysis"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageVersion",
+      "expectedValue": "20260.20261104.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/sourceVersion",
+      "expectedValue": "1.1.0-preview.6"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateArchiveBytes",
+      "expectedValue": 27831
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateArchiveSha256",
+      "expectedValue": "d3e937efbe3fe9524a4146de655f867e965ac1322910cf45f2c060f0b915a3cf"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/candidateDllSha256",
+      "expectedValue": "b2e5508f1e93c5f7968bed62e48c1760815431ce042c5172c3d261d5b7b123e7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/packageDependencies",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/compiledBinaryConsumerChecks",
+      "expectedValue": 13
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f14-analysis-candidate-qualified.json",
+      "jsonPointer": "/candidate/independentPackageReference",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs148-analysis-immutable-private-publisher-rehearsal-qualified-unpublished"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/package_published",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/rehearsal/originalCandidateArchiveSha256",
+      "expectedValue": "d3e937efbe3fe9524a4146de655f867e965ac1322910cf45f2c060f0b915a3cf"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/rehearsal/originalCandidateDllSha256",
+      "expectedValue": "b2e5508f1e93c5f7968bed62e48c1760815431ce042c5172c3d261d5b7b123e7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/rehearsal/consumerChecks",
+      "expectedValue": 13
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/rehearsal/disposableFeedPublished",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f15-analysis-publisher-qualified.json",
+      "jsonPointer": "/rehearsal/publishedToNugetLocal",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.122"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/6/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+      "jsonPointer": "/authorization/redistribute_from_dw_tools_math",
+      "expectedValue": true
+    },
+    {
+      "repositoryPath": "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+      "expectedText": "<Version>1.1.0-preview.6</Version>",
+      "expectedOccurrences": 1
+    },
+    {
+      "repositoryPath": "tools/dw.tools.math.nuget-analysis-candidate/fixtures/AnalysisBinaryConsumer.cs",
+      "expectedText": "MATH-ANALYSIS-BINARY|PASS|13",
+      "expectedOccurrences": 1
+    }
+  ],
+  "validations": [
+    {
+      "id": "analysis-f16-physical",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "retained-analysis-f15",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "retained-analysis-f14",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
