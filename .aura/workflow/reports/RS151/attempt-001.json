@@ -1,0 +1,687 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS151",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-05T14:06:46.0135965+00:00",
+  "completedAtUtc": "2026-11-05T14:07:04.0955747+00:00",
+  "durationMilliseconds": 18081,
+  "projectNodes": [
+    "M0"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+    "docs/distribution/ValidateNugetFoundationPublisher.cs",
+    "tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj",
+    "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+    "docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateNugetFoundationPublisher.cs",
+    "docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json",
+    "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+    "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+    "tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.63",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "4fa8579500c6e4854828a395f63d60ed39decacceb1a9d0473a6bd5d2cdbb82e"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261105T120849Z-0bd406e2f24c6cca",
+      "run-next-20261105T124248Z-0b922fb5f61ec9d5"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261105T120849Z-0bd406e2f24c6cca",
+        "runId": "RS151",
+        "scope": "preselection-rs151",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs151/run-next-20261105T120849Z-0bd406e2f24c6cca"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261105T124248Z-0b922fb5f61ec9d5",
+        "runId": "RS151",
+        "scope": "preselection-rs151",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs151/run-next-20261105T124248Z-0b922fb5f61ec9d5"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS151/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-33f4bc60e5d9431d8f6dcd85b73698a6\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 17982,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS151 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS150/attempt-001.json run=RS150 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M0 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/package_published\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/candidate/candidateArchiveSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/candidate/candidateDllSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/candidate/packageDependencies\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json pointer=/candidate/compiledBinaryConsumerChecks\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f16-analysis-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json pointer=/authorization/package_from_dw_tools_math\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj semantic text found\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-foundation-candidate/fixtures/FoundationBinaryConsumer.cs file exists\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f18-foundation-publisher.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/ValidateNugetFoundationPublisher.cs path is absent\r\n[require.file-missing] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj path is absent\r\n[require.file-missing] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props path is absent\r\n[require.file-missing] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Program.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/distribution/nuget-federation-f18-foundation-publisher.md bytes=5991\r\n[files.replace-from-staged] CHANGED path=docs/distribution/ValidateNugetFoundationPublisher.cs bytes=10033\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj bytes=331\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props bytes=241\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-foundation-release/Program.cs bytes=27480\r\n[require.text-contains] VERIFIED path=docs/distribution/nuget-federation-f18-foundation-publisher.md semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props semantic text found\r\nRS151 baseline-check exit=0 elapsed_ms=2959\r\nRS151 tool-restore exit=0 elapsed_ms=1424\r\nRS151 tool-build exit=0 elapsed_ms=1249\r\nRS151 foundation-rehearsal exit=0 elapsed_ms=11390\r\nRS151 sdk exit=0 elapsed_ms=134\r\n[files.write-complete] CHANGED path=docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json bytes=11380\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\nRS151 target-check exit=0 elapsed_ms=303\r\n[payload] OK operations=36 changed=6 no-change=0 verified=30 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS151/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS151 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "03aa29807a5321361037e1372fe7c4396792a120a2a7736df219a5297419321a",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS150/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS150 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "02bb5e539afb48e8d165e8a84744b5b4ca9a408101378310821609d659dfad70",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M0 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateArchiveSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateDllSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/packageDependencies",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/compiledBinaryConsumerChecks",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f16-analysis-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/physically_published_package_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+        "Status": 0,
+        "Summary": "pointer=/authorization/package_from_dw_tools_math",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-exists",
+        "Path": "tools/dw.tools.math.nuget-foundation-candidate/fixtures/FoundationBinaryConsumer.cs",
+        "Status": 0,
+        "Summary": "file exists",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/ValidateNugetFoundationPublisher.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+        "Status": 1,
+        "Summary": "bytes=5991",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32147b2a8087db3aa972b95c7484f1f3bf26f80aa285d35ed15fa212f2a37eca",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/ValidateNugetFoundationPublisher.cs",
+        "Status": 1,
+        "Summary": "bytes=10033",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "cbc3543f2cc6296cb14ef4683f94d3ceff24c5bbc1924bf3e74a9864f6f00184",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj",
+        "Status": 1,
+        "Summary": "bytes=331",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+        "Status": 1,
+        "Summary": "bytes=241",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=27480",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "434201cd0b685e2d470de91eb6d965333c2c2fa96285b38ac71de8be9d5e5fd0",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=11380",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fd853cdacee8f9c0afaac376561d199ced402dbd23633f31e92dda7e514412d6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "foundation-f18-publisher",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-foundation-f17",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-analysis-f16",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261105T140508Z-93b1cab939ea8d24",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "2b1cf1afacc3cd094aa85ca19368c0cb03fce8a0",
+  "invocationStartedAtUtc": "2026-11-05T14:05:08.4025662+00:00",
+  "invocationDurationMilliseconds": 115693,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS151",
+      "title": "Qualify immutable Foundation local NuGet publisher on a disposable feed with five source-free binary checks",
+      "projectNodes": [
+        "M0"
+      ]
+    },
+    "declared": {
+      "summary": "Rehearse the immutable Foundation NuGet publisher using seven actual commands, five independent binary identity checks and collision/digest/cancellation refusals in a disposable feed only.",
+      "value": "Reuse pinned Dw.Tools.NuGet to build the exact one-source Foundation project in a temporary packing projection, publish/read back its new rehearsal archive, and prove zero dependencies without mutating NUGET_LOCAL.",
+      "debtChanges": [
+        "RS150 original Foundation candidate is 3863 bytes with distinct original archive and DLL SHA-256; a rebuilt rehearsal archive is not a permitted replacement.",
+        "Actual private feed publication, replacement and installed rollback are excluded; owner must explicitly invoke guarded modes after separate successful DWF delivery.",
+        "Preserve 541 completed roadmap nodes, original source Version 0.1.0-preview.1, five published Math packages, and previous F1-F17 authority; public licensing and external adoption remain open.",
+        "RS151 preselection invocation 001 failed before attempt allocation: the payload used a stale Markdown heading and RS148 owner guard name. Both exact text assertions were repaired without changing the run objective.",
+        "RS151 preselection failures 001 and 002 were both workflow refusals with zero allocated attempts. First was stale payload text; second was incorrect RS150 commit identity in validator. Incident reviewed across complete payload/controller/receipt contracts.",
+        "Corrected exact RS150 commit message, RS151 owner guard and Foundation archive diagnostic. Cross-checks: 43 typed source preconditions, 541 native nodes, all emitted rehearsal JSON fields, five binary probes and no shared feed publication."
+      ],
+      "nextAction": "After successful RS151, obtain owner authorization for separate --publish and --verify of original Foundation archive bytes; then prepare independent DWF physical-feed readback.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/ValidateNugetFoundationPublisher.cs",
+        "docs/distribution/nuget-federation-f18-foundation-publisher-qualified.json",
+        "docs/distribution/nuget-federation-f18-foundation-publisher.md",
+        "tools/dw.tools.math.nuget-foundation-release/Directory.Packages.props",
+        "tools/dw.tools.math.nuget-foundation-release/Program.cs",
+        "tools/dw.tools.math.nuget-foundation-release/dw.tools.math.nuget-foundation-release.csproj"
+      ],
+      "validations": [
+        {
+          "id": "foundation-f18-publisher",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-foundation-f17",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-analysis-f16",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M0",
+        "objective": "Foundations, provenance, and DWF preparation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M0 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS151",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS151",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "2b1cf1afacc3cd094aa85ca19368c0cb03fce8a0",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "d617023427565276041a47cc28d556db75844b0a32b7786234029b609ea36a9b"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify Foundation immutable NuGet publisher rehearsal",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
