@@ -82,7 +82,7 @@ Need(Text(owner, "status") ==
      candidate.GetProperty("packageDependencies").GetInt32() == 0 &&
      candidate.GetProperty("compiledBinaryConsumerChecks").GetInt32() == 5 &&
      Flag(candidate, "independentPackageReference"),
-     "qualified original F14 Foundation source-free package identity has changed");
+     "qualified original F17 Foundation source-free package identity has changed");
 Need(Text(priorPhysical.RootElement, "status") ==
          "rs149-analysis-published-local-binary-independently-verified" &&
      Flag(priorPhysical.RootElement, "physically_published_package_verified") &&
