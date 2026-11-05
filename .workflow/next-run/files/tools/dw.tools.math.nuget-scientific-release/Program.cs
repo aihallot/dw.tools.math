@@ -253,7 +253,7 @@ internal static class Program
         var original = PathFor(root, CandidatePath);
         Need(IsExactPhysical(original, 37265, CandidateSha) &&
              PackageDllHash(original) == CandidateDllSha,
-             "only the exact original 3,863-byte RS153 Scientific candidate may be published");
+             "only the exact original 37,265-byte RS153 Scientific candidate may be published");
         Need(DateOnly.FromDateTime(DateTime.Now) >= new DateOnly(2026, 11, 5),
              "original candidate creation date cannot be in the future");
         var receiptDirectory = PathFor(root, "build/artifacts/rs154-scientific-release/receipts");
@@ -315,7 +315,7 @@ internal static class Program
                  IsExactPhysical(archive, 37265, CandidateSha),
                  "original published archive drifted during fresh fifteen-oracle consumer");
             Console.WriteLine("MATH-SCIENTIFIC-VERIFY|id=" + Id +
-                "|version=" + Version + "|binary=5|archive=" + CandidateSha +
+                "|version=" + Version + "|binary=15|archive=" + CandidateSha +
                 "|dependencies=0|feed=NUGET_LOCAL|PASS");
         }
         finally
