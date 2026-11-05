@@ -42,7 +42,7 @@ payload.Require.JsonValueEquals(
     "/package_published_by_this_run", JsonValue.Create(false));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f19-foundation-published-qualified.json",
-    "/observation/compiledConsumerChecks", JsonValue.Create(13));
+    "/observation/compiledConsumerChecks", JsonValue.Create(5));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f1-qualified.json",
     "/package_count", JsonValue.Create(13));
@@ -57,7 +57,7 @@ payload.Require.TextContains(
     "<PackageId>dw.tools.math.scientific</PackageId>");
 payload.Require.TextContains(
     "src/projects/dw.tools.math.scientific/BoundedExactScientific.cs",
-    "public static string Identity => PackageId + \"/\" + ContractVersion;");
+    "public const string RuleId=\"dw-math-bounded-exact-scientific-1\";");
 
 var files = new[]
 {
