@@ -6,21 +6,21 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 const string Distribution = "docs/distribution/";
-const string Tool = "tools/dw.tools.math.nuget-scientific-candidate/";
-const string Project = Tool + "dw.tools.math.nuget-scientific-candidate.csproj";
-const string Validator = Distribution + "ValidateNugetScientificCandidate.cs";
-const string Evidence = Distribution + "nuget-federation-f20-scientific-candidate-qualified.json";
-const string Status = "rs153-independent-scientific-calendar-nuget-candidate-qualified-unpublished";
-const string Ready = "MATH-SCIENTIFIC-F20:SOURCE=READY;CANDIDATE=PENDING;NATIVE=541";
-const string Qualified = "MATH-SCIENTIFIC-F20:CANDIDATE=QUALIFIED;BINARY=15;DEPENDENCIES=0;NATIVE=541";
+const string Tool = "tools/dw.tools.math.nuget-scientific-release/";
+const string Project = Tool + "dw.tools.math.nuget-scientific-release.csproj";
+const string Validator = Distribution + "ValidateNugetScientificPublisher.cs";
+const string Evidence = Distribution + "nuget-federation-f21-scientific-publisher-qualified.json";
+const string Status = "rs154-scientific-immutable-private-publisher-rehearsal-qualified-unpublished";
+const string Ready = "MATH-SCIENTIFIC-F21:SOURCE=READY;REHEARSAL=PENDING;NATIVE=541";
+const string Qualified = "MATH-SCIENTIFIC-F21:REHEARSAL=QUALIFIED;BINARY=15;NATIVE=541";
 
 var payload = PayloadContext.Create();
 var root = payload.RepositoryRoot;
-var complete = File.Exists(Path.Combine(root,
+var completed = File.Exists(Path.Combine(root,
     Evidence.Replace('/', Path.DirectorySeparatorChar)));
-payload.Workflow.RequireCurrentRun("RS153", null, null, null, null, null);
-payload.Workflow.RequirePriorSuccess("RS152", 1,
-    "test: verify published Foundation NuGet archive and isolated binary consumer",
+payload.Workflow.RequireCurrentRun("RS154", null, null, null, null, null);
+payload.Workflow.RequirePriorSuccess("RS153", 1,
+    "test: qualify Scientific calendar NuGet candidate without publication",
     "0.1.63", 0, 0, 0, true);
 payload.ProjectPlan.RequireNodeState("M6", "done");
 payload.ProjectPlan.RequireNodeState("M7", "done");
@@ -31,141 +31,140 @@ payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
 payload.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
     JsonValue.Create("0.26"));
 payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f19-foundation-published-qualified.json",
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
     "/status", JsonValue.Create(
-        "rs152-foundation-published-local-binary-independently-verified"));
+        "rs153-independent-scientific-calendar-nuget-candidate-qualified-unpublished"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
+    "/package_published", JsonValue.Create(false));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
+    "/candidate/candidateArchiveSha256",
+    JsonValue.Create("233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
+    "/candidate/candidateDllSha256",
+    JsonValue.Create("604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
+    "/candidate/packageDependencies", JsonValue.Create(0));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f20-scientific-candidate-qualified.json",
+    "/candidate/compiledBinaryConsumerChecks", JsonValue.Create(15));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f19-foundation-published-qualified.json",
     "/physically_published_package_verified", JsonValue.Create(true));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f19-foundation-published-qualified.json",
-    "/package_published_by_this_run", JsonValue.Create(false));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f19-foundation-published-qualified.json",
-    "/observation/compiledConsumerChecks", JsonValue.Create(5));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f1-qualified.json",
-    "/package_count", JsonValue.Create(13));
 payload.Require.JsonValueEquals(
     "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
     "/authorization/package_from_dw_tools_math", JsonValue.Create(true));
 payload.Require.TextContains(
     "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
     "<Version>1.1.0-preview.14</Version>");
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
-    "<PackageId>dw.tools.math.scientific</PackageId>");
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.scientific/BoundedExactScientific.cs",
-    "public const string RuleId=\"dw-math-bounded-exact-scientific-1\";");
+payload.Require.FileExists(
+    "tools/dw.tools.math.nuget-scientific-candidate/fixtures/ScientificBinaryConsumer.cs");
 
-var files = new[]
+var staged = new[]
 {
-    Distribution + "nuget-federation-f20-scientific-candidate.md",
+    Distribution + "nuget-federation-f21-scientific-publisher.md",
     Validator,
     Project,
-    Tool + "Program.cs",
-    Tool + "fixtures/ScientificBinaryConsumer.cs"
+    Tool + "Directory.Packages.props",
+    Tool + "Program.cs"
 };
-if (!complete)
+if (!completed)
 {
-    foreach (var file in files.Append(Evidence))
-        payload.Require.FileMissing(file);
+    foreach (var path in staged.Append(Evidence))
+        payload.Require.FileMissing(path);
 }
 else
 {
     payload.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
     payload.Require.JsonValueEquals(Evidence, "/package_published", JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence,
-        "/source_versions_modified", JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence,
-        "/native_nodes_retained", JsonValue.Create(541));
+    payload.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
 }
-var sources = new JsonObject();
-foreach (var file in files)
+var sourceHashes = new JsonObject();
+foreach (var path in staged)
 {
-    var installed = payload.Files.ReplaceFromStaged("staged/" + file, file);
-    sources[file] = installed.AfterSha256 ??
-        throw new InvalidDataException("RS153 staged source SHA-256 missing: " + file);
+    var operation = payload.Files.ReplaceFromStaged("staged/" + path, path);
+    sourceHashes[path] = operation.AfterSha256 ??
+        throw new InvalidDataException("RS154 staged source SHA missing " + path);
 }
-payload.Require.TextContains(
-    Distribution + "nuget-federation-f20-scientific-candidate.md",
-    "## Fifteen source-free numerical and refusal checks");
-payload.Require.TextContains(Tool + "Program.cs",
-    "MATH-SCIENTIFIC-BINARY|PASS|15");
-payload.Require.TextContains(Tool + "Program.cs",
-    "sourceFeedUnchanged = true");
-payload.Require.TextContains(Tool + "fixtures/ScientificBinaryConsumer.cs",
-    "MATH-SCIENTIFIC-BINARY|PASS|15");
-payload.Require.TextContains(Project, "<Compile Include=\"Program.cs\" />");
+payload.Require.TextContains(Distribution + "nuget-federation-f21-scientific-publisher.md",
+    "## Single RS154 disposable-feed publisher contract");
+payload.Require.TextContains(Tool + "Program.cs", "DotNetLocalPackageRepository");
+payload.Require.TextContains(Tool + "Program.cs", "MATH-SCIENTIFIC-BINARY|PASS|15");
+payload.Require.TextContains(Tool + "Program.cs", "RequireCleanOwnerAndRs154");
+payload.Require.TextContains(Tool + "Directory.Packages.props",
+    "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
 
-var before = Run(root, "baseline-check", "dotnet",
+var baseline = Run(root, "baseline-check", "dotnet",
     ["run", "--file", Validator, "--", "--check"]);
-Need(before.Output.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
-    "RS153 Scientific source/lineage baseline rejected");
-if (!complete)
+Need(baseline.Output.Contains(completed ? Qualified : Ready, StringComparison.Ordinal),
+    "RS154 original candidate / source lineage baseline check refused");
+if (!completed)
 {
     var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
         throw new InvalidDataException("NUGET_LOCAL must select the existing private feed");
-    Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
-         Directory.Exists(feed), "NUGET_LOCAL must be an existing absolute directory");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs153", "packages");
-    var receipts = new List<JsonNode>();
-    receipts.Add(Run(root, "tool-restore", "dotnet", [
+    Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
+        "NUGET_LOCAL must be an existing absolute directory");
+    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs154", "packages");
+    var commands = new List<JsonNode>();
+    commands.Add(Run(root, "tool-restore", "dotnet", [
         "restore", Project, "--source", feed, "--packages", cache,
         "-p:NuGetAudit=false"
     ]).Receipt);
-    receipts.Add(Run(root, "tool-build", "dotnet", [
+    commands.Add(Run(root, "tool-build", "dotnet", [
         "build", Project, "-c", "Release", "--no-restore",
         "-p:NuGetAudit=false"
     ]).Receipt);
-    var candidateResult = Run(root, "scientific-candidate", "dotnet", [
+    var executed = Run(root, "scientific-rehearsal", "dotnet", [
         "run", "--project", Project, "-c", "Release",
-        "--no-build", "--no-restore", "--", "--qualify-scientific", "."
+        "--no-build", "--no-restore", "--", "--rehearse"
     ]);
-    receipts.Add(candidateResult.Receipt);
+    commands.Add(executed.Receipt);
     var sdk = Run(root, "sdk", "dotnet", ["--version"]);
-    receipts.Add(sdk.Receipt);
-    Need(receipts.Count == 4, "four real parent process receipts are required");
-    var candidate = JsonNode.Parse(candidateResult.Output.Trim())?.AsObject() ??
-        throw new InvalidDataException("the original Scientific candidate must produce JSON");
-    Need(candidate["status"]?.GetValue<string>() ==
-             "qualified-independent-scientific-calendar-candidate-not-published" &&
-         candidate["packageId"]?.GetValue<string>() == "dw.tools.math.scientific" &&
-         candidate["packageVersion"]?.GetValue<string>() == "20260.20261105.1001" &&
-         candidate["historicalSourceVersion"]?.GetValue<string>() == "1.1.0-preview.14" &&
-         candidate["sourceProjectPath"]?.GetValue<string>() ==
-             "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj" &&
-         candidate["candidateArchivePath"]?.GetValue<string>() ==
-             "build/artifacts/rs153-scientific-candidate/candidate/dw.tools.math.scientific.20260.20261105.1001.nupkg" &&
-         candidate["candidateArchiveBytes"]?.GetValue<long>() > 2000 &&
-         candidate["candidateArchiveSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["candidateDllSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["packageDependencies"]?.GetValue<int>() == 0 &&
-         candidate["compiledBinaryConsumerChecks"]?.GetValue<int>() == 15 &&
-         candidate["independentPackageReference"]?.GetValue<bool>() == true &&
-         candidate["originalProjectReferencesUsed"]?.GetValue<bool>() == false &&
-         candidate["sourceProjectUnmodified"]?.GetValue<bool>() == true &&
-         candidate["sourceFeedUnchanged"]?.GetValue<bool>() == true &&
-         candidate["packagePublished"]?.GetValue<bool>() == false &&
-         candidate["versionReserved"]?.GetValue<bool>() == false &&
-         candidate["publicLicenseSelected"]?.GetValue<bool>() == false &&
-         candidate["installedPackageRollbackQualified"]?.GetValue<bool>() == false,
-         "the real Scientific archive or five-case binary consumer failed");
-    var original = candidate["originalSourcesSha256"]?.AsObject() ??
-        throw new InvalidDataException("eighteen original Scientific SHA-256 entries required");
-    Need(original.Count == 18, "sixteen source, project and lockfile SHA-256 required");
-    var commands = candidate["commandReceipts"]?.AsArray() ??
-        throw new InvalidDataException("seven real candidate and consumer receipts required");
-    Need(commands.Count == 7, "exactly seven inner commands required");
+    commands.Add(sdk.Receipt);
+    Need(commands.Count == 4, "four parent source and rehearsal command receipts required");
+    var trial = JsonNode.Parse(executed.Output.Trim())?.AsObject() ??
+        throw new InvalidDataException("rehearsal must produce real structured result");
+    Need(trial["status"]?.GetValue<string>() ==
+             "scientific-immutable-disposable-publisher-qualified" &&
+         trial["packageId"]?.GetValue<string>() == "dw.tools.math.scientific" &&
+         trial["packageVersion"]?.GetValue<string>() == "20260.20261105.1001" &&
+         trial["historicalSourceVersion"]?.GetValue<string>() == "1.1.0-preview.14" &&
+         trial["originalCandidateArchiveSha256"]?.GetValue<string>() ==
+             "233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f" &&
+         trial["originalCandidateDllSha256"]?.GetValue<string>() ==
+             "604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c" &&
+         trial["rehearsalArchiveSha256"]?.GetValue<string>()?.Length == 64 &&
+         trial["rehearsalDllSha256"]?.GetValue<string>()?.Length == 64 &&
+         trial["publisher"]?.GetValue<string>() == "Dw.Tools.NuGet/[20260.20261026.1010]" &&
+         trial["publisherDllSha256"]?.GetValue<string>() ==
+             "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61" &&
+         trial["packageDependencies"]?.GetValue<int>() == 0 &&
+         trial["consumerChecks"]?.GetValue<int>() == 15 &&
+         trial["disposableFeedPublished"]?.GetValue<bool>() == true &&
+         trial["publishedToNugetLocal"]?.GetValue<bool>() == false &&
+         trial["collisionRefused"]?.GetValue<bool>() == true &&
+         trial["alteredDigestRefused"]?.GetValue<bool>() == true &&
+         trial["cancelledRefused"]?.GetValue<bool>() == true &&
+         trial["originalSourcesUnchanged"]?.GetValue<bool>() == true &&
+         trial["originalSourceProjectVersionUnchanged"]?.GetValue<bool>() == true &&
+         trial["sharedFeedUnchanged"]?.GetValue<bool>() == true &&
+         trial["licenseSelected"]?.GetValue<bool>() == false &&
+         trial["rollbackQualified"]?.GetValue<bool>() == false,
+         "RS154 immutable disposable publication or fifteen-case binary contract refused");
+    var inner = trial["commandReceipts"]?.AsArray() ??
+        throw new InvalidDataException("seven actual inner commands required");
+    Need(inner.Count == 7, "seven inner commands required");
     var receipt = new JsonObject
     {
         ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.scientific-local-nuget-candidate-qualification",
+        ["kind"] = "dw.tools.math.scientific-private-immutable-publisher-rehearsal",
         ["status"] = Status,
         ["source_package_id"] = "dw.tools.math.scientific",
-        ["previous_owner_run"] = "RS152",
-        ["sourceBaselineCommit"] = "ba7a33dd453c51332cebac1a3246197b8d193c2d",
+        ["previous_owner_run"] = "RS153",
+        ["sourceBaselineCommit"] = "16779f7aa5dfcc1cebd1c3be43aaaa2fa6ab566e",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
         ["package_published"] = false,
@@ -175,40 +174,40 @@ if (!complete)
         ["installed_package_rollback_qualified"] = false,
         ["external_requests_transmitted"] = false,
         ["discovery_migration_qualified"] = false,
-        ["candidate"] = candidate,
-        ["source_files"] = sources,
-        ["command_receipts"] = payload.Json.Array(receipts.ToArray()),
+        ["rehearsal"] = trial,
+        ["source_files"] = sourceHashes,
+        ["command_receipts"] = payload.Json.Array(commands.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
         ["next_action"] =
-            "After independent Scientific candidate qualification, rehearse immutable publication on a disposable feed; original private publication requires a separate owner authorization and byte-exact release."
+            "After RS154 succeeds, validate original 37265-byte F17 candidate and owner rights. Separately authorize guarded --publish and --verify from clean main, then independent DWF physical-feed readback."
     };
     payload.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
 }
-payload.ProjectPlan.RequireNodeState("M6", "done");
+payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
-var after = Run(root, "target-check", "dotnet",
+var final = Run(root, "target-check", "dotnet",
     ["run", "--file", Validator, "--", "--check"]);
-Need(after.Output.Contains(Qualified, StringComparison.Ordinal) &&
-     after.Output.Contains(
-         "MATH-SCIENTIFIC-F20:PUBLISHED=false;PUBLIC=false;ROLLBACK=false",
+Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
+     final.Output.Contains(
+         "MATH-SCIENTIFIC-F21:SHARED-PUBLICATION=false;ROLLBACK=false;PUBLIC=false",
          StringComparison.Ordinal),
-     "RS153 Scientific candidate target receipt rejected");
+     "RS154 exact immutable rehearsal receipt target check failed");
 return payload.Complete();
 
-static void Need(bool okay, string reason)
+static void Need(bool condition, string reason)
 {
-    if (!okay) throw new InvalidDataException("RS153: " + reason);
+    if (!condition) throw new InvalidDataException("RS154: " + reason);
 }
 static (JsonNode Receipt, string Output) Run(
-    string root, string id, string executable, string[] args)
+    string root, string id, string program, string[] args)
 {
     using var process = new Process
     {
         StartInfo = new ProcessStartInfo
         {
-            FileName = executable,
+            FileName = program,
             WorkingDirectory = root,
             UseShellExecute = false,
             RedirectStandardOutput = true,
@@ -218,34 +217,33 @@ static (JsonNode Receipt, string Output) Run(
     process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
     process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-rs153", "packages");
-    foreach (var argument in args)
-        process.StartInfo.ArgumentList.Add(argument);
-    var watch = Stopwatch.StartNew();
-    Need(process.Start(), "could not execute bounded command " + id);
+        Path.Combine(root, ".workflow", "local", "nuget-rs154", "packages");
+    foreach (var argument in args) process.StartInfo.ArgumentList.Add(argument);
+    var clock = Stopwatch.StartNew();
+    Need(process.Start(), "could not launch RS154 command " + id);
     var stdout = process.StandardOutput.ReadToEndAsync();
     var stderr = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(540000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("RS153 Scientific candidate command timed out: " + id);
+        throw new TimeoutException("RS154 command timed out: " + id);
     }
     var output = stdout.GetAwaiter().GetResult();
     var errors = stderr.GetAwaiter().GetResult();
-    watch.Stop();
+    clock.Stop();
     if (process.ExitCode != 0)
     {
-        var diagnostic = output + "\n" + errors;
+        var diagnostics = output + "\n" + errors;
         throw new InvalidDataException(id + " exit=" + process.ExitCode +
-            "\n" + diagnostic[..System.Math.Min(diagnostic.Length, 4000)]);
+            "\n" + diagnostics[..System.Math.Min(diagnostics.Length, 4200)]);
     }
-    Console.WriteLine("RS153 " + id + " exit=0 elapsed_ms=" + watch.ElapsedMilliseconds);
+    Console.WriteLine("RS154 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"] = id,
         ["exit_code"] = process.ExitCode,
-        ["command"] = executable + " " + string.Join(" ", args),
-        ["elapsed_ms"] = watch.ElapsedMilliseconds,
-        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1000)]
+        ["command"] = program + " " + string.Join(" ", args),
+        ["elapsed_ms"] = clock.ElapsedMilliseconds,
+        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1100)]
     }, output);
 }
