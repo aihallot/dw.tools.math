@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "id": "RS150",
+  "title": "Qualify original zero-dependency Foundation calendar NuGet candidate with five source-free binary checks",
+  "state": "prepared",
+  "commitMessage": "test: qualify Foundation calendar NuGet candidate without publication",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M0"
+  ],
+  "contribution": {
+    "summary": "Qualify a source-identical Foundation NuGet calendar candidate with zero dependencies and five independent package-only binary contract probes, without private-feed publication.",
+    "value": "Build and pack the unchanged FoundationContract source and source csproj, verify the actual .nuspec and DLL hashes, and compile a fresh single-PackageReference consumer with exact identity, loaded SHA and provider-refusal checks.",
+    "debtChanges": [
+      "The Foundation candidate is unpublished, unreserved and immutable by ID/version once its original bytes are qualified; later publication remains a distinct owner decision.",
+      "Historical Foundation source Version 0.1.0-preview.1, the single original C# source, all 541 completed native nodes and five published private packages remain unchanged.",
+      "Foundation is only a bootstrap contract, not scientific accuracy proof; public licensing, installed rollback, OS/RID claims, Decision, Discovery and AURA adoption remain out of scope."
+    ],
+    "nextAction": "After a successful RS150, rehearse the immutable Foundation publisher on a disposable feed; require separate owner consent for publication of exact original candidate bytes.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f17-foundation-candidate.md",
+    "docs/distribution/ValidateNugetFoundationCandidate.cs",
+    "tools/dw.tools.math.nuget-foundation-candidate/dw.tools.math.nuget-foundation-candidate.csproj",
+    "tools/dw.tools.math.nuget-foundation-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-foundation-candidate/fixtures/FoundationBinaryConsumer.cs",
+    "docs/distribution/nuget-federation-f17-foundation-candidate-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "foundation-f17-source",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFoundationCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-analysis-f16",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
