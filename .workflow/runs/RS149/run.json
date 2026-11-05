@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "RS149",
+  "title": "Independently verify the original physically published Analysis NuGet package and thirteen-case binary consumer",
+  "state": "prepared",
+  "commitMessage": "test: verify published Analysis NuGet archive and isolated binary consumer",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Independently qualify the physical private Analysis NuGet archive with exact SHA-256 and thirteen package-only binary oracles, without republishing or changing Math sources.",
+    "value": "Reinspect the exact 27,831-byte original RS147 archive in NUGET_LOCAL, validate nuspec and loaded DLL hashes, restore a single-package snapshot with sources cleared, and retain bounded actual run receipts.",
+    "debtChanges": [
+      "Operator --publish and --verify outputs are independent owner evidence; RS149 requires its own read-only physical-feed DWF receipt.",
+      "The qualified RS148 rehearsal archive is not the original candidate and must never replace published Analysis bytes under the same package version.",
+      "No public license, installed rollback, feed-wide inventory, other OS/RID claim, Decision, Discovery or AURA integration is authorized."
+    ],
+    "nextAction": "After successful RS149, inspect a single next dependency-ready Math package source candidate; keep original-package publication a separate owner-controlled gate.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f16-analysis-published.md",
+    "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-analysis-feed-verify/dw.tools.math.nuget-analysis-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-analysis-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f16-analysis-published-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "analysis-f16-physical",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-analysis-f15",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-analysis-f14",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetAnalysisCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
