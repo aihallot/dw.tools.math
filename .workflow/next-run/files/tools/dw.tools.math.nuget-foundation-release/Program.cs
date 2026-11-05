@@ -233,7 +233,7 @@ internal static class Program
         var original = PathFor(root, CandidatePath);
         Need(IsExactPhysical(original, 3863, CandidateSha) &&
              PackageDllHash(original) == CandidateDllSha,
-             "only the exact original 27,831-byte RS150 Foundation candidate may be published");
+             "only the exact original 3,863-byte RS150 Foundation candidate may be published");
         Need(DateOnly.FromDateTime(DateTime.Now) >= new DateOnly(2026, 11, 5),
              "original candidate creation date cannot be in the future");
         var receiptDirectory = PathFor(root, "build/artifacts/rs151-foundation-release/receipts");
