@@ -62,7 +62,7 @@ Need(Text(previous, "runId") == "RS150" &&
      failures.GetProperty("allocatedAttemptFailureCount").GetInt32() == 0 &&
      Flag(failures, "firstPassSucceeded") &&
      Text(previous.GetProperty("git"), "commitMessage") ==
-         "test: qualify independent Foundation calendar NuGet candidate without publication",
+         "test: qualify Foundation calendar NuGet candidate without publication",
      "RS150 must be the observed successful first-pass predecessor");
 var owner = candidateEvidence.RootElement;
 var candidate = owner.GetProperty("candidate");
@@ -110,7 +110,7 @@ Need(File.ReadAllText(Tool + "dw.tools.math.nuget-foundation-release.csproj")
      File.ReadAllText(Tool + "Program.cs").Contains(
          "MATH-FOUNDATION-BINARY|PASS|5", StringComparison.Ordinal) &&
      File.ReadAllText(Tool + "Program.cs").Contains(
-         "RequireCleanOwnerAndRs148", StringComparison.Ordinal),
+         "RequireCleanOwnerAndRs151", StringComparison.Ordinal),
      "shared publisher and guarded owner modes must remain exact");
 
 var finished = File.Exists(Evidence);
