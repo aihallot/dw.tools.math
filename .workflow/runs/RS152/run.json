@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS152",
+  "title": "Independently verify physically published original Foundation NuGet archive and five-case binary consumer",
+  "state": "prepared",
+  "commitMessage": "test: verify published Foundation NuGet archive and isolated binary consumer",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M0"
+  ],
+  "contribution": {
+    "summary": "Independently verify the private Foundation NuGet physical archive and five isolated binary package contracts, preserving exact original hashes without republishing.",
+    "value": "Read the physical 3863-byte original Foundation package from NUGET_LOCAL, inspect exact nuspec/DLL SHA-256 and zero dependencies, then compile a fresh source-free single-PackageReference consumer.",
+    "debtChanges": [
+      "Owner-supplied publication and verify outputs must be independently observed by RS152; the shared feed is not writable by this run.",
+      "RS151 is durably succeeded after two failed preselection invocations, firstPassSucceeded=false and attempt 001; preserve its exact retained provenance.",
+      "The original Foundation candidate archive differs from disposable RS151 rehearsal bytes and must never be replaced under the same ID/version.",
+      "No public license, NuGet.org release, installed rollback, cross-OS/RID guarantee, feed-wide inventory, Decision/Discovery or AURA migration is implied."
+    ],
+    "nextAction": "After a successful physical Foundation feed qualification, examine the next dependency-ready Math source package; publication remains a separate owner-controlled action.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f19-foundation-published.md",
+    "docs/distribution/ValidateNugetFoundationPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-foundation-feed-verify/dw.tools.math.nuget-foundation-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-foundation-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f19-foundation-published-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "foundation-f19-physical",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFoundationPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-foundation-f18",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFoundationPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-foundation-f17",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFoundationCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
