@@ -158,6 +158,11 @@ if (!completed)
             "233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f",
         ["original_dll_sha256"] =
             "604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c",
+        ["historical_controller_source_sha256"] =
+            "3dad3a39d3f6290c669d9f7bc7c2e561f215a9bf12fad026326305629907f394",
+        ["corrected_controller_source_sha256"] =
+            sourceHashes[Program]?.GetValue<string>() ??
+                throw new InvalidDataException("RS155 corrected controller SHA missing"),
         ["operator_message_archive_bytes"] = 37265,
         ["operator_message_binary_checks"] = 15,
         ["native_nodes_retained"] = 541,
