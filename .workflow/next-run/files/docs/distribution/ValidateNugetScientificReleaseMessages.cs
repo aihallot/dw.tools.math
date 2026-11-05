@@ -24,6 +24,8 @@ const string Source = Tool + "Program.cs";
 const string Candidate = "docs/distribution/nuget-federation-f20-scientific-candidate-qualified.json";
 const string Rehearsal = "docs/distribution/nuget-federation-f21-scientific-publisher-qualified.json";
 const string Previous = ".aura/workflow/reports/RS154/attempt-001.json";
+const string HistoricalController =
+    ".workflow/runs/RS154/staged/tools/dw.tools.math.nuget-scientific-release/Program.cs";
 const string ArchiveSha = "233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f";
 const string DllSha = "604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c";
 static void Need(bool okay, string reason)
@@ -108,6 +110,15 @@ const string WrongBytes =
 const string CorrectBinary = "|binary=15|archive=";
 const string WrongBinary = "|binary=5|archive=";
 var program = File.ReadAllText(Source);
+Need(File.Exists(HistoricalController), "RS154 historical controller not retained");
+var historical = File.ReadAllText(HistoricalController);
+var previousSourceHash = Value(f21.RootElement.GetProperty("source_files"), Source);
+Need(Hash(HistoricalController) == previousSourceHash &&
+     historical.Split(WrongBytes, StringSplitOptions.None).Length - 1 == 1 &&
+     historical.Split(WrongBinary, StringSplitOptions.None).Length - 1 == 1 &&
+     program == historical.Replace(WrongBytes, CorrectBytes, StringComparison.Ordinal)
+                          .Replace(WrongBinary, CorrectBinary, StringComparison.Ordinal),
+     "release controller must differ from qualified RS154 code by exactly two message substitutions");
 Need(program.Split(CorrectBytes, StringSplitOptions.None).Length - 1 == 1 &&
      !program.Contains(WrongBytes, StringComparison.Ordinal) &&
      program.Split(CorrectBinary, StringSplitOptions.None).Length - 1 == 1 &&
@@ -143,6 +154,8 @@ if (completed)
              "c6621ea1c5032c8e52da391bd233e0e0df5f1ff1" &&
          Value(result, "original_archive_sha256") == ArchiveSha &&
          Value(result, "original_dll_sha256") == DllSha &&
+         Value(result, "historical_controller_source_sha256") == previousSourceHash &&
+         Value(result, "corrected_controller_source_sha256") == Hash(Source) &&
          result.GetProperty("operator_message_archive_bytes").GetInt32() == 37265 &&
          result.GetProperty("operator_message_binary_checks").GetInt32() == 15 &&
          result.GetProperty("native_nodes_retained").GetInt32() == 541 &&
