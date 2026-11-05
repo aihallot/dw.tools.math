@@ -90,7 +90,7 @@ foreach (var file in files)
 }
 payload.Require.TextContains(
     Distribution + "nuget-federation-f20-scientific-candidate.md",
-    "## Independent binary-only Scientific consumer");
+    "## Fifteen source-free numerical and refusal checks");
 payload.Require.TextContains(Tool + "Program.cs",
     "MATH-SCIENTIFIC-BINARY|PASS|15");
 payload.Require.TextContains(Tool + "Program.cs",
