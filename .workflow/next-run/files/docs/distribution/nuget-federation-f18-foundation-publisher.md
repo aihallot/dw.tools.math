@@ -20,6 +20,14 @@ After a successful RS151 result and a separate explicit owner decision, the guar
 
 A later RS152 independent DWF physical-feed readback may be prepared **only after** successful owner `--publish` and `--verify` outputs. RS151 itself must not call either mode or mutate shared feed archives.
 
+## RS151 preselection incident review (two failures, no allocated attempt)
+
+This is the same RS151 run, not a successor or a reset of failed evidence. The first invocation `run-next-20261105T120849Z-0bd406e2f24c6cca` failed before attempt allocation: payload source checks expected a Markdown heading that differed from this contract and the obsolete method name `RequireCleanOwnerAndRs148`. The second invocation `run-next-20261105T124248Z-0b922fb5f61ec9d5` also failed before attempt allocation: the read-only Foundation validator still expected the wrong RS150 result message `test: qualify independent Foundation calendar NuGet candidate without publication`. The actual RS150 report confirms `test: qualify Foundation calendar NuGet candidate without publication`, attempt 001, first-pass success.
+
+The correction aligns the payload heading with this document, verifies the actual `RequireCleanOwnerAndRs151` method, aligns validator predecessor identity to the durable report, corrects the validator's inherited owner method token, and keeps Foundation's original archive size (3,863 bytes), SHA-256, candidate version and source count explicit. The controller still runs only `--rehearse` within DWF. A comparison audit covers F17 receipt fields, F16 predecessor, five original binary oracles, tool-generated rehearsal JSON versus validator expectations, targeted read-only validation markers, selected DWF project scope and the intended staged mutation files. No other repository, feed or publishing policy changes.
+
+Both failures produced separate durable GitHub `workflow/evidence/preselection-rs151/...` branches. Each reports `attemptAllocated=false`, `workingTreeChanged=false`; the cumulative retry ordinal is 2 and allocated attempts remain 0. If the corrected run later succeeds, its `firstPassSucceeded` must remain false because these failures are retained provenance.
+
 ## Scope and unqualified claims
 
 RS151 may persist this Markdown contract, its controller/project, a read-only validator and a durable F18 rehearsal receipt only. All 541 completed native roadmap nodes, source version, original Foundation contract, five previously published Math packages and F1–F17 receipts remain unchanged. This rehearsal does not select a public license, publish to NuGet.org, certify installed rollback, concurrent-writer recovery, other OS/RIDs, feed-wide integrity, Discovery migration, Decision integration or AURA admission.
