@@ -22,8 +22,8 @@ payload.Workflow.RequireCurrentRun("RS152", null, null, null, null, null);
 payload.Workflow.RequirePriorSuccess("RS151", 1,
     "test: qualify Foundation immutable NuGet publisher rehearsal",
     "0.1.63", 2, 2, 0, false);
+payload.ProjectPlan.RequireNodeState("M0", "done");
 payload.ProjectPlan.RequireNodeState("M7", "done");
-payload.ProjectPlan.RequireNodeState("M6", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
     JsonValue.Create("0.1.122"));
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
