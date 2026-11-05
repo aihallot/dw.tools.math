@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS154",
+  "title": "Rehearse Scientific immutable NuGet publisher on a disposable feed with fifteen binary cases",
+  "state": "prepared",
+  "commitMessage": "test: qualify Scientific immutable NuGet publisher rehearsal",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M6"
+  ],
+  "contribution": {
+    "summary": "Rehearse immutable Scientific NuGet publishing on a disposable feed, validating sixteen unchanged source files, fifteen package-only binary probes and refusal boundaries without private-feed publication.",
+    "value": "Use pinned Dw.Tools.NuGet to compile a separate rehearsal package from sixteen SHA-pinned original Scientific sources, publish/read back only to a disposable feed, reject collision/altered digest/cancellation, and restore an isolated consumer.",
+    "debtChanges": [
+      "RS153 original Scientific candidate contains 37265 bytes and unique original archive/DLL SHA-256; a disposable rehearsal archive is separate and cannot replace original bytes.",
+      "The original Scientific source Version 1.1.0-preview.14 and 18 source fingerprints, 541 completed native nodes, F1-F20 evidence and six private published packages remain unchanged.",
+      "Private NUGET_LOCAL publication, new public license, installed rollback, broader OS/RID certification and Discovery/Decision/AURA integration remain unauthorized."
+    ],
+    "nextAction": "After successful RS154, the owner may authorize separate guarded --publish and --verify for the exact original F20 archive, then an independent DWF physical-feed readback.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f21-scientific-publisher.md",
+    "docs/distribution/ValidateNugetScientificPublisher.cs",
+    "tools/dw.tools.math.nuget-scientific-release/dw.tools.math.nuget-scientific-release.csproj",
+    "tools/dw.tools.math.nuget-scientific-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-scientific-release/Program.cs",
+    "docs/distribution/nuget-federation-f21-scientific-publisher-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "scientific-f21-rehearsal",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetScientificPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-scientific-f20",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetScientificCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-foundation-f19",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetFoundationPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
