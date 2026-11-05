@@ -90,10 +90,10 @@ foreach (var path in staged)
         throw new InvalidDataException("RS151 staged source SHA missing " + path);
 }
 payload.Require.TextContains(Distribution + "nuget-federation-f18-foundation-publisher.md",
-    "## Single RS151 rehearsal contract");
+    "## Single DWF RS151 objective");
 payload.Require.TextContains(Tool + "Program.cs", "DotNetLocalPackageRepository");
 payload.Require.TextContains(Tool + "Program.cs", "MATH-FOUNDATION-BINARY|PASS|5");
-payload.Require.TextContains(Tool + "Program.cs", "RequireCleanOwnerAndRs148");
+payload.Require.TextContains(Tool + "Program.cs", "RequireCleanOwnerAndRs151");
 payload.Require.TextContains(Tool + "Directory.Packages.props",
     "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
 
@@ -179,7 +179,7 @@ if (!completed)
         ["command_receipts"] = payload.Json.Array(commands.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
         ["next_action"] =
-            "After RS151 succeeds, validate original 3863-byte F14 candidate and owner rights. Separately authorize guarded --publish and --verify from clean main, then independent DWF physical-feed readback."
+            "After RS151 succeeds, validate original 3863-byte F17 candidate and owner rights. Separately authorize guarded --publish and --verify from clean main, then independent DWF physical-feed readback."
     };
     payload.Files.WriteComplete(Evidence,
         receipt.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
