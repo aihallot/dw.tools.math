@@ -22,6 +22,15 @@ A fresh consumer is built with **one direct `PackageReference` to the exact Stat
 
 The eighteen probes are bounded examples and do not certify all statistical APIs, universal numerical accuracy or cryptographic suitability. Eleven real internal receipts are retained, including the explicit restore and build of the existing F1 preflight executable in the disposable DWF checkout, its two read-only inventory observations, candidate and consumer commands, and SDK. F1 is built once from the exact private feed before either `--no-build --no-restore` observation; neither invocation assumes prior build artifacts. The controller refuses changes to the original source hashes, Quantities package, shared NuGet DLL or published-feed scoped inventory. The F24 receipt records the dynamically selected version, original project/lockfile SHA-256, all eight C# source SHA-256 values, archived package/DLL hashes, exact `dw.quantities` dependency and observed environment.
 
+## Two preselection refusals and exact preparation correction
+
+Before any attempt was allocated, the operator's two `dwf run next` invocations produced durable **pre-attempt**, unchanged-working-tree refusal reports:
+
+- `run-next-20261106T101031Z-c4980352814d6788`: the payload required the new `StatisticsBinaryConsumer.cs` fixture to already exist **before staged installation**. The same file-existence guard was moved after `ReplaceFromStaged`; the original fixture and eighteen tests were retained.
+- `run-next-20261106T113150Z-1f64471f7e8884e0`: the candidate's F1 before-inspection attempted `dotnet run --no-build --no-restore` without the preflight executable in DWF's fresh disposable repository. The candidate now explicitly restores and builds the **existing** `dw.tools.math.nuget-preflight` project with the pinned `Dw.Tools.NuGet` package from `NUGET_LOCAL` before either read-only inventory inspection. The original eleven actual command receipts record these two new prerequisite operations as well as the retained nine.
+
+Both failures occurred without an allocated attempt; neither authorizes changing the candidate, source, publisher, dependency, binary consumer or publication policy. This second-failure incident review covers the entire candidate-to-receipt path and does not claim that it has been executed successfully.
+
 ## DWF scope and explicit exclusions
 
 RS157 only installs this contract, the read-only F24 validator, the candidate controller/project/props, the unchanged Statistics consumer fixture and the F24 qualification receipt. All 541 completed native DWF nodes, original Statistics version and reference, existing seven published packages and F1–F23 receipts remain unchanged.
