@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 
 const string Evidence = "docs/distribution/nuget-federation-f25-statistics-publisher-qualified.json";
 const string Status = "rs158-statistics-immutable-local-publisher-rehearsal-qualified-unpublished";
-const string Ready = "MATH-STATISTICS-F12:SOURCE=READY;REHEARSAL=PENDING;NATIVE=541";
-const string Qualified = "MATH-STATISTICS-F12:REHEARSAL=QUALIFIED;BINARY=18;NATIVE=541";
-const string Limits = "MATH-STATISTICS-F12:SHARED-PUBLICATION=false;ROLLBACK=false;PUBLIC=false";
+const string Ready = "MATH-STATISTICS-F25:SOURCE=READY;REHEARSAL=PENDING;NATIVE=541";
+const string Qualified = "MATH-STATISTICS-F25:REHEARSAL=QUALIFIED;BINARY=18;NATIVE=541";
+const string Limits = "MATH-STATISTICS-F25:SHARED-PUBLICATION=false;ROLLBACK=false;PUBLIC=false";
 
 var files = new[]
 {
