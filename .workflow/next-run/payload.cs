@@ -175,7 +175,7 @@ if (!complete)
     var chosenVersion = candidate["packageVersion"]?.GetValue<string>() ??
         throw new InvalidDataException("Statistics candidate calendar version was not provided");
     Need(chosenVersion.StartsWith("20260.2026", StringComparison.Ordinal) &&
-         chosenVersion.Length == 21 && chosenVersion.EndsWith(".1001", StringComparison.Ordinal),
+         chosenVersion.Length == 19 && chosenVersion.EndsWith(".1001", StringComparison.Ordinal),
          "Statistics allocator did not select an exact first daily calendar candidate");
     Need(candidate["candidateArchivePath"]?.GetValue<string>() ==
              "build/artifacts/rs157-statistics-candidate/candidate/dw.tools.math.statistics." +
