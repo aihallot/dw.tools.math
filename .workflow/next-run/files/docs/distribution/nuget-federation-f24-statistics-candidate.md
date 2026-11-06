@@ -22,14 +22,16 @@ A fresh consumer is built with **one direct `PackageReference` to the exact Stat
 
 The eighteen probes are bounded examples and do not certify all statistical APIs, universal numerical accuracy or cryptographic suitability. Eleven real internal receipts are retained, including the explicit restore and build of the existing F1 preflight executable in the disposable DWF checkout, its two read-only inventory observations, candidate and consumer commands, and SDK. F1 is built once from the exact private feed before either `--no-build --no-restore` observation; neither invocation assumes prior build artifacts. The controller refuses changes to the original source hashes, Quantities package, shared NuGet DLL or published-feed scoped inventory. The F24 receipt records the dynamically selected version, original project/lockfile SHA-256, all eight C# source SHA-256 values, archived package/DLL hashes, exact `dw.quantities` dependency and observed environment.
 
-## Two preselection refusals and exact preparation correction
+## Three preselection refusals and exact preparation correction
 
 Before any attempt was allocated, the operator's two `dwf run next` invocations produced durable **pre-attempt**, unchanged-working-tree refusal reports:
 
 - `run-next-20261106T101031Z-c4980352814d6788`: the payload required the new `StatisticsBinaryConsumer.cs` fixture to already exist **before staged installation**. The same file-existence guard was moved after `ReplaceFromStaged`; the original fixture and eighteen tests were retained.
 - `run-next-20261106T113150Z-1f64471f7e8884e0`: the candidate's F1 before-inspection attempted `dotnet run --no-build --no-restore` without the preflight executable in DWF's fresh disposable repository. The candidate now explicitly restores and builds the **existing** `dw.tools.math.nuget-preflight` project with the pinned `Dw.Tools.NuGet` package from `NUGET_LOCAL` before either read-only inventory inspection. The original eleven actual command receipts record these two new prerequisite operations as well as the retained nine.
 
-Both failures occurred without an allocated attempt; neither authorizes changing the candidate, source, publisher, dependency, binary consumer or publication policy. This second-failure incident review covers the entire candidate-to-receipt path and does not claim that it has been executed successfully.
+A third operator invocation, `run-next-20261106T130251Z-9b983d561929ebf6`, reached `consumer-build` but refused **before attempt allocation** with `CS8629`: nullable `SampleVariance.Value` on the independent fixture's line 56. The helper `Need(result.SampleVariance.HasValue, ...)` was not a compiler-recognized flow guard. The third preparation correction preserves the same descriptive-variance oracle and requires a typed non-null extraction via `result.SampleVariance ?? throw new InvalidOperationException(...)` before calling `Near(sample, 1d)`. All eighteen independent case identifiers and expected values remain unchanged.
+
+All three failures occurred without an allocated attempt, durable product mutation, or publication. After each, the complete bounded candidate pipeline was checked against the real evidence: original dependency/lockfile, F1 tool restore/build and two read-only observations, candidate pack and `.nuspec` dependency identity, independent package consumer and nullability, eleven internal/four outer receipts, source/feed unchanged checks and target-reentry. This incident review does not assert that the corrected run has executed or that any tests have now passed.
 
 ## DWF scope and explicit exclusions
 
