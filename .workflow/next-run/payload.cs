@@ -73,9 +73,6 @@ payload.Require.TextContains(
     "<ProjectReference Include=\"../dw.quantities/dw.quantities.csproj\" />");
 payload.Require.FileExists(
     "tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj");
-payload.Require.FileExists(
-    "tools/dw.tools.math.nuget-statistics-candidate/fixtures/StatisticsBinaryConsumer.cs");
-
 var files = new[]
 {
     Distribution + "nuget-federation-f24-statistics-candidate.md",
@@ -105,6 +102,7 @@ foreach (var file in files)
     sourceHashes[file] = installed.AfterSha256 ??
         throw new InvalidDataException("RS157 staged source fingerprint missing " + file);
 }
+payload.Require.FileExists(Tool + "fixtures/StatisticsBinaryConsumer.cs");
 payload.Require.TextContains(Distribution + "nuget-federation-f24-statistics-candidate.md",
     "## Eighteen isolated package-only binary probes");
 payload.Require.TextContains(Tool + "Program.cs", "originalSourceLockSha256 = ShaFile(lockPath)");
