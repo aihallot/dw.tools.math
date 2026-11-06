@@ -113,15 +113,31 @@ Need(Text(backlog.RootElement, "status") == "done" &&
          .All(m => Text(m, "state") == "done"),
      "native Math roadmap or guidance drifted");
 
+const string CorrectedReleaseSource =
+    "tools/dw.tools.math.nuget-scientific-release/Program.cs";
+const string HistoricalReleaseSource =
+    ".workflow/runs/RS154/staged/tools/dw.tools.math.nuget-scientific-release/Program.cs";
 foreach (var previous in new[]
 {
     source.GetProperty("source_files"),
-    rehearsal.GetProperty("source_files"),
     corrected.GetProperty("source_files")
 })
     foreach (var item in previous.EnumerateObject())
         Need(File.Exists(item.Name) && Hash(item.Name) == item.Value.GetString(),
-             "earlier owner source fingerprint changed: " + item.Name);
+             "current original or RS155 source fingerprint changed: " + item.Name);
+foreach (var item in rehearsal.GetProperty("source_files").EnumerateObject())
+{
+    var inspected = item.Name == CorrectedReleaseSource
+        ? HistoricalReleaseSource
+        : item.Name;
+    Need(File.Exists(inspected) && Hash(inspected) == item.Value.GetString(),
+         "RS154 historical source fingerprint changed: " + item.Name);
+}
+Need(Text(corrected, "historical_controller_source_sha256") ==
+         Text(rehearsal.GetProperty("source_files"), CorrectedReleaseSource) &&
+     Text(corrected, "corrected_controller_source_sha256") ==
+         Hash(CorrectedReleaseSource),
+     "RS154 historical and RS155 corrected release controller lineage has drifted");
 
 const string Tool = "tools/dw.tools.math.nuget-scientific-feed-verify/";
 Need(File.ReadAllText(Tool + "dw.tools.math.nuget-scientific-feed-verify.csproj")
