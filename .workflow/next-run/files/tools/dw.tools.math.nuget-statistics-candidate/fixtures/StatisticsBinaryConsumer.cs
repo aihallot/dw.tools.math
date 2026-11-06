@@ -52,8 +52,8 @@ Probe("descriptive-variances", () =>
 {
     var result = DescriptiveStatistics64.Analyze(new double[] { 1d, 2d, 3d });
     Near(result.PopulationVariance, 2d / 3d);
-    Need(result.SampleVariance is { } sample, "Sample variance absent.");
-    Near(sample, 1d);
+    Need(result.SampleVariance.HasValue, "Sample variance absent.");
+    Near(result.SampleVariance.Value, 1d);
 });
 Probe("empty-sample-refusal", () =>
     Throws<ArgumentException>(() => DescriptiveStatistics64.Analyze(Array.Empty<double>())));
