@@ -139,6 +139,17 @@ internal static class Program
 
         var cache = RepoFile(root, ".workflow/local/nuget-rs157/packages");
         var commands = new List<object>();
+        // A disposable DWF checkout has no prebuilt F1 executable.
+        // Restore/build the existing F1 tool from the exact private feed once;
+        // both subsequent inventory observations then run that same binary.
+        commands.Add(Run(root, cache, "f1-tool-restore", "dotnet", [
+            "restore", F1Project, "--source", feed, "--packages", cache,
+            "-p:NuGetAudit=false"
+        ]).Receipt);
+        commands.Add(Run(root, cache, "f1-tool-build", "dotnet", [
+            "build", F1Project, "-c", "Release", "--no-restore",
+            "-p:NuGetAudit=false"
+        ]).Receipt);
         var before = Run(root, cache, "f1-inventory-before", "dotnet", [
             "run", "--project", F1Project, "-c", "Release",
             "--no-build", "--no-restore", "--", "--inspect", "."
@@ -307,8 +318,8 @@ internal static class Program
              "original Statistics code, physical published base, candidate or shared feed changed");
         var sdk = Run(root, cache, "sdk", "dotnet", ["--version"]);
         commands.Add(sdk.Receipt);
-        Need(commands.Count == 9,
-             "nine actual source/consumer/feed and SDK command results must be captured");
+        Need(commands.Count == 11,
+             "eleven actual F1 tool, source/consumer/feed and SDK command results must be captured");
 
         Console.WriteLine(JsonSerializer.Serialize(new
         {
