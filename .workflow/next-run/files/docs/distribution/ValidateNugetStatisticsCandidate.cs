@@ -209,9 +209,10 @@ if (completed)
              "original Statistics source/lockfile changed: " + item.Name);
     var inner = candidate.GetProperty("commands").EnumerateArray().ToArray();
     var outer = result.GetProperty("command_receipts").EnumerateArray().ToArray();
-    Need(inner.Length == 9 && outer.Length == 4 &&
+    Need(inner.Length == 11 && outer.Length == 4 &&
          inner.Select(x => Text(x, "id")).SequenceEqual(new[]
          {
+             "f1-tool-restore", "f1-tool-build",
              "f1-inventory-before", "statistics-linked-restore",
              "statistics-linked-build", "statistics-candidate-pack",
              "consumer-restore", "consumer-build", "consumer-binary-run",
@@ -223,7 +224,7 @@ if (completed)
          }) &&
          inner.All(x => x.GetProperty("exit_code").GetInt32() == 0) &&
          outer.All(x => x.GetProperty("exit_code").GetInt32() == 0),
-         "nine inner and four outer actual process receipts required");
+         "eleven inner (including F1 restore/build) and four outer actual process receipts required");
 }
 Console.WriteLine(completed ? Qualified : Ready);
 Console.WriteLine(Limits);
