@@ -177,7 +177,7 @@ if (!completed)
              "604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c" &&
          observed["declaredDependencyCount"]?.GetValue<int>() == 0 &&
          observed["publishedPackageSnapshotCount"]?.GetValue<int>() == 1 &&
-         observed["compiledConsumerChecks"]?.GetValue<int>() == 5 &&
+         observed["compiledConsumerChecks"]?.GetValue<int>() == 15 &&
          observed["independentPackageReference"]?.GetValue<bool>() == true &&
          observed["physicalArchiveInspected"]?.GetValue<bool>() == true &&
          observed["publishedArchiveUnchanged"]?.GetValue<bool>() == true &&
@@ -196,8 +196,8 @@ if (!completed)
         ["kind"] = "dw.tools.math.scientific-private-feed-independent-qualification",
         ["status"] = Status,
         ["source_package_id"] = "dw.tools.math.scientific",
-        ["previous_owner_run"] = "RS154",
-        ["sourceBaselineCommit"] = "63b2925234e3c8f27f6da704707084c177b91234",
+        ["previous_owner_run"] = "RS155",
+        ["sourceBaselineCommit"] = "158b3629a71777be17660cd42038c87732f44467",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
         ["physically_published_package_verified"] = true,
