@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "id": "RS155",
+  "title": "Correct and compile Scientific private release messages with exact RS154 historical source diff",
+  "state": "prepared",
+  "commitMessage": "fix: correct Scientific private NuGet publication and verification diagnostics",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M6"
+  ],
+  "contribution": {
+    "summary": "Correct two misleading Scientific private-release messages, proving a two-string-only change against the pinned RS154 controller source and a clean tool compilation.",
+    "value": "Ensure the operator refusal names the original 37,265-byte candidate and verification prints binary=15 after the actual fifteen-case consumer; retain F20/F21 histories without publishing or rebuilding the candidate.",
+    "debtChanges": [
+      "The previous RS154 controller was behaviorally qualified on a disposable feed but its owner-facing size and binary-count messages were inherited from Foundation and inaccurate.",
+      "F22 pins the original RS154 historical controller SHA and proves the corrected source differs by exactly two diagnostics; the original archive and all sixteen Scientific source files remain immutable.",
+      "No shared NUGET_LOCAL publication, new public license, installed rollback, feed-wide audit, external repository modification or scientific capability expansion occurs."
+    ],
+    "nextAction": "After successful RS155, the owner may separately publish and verify the exact original F20 Scientific candidate from clean main, then request independent physical-feed readback.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1050
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f22-scientific-release-messages.md",
+    "docs/distribution/ValidateNugetScientificReleaseMessages.cs",
+    "tools/dw.tools.math.nuget-scientific-release/Program.cs",
+    "docs/distribution/nuget-federation-f22-scientific-release-messages-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "scientific-f22-release-messages",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetScientificReleaseMessages.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-scientific-f20",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetScientificCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
