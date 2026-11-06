@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.statistics-private-publication-receipt-correction",
+  "status": "rs159-statistics-private-publication-receipt-corrected-unpublished",
+  "source_package_id": "dw.tools.math.statistics",
+  "preceding_run": "RS158",
+  "sourceBaselineCommit": "48407dd5cf4f6df16b2ea5ba15a079f257421219",
+  "historical_controller_source_sha256": "d4ba2b3b00b29104cecd95a672fcce9777352ca12045276be583c6043b7bc920",
+  "corrected_controller_source_sha256": "fcb6c2436c7ad030579ed6340ed9ef835cd0b3311865dcb3cd8eef728417b1c2",
+  "original_archive_sha256": "9232edaedf57f5f67530905398648fa240141146cb55eed14e7910d54717e4f8",
+  "original_dll_sha256": "75749d668a6bc6216ac91bba55c9b66edb52ddc628d08c3b929227e752b79a96",
+  "native_nodes_retained": 541,
+  "release_controller_compiled": true,
+  "release_modes_invoked": false,
+  "package_published_by_this_run": false,
+  "new_public_license_selected": false,
+  "installed_package_rollback_qualified": false,
+  "original_statistics_sources_modified": false,
+  "external_requests_transmitted": false,
+  "source_files": {
+    "docs/distribution/nuget-federation-f26-statistics-release-receipt.md": "28e08ce3c88c4ce57bd9ebb29ba0e435c7a032cb2fba0b3580e8cffe3fd7dd93",
+    "docs/distribution/ValidateNugetStatisticsReleaseReceipt.cs": "bb874d551838cb55cfb6a1a742c06bcb3680edd7e45dc6246974b333cbf6a4d8",
+    "tools/dw.tools.math.nuget-statistics-release/Program.cs": "fcb6c2436c7ad030579ed6340ed9ef835cd0b3311865dcb3cd8eef728417b1c2"
+  },
+  "command_receipts": [
+    {
+      "id": "tool-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-statistics-release/dw.tools.math.nuget-statistics-release.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-rs159\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 3482,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-statistics-release\\dw.tools.math.nuget-statistics-release.csproj (in 1,04 sec).\r\n"
+    },
+    {
+      "id": "tool-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-statistics-release/dw.tools.math.nuget-statistics-release.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 4995,
+      "output_excerpt": "  dw.tools.math.nuget-statistics-release -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-statistics-release\\Release\\net10.0\\dw.tools.math.nuget-statistics-release.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:04.30\r\n"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 411,
+      "output_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "sdk_version": "10.0.403",
+  "next_action": "Only after durable RS159 success may owner publish and verify the exact original F24 Statistics archive, then independently qualify physical NUGET_LOCAL readback in a separate DWF run."
+}
