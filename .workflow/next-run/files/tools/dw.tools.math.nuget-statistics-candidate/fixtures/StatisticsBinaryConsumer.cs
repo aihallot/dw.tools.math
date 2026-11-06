@@ -24,7 +24,7 @@ static void Need(bool okay, string message)
 }
 static void Near(double actual, double expected)
 {
-    Need(double.IsFinite(actual) && Math.Abs(actual - expected) <= 1e-10,
+    Need(double.IsFinite(actual) && global::System.Math.Abs(actual - expected) <= 1e-10,
         "Expected an independently calculated finite result.");
 }
 static void Throws<T>(Action action) where T : Exception
