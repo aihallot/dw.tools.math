@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.scientific-private-release-operator-confirmation",
+  "status": "rs155-scientific-private-release-operator-messages-qualified-unpublished",
+  "source_package_id": "dw.tools.math.scientific",
+  "preceding_run": "RS154",
+  "sourceBaselineCommit": "c6621ea1c5032c8e52da391bd233e0e0df5f1ff1",
+  "original_archive_sha256": "233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f",
+  "original_dll_sha256": "604b1126554952f75318974028171a7dc9f463cae3c3d686d2075252ccce065c",
+  "historical_controller_source_sha256": "3dad3a39d3f6290c669d9f7bc7c2e561f215a9bf12fad026326305629907f394",
+  "corrected_controller_source_sha256": "5da012e8a4c6e8c43dba4aed3eace8c187a852a55ba31226c889fe6f38406734",
+  "operator_message_archive_bytes": 37265,
+  "operator_message_binary_checks": 15,
+  "native_nodes_retained": 541,
+  "release_controller_compiled": true,
+  "release_modes_invoked": false,
+  "package_published_by_this_run": false,
+  "new_public_license_selected": false,
+  "installed_package_rollback_qualified": false,
+  "original_scientific_sources_modified": false,
+  "external_requests_transmitted": false,
+  "discovery_migration_qualified": false,
+  "source_files": {
+    "docs/distribution/nuget-federation-f22-scientific-release-messages.md": "757b33d294ab21aa28cb86f2af9b25cbbb9edf44ee31fe6997d74f1f8e7b0feb",
+    "docs/distribution/ValidateNugetScientificReleaseMessages.cs": "92d6f7e22192a85d93fd5abb64fb0584f427c4a57dd2f71379cbb8386bb72fb4",
+    "tools/dw.tools.math.nuget-scientific-release/Program.cs": "5da012e8a4c6e8c43dba4aed3eace8c187a852a55ba31226c889fe6f38406734"
+  },
+  "command_receipts": [
+    {
+      "id": "release-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-scientific-release/dw.tools.math.nuget-scientific-release.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-rs155\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 1990,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-scientific-release\\dw.tools.math.nuget-scientific-release.csproj (in 731 ms).\r\n"
+    },
+    {
+      "id": "release-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-scientific-release/dw.tools.math.nuget-scientific-release.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 2027,
+      "output_excerpt": "  dw.tools.math.nuget-scientific-release -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-scientific-release\\Release\\net10.0\\dw.tools.math.nuget-scientific-release.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.60\r\n"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 265,
+      "output_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "sdk_version": "10.0.403",
+  "next_action": "Only after durable RS155 success may the owner separately choose guarded private --publish then --verify using original F20 bytes; independent physical-feed readback remains a separate DWF run."
+}
