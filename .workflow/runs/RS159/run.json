@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "id": "RS159",
+  "title": "Correct one inherited IR-specific field in the immutable Statistics private publication receipt",
+  "state": "prepared",
+  "commitMessage": "fix: correct Statistics immutable private publication receipt field",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Correct one inherited IR-specific field name in the Statistics owner publication receipt, checking exact one-substitution lineage against RS158 and building the guarded controller without publishing.",
+    "value": "Install StatisticsDll receipt-name correction using source bytes verified against the F25 historical controller, then restore/build existing pinned shared NuGet project and record F26 without exercising release modes.",
+    "debtChanges": [
+      "F25 qualified the Statistics publisher rehearsal first-pass but its guarded owner-only publication would emit irDllSha256 as the field name for the correctly pinned Statistics DLL SHA-256.",
+      "F26 must prove the complete Statistics controller differs from the archived RS158 source by only one field rename, retaining original F24 and F25 evidence and all source dependencies.",
+      "No shared-feed publication, rollback qualification, public license, new mathematical behavior, other repository mutation or AURA/Decision/Discovery integration occurs."
+    ],
+    "nextAction": "After durable RS159 success, owner may separately publish and verify the original F24 Statistics archive on clean main; independent physical-feed readback requires another DWF run.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1050
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f26-statistics-release-receipt.md",
+    "docs/distribution/ValidateNugetStatisticsReleaseReceipt.cs",
+    "tools/dw.tools.math.nuget-statistics-release/Program.cs",
+    "docs/distribution/nuget-federation-f26-statistics-release-receipt-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "statistics-f26-receipt",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsReleaseReceipt.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-statistics-f24",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
