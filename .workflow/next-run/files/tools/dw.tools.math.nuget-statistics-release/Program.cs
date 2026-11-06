@@ -88,7 +88,7 @@ internal static class Program
         var result = owner.RootElement;
         var qualified = result.GetProperty("candidate");
         Need(Value(result, "status") ==
-                 "rs157-statistics-calendared-dependent-nuget-candidate-qualified-unpublished" &&
+                 "rs157-statistics-dependent-calendar-candidate-qualified-unpublished" &&
              !result.GetProperty("package_published").GetBoolean() &&
              Value(qualified, "status") ==
                  "qualified-statistics-dependent-calendar-candidate-not-published" &&
@@ -319,7 +319,7 @@ internal static class Program
              PackageDllSha(candidate, PackageId, Version, Dependencies) ==
                  CandidateDllSha,
              "only the original 17,451-byte RS157 Statistics candidate may be published");
-        Need(DateOnly.FromDateTime(DateTime.Now) >= new DateOnly(2026, 11, 4),
+        Need(DateOnly.FromDateTime(DateTime.Now) >= new DateOnly(2026, 11, 6),
              "physical publication date cannot predate original package creation date");
         var records = RootFile(root, "build/artifacts/rs158-statistics-release/receipts");
         var receiptFile = Path.Combine(records, PackageId + "." + Version + ".json");
