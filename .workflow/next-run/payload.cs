@@ -180,7 +180,7 @@ if (!complete)
              chosenVersion + ".nupkg", "unexpected Statistics candidate output archive path");
     var inner = candidate["commands"]?.AsArray() ??
         throw new InvalidDataException("Statistics internal process evidence absent");
-    Need(inner.Count == 9, "exactly nine candidate package/consumer/SDK receipts required");
+    Need(inner.Count == 11, "exactly eleven F1 tool, package, consumer and SDK receipts required");
 
     var record = new JsonObject
     {
