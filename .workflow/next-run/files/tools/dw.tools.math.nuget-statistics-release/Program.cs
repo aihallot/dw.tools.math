@@ -352,7 +352,7 @@ internal static class Program
                 packageId = PackageId,
                 version = Version,
                 archiveSha256 = CandidateSha,
-                irDllSha256 = CandidateDllSha,
+                statisticsDllSha256 = CandidateDllSha,
                 dependencyId = BaseId,
                 dependencyVersion = BaseVersion,
                 feedSelector = "NUGET_LOCAL",
