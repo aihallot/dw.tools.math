@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "RS163",
+  "title": "Independently verify privately published Codecs and exact IR/Quantities binary closure",
+  "state": "prepared",
+  "commitMessage": "test: independently verify published Codecs IR and Quantities NuGet binaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Independently qualify the owner-published immutable Codecs archive and its exact IR/Quantities dependency closure from physical NUGET_LOCAL readback and fifteen compiled package-only binary probes. RS163 never publishes.",
+    "value": "Verify three original private archives and embedded DLL hashes, exact direct IR and transitive Quantities dependencies, restore an isolated Codecs PackageReference consumer from a disposable snapshot, and prove shared-feed archives unchanged.",
+    "debtChanges": [
+      "RS162 completed first-pass publisher rehearsal on a disposable feed. It did not establish actual private Codecs publication, which is a separately authorized owner action.",
+      "RS163 requires the original RS161 Codecs archive to be physically present in NUGET_LOCAL with its exact qualified 35096-byte SHA. It refuses an absent or altered package.",
+      "Independent physical verification cannot claim public licensing, installed rollback, other OS support, cross-repository migration or broad feed certification."
+    ],
+    "nextAction": "After RS163 passes with physical feed evidence, select a next unpublished Math package for bounded qualification. Preserve owner-only publication and independent readback gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f30-codecs-published.md",
+    "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f30-codecs-published-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "codecs-f30-published-binary-readback",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-codecs-f29",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCodecsPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f13",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
