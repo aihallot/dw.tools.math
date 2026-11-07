@@ -133,13 +133,19 @@ internal static class Program
              Text(baseObservation, "packageVersion") == BaseVersion &&
              Text(baseObservation, "archiveSha256") == BaseArchiveSha &&
              Text(baseObservation, "packagedDllSha256") == BaseDllSha &&
-             baseObservation.GetProperty("archiveBytes").GetInt32() == 21926,
-             "F4 published IR dependency evidence is not exact");
+             baseObservation.GetProperty("archiveBytes").GetInt32() == 21926 &&
+             baseObservation.GetProperty("declaredDependencyCount").GetInt32() == 1 &&
+             baseObservation.GetProperty("exactDependencies").EnumerateArray()
+                 .Any(x => Text(x, "id") == QuantitiesId &&
+                     Text(x, "version") == QuantitiesVersion &&
+                     Text(x, "archiveSha256") == QuantitiesArchiveSha &&
+                     Text(x, "packagedDllSha256") == QuantitiesDllSha),
+             "F13 independently published IR dependency evidence is not exact");
         var baseArchive = Path.Combine(feed, BaseId + "." + BaseVersion + ".nupkg");
         Need(CheckPhysical(baseArchive, BaseArchiveSha, 21926) &&
              PackagedDllSha(baseArchive, BaseId, BaseVersion,
                  [(QuantitiesId, "[" + QuantitiesVersion + "]")]) == BaseDllSha,
-             "published IR dependency differs from RS146 physical readback");
+             "published direct IR dependency differs from F13 physical readback");
         var quantitiesArchive = Path.Combine(feed, QuantitiesId + "." + QuantitiesVersion + ".nupkg");
         Need(CheckPhysical(quantitiesArchive, QuantitiesArchiveSha, 14747) &&
              PackagedDllSha(quantitiesArchive, QuantitiesId, QuantitiesVersion, []) ==
@@ -412,7 +418,7 @@ internal static class Program
                 .Select(x => (Id: (string?)x.Attribute("id") ?? "",
                     Version: (string?)x.Attribute("version") ?? "")).ToArray();
             Need(current.SequenceEqual(dependencies),
-                 "candidate nuspec must have exactly one pinned Quantities dependency");
+                 "candidate nuspec must have exactly one pinned IR dependency");
         }
         var dll = archive.GetEntry("lib/net10.0/" + id + ".dll") ??
             throw new InvalidDataException("candidate net10.0 Codecs assembly is missing");
