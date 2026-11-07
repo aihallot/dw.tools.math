@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 const string Evidence = "docs/distribution/nuget-federation-f30-codecs-published-qualified.json";
 const string Status = "rs163-codecs-published-local-three-binaries-independently-verified";
@@ -27,7 +26,6 @@ static string Text(JsonElement obj, string property) => obj.GetProperty(property
     ?? throw new InvalidDataException("Missing required field " + property);
 static bool Flag(JsonElement obj, string property) => obj.GetProperty(property).GetBoolean();
 static string Sha(string path) => Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
-static bool IsSha(string value) => Regex.IsMatch(value, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant);
 static int Count(JsonElement node)
 {
     var n = 1;
