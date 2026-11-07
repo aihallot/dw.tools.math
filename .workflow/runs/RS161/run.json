@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "RS161",
+  "title": "Qualify original Codecs NuGet candidate with exact published IR and transitive Quantities closure",
+  "state": "prepared",
+  "commitMessage": "test: qualify Codecs NuGet candidate with published IR and Quantities dependency closure",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Qualify a calendar NuGet Codecs candidate from nine unchanged original sources using the exact privately published IR/Quantities dependency closure and fifteen compiled binary oracles, without publication.",
+    "value": "Link nine original Codecs sources into a temporary package projection using one exact IR PackageReference, inspect the physical IR and Quantities archives and build a fresh fifteen-case source-free package consumer.",
+    "debtChanges": [
+      "After eight independently verified Math private packages, F1 selects Codecs as an unpublished source with one direct IR ProjectReference and a transitive Quantities project dependency.",
+      "The package projection is disposable and retains original Codecs source Version 1.0.0-preview.8, nine C# source files, csproj and original two-project lockfile unchanged.",
+      "No shared NUGET_LOCAL write, package reservation, public license, installed rollback, external repository mutation or AURA/Decision/Discovery integration occurs."
+    ],
+    "nextAction": "After durable RS161 candidate qualification, rehearse immutable Codecs publisher with exact IR and Quantities dependencies on a disposable feed before any owner release.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f28-codecs-candidate.md",
+    "docs/distribution/ValidateNugetCodecsCandidate.cs",
+    "tools/dw.tools.math.nuget-codecs-candidate/dw.tools.math.nuget-codecs-candidate.csproj",
+    "tools/dw.tools.math.nuget-codecs-candidate/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-codecs-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-codecs-candidate/fixtures/CodecsBinaryConsumer.cs",
+    "docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "codecs-f28-dependent-candidate",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCodecsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-statistics-f27",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f13",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
