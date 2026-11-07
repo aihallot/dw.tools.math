@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "RS160",
+  "title": "Independently verify physically published Statistics NuGet archive and exact Quantities dependency",
+  "state": "prepared",
+  "commitMessage": "test: independently verify published Statistics and Quantities NuGet binaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Independently verify the exact published Statistics and Quantities private archives through physical readback and eighteen isolated package-only binary oracles, without republishing.",
+    "value": "Read exact 17451-byte Statistics and 14747-byte Quantities archives from NUGET_LOCAL; verify immutable SHA-256, DLL and nuspec dependency identity; consume a fresh physical snapshot with eighteen compiled tests.",
+    "debtChanges": [
+      "Owner-provided private Statistics PUBLISHED and VERIFY PASS terminal outputs from 2026-11-07 are not DWF physical readback; F27 must inspect the actual original private-feed archives independently.",
+      "RS158 F25 historical publisher and RS159 F26 corrected publisher carry intentionally different SHA-256; F27 validates each source against its appropriate original/revised authority.",
+      "No publication, feed-wide verification, public licensing, installed rollback, other OS/RID qualification or Decision/Discovery/AURA migration is authorized by RS160."
+    ],
+    "nextAction": "After successful RS160 physical-feed verification, select the next dependency-qualified unpublished Math package from the retained 13-package F1 inventory.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f27-statistics-published.md",
+    "docs/distribution/ValidateNugetStatisticsPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-statistics-feed-verify/dw.tools.math.nuget-statistics-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-statistics-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f27-statistics-published-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "statistics-f27-physical",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-statistics-f26",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsReleaseReceipt.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-statistics-f24",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetStatisticsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
