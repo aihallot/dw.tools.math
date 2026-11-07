@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS163",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-07T20:32:34.4017688+00:00",
+  "completedAtUtc": "2026-11-07T20:32:59.884035+00:00",
+  "durationMilliseconds": 25482,
+  "projectNodes": [
+    "M3"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f30-codecs-published.md",
+    "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f30-codecs-published-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+    "docs/distribution/nuget-federation-f30-codecs-published-qualified.json",
+    "docs/distribution/nuget-federation-f30-codecs-published.md",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+    "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261107T202113Z-99236f3a79853ffa"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261107T202113Z-99236f3a79853ffa",
+        "runId": "RS163",
+        "scope": "preselection-rs163",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs163/run-next-20261107T202113Z-99236f3a79853ffa"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS163/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-ef021a0ec37a47e29551f1023e006894\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 25325,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS163 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS162/attempt-001.json run=RS162 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json pointer=/candidate/candidateArchiveSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json pointer=/candidate/candidateDllSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json pointer=/package_published\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json pointer=/rehearsal/publishedToNugetLocal\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f4-quantities-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json pointer=/authorization/redistribute_from_dw_tools_math\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-codecs-release/Program.cs file exists\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-codecs-candidate/fixtures/CodecsBinaryConsumer.cs file exists\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f30-codecs-published.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/ValidateNugetCodecsPublishedFeed.cs path is absent\r\n[require.file-missing] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj path is absent\r\n[require.file-missing] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f30-codecs-published-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/distribution/nuget-federation-f30-codecs-published.md bytes=4153\r\n[files.replace-from-staged] CHANGED path=docs/distribution/ValidateNugetCodecsPublishedFeed.cs bytes=12514\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj bytes=281\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs bytes=19501\r\n[require.text-contains] VERIFIED path=docs/distribution/nuget-federation-f30-codecs-published.md semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj semantic text found\r\nRS163 source-check exit=0 elapsed_ms=4027\r\nRS163 tool-restore exit=0 elapsed_ms=1393\r\nRS163 tool-build exit=0 elapsed_ms=1403\r\nRS163 codecs-feed-verify exit=0 elapsed_ms=17179\r\nRS163 sdk exit=0 elapsed_ms=209\r\n[files.write-complete] CHANGED path=docs/distribution/nuget-federation-f30-codecs-published-qualified.json bytes=10293\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\nRS163 target-check exit=0 elapsed_ms=447\r\n[payload] OK operations=36 changed=5 no-change=0 verified=31 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS163/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS163 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4cbbe9ad59b7a3d3a3c29a500f34f65ab634d24384d6d33275d7103cbfcc213b",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS162/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS162 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4ba2af1638911b8b687dfc5f1ca74a2804f665cb1a8e45e94aaf2d5505ee99e6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateArchiveSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f28-codecs-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateDllSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f29-codecs-publisher-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/rehearsal/publishedToNugetLocal",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f13-ir-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/physically_published_package_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f4-quantities-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/physically_published_package_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+        "Status": 0,
+        "Summary": "pointer=/authorization/redistribute_from_dw_tools_math",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-exists",
+        "Path": "tools/dw.tools.math.nuget-codecs-release/Program.cs",
+        "Status": 0,
+        "Summary": "file exists",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-exists",
+        "Path": "tools/dw.tools.math.nuget-codecs-candidate/fixtures/CodecsBinaryConsumer.cs",
+        "Status": 0,
+        "Summary": "file exists",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f30-codecs-published.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f30-codecs-published-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/nuget-federation-f30-codecs-published.md",
+        "Status": 1,
+        "Summary": "bytes=4153",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "156ad42125a2e45436a6a3b1d38104cecd39bdf7200c3c588a34bd462049f5e0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+        "Status": 1,
+        "Summary": "bytes=12514",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f7b272081e03932a211f8eac16162e23b55318ca031e2cab71eb275918218156",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj",
+        "Status": 1,
+        "Summary": "bytes=281",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ab3afa6c5f719b0ecc23e80f773a34d14ea487140140f3902d03ddce2d14537c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=19501",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "9403559ae074164577dd75602a7331f3b660f7cad6b57c181870da2d4ba54b10",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/nuget-federation-f30-codecs-published.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/distribution/nuget-federation-f30-codecs-published-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=10293",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1ed8f7fd424c65f9636dde3227ca56f89b7152b6cf921a711e168662924f3d67",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "codecs-f30-published-binary-readback",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-codecs-f29",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-ir-f13",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261107T202939Z-6690d60cdaba32c9",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "61ca186310f71121c1aa5babe78f0d83cb30e65c",
+  "invocationStartedAtUtc": "2026-11-07T20:29:39.9731082+00:00",
+  "invocationDurationMilliseconds": 199910,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS163",
+      "title": "Independently verify privately published Codecs and exact IR/Quantities binary closure",
+      "projectNodes": [
+        "M3"
+      ]
+    },
+    "declared": {
+      "summary": "Independently qualify the owner-published immutable Codecs archive and its exact IR/Quantities dependency closure from physical NUGET_LOCAL readback and fifteen compiled package-only binary probes. RS163 never publishes.",
+      "value": "Verify three original private archives and embedded DLL hashes, exact direct IR and transitive Quantities dependencies, restore an isolated Codecs PackageReference consumer from a disposable snapshot, and prove shared-feed archives unchanged.",
+      "debtChanges": [
+        "RS162 completed first-pass publisher rehearsal on a disposable feed. It did not establish actual private Codecs publication, which is a separately authorized owner action.",
+        "RS163 requires the original RS161 Codecs archive to be physically present in NUGET_LOCAL with its exact qualified 35096-byte SHA. It refuses an absent or altered package.",
+        "Independent physical verification cannot claim public licensing, installed rollback, other OS support, cross-repository migration or broad feed certification."
+      ],
+      "nextAction": "After RS163 passes with physical feed evidence, select a next unpublished Math package for bounded qualification. Preserve owner-only publication and independent readback gates.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/ValidateNugetCodecsPublishedFeed.cs",
+        "docs/distribution/nuget-federation-f30-codecs-published-qualified.json",
+        "docs/distribution/nuget-federation-f30-codecs-published.md",
+        "tools/dw.tools.math.nuget-codecs-feed-verify/Program.cs",
+        "tools/dw.tools.math.nuget-codecs-feed-verify/dw.tools.math.nuget-codecs-feed-verify.csproj"
+      ],
+      "validations": [
+        {
+          "id": "codecs-f30-published-binary-readback",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-codecs-f29",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-ir-f13",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS163",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS163",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "61ca186310f71121c1aa5babe78f0d83cb30e65c",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "e18c10474b5d01ad239020aaa88244f5a81c0315d75c8196e839f77d41a461c5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: independently verify published Codecs IR and Quantities NuGet binaries",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
