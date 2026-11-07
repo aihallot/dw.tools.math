@@ -77,7 +77,7 @@ payload.Require.JsonValueEquals(
     "/observed/packages/4/historicalSourceVersion", JsonValue.Create("1.0.0-preview.8"));
 payload.Require.JsonValueEquals(
     Distribution + "nuget-federation-f1-qualified.json",
-    "/observed/packages/4/projectReferences", JsonValue.Create(new[] { "dw.tools.math.ir" }));
+    "/observed/packages/4/projectReferences/0", JsonValue.Create("dw.tools.math.ir"));
 payload.Require.JsonValueEquals(
     "src/projects/dw.tools.math.codecs/packages.lock.json",
     "/dependencies/net10.0/dw.tools.math.ir/type", JsonValue.Create("Project"));
