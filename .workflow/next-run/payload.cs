@@ -5,24 +5,28 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Dist = "docs/distribution/";
-const string Tool = "tools/dw.tools.math.nuget-codecs-feed-verify/";
-const string Project = Tool + "dw.tools.math.nuget-codecs-feed-verify.csproj";
-const string Validator = Dist + "ValidateNugetCodecsPublishedFeed.cs";
-const string Evidence = Dist + "nuget-federation-f30-codecs-published-qualified.json";
-const string Status = "rs163-codecs-published-local-three-binaries-independently-verified";
-const string Ready = "MATH-CODECS-F30:SOURCE=READY;READBACK=PENDING;NATIVE=541";
-const string Qualified = "MATH-CODECS-F30:PHYSICAL=VERIFIED;BINARY=15;DIRECT=1;TRANSITIVE=1;NATIVE=541";
-const string Limits = "MATH-CODECS-F30:REPUBLICATION=false;PUBLIC=false;ROLLBACK=false";
+const string Distribution = "docs/distribution/";
+const string Tool = "tools/dw.tools.math.nuget-composition-candidate/";
+const string Project = Tool + "dw.tools.math.nuget-composition-candidate.csproj";
+const string Validator = Distribution + "ValidateNugetCompositionCandidate.cs";
+const string Evidence = Distribution + "nuget-federation-f31-composition-candidate-qualified.json";
+const string Status = "rs164-composition-dependent-calendar-candidate-qualified-unpublished";
+const string Ready = "MATH-COMPOSITION-F31:SOURCE=READY;DEPENDENCIES=PINNED;CANDIDATE=PENDING;NATIVE=541";
+const string Qualified = "MATH-COMPOSITION-F31:CANDIDATE=QUALIFIED;BINARY=15;DEPENDENCY=2;NATIVE=541";
+const string Limits = "MATH-COMPOSITION-F31:PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
+const string IrSha = "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480";
+const string IrDll = "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af";
+const string QuantitiesSha = "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d";
+const string QuantitiesDll = "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4";
 
 var payload = PayloadContext.Create();
 var root = payload.RepositoryRoot;
-var completed = File.Exists(Path.Combine(root,
-    Evidence.Replace('/', Path.DirectorySeparatorChar)));
-payload.Workflow.RequireCurrentRun("RS163", null, null, null, null, null);
-payload.Workflow.RequirePriorSuccess("RS162", 1,
-    "test: qualify Codecs immutable NuGet publisher rehearsal with IR closure",
-    "0.1.66", 0, 0, 0, true);
+var complete = File.Exists(Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
+
+payload.Workflow.RequireCurrentRun("RS164", null, null, null, null, null);
+payload.Workflow.RequirePriorSuccess("RS163", 1,
+    "test: independently verify published Codecs IR and Quantities NuGet binaries",
+    "0.1.66", 1, 1, 0, false);
 payload.ProjectPlan.RequireNodeState("M3", "done");
 payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
@@ -32,204 +36,232 @@ payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
 payload.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
     JsonValue.Create("0.26"));
 payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f28-codecs-candidate-qualified.json",
-    "/status", JsonValue.Create(
-        "rs161-codecs-dependent-calendar-candidate-qualified-unpublished"));
+    Distribution + "nuget-federation-f30-codecs-published-qualified.json",
+    "/status",
+    JsonValue.Create("rs163-codecs-published-local-three-binaries-independently-verified"));
 payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f28-codecs-candidate-qualified.json",
-    "/candidate/candidateArchiveSha256",
-    JsonValue.Create("00392fbeddebceb70286b11377aeab120bef0e3ef45f9b12dc2ba878918f8e35"));
-payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f28-codecs-candidate-qualified.json",
-    "/candidate/candidateDllSha256",
-    JsonValue.Create("3e8ba8e03bf6519de28837b1e01d9842e5e76bfee6a6ad9cceee442b47f2fe74"));
-payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f29-codecs-publisher-qualified.json",
-    "/status", JsonValue.Create(
-        "rs162-codecs-immutable-local-publisher-rehearsal-qualified-unpublished"));
-payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f29-codecs-publisher-qualified.json",
-    "/package_published", JsonValue.Create(false));
-payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f29-codecs-publisher-qualified.json",
-    "/rehearsal/publishedToNugetLocal", JsonValue.Create(false));
-payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f13-ir-published-qualified.json",
+    Distribution + "nuget-federation-f30-codecs-published-qualified.json",
     "/physically_published_package_verified", JsonValue.Create(true));
 payload.Require.JsonValueEquals(
-    Dist + "nuget-federation-f4-quantities-published-qualified.json",
+    Distribution + "nuget-federation-f30-codecs-published-qualified.json",
+    "/package_published_by_this_run", JsonValue.Create(false));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/status", JsonValue.Create("rs146-ir-published-local-two-binaries-independently-verified"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
     "/physically_published_package_verified", JsonValue.Create(true));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/observation/packageVersion", JsonValue.Create("20260.20261104.1001"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/observation/archiveSha256", JsonValue.Create(IrSha));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/observation/packagedDllSha256", JsonValue.Create(IrDll));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/observation/exactDependencies/0/archiveSha256", JsonValue.Create(QuantitiesSha));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f13-ir-published-qualified.json",
+    "/observation/exactDependencies/0/packagedDllSha256", JsonValue.Create(QuantitiesDll));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f1-qualified.json", "/package_count",
+    JsonValue.Create(13));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f1-qualified.json",
+    "/observed/packages/5/packageId", JsonValue.Create("dw.tools.math.composition"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f1-qualified.json",
+    "/observed/packages/5/historicalSourceVersion", JsonValue.Create("0.3.0-preview.1"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f1-qualified.json",
+    "/observed/packages/5/projectReferences/0", JsonValue.Create("dw.quantities"));
+payload.Require.JsonValueEquals(
+    Distribution + "nuget-federation-f1-qualified.json",
+    "/observed/packages/5/projectReferences/1", JsonValue.Create("dw.tools.math.ir"));
+payload.Require.JsonValueEquals(
+    "src/projects/dw.tools.math.composition/packages.lock.json",
+    "/dependencies/net10.0/dw.tools.math.ir/type", JsonValue.Create("Project"));
+payload.Require.JsonValueEquals(
+    "src/projects/dw.tools.math.composition/packages.lock.json",
+    "/dependencies/net10.0/dw.quantities/type", JsonValue.Create("Project"));
 payload.Require.JsonValueEquals(
     "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
-    "/authorization/redistribute_from_dw_tools_math", JsonValue.Create(true));
-payload.Require.FileExists("tools/dw.tools.math.nuget-codecs-release/Program.cs");
-payload.Require.FileExists("tools/dw.tools.math.nuget-codecs-candidate/fixtures/CodecsBinaryConsumer.cs");
+    "/authorization/package_from_dw_tools_math", JsonValue.Create(true));
+payload.Require.TextContains(
+    "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+    "<Version>0.3.0-preview.1</Version>");
+payload.Require.TextContains(
+    "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+    "<ProjectReference Include=\"../dw.tools.math.ir/dw.tools.math.ir.csproj\" />");
+payload.Require.TextContains(
+    "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+    "<ProjectReference Include=\"../dw.quantities/dw.quantities.csproj\" />");
+payload.Require.FileExists(
+    "tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj");
 
-var sources = new[]
+var files = new[]
 {
-    Dist + "nuget-federation-f30-codecs-published.md",
+    Distribution + "nuget-federation-f31-composition-candidate.md",
     Validator,
     Project,
-    Tool + "Program.cs"
+    Tool + "Directory.Packages.props",
+    Tool + "Program.cs",
+    Tool + "fixtures/CompositionBinaryConsumer.cs"
 };
-if (!completed)
+if (!complete)
 {
-    foreach (var path in sources.Append(Evidence))
-        payload.Require.FileMissing(path);
+    foreach (var path in files.Append(Evidence)) payload.Require.FileMissing(path);
 }
 else
 {
     payload.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
-    payload.Require.JsonValueEquals(Evidence, "/physically_published_package_verified",
-        JsonValue.Create(true));
-    payload.Require.JsonValueEquals(Evidence, "/dependency_package_verified",
-        JsonValue.Create(true));
-    payload.Require.JsonValueEquals(Evidence, "/package_published_by_this_run",
-        JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence, "/native_nodes_retained",
-        JsonValue.Create(541));
+    payload.Require.JsonValueEquals(Evidence, "/package_published", JsonValue.Create(false));
+    payload.Require.JsonValueEquals(Evidence, "/source_versions_modified", JsonValue.Create(false));
+    payload.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
 }
-
-var sourceHashes = new JsonObject();
-foreach (var file in sources)
+var hashes = new JsonObject();
+foreach (var path in files)
 {
-    var receipt = payload.Files.ReplaceFromStaged("staged/" + file, file);
-    sourceHashes[file] = receipt.AfterSha256 ??
-        throw new InvalidDataException("RS163 staged source SHA missing: " + file);
+    var installed = payload.Files.ReplaceFromStaged("staged/" + path, path);
+    hashes[path] = installed.AfterSha256 ??
+        throw new InvalidDataException("RS164 installed source SHA missing " + path);
 }
-payload.Require.TextContains(Dist + "nuget-federation-f30-codecs-published.md",
-    "## Independent physical readback");
-payload.Require.TextContains(Tool + "Program.cs", "physical-feed-snapshot");
-payload.Require.TextContains(Tool + "Program.cs", "MATH-CODECS-BINARY|PASS|15");
-payload.Require.TextContains(Tool + "Program.cs", "publicationInvoked = false");
-payload.Require.TextContains(Project, "<Compile Include=\"Program.cs\" />");
+payload.Require.FileExists(Tool + "fixtures/CompositionBinaryConsumer.cs");
+payload.Require.TextContains(Distribution + "nuget-federation-f31-composition-candidate.md",
+    "## Bounded F31 unpublished candidate");
+payload.Require.TextContains(Tool + "Program.cs",
+    "originalSourceLockSha256 = ShaFile(lockPath)");
+payload.Require.TextContains(Tool + "Program.cs", "MATH-COMPOSITION-BINARY|PASS|15");
+payload.Require.TextContains(Tool + "fixtures/CompositionBinaryConsumer.cs",
+    "MATH-COMPOSITION-BINARY|PASS|15");
+payload.Require.TextContains(Project, "<PackageReference Include=\"Dw.Tools.NuGet\" />");
+payload.Require.TextContains(Tool + "Directory.Packages.props",
+    "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
 
-var before = Run(root, "source-check", "dotnet",
+var sourceCheck = Run(root, "source-check", "dotnet",
     ["run", "--file", Validator, "--", "--check"]);
-Need(before.Output.Contains(completed ? Qualified : Ready,
-         StringComparison.Ordinal), "F30 independent source validator baseline refused");
-
-if (!completed)
+Need(sourceCheck.Output.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
+    "RS164 original Composition/dependency source verification failed");
+if (!complete)
 {
     var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
-        throw new InvalidDataException("NUGET_LOCAL must select existing private feed");
-    Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
-         Directory.Exists(feed), "NUGET_LOCAL must be an existing absolute directory");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs163", "packages");
-    var receipts = new List<JsonNode>();
-    receipts.Add(Run(root, "tool-restore", "dotnet",
-        ["restore", Project, "--source", feed, "--packages", cache,
-         "-p:NuGetAudit=false"]).Receipt);
-    receipts.Add(Run(root, "tool-build", "dotnet",
-        ["build", Project, "-c", "Release", "--no-restore",
-         "-p:NuGetAudit=false"]).Receipt);
-    var verified = Run(root, "codecs-feed-verify", "dotnet",
-        ["run", "--project", Project, "-c", "Release", "--no-build",
-         "--no-restore", "--", "--verify-published-codecs", "."]);
-    receipts.Add(verified.Receipt);
+        throw new InvalidDataException("NUGET_LOCAL private feed not defined");
+    Need(!string.IsNullOrWhiteSpace(feed) &&
+         Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
+         "NUGET_LOCAL must be an existing absolute private feed");
+    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs164", "packages");
+    var commands = new List<JsonNode>();
+    commands.Add(Run(root, "tool-restore", "dotnet", [
+        "restore", Project, "--source", feed, "--packages", cache,
+        "-p:NuGetAudit=false"
+    ]).Receipt);
+    commands.Add(Run(root, "tool-build", "dotnet", [
+        "build", Project, "-c", "Release", "--no-restore",
+        "-p:NuGetAudit=false"
+    ]).Receipt);
+    var process = Run(root, "composition-candidate", "dotnet", [
+        "run", "--project", Project, "-c", "Release",
+        "--no-build", "--no-restore", "--", "--qualify-composition", "."
+    ]);
+    commands.Add(process.Receipt);
     var sdk = Run(root, "sdk", "dotnet", ["--version"]);
-    receipts.Add(sdk.Receipt);
-    Need(receipts.Count == 4, "exactly four real outer process receipts required");
-    var observed = JsonNode.Parse(verified.Output.Trim())?.AsObject() ??
-        throw new InvalidDataException("Independent readback must emit one real JSON receipt");
-    Need(observed["status"]?.GetValue<string>() ==
-             "codecs-published-local-three-binaries-independently-verified" &&
-         observed["packageId"]?.GetValue<string>() == "dw.tools.math.codecs" &&
-         observed["packageVersion"]?.GetValue<string>() == "20260.20261107.1001" &&
-         observed["archiveBytes"]?.GetValue<int>() == 35096 &&
-         observed["archiveSha256"]?.GetValue<string>() ==
-             "00392fbeddebceb70286b11377aeab120bef0e3ef45f9b12dc2ba878918f8e35" &&
-         observed["packagedDllSha256"]?.GetValue<string>() ==
-             "3e8ba8e03bf6519de28837b1e01d9842e5e76bfee6a6ad9cceee442b47f2fe74" &&
-         observed["loadedDllSha256"]?.GetValue<string>() ==
-             "3e8ba8e03bf6519de28837b1e01d9842e5e76bfee6a6ad9cceee442b47f2fe74" &&
-         observed["declaredDependencyCount"]?.GetValue<int>() == 1 &&
-         observed["transitiveDependencyCount"]?.GetValue<int>() == 1 &&
-         observed["publishedPackageSnapshotCount"]?.GetValue<int>() == 3 &&
-         observed["compiledConsumerChecks"]?.GetValue<int>() == 15 &&
-         observed["physicalArchivesInspected"]?.GetValue<bool>() == true &&
-         observed["publishedArchivesUnchanged"]?.GetValue<bool>() == true &&
-         observed["independentPackageReference"]?.GetValue<bool>() == true &&
-         observed["originalMathProjectReferencesUsed"]?.GetValue<bool>() == false &&
-         observed["feedWideInventoryPerformed"]?.GetValue<bool>() == false &&
-         observed["publicationInvoked"]?.GetValue<bool>() == false &&
-         observed["remoteRegistryPublished"]?.GetValue<bool>() == false &&
-         observed["installedPackageRollbackQualified"]?.GetValue<bool>() == false,
-         "independent Codecs physical-feed proof is incomplete");
-    var direct = observed["exactDependencies"]?.AsArray() ??
-        throw new InvalidDataException("Missing direct IR dependency receipt");
-    var transitive = observed["transitiveDependencies"]?.AsArray() ??
-        throw new InvalidDataException("Missing transitive Quantities receipt");
-    Need(direct.Count == 1 && transitive.Count == 1 &&
-         direct[0]?["id"]?.GetValue<string>() == "dw.tools.math.ir" &&
-         direct[0]?["version"]?.GetValue<string>() == "20260.20261104.1001" &&
-         direct[0]?["archiveBytes"]?.GetValue<int>() == 21926 &&
-         direct[0]?["archiveSha256"]?.GetValue<string>() ==
-             "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480" &&
-         direct[0]?["packagedDllSha256"]?.GetValue<string>() ==
-             "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af" &&
-         transitive[0]?["id"]?.GetValue<string>() == "dw.quantities" &&
-         transitive[0]?["version"]?.GetValue<string>() == "20260.20261102.1001" &&
-         transitive[0]?["archiveBytes"]?.GetValue<int>() == 14747 &&
-         transitive[0]?["archiveSha256"]?.GetValue<string>() ==
-             "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
-         "original IR/Quantities dependency proof is not exact");
-    var inner = observed["commands"]?.AsArray() ??
-        throw new InvalidDataException("Missing compiled binary process receipts");
-    Need(inner.Count == 4 &&
-         inner.All(x => x?["exit_code"]?.GetValue<int>() == 0),
-         "all four inner commands must succeed");
-    var evidence = new JsonObject
+    commands.Add(sdk.Receipt);
+    Need(commands.Count == 4, "four actual outer build, candidate and SDK receipts required");
+    var candidate = JsonNode.Parse(process.Output.Trim())?.AsObject() ??
+        throw new InvalidDataException("Composition candidate producer must emit structured JSON");
+    Need(candidate["status"]?.GetValue<string>() ==
+             "qualified-composition-dependent-calendar-candidate-not-published" &&
+         candidate["packageId"]?.GetValue<string>() == "dw.tools.math.composition" &&
+         candidate["historicalSourceVersion"]?.GetValue<string>() == "0.3.0-preview.1" &&
+         candidate["originalProjectSha256"]?.GetValue<string>()?.Length == 64 &&
+         candidate["originalSourceLockSha256"]?.GetValue<string>()?.Length == 64 &&
+         candidate["originalSourcesSha256"]?.AsObject().Count == 5 &&
+         candidate["packageDependencies"]?.GetValue<int>() == 2 &&
+         candidate["dependencyIrId"]?.GetValue<string>() == "dw.tools.math.ir" &&
+         candidate["dependencyIrVersion"]?.GetValue<string>() == "20260.20261104.1001" &&
+         candidate["dependencyIrArchiveSha256"]?.GetValue<string>() == IrSha &&
+         candidate["dependencyIrDllSha256"]?.GetValue<string>() == IrDll &&
+         candidate["dependencyQuantitiesId"]?.GetValue<string>() == "dw.quantities" &&
+         candidate["dependencyQuantitiesVersion"]?.GetValue<string>() == "20260.20261102.1001" &&
+         candidate["dependencyQuantitiesArchiveSha256"]?.GetValue<string>() == QuantitiesSha &&
+         candidate["dependencyQuantitiesDllSha256"]?.GetValue<string>() == QuantitiesDll &&
+         candidate["candidateArchiveSha256"]?.GetValue<string>()?.Length == 64 &&
+         candidate["candidateDllSha256"]?.GetValue<string>()?.Length == 64 &&
+         candidate["candidateArchiveBytes"]?.GetValue<long>() > 2000 &&
+         candidate["originalSourceProjectReferences"]?.GetValue<int>() == 2 &&
+         candidate["originalFourSourceFilesLinked"]?.GetValue<bool>() == true &&
+         candidate["sourceProjectUnmodified"]?.GetValue<bool>() == true &&
+         candidate["sourceFeedInventoryUnchanged"]?.GetValue<bool>() == true &&
+         candidate["temporaryPackagingProjection"]?.GetValue<bool>() == true &&
+         candidate["independentPackageReference"]?.GetValue<bool>() == true &&
+         candidate["compiledBinaryConsumerChecks"]?.GetValue<int>() == 15 &&
+         candidate["published"]?.GetValue<bool>() == false &&
+         candidate["versionReserved"]?.GetValue<bool>() == false,
+         "qualified exact Composition source and IR/Quantities transitive closure missing");
+    var version = candidate["packageVersion"]?.GetValue<string>() ??
+        throw new InvalidDataException("Composition calendar version missing");
+    Need(version.StartsWith("20260.2026", StringComparison.Ordinal) &&
+         version.Length == 19 &&
+         version.EndsWith(".1001", StringComparison.Ordinal),
+         "Composition package-version allocator did not return first free daily candidate");
+    Need(candidate["candidateArchivePath"]?.GetValue<string>() ==
+             "build/artifacts/rs164-composition-candidate/candidate/dw.tools.math.composition." +
+             version + ".nupkg", "unexpected candidate output package path");
+    var inner = candidate["commands"]?.AsArray() ??
+        throw new InvalidDataException("missing Composition inner process receipts");
+    Need(inner.Count == 11, "eleven actual Composition candidate and consumer receipts required");
+    var record = new JsonObject
     {
         ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.nuget-codecs-private-feed-independent-qualification",
+        ["kind"] = "dw.tools.math.composition-dependent-calendar-nuget-candidate",
         ["status"] = Status,
-        ["source_package_id"] = "dw.tools.math.codecs",
-        ["previous_owner_run"] = "RS162",
-        ["sourceBaselineCommit"] = "8577c235ff3fe1fa37e39767dac281f114aef56d",
+        ["source_package_id"] = "dw.tools.math.composition",
+        ["previous_owner_run"] = "RS163",
+        ["sourceBaselineCommit"] = "a4fa97807114878f74bdd3c754bb75114379b7e5",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
-        ["physically_published_package_verified"] = true,
-        ["dependency_package_verified"] = true,
-        ["package_published_by_this_run"] = false,
-        ["remote_registry_published"] = false,
-        ["installed_package_rollback_qualified"] = false,
+        ["package_published"] = false,
+        ["release_authorized_by_this_run"] = false,
+        ["source_versions_modified"] = false,
         ["new_public_license_selected"] = false,
+        ["installed_package_rollback_qualified"] = false,
         ["external_requests_transmitted"] = false,
         ["discovery_migration_qualified"] = false,
-        ["observation"] = observed,
-        ["source_files"] = sourceHashes,
-        ["command_receipts"] = payload.Json.Array(receipts.ToArray()),
+        ["candidate"] = candidate,
+        ["source_files"] = hashes,
+        ["command_receipts"] = payload.Json.Array(commands.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
         ["next_action"] =
-            "After independent Codecs physical readback, inspect the next Math package candidate. Do not infer remote publication, rollback or external consumer adoption."
+            "After durable Composition candidate qualification, rehearse the exact original candidate and its IR/Quantities dependency closure on a disposable feed before any owner-only publication."
     };
     payload.Files.WriteComplete(Evidence,
-        evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
+        record.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
 }
 payload.ProjectPlan.RequireNodeState("M3", "done");
-payload.ProjectPlan.RequireNodeState("M7", "done");
 payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
-var after = Run(root, "target-check", "dotnet",
+var final = Run(root, "target-check", "dotnet",
     ["run", "--file", Validator, "--", "--check"]);
-Need(after.Output.Contains(Qualified, StringComparison.Ordinal) &&
-     after.Output.Contains(Limits, StringComparison.Ordinal),
-     "RS163 independent physical readback target validation refused");
+Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
+     final.Output.Contains(Limits, StringComparison.Ordinal),
+     "RS164 Composition source-and-binary qualification receipt rejected");
 return payload.Complete();
 
 static void Need(bool good, string reason)
 {
-    if (!good) throw new InvalidDataException("RS163: " + reason);
+    if (!good) throw new InvalidDataException("RS164: " + reason);
 }
 static (JsonNode Receipt, string Output) Run(
-    string root, string id, string program, string[] args)
+    string root, string id, string executable, string[] args)
 {
     using var process = new Process
     {
         StartInfo = new ProcessStartInfo
         {
-            FileName = program,
+            FileName = executable,
             WorkingDirectory = root,
             UseShellExecute = false,
             RedirectStandardOutput = true,
@@ -239,33 +271,33 @@ static (JsonNode Receipt, string Output) Run(
     process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
     process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-rs163", "packages");
+        Path.Combine(root, ".workflow", "local", "nuget-rs164", "packages");
     foreach (var arg in args) process.StartInfo.ArgumentList.Add(arg);
     var clock = Stopwatch.StartNew();
-    Need(process.Start(), "could not start bounded RS163 command " + id);
-    var outputTask = process.StandardOutput.ReadToEndAsync();
-    var errorsTask = process.StandardError.ReadToEndAsync();
+    Need(process.Start(), "unable to start Composition command " + id);
+    var stdout = process.StandardOutput.ReadToEndAsync();
+    var stderr = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(540000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("RS163 command timed out: " + id);
+        throw new TimeoutException("Composition candidate command timed out: " + id);
     }
-    var stdout = outputTask.GetAwaiter().GetResult();
-    var stderr = errorsTask.GetAwaiter().GetResult();
+    var output = stdout.GetAwaiter().GetResult();
+    var errors = stderr.GetAwaiter().GetResult();
     clock.Stop();
     if (process.ExitCode != 0)
     {
-        var details = stdout + "\n" + stderr;
-        throw new InvalidDataException(id + " exit=" + process.ExitCode +
-            "\n" + details[..System.Math.Min(details.Length, 4500)]);
+        var info = output + "\n" + errors;
+        throw new InvalidDataException(id + " exit=" + process.ExitCode + "\n" +
+            info[..System.Math.Min(info.Length, 4100)]);
     }
-    Console.WriteLine("RS163 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
+    Console.WriteLine("RS164 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"] = id,
         ["exit_code"] = process.ExitCode,
-        ["command"] = program + " " + string.Join(" ", args),
+        ["command"] = executable + " " + string.Join(" ", args),
         ["elapsed_ms"] = clock.ElapsedMilliseconds,
-        ["output_excerpt"] = stdout[..System.Math.Min(stdout.Length, 1200)]
-    }, stdout);
+        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1200)]
+    }, output);
 }
