@@ -69,7 +69,7 @@ internal static class Program
         var projectPath = RepoFile(root, SourceProject);
         var sourceDir = RepoFile(root, SourceFolder);
         using var predecessor = JsonDocument.Parse(File.ReadAllText(RepoFile(root,
-            "docs/distribution/nuget-federation-f27-codecs-published-qualified.json")));
+            "docs/distribution/nuget-federation-f27-statistics-published-qualified.json")));
         Need(Text(predecessor.RootElement, "status") ==
                  "rs160-statistics-published-local-two-binaries-independently-verified" &&
              predecessor.RootElement.GetProperty("physically_published_package_verified")
