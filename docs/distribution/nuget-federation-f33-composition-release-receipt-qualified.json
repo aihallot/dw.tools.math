@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.composition-private-release-receipt-completeness",
+  "status": "rs166-composition-private-receipt-two-dependencies-corrected-unpublished",
+  "source_package_id": "dw.tools.math.composition",
+  "preceding_run": "RS165",
+  "sourceBaselineCommit": "732bf99a8a0a7e760943654acc1f34766be66732",
+  "historical_controller_sha256": "08a7dccd4fd8e7df6f0e94f17a37dafaadad68c94a6d3e8b9bb28bfeebf64f30",
+  "corrected_controller_sha256": "dc469c68d9d5ca559f8629ae06da7d524f7ffdd30ce5c81f4d4234b951f612ce",
+  "original_archive_sha256": "b0624cb1835f66fef41ff763da065a400f1709f65808315e28e3247aa2a4228f",
+  "original_dll_sha256": "6e50d10639ee45020fd53dfa6eb81be4e1e38eefcdff235a0731be8e17a2a252",
+  "direct_dependency_count": 2,
+  "direct_dependencies": [
+    {
+      "id": "dw.quantities",
+      "version": "20260.20261102.1001",
+      "archiveSha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+      "packagedDllSha256": "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4"
+    },
+    {
+      "id": "dw.tools.math.ir",
+      "version": "20260.20261104.1001",
+      "archiveSha256": "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480",
+      "packagedDllSha256": "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af"
+    }
+  ],
+  "native_nodes_retained": 541,
+  "release_controller_compiled": true,
+  "release_modes_invoked": false,
+  "package_published_by_this_run": false,
+  "public_registry_published": false,
+  "new_public_license_selected": false,
+  "installed_package_rollback_qualified": false,
+  "original_composition_sources_modified": false,
+  "external_requests_transmitted": false,
+  "source_files": {
+    "docs/distribution/nuget-federation-f33-composition-release-receipt.md": "9bd1dedf7e7872cfaac0b3751974cf553772ad3332a1e84dd70ed68824211f84",
+    "docs/distribution/ValidateNugetCompositionReleaseReceipt.cs": "f08d060be48fe94cfc24530efed5720b94975ab9b5250ef3e6d5cfb1b3b43306",
+    "tools/dw.tools.math.nuget-composition-release/Program.cs": "dc469c68d9d5ca559f8629ae06da7d524f7ffdd30ce5c81f4d4234b951f612ce"
+  },
+  "command_receipts": [
+    {
+      "id": "tool-restore",
+      "exit_code": 0,
+      "command": "dotnet restore tools/dw.tools.math.nuget-composition-release/dw.tools.math.nuget-composition-release.csproj --source I:\\nuget.local --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\local\\nuget-rs166\\packages -p:NuGetAudit=false",
+      "elapsed_ms": 1498,
+      "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tools\\dw.tools.math.nuget-composition-release\\dw.tools.math.nuget-composition-release.csproj (in 579 ms).\r\n"
+    },
+    {
+      "id": "tool-build",
+      "exit_code": 0,
+      "command": "dotnet build tools/dw.tools.math.nuget-composition-release/dw.tools.math.nuget-composition-release.csproj -c Release --no-restore -p:NuGetAudit=false",
+      "elapsed_ms": 1505,
+      "output_excerpt": "  dw.tools.math.nuget-composition-release -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.nuget-composition-release\\Release\\net10.0\\dw.tools.math.nuget-composition-release.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.25\r\n"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "command": "dotnet --version",
+      "elapsed_ms": 154,
+      "output_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "sdk_version": "10.0.403",
+  "next_action": "Only after RS166 succeeds may an owner separately authorize exact original F31 Composition private publication and verification; then independently qualify physical feed readback in a distinct DWF run."
+}

@@ -391,8 +391,24 @@ internal static class Program
                 version = Version,
                 archiveSha256 = CandidateSha,
                 compositionDllSha256 = CandidateDllSha,
-                dependencyId = BaseId,
-                dependencyVersion = BaseVersion,
+                directDependencyCount = Dependencies.Length,
+                directDependencies = new[]
+                {
+                    new
+                    {
+                        id = QuantitiesId,
+                        version = QuantitiesVersion,
+                        archiveSha256 = QuantitiesArchiveSha,
+                        packagedDllSha256 = QuantitiesDllSha
+                    },
+                    new
+                    {
+                        id = BaseId,
+                        version = BaseVersion,
+                        archiveSha256 = BaseArchiveSha,
+                        packagedDllSha256 = BaseDllSha
+                    }
+                },
                 feedSelector = "NUGET_LOCAL",
                 independentlyReadFromPublishedFeed = false,
                 remoteRegistryPublished = false,
@@ -402,7 +418,8 @@ internal static class Program
         }
         Console.WriteLine("MATH-COMPOSITION-PUBLISHED|id=" + PackageId +
             "|version=" + Version + "|sha256=" + CandidateSha +
-            "|dependency=" + BaseVersion +
+            "|dependencies=" + QuantitiesId + "@" + QuantitiesVersion +
+            "," + BaseId + "@" + BaseVersion +
             "|feed=NUGET_LOCAL|verification=pending");
     }
 
@@ -425,7 +442,9 @@ internal static class Program
                  "fresh published Composition package-only consumer failed or archive changed");
             Console.WriteLine("MATH-COMPOSITION-VERIFY|id=" + PackageId +
                 "|version=" + Version + "|binary=15|archive=" + CandidateSha +
-                "|dependency=" + BaseVersion + "|feed=NUGET_LOCAL|PASS");
+                "|dependencies=" + QuantitiesId + "@" + QuantitiesVersion +
+                "," + BaseId + "@" + BaseVersion +
+                "|feed=NUGET_LOCAL|PASS");
         }
         finally
         {
