@@ -121,7 +121,7 @@ foreach (var file in files)
 }
 payload.Require.TextContains(
     Distribution + "nuget-federation-f32-composition-publisher.md",
-    "## Bounded F32 rehearsal");
+    "## Bounded F32 disposable-feed rehearsal");
 payload.Require.TextContains(Tool + "Program.cs", "DotNetLocalPackageRepository");
 payload.Require.TextContains(Tool + "Program.cs", "MATH-COMPOSITION-PUBLISHED|id=");
 payload.Require.TextContains(
