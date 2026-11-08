@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "id": "RS166",
+  "title": "Qualify corrected private Composition release receipt with both direct dependencies",
+  "state": "prepared",
+  "commitMessage": "fix: qualify Composition private release receipt with exact two-dependency closure",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Qualify a corrective Composition private-release receipt containing both exact direct Quantities and IR dependencies and complete provenance, without publication.",
+    "value": "Prove the release controller differs from the immutable RS165 source by only three receipt/terminal marker substitutions; compile its existing NuGet tool from the private source feed and retain exact binary, license and scope boundaries.",
+    "debtChanges": [
+      "RS165 succeeded with two corrected pre-attempt refusals, attempt 001; firstPassSucceeded is false and no private Composition release occurred.",
+      "RS165 release operator receipt omitted one direct Quantities dependency, despite two independently qualified direct package edges.",
+      "RS166 corrects only Composition release receipt and command markers; source projects, candidate archives, NUGET_LOCAL, rollback and other repositories remain untouched."
+    ],
+    "nextAction": "After durable RS166 success, request explicit owner authorization for private immutable publication of the original RS164 Composition candidate and independent follow-up readback.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f33-composition-release-receipt.md",
+    "docs/distribution/ValidateNugetCompositionReleaseReceipt.cs",
+    "tools/dw.tools.math.nuget-composition-release/Program.cs",
+    "docs/distribution/nuget-federation-f33-composition-release-receipt-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "composition-f33-receipt",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCompositionReleaseReceipt.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-composition-f31",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCompositionCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f13",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
