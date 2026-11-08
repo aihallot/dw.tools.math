@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "RS167",
+  "title": "Independently verify original privately published Composition with two direct NuGet dependencies",
+  "state": "prepared",
+  "commitMessage": "test: independently verify published Composition Quantities and IR NuGet binaries",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Independently verify the exact privately published Composition archive and both direct Quantities/IR package dependencies, with fifteen compiled isolated consumer probes and no DWF publication.",
+    "value": "Read original immutable archives directly from NUGET_LOCAL, validate exact nuspec dependency edges, fingerprint snapshot, isolated package-only consumer and unmodified feed; retain independent F34 provenance.",
+    "debtChanges": [
+      "RS166 succeeded after one corrected pre-attempt refusal; F33 independently qualified two-dependency release receipt, but did not publish Composition.",
+      "Owner explicitly authorized private immutable publication of the original 17101-byte Composition F31 archive into NUGET_LOCAL on 2026-11-08, but no operator result has been observed.",
+      "RS167 only independently reads physical packages after owner-controlled release; it cannot publish, substitute rehearsal bytes, modify source versions, or write external feeds."
+    ],
+    "nextAction": "After independently verified Composition F34 readback, inspect the next accepted unpublished Math package in F1 topology. No remote publication or external adoption is inferred.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f34-composition-published.md",
+    "docs/distribution/ValidateNugetCompositionPublishedFeed.cs",
+    "tools/dw.tools.math.nuget-composition-feed-verify/dw.tools.math.nuget-composition-feed-verify.csproj",
+    "tools/dw.tools.math.nuget-composition-feed-verify/Program.cs",
+    "docs/distribution/nuget-federation-f34-composition-published-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "composition-f34-physical-readback",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCompositionPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-composition-f33",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCompositionReleaseReceipt.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f13",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
