@@ -205,14 +205,19 @@ internal static class Program
              "F1 must propose an unreserved current-day calendar NuGet version");
 
         var work = RepoFile(root, "build/artifacts/rs168-numerics-candidate");
-        var producer = Path.Combine(work, "producer");
         var packageFolder = Path.Combine(work, "candidate");
-        var consumer = Path.Combine(work, "consumer");
-        Need(!Directory.Exists(producer) && !Directory.Exists(consumer),
-             "the run-owned Numerics candidate workspace already exists");
-        Directory.CreateDirectory(producer);
-        Need(!File.Exists(Path.Combine(work, "candidate", PackageId + "." + newVersion + ".nupkg")),
+        var package = Path.Combine(packageFolder, PackageId + "." + newVersion + ".nupkg");
+        Need(!File.Exists(package),
              "an original Numerics candidate may never be overwritten");
+        Need(!File.Exists(Path.Combine(feed, PackageId + "." + newVersion + ".nupkg")),
+             "candidate Numerics package identity already exists in shared private feed");
+        // A failed attempt may retain an earlier producer/consumer tree. Never delete it.
+        // Use a fresh, isolated scratch tree while keeping the candidate archive path stable.
+        var scratch = Path.Combine(work, "scratch", Guid.NewGuid().ToString("N"));
+        Need(!Directory.Exists(scratch), "fresh Numerics scratch workspace collided");
+        var producer = Path.Combine(scratch, "producer");
+        var consumer = Path.Combine(scratch, "consumer");
+        Directory.CreateDirectory(producer);
         Directory.CreateDirectory(packageFolder);
         Directory.CreateDirectory(consumer);
 
@@ -253,9 +258,6 @@ internal static class Program
             "--output", packageFolder, "-p:NuGetAudit=false"
         ]).Receipt);
 
-        var package = Path.Combine(packageFolder, PackageId + "." + newVersion + ".nupkg");
-        Need(!File.Exists(Path.Combine(feed, PackageId + "." + newVersion + ".nupkg")),
-             "candidate Numerics package identity already exists in shared private feed");
         Need(File.Exists(package), "the Numerics calendar candidate archive was not created");
         var archiveSha = ShaFile(package);
         var dllSha = PackagedDllSha(package, PackageId, newVersion,
