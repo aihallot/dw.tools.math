@@ -97,7 +97,7 @@ Need(Text(candidate, "packageId") == "dw.tools.math.composition" &&
      Text(candidate, "dependencyIrArchiveSha256") ==
          "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480" &&
      Text(candidate, "dependencyIrDllSha256") ==
-         "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f315af825d9f68f1e18af" &&
+         "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af" &&
      Text(candidate, "dependencyQuantitiesId") == "dw.quantities" &&
      Text(candidate, "dependencyQuantitiesVersion") == "20260.20261102.1001" &&
      Text(candidate, "dependencyQuantitiesArchiveSha256") ==

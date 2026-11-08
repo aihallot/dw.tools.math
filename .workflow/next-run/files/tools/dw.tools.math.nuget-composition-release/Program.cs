@@ -26,7 +26,7 @@ internal static class Program
     private const string BaseArchiveSha =
         "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480";
     private const string BaseDllSha =
-        "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f315af825d9f68f1e18af";
+        "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af";
     private const string SharedNuGetDllSha =
         "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61";
 
@@ -500,7 +500,7 @@ internal static class Program
                     new XElement("PackageVersion", Version),
                     new XElement("Authors", "dw.tools.math"),
                     new XElement("Description",
-                        "Bounded provider-neutral canonical exact Math notation, bounded Unicode/Markdown and Office OMML with typed input-loss boundaries."),
+                        "Inspectable mathematical operation results and capabilities, provider-neutral."),
                     new XElement("IsPackable", "true"),
                     new XElement("ManagePackageVersionsCentrally", "false"),
                     new XElement("RestorePackagesWithLockFile", "false"),
