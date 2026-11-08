@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
@@ -111,9 +112,36 @@ var files = new[]
     Tool + "Program.cs",
     Tool + "fixtures/NumericsBinaryConsumer.cs"
 };
+// Exact bytes installed by the failed attempt remain admissible for same-run retry.
+// Any non-original or non-current staged bytes still refuse before replacement.
+var originalStagedHashes = new Dictionary<string, string>(StringComparer.Ordinal)
+{
+    [Distribution + "nuget-federation-f35-numerics-candidate.md"] = "42386683fbe057bb93d42d4d7db0c5d0275cce89f8a189c734e0f5e0223500e7",
+    [Validator] = "fd9b056ab32975a8eb269e8ede056782dc6e42ea2ee046f0f54abf62c9fa8985",
+    [Project] = "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+    [Tool + "Directory.Packages.props"] = "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+    [Tool + "Program.cs"] = "d204b7767b71588ab68f7ee9a20327c7ee58c1530cf92f2e709037256e9572a2",
+    [Tool + "fixtures/NumericsBinaryConsumer.cs"] = "98383b85fde7a4c773f68bddccda34e351db7f7ece038a77c92a759ea7f6766b",
+};
 if (!complete)
 {
-    foreach (var path in files.Append(Evidence)) payload.Require.FileMissing(path);
+    foreach (var path in files)
+    {
+        var destination = Path.Combine(root, path.Replace('/', Path.DirectorySeparatorChar));
+        if (!File.Exists(destination))
+        {
+            payload.Require.FileMissing(path);
+            continue;
+        }
+        Need((File.GetAttributes(destination) & FileAttributes.ReparsePoint) == 0,
+            "retained RS168 target must be a regular file: " + path);
+        var retainedSha = FileSha(destination);
+        var stagedPath = Path.Combine(root, ".workflow", "runs", "RS168", "staged",
+            path.Replace('/', Path.DirectorySeparatorChar));
+        Need(retainedSha == originalStagedHashes[path] || retainedSha == FileSha(stagedPath),
+            "retained RS168 target differs from original attempt and corrected staged bytes: " + path);
+    }
+    payload.Require.FileMissing(Evidence);
 }
 else
 {
@@ -249,6 +277,9 @@ Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
      final.Output.Contains(Limits, StringComparison.Ordinal),
      "RS168 Numerics source-and-binary qualification receipt rejected");
 return payload.Complete();
+
+static string FileSha(string file) =>
+    Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(file)));
 
 static void Need(bool good, string reason)
 {
