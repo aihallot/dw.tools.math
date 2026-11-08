@@ -95,8 +95,10 @@ payload.Require.FileExists(".workflow/runs/RS165/staged/" + Controller);
 var sources = new[] { Documentation, Validator, Controller };
 if (!complete)
 {
-    foreach (var file in sources.Append(Evidence))
-        payload.Require.FileMissing(file);
+    payload.Require.FileMissing(Documentation);
+    payload.Require.FileMissing(Validator);
+    payload.Require.FileMissing(Evidence);
+    payload.Require.FileExists(Controller);
 }
 else
 {
