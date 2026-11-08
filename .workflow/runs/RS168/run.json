@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "RS168",
+  "title": "Qualify original Numerics NuGet candidate with published IR and transitive Quantities binary closure",
+  "state": "prepared",
+  "commitMessage": "test: qualify Numerics calendar NuGet candidate with published IR and Quantities",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Qualify an unpublished three-source Numerics NuGet calendar candidate with an exact direct IR package dependency, transitive Quantities and fifteen compiled package-only oracles.",
+    "value": "Preserve the original Numerics source version, project and lockfile; link three existing C# sources into a disposable net10.0 package, compare physical IR/Quantities dependencies, test compiled binary consumers and record F35 without feed mutation.",
+    "debtChanges": [
+      "RS167 completed first-pass, independently proving the tenth private Math package Composition and its exact two-direct-dependency closure.",
+      "The F1 inventory lists Numerics 0.4.0-preview.4 with three original source files, one IR ProjectReference and transitive Quantities; candidate packages are unreserved and unpublished.",
+      "RS168 performs no owner publication, public license choice, installed rollback, external repository change or AURA/Decision/Discovery adoption."
+    ],
+    "nextAction": "After durable RS168 F35 candidate qualification, rehearse a guarded immutable Numerics publisher in a disposable feed; actual private release requires separate owner authorization.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f35-numerics-candidate.md",
+    "docs/distribution/ValidateNugetNumericsCandidate.cs",
+    "tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj",
+    "tools/dw.tools.math.nuget-numerics-candidate/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs",
+    "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "numerics-f35-candidate",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetNumericsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-composition-f34",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetCompositionPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-ir-f13",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetIrPublishedFeed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
