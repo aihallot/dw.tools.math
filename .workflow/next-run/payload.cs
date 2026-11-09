@@ -5,263 +5,161 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Distribution = "docs/distribution/";
-const string Tool = "tools/dw.tools.math.nuget-numerics-candidate/";
-const string Project = Tool + "dw.tools.math.nuget-numerics-candidate.csproj";
-const string Validator = Distribution + "ValidateNugetNumericsCandidate.cs";
-const string Evidence = Distribution + "nuget-federation-f35-numerics-candidate-qualified.json";
-const string Status = "rs168-numerics-dependent-calendar-candidate-qualified-unpublished";
-const string Ready = "MATH-NUMERICS-F35:SOURCE=READY;DEPENDENCIES=PINNED;CANDIDATE=PENDING;NATIVE=541";
-const string Qualified = "MATH-NUMERICS-F35:CANDIDATE=QUALIFIED;BINARY=15;DEPENDENCY=1;NATIVE=541";
-const string Limits = "MATH-NUMERICS-F35:PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
-const string IrSha = "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480";
-const string IrDll = "5c81fafb632424d6a5abd1d94ce08e5d887e53a7a09f285af825d9f68f1e18af";
-const string QuantitiesSha = "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d";
-const string QuantitiesDll = "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4";
+const string Tool = "tools/dw.tools.math.nuget-numerics-rehearsal/";
+const string Project = Tool + "dw.tools.math.nuget-numerics-rehearsal.csproj";
+const string Validator = "docs/distribution/ValidateNugetNumericsRehearsal.cs";
+const string Documentation = "docs/distribution/nuget-federation-f36-numerics-rehearsal.md";
+const string Evidence = "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json";
+const string Status = "rs169-numerics-immutable-disposable-rehearsal-qualified-unpublished";
+const string Ready = "MATH-NUMERICS-F36:SOURCE=READY;REHEARSAL=PENDING;NATIVE=541";
+const string Qualified = "MATH-NUMERICS-F36:REHEARSAL=QUALIFIED;BINARY=15;NATIVE=541";
+const string Limits = "MATH-NUMERICS-F36:SHARED-PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
+const string CandidateSha = "f8e50ed22ac89b2939aa5519f202e082a536cc7cd8c7843ba74205d8a134802d";
+const string CandidateDll = "77ff720ffbb959a7052d5b31d18b272e472cf81b07f37697dfe525c0b40bcde4";
 
-var payload = PayloadContext.Create();
-var root = payload.RepositoryRoot;
+var p = PayloadContext.Create();
+var root = p.RepositoryRoot;
 var complete = File.Exists(Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
-
-payload.Workflow.RequireCurrentRun("RS168", null, null, null, null, null);
-payload.Workflow.RequirePriorSuccess("RS167", 1,
-    "test: independently verify published Composition Quantities and IR NuGet binaries",
-    "0.1.66", 0, 0, 0, true);
-payload.ProjectPlan.RequireNodeState("M3", "done");
-payload.ProjectPlan.RequireNodeState("M7", "done");
-payload.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
+p.Workflow.RequireCurrentRun("RS169", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS168", 3,
+    "test: qualify Numerics calendar NuGet candidate with published IR and Quantities",
+    "0.1.66", 4, 2, 2, false, true, 2);
+p.ProjectPlan.RequireNodeState("M3", "done");
+p.ProjectPlan.RequireNodeState("M7", "done");
+p.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
     JsonValue.Create("0.1.122"));
-payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
+p.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
-payload.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
+p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
     JsonValue.Create("0.26"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f34-composition-published-qualified.json",
-    "/status",
-    JsonValue.Create("rs167-composition-published-local-three-binaries-independently-verified"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f34-composition-published-qualified.json",
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+    "/status", JsonValue.Create("rs168-numerics-dependent-calendar-candidate-qualified-unpublished"));
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+    "/candidate/candidateArchiveSha256", JsonValue.Create(CandidateSha));
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+    "/candidate/candidateDllSha256", JsonValue.Create(CandidateDll));
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+    "/candidate/compiledBinaryConsumerChecks", JsonValue.Create(15));
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+    "/package_published", JsonValue.Create(false));
+p.Require.JsonValueEquals("docs/distribution/nuget-federation-f13-ir-published-qualified.json",
     "/physically_published_package_verified", JsonValue.Create(true));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f34-composition-published-qualified.json",
-    "/package_published_by_this_run", JsonValue.Create(false));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f34-composition-published-qualified.json",
-    "/observation/packageId", JsonValue.Create("dw.tools.math.composition"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f34-composition-published-qualified.json",
-    "/observation/compiledConsumerChecks", JsonValue.Create(15));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/status", JsonValue.Create("rs146-ir-published-local-two-binaries-independently-verified"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/physically_published_package_verified", JsonValue.Create(true));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/observation/packageVersion", JsonValue.Create("20260.20261104.1001"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/observation/archiveSha256", JsonValue.Create(IrSha));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/observation/packagedDllSha256", JsonValue.Create(IrDll));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/observation/exactDependencies/0/archiveSha256", JsonValue.Create(QuantitiesSha));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f13-ir-published-qualified.json",
-    "/observation/exactDependencies/0/packagedDllSha256", JsonValue.Create(QuantitiesDll));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f1-qualified.json", "/package_count",
-    JsonValue.Create(13));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f1-qualified.json",
-    "/observed/packages/9/packageId", JsonValue.Create("dw.tools.math.numerics"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f1-qualified.json",
-    "/observed/packages/9/historicalSourceVersion", JsonValue.Create("0.4.0-preview.4"));
-payload.Require.JsonValueEquals(
-    Distribution + "nuget-federation-f1-qualified.json",
-    "/observed/packages/9/projectReferences/0", JsonValue.Create("dw.tools.math.ir"));
-payload.Require.JsonValueEquals(
-    "src/projects/dw.tools.math.numerics/packages.lock.json",
-    "/dependencies/net10.0/dw.tools.math.ir/type", JsonValue.Create("Project"));
-payload.Require.JsonValueEquals(
-    "src/projects/dw.tools.math.numerics/packages.lock.json",
-    "/dependencies/net10.0/dw.quantities/type", JsonValue.Create("Project"));
-payload.Require.JsonValueEquals(
-    "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+p.Require.JsonValueEquals("docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
     "/authorization/package_from_dw_tools_math", JsonValue.Create(true));
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
-    "<Version>0.4.0-preview.4</Version>");
-payload.Require.TextContains(
-    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
-    "<ProjectReference Include=\"../dw.tools.math.ir/dw.tools.math.ir.csproj\" />");
-payload.Require.FileExists(
-    "tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj");
+p.Require.FileExists("tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs");
 
-var files = new[]
-{
-    Distribution + "nuget-federation-f35-numerics-candidate.md",
-    Validator,
-    Project,
-    Tool + "Directory.Packages.props",
-    Tool + "Program.cs",
-    Tool + "fixtures/NumericsBinaryConsumer.cs"
-};
+var files = new[] { Documentation, Validator, Project, Tool + "Directory.Packages.props",
+    Tool + "Program.cs" };
 if (!complete)
 {
-    foreach (var path in files.Append(Evidence)) payload.Require.FileMissing(path);
+    foreach (var file in files.Append(Evidence)) p.Require.FileMissing(file);
 }
 else
 {
-    payload.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
-    payload.Require.JsonValueEquals(Evidence, "/package_published", JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence, "/source_versions_modified", JsonValue.Create(false));
-    payload.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
+    p.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
+    p.Require.JsonValueEquals(Evidence, "/shared_package_published", JsonValue.Create(false));
+    p.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
 }
-var hashes = new JsonObject();
-foreach (var path in files)
+var sourceHashes = new JsonObject();
+foreach (var file in files)
 {
-    var installed = payload.Files.ReplaceFromStaged("staged/" + path, path);
-    hashes[path] = installed.AfterSha256 ??
-        throw new InvalidDataException("RS168 installed source SHA missing " + path);
+    var installed = p.Files.ReplaceFromStaged("staged/" + file, file);
+    sourceHashes[file] = installed.AfterSha256 ??
+        throw new InvalidDataException("RS169 staged SHA missing " + file);
 }
-payload.Require.FileExists(Tool + "fixtures/NumericsBinaryConsumer.cs");
-payload.Require.TextContains(Distribution + "nuget-federation-f35-numerics-candidate.md",
-    "## Fifteen independent compiled binary probes");
-payload.Require.TextContains(Tool + "Program.cs",
-    "originalSourceLockSha256 = ShaFile(lockPath)");
-payload.Require.TextContains(Tool + "Program.cs", "MATH-NUMERICS-BINARY|PASS|15");
-payload.Require.TextContains(Tool + "fixtures/NumericsBinaryConsumer.cs",
-    "MATH-NUMERICS-BINARY|PASS|15");
-payload.Require.TextContains(Project, "<PackageReference Include=\"Dw.Tools.NuGet\" />");
-payload.Require.TextContains(Tool + "Directory.Packages.props",
-    "<PackageVersion Include=\"Dw.Tools.NuGet\" Version=\"[20260.20261026.1010]\" />");
-
-var sourceCheck = Run(root, "source-check", "dotnet",
-    ["run", "--file", Validator, "--", "--check"]);
-Need(sourceCheck.Output.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
-    "RS168 original Numerics/dependency source verification failed");
+p.Require.TextContains(Documentation,
+    "## Rehearsal and independent consumer");
+p.Require.TextContains(Tool + "Program.cs", "disposableFeedPublished = true");
+p.Require.TextContains(Tool + "Program.cs", "sharedFeedPublished = false");
+p.Require.TextContains(Tool + "Program.cs", "independentCompiledBinaryChecks = 15");
+p.Require.TextContains(Project, "<PackageReference Include=\"Dw.Tools.NuGet\" />");
+var check = Run(root, "source-check", ["run", "--file", Validator, "--", "--check"]);
+Need(check.Output.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
+    "RS169 source validation failed");
 if (!complete)
 {
     var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
-        throw new InvalidDataException("NUGET_LOCAL private feed not defined");
-    Need(!string.IsNullOrWhiteSpace(feed) &&
-         Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
-         "NUGET_LOCAL must be an existing absolute private feed");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs168", "packages");
+        throw new InvalidDataException("NUGET_LOCAL private feed missing");
+    Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
+        "private dependency feed must be absolute and present");
+    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs169", "packages");
     var commands = new List<JsonNode>();
-    commands.Add(Run(root, "tool-restore", "dotnet", [
+    commands.Add(Run(root, "tool-restore", [
         "restore", Project, "--source", feed, "--packages", cache,
         "-p:NuGetAudit=false"
     ]).Receipt);
-    commands.Add(Run(root, "tool-build", "dotnet", [
-        "build", Project, "-c", "Release", "--no-restore",
-        "-p:NuGetAudit=false"
+    commands.Add(Run(root, "tool-build", [
+        "build", Project, "-c", "Release", "--no-restore", "-p:NuGetAudit=false"
     ]).Receipt);
-    var process = Run(root, "numerics-candidate", "dotnet", [
+    var rehearsal = Run(root, "numerics-disposable-rehearsal", [
         "run", "--project", Project, "-c", "Release",
-        "--no-build", "--no-restore", "--", "--qualify-numerics", "."
+        "--no-build", "--no-restore", "--", "--rehearse", "."
     ]);
-    commands.Add(process.Receipt);
-    var sdk = Run(root, "sdk", "dotnet", ["--version"]);
+    commands.Add(rehearsal.Receipt);
+    var sdk = Run(root, "sdk", ["--version"]);
     commands.Add(sdk.Receipt);
-    Need(commands.Count == 4, "four actual outer build, candidate and SDK receipts required");
-    var candidate = JsonNode.Parse(process.Output.Trim())?.AsObject() ??
-        throw new InvalidDataException("Numerics candidate producer must emit structured JSON");
-    Need(candidate["status"]?.GetValue<string>() ==
-             "qualified-numerics-dependent-calendar-candidate-not-published" &&
-         candidate["packageId"]?.GetValue<string>() == "dw.tools.math.numerics" &&
-         candidate["historicalSourceVersion"]?.GetValue<string>() == "0.4.0-preview.4" &&
-         candidate["originalProjectSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["originalSourceLockSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["originalSourcesSha256"]?.AsObject().Count == 4 &&
-         candidate["packageDependencies"]?.GetValue<int>() == 1 &&
-         candidate["dependencyIrId"]?.GetValue<string>() == "dw.tools.math.ir" &&
-         candidate["dependencyIrVersion"]?.GetValue<string>() == "20260.20261104.1001" &&
-         candidate["dependencyIrArchiveSha256"]?.GetValue<string>() == IrSha &&
-         candidate["dependencyIrDllSha256"]?.GetValue<string>() == IrDll &&
-         candidate["dependencyQuantitiesId"]?.GetValue<string>() == "dw.quantities" &&
-         candidate["dependencyQuantitiesVersion"]?.GetValue<string>() == "20260.20261102.1001" &&
-         candidate["dependencyQuantitiesArchiveSha256"]?.GetValue<string>() == QuantitiesSha &&
-         candidate["dependencyQuantitiesDllSha256"]?.GetValue<string>() == QuantitiesDll &&
-         candidate["candidateArchiveSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["candidateDllSha256"]?.GetValue<string>()?.Length == 64 &&
-         candidate["candidateArchiveBytes"]?.GetValue<long>() > 2000 &&
-         candidate["originalSourceProjectReferences"]?.GetValue<int>() == 1 &&
-         candidate["originalThreeSourceFilesLinked"]?.GetValue<bool>() == true &&
-         candidate["sourceProjectUnmodified"]?.GetValue<bool>() == true &&
-         candidate["sourceFeedInventoryUnchanged"]?.GetValue<bool>() == true &&
-         candidate["temporaryPackagingProjection"]?.GetValue<bool>() == true &&
-         candidate["independentPackageReference"]?.GetValue<bool>() == true &&
-         candidate["compiledBinaryConsumerChecks"]?.GetValue<int>() == 15 &&
-         candidate["published"]?.GetValue<bool>() == false &&
-         candidate["versionReserved"]?.GetValue<bool>() == false,
-         "qualified exact Numerics source and IR/Quantities transitive closure missing");
-    var version = candidate["packageVersion"]?.GetValue<string>() ??
-        throw new InvalidDataException("Numerics calendar version missing");
-    Need(version.StartsWith("20260.2026", StringComparison.Ordinal) &&
-         version.Length == 19 &&
-         version.EndsWith(".1001", StringComparison.Ordinal),
-         "Numerics package-version allocator did not return first free daily candidate");
-    Need(candidate["candidateArchivePath"]?.GetValue<string>() ==
-             "build/artifacts/rs168-numerics-candidate/candidate/dw.tools.math.numerics." +
-             version + ".nupkg", "unexpected candidate output package path");
-    var inner = candidate["commands"]?.AsArray() ??
-        throw new InvalidDataException("missing Numerics inner process receipts");
-    Need(inner.Count == 11, "eleven actual Numerics candidate and consumer receipts required");
+    var observation = JsonNode.Parse(rehearsal.Output.Trim())?.AsObject() ??
+        throw new InvalidDataException("RS169 tool did not emit structured JSON");
+    Need(observation["status"]?.GetValue<string>() ==
+             "qualified-numerics-immutable-disposable-rehearsal-unpublished" &&
+         observation["packageId"]?.GetValue<string>() == "dw.tools.math.numerics" &&
+         observation["originalF35ArchiveSha256"]?.GetValue<string>() == CandidateSha &&
+         observation["originalF35DllSha256"]?.GetValue<string>() == CandidateDll &&
+         observation["disposableFeedPublished"]?.GetValue<bool>() == true &&
+         observation["sharedFeedPublished"]?.GetValue<bool>() == false &&
+         observation["releaseAuthorized"]?.GetValue<bool>() == false &&
+         observation["immutableCollisionRefused"]?.GetValue<bool>() == true &&
+         observation["falsifiedDigestRefused"]?.GetValue<bool>() == true &&
+         observation["cancellationRefused"]?.GetValue<bool>() == true &&
+         observation["independentCompiledBinaryChecks"]?.GetValue<int>() == 15 &&
+         observation["candidateInnerCommands"]?.GetValue<int>() == 11 &&
+         observation["commands"]?.AsArray().Count == 7 &&
+         observation["directDependencyCount"]?.GetValue<int>() == 1 &&
+         commands.Count == 4,
+         "RS169 exact disposable rehearsal and actual command receipts refused");
     var record = new JsonObject
     {
         ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.numerics-dependent-calendar-nuget-candidate",
+        ["kind"] = "dw.tools.math.numerics-immutable-disposable-publisher-rehearsal",
         ["status"] = Status,
         ["source_package_id"] = "dw.tools.math.numerics",
-        ["previous_owner_run"] = "RS167",
-        ["sourceBaselineCommit"] = "a7dd0a6b873affaac57d677ee7a6a6024b44c355",
+        ["previous_owner_run"] = "RS168",
+        ["source_baseline_commit"] = "494a3ec2e2dc36dfa52f6299c68dfd814cd76008",
         ["feed_selector"] = "NUGET_LOCAL",
         ["native_nodes_retained"] = 541,
-        ["package_published"] = false,
-        ["release_authorized_by_this_run"] = false,
-        ["source_versions_modified"] = false,
-        ["new_public_license_selected"] = false,
-        ["installed_package_rollback_qualified"] = false,
+        ["shared_package_published"] = false,
+        ["owner_release_authorized"] = false,
+        ["public_license_selected"] = false,
+        ["installed_rollback_qualified"] = false,
         ["external_requests_transmitted"] = false,
-        ["discovery_migration_qualified"] = false,
-        ["candidate"] = candidate,
-        ["source_files"] = hashes,
-        ["command_receipts"] = payload.Json.Array(commands.ToArray()),
+        ["rehearsal"] = observation,
+        ["source_files"] = sourceHashes,
+        ["command_receipts"] = p.Json.Array(commands.ToArray()),
         ["sdk_version"] = sdk.Output.Trim(),
         ["next_action"] =
-            "After durable Numerics candidate qualification, rehearse the exact original candidate and its IR/Quantities dependency closure on a disposable feed before any owner-only publication."
+            "Inspect the exact F35 candidate and qualify a distinct no-overwrite private Numerics release controller; publication requires owner authorization."
     };
-    payload.Files.WriteComplete(Evidence,
+    p.Files.WriteComplete(Evidence,
         record.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
 }
-payload.ProjectPlan.RequireNodeState("M3", "done");
-payload.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
-    JsonValue.Create("done"));
-var final = Run(root, "target-check", "dotnet",
-    ["run", "--file", Validator, "--", "--check"]);
+p.ProjectPlan.RequireNodeState("M3", "done");
+var final = Run(root, "target-check", ["run", "--file", Validator, "--", "--check"]);
 Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
      final.Output.Contains(Limits, StringComparison.Ordinal),
-     "RS168 Numerics source-and-binary qualification receipt rejected");
-return payload.Complete();
+     "RS169 evidence did not pass qualified read-only validator");
+return p.Complete();
 
-static void Need(bool good, string reason)
+static void Need(bool accepted, string reason)
 {
-    if (!good) throw new InvalidDataException("RS168: " + reason);
+    if (!accepted) throw new InvalidDataException("RS169: " + reason);
 }
-static (JsonNode Receipt, string Output) Run(
-    string root, string id, string executable, string[] args)
+static (JsonNode Receipt, string Output) Run(string root, string id, string[] arguments)
 {
     using var process = new Process
     {
         StartInfo = new ProcessStartInfo
         {
-            FileName = executable,
+            FileName = "dotnet",
             WorkingDirectory = root,
             UseShellExecute = false,
             RedirectStandardOutput = true,
@@ -271,32 +169,31 @@ static (JsonNode Receipt, string Output) Run(
     process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
     process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
     process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-rs168", "packages");
-    foreach (var arg in args) process.StartInfo.ArgumentList.Add(arg);
+        Path.Combine(root, ".workflow", "local", "nuget-rs169", "packages");
+    foreach (var arg in arguments) process.StartInfo.ArgumentList.Add(arg);
     var clock = Stopwatch.StartNew();
-    Need(process.Start(), "unable to start Numerics command " + id);
+    Need(process.Start(), "failed to start bounded command " + id);
     var stdout = process.StandardOutput.ReadToEndAsync();
     var stderr = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(540000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("Numerics candidate command timed out: " + id);
+        throw new TimeoutException("RS169 command timed out: " + id);
     }
     var output = stdout.GetAwaiter().GetResult();
     var errors = stderr.GetAwaiter().GetResult();
     clock.Stop();
     if (process.ExitCode != 0)
     {
-        var info = output + "\n" + errors;
+        var details = output + "\n" + errors;
         throw new InvalidDataException(id + " exit=" + process.ExitCode + "\n" +
-            info[..System.Math.Min(info.Length, 4100)]);
+            details[..System.Math.Min(details.Length, 3900)]);
     }
-    Console.WriteLine("RS168 " + id + " exit=0 elapsed_ms=" + clock.ElapsedMilliseconds);
     return (new JsonObject
     {
         ["id"] = id,
         ["exit_code"] = process.ExitCode,
-        ["command"] = executable + " " + string.Join(" ", args),
+        ["command"] = "dotnet " + string.Join(" ", arguments),
         ["elapsed_ms"] = clock.ElapsedMilliseconds,
         ["output_excerpt"] = output[..System.Math.Min(output.Length, 1200)]
     }, output);
