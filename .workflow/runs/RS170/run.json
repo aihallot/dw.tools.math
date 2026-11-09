@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "RS170",
+  "title": "Qualify original Numerics immutable private NuGet release controller without publication",
+  "state": "prepared",
+  "commitMessage": "test: qualify Numerics immutable private release controller",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M3"
+  ],
+  "contribution": {
+    "summary": "Qualify an original-only Numerics private NuGet release controller that pins F35 archive/DLL identity, IR and Quantities dependencies and refuses mismatched archives without publishing.",
+    "value": "Compile the guarded controller and nonmutating qualification mode; retain exact F35 and F36 lineage, source hashes and dependent package hashes; record archive availability without claiming approval. Publication and independent readback stay separate.",
+    "debtChanges": [
+      "RS169 succeeded on attempt 002 after an allocated failure; F36 proved disposable publication with fifteen binary probes, but its rebuilt archive differs from the original F35 package.",
+      "The only admissible original release is the F35 18313-byte Numerics archive with SHA-256 f8e50ed2..., a single exact IR dependency and transitive Quantities.",
+      "RS170 publishes nothing to NUGET_LOCAL, does not authorize owner release, public registry, installed rollback, other repositories or AURA D3.",
+      "RS170 first invocation was refused before attempt allocation by CS7036: PreparePublication requires an explicit CancellationToken when ignoreSubdirectories is supplied. The same pending run is corrected without releasing packages."
+    ],
+    "nextAction": "After RS170 succeeds, request explicit owner authorization to publish only the physically verified original F35 archive, then perform independent private-feed readback.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1650
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f37-numerics-release.md",
+    "docs/distribution/ValidateNugetNumericsRelease.cs",
+    "tools/dw.tools.math.nuget-numerics-release/dw.tools.math.nuget-numerics-release.csproj",
+    "tools/dw.tools.math.nuget-numerics-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-release/Program.cs",
+    "docs/distribution/nuget-federation-f37-numerics-release-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "numerics-f37-controller",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetNumericsRelease.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-numerics-f36",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetNumericsRehearsal.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "retained-numerics-f35",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateNugetNumericsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
