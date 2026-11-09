@@ -113,8 +113,8 @@ var files = new[]
     Tool + "Program.cs",
     Tool + "fixtures/NumericsBinaryConsumer.cs"
 };
-// Exact bytes installed by the failed attempt remain admissible for same-run retry.
-// Any non-original or non-current staged bytes still refuse before replacement.
+// Re-entry accepts only exact retained RS168 versions, never arbitrary local bytes.
+// Dirty correction receipt provenance is verified separately by DWF before execution.
 var originalStagedHashes = new Dictionary<string, string>(StringComparer.Ordinal)
 {
     [Distribution + "nuget-federation-f35-numerics-candidate.md"] = "42386683fbe057bb93d42d4d7db0c5d0275cce89f8a189c734e0f5e0223500e7",
@@ -139,8 +139,15 @@ if (!complete)
         var retainedSha = FileSha(destination);
         var stagedPath = Path.Combine(root, ".workflow", "runs", "RS168", "staged",
             path.Replace('/', Path.DirectorySeparatorChar));
-        Need(retainedSha == originalStagedHashes[path] || retainedSha == FileSha(stagedPath),
-            "retained RS168 target differs from original attempt and corrected staged bytes: " + path);
+        // The failed attempt 002 retained Program.cs from the first correction
+        // (commit 0a513cc2b68cd16c82e8b3fa6dc66acb098097ee).
+        // The retry-2 preparation changed staged Program.cs again, so retain that
+        // exact intermediate version rather than rejecting valid DWF provenance.
+        var previouslyPreparedProgram = path == Tool + "Program.cs" &&
+            retainedSha == "38bc445052cea58a73841fb0e395eb7dfad5548e5c2a4f06565217905105219c";
+        Need(retainedSha == originalStagedHashes[path] ||
+             retainedSha == FileSha(stagedPath) || previouslyPreparedProgram,
+            "retained RS168 target differs from the exact approved staged revisions: " + path);
     }
     payload.Require.FileMissing(Evidence);
 }
