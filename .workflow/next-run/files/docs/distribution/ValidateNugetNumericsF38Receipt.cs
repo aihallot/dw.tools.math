@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 const string PriorReport = ".aura/workflow/reports/RS171/attempt-001.json";
 const string F35 = "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json";
@@ -128,6 +129,13 @@ if (File.Exists(Receipt))
          result.GetProperty("source_attempt").GetInt32() == 1 &&
          Text(result, "source_validation_id") == "original-f35-binary-physical" &&
          Text(result, "stdout_sha256") == HashText(stdout) &&
+         Text(result, "source_report") == PriorReport &&
+         Text(result, "source_result_commit") ==
+             "01d9fffe1f7a1aa0f770cec215aa116b9f140104" &&
+         result.GetProperty("validation_exit_code").GetInt32() == 0 &&
+         JsonNode.DeepEquals(
+             JsonNode.Parse(result.GetProperty("observation").GetRawText()),
+             JsonNode.Parse(stdout)) &&
          !result.GetProperty("new_physical_execution").GetBoolean() &&
          !result.GetProperty("package_published").GetBoolean() &&
          !result.GetProperty("release_authorized").GetBoolean() &&

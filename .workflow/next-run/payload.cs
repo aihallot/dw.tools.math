@@ -1,9 +1,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
@@ -13,7 +10,6 @@ const string Validator = Dist + "ValidateNugetNumericsF38Receipt.cs";
 const string Evidence = Dist + "nuget-federation-f38-numerics-reconciled.json";
 const string Report = ".aura/workflow/reports/RS171/attempt-001.json";
 const string Status = "rs172-f38-original-numerics-dwf-physical-evidence-reconciled-unpublished";
-const string Ready = "MATH-NUMERICS-F38:DWf=VERIFIED;RECEIPT=PENDING;NATIVE=541";
 const string Qualified = "MATH-NUMERICS-F38:DWf=VERIFIED;RECEIPT=RECONCILED;BINARY=15;NATIVE=541";
 const string Limits = "MATH-NUMERICS-F38:NEW-PHYSICAL=false;SHARED-PUBLISHED=false;PUBLIC=false";
 
@@ -50,59 +46,24 @@ else
     p.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
 }
 
-var sources = new[] { Document, Validator };
-var hashes = new JsonObject();
-foreach (var path in sources)
+var sources = new[] { Document, Validator, Evidence };
+if (!complete)
 {
-    var replaced = p.Files.ReplaceFromStaged("staged/" + path, path);
-    hashes[path] = replaced.AfterSha256 ??
-        throw new InvalidDataException("RS172 installed source SHA missing " + path);
+    foreach (var path in sources) p.Require.FileMissing(path);
 }
+foreach (var path in sources)
+    p.Files.ReplaceFromStaged("staged/" + path, path);
 p.Require.TextContains(Document, "## Reconciliation operation and bounds");
 p.Require.TextContains(Validator, "original-f35-binary-physical");
 p.Require.TextContains(Validator, "new_physical_execution");
+// The evidence is a canonical staged snapshot of the already-committed RS171
+// observation, not a locally recomputed workflow identity. Its exact source
+// relationship is independently checked by the product validator.
 var before = Run(root, "read-only-source-validation", Validator);
-Need(before.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
-    "RS172 source/report reconciliation baseline refused");
+Need(before.Contains(Qualified, StringComparison.Ordinal) &&
+     before.Contains(Limits, StringComparison.Ordinal),
+    "RS172 committed physical evidence snapshot refused");
 
-if (!complete)
-{
-    using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root,
-        Report.Replace('/', Path.DirectorySeparatorChar))));
-    var physical = report.RootElement.GetProperty("validations")[0];
-    var stdout = physical.GetProperty("StandardOutput").GetString() ??
-        throw new InvalidDataException("RS171 output missing");
-    using var output = JsonDocument.Parse(stdout);
-    Need(output.RootElement.GetProperty("compiledBinaryChecks").GetInt32() == 15 &&
-         output.RootElement.GetProperty("originalArchivePhysicallyVerified").GetBoolean() &&
-         !output.RootElement.GetProperty("privateFeedPublished").GetBoolean(),
-         "RS171 original package physical observations incomplete");
-    var node = new JsonObject
-    {
-        ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.numerics-f38-dwf-focused-evidence-reconciliation",
-        ["status"] = Status,
-        ["source_run"] = "RS171",
-        ["source_attempt"] = 1,
-        ["source_report"] = Report,
-        ["source_result_commit"] = "01d9fffe1f7a1aa0f770cec215aa116b9f140104",
-        ["source_validation_id"] = "original-f35-binary-physical",
-        ["validation_exit_code"] = 0,
-        ["stdout_sha256"] = Convert.ToHexStringLower(
-            SHA256.HashData(Encoding.UTF8.GetBytes(stdout))),
-        ["native_nodes_retained"] = 541,
-        ["new_physical_execution"] = false,
-        ["package_published"] = false,
-        ["release_authorized"] = false,
-        ["public_registry_published"] = false,
-        ["installed_rollback_qualified"] = false,
-        ["observation"] = JsonNode.Parse(stdout),
-        ["source_files"] = hashes,
-        ["next_action"] = "Original F35 private publication still requires explicit owner approval followed by independent physical-feed readback."
-    };
-    p.Files.WriteComplete(Evidence,
-        node.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
-}
 p.ProjectPlan.RequireNodeState("M3", "done");
 var final = Run(root, "reconciled-receipt-validation", Validator);
 Need(final.Contains(Qualified, StringComparison.Ordinal) &&
