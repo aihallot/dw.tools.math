@@ -195,7 +195,7 @@ internal static class Program
         var repo = new DotNetLocalPackageRepository(feed,
             new DotNetLocalRepositoryLimits(4096, 67_108_864, 1_073_741_824));
         var prepared = repo.PreparePublication(original, ArchiveSha,
-            ignoreSubdirectories: true);
+            CancellationToken.None, ignoreSubdirectories: true);
         Need(prepared.Receipt.PackageId == Id &&
              prepared.Receipt.Version == Version &&
              prepared.Receipt.Sha256 == ArchiveSha,
