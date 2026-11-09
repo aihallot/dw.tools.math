@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.Json;
 
 const string Ready = "MATH-NUMERICS-F38:SOURCE=READY;PHYSICAL=POST-ATTEMPT;NATIVE=541";
@@ -21,8 +20,6 @@ static void Need(bool condition, string message)
 static string Text(JsonElement value, string key) =>
     value.GetProperty(key).GetString() ??
         throw new InvalidDataException("required exact JSON value missing: " + key);
-static string Sha(string path) =>
-    Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
 Need(args.Length == 0 || args.Length == 1 && args[0] == "--check",
     "validator only accepts observational --check");
 foreach (var file in files) Need(File.Exists(file), "missing immutable source " + file);
