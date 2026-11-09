@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Linq;
 using System.Text.Json;
@@ -11,7 +12,6 @@ namespace Dw.Tools.Math.NuGetNumericsRehearsal;
 internal static class Program
 {
     private const string PackageId = "dw.tools.math.numerics";
-    private const string CandidateProject = "tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj";
     private const string BinaryFixture = "tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs";
     private const string CandidateEvidence = "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json";
     private const string IrPackage = "dw.tools.math.ir.20260.20261104.1001.nupkg";
@@ -80,57 +80,98 @@ internal static class Program
                  File.Exists(Local(item.Name)) && Sha(Local(item.Name)) == item.Value.GetString()),
              "original three Numerics sources or exact lockfile changed");
         Need(File.Exists(Local(BinaryFixture)), "existing source-free binary consumer missing");
+        Need(Text(priorCandidate, "originalProjectSha256") ==
+                 Sha(Local("src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj")) &&
+             Text(priorCandidate, "originalSourceLockSha256") ==
+                 Sha(Local("src/projects/dw.tools.math.numerics/packages.lock.json")) &&
+             priorCandidate.GetProperty("originalThreeSourceFilesLinked").GetBoolean() &&
+             priorCandidate.GetProperty("originalSourceProjectReferences").GetInt32() == 1,
+             "the qualified original Numerics source project and lockfile changed");
 
-        var cache = Local(".workflow/local/nuget-rs169/packages");
-        var steps = new List<object>();
-        steps.Add(Run(root, cache, "candidate-tool-restore", [
-            "restore", CandidateProject, "--source", feed, "--packages", cache,
-            "-p:NuGetAudit=false"
-        ]).Receipt);
-        steps.Add(Run(root, cache, "candidate-tool-build", [
-            "build", CandidateProject, "-c", "Release", "--no-restore",
-            "-p:NuGetAudit=false"
-        ]).Receipt);
-        var candidateRun = Run(root, cache, "source-rebuild", [
-            "run", "--project", CandidateProject, "-c", "Release",
-            "--no-build", "--no-restore", "--", "--qualify-numerics", "."
-        ]);
-        steps.Add(candidateRun.Receipt);
-        using var generated = JsonDocument.Parse(candidateRun.Output.Trim());
-        var candidate = generated.RootElement;
-        var version = Text(candidate, "packageVersion");
-        var candidatePath = Text(candidate, "candidateArchivePath");
-        Need(Text(candidate, "status") ==
-                 "qualified-numerics-dependent-calendar-candidate-not-published" &&
-             Text(candidate, "packageId") == PackageId &&
-             Text(candidate, "historicalSourceVersion") == "0.4.0-preview.4" &&
-             candidate.GetProperty("compiledBinaryConsumerChecks").GetInt32() == 15 &&
-             candidate.GetProperty("packageDependencies").GetInt32() == 1 &&
-             Text(candidate, "dependencyIrArchiveSha256") == IrSha &&
-             Text(candidate, "dependencyQuantitiesArchiveSha256") == QuantitiesSha &&
-             !candidate.GetProperty("published").GetBoolean() &&
-             !candidate.GetProperty("versionReserved").GetBoolean() &&
-             Regex.IsMatch(candidatePath,
-                 @"\Abuild/artifacts/rs168-numerics-candidate/scratch/[a-f0-9]{32}/candidate/" +
-                 Regex.Escape(PackageId) + @"\." + Regex.Escape(version) + @"\.nupkg\z",
-                 RegexOptions.CultureInvariant),
-             "reconstructed unpublished candidate or exact binary/dependency checks refused");
-        var source = Local(candidatePath);
-        var generatedSha = Text(candidate, "candidateArchiveSha256");
-        var dllSha = Text(candidate, "candidateDllSha256");
-        Need(File.Exists(source) && Sha(source) == generatedSha &&
-             new FileInfo(source).Length > 2000 &&
-             Regex.IsMatch(generatedSha, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant) &&
-             Regex.IsMatch(dllSha, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant),
-             "source-built candidate archive not observed with exact SHA-256");
-
+        // Keep the original F35 evidence authoritative. Rebuild the unchanged three
+        // source files in an independent disposable producer rather than calling F35
+        // again with its already-populated RS168 NuGet package cache.
+        var version = OriginalCandidateVersion;
         var rehearsalRoot = Local("build/artifacts/rs169-numerics-rehearsal/" +
             Guid.NewGuid().ToString("N"));
         Need(!Directory.Exists(rehearsalRoot), "rehearsal directory collision");
+        var producer = Path.Combine(rehearsalRoot, "producer");
+        var candidateFolder = Path.Combine(rehearsalRoot, "candidate");
         var disposableFeed = Path.Combine(rehearsalRoot, "feed");
         var consumer = Path.Combine(rehearsalRoot, "consumer");
+        var cache = Path.Combine(rehearsalRoot, "packages");
+        Directory.CreateDirectory(producer);
+        Directory.CreateDirectory(candidateFolder);
         Directory.CreateDirectory(disposableFeed);
         Directory.CreateDirectory(consumer);
+        Directory.CreateDirectory(cache);
+        Need(!Directory.EnumerateFileSystemEntries(cache).Any(),
+             "rehearsal NuGet package cache must start empty");
+        var originalSources = sourceHashes.EnumerateObject()
+            .Where(item => item.Name.EndsWith(".cs", StringComparison.Ordinal))
+            .Select(item => Local(item.Name))
+            .OrderBy(path => path, StringComparer.Ordinal).ToArray();
+        Need(originalSources.Length == 3 &&
+             originalSources.Select(Path.GetFileName).Order(StringComparer.Ordinal)
+                 .SequenceEqual(new[]
+                 {
+                     "BoundedLinearAlgebra64.cs",
+                     "NumericalMatrices.cs",
+                     "RationalBinary64Conversion.cs"
+                 }, StringComparer.Ordinal),
+             "exact three F35 Numerics sources are required");
+        var producerProject = Path.Combine(producer, "numerics-rehearsal.csproj");
+        File.WriteAllText(producerProject,
+            new XDocument(new XElement("Project",
+                new XAttribute("Sdk", "Microsoft.NET.Sdk"),
+                new XElement("PropertyGroup",
+                    new XElement("TargetFramework", "net10.0"),
+                    new XElement("AssemblyName", PackageId),
+                    new XElement("RootNamespace", "Dw.Tools.Math.Numerics"),
+                    new XElement("PackageId", PackageId),
+                    new XElement("Version", "0.4.0-preview.4"),
+                    new XElement("PackageVersion", version),
+                    new XElement("Authors", "dw.tools.math"),
+                    new XElement("Description",
+                        "Provider-neutral finite binary64 matrix, vector and sparse contracts with explicit budgets."),
+                    new XElement("IsPackable", "true"),
+                    new XElement("ManagePackageVersionsCentrally", "false"),
+                    new XElement("RestorePackagesWithLockFile", "false"),
+                    new XElement("EnableDefaultCompileItems", "false")),
+                new XElement("ItemGroup",
+                    originalSources.Select(file => new XElement("Compile",
+                        new XAttribute("Include", file),
+                        new XAttribute("Link", Path.GetFileName(file)))),
+                    new XElement("PackageReference",
+                        new XAttribute("Include", "dw.tools.math.ir"),
+                        new XAttribute("Version", "[20260.20261104.1001]")))))
+                .ToString(SaveOptions.DisableFormatting) + "\n");
+        var producerConfig = Path.Combine(producer, "NuGet.Config");
+        File.WriteAllText(producerConfig, Sources(("dependencies", feed)));
+        var steps = new List<object>();
+        steps.Add(Run(root, cache, "producer-restore", [
+            "restore", producerProject, "--configfile", producerConfig,
+            "--packages", cache, "-p:NuGetAudit=false"
+        ]).Receipt);
+        steps.Add(Run(root, cache, "producer-build", [
+            "build", producerProject, "-c", "Release", "--no-restore",
+            "-p:NuGetAudit=false"
+        ]).Receipt);
+        steps.Add(Run(root, cache, "candidate-pack", [
+            "pack", producerProject, "-c", "Release",
+            "--no-build", "--no-restore", "--output", candidateFolder,
+            "-p:NuGetAudit=false"
+        ]).Receipt);
+        var source = Path.Combine(candidateFolder,
+            PackageId + "." + version + ".nupkg");
+        Need(File.Exists(source), "newly built Numerics archive is missing");
+        var generatedSha = Sha(source);
+        var dllSha = PackagedDllSha(source, PackageId, version);
+        Need(new FileInfo(source).Length > 2000 &&
+             Regex.IsMatch(generatedSha, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant) &&
+             Regex.IsMatch(dllSha, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant) &&
+             !File.Exists(Path.Combine(feed, PackageId + "." + version + ".nupkg")),
+             "rehearsal archive identity, metadata or original shared feed changed");
         var repository = new DotNetLocalPackageRepository(disposableFeed,
             new DotNetLocalRepositoryLimits(32, 67_108_864, 67_108_864));
         var prepared = repository.PreparePublication(source, generatedSha);
@@ -182,13 +223,8 @@ internal static class Program
                         new XAttribute("Version", "[" + version + "]")))))
                 .ToString(SaveOptions.DisableFormatting) + "\n");
         var config = Path.Combine(consumer, "NuGet.Config");
-        File.WriteAllText(config, new XDocument(new XElement("configuration",
-            new XElement("packageSources", new XElement("clear"),
-                new XElement("add", new XAttribute("key", "rehearsal"),
-                    new XAttribute("value", disposableFeed)),
-                new XElement("add", new XAttribute("key", "dependencies"),
-                    new XAttribute("value", feed)))))
-            .ToString(SaveOptions.DisableFormatting) + "\n");
+        File.WriteAllText(config,
+            Sources(("rehearsal", disposableFeed), ("dependencies", feed)));
         steps.Add(Run(root, cache, "consumer-restore", [
             "restore", consumerProject, "--configfile", config,
             "--packages", cache, "-p:NuGetAudit=false"
@@ -214,7 +250,7 @@ internal static class Program
              "disposable-feed binary consumer failed fifteen independent probes");
         var sdk = Run(root, cache, "sdk", ["--version"]);
         steps.Add(sdk.Receipt);
-        Need(steps.Count == 7 && candidate.GetProperty("commands").GetArrayLength() == 11 &&
+        Need(steps.Count == 7 && priorCandidate.GetProperty("commands").GetArrayLength() == 11 &&
              Sha(irArchive) == IrSha && Sha(quantitiesArchive) == QuantitiesSha &&
              Sha(source) == generatedSha && Sha(published.Path) == generatedSha &&
              !File.Exists(Path.Combine(feed, PackageId + "." + version + ".nupkg")),
@@ -249,7 +285,7 @@ internal static class Program
             transitiveDependencyId = "dw.quantities",
             transitiveDependencyVersion = "20260.20261102.1001",
             transitiveDependencyArchiveSha256 = QuantitiesSha,
-            candidateInnerCommands = 11,
+            candidateInnerCommands = priorCandidate.GetProperty("commands").GetArrayLength(),
             commands = steps,
             sharedNugetReader = "20260.20261026.1010",
             targetFramework = "net10.0",
@@ -257,6 +293,51 @@ internal static class Program
             originalCandidateSourcePackagePublished = false,
             nextAction = "Only the exact original RS168 F35 archive may be considered for owner-authorized private publication after a separate immutable release gate."
         };
+    }
+
+
+    private static string Sources(params (string Key, string Directory)[] feeds) =>
+        new XDocument(new XElement("configuration",
+            new XElement("packageSources", new XElement("clear"),
+                feeds.Select(feed => new XElement("add",
+                    new XAttribute("key", feed.Key),
+                    new XAttribute("value", feed.Directory))))))
+        .ToString(SaveOptions.DisableFormatting) + "\n";
+
+    private static string PackagedDllSha(string archivePath, string id, string version)
+    {
+        using var archive = ZipFile.OpenRead(archivePath);
+        Need(archive.Entries.Count is >= 3 and <= 48 &&
+             archive.Entries.Select(x => x.FullName)
+                 .Distinct(StringComparer.Ordinal).Count() == archive.Entries.Count &&
+             archive.Entries.All(x => !x.FullName.Contains("..", StringComparison.Ordinal) &&
+                 !x.FullName.StartsWith("/", StringComparison.Ordinal) &&
+                 !x.FullName.Contains('\\')),
+             "Numerics candidate archive entry paths must be bounded and safe");
+        var nuspec = archive.GetEntry(id + ".nuspec")
+            ?? throw new InvalidDataException("candidate nuspec missing");
+        using (var input = nuspec.Open())
+        {
+            var manifest = XDocument.Load(input, LoadOptions.None);
+            Need(manifest.Descendants().Any(x => x.Name.LocalName == "id" &&
+                     x.Value == id) &&
+                 manifest.Descendants().Any(x => x.Name.LocalName == "version" &&
+                     x.Value == version),
+                 "rehearsal nuspec package identity differs");
+            var dependencies = manifest.Descendants()
+                .Where(x => x.Name.LocalName == "dependency")
+                .Select(x => (
+                    Id: (string?)x.Attribute("id") ?? "",
+                    Version: (string?)x.Attribute("version") ?? "")).ToArray();
+            Need(dependencies.SequenceEqual(
+                     new[] { (Id: "dw.tools.math.ir",
+                             Version: "[20260.20261104.1001]") }),
+                 "rehearsal nuspec must declare only exact published IR");
+        }
+        var dll = archive.GetEntry("lib/net10.0/" + id + ".dll")
+            ?? throw new InvalidDataException("Numerics net10.0 DLL missing");
+        using var stream = dll.Open();
+        return Convert.ToHexStringLower(SHA256.HashData(stream));
     }
 
     private static void RequireRefusal(string code, Action action)

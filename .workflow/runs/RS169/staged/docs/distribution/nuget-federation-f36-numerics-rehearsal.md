@@ -8,11 +8,11 @@ RS169 preserves that original evidence. It does **not** assume a newly rebuilt a
 
 ## Rehearsal and independent consumer
 
-The new Math-owned `dw.tools.math.nuget-numerics-rehearsal` controller invokes the existing, qualified F35 source-linking candidate controller, rather than reimplementing its original-source audit, physical IR/Quantities checks, exact NuGet dependency closure and eleven real candidate commands. The resulting source-derived candidate is placed only in a fresh ignored, run-owned scratch workspace.
+The Math-owned `dw.tools.math.nuget-numerics-rehearsal` controller independently links the same three F35-authorized source files, verifies each exact original source SHA-256 and source project/lockfile fingerprints, and packs a fresh temporary `net10.0` candidate with one exact IR PackageReference. It explicitly does **not** relaunch the F35 candidate controller: the earlier F35 cache may retain a package with the same calendar identity but different rebuilt DLL bytes. Each RS169 invocation uses a fresh, empty NuGet package cache, build tree, candidate directory and disposable feed. A real ZIP/nuspec readback checks package ID/version, its sole exact IR dependency and the built DLL SHA-256. The previously accepted eleven F35 internal command receipts remain immutable predecessor evidence, not commands falsely claimed to have run again.
 
 Using the pinned `Dw.Tools.NuGet [20260.20261026.1010]` reader, RS169 prepares, publishes and physically reads back the exact newly built archive in a **new disposable feed**, never the shared `NUGET_LOCAL`. It independently rejects same-version collision, falsified archive digest and cancellation. A new source-free consumer restores by exact package identity from the disposable feed and loads the Numerics assembly to run the existing fifteen compiled probes, including loaded DLL SHA, LU/solve, and IR transport.
 
-Seven actual controller command receipts (F35 tool restore/build/run, consumer restore/build/run, SDK) and four DWF payload receipts are retained. The F35 internal eleven-command evidence is observed. Physical IR `20260.20261104.1001` and transitive Quantities `20260.20261102.1001` package hashes are checked before and after the consumer.
+Seven actual controller command receipts (producer restore/build/pack, consumer restore/build/run, SDK) and four DWF payload receipts are retained. The F35 internal eleven-command evidence is independently read from the prior successful receipt, not replayed. Physical IR `20260.20261104.1001` and transitive Quantities `20260.20261102.1001` package hashes are checked before and after the consumer.
 
 ## Explicit limits
 

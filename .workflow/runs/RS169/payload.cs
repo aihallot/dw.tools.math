@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
@@ -50,9 +51,35 @@ p.Require.FileExists("tools/dw.tools.math.nuget-numerics-candidate/fixtures/Nume
 
 var files = new[] { Documentation, Validator, Project, Tool + "Directory.Packages.props",
     Tool + "Program.cs" };
+// Accept exact retained attempt-001 staged bytes, or current corrected staged bytes.
+// Unknown operator mutations remain refused before any installation.
+var originalStagedHashes = new Dictionary<string, string>(StringComparer.Ordinal)
+{
+    [Documentation] = "c85e2b04a9d9e0cb07588e731b0a90883ac0d934c680fb2a6b30b62079f66afc",
+    [Validator] = "f56e7978aa653060aa07b0a9421573622b1dd78a228f60f995bf39f9cb60d1cd",
+    [Project] = "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+    [Tool + "Directory.Packages.props"] = "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+    [Tool + "Program.cs"] = "c5d75a791dea0a8cba8dc3e0ba2850deeb7159a93fee746aa87ce70064d69a77",
+};
 if (!complete)
 {
-    foreach (var file in files.Append(Evidence)) p.Require.FileMissing(file);
+    foreach (var file in files)
+    {
+        var destination = Path.Combine(root, file.Replace('/', Path.DirectorySeparatorChar));
+        if (!File.Exists(destination))
+        {
+            p.Require.FileMissing(file);
+            continue;
+        }
+        Need((File.GetAttributes(destination) & FileAttributes.ReparsePoint) == 0,
+            "retained RS169 target is not an ordinary file: " + file);
+        var staged = Path.Combine(root, ".workflow", "runs", "RS169", "staged",
+            file.Replace('/', Path.DirectorySeparatorChar));
+        var hash = FileSha(destination);
+        Need(hash == originalStagedHashes[file] || hash == FileSha(staged),
+            "retained RS169 target is not exact known staged content: " + file);
+    }
+    p.Require.FileMissing(Evidence);
 }
 else
 {
@@ -148,6 +175,9 @@ Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
      final.Output.Contains(Limits, StringComparison.Ordinal),
      "RS169 evidence did not pass qualified read-only validator");
 return p.Complete();
+
+static string FileSha(string file) =>
+    Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(file)));
 
 static void Need(bool accepted, string reason)
 {
