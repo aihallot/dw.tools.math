@@ -5,10 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 
-const string Evidence = "docs/distribution/nuget-federation-f38-numerics-original-qualified.json";
-const string Status = "rs171-original-numerics-consumer-qualified-unpublished";
-const string Ready = "MATH-NUMERICS-F38:ORIGINAL=READY;BINARY=PENDING;NATIVE=541";
-const string Qualified = "MATH-NUMERICS-F38:ORIGINAL=VERIFIED;BINARY=15;NATIVE=541";
+const string Ready = "MATH-NUMERICS-F38:SOURCE=READY;PHYSICAL=POST-ATTEMPT;NATIVE=541";
 const string Limits = "MATH-NUMERICS-F38:PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
 string[] files =
 [
@@ -65,42 +62,8 @@ Need(File.ReadAllText(files[2]).Contains("<Compile Include=\"Program.cs\" />",
      File.ReadAllText(files[3]).Contains("privateFeedPublished = false",
         StringComparison.Ordinal),
      "original consumer and no-publication code contract changed");
-if (File.Exists(Evidence))
-{
-    using var document = JsonDocument.Parse(File.ReadAllText(Evidence));
-    var root = document.RootElement;
-    var found = root.GetProperty("observation");
-    Need(Text(root, "status") == Status &&
-         root.GetProperty("native_nodes_retained").GetInt32() == 541 &&
-         !root.GetProperty("package_published").GetBoolean() &&
-         !root.GetProperty("release_authorized").GetBoolean() &&
-         Text(found, "status") ==
-             "qualified-original-f35-numerics-consumer-unpublished" &&
-         Text(found, "packageId") == "dw.tools.math.numerics" &&
-         Text(found, "packageVersion") == "20260.20261109.1001" &&
-         Text(found, "originalArchiveSha256") ==
-             Text(original, "candidateArchiveSha256") &&
-         Text(found, "originalDllSha256") ==
-             Text(original, "candidateDllSha256") &&
-         Text(found, "disposableArchiveSha256") ==
-             Text(original, "candidateArchiveSha256") &&
-         found.GetProperty("originalArchivePhysicallyVerified").GetBoolean() &&
-         found.GetProperty("freshNuGetPackagesCache").GetBoolean() &&
-         !found.GetProperty("archiveRebuilt").GetBoolean() &&
-         !found.GetProperty("rehearsalArchiveSubstituted").GetBoolean() &&
-         !found.GetProperty("privateFeedPublished").GetBoolean() &&
-         !found.GetProperty("releaseAuthorized").GetBoolean() &&
-         found.GetProperty("compiledBinaryChecks").GetInt32() == 15 &&
-         Text(found, "directDependencyArchiveSha256") ==
-             "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480" &&
-         Text(found, "transitiveDependencyArchiveSha256") ==
-             "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d" &&
-         found.GetProperty("commandReceipts").GetArrayLength() == 4 &&
-         root.GetProperty("command_receipts").GetArrayLength() == 4 &&
-         root.GetProperty("source_files").EnumerateObject().Count() == 4 &&
-         root.GetProperty("source_files").EnumerateObject().All(x =>
-             File.Exists(x.Name) && Sha(x.Name) == x.Value.GetString()),
-         "immutable F35 actual binary consumer receipts are incomplete");
-}
-Console.WriteLine(File.Exists(Evidence) ? Qualified : Ready);
+// Physical F35 archive bytes are intentionally absent from DWF's disposable clone.
+// The independent focused post-attempt validation will run the compiled controller
+// against the original operator checkout; its result belongs to the DWF attempt report.
+Console.WriteLine(Ready);
 Console.WriteLine(Limits);

@@ -9,17 +9,13 @@ const string Tool = "tools/dw.tools.math.nuget-numerics-original-consumer/";
 const string Project = Tool + "dw.tools.math.nuget-numerics-original-consumer.csproj";
 const string Documentation = "docs/distribution/nuget-federation-f38-numerics-original.md";
 const string Validator = "docs/distribution/ValidateNugetNumericsOriginal.cs";
-const string Evidence = "docs/distribution/nuget-federation-f38-numerics-original-qualified.json";
-const string Status = "rs171-original-numerics-consumer-qualified-unpublished";
-const string Ready = "MATH-NUMERICS-F38:ORIGINAL=READY;BINARY=PENDING;NATIVE=541";
-const string Qualified = "MATH-NUMERICS-F38:ORIGINAL=VERIFIED;BINARY=15;NATIVE=541";
+const string Ready = "MATH-NUMERICS-F38:SOURCE=READY;PHYSICAL=POST-ATTEMPT;NATIVE=541";
 const string Limits = "MATH-NUMERICS-F38:PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
 const string ArchiveSha = "f8e50ed22ac89b2939aa5519f202e082a536cc7cd8c7843ba74205d8a134802d";
 const string DllSha = "77ff720ffbb959a7052d5b31d18b272e472cf81b07f37697dfe525c0b40bcde4";
 
 var p = PayloadContext.Create();
 var root = p.RepositoryRoot;
-var complete = File.Exists(Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
 p.Workflow.RequireCurrentRun("RS171", null, null, null, null, null);
 p.Workflow.RequirePriorSuccess("RS170", 1,
     "test: qualify Numerics immutable private release controller",
@@ -47,22 +43,11 @@ p.Require.JsonValueEquals("docs/distribution/nuget-federation-f13-ir-published-q
 p.Require.FileExists("tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs");
 
 var files = new[] { Documentation, Validator, Project, Tool + "Program.cs" };
-// DWF's exact correction receipt authenticates dirty retry mutations; staged replacement
-// is byte-idempotent and does not alter unknown files outside the declared mutation paths.
-if (!complete) p.Require.FileMissing(Evidence);
-else
-{
-    p.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
-    p.Require.JsonValueEquals(Evidence, "/package_published", JsonValue.Create(false));
-    p.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
-}
-var hashes = new JsonObject();
+// The DWF preparation clone intentionally lacks ignored F35 archive bytes.
+// Install the same complete source files in both clone and operator checkout.
+// The physical original-archive qualification is a post-attempt focused test.
 foreach (var file in files)
-{
-    var installed = p.Files.ReplaceFromStaged("staged/" + file, file);
-    hashes[file] = installed.AfterSha256 ??
-        throw new InvalidDataException("RS171 staged source SHA-256 missing " + file);
-}
+    p.Files.ReplaceFromStaged("staged/" + file, file);
 p.Require.TextContains(Documentation, "## Fresh original package-only consumer");
 p.Require.TextContains(Tool + "Program.cs", "archiveRebuilt = false");
 p.Require.TextContains(Tool + "Program.cs", "privateFeedPublished = false");
@@ -71,75 +56,33 @@ p.Require.TextContains(Project, "<Compile Include=\"Program.cs\" />");
 
 var source = Run(root, "source-check",
     ["run", "--file", Validator, "--", "--check"]);
-Need(source.Output.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
-    "RS171 original source validation refused");
-if (!complete)
-{
-    var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
-        throw new InvalidDataException("NUGET_LOCAL published dependency feed missing");
-    Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
-        "read-only published IR/Quantities dependency feed is unavailable");
-    var cache = Path.Combine(root, ".workflow", "local", "nuget-rs171", "packages");
-    var commands = new List<JsonNode>();
-    commands.Add(Run(root, "tool-restore", [
-        "restore", Project, "--source", feed,
-        "--packages", cache, "-p:NuGetAudit=false"]).Receipt);
-    commands.Add(Run(root, "tool-build", [
-        "build", Project, "-c", "Release", "--no-restore", "-p:NuGetAudit=false"]).Receipt);
-    var observation = Run(root, "original-binary-consumer", [
-        "run", "--project", Project, "-c", "Release",
-        "--no-build", "--no-restore", "--", "--verify-original", "."]);
-    commands.Add(observation.Receipt);
-    var sdk = Run(root, "sdk", ["--version"]);
-    commands.Add(sdk.Receipt);
-    Need(commands.Count == 4, "four independent DWF command receipts required");
-    var actual = JsonNode.Parse(observation.Output.Trim())?.AsObject() ??
-        throw new InvalidDataException("original Numercis consumer did not emit JSON");
-    Need(actual["status"]?.GetValue<string>() ==
-             "qualified-original-f35-numerics-consumer-unpublished" &&
-         actual["packageId"]?.GetValue<string>() == "dw.tools.math.numerics" &&
-         actual["packageVersion"]?.GetValue<string>() == "20260.20261109.1001" &&
-         actual["originalArchiveSha256"]?.GetValue<string>() == ArchiveSha &&
-         actual["originalDllSha256"]?.GetValue<string>() == DllSha &&
-         actual["disposableArchiveSha256"]?.GetValue<string>() == ArchiveSha &&
-         actual["originalArchiveBytes"]?.GetValue<int>() == 18313 &&
-         actual["originalArchivePhysicallyVerified"]?.GetValue<bool>() == true &&
-         actual["archiveRebuilt"]?.GetValue<bool>() == false &&
-         actual["rehearsalArchiveSubstituted"]?.GetValue<bool>() == false &&
-         actual["freshNuGetPackagesCache"]?.GetValue<bool>() == true &&
-         actual["compiledBinaryChecks"]?.GetValue<int>() == 15 &&
-         actual["privateFeedPublished"]?.GetValue<bool>() == false &&
-         actual["releaseAuthorized"]?.GetValue<bool>() == false &&
-         actual["commandReceipts"]?.AsArray().Count == 4,
-         "original NuGet archive binary closure missing");
-    var evidence = new JsonObject
-    {
-        ["schemaVersion"] = 1,
-        ["kind"] = "dw.tools.math.numerics-original-f35-binary-consumer",
-        ["status"] = Status,
-        ["previous_owner_run"] = "RS170",
-        ["source_baseline_commit"] = "3e94acda019b62f19078f4ab70e4d738249cfdb7",
-        ["native_nodes_retained"] = 541,
-        ["package_published"] = false,
-        ["release_authorized"] = false,
-        ["public_registry_published"] = false,
-        ["installed_rollback_qualified"] = false,
-        ["observation"] = actual,
-        ["source_files"] = hashes,
-        ["command_receipts"] = p.Json.Array(commands.ToArray()),
-        ["sdk_version"] = sdk.Output.Trim(),
-        ["next_action"] =
-            "Private publication of the original F35 archive requires owner authorization; independent shared-feed readback must follow any authorized publication."
-    };
-    p.Files.WriteComplete(Evidence,
-        evidence.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
-}
+Need(source.Output.Contains(Ready, StringComparison.Ordinal) &&
+     source.Output.Contains(Limits, StringComparison.Ordinal),
+    "RS171 source preflight refused");
+
+var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
+    throw new InvalidDataException("NUGET_LOCAL published dependency feed missing");
+Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
+    "read-only published IR/Quantities dependency feed is unavailable");
+var cache = Path.Combine(root, ".workflow", "local", "nuget-rs171", "packages");
+var restore = Run(root, "tool-restore",
+    ["restore", Project, "--source", feed,
+     "--packages", cache, "-p:NuGetAudit=false"]);
+var build = Run(root, "tool-build",
+    ["build", Project, "-c", "Release", "--no-restore",
+     "-p:NuGetAudit=false"]);
+var sdk = Run(root, "sdk", ["--version"]);
+Need(restore.Receipt["exit_code"]?.GetValue<int>() == 0 &&
+     build.Receipt["exit_code"]?.GetValue<int>() == 0 &&
+     sdk.Receipt["exit_code"]?.GetValue<int>() == 0,
+    "RS171 controller compilation and SDK must succeed");
+
 p.ProjectPlan.RequireNodeState("M3", "done");
 var final = Run(root, "target-check",
     ["run", "--file", Validator, "--", "--check"]);
-Need(final.Output.Contains(Qualified, StringComparison.Ordinal) &&
+Need(final.Output.Contains(Ready, StringComparison.Ordinal) &&
      final.Output.Contains(Limits, StringComparison.Ordinal),
-     "RS171 original archive qualification receipt rejected");
+    "RS171 source-only target re-entry refused");
 return p.Complete();
 
 static void Need(bool condition, string reason)

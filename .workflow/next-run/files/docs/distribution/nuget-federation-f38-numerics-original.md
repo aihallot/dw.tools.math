@@ -10,7 +10,9 @@ The F35 source project, three source files and lockfile remain immutable. The so
 
 The Math-owned F38 controller checks F35/F37 predecessor identities and exact source hashes, the original physical F35 ZIP/Nuspec/dependency graph, and both private dependency archives. It copies only the original byte-identical F35 archive into a new ignored disposable flat NuGet feed (non-overwriting), then generates an independent `net10.0` consumer with only one exact Numerics PackageReference. The existing binary fixture is compiled from source inside this consumer, **not** inside the Numerics package. Its NuGet cache is new and initially empty.
 
-The consumer restores from the disposable original archive plus the read-only published IR and Quantities dependencies, and executes fifteen independent binary probes including actual Numerics DLL SHA-256, LU/solve and approximate IR roundtrip. The source archive, disposable copy and both dependency archives are rehashed after the consumer. Four real inner commands and four DWF outer command receipts are retained.
+The consumer restores from the disposable original archive plus the read-only published IR and Quantities dependencies, and executes fifteen independent binary probes including actual Numerics DLL SHA-256, LU/solve and approximate IR roundtrip. The source archive, disposable copy and both dependency archives are rehashed after the consumer.
+
+DWF prepares and compiles the controller in a disposable Git clone, which does **not** contain ignored physical F35 artifacts from the operator checkout. RS171 therefore performs the physical archive and fifteen-probe qualification as a **focused post-attempt validation on the original operator checkout**. It does not run or falsely claim the binary test during preflight. The four real inner commands and the exact observed hashes are emitted as structured JSON by that validation, retained in the DWF RS171 attempt report. The source-only payload writes no premature F38-qualified evidence artifact. Any later durable F38 readback receipt must cite the successful focused DWF validation, not an assumed preflight result.
 
 ## Limits and next gate
 
