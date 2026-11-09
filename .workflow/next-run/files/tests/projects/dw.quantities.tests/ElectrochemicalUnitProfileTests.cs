@@ -11,7 +11,7 @@ namespace Dw.Quantities.Tests;
 [TestClass]
 public sealed class ElectrochemicalUnitProfileTests
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("si.ampere", "A", "ampere", 0, 0, 0, 1, 0, 0, 0, 0)]
     [DataRow("si.volt", "V", "volt", 2, 1, -3, -1, 0, 0, 0, 0)]
     [DataRow("si.ohm", "Ω", "ohm", 2, 1, -3, -2, 0, 0, 0, 0)]
