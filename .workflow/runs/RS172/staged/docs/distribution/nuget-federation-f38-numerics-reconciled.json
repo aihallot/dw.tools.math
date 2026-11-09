@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.numerics-f38-dwf-focused-evidence-reconciliation",
+  "status": "rs172-f38-original-numerics-dwf-physical-evidence-reconciled-unpublished",
+  "source_run": "RS171",
+  "source_attempt": 1,
+  "source_report": ".aura/workflow/reports/RS171/attempt-001.json",
+  "source_result_commit": "01d9fffe1f7a1aa0f770cec215aa116b9f140104",
+  "source_validation_id": "original-f35-binary-physical",
+  "validation_exit_code": 0,
+  "stdout_sha256": "10115713005279e19cac76d15e52ba40702970818336e909043bad1eba8acdd3",
+  "native_nodes_retained": 541,
+  "new_physical_execution": false,
+  "package_published": false,
+  "release_authorized": false,
+  "public_registry_published": false,
+  "installed_rollback_qualified": false,
+  "observation": {
+    "schemaVersion": 1,
+    "status": "qualified-original-f35-numerics-consumer-unpublished",
+    "packageId": "dw.tools.math.numerics",
+    "packageVersion": "20260.20261109.1001",
+    "originalArchiveSha256": "f8e50ed22ac89b2939aa5519f202e082a536cc7cd8c7843ba74205d8a134802d",
+    "originalArchiveBytes": 18313,
+    "originalDllSha256": "77ff720ffbb959a7052d5b31d18b272e472cf81b07f37697dfe525c0b40bcde4",
+    "disposableArchiveSha256": "f8e50ed22ac89b2939aa5519f202e082a536cc7cd8c7843ba74205d8a134802d",
+    "originalArchivePhysicallyVerified": true,
+    "archiveRebuilt": false,
+    "rehearsalArchiveSubstituted": false,
+    "freshNuGetPackagesCache": true,
+    "compiledBinaryChecks": 15,
+    "privateFeedPublished": false,
+    "releaseAuthorized": false,
+    "directDependencyId": "dw.tools.math.ir",
+    "directDependencyVersion": "20260.20261104.1001",
+    "directDependencyArchiveSha256": "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480",
+    "transitiveDependencyId": "dw.quantities",
+    "transitiveDependencyVersion": "20260.20261102.1001",
+    "transitiveDependencyArchiveSha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+    "commandReceipts": [
+      {
+        "id": "consumer-restore",
+        "exit_code": 0,
+        "command": "dotnet restore D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\consumer\\numerics-original-binary.csproj --configfile D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\consumer\\NuGet.Config --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\cache -p:NuGetAudit=false",
+        "elapsed_ms": 1185,
+        "output_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\consumer\\numerics-original-binary.csproj (in 244 ms).\r\n"
+      },
+      {
+        "id": "consumer-build",
+        "exit_code": 0,
+        "command": "dotnet build D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\consumer\\numerics-original-binary.csproj -c Release --no-restore -p:NuGetAudit=false",
+        "elapsed_ms": 1298,
+        "output_excerpt": "  numerics-original-binary -> D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\numerics-original-binary\\Release\\net10.0\\numerics-original-binary.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.06\r\n"
+      },
+      {
+        "id": "consumer-binary",
+        "exit_code": 0,
+        "command": "dotnet run --project D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs171-numerics-original\\082f9498df0e407ea3ca51c0499009d8\\consumer\\numerics-original-binary.csproj -c Release --no-build --no-restore -- 77ff720ffbb959a7052d5b31d18b272e472cf81b07f37697dfe525c0b40bcde4",
+        "elapsed_ms": 2852,
+        "output_excerpt": "MATH-NUMERICS-CHECK|loaded-numerics-dll|PASS\r\nMATH-NUMERICS-CHECK|matrix-finite-shape|PASS\r\nMATH-NUMERICS-CHECK|exact-zero-conversion|PASS\r\nMATH-NUMERICS-CHECK|matrix-addition|PASS\r\nMATH-NUMERICS-CHECK|matrix-product|PASS\r\nMATH-NUMERICS-CHECK|matrix-vector|PASS\r\nMATH-NUMERICS-CHECK|shape-refusal|PASS\r\nMATH-NUMERICS-CHECK|nonfinite-refusal|PASS\r\nMATH-NUMERICS-CHECK|element-budget-refusal|PASS\r\nMATH-NUMERICS-CHECK|vector-dot|PASS\r\nMATH-NUMERICS-CHECK|vector-shape-refusal|PASS\r\nMATH-NUMERICS-CHECK|sparse-to-dense|PASS\r\nMATH-NUMERICS-CHECK|sparse-duplicate-refusal|PASS\r\nMATH-NUMERICS-CHECK|lu-and-solve|PASS\r\nMATH-NUMERICS-CHECK|approximate-ir-roundtrip|PASS\r\nMATH-NUMERICS-BINARY|PASS|15\r\n"
+      },
+      {
+        "id": "sdk",
+        "exit_code": 0,
+        "command": "dotnet --version",
+        "elapsed_ms": 144,
+        "output_excerpt": "10.0.403\r\n"
+      }
+    ],
+    "sdkVersion": "10.0.403",
+    "nextAction": "Only an explicit owner authorization may allow publication of the exact original F35 archive to NUGET_LOCAL; follow with independent physical readback."
+  },
+  "source_files": {
+    "docs/distribution/nuget-federation-f38-numerics-reconciled.md": "8760855d51c3822559db2eeb7a3a2dacdc7638d2cad085a840fd27971282cb41",
+    "docs/distribution/ValidateNugetNumericsF38Receipt.cs": "963ffa69fe35d0f48541dc057b9bdd4726b2a65ab1f8dcc293b40253f38072cc"
+  },
+  "next_action": "Original F35 private publication still requires explicit owner approval followed by independent physical-feed readback."
+}
