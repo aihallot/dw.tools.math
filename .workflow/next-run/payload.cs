@@ -1,25 +1,29 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Tool = "tools/dw.tools.math.nuget-numerics-original-consumer/";
-const string Project = Tool + "dw.tools.math.nuget-numerics-original-consumer.csproj";
-const string Documentation = "docs/distribution/nuget-federation-f38-numerics-original.md";
-const string Validator = "docs/distribution/ValidateNugetNumericsOriginal.cs";
-const string Ready = "MATH-NUMERICS-F38:SOURCE=READY;PHYSICAL=POST-ATTEMPT;NATIVE=541";
-const string Limits = "MATH-NUMERICS-F38:PUBLISHED=false;PUBLIC=false;ROLLBACK=false";
-const string ArchiveSha = "f8e50ed22ac89b2939aa5519f202e082a536cc7cd8c7843ba74205d8a134802d";
-const string DllSha = "77ff720ffbb959a7052d5b31d18b272e472cf81b07f37697dfe525c0b40bcde4";
+const string Dist = "docs/distribution/";
+const string Document = Dist + "nuget-federation-f38-numerics-reconciled.md";
+const string Validator = Dist + "ValidateNugetNumericsF38Receipt.cs";
+const string Evidence = Dist + "nuget-federation-f38-numerics-reconciled.json";
+const string Report = ".aura/workflow/reports/RS171/attempt-001.json";
+const string Status = "rs172-f38-original-numerics-dwf-physical-evidence-reconciled-unpublished";
+const string Ready = "MATH-NUMERICS-F38:DWf=VERIFIED;RECEIPT=PENDING;NATIVE=541";
+const string Qualified = "MATH-NUMERICS-F38:DWf=VERIFIED;RECEIPT=RECONCILED;BINARY=15;NATIVE=541";
+const string Limits = "MATH-NUMERICS-F38:NEW-PHYSICAL=false;SHARED-PUBLISHED=false;PUBLIC=false";
 
 var p = PayloadContext.Create();
 var root = p.RepositoryRoot;
-p.Workflow.RequireCurrentRun("RS171", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS170", 1,
-    "test: qualify Numerics immutable private release controller",
-    "0.1.66", 1, 1, 0, false);
+var complete = File.Exists(Path.Combine(root, Evidence.Replace('/', Path.DirectorySeparatorChar)));
+p.Workflow.RequireCurrentRun("RS172", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS171", 1,
+    "test: qualify original Numerics immutable binary consumer with IR and Quantities",
+    "0.1.66", 2, 2, 0, false);
 p.ProjectPlan.RequireNodeState("M3", "done");
 p.ProjectPlan.RequireNodeState("M7", "done");
 p.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version",
@@ -28,68 +32,89 @@ p.Require.JsonValueEquals("docs/planning/backlog.json", "/status",
     JsonValue.Create("done"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion",
     JsonValue.Create("0.26"));
+p.Require.JsonValueEquals(Report, "/outcome", JsonValue.Create("succeeded"));
+p.Require.JsonValueEquals(Report, "/attempt", JsonValue.Create(1));
+p.Require.JsonValueEquals(Report, "/validations/0/Id",
+    JsonValue.Create("original-f35-binary-physical"));
+p.Require.JsonValueEquals(Report, "/validations/0/ExitCode", JsonValue.Create(0));
 p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
-    "/candidate/candidateArchiveSha256", JsonValue.Create(ArchiveSha));
-p.Require.JsonValueEquals("docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
-    "/candidate/candidateDllSha256", JsonValue.Create(DllSha));
-p.Require.JsonValueEquals("docs/distribution/nuget-federation-f37-numerics-release-qualified.json",
-    "/status", JsonValue.Create("rs170-numerics-immutable-release-controller-qualified-unpublished"));
-p.Require.JsonValueEquals("docs/distribution/nuget-federation-f37-numerics-release-qualified.json",
-    "/controller/originalCandidatePhysicallyVerified", JsonValue.Create(true));
+    "/package_published", JsonValue.Create(false));
 p.Require.JsonValueEquals("docs/distribution/nuget-federation-f37-numerics-release-qualified.json",
     "/package_published", JsonValue.Create(false));
-p.Require.JsonValueEquals("docs/distribution/nuget-federation-f13-ir-published-qualified.json",
-    "/physically_published_package_verified", JsonValue.Create(true));
-p.Require.FileExists("tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs");
+if (!complete) p.Require.FileMissing(Evidence);
+else
+{
+    p.Require.JsonValueEquals(Evidence, "/status", JsonValue.Create(Status));
+    p.Require.JsonValueEquals(Evidence, "/package_published", JsonValue.Create(false));
+    p.Require.JsonValueEquals(Evidence, "/new_physical_execution", JsonValue.Create(false));
+    p.Require.JsonValueEquals(Evidence, "/native_nodes_retained", JsonValue.Create(541));
+}
 
-var files = new[] { Documentation, Validator, Project, Tool + "Program.cs" };
-// The DWF preparation clone intentionally lacks ignored F35 archive bytes.
-// Install the same complete source files in both clone and operator checkout.
-// The physical original-archive qualification is a post-attempt focused test.
-foreach (var file in files)
-    p.Files.ReplaceFromStaged("staged/" + file, file);
-p.Require.TextContains(Documentation, "## Fresh original package-only consumer");
-p.Require.TextContains(Tool + "Program.cs", "archiveRebuilt = false");
-p.Require.TextContains(Tool + "Program.cs", "privateFeedPublished = false");
-p.Require.TextContains(Tool + "Program.cs", "MATH-NUMERICS-BINARY|PASS|15");
-p.Require.TextContains(Project, "<Compile Include=\"Program.cs\" />");
+var sources = new[] { Document, Validator };
+var hashes = new JsonObject();
+foreach (var path in sources)
+{
+    var replaced = p.Files.ReplaceFromStaged("staged/" + path, path);
+    hashes[path] = replaced.AfterSha256 ??
+        throw new InvalidDataException("RS172 installed source SHA missing " + path);
+}
+p.Require.TextContains(Document, "## Reconciliation operation and bounds");
+p.Require.TextContains(Validator, "original-f35-binary-physical");
+p.Require.TextContains(Validator, "new_physical_execution");
+var before = Run(root, "read-only-source-validation", Validator);
+Need(before.Contains(complete ? Qualified : Ready, StringComparison.Ordinal),
+    "RS172 source/report reconciliation baseline refused");
 
-var source = Run(root, "source-check",
-    ["run", "--file", Validator, "--", "--check"]);
-Need(source.Output.Contains(Ready, StringComparison.Ordinal) &&
-     source.Output.Contains(Limits, StringComparison.Ordinal),
-    "RS171 source preflight refused");
-
-var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL") ??
-    throw new InvalidDataException("NUGET_LOCAL published dependency feed missing");
-Need(Path.IsPathFullyQualified(feed) && Directory.Exists(feed),
-    "read-only published IR/Quantities dependency feed is unavailable");
-var cache = Path.Combine(root, ".workflow", "local", "nuget-rs171", "packages");
-var restore = Run(root, "tool-restore",
-    ["restore", Project, "--source", feed,
-     "--packages", cache, "-p:NuGetAudit=false"]);
-var build = Run(root, "tool-build",
-    ["build", Project, "-c", "Release", "--no-restore",
-     "-p:NuGetAudit=false"]);
-var sdk = Run(root, "sdk", ["--version"]);
-Need(restore.Receipt["exit_code"]?.GetValue<int>() == 0 &&
-     build.Receipt["exit_code"]?.GetValue<int>() == 0 &&
-     sdk.Receipt["exit_code"]?.GetValue<int>() == 0,
-    "RS171 controller compilation and SDK must succeed");
-
+if (!complete)
+{
+    using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root,
+        Report.Replace('/', Path.DirectorySeparatorChar))));
+    var physical = report.RootElement.GetProperty("validations")[0];
+    var stdout = physical.GetProperty("StandardOutput").GetString() ??
+        throw new InvalidDataException("RS171 output missing");
+    using var output = JsonDocument.Parse(stdout);
+    Need(output.RootElement.GetProperty("compiledBinaryChecks").GetInt32() == 15 &&
+         output.RootElement.GetProperty("originalArchivePhysicallyVerified").GetBoolean() &&
+         !output.RootElement.GetProperty("privateFeedPublished").GetBoolean(),
+         "RS171 original package physical observations incomplete");
+    var node = new JsonObject
+    {
+        ["schemaVersion"] = 1,
+        ["kind"] = "dw.tools.math.numerics-f38-dwf-focused-evidence-reconciliation",
+        ["status"] = Status,
+        ["source_run"] = "RS171",
+        ["source_attempt"] = 1,
+        ["source_report"] = Report,
+        ["source_result_commit"] = "01d9fffe1f7a1aa0f770cec215aa116b9f140104",
+        ["source_validation_id"] = "original-f35-binary-physical",
+        ["validation_exit_code"] = 0,
+        ["stdout_sha256"] = Convert.ToHexStringLower(
+            SHA256.HashData(Encoding.UTF8.GetBytes(stdout))),
+        ["native_nodes_retained"] = 541,
+        ["new_physical_execution"] = false,
+        ["package_published"] = false,
+        ["release_authorized"] = false,
+        ["public_registry_published"] = false,
+        ["installed_rollback_qualified"] = false,
+        ["observation"] = JsonNode.Parse(stdout),
+        ["source_files"] = hashes,
+        ["next_action"] = "Original F35 private publication still requires explicit owner approval followed by independent physical-feed readback."
+    };
+    p.Files.WriteComplete(Evidence,
+        node.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + "\n");
+}
 p.ProjectPlan.RequireNodeState("M3", "done");
-var final = Run(root, "target-check",
-    ["run", "--file", Validator, "--", "--check"]);
-Need(final.Output.Contains(Ready, StringComparison.Ordinal) &&
-     final.Output.Contains(Limits, StringComparison.Ordinal),
-    "RS171 source-only target re-entry refused");
+var final = Run(root, "reconciled-receipt-validation", Validator);
+Need(final.Contains(Qualified, StringComparison.Ordinal) &&
+     final.Contains(Limits, StringComparison.Ordinal),
+     "RS172 durable F38 reconciliation receipt rejected");
 return p.Complete();
 
-static void Need(bool condition, string reason)
+static void Need(bool yes, string reason)
 {
-    if (!condition) throw new InvalidDataException("RS171: " + reason);
+    if (!yes) throw new InvalidDataException("RS172: " + reason);
 }
-static (JsonNode Receipt, string Output) Run(string root, string id, string[] args)
+static string Run(string root, string name, string file)
 {
     using var process = new Process
     {
@@ -102,35 +127,22 @@ static (JsonNode Receipt, string Output) Run(string root, string id, string[] ar
             RedirectStandardError = true
         }
     };
-    process.StartInfo.Environment["DOTNET_NOLOGO"] = "1";
-    process.StartInfo.Environment["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1";
-    process.StartInfo.Environment["NUGET_PACKAGES"] =
-        Path.Combine(root, ".workflow", "local", "nuget-rs171", "packages");
-    foreach (var arg in args) process.StartInfo.ArgumentList.Add(arg);
-    var clock = Stopwatch.StartNew();
-    Need(process.Start(), "unable to start RS171 command " + id);
-    var stdout = process.StandardOutput.ReadToEndAsync();
+    process.StartInfo.ArgumentList.Add("run");
+    process.StartInfo.ArgumentList.Add("--file");
+    process.StartInfo.ArgumentList.Add(file);
+    process.StartInfo.ArgumentList.Add("--");
+    process.StartInfo.ArgumentList.Add("--check");
+    var stdout = process.Start() ? process.StandardOutput.ReadToEndAsync() :
+        throw new InvalidDataException("RS172 validator process start failed");
     var stderr = process.StandardError.ReadToEndAsync();
-    if (!process.WaitForExit(360000))
+    if (!process.WaitForExit(240000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("RS171 command timed out: " + id);
+        throw new TimeoutException("RS172 " + name + " timed out");
     }
     var output = stdout.GetAwaiter().GetResult();
-    var errors = stderr.GetAwaiter().GetResult();
-    clock.Stop();
-    if (process.ExitCode != 0)
-    {
-        var error = output + "\n" + errors;
-        throw new InvalidDataException(id + " exit=" + process.ExitCode + "\n" +
-            error[..System.Math.Min(error.Length, 3500)]);
-    }
-    return (new JsonObject
-    {
-        ["id"] = id,
-        ["exit_code"] = process.ExitCode,
-        ["command"] = "dotnet " + string.Join(" ", args),
-        ["elapsed_ms"] = clock.ElapsedMilliseconds,
-        ["output_excerpt"] = output[..System.Math.Min(output.Length, 1100)]
-    }, output);
+    var error = stderr.GetAwaiter().GetResult();
+    Need(process.ExitCode == 0,
+        name + " failed: " + (output + "\n" + error)[..System.Math.Min((output + "\n" + error).Length, 2200)]);
+    return output;
 }
