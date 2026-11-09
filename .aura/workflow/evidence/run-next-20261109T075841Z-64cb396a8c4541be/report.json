@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS168",
+  "attempt": 2,
+  "outcome": "failed",
+  "correctionMode": true,
+  "correctionSourceAttempt": 1,
+  "correctionReceiptPath": ".aura/workflow/local/corrections/RS168.json",
+  "startedAtUtc": "2026-11-09T08:00:22.1365479\u002B00:00",
+  "completedAtUtc": "2026-11-09T08:01:16.7855255\u002B00:00",
+  "durationMilliseconds": 54648,
+  "projectNodes": [
+    "M3"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f35-numerics-candidate.md",
+    "docs/distribution/ValidateNugetNumericsCandidate.cs",
+    "tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj",
+    "tools/dw.tools.math.nuget-numerics-candidate/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs",
+    "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateNugetNumericsCandidate.cs",
+    "docs/distribution/nuget-federation-f35-numerics-candidate.md",
+    "tools/dw.tools.math.nuget-numerics-candidate/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-candidate/Program.cs",
+    "tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj",
+    "tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 1,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261108T203219Z-7e1b8d1047662586",
+      "run-next-20261108T220321Z-1c6ac27a68ef05fe"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261108T203219Z-7e1b8d1047662586",
+        "runId": "RS168",
+        "scope": "rs168",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/rs168/run-next-20261108T203219Z-7e1b8d1047662586"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261108T220321Z-1c6ac27a68ef05fe",
+        "runId": "RS168",
+        "scope": "rs168",
+        "outcome": "failed",
+        "publicationOutcome": "attempt-failed",
+        "failureStage": "payload",
+        "failureClassification": "attempt-failed",
+        "attemptAllocated": true,
+        "attempt": 1,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/rs168/run-next-20261108T220321Z-1c6ac27a68ef05fe"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS168/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-4281552a1fb64ca884ea7216d2b4dec6\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": -532462766,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 54475,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS168 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS167/attempt-001.json run=RS167 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/package_published_by_this_run\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/observation/packageId\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/observation/compiledConsumerChecks\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/observation/packageVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/observation/archiveSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/observation/packagedDllSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/observation/exactDependencies/0/archiveSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/observation/exactDependencies/0/packagedDllSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f1-qualified.json pointer=/package_count\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f1-qualified.json pointer=/observed/packages/9/packageId\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f1-qualified.json pointer=/observed/packages/9/historicalSourceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f1-qualified.json pointer=/observed/packages/9/projectReferences/0\r\n[require.json-value-equals] VERIFIED path=src/projects/dw.tools.math.numerics/packages.lock.json pointer=/dependencies/net10.0/dw.tools.math.ir/type\r\n[require.json-value-equals] VERIFIED path=src/projects/dw.tools.math.numerics/packages.lock.json pointer=/dependencies/net10.0/dw.quantities/type\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json pointer=/authorization/package_from_dw_tools_math\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj semantic text found\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj semantic text found\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj file exists\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json path is absent\r\n[files.replace-from-staged] NOCHANGE path=docs/distribution/nuget-federation-f35-numerics-candidate.md staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=docs/distribution/ValidateNugetNumericsCandidate.cs staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=tools/dw.tools.math.nuget-numerics-candidate/Directory.Packages.props staged content already installed\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-numerics-candidate/Program.cs bytes=27921\r\n[files.replace-from-staged] NOCHANGE path=tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs staged content already installed\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs file exists\r\n[require.text-contains] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate.md semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/dw.tools.math.nuget-numerics-candidate.csproj semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/Directory.Packages.props semantic text found\r\nRS168 source-check exit=0 elapsed_ms=10739\r\nRS168 tool-restore exit=0 elapsed_ms=1149\r\nRS168 tool-build exit=0 elapsed_ms=2656\r\n",
+      "StandardError": "Unhandled exception. System.IO.InvalidDataException: numerics-candidate exit=1\n\nMATH-NUMERICS-CANDIDATE-REFUSED: the shared NuGet repository reader refused the exact Numerics candidate\r\n\r\n   at Program.\u003C\u003CMain\u003E$\u003Eg__Run|0_2(String root, String id, String executable, String[] args) in D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\runs\\RS168\\payload.cs:line 322\r\n   at Program.\u003CMain\u003E$(String[] args) in D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\.workflow\\runs\\RS168\\payload.cs:line 193\r\n",
+      "StandardOutputOriginalBytes": 5900,
+      "StandardOutputSha256": "415c24949f6681691f23ab7cf5e211a534455caabcedad7796e0333e8c4dccf5",
+      "StandardOutputTruncated": false,
+      "StandardErrorOriginalBytes": 501,
+      "StandardErrorSha256": "57c69d5c7abf097771edbba1ea1c7c560b7215e07ba9a190116e4bebd163588c",
+      "StandardErrorTruncated": false
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/local/reports/RS168/attempt-002.md",
+    "ArtifactRootPath": ".aura/workflow/local/reports/RS168/attempt-002-artifacts"
+  },
+  "preparationValidationEvidence": {
+    "source": "run-preparation-gate",
+    "mode": "executed",
+    "durationMilliseconds": 89071,
+    "parsedPowerShellFiles": 0,
+    "payloadCompiled": true,
+    "predictedChangedPaths": [
+      "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+      "tools/dw.tools.math.nuget-numerics-candidate/Program.cs"
+    ],
+    "validations": [
+      {
+        "id": "numerics-f35-candidate",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-composition-f34",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-ir-f13",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261109T075841Z-64cb396a8c4541be",
+  "commandMode": "run-next-auto-correction",
+  "authorityBaselineCommit": "e9d97db95002cb21a034333930623ce3a936d267",
+  "invocationStartedAtUtc": "2026-11-09T07:58:41.3325572\u002B00:00",
+  "invocationDurationMilliseconds": 155452,
+  "git": {
+    "commitMessage": null,
+    "commitEligible": false,
+    "deliveryIntent": "none",
+    "deliveryStateAtReportWrite": "not-applicable"
+  },
+  "attemptAllocated": true,
+  "failureStage": "payload",
+  "failureClassification": "attempt-failed",
+  "localDiagnosticReport": ".aura/workflow/local/reports/RS168/attempt-002.json",
+  "safeNextAction": "dwf run next",
+  "evidencePublicationReference": "refs/heads/workflow/evidence/rs168/run-next-20261109T075841Z-64cb396a8c4541be"
+}
