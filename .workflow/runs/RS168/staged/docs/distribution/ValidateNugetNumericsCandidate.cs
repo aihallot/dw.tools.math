@@ -179,8 +179,10 @@ if (finished)
          Text(candidate, "status") == "qualified-numerics-dependent-calendar-candidate-not-published" &&
          Text(candidate, "packageId") == Id &&
          Text(candidate, "historicalSourceVersion") == "0.4.0-preview.4" &&
-         Text(candidate, "candidateArchivePath") ==
-             "build/artifacts/rs168-numerics-candidate/candidate/" + Id + "." + version + ".nupkg" &&
+         Regex.IsMatch(Text(candidate, "candidateArchivePath"),
+             @"\Abuild/artifacts/rs168-numerics-candidate/scratch/[0-9a-f]{32}/candidate/" +
+             Regex.Escape(Id) + @"\." + Regex.Escape(version) + @"\.nupkg\z",
+             RegexOptions.CultureInvariant) &&
          candidate.GetProperty("candidateArchiveBytes").GetInt64() > 2000 &&
          Text(candidate, "candidateArchiveSha256").Length == 64 &&
          Text(candidate, "candidateDllSha256").Length == 64 &&

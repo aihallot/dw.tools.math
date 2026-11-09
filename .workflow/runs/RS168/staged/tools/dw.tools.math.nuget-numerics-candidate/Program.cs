@@ -205,18 +205,18 @@ internal static class Program
              "F1 must propose an unreserved current-day calendar NuGet version");
 
         var work = RepoFile(root, "build/artifacts/rs168-numerics-candidate");
-        var packageFolder = Path.Combine(work, "candidate");
+        // Each attempt owns one entirely fresh scratch tree, including its NuGet feed.
+        // Never delete or overwrite retained archives from a failed prior attempt.
+        var scratch = Path.Combine(work, "scratch", Guid.NewGuid().ToString("N"));
+        Need(!Directory.Exists(scratch), "fresh Numerics scratch workspace collided");
+        var producer = Path.Combine(scratch, "producer");
+        var packageFolder = Path.Combine(scratch, "candidate");
+        var consumer = Path.Combine(scratch, "consumer");
         var package = Path.Combine(packageFolder, PackageId + "." + newVersion + ".nupkg");
         Need(!File.Exists(package),
              "an original Numerics candidate may never be overwritten");
         Need(!File.Exists(Path.Combine(feed, PackageId + "." + newVersion + ".nupkg")),
              "candidate Numerics package identity already exists in shared private feed");
-        // A failed attempt may retain an earlier producer/consumer tree. Never delete it.
-        // Use a fresh, isolated scratch tree while keeping the candidate archive path stable.
-        var scratch = Path.Combine(work, "scratch", Guid.NewGuid().ToString("N"));
-        Need(!Directory.Exists(scratch), "fresh Numerics scratch workspace collided");
-        var producer = Path.Combine(scratch, "producer");
-        var consumer = Path.Combine(scratch, "consumer");
         Directory.CreateDirectory(producer);
         Directory.CreateDirectory(packageFolder);
         Directory.CreateDirectory(consumer);
@@ -270,7 +270,11 @@ internal static class Program
              listed.Packages[0].PackageId == PackageId &&
              listed.Packages[0].Version == newVersion &&
              listed.Packages[0].Sha256 == archiveSha,
-             "the shared NuGet repository reader refused the exact Numerics candidate");
+             "the shared NuGet repository reader refused the exact Numerics candidate; " +
+             "inspected=" + listed.InspectedPackages + ";matched=" + listed.MatchedPackages +
+             ";items=" + listed.Packages.Count + ";observed=" +
+             string.Join(",", listed.Packages.Select(p =>
+                 p.PackageId + "@" + p.Version + "#" + p.Sha256)));
 
         File.Copy(RepoFile(root, Fixture), Path.Combine(consumer, "Program.cs"),
             overwrite: false);

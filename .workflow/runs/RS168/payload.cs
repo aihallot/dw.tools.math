@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using Dw.Tools.Workflow.Payloads;
 
 const string Distribution = "docs/distribution/";
@@ -235,9 +236,11 @@ if (!complete)
          version.Length == 19 &&
          version.EndsWith(".1001", StringComparison.Ordinal),
          "Numerics package-version allocator did not return first free daily candidate");
-    Need(candidate["candidateArchivePath"]?.GetValue<string>() ==
-             "build/artifacts/rs168-numerics-candidate/candidate/dw.tools.math.numerics." +
-             version + ".nupkg", "unexpected candidate output package path");
+    Need(Regex.IsMatch(candidate["candidateArchivePath"]?.GetValue<string>() ?? "",
+             @"\Abuild/artifacts/rs168-numerics-candidate/scratch/[0-9a-f]{32}/candidate/" +
+             Regex.Escape("dw.tools.math.numerics") + @"\." +
+             Regex.Escape(version) + @"\.nupkg\z",
+             RegexOptions.CultureInvariant), "unexpected candidate output package path");
     var inner = candidate["commands"]?.AsArray() ??
         throw new InvalidDataException("missing Numerics inner process receipts");
     Need(inner.Count == 11, "eleven actual Numerics candidate and consumer receipts required");
