@@ -43,15 +43,22 @@ public sealed class ElectrochemicalUnitProfileTests
     [TestMethod]
     public void OptInProfilePreservesBothHistoricalCatalogues()
     {
-        Assert.AreEqual("math.si-electrochemical", ElectrochemicalUnitProfile.ProfileId);
+        Assert.AreEqual("math.si-electrochemical",
+            typeof(ElectrochemicalUnitProfile)
+                .GetField(nameof(ElectrochemicalUnitProfile.ProfileId))?.GetRawConstantValue());
         Assert.AreEqual("2026-11-electrochemical-exact-v1",
-            ElectrochemicalUnitProfile.ProfileVersion);
+            typeof(ElectrochemicalUnitProfile)
+                .GetField(nameof(ElectrochemicalUnitProfile.ProfileVersion))?.GetRawConstantValue());
         Assert.AreEqual(6, ElectrochemicalUnitProfile.All.Length);
         Assert.AreEqual(6, ElectrochemicalUnitProfile.All
             .Select(x => x.Id).Distinct(StringComparer.Ordinal).Count());
-        Assert.AreEqual("0.2.0", InheritedStandardUnitCatalog.Version);
+        Assert.AreEqual("0.2.0",
+            typeof(InheritedStandardUnitCatalog)
+                .GetField(nameof(InheritedStandardUnitCatalog.Version))?.GetRawConstantValue());
         Assert.AreEqual(58, InheritedStandardUnitCatalog.All.Length);
-        Assert.AreEqual("2026-10-exact-v1", StandardUnitCatalog.CatalogVersion);
+        Assert.AreEqual("2026-10-exact-v1",
+            typeof(StandardUnitCatalog)
+                .GetField(nameof(StandardUnitCatalog.CatalogVersion))?.GetRawConstantValue());
         Assert.AreEqual(14, StandardUnitCatalog.All.Length);
         foreach (var unit in ElectrochemicalUnitProfile.All)
         {
