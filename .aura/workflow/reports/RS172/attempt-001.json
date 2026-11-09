@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS172",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-09T22:11:21.8522985+00:00",
+  "completedAtUtc": "2026-11-09T22:11:25.8836749+00:00",
+  "durationMilliseconds": 4031,
+  "projectNodes": [
+    "M3"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f38-numerics-reconciled.md",
+    "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+    "docs/distribution/nuget-federation-f38-numerics-reconciled.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+    "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+    "docs/distribution/nuget-federation-f38-numerics-reconciled.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261109T201235Z-c32997f32cd343a1"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261109T201235Z-c32997f32cd343a1",
+        "runId": "RS172",
+        "scope": "preselection-rs172",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs172/run-next-20261109T201235Z-c32997f32cd343a1"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS172/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1500,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-7d4b9db0d4b54d089d74a060ce300510\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1500000,
+      "DurationMilliseconds": 3896,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS172 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS171/attempt-001.json run=RS171 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS171/attempt-001.json pointer=/outcome\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS171/attempt-001.json pointer=/attempt\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS171/attempt-001.json pointer=/validations/0/Id\r\n[require.json-value-equals] VERIFIED path=.aura/workflow/reports/RS171/attempt-001.json pointer=/validations/0/ExitCode\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/package_published\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f37-numerics-release-qualified.json pointer=/package_published\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f38-numerics-reconciled.json path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f38-numerics-reconciled.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/ValidateNugetNumericsF38Receipt.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f38-numerics-reconciled.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/distribution/nuget-federation-f38-numerics-reconciled.md bytes=2562\r\n[files.replace-from-staged] CHANGED path=docs/distribution/ValidateNugetNumericsF38Receipt.cs bytes=8857\r\n[files.replace-from-staged] CHANGED path=docs/distribution/nuget-federation-f38-numerics-reconciled.json bytes=5527\r\n[require.text-contains] VERIFIED path=docs/distribution/nuget-federation-f38-numerics-reconciled.md semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/ValidateNugetNumericsF38Receipt.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/ValidateNugetNumericsF38Receipt.cs semantic text found\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[payload] OK operations=24 changed=3 no-change=0 verified=21 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS172/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS172 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "90c10c9727d6bfcb863f2708c3220041969e546a1e3436587616ff365bc77265",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS171/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS171 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c1e185a6d73f4b444035816966a20364853a529333dec95314a076a68edcd5c9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS171/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/outcome",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS171/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/attempt",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS171/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/validations/0/Id",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": ".aura/workflow/reports/RS171/attempt-001.json",
+        "Status": 0,
+        "Summary": "pointer=/validations/0/ExitCode",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f37-numerics-release-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.md",
+        "Status": 1,
+        "Summary": "bytes=2562",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8760855d51c3822559db2eeb7a3a2dacdc7638d2cad085a840fd27971282cb41",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+        "Status": 1,
+        "Summary": "bytes=8857",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "963ffa69fe35d0f48541dc057b9bdd4726b2a65ab1f8dcc293b40253f38072cc",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+        "Status": 1,
+        "Summary": "bytes=5527",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32c1895280dd28391d56d6f94b6ef2f38c6ae65b1a64e466ab61e33494c77a76",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "f38-physical-evidence-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-numerics-f37",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261109T221022Z-1714b9bac4102241",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "bc4580704a442246904f150885d74a31ae0b7b5e",
+  "invocationStartedAtUtc": "2026-11-09T22:10:22.7160457+00:00",
+  "invocationDurationMilliseconds": 63167,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS172",
+      "title": "Reconcile durable F38 original Numerics package-only DWF validation evidence",
+      "projectNodes": [
+        "M3"
+      ]
+    },
+    "declared": {
+      "summary": "Reconcile the actual RS171 focused F35 original Numerics consumer validation into durable, source-bound F38 evidence without replaying physical tests or publishing packages.",
+      "value": "Reconcile the exact committed RS171 focused physical validation by installing a source-bound F38 snapshot and verifying its stdout SHA-256, complete JSON observation, fifteen compiled oracles and unchanged original F35/IR/Quantities identities; no new physical run or publication.",
+      "debtChanges": [
+        "RS171 succeeded on its first allocated attempt after two preparation refusals; the actual physical original F35 consumer, all fifteen probes and four inner commands passed.",
+        "RS171\u0027s source-only preflight did not write a premature F38 receipt; RS172 reconciles its retained DWF output from Git, not ignored build artifacts.",
+        "No new physical execution, shared NUGET_LOCAL publication, public license, installed rollback, cross-repository mutation or AURA D3 authorization is involved.",
+        "RS172 first preselection was refused before attempt allocation: direct DWF report JSON traversal and SHA recalculation in payload duplicated workflow contracts. Correction uses typed DWF requirements plus staged RS171 observation and exact read-only domain validation."
+      ],
+      "nextAction": "With durable F38 evidence reconciled, keep private Numerics publication owner-gated and proceed to the next unqualified Math package, likely Symbolics, unless explicit release authorization arrives.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/ValidateNugetNumericsF38Receipt.cs",
+        "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+        "docs/distribution/nuget-federation-f38-numerics-reconciled.md"
+      ],
+      "validations": [
+        {
+          "id": "f38-physical-evidence-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-numerics-f37",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS172",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS172",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "bc4580704a442246904f150885d74a31ae0b7b5e",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "a7bcb9e2e8892221208f4d9d53d0d1a12952f945f06277025d13135599379024"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: reconcile original Numerics F38 binary validation evidence",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
