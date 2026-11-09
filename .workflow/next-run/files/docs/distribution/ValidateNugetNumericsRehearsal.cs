@@ -1,5 +1,6 @@
 #:property NuGetAudit=false
 using System.Security.Cryptography;
+using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
