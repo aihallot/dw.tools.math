@@ -1,0 +1,585 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS169",
+  "attempt": 2,
+  "outcome": "succeeded",
+  "correctionMode": true,
+  "correctionSourceAttempt": 1,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-09T13:23:58.9187645+00:00",
+  "completedAtUtc": "2026-11-09T13:24:14.5154617+00:00",
+  "durationMilliseconds": 15596,
+  "projectNodes": [
+    "M3"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+    "docs/distribution/ValidateNugetNumericsRehearsal.cs",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+    "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateNugetNumericsRehearsal.cs",
+    "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json",
+    "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+    "tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 1,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261109T121204Z-68bb8e8e34b8ccdd"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261109T121204Z-68bb8e8e34b8ccdd",
+        "runId": "RS169",
+        "scope": "rs169",
+        "outcome": "failed",
+        "publicationOutcome": "attempt-failed",
+        "failureStage": "payload",
+        "failureClassification": "attempt-failed",
+        "attemptAllocated": true,
+        "attempt": 1,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/rs169/run-next-20261109T121204Z-68bb8e8e34b8ccdd"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS169/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-94a9907cfef24f4b812260175eba9270\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 15501,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS169 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS168/attempt-003.json run=RS168 attempt=3 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/candidate/candidateArchiveSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/candidate/candidateDllSha256\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/candidate/compiledBinaryConsumerChecks\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json pointer=/package_published\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f13-ir-published-qualified.json pointer=/physically_published_package_verified\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json pointer=/authorization/package_from_dw_tools_math\r\n[require.file-exists] VERIFIED path=tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs file exists\r\n[require.file-missing] VERIFIED path=docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=docs/distribution/nuget-federation-f36-numerics-rehearsal.md bytes=3394\r\n[files.replace-from-staged] NOCHANGE path=docs/distribution/ValidateNugetNumericsRehearsal.cs staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=tools/dw.tools.math.nuget-numerics-rehearsal/Directory.Packages.props staged content already installed\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs bytes=22104\r\n[require.text-contains] VERIFIED path=docs/distribution/nuget-federation-f36-numerics-rehearsal.md semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs semantic text found\r\n[require.text-contains] VERIFIED path=tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj semantic text found\r\n[files.write-complete] CHANGED path=docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json bytes=12192\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[payload] OK operations=28 changed=3 no-change=3 verified=22 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS169/attempt-002.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS169 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fdb95fa12cf8081c5145ef05a073f913df4d7a4d63598e0e0ddc9f30e8a61d8c",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS168/attempt-003.json",
+        "Status": 0,
+        "Summary": "run=RS168 attempt=3 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "cd5c1494d43f119228faa53d14926084c1fe978237f5173a47a729224081b5cb",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateArchiveSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/candidateDllSha256",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/compiledBinaryConsumerChecks",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f35-numerics-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f13-ir-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/physically_published_package_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json",
+        "Status": 0,
+        "Summary": "pointer=/authorization/package_from_dw_tools_math",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-exists",
+        "Path": "tools/dw.tools.math.nuget-numerics-candidate/fixtures/NumericsBinaryConsumer.cs",
+        "Status": 0,
+        "Summary": "file exists",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+        "Status": 1,
+        "Summary": "bytes=3394",
+        "Details": null,
+        "BeforeSha256": "c85e2b04a9d9e0cb07588e731b0a90883ac0d934c680fb2a6b30b62079f66afc",
+        "AfterSha256": "90518abfe2e5cfacf5777e5b8c42e3fb77b537c0d9f5a1adfc3d03999a4723d8",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/ValidateNugetNumericsRehearsal.cs",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "f56e7978aa653060aa07b0a9421573622b1dd78a228f60f995bf39f9cb60d1cd",
+        "AfterSha256": "f56e7978aa653060aa07b0a9421573622b1dd78a228f60f995bf39f9cb60d1cd",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+        "AfterSha256": "5b6790df82d14838a958d40826dc27321ed4f171a08843ab726067c9048a548f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/Directory.Packages.props",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+        "AfterSha256": "42b8b5536d24cc3e60b1832f627c9e82422ae63634b0af47e4071a235bada554",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=22104",
+        "Details": null,
+        "BeforeSha256": "c5d75a791dea0a8cba8dc3e0ba2850deeb7159a93fee746aa87ce70064d69a77",
+        "AfterSha256": "d194dc6cd1bd207f6732863bb57d3a50996e360958baac9fb99a37e312882fca",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=12192",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e3bc9f68d5c51b547e92adcb0f763ddaf806fecb40392d3472d90d84710c8add",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "run-preparation-gate",
+    "mode": "executed",
+    "durationMilliseconds": 67159,
+    "parsedPowerShellFiles": 0,
+    "payloadCompiled": true,
+    "predictedChangedPaths": [
+      "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json",
+      "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+      "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs"
+    ],
+    "validations": [
+      {
+        "id": "numerics-f36-rehearsal",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-numerics-f35",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "retained-ir-f13",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "transfer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261109T132243Z-96b054ac4637cd22",
+  "commandMode": "run-next-auto-correction",
+  "authorityBaselineCommit": "8ea1bf849487dd6ed22ee3404819d33a2e51d54c",
+  "invocationStartedAtUtc": "2026-11-09T13:22:43.9427452+00:00",
+  "invocationDurationMilliseconds": 90572,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS169",
+      "title": "Rehearse immutable Numerics NuGet publisher on disposable feed with exact IR and Quantities closure",
+      "projectNodes": [
+        "M3"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify an immutable Numerics publisher rehearsal using unchanged original sources, exact published IR/Quantities closure, disposable-feed publication, collision/digest/cancellation refusals and fifteen compiled package-only checks.",
+      "value": "Rebuild a disposable source-linked Numerics candidate through the qualified F35 controller, independently publish and read back those exact rehearsal bytes in a fresh disposable feed, then restore a binary-only consumer. Record distinct F35 and rehearsal archive identities.",
+      "debtChanges": [
+        "RS168 succeeded at attempt 003 after two allocated and two preparation failures; F35 qualified the original unpublished Numerics candidate with fifteen binary checks and one exact IR dependency.",
+        "Rehearsal archive bytes are independently recorded and never substituted for the original immutable F35 candidate, even when source and package identity match.",
+        "RS169 never publishes to shared NUGET_LOCAL, changes source versions, grants public license, qualifies installed rollback or authorizes external/AURA/Decision/Discovery adoption."
+      ],
+      "nextAction": "After F36 succeeds, inspect the exact original F35 archive and seek explicit owner authorization before an independent immutable private publication and physical-feed readback.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/ValidateNugetNumericsRehearsal.cs",
+        "docs/distribution/nuget-federation-f36-numerics-rehearsal-qualified.json",
+        "docs/distribution/nuget-federation-f36-numerics-rehearsal.md",
+        "tools/dw.tools.math.nuget-numerics-rehearsal/Directory.Packages.props",
+        "tools/dw.tools.math.nuget-numerics-rehearsal/Program.cs",
+        "tools/dw.tools.math.nuget-numerics-rehearsal/dw.tools.math.nuget-numerics-rehearsal.csproj"
+      ],
+      "validations": [
+        {
+          "id": "numerics-f36-rehearsal",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-numerics-f35",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "retained-ir-f13",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "transfer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 2,
+      "failedAttempts": 1,
+      "successfulAttempt": 2,
+      "classificationCompleteness": "partial"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M3",
+        "objective": "Qualified numerical computation",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M3 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS169",
+    "attempt": 2,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS169",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "8ea1bf849487dd6ed22ee3404819d33a2e51d54c",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "de11e07bc31a7f6fddfdeaeae589734fad583a8affc5764990b550c1a3d781ff"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: rehearse Numerics immutable NuGet publisher with IR and Quantities",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
