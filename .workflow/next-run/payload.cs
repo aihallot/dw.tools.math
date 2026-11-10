@@ -81,7 +81,8 @@ if (!complete)
         "rs173-electrochemical-targeted", Guid.NewGuid().ToString("N"));
     Need(!Directory.Exists(resultDirectory),
         "fresh targeted MSTest results directory collided");
-    Directory.CreateDirectory(resultDirectory);
+    // The test runner owns creation of its disposable results directory.
+    // A DWF payload must not mutate repository directories directly.
     var run = Execute(root, "targeted-mstest",
         ["test", TestProject, "-c", "Release", "--no-restore",
          "--filter", "FullyQualifiedName~ElectrochemicalUnitProfileTests",
