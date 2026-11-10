@@ -271,7 +271,7 @@ internal static class Program
             Sources(("candidate", candidate), ("published", feed)));
         commands.Add(Run(root, consumerCache, "consumer-local-only-restore", "dotnet", [
             "restore", consumerProject, "--configfile", consumerConfig,
-            "--packages", cache, "-p:NuGetAudit=false"
+            "--packages", consumerCache, "-p:NuGetAudit=false"
         ]).Receipt);
         commands.Add(Run(root, consumerCache, "consumer-release-build", "dotnet", [
             "build", consumerProject, "-c", "Release",
