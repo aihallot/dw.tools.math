@@ -296,7 +296,7 @@ internal static class Program
              consumerSources.All(x => !x.Contains("://", StringComparison.Ordinal)),
              "actual restore sources must be local and recorded");
         var loadedClrIdentities = consumerTest.Output
-            .Split(['\\r', '\\n'], StringSplitOptions.RemoveEmptyEntries)
+            .Split(new[] { (char)13, (char)10 }, StringSplitOptions.RemoveEmptyEntries)
             .Single(x => x.StartsWith("MATH-ELECTROCHEM-CLR|standard=",
                 StringComparison.Ordinal));
         var archiveEntries = Inventory(archive);
