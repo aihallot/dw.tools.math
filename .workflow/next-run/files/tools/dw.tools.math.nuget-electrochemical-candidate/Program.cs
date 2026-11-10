@@ -158,8 +158,16 @@ internal static class Program
                  StringComparison.OrdinalIgnoreCase) &&
              ShaFile(loadedCore.Location) == SharedNuGetDllSha,
              "loaded shared NuGet reader is not the pinned qualified DLL");
+        // The private flat feed may contain unrelated child directories.
+        // The shared reader explicitly skips them without traversing descendants;
+        // every top-level package remains inspected under the original limits.
         var existing = new DotNetLocalPackageRepository(feed,
-            new DotNetLocalRepositoryLimits(4096, 67_108_864, 1_073_741_824)).List(PackageId);
+            new DotNetLocalRepositoryLimits(4096, 67_108_864, 1_073_741_824))
+            .List(PackageId, ignoreSubdirectories: true);
+        Need(existing.DirectoryPolicy == "ignore" &&
+             existing.ScannedEntries >= existing.InspectedPackages &&
+             existing.MatchedPackages >= 1,
+             "private feed top-level inventory must be complete and explicit");
         Need(existing.Packages.Any(p => p.Version == OldVersion && p.Sha256 == OldSha),
              "shared NuGet reader did not confirm old immutable package");
         var date = DateOnly.FromDateTime(DateTime.Now);
