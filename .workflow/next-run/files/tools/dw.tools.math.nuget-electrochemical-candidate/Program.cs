@@ -158,6 +158,10 @@ internal static class Program
                  StringComparison.OrdinalIgnoreCase) &&
              ShaFile(loadedCore.Location) == SharedNuGetDllSha,
              "loaded shared NuGet reader is not the pinned qualified DLL");
+        // Keep the pinned shared reader's path/ancestor and limit checks without
+        // asking it to inspect unrelated packages in this private flat feed.
+        _ = new DotNetLocalPackageRepository(feed,
+            new DotNetLocalRepositoryLimits(4096, 67_108_864, 1_073_741_824));
         // List(packageId) inspects every top-level nupkg before filtering, so an
         // unrelated malformed package would refuse this scoped Math candidate.
         // Inspect bounded top-level names for collision safety, not unrelated bytes.
