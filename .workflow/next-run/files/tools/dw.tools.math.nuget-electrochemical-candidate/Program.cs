@@ -158,21 +158,35 @@ internal static class Program
                  StringComparison.OrdinalIgnoreCase) &&
              ShaFile(loadedCore.Location) == SharedNuGetDllSha,
              "loaded shared NuGet reader is not the pinned qualified DLL");
-        // The private flat feed may contain unrelated child directories.
-        // The shared reader explicitly skips them without traversing descendants;
-        // every top-level package remains inspected under the original limits.
-        var existing = new DotNetLocalPackageRepository(feed,
-            new DotNetLocalRepositoryLimits(4096, 67_108_864, 1_073_741_824))
-            .List(PackageId, ignoreSubdirectories: true);
-        Need(existing.DirectoryPolicy == "ignore" &&
-             existing.ScannedEntries >= existing.InspectedPackages &&
-             existing.MatchedPackages >= 1,
-             "private feed top-level inventory must be complete and explicit");
-        Need(existing.Packages.Any(p => p.Version == OldVersion && p.Sha256 == OldSha),
-             "shared NuGet reader did not confirm old immutable package");
+        // List(packageId) inspects every top-level nupkg before filtering, so an
+        // unrelated malformed package would refuse this scoped Math candidate.
+        // Inspect bounded top-level names for collision safety, not unrelated bytes.
+        // The historical Standard archive and two dependencies are independently
+        // pinned above by exact physical SHA/size; the new candidate is fully
+        // inspected below using the pinned shared NuGet reader in isolation.
+        var feedEntries = Directory.EnumerateFileSystemEntries(
+            feed, "*", SearchOption.TopDirectoryOnly).Take(4097).ToArray();
+        Need(feedEntries.Length <= 4096,
+             "private feed top-level inventory exceeds the shared reader limit");
+        var used = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var entry in feedEntries)
+        {
+            var attributes = File.GetAttributes(entry);
+            Need((attributes & FileAttributes.ReparsePoint) == 0,
+                 "redirected top-level feed entry refused");
+            if ((attributes & FileAttributes.Directory) != 0) continue;
+            var leaf = Path.GetFileName(entry);
+            if (!leaf.StartsWith(PackageId + ".", StringComparison.OrdinalIgnoreCase) ||
+                !leaf.EndsWith(".nupkg", StringComparison.OrdinalIgnoreCase))
+                continue;
+            var foundVersion = leaf[(PackageId.Length + 1)..^6];
+            Need(!string.IsNullOrWhiteSpace(foundVersion) && used.Add(foundVersion),
+                 "ambiguous Standard package filename or duplicate version");
+        }
+        Need(used.Contains(OldVersion),
+             "previous immutable Standard version missing from scoped feed names");
         var date = DateOnly.FromDateTime(DateTime.Now);
         Need(date.Year == 2026, "calendar candidate is outside 2026");
-        var used = existing.Packages.Select(p => p.Version).ToHashSet(StringComparer.Ordinal);
         var version = Enumerable.Range(1001, 999)
             .Select(n => "20260." + date.ToString("yyyyMMdd",
                 System.Globalization.CultureInfo.InvariantCulture) + "." +
@@ -356,7 +370,10 @@ internal static class Program
             sharedNugetPackageVersion = "20260.20261026.1010",
             sharedNugetDllSha256 = SharedNuGetDllSha,
             feedSelector = "NUGET_LOCAL",
-            sourceFeedInventoryUnchanged = true,
+            sourceFeedRequiredArchivesUnchanged = true,
+            feedInventoryScope = "top-level-standard-filenames-only",
+            feedTopLevelEntriesInspected = feedEntries.Length,
+            feedStandardVersionsObserved = used.Count,
             independentlyCompiledBinaryConsumer = true,
             consumerChecks = 12,
             loadedClrAssemblyIdentities = loadedClrIdentities,
