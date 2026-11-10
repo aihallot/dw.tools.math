@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "RS175",
+  "title": "Qualify immutable electrochemical publisher using only the original RS174 archive",
+  "state": "prepared",
+  "commitMessage": "test: qualify immutable electrochemical publisher on original candidate bytes",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M1"
+  ],
+  "contribution": {
+    "summary": "Qualify the shared immutable publisher against the exact original RS174 electrochemical Standard archive in a disposable feed, without rebuilding or publishing to NUGET_LOCAL.",
+    "value": "Prove seven bounded publication controls with the original archive, complete ZIP inventory and pinned DLL; preserve both exact dependencies, old Standard bytes and acquired source/binary evidence. Establish the next local-delivery trust gate for the AURA unit-profile request.",
+    "debtChanges": [
+      "RS174 succeeded at attempt 001 after three pre-attempt refusals; firstPassSucceeded is false. Its twelve binary checks and three loaded DLL hashes remain acquired evidence.",
+      "The original Standard 20260.20261110.1001 archive is the only admitted input. Missing or changed bytes refuse; no rebuilding, repacking or same-version substitution is permitted.",
+      "Disposable DWF preparation may read only the pinned archive under the exact approved operator checkout. It never executes there, searches sibling repositories or writes to the operator archive.",
+      "Reuse Dw.Tools.NuGet [20260.20261026.1010]. No shared-feed publication, old package overwrite, source or binary campaign replay, public release, license choice or AURA completion is claimed.",
+      "M1 and M3 remain done; all 541 native nodes and backlog 0.1.122 are retained. No completion achievement is declared for this bounded delivery qualification."
+    ],
+    "nextAction": "After durable success, publish the identical original archive without overwrite to NUGET_LOCAL under the existing owner authorization, then independently verify the physically published archives and loaded DLLs in a separate gate.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1500
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/electrochemical-publisher.md",
+    "docs/distribution/ValidateElectrochemicalPublisher.cs",
+    "tools/dw.tools.math.nuget-electrochemical-release/dw.tools.math.nuget-electrochemical-release.csproj",
+    "tools/dw.tools.math.nuget-electrochemical-release/Directory.Packages.props",
+    "tools/dw.tools.math.nuget-electrochemical-release/Program.cs",
+    "docs/distribution/electrochemical-publisher-qualified.json"
+  ],
+  "validations": [
+    {
+      "id": "electrochemical-publisher",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateElectrochemicalPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "planning",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "native-dwf",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "transfer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateTransferArchitecture.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
