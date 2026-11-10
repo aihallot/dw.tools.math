@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS173",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-10T08:55:58.7947093+00:00",
+  "completedAtUtc": "2026-11-10T08:56:09.5900579+00:00",
+  "durationMilliseconds": 10795,
+  "projectNodes": [
+    "M1"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+    "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs",
+    "docs/distribution/electrochemical-unit-profile.md",
+    "docs/distribution/electrochemical-unit-profile-source-qualified.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+    "docs/distribution/electrochemical-unit-profile.md",
+    "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+    "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261110T074845Z-31318f6baaa15566"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261110T074845Z-31318f6baaa15566",
+        "runId": "RS173",
+        "scope": "preselection-rs173",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs173/run-next-20261110T074845Z-31318f6baaa15566"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS173/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1500,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-137bf7464a064bbf9027aedb65ae00b1\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1500000,
+      "DurationMilliseconds": 10674,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS173 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS172/attempt-001.json run=RS172 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f38-numerics-reconciled.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f10-standard-published-qualified.json pointer=/observation/packageVersion\r\n[require.text-contains] VERIFIED path=src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs semantic text found\r\n[require.text-contains] VERIFIED path=src/projects/dw.quantities.standard/StandardUnitCatalog.cs semantic text found\r\n[require.text-contains] VERIFIED path=src/projects/dw.quantities.standard/dw.quantities.standard.csproj semantic text found\r\n[require.file-missing] VERIFIED path=src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs path is absent\r\n[require.file-missing] VERIFIED path=tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/electrochemical-unit-profile.md path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/electrochemical-unit-profile-source-qualified.json path is absent\r\n[files.replace-from-staged] CHANGED path=src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs bytes=2480\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs bytes=7382\r\n[files.replace-from-staged] CHANGED path=docs/distribution/electrochemical-unit-profile.md bytes=3863\r\n[require.text-contains] VERIFIED path=src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs semantic text found\r\n[require.text-contains] VERIFIED path=src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs semantic text found\r\n[require.text-contains] VERIFIED path=tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs semantic text found\r\n[require.text-contains] VERIFIED path=docs/distribution/electrochemical-unit-profile.md semantic text found\r\n[files.write-complete] CHANGED path=docs/distribution/electrochemical-unit-profile-source-qualified.json bytes=4961\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M1 state=done\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-unit-profile-source-qualified.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-unit-profile-source-qualified.json pointer=/tests/passed\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-unit-profile-source-qualified.json pointer=/package_published\r\n[payload] OK operations=28 changed=4 no-change=0 verified=24 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS173/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS173 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "9bf7060d963d1e6106314f43cb978222b85418a9783d7171fd09dbdacbe70320",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS172/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS172 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d93e116980f375adee23e3a28c85b88eb29601a53b78262de7c91c78586ccd0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f38-numerics-reconciled.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f10-standard-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/observation/packageVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.quantities.standard/InheritedStandardUnitCatalog.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.quantities.standard/StandardUnitCatalog.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/electrochemical-unit-profile.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+        "Status": 1,
+        "Summary": "bytes=2480",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c64f9b0f9595889190e4d383853ba981b61dd241bd7565673d28e7d31b203b6a",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs",
+        "Status": 1,
+        "Summary": "bytes=7382",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1e4607f1ccecee51ea3f3b98b99e3cf37b220b5347d01870e196903b093c8880",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/electrochemical-unit-profile.md",
+        "Status": 1,
+        "Summary": "bytes=3863",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "651a5ad10dae6f564734319edf10051560fafa9fe684659355374072d3beb31d",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/distribution/electrochemical-unit-profile.md",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "Status": 1,
+        "Summary": "bytes=4961",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "daf3c7d730885831b777af19f0ef280b824a1cd975cab071c0f2df7f7a99a364",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/tests/passed",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/package_published",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261110T085447Z-fbd926b0dd585ba3",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "fbbcc27cbc90d3df1e33cee83db4fe68833ab105",
+  "invocationStartedAtUtc": "2026-11-10T08:54:47.6970912+00:00",
+  "invocationDurationMilliseconds": 81892,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS173",
+      "title": "Implement opt-in Math SI electrochemical unit profile with twelve targeted source tests",
+      "projectNodes": [
+        "M1"
+      ]
+    },
+    "declared": {
+      "summary": "Add six originally authored SI electrical/molar units to an explicit Math-owned profile without altering either historical catalogue or previously published package.",
+      "value": "Compile the new ElectrochemicalUnitProfile using existing exact rational, dimension and quantity contracts; execute twelve selected source tests for each unit, legacy catalogue identity, two electric products, molar inverse, and actual incompatible unit refusals.",
+      "debtChanges": [
+        "AURA U-N checkpoint c818346f identifies absent electrical/molar units in both the 58-entry inherited and 14-entry standard catalogues; no manually assembled consumer definitions count.",
+        "RS172 succeeded at attempt 001 after one pre-attempt refusal; F38 Numerics provenance is reconciled and all published packages remain immutable.",
+        "AURA code reuse rights remain not established. New source is original Math work; no public SPDX/license, AURA modification or sibling repository mutation is authorized.",
+        "RS173 only qualifies source-compiled Math tests. A new exact-version dw.quantities.standard package and independent PackageReference-only consumer must be qualified before local release.",
+        "RS173 first invocation was refused before attempt allocation: payload manually created a disposable TRX directory, which DWF forbids. The correction delegates directory creation to dotnet test; the same twelve-case qualification and mutation boundary are retained."
+      ],
+      "nextAction": "Prepare a fresh calendar-version dw.quantities.standard NuGet candidate using exact Quantities/Expression packages, qualify an isolated PackageReference consumer, then publish without overwrite to NUGET_LOCAL and independently reread the published archives.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/electrochemical-unit-profile-source-qualified.json",
+        "docs/distribution/electrochemical-unit-profile.md",
+        "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs",
+        "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs"
+      ],
+      "validations": [
+        {
+          "id": "planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M1",
+        "objective": "Extract the exact AURA core",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M1 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS173",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS173",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "fbbcc27cbc90d3df1e33cee83db4fe68833ab105",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "d90bdf957a08c25ea45b1a4a24e26832cf5c33cd3932031f9342a337185f16e3"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: add explicit Math electrochemical SI unit profile with exact dimensions",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

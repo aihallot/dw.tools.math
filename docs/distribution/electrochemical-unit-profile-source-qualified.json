@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "kind": "dw.tools.math.electrochemical-original-source-qualification",
+  "status": "rs173-math-electrochemical-six-unit-source-qualified-not-packaged",
+  "request_gate": "MATH-ELECTROCHEM-UNIT-PROFILE",
+  "consumer_need": "A2-W02-C01-U-N",
+  "source_package_id": "dw.quantities.standard",
+  "source_project_version_retained": "0.2.0-preview.1",
+  "profile_clr_type": "dw.quantities.standard.ElectrochemicalUnitProfile",
+  "profile_id": "math.si-electrochemical",
+  "profile_version": "2026-11-electrochemical-exact-v1",
+  "unit_count": 6,
+  "historical_catalogue_version": "0.2.0",
+  "historical_unit_count": 58,
+  "standard_catalogue_version": "2026-10-exact-v1",
+  "standard_unit_count": 14,
+  "package_candidate_created": false,
+  "package_published": false,
+  "independent_package_consumer_qualified": false,
+  "aura_code_reuse_rights_established": false,
+  "public_license_selected": false,
+  "tests": {
+    "selected": 12,
+    "passed": 12,
+    "failed": 0,
+    "definition_cases": 6,
+    "other_cases": 6,
+    "scope": "Math-owned source-compiled MSTest",
+    "filter": "FullyQualifiedName~ElectrochemicalUnitProfileTests"
+  },
+  "source_files": {
+    "src/projects/dw.quantities.standard/ElectrochemicalUnitProfile.cs": "c64f9b0f9595889190e4d383853ba981b61dd241bd7565673d28e7d31b203b6a",
+    "tests/projects/dw.quantities.tests/ElectrochemicalUnitProfileTests.cs": "1e4607f1ccecee51ea3f3b98b99e3cf37b220b5347d01870e196903b093c8880",
+    "docs/distribution/electrochemical-unit-profile.md": "651a5ad10dae6f564734319edf10051560fafa9fe684659355374072d3beb31d"
+  },
+  "sdk_version": "10.0.403",
+  "commands": [
+    {
+      "id": "locked-restore",
+      "exit_code": 0,
+      "elapsed_ms": 1406,
+      "command": "dotnet restore tests/projects/dw.quantities.tests/dw.quantities.tests.csproj --locked-mode -p:NuGetAudit=false",
+      "stdout_excerpt": "  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities.standard\\dw.quantities.standard.csproj (in 154 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.tools.math.ir\\dw.tools.math.ir.csproj (in 154 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities.expression\\dw.quantities.expression.csproj (in 155 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 154 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\tests\\projects\\dw.quantities.tests\\dw.quantities.tests.csproj (in 238 ms).\r\n"
+    },
+    {
+      "id": "targeted-mstest",
+      "exit_code": 0,
+      "elapsed_ms": 8606,
+      "command": "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --no-restore --filter FullyQualifiedName~ElectrochemicalUnitProfileTests --results-directory D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs173-electrochemical-targeted\\57b53c020fce4f5ab4178278852a19e9 --logger trx;LogFileName=electrochem.trx -p:NuGetAudit=false",
+      "stdout_excerpt": "  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities\\Release\\net10.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net10.0\\dw.tools.math.ir.dll\r\n  dw.quantities.expression -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.expression\\Release\\net10.0\\dw.quantities.expression.dll\r\n  dw.quantities.standard -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.standard\\Release\\net10.0\\dw.quantities.standard.dll\r\n  dw.quantities.tests -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll\r\nTest run for D:\\data.dev\\github\\ai%40hallot.net\\dw.tools.math\\build\\artifacts\\bin\\dw.quantities.tests\\Release\\net10.0\\dw.quantities.tests.dll (.NETCoreApp,Version=v10.0)\r\nA total of 1 test files matched the specified pattern.\r\nResults File: D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\rs173-electrochemical-targeted\\57b53c020fce4f5ab4178278852a19e9\\electrochem.trx\r\n\r\nPassed!  - Failed:     0, Passed:    12, Skipped:     0, Total:    12, Duration: 117 ms - dw.quantities.tests.dll (net10.0)\r\n"
+    },
+    {
+      "id": "sdk",
+      "exit_code": 0,
+      "elapsed_ms": 158,
+      "command": "dotnet --version",
+      "stdout_excerpt": "10.0.403\r\n"
+    }
+  ],
+  "next_action": "Qualify a new calendar-version dw.quantities.standard candidate using a fresh exact PackageReference-only consumer; private release and independent readback remain separate."
+}
