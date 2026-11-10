@@ -110,6 +110,9 @@ if (File.Exists(Evidence))
              "d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae" &&
          Text(c, "originalStandardArchiveSha256") ==
              "c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75" &&
+         c.GetProperty("originalSourcesSha256").EnumerateObject().Count() == 6 &&
+         Text(c, "loadedClrAssemblyIdentities").StartsWith(
+             "MATH-ELECTROCHEM-CLR|standard=", StringComparison.Ordinal) &&
          c.GetProperty("packagedFileInventory").GetArrayLength() >= 3 &&
          c.GetProperty("packagedFileInventory").GetArrayLength() <= 48 &&
          c.GetProperty("producerEffectiveSources").GetArrayLength() >= 1 &&

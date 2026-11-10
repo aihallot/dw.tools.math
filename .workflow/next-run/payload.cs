@@ -128,6 +128,10 @@ if (!complete)
          observed["published"]?.GetValue<bool>() == false &&
          observed["auraCodeReuseRightsEstablished"]?.GetValue<bool>() == false &&
          observed["commands"]?.AsArray().Count == 9 &&
+         observed["originalSourcesSha256"]?.AsObject().Count == 6 &&
+         observed["loadedClrAssemblyIdentities"]?.GetValue<string>()
+             .StartsWith("MATH-ELECTROCHEM-CLR|standard=",
+                 StringComparison.Ordinal) == true &&
          observed["packagedFileInventory"]?.AsArray().Count >= 3 &&
          observed["producerEffectiveSources"]?.AsArray().Count >= 1 &&
          observed["consumerEffectiveSources"]?.AsArray().Count >= 2,
