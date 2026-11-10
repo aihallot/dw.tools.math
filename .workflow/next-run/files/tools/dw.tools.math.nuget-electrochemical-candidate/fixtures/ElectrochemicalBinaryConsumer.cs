@@ -116,9 +116,10 @@ Probe("half-mole-per-litre-and-inverse", () =>
 });
 Probe("kilogram-to-mole-present-but-incompatible", () =>
 {
-    Need(InheritedStandardUnitCatalog.TryGetById("si.kilogram", out var k) &&
-         ElectrochemicalUnitProfile.TryGetById("si.mole", out var m),
-         "both units must exist, not be synthetically absent");
+    Need(InheritedStandardUnitCatalog.TryGetById("si.kilogram", out var k),
+         "inherited kilogram must exist, not be synthetically absent");
+    Need(ElectrochemicalUnitProfile.TryGetById("si.mole", out var m),
+         "profile mole must exist, not be synthetically absent");
     var kilogram = k ?? throw new InvalidOperationException("kilogram null");
     var mole = m ?? throw new InvalidOperationException("mole null");
     var refused = false;
