@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS176",
+  "title": "Publish the original qualified electrochemical Standard archive to NUGET_LOCAL",
+  "state": "prepared",
+  "commitMessage": "release: publish original electrochemical Standard archive to NUGET_LOCAL",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M1"
+  ],
+  "contribution": {
+    "summary": "Deliver the RS174 electrochemical Standard archive to the qualified private feed with the shared immutable publisher after attempt allocation.",
+    "value": "Expose the exact Math-owned Standard version requested for AURA A2-W02-C01-U-N. Bind the delivery to the original candidate, qualified publisher, both exact dependency archives and previous Standard archive. Record the observed local outcome in the DWF validation report.",
+    "debtChanges": [
+      "RS175 succeeded at attempt 001, first pass, with seven publisher controls in a disposable feed.",
+      "Use the existing release authorization and preserve the original candidate bytes. An exact interrupted delivery can be observed after matching intent without overwriting the archive.",
+      "M1 remains done. M3, all 541 native nodes, backlog 0.1.122 and historical NuGet packages are retained. There is no completion transition.",
+      "Independent readback of the three physically published packages and three loaded DLLs remains pending. AURA historical reuse rights remain unestablished."
+    ],
+    "nextAction": "After durable private publication, independently read the physically published Standard, Quantities and Expression archives and verify the three loaded DLL hashes for the AURA request.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 240
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tools/dw.tools.math.nuget-electrochemical-release/publication/dw.tools.math.nuget-electrochemical-publication.csproj",
+    "tools/dw.tools.math.nuget-electrochemical-release/publication/Program.cs",
+    "docs/distribution/electrochemical-local-publication.md"
+  ],
+  "validations": [
+    {
+      "id": "electrochemical-publication-inputs",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tools/dw.tools.math.nuget-electrochemical-release/publication/dw.tools.math.nuget-electrochemical-publication.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--inspect"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "electrochemical-publisher",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateElectrochemicalPublisher.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "immutable-electrochemical-local-publication",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tools/dw.tools.math.nuget-electrochemical-release/publication/dw.tools.math.nuget-electrochemical-publication.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--publish"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": [
+        "electrochemical-local-publication"
+      ]
+    }
+  ]
+}
