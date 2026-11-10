@@ -295,6 +295,10 @@ internal static class Program
              producerSources.All(x => !x.Contains("://", StringComparison.Ordinal)) &&
              consumerSources.All(x => !x.Contains("://", StringComparison.Ordinal)),
              "actual restore sources must be local and recorded");
+        var loadedClrIdentities = consumerTest.Output
+            .Split(['\\r', '\\n'], StringSplitOptions.RemoveEmptyEntries)
+            .Single(x => x.StartsWith("MATH-ELECTROCHEM-CLR|standard=",
+                StringComparison.Ordinal));
         var archiveEntries = Inventory(archive);
         Need(CheckPhysical(baseArchive, 14747, BaseArchiveSha) &&
              CheckPhysical(expressionArchive, 13951, ExpressionArchiveSha) &&
@@ -347,6 +351,7 @@ internal static class Program
             sourceFeedInventoryUnchanged = true,
             independentlyCompiledBinaryConsumer = true,
             consumerChecks = 12,
+            loadedClrAssemblyIdentities = loadedClrIdentities,
             packagedFileInventory = archiveEntries,
             packagedDllPath = "lib/net10.0/" + PackageId + ".dll",
             producerEffectiveSources = producerSources,

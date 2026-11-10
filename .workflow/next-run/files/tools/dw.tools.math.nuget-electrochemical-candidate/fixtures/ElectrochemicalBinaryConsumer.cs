@@ -148,5 +148,9 @@ Probe("electrical-dimension-and-transform-refusals", () =>
          volt.Dimension == nonLinearCounterexample.Dimension,
          "electrical dimension and transformation refusals are distinct");
 });
+Console.WriteLine("MATH-ELECTROCHEM-CLR|standard=" +
+    typeof(ElectrochemicalUnitProfile).Assembly.GetName().Version +
+    "|expression=" + typeof(ExpressionParser).Assembly.GetName().Version +
+    "|quantities=" + typeof(ExactRational).Assembly.GetName().Version);
 Need(count == 12, "twelve independently emitted binary check results required");
 Console.WriteLine("MATH-ELECTROCHEM-BINARY|PASS|12");
