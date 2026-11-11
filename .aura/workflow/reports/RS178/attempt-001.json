@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS178",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-11T09:29:56.2241155+00:00",
+  "completedAtUtc": "2026-11-11T09:29:56.8509381+00:00",
+  "durationMilliseconds": 626,
+  "projectNodes": [
+    "M1"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+    "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+    "docs/coordination/requests/README.md"
+  ],
+  "changedPaths": [
+    "docs/coordination/requests/README.md",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+    "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261111T083643Z-98bf9648aff803ee",
+      "run-next-20261111T091439Z-4ab6c665a6d89aa6"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261111T083643Z-98bf9648aff803ee",
+        "runId": "RS178",
+        "scope": "preselection-rs178",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs178/run-next-20261111T083643Z-98bf9648aff803ee"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261111T091439Z-4ab6c665a6d89aa6",
+        "runId": "RS178",
+        "scope": "preselection-rs178",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs178/run-next-20261111T091439Z-4ab6c665a6d89aa6"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS178/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-b82b351dd54e459c97dfca46950f4d06\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 476,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS178 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS177/attempt-001.json run=RS177 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-published-readback.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-published-readback.json pointer=/auraIntegrationVerified\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-published-readback.json pointer=/auraHistoricalReuseRightsEstablished\r\n[require.file-missing] VERIFIED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md path is absent\r\n[require.file-missing] VERIFIED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json path is absent\r\n[require.file-missing] VERIFIED path=docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs path is absent\r\n[files.replace-from-staged] CHANGED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md bytes=3455\r\n[files.replace-from-staged] CHANGED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json bytes=3829\r\n[files.replace-from-staged] CHANGED path=docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs bytes=2730\r\n[files.converge-from-staged] CHANGED path=docs/coordination/requests/README.md bytes=577\r\n[require.json-value-equals] VERIFIED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json pointer=/transmission\r\n[payload] OK operations=16 changed=4 no-change=0 verified=12 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS178/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS178 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1b851ef2108d14a12d4ba246f8fd14d888b11cf0e0dfc0c95be968d745ae876e",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS177/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS177 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ab74c74a6419697695a0801babd97634f35d225ae6cbbb7852f020d6a83ce0aa",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "pointer=/auraIntegrationVerified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "pointer=/auraHistoricalReuseRightsEstablished",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+        "Status": 1,
+        "Summary": "bytes=3455",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fb9757360ace8f4e0a28e1a2b02218effaab403574d375dd9b793b9717fc2cc6",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+        "Status": 1,
+        "Summary": "bytes=3829",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5c74e85a708f184fed3cb2742657c3bee01ae8b1154db5f2662531b2dcc2dbbd",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+        "Status": 1,
+        "Summary": "bytes=2730",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1ff7a7423fdddd55e9e39a9209bdd08514d1809731649de37f3a18f36a6c22ef",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "converge-from-staged",
+        "Path": "docs/coordination/requests/README.md",
+        "Status": 1,
+        "Summary": "bytes=577",
+        "Details": null,
+        "BeforeSha256": "898ebd7a2f9c6db844711d9e7c7b2770ae42feb8cf1b7e45f07160ce0a0af844",
+        "AfterSha256": "867f0c63b73236e50e26e2faec6b6651f7e8dd0b068bf6dad7ac0ff4073af60f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+        "Status": 0,
+        "Summary": "pointer=/transmission",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "aura-electrochemical-reception-draft",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261111T092922Z-4bf29d19749d359d",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "bcf9413fb90ab16a201bd9100347f352850ae6f5",
+  "invocationStartedAtUtc": "2026-11-11T09:29:22.5206693+00:00",
+  "invocationDurationMilliseconds": 34330,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS178",
+      "title": "Prepare the unsent AURA reception dossier for the published electrochemical unit profile",
+      "projectNodes": [
+        "M1"
+      ]
+    },
+    "declared": {
+      "summary": "Prepare a Math-owned, unsent AURA reception dossier for A2-W02-C01-U-N from the durable RS177 readback and exact local package identities.",
+      "value": "Record the three exact package/archive/DLL identities, six opt-in unit IDs, 58/14 catalogue preservation, AURA ownership boundaries, rollback expectations and the recipient-side independent verification recipe. The dossier remains draft with transmission=none.",
+      "debtChanges": [
+        "RS177 succeeded at attempt 001 after one pre-attempt workflow-refusal; firstPassSucceeded is false. The independent readback is acquired and must not be replayed.",
+        "Math has completed local publication and physical readback. AURA integration remains unverified and historical AURA reuse rights remain unestablished.",
+        "This run prepares but does not transmit an inter-agent request. It does not modify AURA, publish remotely, alter package bytes or reopen completed native product nodes.",
+        "RS178 first invocation refused pre-attempt because Files.ConvergeFromStaged received the 40-character Git blob SHA instead of the required 64-character content SHA-256. Corrected to the exact README content SHA-256; no attempt was allocated.",
+        "RS178 second invocation refused pre-attempt on target re-entry: Require.FileMissing rejected the exact installed MATH-XR-006 draft. Now accept only missing baseline or byte-identical staged targets; divergent contents still refuse. No allocated attempt."
+      ],
+      "nextAction": "After durable success, provide the MATH-XR-006 draft to the owner for explicit transmission to the AURA owning agent; await AURA-side independent reception evidence before claiming adoption.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+        "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+        "docs/coordination/requests/README.md",
+        "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs"
+      ],
+      "validations": [
+        {
+          "id": "aura-electrochemical-reception-draft",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M1",
+        "objective": "Extract the exact AURA core",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M1 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS178",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS178",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "bcf9413fb90ab16a201bd9100347f352850ae6f5",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "fd2c4d4c2ecf9788fc233c34eeda94f3a096e655d5c443542b387fdc2aed1750"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: prepare AURA electrochemical reception dossier from verified Math delivery",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

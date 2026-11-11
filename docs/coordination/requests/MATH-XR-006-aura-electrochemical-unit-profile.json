@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "MATH-XR-006-AURA-ELECTROCHEM",
+  "status": "draft",
+  "transmission": "none",
+  "recipient": "AURA owning agent",
+  "gate": "MATH-ELECTROCHEM-UNIT-PROFILE",
+  "consumer_need": "A2-W02-C01-U-N",
+  "math_result_commit": "1d0923c7baecd79948d49b82380d789ad8fe3c10",
+  "package_closure": [
+    {
+      "id": "dw.quantities.standard",
+      "version": "20260.20261110.1001",
+      "archive_sha256": "766e756e402ced1303a3b86d3faef39cfb1f40d00e34121288cc97b372968e6d",
+      "dll_sha256": "9020646c909cc1a5408c19f51919681a8e21d43024ec8530a2119b328e8dd17a",
+      "depends_on": [
+        "dw.quantities",
+        "dw.quantities.expression"
+      ]
+    },
+    {
+      "id": "dw.quantities.expression",
+      "version": "20260.20261102.1001",
+      "archive_sha256": "d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae",
+      "dll_sha256": "f19c71d1313388f8cf3f05661ef78aaac8687d5230ed5673207f8fc0c9ff03e1",
+      "depends_on": [
+        "dw.quantities"
+      ]
+    },
+    {
+      "id": "dw.quantities",
+      "version": "20260.20261102.1001",
+      "archive_sha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+      "dll_sha256": "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4",
+      "depends_on": []
+    }
+  ],
+  "availability": {
+    "mode": "local-only",
+    "feed_selector": "NUGET_LOCAL",
+    "observed_feed": "I:\\nuget.local",
+    "remote_publication": false
+  },
+  "profile": {
+    "clr_type": "dw.quantities.standard.ElectrochemicalUnitProfile",
+    "id": "math.si-electrochemical",
+    "version": "2026-11-electrochemical-exact-v1",
+    "unit_ids": [
+      "si.ampere",
+      "si.mole",
+      "si.mole-per-cubic-metre",
+      "si.ohm",
+      "si.volt",
+      "si.watt"
+    ],
+    "inherited_catalogue": {
+      "version": "0.2.0",
+      "unit_count": 58
+    },
+    "standard_catalogue": {
+      "version": "2026-10-exact-v1",
+      "unit_count": 14
+    }
+  },
+  "math_evidence": {
+    "source": ".aura/workflow/reports/RS173/attempt-001.json",
+    "candidate": "docs/distribution/electrochemical-nuget-candidate-qualified.json",
+    "publisher": ".aura/workflow/reports/RS175/attempt-001.json",
+    "publication": ".aura/workflow/reports/RS176/attempt-001.json",
+    "readback": "docs/distribution/electrochemical-published-readback.json",
+    "readback_run": ".aura/workflow/reports/RS177/attempt-001.json"
+  },
+  "boundaries": {
+    "aura_integration_verified": false,
+    "aura_historical_reuse_rights_established": false,
+    "public_release_authorized": false,
+    "math_must_not_modify_aura": true
+  },
+  "requested_actions": [
+    "Inspect the current AURA revision independently before edits.",
+    "Restore the exact three-package closure from the approved private feed into a fresh cache and verify archive and loaded-DLL SHA-256 values.",
+    "Verify the six opt-in electrochemical unit identifiers and the preserved 58/14 catalogue boundaries.",
+    "Adapt only AURA-owned package references/facades needed by A2-W02-C01-U-N; preserve AURA-owned command, localization, permission, worker, configuration and persisted-data contracts.",
+    "Run AURA-owned targeted and affected regression tests, record failures and limits, and keep rollback references until adoption is independently verified.",
+    "Return an AURA-owned durable receipt with reviewed revision, consumed hashes, commands/results, result commit if any and adoption state."
+  ],
+  "expected_response": {
+    "allowed_decisions": [
+      "accepted",
+      "needs_change",
+      "rejected"
+    ],
+    "required_fields": [
+      "reviewed_aura_revision",
+      "consumed_package_versions_hashes",
+      "commands_and_results",
+      "limits",
+      "data_api_impact",
+      "result_commit_if_any",
+      "receipt_link",
+      "a2_w02_c01_u_n_state"
+    ]
+  }
+}
