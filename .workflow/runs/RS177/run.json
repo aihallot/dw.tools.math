@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "RS177",
+  "title": "Independently read the three published electrochemical packages and their loaded DLLs",
+  "state": "prepared",
+  "commitMessage": "test: verify published electrochemical archives and three loaded DLLs",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M1"
+  ],
+  "contribution": {
+    "summary": "Qualify the physically published three-package closure for the AURA electrochemical unit-profile request using an independent, exact Standard PackageReference and a fresh locked restore.",
+    "value": "Trace each observed physical archive through the private NuGet cache to its loaded CLR assembly. Record the complete ZIP inventories, exact dependency graph, six opt-in IDs and the historical catalogue sizes in a Math-owned readback receipt.",
+    "debtChanges": [
+      "RS176 created the original Standard archive on NUGET_LOCAL at attempt 001, first pass. Its durable focused validation remains the publication authority.",
+      "Reuse RS173 source and RS174 binary behavior evidence. This run exercises the published bytes only and uses no candidate producer, publisher, source projects, previous cache or general test suite.",
+      "M1 and M3 remain done, with 541 native nodes and backlog 0.1.122 retained. No native completion or AURA adoption is declared.",
+      "Historical AURA reuse rights remain unestablished. Preserve the old Standard archive and both dependencies, with no remote registry or feed writes.",
+      "RS177 preselection run-next-20261111T065647Z-509daa167edd9deb refused workflow-json-traversal before compilation or allocation. The receipt now takes its report path from the typed RequirePriorSuccess result. The consumer JSON and its checks are unchanged."
+    ],
+    "nextAction": "After durable success, return the package identities and Math readback receipt to the owner for AURA-side independent reception of A2-W02-C01-U-N.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1500
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj",
+    "tests/consumers/electrochemical-published-readback/NuGet.Config",
+    "tests/consumers/electrochemical-published-readback/Program.cs",
+    "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+    "docs/distribution/electrochemical-published-readback.json"
+  ],
+  "validations": [
+    {
+      "id": "published-electrochemical-receipt",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+        "--",
+        "--check-receipt"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
