@@ -22,7 +22,7 @@ foreach (var path in new[] { Md, Json, Validator }) p.Require.FileMissing(path);
 p.Files.ReplaceFromStaged("staged/" + Md, Md);
 p.Files.ReplaceFromStaged("staged/" + Json, Json);
 p.Files.ReplaceFromStaged("staged/" + Validator, Validator);
-p.Files.ConvergeFromStaged("staged/" + Readme, Readme, "3dc6cc937be406f18c8a3153d308ef7aed665e4f");
+p.Files.ConvergeFromStaged("staged/" + Readme, Readme, "898ebd7a2f9c6db844711d9e7c7b2770ae42feb8cf1b7e45f07160ce0a0af844");
 p.Require.JsonValueEquals(Json, "/status", JsonValue.Create("draft"));
 p.Require.JsonValueEquals(Json, "/transmission", JsonValue.Create("none"));
 return p.Complete();
