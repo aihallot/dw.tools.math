@@ -16,7 +16,7 @@ const string ResultCommit = "8fbea2196c0f60e92da6608fd84d9b6356f75093";
 var p = PayloadContext.Create();
 var root = p.RepositoryRoot;
 p.Workflow.RequireCurrentRun("RS177", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS176", 1,
+var publication = p.Workflow.RequirePriorSuccess("RS176", 1,
     "release: publish original electrochemical Standard archive to NUGET_LOCAL", "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M1", "done");
 p.ProjectPlan.RequireNodeState("M3", "done");
@@ -78,7 +78,7 @@ if (!complete)
         ["schemaVersion"] = 1, ["status"] = Status,
         ["gate"] = "MATH-ELECTROCHEM-UNIT-PROFILE", ["consumerNeed"] = "A2-W02-C01-U-N",
         ["publicationRun"] = "RS176", ["publicationCommit"] = ResultCommit, ["publicationObservation"] = "created",
-        ["publicationReport"] = ".aura/workflow/reports/RS176/attempt-001.json",
+        ["publicationReport"] = publication.Path,
         ["candidateEvidence"] = Candidate, ["sourceEvidence"] = "docs/distribution/electrochemical-unit-profile-source-qualified.json",
         ["sdkVersion"] = sdk.Output.Trim(), ["readback"] = readback, ["commands"] = p.Json.Array(commands.ToArray()),
         ["olderStandardPreserved"] = true, ["auraIntegrationVerified"] = false,
