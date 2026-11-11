@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "id": "RS178",
+  "title": "Prepare the unsent AURA reception dossier for the published electrochemical unit profile",
+  "commitMessage": "docs: prepare AURA electrochemical reception dossier from verified Math delivery",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M1"
+  ],
+  "contribution": {
+    "summary": "Prepare a Math-owned, unsent AURA reception dossier for A2-W02-C01-U-N from the durable RS177 readback and exact local package identities.",
+    "value": "Record the three exact package/archive/DLL identities, six opt-in unit IDs, 58/14 catalogue preservation, AURA ownership boundaries, rollback expectations and the recipient-side independent verification recipe. The dossier remains draft with transmission=none.",
+    "debtChanges": [
+      "RS177 succeeded at attempt 001 after one pre-attempt workflow-refusal; firstPassSucceeded is false. The independent readback is acquired and must not be replayed.",
+      "Math has completed local publication and physical readback. AURA integration remains unverified and historical AURA reuse rights remain unestablished.",
+      "This run prepares but does not transmit an inter-agent request. It does not modify AURA, publish remotely, alter package bytes or reopen completed native product nodes."
+    ],
+    "nextAction": "After durable success, provide the MATH-XR-006 draft to the owner for explicit transmission to the AURA owning agent; await AURA-side independent reception evidence before claiming adoption.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+    "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+    "docs/coordination/requests/README.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+      "sourcePath": "files/docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md"
+    },
+    {
+      "path": "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+      "sourcePath": "files/docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json"
+    },
+    {
+      "path": "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+      "sourcePath": "files/docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs"
+    },
+    {
+      "path": "docs/coordination/requests/README.md",
+      "sourcePath": "files/docs/coordination/requests/README.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS177"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS177/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "test: verify published electrochemical archives and three loaded DLLs"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/status",
+      "expectedValue": "rs177-electrochemical-published-readback-verified"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/gate",
+      "expectedValue": "MATH-ELECTROCHEM-UNIT-PROFILE"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/consumerNeed",
+      "expectedValue": "A2-W02-C01-U-N"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/packages/0/version",
+      "expectedValue": "20260.20261110.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/packages/0/archiveSha256",
+      "expectedValue": "766e756e402ced1303a3b86d3faef39cfb1f40d00e34121288cc97b372968e6d"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/packages/0/loadedDllSha256",
+      "expectedValue": "9020646c909cc1a5408c19f51919681a8e21d43024ec8530a2119b328e8dd17a"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/profileId",
+      "expectedValue": "math.si-electrochemical"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/profileVersion",
+      "expectedValue": "2026-11-electrochemical-exact-v1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/inheritedUnits",
+      "expectedValue": 58
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/readback/standardUnits",
+      "expectedValue": 14
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/auraIntegrationVerified",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/auraHistoricalReuseRightsEstablished",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/electrochemical-published-readback.json",
+      "jsonPointer": "/remotePublication",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.122"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "aura-electrochemical-reception-draft",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
