@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "RS178",
+  "title": "Prepare the unsent AURA reception dossier for the published electrochemical unit profile",
+  "state": "prepared",
+  "commitMessage": "docs: prepare AURA electrochemical reception dossier from verified Math delivery",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M1"
+  ],
+  "contribution": {
+    "summary": "Prepare a Math-owned, unsent AURA reception dossier for A2-W02-C01-U-N from the durable RS177 readback and exact local package identities.",
+    "value": "Record the three exact package/archive/DLL identities, six opt-in unit IDs, 58/14 catalogue preservation, AURA ownership boundaries, rollback expectations and the recipient-side independent verification recipe. The dossier remains draft with transmission=none.",
+    "debtChanges": [
+      "RS177 succeeded at attempt 001 after one pre-attempt workflow-refusal; firstPassSucceeded is false. The independent readback is acquired and must not be replayed.",
+      "Math has completed local publication and physical readback. AURA integration remains unverified and historical AURA reuse rights remain unestablished.",
+      "This run prepares but does not transmit an inter-agent request. It does not modify AURA, publish remotely, alter package bytes or reopen completed native product nodes.",
+      "RS178 first invocation refused pre-attempt because Files.ConvergeFromStaged received the 40-character Git blob SHA instead of the required 64-character content SHA-256. Corrected to the exact README content SHA-256; no attempt was allocated.",
+      "RS178 second invocation refused pre-attempt on target re-entry: Require.FileMissing rejected the exact installed MATH-XR-006 draft. Now accept only missing baseline or byte-identical staged targets; divergent contents still refuse. No allocated attempt."
+    ],
+    "nextAction": "After durable success, provide the MATH-XR-006 draft to the owner for explicit transmission to the AURA owning agent; await AURA-side independent reception evidence before claiming adoption.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.md",
+    "docs/coordination/requests/MATH-XR-006-aura-electrochemical-unit-profile.json",
+    "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs",
+    "docs/coordination/requests/README.md"
+  ],
+  "validations": [
+    {
+      "id": "aura-electrochemical-reception-draft",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/coordination/requests/ValidateMathXr006AuraElectrochemical.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
