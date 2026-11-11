@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS177",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-11T07:28:45.419627+00:00",
+  "completedAtUtc": "2026-11-11T07:28:55.2015247+00:00",
+  "durationMilliseconds": 9781,
+  "projectNodes": [
+    "M1"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj",
+    "tests/consumers/electrochemical-published-readback/NuGet.Config",
+    "tests/consumers/electrochemical-published-readback/Program.cs",
+    "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+    "docs/distribution/electrochemical-published-readback.json"
+  ],
+  "changedPaths": [
+    "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+    "docs/distribution/electrochemical-published-readback.json",
+    "tests/consumers/electrochemical-published-readback/NuGet.Config",
+    "tests/consumers/electrochemical-published-readback/Program.cs",
+    "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261111T065647Z-509daa167edd9deb"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261111T065647Z-509daa167edd9deb",
+        "runId": "RS177",
+        "scope": "preselection-rs177",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs177/run-next-20261111T065647Z-509daa167edd9deb"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS177/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-2accada7679f4cc7bf93a125390d8053\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 9648,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS177 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS176/attempt-001.json run=RS176 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3 state=done\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-nuget-candidate-qualified.json pointer=/candidate/consumerChecks\r\n[require.file-missing] VERIFIED path=tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj path is absent\r\n[require.file-missing] VERIFIED path=tests/consumers/electrochemical-published-readback/NuGet.Config path is absent\r\n[require.file-missing] VERIFIED path=tests/consumers/electrochemical-published-readback/Program.cs path is absent\r\n[require.file-missing] VERIFIED path=docs/distribution/ValidateElectrochemicalPublishedReadback.cs path is absent\r\n[files.replace-from-staged] CHANGED path=tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj bytes=596\r\n[files.replace-from-staged] CHANGED path=tests/consumers/electrochemical-published-readback/NuGet.Config bytes=515\r\n[files.replace-from-staged] CHANGED path=tests/consumers/electrochemical-published-readback/Program.cs bytes=9249\r\n[files.replace-from-staged] CHANGED path=docs/distribution/ValidateElectrochemicalPublishedReadback.cs bytes=5181\r\n[require.file-missing] VERIFIED path=docs/distribution/electrochemical-published-readback.json path is absent\r\n[files.write-complete] CHANGED path=docs/distribution/electrochemical-published-readback.json bytes=15695\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-published-readback.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/distribution/electrochemical-published-readback.json pointer=/publicationCommit\r\n[payload] OK operations=20 changed=5 no-change=0 verified=15 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS177/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS177 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0aea617c96abb010a3cc3b4d615bc2d3b71d1567797a7c45caad197f199f9d31",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS176/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS176 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0f40b6bdafb0ed7dbc69385d679bbd37eebfb573b5436e6d29db90161a345a1b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-nuget-candidate-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/candidate/consumerChecks",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/electrochemical-published-readback/NuGet.Config",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "tests/consumers/electrochemical-published-readback/Program.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj",
+        "Status": 1,
+        "Summary": "bytes=596",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c81765885280c53b07681d020780e3c700b76787372c1751c6fdb2ce8cb8a718",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/electrochemical-published-readback/NuGet.Config",
+        "Status": 1,
+        "Summary": "bytes=515",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "92c7d9fe7b93d80ad751aa7d9b924d323fe37c638cf8effee96e9b71c0c95e02",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/consumers/electrochemical-published-readback/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=9249",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7da0aae81a0363b468fd9b3f7219bed3ede46143dbf9bc311cbcd92cea0e4d31",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+        "Status": 1,
+        "Summary": "bytes=5181",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6451b932895115cc3a2cdf28c82ce8e2e8fa2354d7433453d7e9229142ef12e4",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "file-missing",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "path is absent",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "write-complete",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 1,
+        "Summary": "bytes=15695",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fcdfdc9204927452384b5061ded541a7f9a4b78ca9904e674912108dce44d305",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/electrochemical-published-readback.json",
+        "Status": 0,
+        "Summary": "pointer=/publicationCommit",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "published-electrochemical-receipt",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261111T072801Z-70f71f1736f10679",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "0344349c4aca5182d4c197aab52fb900e99c7676",
+  "invocationStartedAtUtc": "2026-11-11T07:28:01.5628773+00:00",
+  "invocationDurationMilliseconds": 53638,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS177",
+      "title": "Independently read the three published electrochemical packages and their loaded DLLs",
+      "projectNodes": [
+        "M1"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify the physically published three-package closure for the AURA electrochemical unit-profile request using an independent, exact Standard PackageReference and a fresh locked restore.",
+      "value": "Trace each observed physical archive through the private NuGet cache to its loaded CLR assembly. Record the complete ZIP inventories, exact dependency graph, six opt-in IDs and the historical catalogue sizes in a Math-owned readback receipt.",
+      "debtChanges": [
+        "RS176 created the original Standard archive on NUGET_LOCAL at attempt 001, first pass. Its durable focused validation remains the publication authority.",
+        "Reuse RS173 source and RS174 binary behavior evidence. This run exercises the published bytes only and uses no candidate producer, publisher, source projects, previous cache or general test suite.",
+        "M1 and M3 remain done, with 541 native nodes and backlog 0.1.122 retained. No native completion or AURA adoption is declared.",
+        "Historical AURA reuse rights remain unestablished. Preserve the old Standard archive and both dependencies, with no remote registry or feed writes.",
+        "RS177 preselection run-next-20261111T065647Z-509daa167edd9deb refused workflow-json-traversal before compilation or allocation. The receipt now takes its report path from the typed RequirePriorSuccess result. The consumer JSON and its checks are unchanged."
+      ],
+      "nextAction": "After durable success, return the package identities and Math readback receipt to the owner for AURA-side independent reception of A2-W02-C01-U-N.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/ValidateElectrochemicalPublishedReadback.cs",
+        "docs/distribution/electrochemical-published-readback.json",
+        "tests/consumers/electrochemical-published-readback/NuGet.Config",
+        "tests/consumers/electrochemical-published-readback/Program.cs",
+        "tests/consumers/electrochemical-published-readback/electrochemical-published-readback.csproj"
+      ],
+      "validations": [
+        {
+          "id": "published-electrochemical-receipt",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M1",
+        "objective": "Extract the exact AURA core",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M1 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS177",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS177",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "0344349c4aca5182d4c197aab52fb900e99c7676",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f6d6a6f293f75bea0219ca748baf9cde8c25418e272db5fd5091d0a9cc37e6a3"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: verify published electrochemical archives and three loaded DLLs",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
