@@ -18,7 +18,22 @@ p.Require.JsonValueEquals("docs/distribution/electrochemical-published-readback.
     JsonValue.Create(false));
 p.Require.JsonValueEquals("docs/distribution/electrochemical-published-readback.json", "/auraHistoricalReuseRightsEstablished",
     JsonValue.Create(false));
-foreach (var path in new[] { Md, Json, Validator }) p.Require.FileMissing(path);
+// Accept only an absent baseline or the exact already-installed staged target.
+foreach (var path in new[] { Md, Json, Validator })
+{
+    var destination = System.IO.Path.Combine(p.RepositoryRoot, path);
+    if (System.IO.File.Exists(destination))
+    {
+        var staged = System.IO.Path.Combine(p.RunRoot, "staged", path);
+        if (!System.IO.File.ReadAllBytes(destination)
+            .SequenceEqual(System.IO.File.ReadAllBytes(staged)))
+            throw new System.IO.InvalidDataException("RS178 divergent existing target: " + path);
+    }
+    else
+    {
+        p.Require.FileMissing(path);
+    }
+}
 p.Files.ReplaceFromStaged("staged/" + Md, Md);
 p.Files.ReplaceFromStaged("staged/" + Json, Json);
 p.Files.ReplaceFromStaged("staged/" + Validator, Validator);
