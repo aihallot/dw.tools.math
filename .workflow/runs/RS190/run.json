@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "RS190",
+  "title": "Generate deterministic parameter-level Math Discovery skill reference from qualified manifest",
+  "state": "prepared",
+  "commitMessage": "feat: generate Math Discovery parameter and limits reference",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a deterministic parameter-level reference page for the four source-qualified Math Discovery capabilities, without widening their exposure.",
+    "value": "Introduce a standalone C# write/check renderer and generated selected-capabilities.md covering exact CLR binding, parameters, result, failure policy, limits, fingerprints and evidence. Reuse RS186\u2013RS189 qualified contracts without repeating their adversarial campaigns.",
+    "debtChanges": [
+      "RS189 succeeded attempt 001 first-pass, proving seven generated skill drift refusals.",
+      "RS190 is a bounded skill documentation expansion, not a source-free package consumer or completed M8-W01-C02.",
+      "Only four AgentCallable capabilities and runtime-only authorization are represented; no BrokerReady or AURA adoption."
+    ],
+    "nextAction": "After durable success, independently test generated reference drift, then establish source-free installed-package consumption before claiming Math Discovery delivery.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8SkillReference.cs",
+    ".agents/skills/dw-tools-math/references/selected-capabilities.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-reference-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillReference.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-skill-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
