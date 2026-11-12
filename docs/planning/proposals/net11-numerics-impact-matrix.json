@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "id": "MATH-NET11-NUMERICS-IMPACT",
+  "status": "research-proposal-not-migrated",
+  "asOf": "2026-11-12",
+  "ownerNeed": "Analyze extended .NET 11/C#15 numerics, migration and refactor opportunities within M8-W02",
+  "baseline": {
+    "repo": "aihallot/dw.tools.math",
+    "commit": "668136168bcb47ac2edbc07682753199396aed35",
+    "backlog": "0.1.123",
+    "scope": "M8-W02-C01",
+    "packages": 13,
+    "net10Preserved": true
+  },
+  "sources": [
+    {
+      "id": "MS-NET11-LIB",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/libraries",
+      "publisher": "Microsoft Learn",
+      "kind": "platform features"
+    },
+    {
+      "id": "MS-NET11-PERF",
+      "url": "https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/",
+      "publisher": ".NET Blog",
+      "kind": "performance evidence"
+    },
+    {
+      "id": "MS-NET11-GA",
+      "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/",
+      "publisher": ".NET Blog",
+      "kind": "GA and support"
+    },
+    {
+      "id": "MS-CS15",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15",
+      "publisher": "Microsoft Learn",
+      "kind": "language features"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "N11-01",
+      "feature": "BigInteger internal 64-bit limb rework and conversion correctness",
+      "ownerPackage": "dw.quantities",
+      "sourceFile": "src/projects/dw.quantities/ExactRational.cs",
+      "finding": "Observed use of BigInteger.GreatestCommonDivisor, Pow, DivRem and rational comparisons; assess net11 runtime wins without changing canonical values.",
+      "risk": "high",
+      "action": "Benchmark same source on .NET 10 vs 11, compare exact results, huge operands, cancellation/budget and Windows/Linux architecture.",
+      "migration": "runtime-first; avoid custom BigInteger replacements"
+    },
+    {
+      "id": "N11-02",
+      "feature": "IEEE 754 decimal floating-point Decimal32/Decimal64/Decimal128",
+      "ownerPackage": "dw.quantities",
+      "sourceFile": "src/projects/dw.quantities/ExactRational.cs",
+      "finding": "Candidate explicitly approximate decimal representation, NOT replacement for ExactRational or System.Decimal.",
+      "risk": "high",
+      "action": "Assess new typed scalar/value provenance and decimal binary conversion boundaries with exact reference oracles, rounding, NaN, signed zero and infinities.",
+      "migration": "separate opt-in contract and versioned serialization"
+    },
+    {
+      "id": "N11-03",
+      "feature": "Generic Complex<T>",
+      "ownerPackage": "dw.tools.math.numerics",
+      "sourceFile": "src/projects/dw.tools.math.numerics/",
+      "finding": "Potential reusable framework generic complex arithmetic; exact existing numerics source type and candidate signatures need inventory.",
+      "risk": "high",
+      "action": "Inventory actual complex use, T constraints, branch cut, precision and interoperability; compare existing provider and .NET 11 behavior.",
+      "migration": "adapter only if qualified; do not promise all T"
+    },
+    {
+      "id": "N11-04",
+      "feature": "Correctly rounded conversions / partial parsing / floating-point hex",
+      "ownerPackage": "dw.quantities.expression",
+      "sourceFile": "src/projects/dw.quantities.expression/",
+      "finding": "Potential parser/codecs simplification, but custom grammar is an intentional mathematical contract.",
+      "risk": "high",
+      "action": "Falsify round-trip, locale, partial consumption, overflow, hexadecimal and exact-vs-binary semantics with pinned corpus.",
+      "migration": "keep accepted grammar and explicit policy"
+    },
+    {
+      "id": "N11-05",
+      "feature": "SIMD cross-lane Zip/Unzip/Concat, FP16 and JIT vector optimizations",
+      "ownerPackage": "dw.tools.math.numerics",
+      "sourceFile": "src/projects/dw.tools.math.numerics/",
+      "finding": "Candidate implementation changes for finite matrix/vector kernels, only if actual hot paths and CPU support justify.",
+      "risk": "medium",
+      "action": "Benchmarks throughput/allocation on x64/Arm64 with scalar oracle and numerical error bounds, hardware feature fallback.",
+      "migration": "targeted kernels, no blanket intrinsic rewrite"
+    },
+    {
+      "id": "N11-06",
+      "feature": "Generic numeric random methods",
+      "ownerPackage": "dw.tools.math.statistics",
+      "sourceFile": "src/projects/dw.tools.math.statistics/",
+      "finding": "Candidate sampling utilities; deterministic seeded behavior and distribution guarantees may differ.",
+      "risk": "medium",
+      "action": "Assess exact RNG APIs, distributions, reproducibility and boundaries; keep reproducibility promises explicit.",
+      "migration": "opt-in separate sampling functions"
+    },
+    {
+      "id": "N11-07",
+      "feature": "Union types and closed hierarchies in C# 15",
+      "ownerPackage": "dw.tools.math.ir",
+      "sourceFile": "src/projects/dw.tools.math.ir/IrCanonicalJsonCodec.cs",
+      "finding": "Observed bounded polymorphic IR JSON. New language constructs may model exact/approximate/status cases but must not silently change format or discriminants.",
+      "risk": "high",
+      "action": "Test compiler exhaustiveness, source-generated JSON, AOT trimming, patterns, semantic hashes and previous IR wire fixtures.",
+      "migration": "compatibility-first; no automatic AST rewrite"
+    },
+    {
+      "id": "N11-08",
+      "feature": "Decimal, BigInteger and typed numeric JSON support",
+      "ownerPackage": "dw.tools.math.codecs",
+      "sourceFile": "src/projects/dw.tools.math.codecs/",
+      "finding": "New serializer converters may reduce custom code but canonical transport needs stronger invariants.",
+      "risk": "high",
+      "action": "Verify byte-identical canonical schema, invalid payload refusal, NaN representation, culture and AOT constraints.",
+      "migration": "adapters only behind versioned codec"
+    },
+    {
+      "id": "N11-09",
+      "feature": "Cross-framework baseline and behavior delta",
+      "ownerPackage": "dw.tools.math.scientific",
+      "sourceFile": "src/projects/dw.tools.math.scientific/",
+      "finding": "Representative scientific functions should be benchmarked and evaluated for numerical stability rather than migrated mechanically.",
+      "risk": "medium",
+      "action": "Differential net10/net11 tests, independently computed reference values, domain/precision budgets and source-free NuGet consumer.",
+      "migration": "evaluate before targeting"
+    }
+  ],
+  "gates": [
+    "Inventory all 13 package source APIs and tests before authoring replacements",
+    "Classify semantic compatibility and versioned public/wire contracts",
+    "Build with verified GA SDK on isolated net11 configuration; preserve exact net10 source baseline",
+    "Run independent exact/decimal/complex/SIMD/JSON correctness oracles and targeted performance measurements",
+    "No silent exact-to-decimal float conversion; report rounding, domains, NaN and invalid values",
+    "Qualify on supported OS/RID and emit observed matrix, not inferred support",
+    "No mutation of immutable packages or public publication absent owner decision"
+  ],
+  "crossWorkstream": "M8-W01 Discovery metadata must reflect admitted numeric types and precision policies, but M8-W01 remains scheduled before M8-W02 implementation.",
+  "limitations": [
+    "Candidate impact assessment, not a verified net11 migration",
+    "Some platform documentation pages have RC/preview wording; GA release announcement dated 2026-11-10 is the current release authority",
+    "Only ExactRational.cs and IrCanonicalJsonCodec.cs were directly inspected for this research seed; other module file paths are inventory targets, not source-verified findings"
+  ]
+}
