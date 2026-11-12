@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "id": "RS184",
+  "title": "Compile and qualify the four selected Math Discovery CLR signatures in an independent source-project consumer",
+  "commitMessage": "test: qualify four Math Discovery CLR bindings and bounded IR examples",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Independently compile the four Math Discovery CLR seed methods and execute bounded IR codec and structural-hash examples without broker or AURA integration.",
+    "value": "Add a standalone net10.0 consumer with exact static method reflection for the four opt-in candidate IDs. Verify exact rational JSON, canonical IR round-trip and passive label distinction. Reuse durable RS131 portable conformance; do not rerun the thirteen-fixture corpus or claim a generated skill.",
+    "debtChanges": [
+      "RS183 succeeded on attempt 001, first pass; its nine .NET 11 numeric modernization candidates remain independent research input for M8-W02.",
+      "M8-W01-C01 is admitted to canonical backlog 0.1.123 but all M8 native nodes remain not-ready. This probe creates evidence only, not a product completion transition.",
+      "RS131 already qualified the 13 pinned portable schema-2 fixtures in C#. This run verifies only actual current Math CLR signatures and bounded typed examples.",
+      "The compiled consumer uses Math source project references and is not an isolated NuGet package or generated agent skill; no BrokerReady, host permissions or AURA deployment are claimed."
+    ],
+    "nextAction": "After durable success, prepare bounded M8-W01 readiness and generated Discovery manifest/skill implementation using this source-compiled CLR seed evidence, with separate package-consumer qualification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+    "tests/consumers/m8-discovery-clr-seed/Program.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+      "sourcePath": "files/tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj"
+    },
+    {
+      "path": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+      "sourcePath": "files/tests/consumers/m8-discovery-clr-seed/Program.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS183"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS183/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "docs: qualify .NET 11 numeric evolution and Math refactor opportunities"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/releases/8/id",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/id",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+      "jsonPointer": "/total_cases",
+      "expectedValue": 13
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+      "jsonPointer": "/csharp_portable_envelope_conformant",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/proposals/net11-numerics-impact-matrix.json",
+      "jsonPointer": "/candidates/0/id",
+      "expectedValue": "N11-01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "discovery-clr-seed",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+        "-c",
+        "Release",
+        "--no-launch-profile"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
