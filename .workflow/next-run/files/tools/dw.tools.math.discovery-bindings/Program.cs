@@ -48,11 +48,12 @@ foreach (var selection in selections)
         "Selected return type drift: " + selection.CapabilityId);
     var method = selection.Owner.GetMethod(selection.Member,
         BindingFlags.Static | BindingFlags.Public, selection.ParameterTypes);
-    Require(method is not null && method.ReturnType == selection.ResultType,
-        "Missing qualified CLR overload: " + selection.CapabilityId);
+    if (method is null || method.ReturnType != selection.ResultType)
+        throw new InvalidOperationException("Missing qualified CLR overload: " + selection.CapabilityId);
     var declaredAssembly = metadata.GetProperty("assembly").GetString();
-    var actualAssembly = method.DeclaringType?.Assembly;
-    Require(actualAssembly is not null && actualAssembly.GetName().Name == declaredAssembly,
+    var actualAssembly = method.DeclaringType?.Assembly
+        ?? throw new InvalidOperationException("Selected declaring assembly is missing: " + selection.CapabilityId);
+    Require(actualAssembly.GetName().Name == declaredAssembly,
         "Selected assembly drift: " + selection.CapabilityId);
     var version = actualAssembly.GetName().Version?.ToString()
         ?? throw new InvalidOperationException("Assembly version unknown.");
