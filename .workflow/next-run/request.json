@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "id": "RS192",
+  "title": "Expose deterministic selected Math Discovery list and explain diagnostics with unselected-ID refusal",
+  "commitMessage": "feat: add deterministic Math Discovery list and explain inspection",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Provide Math-owned read-only --list and --explain commands over the qualified four-capability schema-2 discovery manifest.",
+    "value": "Stage one C# CLI for deterministic capability enumeration and detailed CLR, parameter, precision and authorization inspection. Self-test positive paths and four unknown/unsupported identifier refusals without any broker or package-installed consumer claim.",
+    "debtChanges": [
+      "RS191 succeeded attempt 001 first-pass, independently qualifying eight parameter-reference drift refusals.",
+      "RS192 adds read-only discovery inspection rather than another generated Markdown validator or changing any qualified manifests.",
+      "M8-W01-C02 remains not-ready; --list/--explain do not imply broker authority, public distribution or AURA adoption."
+    ],
+    "nextAction": "After RS192 success, add independent CLI refusal/byte contract checks or proceed to source-free installed-package consumer qualification based on exact published artifacts.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/DescribeM8Discovery.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/DescribeM8Discovery.cs",
+      "sourcePath": "files/docs/discovery/qualification/DescribeM8Discovery.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS191/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS191/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-inspection-self-test",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/DescribeM8Discovery.cs",
+        "--",
+        "--self-test"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-inspection-list",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/DescribeM8Discovery.cs",
+        "--",
+        "--list"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
