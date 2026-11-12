@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "RS180",
+  "title": "Observe the installed DWF typed native milestone authoring contract without mutating the accepted plan",
+  "commitMessage": "test: qualify installed DWF milestone authoring availability for Math M8",
+  "timeoutSeconds": 420,
+  "projectNodes": [
+    "M7"
+  ],
+  "contribution": {
+    "summary": "Independently inspect the DWF Payload SDK actually loaded by RS180 for typed milestone/work-package authoring and record an exact receipt before Math M8 admission.",
+    "value": "Distinguish current upstream DWF source capabilities from the installed 0.1.66 executor. Probe EnsureMilestoneSubtree, EnsureWorkPackageSubtree and the typed node specification by public CLR signatures. Preserve the completed 541-node M0-M7 plan, backlog and all historical packages.",
+    "debtChanges": [
+      "RS179 completed at attempt 001 with first-pass success. M8-M12 are owner-approved direction and proposed topology only, not admitted into the canonical DWF plan.",
+      "Math's current generated DWF Payload SDK reference does not document typed milestone/work-package creation; upstream DWF GitHub source now implements both methods.",
+      "RS180 does not assume that upstream source equals the installed executable. Absence of a method is reported as unavailable, not mislabeled as qualified.",
+      "The run adds a Math-owned evidence receipt only; no product completion, AURA operation, retroactive plan rebaseline or package mutation is authorized."
+    ],
+    "nextAction": "If the typed APIs are installed, prepare a separately bounded M8 admission with fully reconciled backlog and native plan; otherwise qualify a compatible DWF upgrade first.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 240
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/evidence/RS180-dwf-native-topology-capability.json"
+  ],
+  "stagedFiles": [],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS179"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS179/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "docs: qualify proposed M8-M12 Math roadmap and DWF topology gate"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/proposals/math-next-roadmap-m8-m12.json",
+      "jsonPointer": "/accepted_direction",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/proposals/math-next-roadmap-m8-m12.json",
+      "jsonPointer": "/new_milestones_not_yet_inserted",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.122"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/id",
+      "expectedValue": "M7"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/7/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
