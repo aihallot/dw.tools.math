@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.122",
+  "plan_version": "0.1.123",
   "product": "dw.tools.math",
-  "status": "done",
+  "status": "in_progress",
   "baseline": {
     "date": "2026-10-07",
     "repository": "aihallot/dw.tools.math",
@@ -226,6 +226,24 @@
         "docs/planning/evidence/M7-W02-work-package-qualified.json",
         "docs/planning/evidence/M7-internal-gate-qualified.json"
       ]
+    },
+    {
+      "id": "M8",
+      "version": "1.3.0-preview",
+      "title": "Foundation and Discovery",
+      "outcome": "Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer.",
+      "status": "planned",
+      "gate": "G-M8",
+      "required_chunks": [
+        "M8-W01-C01",
+        "M8-W01-C02",
+        "M8-W02-C01",
+        "M8-W02-C02"
+      ],
+      "depends_on": [
+        "M7"
+      ],
+      "evidence": []
     }
   ],
   "work_packages": [
@@ -555,6 +573,33 @@
         "docs/planning/evidence/M7-W02-C02-T2-qualified.json",
         "docs/planning/evidence/M7-W02-work-package-qualified.json"
       ]
+    },
+    {
+      "id": "M8-W01",
+      "release": "M8",
+      "title": "Independent Math Discovery",
+      "status": "planned",
+      "paths": [
+        "src/projects/dw.tools.math.discovery/",
+        "tests/projects/dw.tools.math.discovery.tests/",
+        "tools/dw.tools.math.skillgen/",
+        "docs/discovery/"
+      ],
+      "path_policy": "Exact files and commands are refined before readiness; no changes to prior immutable artifacts.",
+      "evidence": []
+    },
+    {
+      "id": "M8-W02",
+      "release": "M8",
+      "title": "Independent .NET 11 and C# 15 modernization",
+      "status": "planned",
+      "paths": [
+        "src/projects/",
+        "tests/projects/",
+        "docs/engineering/"
+      ],
+      "path_policy": "Exact files and commands are refined before readiness; no changes to prior immutable artifacts.",
+      "evidence": []
     }
   ],
   "chunks": [
@@ -1270,7 +1315,7 @@
         "M1-W01-C01-R2"
       ],
       "deliverables": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-      "acceptance": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+      "acceptance": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
       "boundary_acceptance": "Decide default(ExactRational) explicitly; bound inputs and intermediates without converting to double.",
       "test_suites": [
         "CONTRACT",
@@ -1320,7 +1365,7 @@
           "id": "M1-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
-          "test_case": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+          "test_case": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W01-C01-red.json",
@@ -1330,7 +1375,7 @@
             {
               "id": "M1-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
+              "description": "Write and execute a targeted independent test: 1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C01-red.json"
@@ -1417,7 +1462,7 @@
         "M1-W01-C02-R2"
       ],
       "deliverables": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
+      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
       "boundary_acceptance": "Reject NaN/infinity; qualify subnormals, signed zero, and precision bounds; display never changes the exact value.",
       "test_suites": [
         "CONTRACT",
@@ -1457,7 +1502,7 @@
           "id": "M1-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
-          "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
+          "test_case": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W01-C02-red.json",
@@ -1467,7 +1512,7 @@
             {
               "id": "M1-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode.",
+              "description": "Write and execute a targeted independent test: FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C02-red.json"
@@ -1553,8 +1598,8 @@
         "M1-W01-C03-R2"
       ],
       "deliverables": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-      "acceptance": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
-      "boundary_acceptance": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+      "acceptance": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+      "boundary_acceptance": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
       "test_suites": [
         "CONTRACT",
         "BOUNDARY",
@@ -1601,7 +1646,7 @@
           "id": "M1-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
-          "test_case": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+          "test_case": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W01-C03-red.json",
@@ -1611,7 +1656,7 @@
             {
               "id": "M1-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
+              "description": "Write and execute a targeted independent test: 3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C03-red.json"
@@ -1640,8 +1685,8 @@
         {
           "id": "M1-W01-C03-T2",
           "title": "Boundaries and integration",
-          "behavior": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
-          "test_case": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+          "behavior": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+          "test_case": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W01-C03-boundary-red.json",
@@ -1651,7 +1696,7 @@
             {
               "id": "M1-W01-C03-T2-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+              "description": "Write and execute a targeted independent test: Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C03-boundary-red.json"
@@ -1660,7 +1705,7 @@
             {
               "id": "M1-W01-C03-T2-G",
               "title": "GREEN",
-              "description": "Implement only: Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+              "description": "Implement only: Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W01-C03-boundary-qualified.json"
@@ -1990,7 +2035,7 @@
         "M1-W02-C02-R2"
       ],
       "deliverables": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
-      "acceptance": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+      "acceptance": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
       "boundary_acceptance": "Characterize 4096 characters, 256 tokens, depth 32, magnitude 256 digits, and power/root 16 limits; execute no C# and allow no free variable.",
       "test_suites": [
         "CONTRACT",
@@ -2049,7 +2094,7 @@
           "id": "M1-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
-          "test_case": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+          "test_case": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M1-W02-C02-source-red.json",
@@ -2059,7 +2104,7 @@
             {
               "id": "M1-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
+              "description": "Write and execute a targeted independent test: Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M1-W02-C02-source-red.json"
@@ -2690,7 +2735,7 @@
         "M2-W01-C02-R2"
       ],
       "deliverables": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
-      "acceptance": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
+      "acceptance": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
       "boundary_acceptance": "NaN, infinity, complex values, and intervals have declared policies; no implicit widening; size and immutability are bounded.",
       "test_suites": [
         "CONTRACT",
@@ -2748,7 +2793,7 @@
           "id": "M2-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
-          "test_case": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
+          "test_case": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M2-W01-C02-red.json",
@@ -2758,7 +2803,7 @@
             {
               "id": "M2-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text.",
+              "description": "Write and execute a targeted independent test: An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M2-W01-C02-red.json"
@@ -3139,7 +3184,7 @@
         "M2-W02-C02-R2"
       ],
       "deliverables": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
-      "acceptance": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
+      "acceptance": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
       "boundary_acceptance": "Bound cost/nodes, cancellation, and step provenance; validate shapes before provider execution; no distributed scheduler.",
       "test_suites": [
         "CONTRACT",
@@ -3188,7 +3233,7 @@
           "id": "M2-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
-          "test_case": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
+          "test_case": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M2-W02-C02-contract-red.json",
@@ -3198,7 +3243,7 @@
             {
               "id": "M2-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: 5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation.",
+              "description": "Write and execute a targeted independent test: 5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M2-W02-C02-contract-red.json"
@@ -3565,7 +3610,7 @@
       ],
       "deliverables": "Introduce dense forms and an explicitly admitted sparse strategy, precision policy, and provider conversion.",
       "acceptance": "Verify 2x2 addition and multiplication by hand; reject incompatible shapes and allocation beyond budget.",
-      "boundary_acceptance": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+      "boundary_acceptance": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
       "test_suites": [
         "CONTRACT",
         "BOUNDARY",
@@ -3660,8 +3705,8 @@
         {
           "id": "M3-W01-C02-T2",
           "title": "Boundaries and integration",
-          "behavior": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
-          "test_case": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+          "behavior": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
+          "test_case": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M3-W01-C02-boundary-red.json",
@@ -3671,7 +3716,7 @@
             {
               "id": "M3-W01-C02-T2-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+              "description": "Write and execute a targeted independent test: Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M3-W01-C02-boundary-red.json"
@@ -3680,7 +3725,7 @@
             {
               "id": "M3-W01-C02-T2-G",
               "title": "GREEN",
-              "description": "Implement only: Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+              "description": "Implement only: Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M3-W01-C02-boundaries-qualified.json"
@@ -4593,7 +4638,7 @@
         "M4-W01-C02-R2"
       ],
       "deliverables": "Translate the IR/provider subset and restore results with domains and conditions.",
-      "acceptance": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
+      "acceptance": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
       "boundary_acceptance": "An unrepresentable object returns unsupported, not opaque text accepted as mathematics; execute no code.",
       "test_suites": [
         "CONTRACT",
@@ -4608,7 +4653,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C02Tests"
       ],
-      "refinement": "RS055 T1 qualified exact provider-free typed cancellation (x\u00B2-c\u00B2)/(x-c) to restricted x\u002Bc with x!=c, 25 scientific tests and eight NuGet-only oracles. RS056 T2 adds the strictly checked external-result admission API: only a native canonical IrRestrictedExpression exactly equal to the fresh local T1 proof is admitted, while opaque foreign objects, provider \u0027provided\u0027 strings, missing/extra/wrong conditions, foreign identities and unsupported domains are typed refusals without invoking untrusted ToString. A compiled RED, 29 further GREEN tests, eight independent preview.2 consumer probes, locked IR/quantities regressions, three actual NuGet manifest/hash receipts and unchanged CAS isolation close C02. Angouri provider integration and general symbolic proof remain explicitly unqualified.",
+      "refinement": "RS055 T1 qualified exact provider-free typed cancellation (x²-c²)/(x-c) to restricted x+c with x!=c, 25 scientific tests and eight NuGet-only oracles. RS056 T2 adds the strictly checked external-result admission API: only a native canonical IrRestrictedExpression exactly equal to the fresh local T1 proof is admitted, while opaque foreign objects, provider 'provided' strings, missing/extra/wrong conditions, foreign identities and unsupported domains are typed refusals without invoking untrusted ToString. A compiled RED, 29 further GREEN tests, eight independent preview.2 consumer probes, locked IR/quantities regressions, three actual NuGet manifest/hash receipts and unchanged CAS isolation close C02. Angouri provider integration and general symbolic proof remain explicitly unqualified.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/packages.lock.json",
@@ -4655,7 +4700,7 @@
           "id": "M4-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Translate the IR/provider subset and restore results with domains and conditions.",
-          "test_case": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
+          "test_case": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M4-W01-C02-T1-contract-red.json",
@@ -4665,7 +4710,7 @@
             {
               "id": "M4-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: (x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded.",
+              "description": "Write and execute a targeted independent test: (x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M4-W01-C02-T1-contract-red.json"
@@ -4751,7 +4796,7 @@
         "M4-W01-C03-R2"
       ],
       "deliverables": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
-      "acceptance": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
+      "acceptance": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
       "boundary_acceptance": "Report unproved rules; reject contradictory assumptions; enforce node/time budgets and never invent success after interruption.",
       "test_suites": [
         "CONTRACT",
@@ -4766,7 +4811,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W01C03Tests"
       ],
-      "refinement": "RS057 T1 qualified four exact closed symbolic operations in preview.3: bounded binomial expand/factor, safe-by-refusal free-symbol substitution, and real sqrt(square(x)) -\u003E abs(x) without an independent sign proof. RS058 T2 adds a provider-neutral, bounded synchronous dispatcher over those same four known rules: input/output node and depth caps, combined work units, explicit cancellation and soft deadline refusal, and math-ir/1 structural source/proof provenance. One compiled RED and 26 independent GREEN tests, eight NuGet-only consumer oracles, IR/quantities regressions and actual preview.4 package SHA-256 receipts qualify the boundary. This does not prove hard preemption, arbitrary CAS behavior or general capture-avoiding substitution.",
+      "refinement": "RS057 T1 qualified four exact closed symbolic operations in preview.3: bounded binomial expand/factor, safe-by-refusal free-symbol substitution, and real sqrt(square(x)) -> abs(x) without an independent sign proof. RS058 T2 adds a provider-neutral, bounded synchronous dispatcher over those same four known rules: input/output node and depth caps, combined work units, explicit cancellation and soft deadline refusal, and math-ir/1 structural source/proof provenance. One compiled RED and 26 independent GREEN tests, eight NuGet-only consumer oracles, IR/quantities regressions and actual preview.4 package SHA-256 receipts qualify the boundary. This does not prove hard preemption, arbitrary CAS behavior or general capture-avoiding substitution.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/SymbolicExactTransformations.cs",
@@ -4809,7 +4854,7 @@
           "id": "M4-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
-          "test_case": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
+          "test_case": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M4-W01-C03-T1-contract-red.json",
@@ -4819,7 +4864,7 @@
             {
               "id": "M4-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain.",
+              "description": "Write and execute a targeted independent test: Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M4-W01-C03-T1-contract-red.json"
@@ -4905,7 +4950,7 @@
         "M4-W02-C01-R2"
       ],
       "deliverables": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
-      "acceptance": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+      "acceptance": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
       "boundary_acceptance": "Expose non-differentiable points and unsupported functions; keep numerical differentiation distinct.",
       "test_suites": [
         "CONTRACT",
@@ -4920,7 +4965,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C01Tests"
       ],
-      "refinement": "RS059 T1 introduced dw.tools.math.symbolics preview.5 exact real formal polynomial derivative up to degree eight, with d(x^3)/dx=3x^2, absent-symbol zero, and explicit unit/assumption/nonpolynomial refusals. RS060 T2 adds preview.6 exact rational pointwise derivative values and conservatively classified scientific boundaries: |x| and sqrt(x^2) are nondifferentiable at zero; sqrt(x) is outside its real domain for x\u003C0 and nondifferentiable at zero; the original quotient hole x=1 stays excluded. Generic radical/quotient differentiation, unit arithmetic and numerical finite differences remain unsupported. Controlled RED \u002B 37 GREEN, eight local NuGet-only oracles, and scoped symbolic/IR/quantity regressions close C01 without claiming W02/M4 completion.",
+      "refinement": "RS059 T1 introduced dw.tools.math.symbolics preview.5 exact real formal polynomial derivative up to degree eight, with d(x^3)/dx=3x^2, absent-symbol zero, and explicit unit/assumption/nonpolynomial refusals. RS060 T2 adds preview.6 exact rational pointwise derivative values and conservatively classified scientific boundaries: |x| and sqrt(x^2) are nondifferentiable at zero; sqrt(x) is outside its real domain for x<0 and nondifferentiable at zero; the original quotient hole x=1 stays excluded. Generic radical/quotient differentiation, unit arithmetic and numerical finite differences remain unsupported. Controlled RED + 37 GREEN, eight local NuGet-only oracles, and scoped symbolic/IR/quantity regressions close C01 without claiming W02/M4 completion.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/SymbolicExactDifferentiation.cs",
@@ -4963,7 +5008,7 @@
           "id": "M4-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
-          "test_case": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+          "test_case": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M4-W02-C01-T1-contract-red.json",
@@ -4973,7 +5018,7 @@
             {
               "id": "M4-W02-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
+              "description": "Write and execute a targeted independent test: d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M4-W02-C01-T1-contract-red.json"
@@ -5059,7 +5104,7 @@
         "M4-W02-C02-R2"
       ],
       "deliverables": "Adapt subset equations/inequalities with domains and conditional solutions.",
-      "acceptance": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+      "acceptance": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
       "boundary_acceptance": "Distinguish empty/unknown/incomplete; substitute into the original equation to remove spurious candidates; qualify multiplicity.",
       "test_suites": [
         "CONTRACT",
@@ -5117,7 +5162,7 @@
           "id": "M4-W02-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt subset equations/inequalities with domains and conditional solutions.",
-          "test_case": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+          "test_case": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M4-W02-C02-T1-contract-red.json",
@@ -5127,7 +5172,7 @@
             {
               "id": "M4-W02-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
+              "description": "Write and execute a targeted independent test: x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M4-W02-C02-T1-contract-red.json"
@@ -5228,7 +5273,7 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj -c Release --filter FullyQualifiedName~M4W02C03Tests"
       ],
-      "refinement": "RS063 T1 qualified degree-seven exact real polynomial primitives and finite limits with \u002BC. RS064 T2 adds conservative exact simple-pole and removable-original-hole classification over k/(x-c) and the existing (x^2-c^2)/(x-c) bridge. Exact results only on certified domain-safe intervals or finite point limits; unqualified logarithmic/improper convergence stays unknown and no numerical result is promoted. Compiled missing-API RED, 51 GREEN, eight isolated NuGet-only oracles, local product SHA-256 inspection and relevant regressions close C03 and M4-W02. M4 release gate remains independent.",
+      "refinement": "RS063 T1 qualified degree-seven exact real polynomial primitives and finite limits with +C. RS064 T2 adds conservative exact simple-pole and removable-original-hole classification over k/(x-c) and the existing (x^2-c^2)/(x-c) bridge. Exact results only on certified domain-safe intervals or finite point limits; unqualified logarithmic/improper convergence stays unknown and no numerical result is promoted. Compiled missing-API RED, 51 GREEN, eight isolated NuGet-only oracles, local product SHA-256 inspection and relevant regressions close C03 and M4-W02. M4 release gate remains independent.",
       "files": [
         "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
         "src/projects/dw.tools.math.symbolics/SymbolicExactPolynomialCalculus.cs",
@@ -5369,7 +5414,7 @@
         "M5-W01-C01-R2"
       ],
       "deliverables": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
-      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
+      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
       "boundary_acceptance": "Bound text escaping, depth, and allowed commands; execute no TeX; do not promise typographic fidelity.",
       "test_suites": [
         "CONTRACT",
@@ -5431,7 +5476,7 @@
           "id": "M5-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
-          "test_case": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
+          "test_case": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M5-W01-C01-T1-contract-red.json",
@@ -5441,7 +5486,7 @@
             {
               "id": "M5-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved.",
+              "description": "Write and execute a targeted independent test: Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M5-W01-C01-T1-contract-red.json"
@@ -5991,7 +6036,7 @@
         "M5-W02-C01-R2"
       ],
       "deliverables": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
-      "acceptance": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+      "acceptance": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
       "boundary_acceptance": "No AURA installed; outputs expose exactness, provider, assumptions, and losses; do not confuse derivative with solving the same object.",
       "test_suites": [
         "CONTRACT",
@@ -6055,7 +6100,7 @@
           "id": "M5-W02-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
-          "test_case": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+          "test_case": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M5-W02-C01-T1-contract-red.json",
@@ -6065,7 +6110,7 @@
             {
               "id": "M5-W02-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
+              "description": "Write and execute a targeted independent test: For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M5-W02-C01-T1-contract-red.json"
@@ -6447,7 +6492,7 @@
         "M6-W01-C01-R2"
       ],
       "deliverables": "Adapt linear/spline interpolation and least squares within the qualified scope.",
-      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
+      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
       "boundary_acceptance": "Define extrapolation, duplicate points, rank deficiency, and units; fitting is not causality or predictive guarantee.",
       "test_suites": [
         "CONTRACT",
@@ -6511,7 +6556,7 @@
           "id": "M6-W01-C01-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt linear/spline interpolation and least squares within the qualified scope.",
-          "test_case": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
+          "test_case": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M6-W01-C01-T1-contract-red.json",
@@ -6521,7 +6566,7 @@
             {
               "id": "M6-W01-C01-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2.",
+              "description": "Write and execute a targeted independent test: Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M6-W01-C01-T1-contract-red.json"
@@ -6607,7 +6652,7 @@
         "M6-W01-C02-R2"
       ],
       "deliverables": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
-      "acceptance": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
+      "acceptance": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
       "boundary_acceptance": "Expose missing bracket, discontinuity, non-convergence, and budget; requested precision is not presented as achieved guarantee.",
       "test_suites": [
         "CONTRACT",
@@ -6666,7 +6711,7 @@
           "id": "M6-W01-C02-T1",
           "title": "Contract and outcome",
           "behavior": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
-          "test_case": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
+          "test_case": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M6-W01-C02-T1-contract-red.json",
@@ -6676,7 +6721,7 @@
             {
               "id": "M6-W01-C02-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3.",
+              "description": "Write and execute a targeted independent test: x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M6-W01-C02-T1-contract-red.json"
@@ -6762,7 +6807,7 @@
         "M6-W01-C03-R2"
       ],
       "deliverables": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
-      "acceptance": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+      "acceptance": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
       "boundary_acceptance": "Stiffness, events, and PDE are outside the initial subset; distinguish local/global error and overflow.",
       "test_suites": [
         "CONTRACT",
@@ -6823,7 +6868,7 @@
           "id": "M6-W01-C03-T1",
           "title": "Contract and outcome",
           "behavior": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
-          "test_case": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+          "test_case": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
           "status": "done",
           "evidence": [
             "docs/planning/evidence/M6-W01-C03-T1-contract-red.json",
@@ -6833,7 +6878,7 @@
             {
               "id": "M6-W01-C03-T1-R",
               "title": "RED",
-              "description": "Write and execute a targeted independent test: d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
+              "description": "Write and execute a targeted independent test: d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance.",
               "status": "done",
               "evidence": [
                 "docs/planning/evidence/M6-W01-C03-T1-contract-red.json"
@@ -7305,7 +7350,7 @@
         "docs/planning/evidence/M6-W02-C03-T2-contract-red.json",
         "docs/planning/evidence/M6-W02-C03-T2-boundaries-qualified.json"
       ],
-      "readiness": "Original C03 T1\u002BT2 and split S01/S02/S03 contracts independently qualified within finite 2D/3D Cartesian, 1..32 direct discrete signal and numeric uniform-grid budgets, explicit caller-managed units and no scientific error theorem. M6-W02/C04/C05 and milestone M6 remain open.",
+      "readiness": "Original C03 T1+T2 and split S01/S02/S03 contracts independently qualified within finite 2D/3D Cartesian, 1..32 direct discrete signal and numeric uniform-grid budgets, explicit caller-managed units and no scientific error theorem. M6-W02/C04/C05 and milestone M6 remain open.",
       "tasks": [
         {
           "id": "M6-W02-C03-T1",
@@ -7626,7 +7671,7 @@
         "docs/planning/evidence/M6-W02-C03-S02-T2-contract-red.json",
         "docs/planning/evidence/M6-W02-C03-S02-T2-boundaries-qualified.json"
       ],
-      "readiness": "S02 T1\u002BT2 qualified within 1..32 finite binary64 direct samples and caller-accepted discrete/linear policies; alias-free reconstruction, FFT, circular convolution, error theorems and original C03/M6 gates remain unsupported.",
+      "readiness": "S02 T1+T2 qualified within 1..32 finite binary64 direct samples and caller-accepted discrete/linear policies; alias-free reconstruction, FFT, circular convolution, error theorems and original C03/M6 gates remain unsupported.",
       "tasks": [
         {
           "id": "M6-W02-C03-S02-T1",
@@ -9112,6 +9157,400 @@
           ]
         }
       ]
+    },
+    {
+      "id": "M8-W01-C01",
+      "tag": "discovery",
+      "release": "M8",
+      "work_package": "M8-W01",
+      "title": "Selected CLR bindings and portable protocol",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [],
+      "external_dependencies": [],
+      "requirements": [
+        "M8-W01-C01-R1",
+        "M8-W01-C01-R2"
+      ],
+      "deliverables": "Qualify pinned Discovery portable conformance and selected exact CLR signatures.",
+      "acceptance": "Verify 13 portable protocol fixtures and compiled exact selected Math operations.",
+      "boundary_acceptance": "Reject unselected helpers, premature BrokerReady and invented broker authorization.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/discovery/README.md"
+      ],
+      "proposed_commands": [],
+      "refinement": "Await typed native admission and independent task-level readiness refinement.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "tasks": [
+        {
+          "id": "M8-W01-C01-T1",
+          "title": "Pinned protocol and conformance",
+          "behavior": "Pinned protocol and conformance",
+          "test_case": "Pinned protocol and conformance has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W01-C01-T1-R",
+              "title": "RED",
+              "description": "RED: qualify pinned protocol and conformance with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C01-T1-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify pinned protocol and conformance with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify pinned protocol and conformance with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M8-W01-C01-T2",
+          "title": "Bound selected CLR operations",
+          "behavior": "Bound selected CLR operations",
+          "test_case": "Bound selected CLR operations has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W01-C01-T2-R",
+              "title": "RED",
+              "description": "RED: qualify bound selected clr operations with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C01-T2-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify bound selected clr operations with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C01-T2-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify bound selected clr operations with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M8-W01-C02",
+      "tag": "discovery",
+      "release": "M8",
+      "work_package": "M8-W01",
+      "title": "Deterministic skill generator and qualification",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M8-W01-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M8-W01-C02-R1",
+        "M8-W01-C02-R2"
+      ],
+      "deliverables": "Implement bounded deterministic, opt-in Math skill and manifest generation.",
+      "acceptance": "Verify byte-identical generation, exact CLR fingerprints, examples and drift refusal.",
+      "boundary_acceptance": "Skills are metadata for agents, not authority to execute host actions.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/discovery/README.md"
+      ],
+      "proposed_commands": [],
+      "refinement": "Await typed native admission and independent task-level readiness refinement.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "tasks": [
+        {
+          "id": "M8-W01-C02-T1",
+          "title": "Skill generator contract",
+          "behavior": "Skill generator contract",
+          "test_case": "Skill generator contract has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W01-C02-T1-R",
+              "title": "RED",
+              "description": "RED: qualify skill generator contract with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C02-T1-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify skill generator contract with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C02-T1-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify skill generator contract with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M8-W01-C02-T2",
+          "title": "Skill delivery and refusal boundary",
+          "behavior": "Skill delivery and refusal boundary",
+          "test_case": "Skill delivery and refusal boundary has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W01-C02-T2-R",
+              "title": "RED",
+              "description": "RED: qualify skill delivery and refusal boundary with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C02-T2-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify skill delivery and refusal boundary with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W01-C02-T2-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify skill delivery and refusal boundary with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M8-W02-C01",
+      "tag": "modernization",
+      "release": "M8",
+      "work_package": "M8-W02",
+      "title": "SDK baseline and modernization audit",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [],
+      "external_dependencies": [],
+      "requirements": [
+        "M8-W02-C01-R1",
+        "M8-W02-C01-R2"
+      ],
+      "deliverables": "Audit installed stable .NET 11 / C# 15 and evaluate current Math package compatibility.",
+      "acceptance": "Produce primary-source delta matrix for 13 existing packable libraries and tests.",
+      "boundary_acceptance": "No implicit conversion or use of unqualified SDK versions.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/engineering/dotnet-authoring-checklist.md"
+      ],
+      "proposed_commands": [],
+      "refinement": "Await typed native admission and independent task-level readiness refinement.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "tasks": [
+        {
+          "id": "M8-W02-C01-T1",
+          "title": "Official API and toolchain inventory",
+          "behavior": "Official API and toolchain inventory",
+          "test_case": "Official API and toolchain inventory has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W02-C01-T1-R",
+              "title": "RED",
+              "description": "RED: qualify official api and toolchain inventory with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C01-T1-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify official api and toolchain inventory with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify official api and toolchain inventory with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M8-W02-C01-T2",
+          "title": "Delta risk and package graph",
+          "behavior": "Delta risk and package graph",
+          "test_case": "Delta risk and package graph has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W02-C01-T2-R",
+              "title": "RED",
+              "description": "RED: qualify delta risk and package graph with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C01-T2-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify delta risk and package graph with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C01-T2-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify delta risk and package graph with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M8-W02-C02",
+      "tag": "modernization",
+      "release": "M8",
+      "work_package": "M8-W02",
+      "title": "Targeted migration and external consumer proof",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M8-W02-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M8-W02-C02-R1",
+        "M8-W02-C02-R2"
+      ],
+      "deliverables": "Migrate only measured targeted Math constructs and qualify a source-free consumer.",
+      "acceptance": "Prove new exact package graph, tests and external consumer behavior without old package overwrite.",
+      "boundary_acceptance": "No retrospective mutation of .NET 10 archives; no public release.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "docs/engineering/dotnet-authoring-checklist.md"
+      ],
+      "proposed_commands": [],
+      "refinement": "Await typed native admission and independent task-level readiness refinement.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "tasks": [
+        {
+          "id": "M8-W02-C02-T1",
+          "title": "Bounded modern language and framework changes",
+          "behavior": "Bounded modern language and framework changes",
+          "test_case": "Bounded modern language and framework changes has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W02-C02-T1-R",
+              "title": "RED",
+              "description": "RED: qualify bounded modern language and framework changes with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C02-T1-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify bounded modern language and framework changes with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C02-T1-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify bounded modern language and framework changes with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M8-W02-C02-T2",
+          "title": "Package and independent client verification",
+          "behavior": "Package and independent client verification",
+          "test_case": "Package and independent client verification has independent falsification and refusal evidence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M8-W02-C02-T2-R",
+              "title": "RED",
+              "description": "RED: qualify package and independent client verification with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C02-T2-G",
+              "title": "GREEN",
+              "description": "GREEN: qualify package and independent client verification with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M8-W02-C02-T2-V",
+              "title": "Verify and document",
+              "description": "Verification: qualify package and independent client verification with bounded evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
     }
   ],
   "requirements": [
@@ -9190,7 +9629,7 @@
       "title": "Transfer ExactRational and qualify normalization, arithmetic, fractions, mixed numbers, and canonical representation.",
       "release": "M1",
       "owner": "M1-W01-C01",
-      "acceptance": "1/3\u002B1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2."
+      "acceptance": "1/3+1/6=1/2; -1 1/2=-3/2; zero denominator is rejected; constructor canonicalizes 2/-4 to -1/2."
     },
     {
       "id": "M1-W01-C01-R2",
@@ -9204,7 +9643,7 @@
       "title": "Transfer ExactBinaryNumber and ExactDecimalFormatter; distinguish received binary64 value, exact decimal, and rounded display.",
       "release": "M1",
       "owner": "M1-W01-C02",
-      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round \u002B/-1.25 to one digit under the documented mode."
+      "acceptance": "FromDouble(0.5)=1/2; FromDouble(0.1)=3602879701896397/36028797018963968; round +/-1.25 to one digit under the documented mode."
     },
     {
       "id": "M1-W01-C02-R2",
@@ -9218,14 +9657,14 @@
       "title": "Transfer DimensionVector, Quantity, and UnitDefinition; retain information dimension and isolate affine semantics.",
       "release": "M1",
       "owner": "M1-W01-C03",
-      "acceptance": "3 m*4 m=12 m\u00B2; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K."
+      "acceptance": "3 m*4 m=12 m²; 10 km/30 min=50/9 m/s; 32 degF=0 degC; a 9 degF interval equals 5 K."
     },
     {
       "id": "M1-W01-C03-R2",
-      "title": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
+      "title": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser.",
       "release": "M1",
       "owner": "M1-W01-C03",
-      "acceptance": "Reject mass\u002Btime; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser."
+      "acceptance": "Reject mass+time; test exponent overflow and absolute/interval behavior at direct public APIs, not only through the parser."
     },
     {
       "id": "M1-W01-C04-R1",
@@ -9260,7 +9699,7 @@
       "title": "Transfer the existing parser, operators, fractions, powers, and exact roots; retain an injected resolver.",
       "release": "M1",
       "owner": "M1-W02-C02",
-      "acceptance": "Expression 1/3\u002B1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode."
+      "acceptance": "Expression 1/3+1/6 equals 1/2; an admitted exact root returns a rational; an irrational root remains rejected in this mode."
     },
     {
       "id": "M1-W02-C02-R2",
@@ -9330,7 +9769,7 @@
       "title": "Implement exact/approximate scalars, bound symbols, expressions, domains, assumptions, and relations for the admitted subset.",
       "release": "M2",
       "owner": "M2-W01-C02",
-      "acceptance": "An exact scalar is never silently widened to double; sqrt(x\u00B2) over reals keeps |x|; a bound symbol differs from identical free text."
+      "acceptance": "An exact scalar is never silently widened to double; sqrt(x²) over reals keeps |x|; a bound symbol differs from identical free text."
     },
     {
       "id": "M2-W01-C02-R2",
@@ -9372,7 +9811,7 @@
       "title": "Validate then execute a finite chain of compatible operations with identical semantics across direct and fluent APIs.",
       "release": "M2",
       "owner": "M2-W02-C02",
-      "acceptance": "5 km -\u003E m -\u003E divide by 2 min -\u003E km/h equals 150 km/h; mass\u002Btime addition is rejected before computation."
+      "acceptance": "5 km -> m -> divide by 2 min -> km/h equals 150 km/h; mass+time addition is rejected before computation."
     },
     {
       "id": "M2-W02-C02-R2",
@@ -9418,10 +9857,10 @@
     },
     {
       "id": "M3-W01-C02-R2",
-      "title": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time.",
+      "title": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time.",
       "release": "M3",
       "owner": "M3-W01-C02",
-      "acceptance": "Define copy versus view/alias; make rational -\u003E double conversion explicit and reported; provider remains optional at load time."
+      "acceptance": "Define copy versus view/alias; make rational -> double conversion explicit and reported; provider remains optional at load time."
     },
     {
       "id": "M3-W01-C03-R1",
@@ -9512,7 +9951,7 @@
       "title": "Translate the IR/provider subset and restore results with domains and conditions.",
       "release": "M4",
       "owner": "M4-W01-C02",
-      "acceptance": "(x\u00B2-1)/(x-1) -\u003E x\u002B1 preserves x!=1; evaluation at x=1 remains excluded."
+      "acceptance": "(x²-1)/(x-1) -> x+1 preserves x!=1; evaluation at x=1 remains excluded."
     },
     {
       "id": "M4-W01-C02-R2",
@@ -9526,7 +9965,7 @@
       "title": "Adapt expand/factor/simplify/substitute with provenance and operational guarantees.",
       "release": "M4",
       "owner": "M4-W01-C03",
-      "acceptance": "Expand (x\u002B1)\u00B2 to x\u00B2\u002B2x\u002B1; substitution under binding avoids capture; sqrt(x\u00B2) respects domain."
+      "acceptance": "Expand (x+1)² to x²+2x+1; substitution under binding avoids capture; sqrt(x²) respects domain."
     },
     {
       "id": "M4-W01-C03-R2",
@@ -9540,7 +9979,7 @@
       "title": "Model functions with explicit domain/codomain and symbolic differentiation; discover supported analytic operations.",
       "release": "M4",
       "owner": "M4-W02-C01",
-      "acceptance": "d(x\u00B3)/dx=3x\u00B2; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected."
+      "acceptance": "d(x³)/dx=3x²; derivative with respect to an absent symbol is 0; derived units are handled or explicitly rejected."
     },
     {
       "id": "M4-W02-C01-R2",
@@ -9554,7 +9993,7 @@
       "title": "Adapt subset equations/inequalities with domains and conditional solutions.",
       "release": "M4",
       "owner": "M4-W02-C02",
-      "acceptance": "x\u00B2=1 over R yields {-1,1}; x\u00B2=-1 over R yields empty, over C {-i,i} if the capability is admitted."
+      "acceptance": "x²=1 over R yields {-1,1}; x²=-1 over R yields empty, over C {-i,i} if the capability is admitted."
     },
     {
       "id": "M4-W02-C02-R2",
@@ -9582,7 +10021,7 @@
       "title": "Parse constrained mathematical text to IR and render the subset to LaTeX; keep the exact grammar as a distinct mode.",
       "release": "M5",
       "owner": "M5-W01-C01",
-      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -\u003E IR -\u003E LaTeX with meaning preserved."
+      "acceptance": "Rational, polynomial, function, unit, and exclusion round-trip text -> IR -> LaTeX with meaning preserved."
     },
     {
       "id": "M5-W01-C01-R2",
@@ -9638,7 +10077,7 @@
       "title": "Deliver a public console sample: parse, validate, compute numerically and symbolically, compose, render, and replay.",
       "release": "M5",
       "owner": "M5-W02-C01",
-      "acceptance": "For x\u00B2-1 with x!=1: derivative 2x, evaluation x=2 -\u003E 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected."
+      "acceptance": "For x²-1 with x!=1: derivative 2x, evaluation x=2 -> 3, admissible root -1, x=1 excluded; incompatible pipeline is rejected."
     },
     {
       "id": "M5-W02-C01-R2",
@@ -9680,7 +10119,7 @@
       "title": "Adapt linear/spline interpolation and least squares within the qualified scope.",
       "release": "M6",
       "owner": "M6-W01-C01",
-      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x\u002B1 with zero residual; interpolation at .5 equals 2."
+      "acceptance": "Points (0,1),(1,3),(2,5) yield y=2x+1 with zero residual; interpolation at .5 equals 2."
     },
     {
       "id": "M6-W01-C01-R2",
@@ -9694,7 +10133,7 @@
       "title": "Adapt bounded univariate solve and quadrature with intervals, tolerances, and diagnostics.",
       "release": "M6",
       "owner": "M6-W01-C02",
-      "acceptance": "x\u00B2-2 on [1,2] yields a root with admitted residual/error; integral x\u00B2 on [0,1] approximates 1/3."
+      "acceptance": "x²-2 on [1,2] yields a root with admitted residual/error; integral x² on [0,1] approximates 1/3."
     },
     {
       "id": "M6-W01-C02-R2",
@@ -9708,7 +10147,7 @@
       "title": "Qualify numerical differentiation and a small ODE solver through a provider, with step policy.",
       "release": "M6",
       "owner": "M6-W01-C03",
-      "acceptance": "d(x\u00B2) at x=2 approximates 4; y\u0027=y,y(0)=1 at t=1 agrees with e within validated tolerance."
+      "acceptance": "d(x²) at x=2 approximates 4; y'=y,y(0)=1 at t=1 agrees with e within validated tolerance."
     },
     {
       "id": "M6-W01-C03-R2",
@@ -9856,6 +10295,62 @@
       "release": "M7",
       "owner": "M7-W02-C02",
       "acceptance": "Completed spikes do not become advertised functions; decide new scope before new packages or major evolution."
+    },
+    {
+      "id": "M8-W01-C01-R1",
+      "title": "Verify 13 portable protocol fixtures and compiled exact selected Math operations.",
+      "release": "M8",
+      "owner": "M8-W01-C01",
+      "acceptance": "Verify 13 portable protocol fixtures and compiled exact selected Math operations."
+    },
+    {
+      "id": "M8-W01-C01-R2",
+      "title": "Reject unselected helpers, premature BrokerReady and invented broker authorization.",
+      "release": "M8",
+      "owner": "M8-W01-C01",
+      "acceptance": "Reject unselected helpers, premature BrokerReady and invented broker authorization."
+    },
+    {
+      "id": "M8-W01-C02-R1",
+      "title": "Verify byte-identical generation, exact CLR fingerprints, examples and drift refusal.",
+      "release": "M8",
+      "owner": "M8-W01-C02",
+      "acceptance": "Verify byte-identical generation, exact CLR fingerprints, examples and drift refusal."
+    },
+    {
+      "id": "M8-W01-C02-R2",
+      "title": "Skills are metadata for agents, not authority to execute host actions.",
+      "release": "M8",
+      "owner": "M8-W01-C02",
+      "acceptance": "Skills are metadata for agents, not authority to execute host actions."
+    },
+    {
+      "id": "M8-W02-C01-R1",
+      "title": "Produce primary-source delta matrix for 13 existing packable libraries and tests.",
+      "release": "M8",
+      "owner": "M8-W02-C01",
+      "acceptance": "Produce primary-source delta matrix for 13 existing packable libraries and tests."
+    },
+    {
+      "id": "M8-W02-C01-R2",
+      "title": "No implicit conversion or use of unqualified SDK versions.",
+      "release": "M8",
+      "owner": "M8-W02-C01",
+      "acceptance": "No implicit conversion or use of unqualified SDK versions."
+    },
+    {
+      "id": "M8-W02-C02-R1",
+      "title": "Prove new exact package graph, tests and external consumer behavior without old package overwrite.",
+      "release": "M8",
+      "owner": "M8-W02-C02",
+      "acceptance": "Prove new exact package graph, tests and external consumer behavior without old package overwrite."
+    },
+    {
+      "id": "M8-W02-C02-R2",
+      "title": "No retrospective mutation of .NET 10 archives; no public release.",
+      "release": "M8",
+      "owner": "M8-W02-C02",
+      "acceptance": "No retrospective mutation of .NET 10 archives; no public release."
     }
   ],
   "external_dependencies": [

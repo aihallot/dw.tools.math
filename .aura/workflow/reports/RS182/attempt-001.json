@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS182",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-12T12:24:12.6013396+00:00",
+  "completedAtUtc": "2026-11-12T12:24:28.9612527+00:00",
+  "durationMilliseconds": 16359,
+  "projectNodes": [
+    "M7"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/README.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/coverage.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/README.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M8.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 3,
+    "preparationFailureCount": 3,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261112T110126Z-555816f18f32f394",
+      "run-next-20261112T111550Z-1a3007736a2ceda6",
+      "run-next-20261112T121258Z-97cd1ae59345bd21"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261112T110126Z-555816f18f32f394",
+        "runId": "RS182",
+        "scope": "preselection-rs182",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs182/run-next-20261112T110126Z-555816f18f32f394"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261112T111550Z-1a3007736a2ceda6",
+        "runId": "RS182",
+        "scope": "preselection-rs182",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs182/run-next-20261112T111550Z-1a3007736a2ceda6"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261112T121258Z-97cd1ae59345bd21",
+        "runId": "RS182",
+        "scope": "preselection-rs182",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs182/run-next-20261112T121258Z-97cd1ae59345bd21"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS182/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-88c36fda66a54217a0942fadea5eee08\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1800000,
+      "DurationMilliseconds": 16113,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS182 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS181/attempt-001.json run=RS181 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[require.json-value-equals] VERIFIED path=docs/planning/proposals/m8-admission-contract.json pointer=/admission/expectedTotalNativeNodes\r\n[require.json-value-equals] VERIFIED path=docs/planning/evidence/RS180-dwf-native-topology-capability.json pointer=/supportedForNewMathMilestones\r\n[files.replace-from-staged] CHANGED path=docs/planning/backlog.json bytes=527567\r\n[project-plan.ensure-milestone-subtree] CHANGED path=.aura/workflow/plan/project.json milestone=M8 nodes=39\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11162\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\nplanning valid: 0.1.123 | 62 chunks | 804ceda0c3c6e5d85f8d9c22c51f797549396822dfb35ab287cc8be05b6cc18b | mode --write\r\n\r\n[require.json-value-equals] VERIFIED path=docs/planning/dwf-map.json pointer=/plan_version\r\n[payload] OK operations=11 changed=3 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS182/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS182 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d0870c293571ed7ee92536caf21428a9dd55ccd735add3a7e6d6149274ddf441",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS181/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS181 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b71c6def1389931eedeeed3c8c9798a2d44164d88b0d9193f19aa35c5f888a9c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/proposals/m8-admission-contract.json",
+        "Status": 0,
+        "Summary": "pointer=/admission/expectedTotalNativeNodes",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/evidence/RS180-dwf-native-topology-capability.json",
+        "Status": 0,
+        "Summary": "pointer=/supportedForNewMathMilestones",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "bytes=527567",
+        "Details": null,
+        "BeforeSha256": "87cf811ad6b2a2dc533e9f81aa110e16bbeee6d1dea6b7b56b2c0cf8d67f7d96",
+        "AfterSha256": "804ceda0c3c6e5d85f8d9c22c51f797549396822dfb35ab287cc8be05b6cc18b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "ensure-milestone-subtree",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "milestone=M8 nodes=39",
+        "Details": null,
+        "BeforeSha256": "c28fc9a86b1ff97e0ba2b4ee0f6149cb5a610b934cc38fe7f3c175ac6b82ab0f",
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11162",
+        "Details": null,
+        "BeforeSha256": "1d5102b5e3775eda4cfeb148d526a4457eb7c792f3b6f3e0543bc73d5c8ea9a6",
+        "AfterSha256": "758cc1c167cb97046cbc6430cc287cc13751d4df717dc06e106452e4c38fad43",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/dwf-map.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-canonical-planning",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-topology",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261112T122212Z-6e97722201960da9",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "b63a5ea77d45b901360d22c6a34bcd97d950883b",
+  "invocationStartedAtUtc": "2026-11-12T12:22:12.1178636+00:00",
+  "invocationDurationMilliseconds": 136843,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS182",
+      "title": "Atomically admit the M8 Foundation and Discovery roadmap in canonical Math and native DWF authorities",
+      "projectNodes": [
+        "M7"
+      ]
+    },
+    "declared": {
+      "summary": "Admit the owner-approved M8 Math Discovery and modernization scope as a complete typed native DWF milestone and matching canonical backlog projection.",
+      "value": "Append 39 initially not-ready native nodes under a new M8 milestone, preserve all 541 completed historical nodes, reconcile the canonical backlog to 0.1.123, regenerate its deterministic C# planning projections and extend native plan validation. No Math skill or .NET 11 migration is implemented by this admission.",
+      "debtChanges": [
+        "RS181 succeeded at attempt 001, first-pass. Its bounded 39-node M8 admission contract is the accepted structural target for this run.",
+        "RS180 independently observed typed milestone/work-package authoring in the installed DWF 0.1.66. Use EnsureMilestoneSubtree rather than editing workflow authority JSON.",
+        "The historical M3-W03 draft remains unmerged; its intended Discovery scope is represented by M8-W01. All M0-M7 541 nodes remain done.",
+        "Both M8 work packages are planned, with four phases, eight tasks and twenty-four subtasks not-ready. No achievements or readiness claims arise from topology admission.",
+        "Rebuild documentary projections only through existing C# ValidatePlan generator; preserve immutable NuGet packages and no sibling repository mutations.",
+        "RS182 preselection run-next-20261112T110126Z-555816f18f32f394 refused during planning generation: proposed_files contained trailing-slash directory paths. Replaced all four with existing canonical file anchors; no attempt or source mutation occurred.",
+        "RS182 second preselection run-next-20261112T111550Z-1a3007736a2ceda6 refused validation:m8-native-topology (CS1026, malformed historical-state predicate). Replaced it with explicit bounded M0-M7 iteration, including milestone IDs; no attempt allocated.",
+        "RS182 third preselection run-next-20261112T121258Z-97cd1ae59345bd21 found Unsafe path docs/discovery/ again: prior validator repair had used a stale base tree, reverting four staged backlog anchors. Rebuilt from current HEAD tree; verified both repairs together. No attempt allocated."
+      ],
+      "nextAction": "After durable M8 admission, reconcile its exact native and product state, then prepare the first independent M8-W01 Discovery readiness/qualification run.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/README.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M8.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-canonical-planning",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-topology",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M7",
+        "objective": "Advanced extensions and scope decisions",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "done",
+        "completionCondition": "Complete every required product chunk for M7 in docs/planning/backlog.json and satisfy its accepted release gate."
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS182",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS182",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "b63a5ea77d45b901360d22c6a34bcd97d950883b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "75aa6d8b8158a0fd7db1f9f71df908c7d6229560151e0e616d55c438ce9b2160"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: admit bounded M8 Foundation and Discovery scope into native Math roadmap",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

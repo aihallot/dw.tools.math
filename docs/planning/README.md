@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.122. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.123. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -16,6 +16,7 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 | [M5](versions/M5.md) | 1.0.0 | Qualify the first coherent numerical/symbolic platform usable without AURA. | done |
 | [M6](versions/M6.md) | 1.1.0 | Extend useful families through qualified contracts and providers without absorbing decision domains. | done |
 | [M7](versions/M7.md) | 1.2.0-candidate | Qualify advanced needs and deliver only those admitted by ADR; make deferrals explicit. | done |
+| [M8](versions/M8.md) | 1.3.0-preview | Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer. | planned |
 
 M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.
 
@@ -24,7 +25,7 @@ M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical
 - [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)
 - [Resource policy](resource-cost-policy.md)
 
-Scope: 8 releases, 17 work packages, 58 chunks, 116 tasks, 348 subtasks, 106 requirements.
+Scope: 9 releases, 19 work packages, 62 chunks, 124 tasks, 372 subtasks, 114 requirements.
 
 Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.
 
