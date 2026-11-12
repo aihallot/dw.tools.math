@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "id": "MATH-NEXT-M8-M12",
+  "status": "owner-approved-direction-proposed-topology",
+  "decision_date": "2026-11-12",
+  "accepted_direction": true,
+  "canonical_backlog_unchanged": true,
+  "canonical_backlog_version": "0.1.122",
+  "previous_accepted_milestones": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7"
+  ],
+  "new_milestones_not_yet_inserted": true,
+  "scope": "Independent Math roadmap, not contingent on AURA adoption",
+  "order": [
+    "M8",
+    "M9",
+    "M10",
+    "M11",
+    "M12"
+  ],
+  "milestones": [
+    {
+      "id": "M8",
+      "title": "Foundation and Discovery",
+      "priority": 1,
+      "work_streams": [
+        {
+          "id": "M8-W01",
+          "title": "Math Discovery",
+          "scope": "Reconcile pre-existing M3-W03 draft; qualify opt-in CLR bindings, schema-2 conformance and deterministic generated skill",
+          "acceptance": [
+            "Pinned 13-case portable corpus is independently verified",
+            "Selected CLR signatures and examples compile from current assemblies",
+            "Only opted-in AgentCallable metadata is emitted; no BrokerReady or broker authorization claim",
+            "Generator output is byte-stable and drift is rejected"
+          ]
+        },
+        {
+          "id": "M8-W02",
+          "title": ".NET 11 and C# 15 modernization",
+          "scope": "Audit SDK and API changes; qualify net11 consumer and safe targeted migrations of existing 13 libraries",
+          "acceptance": [
+            "Verify installed stable SDK and Microsoft primary-source specifications on execution day",
+            "Record package graph, target framework, language and analyzer changes",
+            "Targeted build/test and source-free local consumer receipts before shipping net11 packages",
+            "Do not mutate or overwrite historical immutable NuGet packages"
+          ]
+        }
+      ],
+      "exit_gate": "Qualified Discovery seed and independent net11/C#15 compatibility decision; no implicit cross-repository adoption"
+    },
+    {
+      "id": "M9",
+      "title": "Scientific Quantities",
+      "priority": 2,
+      "work_streams": [
+        {
+          "id": "M9-W01",
+          "title": "Versioned scientific constants",
+          "scope": "Canonical source/licensing audit; exact definitions versus measured uncertain values; provenance and revisions",
+          "acceptance": [
+            "Every constant has a traceable primary source and version",
+            "Uncertainty and dimensions are typed, never silently exactified"
+          ]
+        },
+        {
+          "id": "M9-W02",
+          "title": "Discipline-specific opt-in unit profiles",
+          "scope": "Electromagnetism, thermodynamics, mechanics, chemistry and photometry under explicit conflict and alias policy",
+          "acceptance": [
+            "Units have exact dimension/scale/offset identity where justified",
+            "No implicit alias or historical catalogue changes"
+          ]
+        }
+      ],
+      "exit_gate": "Independent package and source-free consumer validation; preserved old catalogues"
+    },
+    {
+      "id": "M10",
+      "title": "Advanced Numerics",
+      "priority": 3,
+      "work_streams": [
+        {
+          "id": "M10-W01",
+          "title": "Precision and interval contracts",
+          "scope": "Arbitrary precision policy, enclosure arithmetic and uncertainty propagation",
+          "acceptance": [
+            "Bounded precision, allocation and cancellation",
+            "Independent exact/interval oracles; rounding direction and invalid domains explicit"
+          ]
+        },
+        {
+          "id": "M10-W02",
+          "title": "Tensor and numerical algorithm candidates",
+          "scope": "Finite typed tensor shapes and targeted algorithms selected by evidence, not an unbounded engine",
+          "acceptance": [
+            "Shape/budget refusals, numerical stability and independent consumer qualification",
+            "Explicit exact-to-approximate policy"
+          ]
+        }
+      ],
+      "exit_gate": "Per-family qualified bounded algorithms"
+    },
+    {
+      "id": "M11",
+      "title": "Computation and Interoperability",
+      "priority": 4,
+      "work_streams": [
+        {
+          "id": "M11-W01",
+          "title": "Bounded local computation DAG",
+          "scope": "Acyclic typed DAG, shared subexpressions, deterministic replay and partial result statuses",
+          "acceptance": [
+            "Cycle and budget refusal; reproducible node provenance",
+            "No distributed scheduler, credentials or AURA resource policy"
+          ]
+        },
+        {
+          "id": "M11-W02",
+          "title": "Formal and exchange boundaries",
+          "scope": "Qualified bounded formal exchange and canonical codecs, no general theorem prover",
+          "acceptance": [
+            "Reject unknown schema/domain variants; round-trip known subset",
+            "No equivalence claim from structural hashes alone"
+          ]
+        }
+      ],
+      "exit_gate": "Selected local computation and formal/exchange contracts verified"
+    },
+    {
+      "id": "M12",
+      "title": "Qualification and Distribution",
+      "priority": 5,
+      "work_streams": [
+        {
+          "id": "M12-W01",
+          "title": "OS/RID portability and reproducibility",
+          "scope": "Windows/Linux/macOS test matrix as available, architecture limits and deterministic local NuGet closures",
+          "acceptance": [
+            "Independent OS evidence with precise SDK/RID",
+            "Immutable package checksums and unsupported platforms explicitly declared"
+          ]
+        },
+        {
+          "id": "M12-W02",
+          "title": "Capability documentation and gated delivery",
+          "scope": "Per-capability contracts, generated docs, compatibility and release/license decisions",
+          "acceptance": [
+            "Examples compile from published packages and boundaries are discoverable",
+            "Owner-authorized release only after rights and support matrix review"
+          ]
+        }
+      ],
+      "exit_gate": "Evidence-backed distribution and compatibility decisions"
+    }
+  ],
+  "initial_gate": {
+    "preferred_next": "M8-W01 Discovery compatibility/topology audit, then M8-W02 runtime modernization in separate runs",
+    "discovery_existing_proposal": "docs/planning/proposals/math-agent-discovery-work-package.json",
+    "discovery_protocol": "dw.discovery/1.0.0-draft.1",
+    "discovery_schema_version": 2,
+    "discovery_fixture_count": 13,
+    "workflow_source_observation": {
+      "repository": "aihallot/dw.tools.workflow",
+      "typed_source_files": [
+        "src/dw.tools.workflow/Payloads/PayloadProjectPlanMilestones.cs",
+        "src/dw.tools.workflow/Payloads/PayloadProjectPlanWorkPackages.cs"
+      ],
+      "methods": [
+        "ProjectPlan.EnsureMilestoneSubtree",
+        "ProjectPlan.EnsureWorkPackageSubtree"
+      ],
+      "issue_139_state": "open",
+      "note": "Current GitHub source contains these methods; availability in the operator's installed DWF 0.1.66 is NOT yet established and must be checked against the active executable contract before plan mutations."
+    },
+    "net11_check": {
+      "references": [
+        "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview",
+        "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15"
+      ],
+      "target": "net11.0 / C# 15",
+      "note": "Verify GA SDK, APIs and stable package dependencies on the implementation date; the pinned net10.0 DWF operator/build baseline is preserved by this planning run."
+    }
+  },
+  "limitations": [
+    "No new native project nodes, versions or source packages in RS179",
+    "No claims of shipped Math skill, BrokerReady adapter, non-Windows qualification or stable ABI",
+    "No AURA/Decision/MCDM writes",
+    "No retroactive change to M0–M7 achievements, 541-node count or backlog evidence"
+  ]
+}
