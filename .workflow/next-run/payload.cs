@@ -3,50 +3,50 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Project = "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj";
-const string Program = "tools/dw.tools.math.discovery-bindings/Program.cs";
-const string Receipt = "docs/discovery/qualification/m8-selected-clr-bindings.json";
+const string Generator = "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs";
+const string Manifest = "docs/discovery/qualification/m8-discovery-manifest.json";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS185", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS184", 1,
-    "test: qualify four Math Discovery CLR bindings and bounded IR examples",
-    "0.1.66", 0, 0, 0, true);
+p.Workflow.RequireCurrentRun("RS186", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS185", 1,
+    "feat: generate deterministic selected Math Discovery CLR binding receipt",
+    "0.1.66", 1, 1, 0, false);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
-p.ProjectPlan.RequireNodeState("M8-W01-C01", "not-ready");
+p.ProjectPlan.RequireNodeState("M8-W01-C02", "not-ready");
 p.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.123"));
-p.Require.JsonValueEquals("docs/discovery/qualification/RS131-portable-protocol-qualified.json",
-    "/total_cases", JsonValue.Create(13));
-p.Files.ReplaceFromStaged("staged/" + Project, Project);
-p.Files.ReplaceFromStaged("staged/" + Program, Program);
-RunBindingGenerator();
-p.Require.JsonValueEquals(Receipt, "/status", JsonValue.Create("selected-clr-fingerprints-only"));
-p.Require.JsonValueEquals(Receipt, "/brokerReadyCount", JsonValue.Create(0));
+p.Require.JsonValueEquals("docs/discovery/qualification/m8-selected-clr-bindings.json",
+    "/status", JsonValue.Create("selected-clr-fingerprints-only"));
+p.Require.JsonValueEquals("docs/discovery/qualification/m8-selected-clr-bindings.json",
+    "/brokerReadyCount", JsonValue.Create(0));
+p.Files.ReplaceFromStaged("staged/" + Generator, Generator);
+RunGenerator();
+p.Require.JsonValueEquals(Manifest, "/schemaVersion", JsonValue.Create(2));
+p.Require.JsonValueEquals(Manifest, "/owner", JsonValue.Create("math"));
 return p.Complete();
 
-static void RunBindingGenerator()
+static void RunGenerator()
 {
-    var processStart = new ProcessStartInfo("dotnet")
+    var start = new ProcessStartInfo("dotnet")
     {
+        WorkingDirectory = Environment.CurrentDirectory,
         UseShellExecute = false,
         RedirectStandardOutput = true,
-        RedirectStandardError = true,
-        WorkingDirectory = Environment.CurrentDirectory
+        RedirectStandardError = true
     };
-    foreach (var value in new[] { "run", "--project",
-        "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
-        "-c", "Release", "--", "--write" })
-        processStart.ArgumentList.Add(value);
-    using var process = Process.Start(processStart)
-        ?? throw new InvalidOperationException("Unable to run the binding generator.");
-    var output = process.StandardOutput.ReadToEnd();
-    var errors = process.StandardError.ReadToEnd();
-    if (!process.WaitForExit(240000))
+    foreach (var arg in new[] { "run", "--file",
+        "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "--", "--write" })
+        start.ArgumentList.Add(arg);
+    using var process = Process.Start(start) ??
+        throw new InvalidOperationException("Cannot run manifest generator.");
+    var stdout = process.StandardOutput.ReadToEnd();
+    var stderr = process.StandardError.ReadToEnd();
+    if (!process.WaitForExit(180000))
     {
         process.Kill(entireProcessTree: true);
-        throw new TimeoutException("Binding generation timed out.");
+        throw new TimeoutException("Manifest generator timed out.");
     }
     if (process.ExitCode != 0)
-        throw new InvalidOperationException("Binding generation failed: " + output + errors);
-    Console.WriteLine(output);
+        throw new InvalidOperationException("Manifest generator failed: " + stdout + stderr);
+    Console.WriteLine(stdout);
 }
