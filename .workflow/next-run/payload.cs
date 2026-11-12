@@ -18,16 +18,17 @@ p.Require.JsonValueEquals("docs/planning/proposals/math-next-roadmap-m8-m12.json
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.26"));
 
 var assembly = typeof(PayloadContext).Assembly;
-var plan = assembly.GetType("Dw.Tools.Workflow.Payloads.PayloadProjectPlan");
-var spec = assembly.GetType("Dw.Tools.Workflow.Payloads.PayloadProjectPlanNodeSpec");
-var milestone = plan?.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-    .SingleOrDefault(m => m.Name == "EnsureMilestoneSubtree" &&
-        m.GetParameters() is [{ ParameterType: var argument }] && argument == spec);
-var package = plan?.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-    .SingleOrDefault(m => m.Name == "EnsureWorkPackageSubtree" &&
-        m.GetParameters() is [{ ParameterType: var owner }, { ParameterType: var argument }] &&
-        owner == typeof(string) && argument == spec);
-var qualified = spec is not null && milestone is not null && package is not null;
+// A statically known SDK type makes the public-method reflection trimming-safe.
+const string SpecName = "Dw.Tools.Workflow.Payloads.PayloadProjectPlanNodeSpec";
+var methods = typeof(PayloadProjectPlan).GetMethods(BindingFlags.Instance | BindingFlags.Public);
+var milestone = methods.SingleOrDefault(m => m.Name == "EnsureMilestoneSubtree" &&
+    m.GetParameters() is [{ ParameterType: var argument }] &&
+    argument.FullName == SpecName);
+var package = methods.SingleOrDefault(m => m.Name == "EnsureWorkPackageSubtree" &&
+    m.GetParameters() is [{ ParameterType: var owner }, { ParameterType: var argument }] &&
+    owner == typeof(string) && argument.FullName == SpecName);
+var specAvailable = milestone is not null || package is not null;
+var qualified = milestone is not null && package is not null;
 var report = new JsonObject
 {
     ["schemaVersion"] = 1,
@@ -38,7 +39,7 @@ var report = new JsonObject
     ["executorAssemblyVersion"] = assembly.GetName().Version?.ToString() ?? "unreported",
     ["milestoneOperationAvailable"] = milestone is not null,
     ["workPackageOperationAvailable"] = package is not null,
-    ["nodeSpecAvailable"] = spec is not null,
+    ["nodeSpecAvailable"] = specAvailable,
     ["supportedForNewMathMilestones"] = qualified,
     ["sourceOnlyClaimExcluded"] = true,
     ["canonicalBacklogUnchanged"] = true,
