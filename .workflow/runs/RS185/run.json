@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "RS185",
+  "title": "Generate and verify deterministic CLR binding fingerprints for four opt-in Math Discovery operations",
+  "state": "prepared",
+  "commitMessage": "feat: generate deterministic selected Math Discovery CLR binding receipt",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Generate a deterministic, Math-owned receipt of the four deliberately selected Discovery CLR signatures and SHA-256 fingerprints from actual assemblies.",
+    "value": "Implement a bounded C# binding generator with write/check modes; verify exact static overloads against the candidate inventory, assembly versions, result types, and SHA-256 of canonical signatures. Reuse RS131 portable conformance and RS184 compiled consumer evidence without repeating either campaign.",
+    "debtChanges": [
+      "RS184 succeeded attempt 001 first-pass with four compiled selected CLR method signatures and bounded IR examples; it did not qualify a broker or package-installed skill.",
+      "RS185 is the deterministic fingerprint and provenance layer required before schema-2 manifest and skill generation; it admits no public helper discovery by convention.",
+      "RS131\u0027s 13 portable protocol fixtures are historical qualified evidence and are not rerun. M8 remains not-ready and backlog 0.1.123 is preserved.",
+      "The receipt reports BrokerReady=0, skill=false and package-consumer=false. No AURA integration or existing package revision is claimed.",
+      "RS185 preselection run-next-20261112T143421Z-a18c74be22a299dc refused before attempt allocation: CS8602 on nullable MethodInfo and declaring Assembly. Replace assertion-only flow with explicit fail-fast guards; retain exact CLR checks."
+    ],
+    "nextAction": "After durable success, generate a schema-2 Math manifest and hierarchical opt-in skill from the exact binding receipt, with deterministic regeneration and drift refusal.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+    "tools/dw.tools.math.discovery-bindings/Program.cs",
+    "docs/discovery/qualification/m8-selected-clr-bindings.json"
+  ],
+  "validations": [
+    {
+      "id": "discovery-binding-fingerprints",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
