@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS185",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-12T14:46:46.3787427+00:00",
+  "completedAtUtc": "2026-11-12T14:47:08.0417581+00:00",
+  "durationMilliseconds": 21663,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+    "tools/dw.tools.math.discovery-bindings/Program.cs",
+    "docs/discovery/qualification/m8-selected-clr-bindings.json"
+  ],
+  "changedPaths": [
+    "docs/discovery/qualification/m8-selected-clr-bindings.json",
+    "tools/dw.tools.math.discovery-bindings/Program.cs",
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261112T143421Z-a18c74be22a299dc"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261112T143421Z-a18c74be22a299dc",
+        "runId": "RS185",
+        "scope": "preselection-rs185",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs185/run-next-20261112T143421Z-a18c74be22a299dc"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS185/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-70ea9fcd456047169afbe9e19cb75029\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 900000,
+      "DurationMilliseconds": 21071,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS185 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS184/attempt-001.json run=RS184 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/RS131-portable-protocol-qualified.json pointer=/total_cases\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj bytes=571\r\n[files.replace-from-staged] CHANGED path=tools/dw.tools.math.discovery-bindings/Program.cs bytes=6099\r\nM8-DISCOVERY-BINDINGS|selected=4|fingerprints=4|brokerReady=0|mode=--write\r\n\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-selected-clr-bindings.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-selected-clr-bindings.json pointer=/brokerReadyCount\r\n[payload] OK operations=11 changed=2 no-change=0 verified=9 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS185/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS185 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e5e08c41e4387d954ef7a5bbb49216f7aff262bbd3fd9ee47d5cf66515a7fc2e",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS184/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS184 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "69f5c3d4667bf7fe58b0fd77bed0b44a04a9e6b8738eb89f7473735badde69c9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/total_cases",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+        "Status": 1,
+        "Summary": "bytes=571",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5dda57552166031a89b13c95236c9a7bc761f8425865b6ddba5918b000c4f7a2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tools/dw.tools.math.discovery-bindings/Program.cs",
+        "Status": 1,
+        "Summary": "bytes=6099",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "67fbff5f5fcf9bafe86a1409907ca4cbe29510b65b0eb00a8d316e15c519f966",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+        "Status": 0,
+        "Summary": "pointer=/brokerReadyCount",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "discovery-binding-fingerprints",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261112T144453Z-674d335037f2118e",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "d3e9a312ae0985262de90d4be4d07376bbeebb07",
+  "invocationStartedAtUtc": "2026-11-12T14:44:53.4614819+00:00",
+  "invocationDurationMilliseconds": 134580,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS185",
+      "title": "Generate and verify deterministic CLR binding fingerprints for four opt-in Math Discovery operations",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Generate a deterministic, Math-owned receipt of the four deliberately selected Discovery CLR signatures and SHA-256 fingerprints from actual assemblies.",
+      "value": "Implement a bounded C# binding generator with write/check modes; verify exact static overloads against the candidate inventory, assembly versions, result types, and SHA-256 of canonical signatures. Reuse RS131 portable conformance and RS184 compiled consumer evidence without repeating either campaign.",
+      "debtChanges": [
+        "RS184 succeeded attempt 001 first-pass with four compiled selected CLR method signatures and bounded IR examples; it did not qualify a broker or package-installed skill.",
+        "RS185 is the deterministic fingerprint and provenance layer required before schema-2 manifest and skill generation; it admits no public helper discovery by convention.",
+        "RS131\u0027s 13 portable protocol fixtures are historical qualified evidence and are not rerun. M8 remains not-ready and backlog 0.1.123 is preserved.",
+        "The receipt reports BrokerReady=0, skill=false and package-consumer=false. No AURA integration or existing package revision is claimed.",
+        "RS185 preselection run-next-20261112T143421Z-a18c74be22a299dc refused before attempt allocation: CS8602 on nullable MethodInfo and declaring Assembly. Replace assertion-only flow with explicit fail-fast guards; retain exact CLR checks."
+      ],
+      "nextAction": "After durable success, generate a schema-2 Math manifest and hierarchical opt-in skill from the exact binding receipt, with deterministic regeneration and drift refusal.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/discovery/qualification/m8-selected-clr-bindings.json",
+        "tools/dw.tools.math.discovery-bindings/Program.cs",
+        "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj"
+      ],
+      "validations": [
+        {
+          "id": "discovery-binding-fingerprints",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS185",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS185",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "d3e9a312ae0985262de90d4be4d07376bbeebb07",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "3a659f887eda2a7a9885753d466c11dbb1d79889305da7ed9d8d50ab180a1bac"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: generate deterministic selected Math Discovery CLR binding receipt",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
