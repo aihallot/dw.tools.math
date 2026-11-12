@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "RS186",
+  "title": "Generate a deterministic schema-2 Math Discovery manifest from four independently qualified CLR bindings",
+  "commitMessage": "feat: generate selected Math Discovery schema-2 manifest without broker claims",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Generate the first bounded Math-owned Discovery schema-2 manifest from RS185 CLR fingerprints and the explicit four-capability selection.",
+    "value": "Add a C# generator with deterministic write/check output, four opted-in AgentCallable entries, exact CLR binding fingerprints, typed parameter/result metadata, numeric limits and source provenance. Refuse source/assembly drift, unauthorized exposure and broker claims. Reuse prior RS131/RS184/RS185 evidence without replaying it.",
+    "debtChanges": [
+      "RS185 succeeded at attempt 001 after one pre-attempt C# nullability failure; first-pass was false. Four stable selected CLR binding fingerprints are now durably qualified.",
+      "RS186 generates a portable protocol manifest only, with no installed skill bundle, runtime adapter, AURA permission, automatic selection of public helpers or BrokerReady claim.",
+      "All four bindings are sourced from the Math-owned RS185 receipt and exact candidate metadata. M8 nodes remain not-ready and backlog 0.1.123 remains unchanged.",
+      "The thirteen RS131 protocol fixtures and RS184 source-compiled consumer are reused as prior receipts, not repeated. Package-installed consumer qualification remains pending."
+    ],
+    "nextAction": "After durable success, qualify the generated schema-2 envelope with bounded negative cases and create progressive skill pages in a distinct deterministic skill-generation run.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+    "docs/discovery/qualification/m8-discovery-manifest.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+      "sourcePath": "files/docs/discovery/qualification/GenerateM8DiscoveryManifest.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS185"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS185/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "feat: generate deterministic selected Math Discovery CLR binding receipt"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+      "jsonPointer": "/status",
+      "expectedValue": "selected-clr-fingerprints-only"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+      "jsonPointer": "/brokerReadyCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+      "jsonPointer": "/generatedSkill",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+      "jsonPointer": "/total_cases",
+      "expectedValue": 13
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/id",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-manifest-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
