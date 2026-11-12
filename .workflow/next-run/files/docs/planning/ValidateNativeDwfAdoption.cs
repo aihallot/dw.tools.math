@@ -41,8 +41,16 @@ try
     RequireState(actual, "M8", "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, "not-ready");
-    foreach (var entry in actual.Where(pair => pair.Key == "M0" || (pair.Key.Length > 1 && pair.Key[0] == 'M' && pair.Key[1] is >= '0' and <= '7' && pair.Key[2] == '-'))
-        RequireState(actual, entry.Key, "done");
+    foreach (var entry in actual)
+    {
+        var id = entry.Key;
+        if (id.Length >= 2 && id[0] == 'M' &&
+            id[1] is >= '0' and <= '7' &&
+            (id.Length == 2 || (id.Length > 2 && id[2] == '-')))
+        {
+            RequireState(actual, id, "done");
+        }
+    }
 
     Require(State(actual, "M0") is "in-progress" or "done", "M0 must be in-progress or done after native DWF adoption.");
     Require(State(actual, "M0-W01") is "in-progress" or "done", "M0-W01 must be in-progress before RS002 or done after RS002.");
