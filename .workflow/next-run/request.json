@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "RS187",
+  "title": "Independently qualify the four-capability generated Math Discovery manifest with bounded adversarial tests",
+  "commitMessage": "test: qualify generated Math Discovery manifest and eleven refusals",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify the actual RS186 Math Discovery manifest against pinned RS185 CLR identities and eleven targeted negative mutations without rerunning the RS131 fixture suite.",
+    "value": "Add an independent C# validator of schema/protocol/owner, exact four capability selections, signatures and SHA-256, numerical limits, package provenance and runtime-only authorization. Falsify duplicate IDs, bad owner, stale binding, premature BrokerReady, unauthorized execution and catalogue leakage.",
+    "debtChanges": [
+      "RS186 succeeded attempt 001 first-pass; schema-2 manifest has four explicitly selected AgentCallable capabilities and zero broker candidates.",
+      "RS187 validates the actual generated Math manifest rather than replacing the already-qualified synthetic RS131 portable corpus.",
+      "Only a bounded new C# validator is installed. No skill pages, new packages, public API, broker authority or AURA repository change is claimed.",
+      "M8 backlog 0.1.123 and all M8 native nodes remain not-ready; this qualification adds no product achievements."
+    ],
+    "nextAction": "After durable success, implement a deterministic hierarchical Math skill generator from the qualified schema-2 manifest; separately validate generated pages and source-free package consumption.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8GeneratedManifest.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8GeneratedManifest.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8GeneratedManifest.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS186"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS186/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "feat: generate selected Math Discovery schema-2 manifest without broker claims"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/owner",
+      "expectedValue": "math"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/capabilities/0/exposure",
+      "expectedValue": "AgentCallable"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+      "jsonPointer": "/brokerReadyCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-manifest-adversarial",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8GeneratedManifest.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-manifest-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
