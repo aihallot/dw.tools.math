@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "RS189",
+  "title": "Independently qualify Math Discovery skill content and seven targeted drift refusals",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math Discovery skill and seven drift refusals",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Validate the generated Math Discovery skill against all four qualified manifest bindings and seven targeted drift or privilege-escalation mutations.",
+    "value": "Install one standalone C# validator checking identity, capability signatures, numerical limits, SHA-256 fingerprints, runtime-only authorization and no BrokerReady promotion. Preserve RS188 output and prior proofs; do not rerun the RS131 corpus.",
+    "debtChanges": [
+      "RS188 succeeded attempt 001 with two prior preselection refusals; it was not first-pass.",
+      "RS189 adds an independent read-only skill contract validator; M8-W01-C02 remains not-ready until full accepted delivery is qualified.",
+      "No additional capabilities, public NuGet releases, broker grants, or AURA adoption."
+    ],
+    "nextAction": "After durable RS189 result, extend deterministic skill pages only where accepted product scope and source-qualified CLR examples justify it.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8MathSkill.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-adversarial",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8MathSkill.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-skill-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
