@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS186",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-12T15:03:14.7568176+00:00",
+  "completedAtUtc": "2026-11-12T15:03:30.5190639+00:00",
+  "durationMilliseconds": 15762,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+    "docs/discovery/qualification/m8-discovery-manifest.json"
+  ],
+  "changedPaths": [
+    "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+    "docs/discovery/qualification/m8-discovery-manifest.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS186/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-2e5e61942e824197b5723274c97fcaa9\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 900000,
+      "DurationMilliseconds": 15587,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS186 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS185/attempt-001.json run=RS185 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-selected-clr-bindings.json pointer=/status\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-selected-clr-bindings.json pointer=/brokerReadyCount\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/GenerateM8DiscoveryManifest.cs bytes=9436\r\nMATH-RS186-MANIFEST|schema=2|capabilities=4|brokerReady=0|mode=--write\r\n\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-discovery-manifest.json pointer=/schemaVersion\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-discovery-manifest.json pointer=/owner\r\n[payload] OK operations=11 changed=1 no-change=0 verified=10 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS186/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS186 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "95d042dc9204925b637ffc25b6f1c4a42f851e9ce6ee7f51a6d085c935b8aa79",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS185/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS185 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e00a9cace9ffef09ec11631c3808e3a0a8ae26f977948d31d6dd6f53faf67fcb",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+        "Status": 0,
+        "Summary": "pointer=/status",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+        "Status": 0,
+        "Summary": "pointer=/brokerReadyCount",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "Status": 1,
+        "Summary": "bytes=9436",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f37602a30696b0aeed4e693902367ac3077265ea52a46fe4b72b14c16a22b2b1",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-discovery-manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/schemaVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-discovery-manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/owner",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-manifest-determinism",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261112T150233Z-1e9ef79bfe206738",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "a52b2bd6a51ee2bdde5be937089536ce591fece6",
+  "invocationStartedAtUtc": "2026-11-12T15:02:33.2512095+00:00",
+  "invocationDurationMilliseconds": 57267,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS186",
+      "title": "Generate a deterministic schema-2 Math Discovery manifest from four independently qualified CLR bindings",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Generate the first bounded Math-owned Discovery schema-2 manifest from RS185 CLR fingerprints and the explicit four-capability selection.",
+      "value": "Add a C# generator with deterministic write/check output, four opted-in AgentCallable entries, exact CLR binding fingerprints, typed parameter/result metadata, numeric limits and source provenance. Refuse source/assembly drift, unauthorized exposure and broker claims. Reuse prior RS131/RS184/RS185 evidence without replaying it.",
+      "debtChanges": [
+        "RS185 succeeded at attempt 001 after one pre-attempt C# nullability failure; first-pass was false. Four stable selected CLR binding fingerprints are now durably qualified.",
+        "RS186 generates a portable protocol manifest only, with no installed skill bundle, runtime adapter, AURA permission, automatic selection of public helpers or BrokerReady claim.",
+        "All four bindings are sourced from the Math-owned RS185 receipt and exact candidate metadata. M8 nodes remain not-ready and backlog 0.1.123 remains unchanged.",
+        "The thirteen RS131 protocol fixtures and RS184 source-compiled consumer are reused as prior receipts, not repeated. Package-installed consumer qualification remains pending."
+      ],
+      "nextAction": "After durable success, qualify the generated schema-2 envelope with bounded negative cases and create progressive skill pages in a distinct deterministic skill-generation run.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "docs/discovery/qualification/m8-discovery-manifest.json"
+      ],
+      "validations": [
+        {
+          "id": "m8-manifest-determinism",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS186",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS186",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "a52b2bd6a51ee2bdde5be937089536ce591fece6",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "27a68876783ca67ba964c60db58e074096b16c0b127923bca7e96836ef269aec"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: generate selected Math Discovery schema-2 manifest without broker claims",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
