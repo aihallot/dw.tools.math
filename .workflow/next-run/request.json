@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "RS191",
+  "title": "Independently qualify generated Math Discovery parameter reference with eight refusal mutations",
+  "commitMessage": "test: qualify Math Discovery reference and eight drift refusals",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Independently check the RS190 generated reference against four qualified manifest capability entries and eight targeted negative mutations.",
+    "value": "Install one bounded C# validator for capability order and identity, pinned package/CLR fingerprints, numeric limits, failure policy, parameter type and optionality, and runtime-only permissions. Refuse broker promotion, missing entries and drift without replaying older suites.",
+    "debtChanges": [
+      "RS190 succeeded attempt 001 first-pass and generated the four-capability parameter-level reference.",
+      "RS191 validates existing generated reference without changing the manifest or delivering a source-free binary consumer.",
+      "M8-W01-C02 remains not-ready; no BrokerReady, AURA adoption or public package publication is asserted."
+    ],
+    "nextAction": "After durable qualification, prioritize a source-free installed-package Math Discovery consumer, with exact package provenance and no broker authority.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8SkillReference.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8SkillReference.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8SkillReference.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS190/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS190/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-reference-adversarial",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8SkillReference.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-reference-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillReference.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
