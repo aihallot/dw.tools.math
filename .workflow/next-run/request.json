@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "id": "RS185",
+  "title": "Generate and verify deterministic CLR binding fingerprints for four opt-in Math Discovery operations",
+  "commitMessage": "feat: generate deterministic selected Math Discovery CLR binding receipt",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Generate a deterministic, Math-owned receipt of the four deliberately selected Discovery CLR signatures and SHA-256 fingerprints from actual assemblies.",
+    "value": "Implement a bounded C# binding generator with write/check modes; verify exact static overloads against the candidate inventory, assembly versions, result types, and SHA-256 of canonical signatures. Reuse RS131 portable conformance and RS184 compiled consumer evidence without repeating either campaign.",
+    "debtChanges": [
+      "RS184 succeeded attempt 001 first-pass with four compiled selected CLR method signatures and bounded IR examples; it did not qualify a broker or package-installed skill.",
+      "RS185 is the deterministic fingerprint and provenance layer required before schema-2 manifest and skill generation; it admits no public helper discovery by convention.",
+      "RS131's 13 portable protocol fixtures are historical qualified evidence and are not rerun. M8 remains not-ready and backlog 0.1.123 is preserved.",
+      "The receipt reports BrokerReady=0, skill=false and package-consumer=false. No AURA integration or existing package revision is claimed."
+    ],
+    "nextAction": "After durable success, generate a schema-2 Math manifest and hierarchical opt-in skill from the exact binding receipt, with deterministic regeneration and drift refusal.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+    "tools/dw.tools.math.discovery-bindings/Program.cs",
+    "docs/discovery/qualification/m8-selected-clr-bindings.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+      "sourcePath": "files/tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj"
+    },
+    {
+      "path": "tools/dw.tools.math.discovery-bindings/Program.cs",
+      "sourcePath": "files/tools/dw.tools.math.discovery-bindings/Program.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/runId",
+      "expectedValue": "RS184"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.66"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS184/attempt-001.json",
+      "jsonPointer": "/git/commitMessage",
+      "expectedValue": "test: qualify four Math Discovery CLR bindings and bounded IR examples"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+      "jsonPointer": "/total_cases",
+      "expectedValue": 13
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+      "jsonPointer": "/csharp_portable_envelope_conformant",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/agent-surface-candidates.json",
+      "jsonPointer": "/proposed_agent_callable_seed/0/capabilityId",
+      "expectedValue": "math.quantity.exact-pipeline.evaluate"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/status",
+      "expectedValue": "in_progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/id",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "discovery-binding-fingerprints",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
