@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "RS188",
+  "title": "Generate initial deterministic source-qualified Math Discovery agent skill",
+  "state": "prepared",
+  "commitMessage": "feat: generate bounded Math Discovery skill from qualified manifest",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Introduce the first deterministic Math-owned agent skill projection from the four RS186/RS187 qualified CLR capabilities without broker authorization.",
+    "value": "Stage a C# write/check generator and generated SKILL.md. Preserve selected identifiers, signatures, SHA-256 fingerprints, numerical limits, evidence and runtime-only authorization. Validate output byte drift and unchanged canonical manifest.",
+    "debtChanges": [
+      "RS187 succeeded first-pass with eleven negative tests; its durable proof is reused without replay.",
+      "M8-W01-C02 remains not-ready: a starter skill page does not finish delivery, refusal testing or independent package consumption.",
+      "No BrokerReady, AURA adoption, new public APIs or package publication is claimed."
+    ],
+    "nextAction": "After success, independently falsify skill drift and incorrect exposures, then expand hierarchical pages and package-installed consumer qualification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/SKILL.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-generation-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-existing-manifest-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8DiscoveryManifest.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
