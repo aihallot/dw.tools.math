@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "RS193",
+  "title": "Generate distinct deterministic Math Discovery skill version and package identity metadata",
+  "commitMessage": "feat: generate Math Discovery skill version and package matrix",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Generate deterministic Math Discovery skill-version.json with separate protocol, schema, source library, generator, bundle and exact selected package versions.",
+    "value": "Stage a C# --write/--check version renderer and source-derived metadata for exactly four selected AgentCallable capabilities and two package identities, without broker permissions, public package changes, or speculative consumer support.",
+    "debtChanges": [
+      "RS192 succeeded attempt 001 after one preselection self-test refusal; first-pass is false.",
+      "The version matrix derives from qualified RS186/RS187 manifest and does not mutate existing immutable package archives.",
+      "M8-W01-C02 remains not-ready; metadata generation alone is not independent installed-package qualification or broker adoption."
+    ],
+    "nextAction": "After durable RS193 success, independently qualify version metadata drift and complete the source-free package-consumer gate before any Discovery delivery claim.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8SkillVersion.cs",
+    ".agents/skills/dw-tools-math/references/skill-version.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/GenerateM8SkillVersion.cs",
+      "sourcePath": "files/docs/discovery/qualification/GenerateM8SkillVersion.cs"
+    },
+    {
+      "path": ".agents/skills/dw-tools-math/references/skill-version.json",
+      "sourcePath": "files/.agents/skills/dw-tools-math/references/skill-version.json"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS192/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS192/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS192/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-version-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillVersion.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-inspection-self-test",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/DescribeM8Discovery.cs",
+        "--",
+        "--self-test"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
