@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "RS197",
+  "title": "Verify four selected Math Discovery CLR signatures directly from three immutable private NuGet archives",
+  "commitMessage": "test: qualify private packaged Math Discovery CLR bindings",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify exact selected Math Discovery CLR signatures from immutable Composition, IR and Quantities private package DLLs, without project references or publishing.",
+    "value": "Stage a source-free C# reflection audit that reads NUGET_LOCAL archives, validates archived and loaded DLL SHA-256 against existing RS167/RS146/RS137 published receipts, checks the package dependency closure, and compares four runtime MethodInfo signatures against source-pinned schema-2 fingerprints.",
+    "debtChanges": [
+      "RS196 succeeded attempt 001 first-pass and established the distinction between source preview versions and private calendar-version packages.",
+      "This independent check loads only qualified existing net10.0 private binaries in memory and does not create or change NuGet archives, package references or public APIs.",
+      "Passing reflection would qualify these four CLR binding identities only; it does not grant broker permissions, AURA adoption, or complete M8-W01-C02."
+    ],
+    "nextAction": "After durable RS197 success, qualify bounded actual method invocation from the same installed private package graph and reconcile the full Discovery completion criteria before any native lifecycle transition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+      "sourcePath": "files/docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS196/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS196/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-private-packaged-clr-reflection",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+        "--",
+        "--verify-private-binaries"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
