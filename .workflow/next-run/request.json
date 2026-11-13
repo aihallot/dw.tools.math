@@ -1,21 +1,22 @@
 {
   "schemaVersion": 1,
   "id": "RS201",
-  "title": "Include source-exact qualified schema-2 Math Discovery manifest in the generated skill bundle",
+  "title": "Include canonical LF qualified schema-2 Math Discovery manifest in the generated skill bundle",
   "commitMessage": "feat: bundle qualified Math Discovery manifest byte-for-byte",
   "timeoutSeconds": 600,
   "projectNodes": [
     "M8"
   ],
   "contribution": {
-    "summary": "Extend the existing Math skill generator to generate and check its manifest.json as an exact-byte copy of the source-qualified four-capability schema-2 manifest.",
-    "value": "Deliver references/manifest.json without JSON reserialization, new public APIs or broker claims. Reuse the existing C# --write/--check Math skill generator; refuse absent or drifted bundle bytes while retaining all four selected AgentCallable bindings and immutable package evidence.",
+    "summary": "Extend the existing Math skill generator to generate and check a canonical-LF projection of the qualified four-capability schema-2 manifest.",
+    "value": "Deliver references/manifest.json with identical qualified source content and canonicalized line endings only, using the existing C# write/check generator. Reject missing or drifted canonical-LF bytes without introducing capabilities or broker authority.",
     "debtChanges": [
       "RS200 succeeded attempt 001 first-pass with six navigation refusal cases; generated navigation and prior skill reference gates remain qualified.",
       "The skill bundle lacked its planned machine-readable references/manifest.json; this run adds only the derived bundle file and the existing generator's byte-exact check.",
-      "M8-W01-C02 remains not-ready pending the remaining accepted skill examples, end-to-end qualification and a truthful plan transition. No BrokerReady, AURA adoption or public publication."
+      "M8-W01-C02 remains not-ready pending the remaining accepted skill examples, end-to-end qualification and a truthful plan transition. No BrokerReady, AURA adoption or public publication.",
+      "RS201 retry 0 refused pre-attempt in Windows check: staged bundle bytes differed from qualified source (line-ending normalization not previously accounted for). Generator now canonicalizes CRLF to LF for both source and projected file and still requires exact canonical bytes; no product packages or prior evidence mutated."
     ],
-    "nextAction": "After durable RS201 success, qualify the bundled manifest byte-drift refusal independently and audit remaining Math skill examples and accepted lifecycle evidence before any M8 completion.",
+    "nextAction": "After durable RS201 success, independently qualify canonical-LF bundled manifest drift and audit remaining skill examples before M8 progress transitions.",
     "achievements": []
   },
   "delivery": {
