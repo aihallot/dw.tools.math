@@ -81,7 +81,7 @@ else
     Require(File.Exists(Output) && File.ReadAllText(Output) == expected,
         "Generated skill is absent or stale.");
 const string BundleManifest = ".agents/skills/dw-tools-math/references/manifest.json";
-var manifestBytes = File.ReadAllBytes(Input);
+var manifestBytes = Encoding.UTF8.GetBytes(File.ReadAllText(Input).Replace("\r\n", "\n", StringComparison.Ordinal));
 if (args[0] == "--write")
 {
     Directory.CreateDirectory(Path.GetDirectoryName(BundleManifest)!);
@@ -89,6 +89,7 @@ if (args[0] == "--write")
 }
 else
     Require(File.Exists(BundleManifest) &&
-        File.ReadAllBytes(BundleManifest).AsSpan().SequenceEqual(manifestBytes),
-        "Bundled manifest is missing or differs from the qualified source bytes.");
+        Encoding.UTF8.GetBytes(File.ReadAllText(BundleManifest).Replace("\r\n", "\n", StringComparison.Ordinal))
+            .AsSpan().SequenceEqual(manifestBytes),
+        "Bundled manifest is missing or differs from the canonical LF source bytes.");
 Console.WriteLine("MATH-RS201-SKILL-MANIFEST|capabilities=4|brokerReady=0|mode=" + args[0]);
