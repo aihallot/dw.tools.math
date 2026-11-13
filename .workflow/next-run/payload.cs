@@ -3,9 +3,9 @@ using Dw.Tools.Workflow.Payloads;
 
 const string Consumer = "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS197", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS196", 1,
-    "test: audit Math Discovery source and published package boundary",
+p.Workflow.RequireCurrentRun("RS198", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS197", 1,
+    "test: qualify private packaged Math Discovery CLR bindings",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
