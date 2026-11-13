@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "id": "RS201",
+  "title": "Include source-exact qualified schema-2 Math Discovery manifest in the generated skill bundle",
+  "commitMessage": "feat: bundle qualified Math Discovery manifest byte-for-byte",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the existing Math skill generator to generate and check its manifest.json as an exact-byte copy of the source-qualified four-capability schema-2 manifest.",
+    "value": "Deliver references/manifest.json without JSON reserialization, new public APIs or broker claims. Reuse the existing C# --write/--check Math skill generator; refuse absent or drifted bundle bytes while retaining all four selected AgentCallable bindings and immutable package evidence.",
+    "debtChanges": [
+      "RS200 succeeded attempt 001 first-pass with six navigation refusal cases; generated navigation and prior skill reference gates remain qualified.",
+      "The skill bundle lacked its planned machine-readable references/manifest.json; this run adds only the derived bundle file and the existing generator's byte-exact check.",
+      "M8-W01-C02 remains not-ready pending the remaining accepted skill examples, end-to-end qualification and a truthful plan transition. No BrokerReady, AURA adoption or public publication."
+    ],
+    "nextAction": "After durable RS201 success, qualify the bundled manifest byte-drift refusal independently and audit remaining Math skill examples and accepted lifecycle evidence before any M8 completion.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/references/manifest.json"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/GenerateM8MathSkill.cs",
+      "sourcePath": "files/docs/discovery/qualification/GenerateM8MathSkill.cs"
+    },
+    {
+      "path": ".agents/skills/dw-tools-math/references/manifest.json",
+      "sourcePath": "files/.agents/skills/dw-tools-math/references/manifest.json"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS200/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS200/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS200/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-and-manifest-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
