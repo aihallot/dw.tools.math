@@ -1,13 +1,12 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Generator = "docs/discovery/qualification/GenerateM8SkillVersion.cs";
-const string Version = ".agents/skills/dw-tools-math/references/skill-version.json";
+const string Validator = "docs/discovery/qualification/ValidateM8SkillVersion.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS193", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS192", 1,
-    "feat: add deterministic Math Discovery list and explain inspection",
-    "0.1.66", 1, 1, 0, false);
+p.Workflow.RequireCurrentRun("RS194", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS193", 1,
+    "feat: generate Math Discovery skill version and package matrix",
+    "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01-C02", "not-ready");
@@ -16,6 +15,5 @@ p.Require.JsonValueEquals("docs/discovery/qualification/m8-discovery-manifest.js
     "/schemaVersion", JsonValue.Create(2));
 p.Require.JsonValueEquals("docs/discovery/qualification/m8-discovery-manifest.json",
     "/owner", JsonValue.Create("math"));
-p.Files.ReplaceFromStaged("staged/" + Generator, Generator);
-p.Files.ReplaceFromStaged("staged/" + Version, Version);
+p.Files.ReplaceFromStaged("staged/" + Validator, Validator);
 return p.Complete();
