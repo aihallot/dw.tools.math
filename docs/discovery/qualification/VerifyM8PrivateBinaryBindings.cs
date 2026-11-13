@@ -13,8 +13,9 @@ const string CompositionReceipt = "docs/distribution/nuget-federation-f34-compos
 const string IrReceipt = "docs/distribution/nuget-federation-f13-ir-published-qualified.json";
 const string QuantitiesReceipt = "docs/distribution/nuget-federation-f4-quantities-published-qualified.json";
 
-if (args.Length != 1 || args[0] != "--verify-private-binaries")
-    throw new ArgumentException("Use --verify-private-binaries.");
+if (args.Length != 1 || args[0] is not ("--verify-private-binaries" or "--verify-private-invocations"))
+    throw new ArgumentException("Use --verify-private-binaries or --verify-private-invocations.");
+var invokeSelected = args[0] == "--verify-private-invocations";
 
 static void Require(bool condition, string message)
 {
@@ -120,6 +121,7 @@ foreach (var package in expectedIds.Reverse())
     loaded.Add(package, assembly);
 }
 var accepted = 0;
+var invoked = 0;
 foreach (var capability in selected)
 {
     var id = Text(capability, "capabilityId");
@@ -157,6 +159,82 @@ foreach (var capability in selected)
         Hash(Encoding.UTF8.GetBytes(signature)) == Text(binding, "fingerprint"),
         "Packaged CLR signature fingerprint differs from source manifest: " + id);
     accepted++;
+    if (invokeSelected)
+    {
+        var ir = loaded["dw.tools.math.ir"];
+        var composition = loaded["dw.tools.math.composition"];
+        object SampleNode()
+        {
+            var scalar = ir.GetType("Dw.Tools.Math.Ir.IrFiniteBinary64Scalar", true)!;
+            return scalar.GetMethod("FromDouble", BindingFlags.Static | BindingFlags.Public)!
+                .Invoke(null, [0.5]) ?? throw new InvalidDataException("Finite binary64 factory returned null.");
+        }
+        switch (id)
+        {
+            case "math.ir.canonical.encode":
+            {
+                var json = method.Invoke(null, [SampleNode()]) as string;
+                using var canonical = JsonDocument.Parse(json ?? throw new InvalidDataException("Packaged IR Encode returned null."));
+                var envelope = canonical.RootElement;
+                var rootNode = envelope.GetProperty("root");
+                Require(envelope.GetProperty("version").GetString() == "math-ir/1" &&
+                    rootNode.GetProperty("kind").GetString() == "binary64" &&
+                    rootNode.GetProperty("bits").GetString() == "3fe0000000000000",
+                    "Packaged IR Encode returned unexpected finite binary64 canonical JSON.");
+                break;
+            }
+            case "math.ir.hash.semantic":
+            {
+                var node = SampleNode();
+                var hash = method.Invoke(null, [node]) as string;
+                Require(hash is not null && IsSha256(hash) &&
+                    hash == method.Invoke(null, [node]) as string,
+                    "Packaged structural hash is not stable SHA-256.");
+                break;
+            }
+            case "math.quantity.exact-pipeline.evaluate":
+            case "math.replay.try-evaluate":
+            {
+                var stepType = composition.GetType("Dw.Tools.Math.Composition.ExactPipelineStep", true)!;
+                var emptySteps = Array.CreateInstance(stepType, 0);
+                if (id == "math.quantity.exact-pipeline.evaluate")
+                {
+                    try
+                    {
+                        method.Invoke(null, [emptySteps]);
+                        throw new InvalidDataException("Packaged empty pipeline unexpectedly accepted.");
+                    }
+                    catch (TargetInvocationException error) when (error.InnerException is ArgumentException)
+                    {
+                        // The qualified method refuses a pipeline without an initial Start step.
+                    }
+                }
+                else
+                {
+                    var contextType = composition.GetType("Dw.Tools.Math.Composition.ExactReplayContext", true)!;
+                    var replayContext = contextType.GetMethod("Create", BindingFlags.Static | BindingFlags.Public)!
+                        .Invoke(null, ["assumptions", "policy", "catalog", "tolerance", "provider"]);
+                    Require(replayContext is not null, "Replay context creation failed.");
+                    var result = method.Invoke(null, [emptySteps, replayContext, null, CancellationToken.None]);
+                    Require(result is not null &&
+                        result.GetType().GetProperty("Status")?.GetValue(result)?.ToString() == "Unsupported" &&
+                        result.GetType().GetProperty("HasFinalValue")?.GetValue(result) is false &&
+                        result.GetType().GetProperty("Receipt")?.GetValue(result) is null,
+                        "Packaged replay must return an unsupported nonfinal attempt.");
+                }
+                break;
+            }
+            default:
+                throw new InvalidDataException("Unselected packaged invocation: " + id);
+        }
+        invoked++;
+    }
 }
 Require(accepted == 4, "Four packaged CLR bindings required.");
-Console.WriteLine("MATH-RS197-PRIVATE-CLR|archives=3|bindings=4|sourceFree=true|brokerReady=0|PASS");
+if (invokeSelected)
+{
+    Require(invoked == 4, "Four packaged invocation probes required.");
+    Console.WriteLine("MATH-RS198-PRIVATE-INVOCATIONS|archives=3|methods=4|sourceFree=true|brokerReady=0|PASS");
+}
+else
+    Console.WriteLine("MATH-RS197-PRIVATE-CLR|archives=3|bindings=4|sourceFree=true|brokerReady=0|PASS");

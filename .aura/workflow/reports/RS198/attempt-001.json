@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS198",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-13T16:02:19.0473388+00:00",
+  "completedAtUtc": "2026-11-13T16:02:20.0349449+00:00",
+  "durationMilliseconds": 987,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+  ],
+  "changedPaths": [
+    "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261113T134021Z-16ddb0d1714dafaa",
+      "run-next-20261113T140956Z-57a8cf44d05b4dc7"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261113T134021Z-16ddb0d1714dafaa",
+        "runId": "RS198",
+        "scope": "preselection-rs198",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs198/run-next-20261113T134021Z-16ddb0d1714dafaa"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261113T140956Z-57a8cf44d05b4dc7",
+        "runId": "RS198",
+        "scope": "preselection-rs198",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs198/run-next-20261113T140956Z-57a8cf44d05b4dc7"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS198/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-b60958bfc65248c9a0ac0acedaf190ef\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 780,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS198 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS197/attempt-001.json run=RS197 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-discovery-manifest.json pointer=/schemaVersion\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f34-composition-published-qualified.json pointer=/physically_published_package_verified\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs bytes=12609\r\n[payload] OK operations=9 changed=1 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS198/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS198 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4cd5b3b4cb88f9ce8bbaf70102279b22f016ed566abb5c23eb0033ebcbcd00a9",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS197/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS197 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c091a2ae68f0ed03ffbc3ea72b79fd8c0d45b7b9e25721a153271d51e9101d30",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-discovery-manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/schemaVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f34-composition-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/physically_published_package_verified",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+        "Status": 1,
+        "Summary": "bytes=12609",
+        "Details": null,
+        "BeforeSha256": "21557ddf79d67d212ecb4decb7691c73794671c1cc9663dccea10e338b06a5b5",
+        "AfterSha256": "dde71d4f876aef2b4ce016a4aa40c6c10d48abb62fa02954d3d13f038c7bc71a",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-private-packaged-invocations",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261113T160117Z-3567182e6ac6a4cf",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "83c330a511a8f585a80e344106565179189dd8df",
+  "invocationStartedAtUtc": "2026-11-13T16:01:17.3566589+00:00",
+  "invocationDurationMilliseconds": 62678,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS198",
+      "title": "Exercise four selected Math Discovery methods directly from immutable private packaged CLR binaries",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Extend the qualified private binary identity audit with bounded real MethodInfo calls for all four selected Math Discovery CLR operations.",
+      "value": "Reuse RS197 exact private archive and CLR fingerprint checks, then invoke packaged IR Encode and StructuralSha256 on finite binary64, reject an empty exact pipeline, and confirm TryRun returns Unsupported without a final value. No source ProjectReference, feed mutation or broker authorization.",
+      "debtChanges": [
+        "RS197 succeeded attempt 001 first-pass: three immutable private package DLLs loaded and four selected CLR identities matched the source-qualified manifest.",
+        "RS198 extends the existing verifier rather than duplicating package readers; it checks bounded in-memory behavior but does not claim general input support, full integration or all operational outcomes.",
+        "M8-W01-C02 stays not-ready pending full accepted skill delivery and independent lifecycle qualification. No public package publication or AURA adoption.",
+        "RS198 retry 0 refused before attempt allocation: the staged C# verifier contained malformed escaped JSON string literals at lines 177-178. Correction parses canonical IR JSON structurally and retains all four invocation probes; no product files or private packages changed.",
+        "RS198 retry 1 refused before attempt allocation: C# CS0136 at line 215 shadowed the enclosing AssemblyLoadContext variable \u0027context\u0027; corrected only the nested replay-context variable to \u0027replayContext\u0027 while retaining all source-free invocation contracts."
+      ],
+      "nextAction": "After durable RS198 success, evaluate complete M8-W01-C01/C02 accepted evidence and remaining skill navigation, examples and refusal obligations before any lifecycle progress transition.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-private-packaged-invocations",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS198",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS198",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "83c330a511a8f585a80e344106565179189dd8df",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "da313e495b9adefb11670fe2c55b3ebb5b2424a4d8727afd5443f8356e278646"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify source-free packaged Math Discovery invocations",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
