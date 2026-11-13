@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "RS192",
+  "title": "Expose deterministic selected Math Discovery list and explain diagnostics with unselected-ID refusal",
+  "state": "prepared",
+  "commitMessage": "feat: add deterministic Math Discovery list and explain inspection",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Provide Math-owned read-only --list and --explain commands over the qualified four-capability schema-2 discovery manifest.",
+    "value": "Stage one C# CLI for deterministic capability enumeration and detailed CLR, parameter, precision and authorization inspection. Self-test positive paths and four unknown/unsupported identifier refusals without any broker or package-installed consumer claim.",
+    "debtChanges": [
+      "RS191 succeeded attempt 001 first-pass, independently qualifying eight parameter-reference drift refusals.",
+      "RS192 adds read-only discovery inspection rather than another generated Markdown validator or changing any qualified manifests.",
+      "M8-W01-C02 remains not-ready; --list/--explain do not imply broker authority, public distribution or AURA adoption.",
+      "RS192 retry 0 refused in pre-attempt self-test on Windows because StringBuilder.AppendLine used CRLF while assertions expected LF; normalize list/explain output to LF, preserving protocol semantics."
+    ],
+    "nextAction": "After RS192 success, add independent CLI refusal/byte contract checks or proceed to source-free installed-package consumer qualification based on exact published artifacts.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/DescribeM8Discovery.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-inspection-self-test",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/DescribeM8Discovery.cs",
+        "--",
+        "--self-test"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-inspection-list",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/DescribeM8Discovery.cs",
+        "--",
+        "--list"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
