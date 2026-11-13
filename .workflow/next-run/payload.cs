@@ -6,7 +6,7 @@ var p = PayloadContext.Create();
 p.Workflow.RequireCurrentRun("RS202", null, null, null, null, null);
 p.Workflow.RequirePriorSuccess("RS201", 1,
     "feat: bundle qualified Math Discovery manifest byte-for-byte",
-    "0.1.66", 2, 0, 0, false);
+    "0.1.66", 2, 2, 0, false);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01-C02", "not-ready");
