@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "RS196",
+  "title": "Audit source-qualified Math Discovery versions against exact private published package identities without claiming installed binding readiness",
+  "state": "prepared",
+  "commitMessage": "test: audit Math Discovery source and published package boundary",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Establish the current source-only versus published-private-package boundary for four selected Math Discovery methods, without assuming binary compatibility.",
+    "value": "Add a read-only C# audit using retained physical published-package receipts for Composition, IR and Quantities. Pin package/loaded-DLL SHA-256 and transitive closure; reject conflation of source preview versions with immutable calendar-version packages or broker authorization.",
+    "debtChanges": [
+      "RS195 succeeded attempt 001 first-pass, qualifying cross-artifact consistency of manifest, skill, reference and version matrix.",
+      "The Discovery manifest records source version 0.3.0-preview.1, while pre-existing private packages have 20260 calendar versions; this audit does not substitute for a fresh installed-source-free CLR method consumer.",
+      "No physical feed mutation, public publication, AURA adoption, broker grant or M8 closure."
+    ],
+    "nextAction": "After durable RS196 audit, implement source-free installed-package CLR signature verification with immutable private feed identities and bounded read-only consumption; do not update source version pins speculatively.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/AuditM8PublishedPackageReadiness.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-published-boundary-audit",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/AuditM8PublishedPackageReadiness.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
