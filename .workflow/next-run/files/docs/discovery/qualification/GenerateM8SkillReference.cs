@@ -73,4 +73,41 @@ if (args[0] == "--write")
 else
     Require(File.Exists(ReferencePath) && File.ReadAllText(ReferencePath) == expected,
         "Generated reference is missing or stale");
-Console.WriteLine("MATH-RS190-REFERENCE|capabilities=4|brokerReady=0|mode=" + args[0]);
+const string IndexPath = ".agents/skills/dw-tools-math/references/index.md";
+var navigation = new StringBuilder();
+void Nav(string value = "") => navigation.Append(value).Append('\n');
+Nav("# Math Discovery — navigation");
+Nav();
+Nav("Selected Math capability metadata from `docs/discovery/qualification/m8-discovery-manifest.json`.");
+Nav();
+Nav("- [Capability signatures, parameters and numerical limits](selected-capabilities.md)");
+Nav("- [Separated protocol, generator, bundle and package versions](skill-version.json)");
+Nav();
+Nav("The entries below are intentionally selected `AgentCallable` surfaces, not broker authorization.");
+string? family = null;
+foreach (var cap in caps)
+{
+    var currentFamily = Read(cap, "family");
+    if (family != currentFamily)
+    {
+        family = currentFamily;
+        Nav();
+        Nav("## " + family);
+    }
+    Nav("- `" + Read(cap, "capabilityId") + "` — " +
+        Flat(Read(cap.GetProperty("result"), "interpretation")));
+}
+Nav();
+Nav("Inspect without invoking: `dotnet run --file docs/discovery/qualification/DescribeM8Discovery.cs -- --list` or `--explain <selected-capability-id>`.");
+Nav();
+Nav("Runtime permission and broker routing are external; none of these capabilities is `BrokerReady`.");
+var expectedIndex = navigation.ToString();
+if (args[0] == "--write")
+{
+    Directory.CreateDirectory(Path.GetDirectoryName(IndexPath)!);
+    File.WriteAllText(IndexPath, expectedIndex, new UTF8Encoding(false));
+}
+else
+    Require(File.Exists(IndexPath) && File.ReadAllText(IndexPath) == expectedIndex,
+        "Generated navigation index is missing or stale");
+Console.WriteLine("MATH-RS199-NAVIGATION|capabilities=4|families=3|brokerReady=0|mode=" + args[0]);
