@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS197",
+  "title": "Verify four selected Math Discovery CLR signatures directly from three immutable private NuGet archives",
+  "state": "prepared",
+  "commitMessage": "test: qualify private packaged Math Discovery CLR bindings",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify exact selected Math Discovery CLR signatures from immutable Composition, IR and Quantities private package DLLs, without project references or publishing.",
+    "value": "Stage a source-free C# reflection audit that reads NUGET_LOCAL archives, validates archived and loaded DLL SHA-256 against existing RS167/RS146/RS137 published receipts, checks the package dependency closure, and compares four runtime MethodInfo signatures against source-pinned schema-2 fingerprints.",
+    "debtChanges": [
+      "RS196 succeeded attempt 001 first-pass and established the distinction between source preview versions and private calendar-version packages.",
+      "This independent check loads only qualified existing net10.0 private binaries in memory and does not create or change NuGet archives, package references or public APIs.",
+      "Passing reflection would qualify these four CLR binding identities only; it does not grant broker permissions, AURA adoption, or complete M8-W01-C02."
+    ],
+    "nextAction": "After durable RS197 success, qualify bounded actual method invocation from the same installed private package graph and reconcile the full Discovery completion criteria before any native lifecycle transition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-private-packaged-clr-reflection",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+        "--",
+        "--verify-private-binaries"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
