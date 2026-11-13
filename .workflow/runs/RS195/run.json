@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "RS195",
+  "title": "Audit Math Discovery manifest, generated skill, capability reference and version matrix as one consistent bundle",
+  "state": "prepared",
+  "commitMessage": "test: verify Math Discovery bundle cross-artifact consistency",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add one integrated read-only Math Discovery bundle audit spanning the qualified schema-2 manifest, SKILL.md, capability reference and version matrix.",
+    "value": "The C# audit verifies exact selected identity/order, four CLR SHA-256 signatures, numerical limits, two pinned source package identities, independent version layers and no BrokerReady or runtime grants. Reuse existing per-artifact refusal evidence without repeating previous campaigns.",
+    "debtChanges": [
+      "RS194 succeeded attempt 001 after one network preselection refusal; it was not first-pass.",
+      "Previously separate artifact validations did not establish exact cross-file consistency of the whole generated Math Discovery bundle.",
+      "This is a source-qualified audit only; it does not claim packaged binary consumption, AURA adoption, or a completed M8 phase."
+    ],
+    "nextAction": "After durable success, evaluate source-free installed-package consumer feasibility against immutable published binary identities, and only then consider Discovery lifecycle completion.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8SkillBundleConsistency.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-bundle-cross-artifact",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8SkillBundleConsistency.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-version-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillVersion.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
