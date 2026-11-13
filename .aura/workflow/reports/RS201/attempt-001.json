@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS201",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-13T21:45:00.7047508+00:00",
+  "completedAtUtc": "2026-11-13T21:45:01.2949887+00:00",
+  "durationMilliseconds": 590,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/references/manifest.json"
+  ],
+  "changedPaths": [
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/references/manifest.json"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261113T204910Z-13c61271d28e5c99",
+      "run-next-20261113T213558Z-28fd5769d1ad83eb"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261113T204910Z-13c61271d28e5c99",
+        "runId": "RS201",
+        "scope": "preselection-rs201",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs201/run-next-20261113T204910Z-13c61271d28e5c99"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261113T213558Z-28fd5769d1ad83eb",
+        "runId": "RS201",
+        "scope": "preselection-rs201",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs201/run-next-20261113T213558Z-28fd5769d1ad83eb"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS201/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-f5007023cdea404b802306fbf0980494\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 475,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS201 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS200/attempt-001.json run=RS200 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-discovery-manifest.json pointer=/schemaVersion\r\n[require.json-value-equals] VERIFIED path=docs/discovery/qualification/m8-discovery-manifest.json pointer=/owner\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/GenerateM8MathSkill.cs bytes=4916\r\n[files.replace-from-staged] CHANGED path=.agents/skills/dw-tools-math/references/manifest.json bytes=11414\r\n[payload] OK operations=10 changed=2 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS201/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS201 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a91e8eeecb8851f0925e61dc70eaa23dd88f56b685839369a8cca3596a72095e",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS200/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS200 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f443fa3d250ef46e2427d486731d8a94cf8ed19eb3c5aa1c3b151b92772ac9e5",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-discovery-manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/schemaVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/discovery/qualification/m8-discovery-manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/owner",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "Status": 1,
+        "Summary": "bytes=4916",
+        "Details": null,
+        "BeforeSha256": "0127be1a55c5452a40b584e52f2d77f3b527dcb296640ac739e024d748f3a92e",
+        "AfterSha256": "edc6dd54ae7d1c5a588025cc51ba5ec3be4cf1e1f61a3bfad3146e25357dfb68",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": ".agents/skills/dw-tools-math/references/manifest.json",
+        "Status": 1,
+        "Summary": "bytes=11414",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "cf6cd18a333bd4679b458227665a3e23fa8dba0afa959ae706ce9e2a9f9928dc",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-skill-and-manifest-determinism",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261113T214426Z-9dd2293083df834f",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "9e533c924174476148f67764532f133dd176bc65",
+  "invocationStartedAtUtc": "2026-11-13T21:44:26.8022912+00:00",
+  "invocationDurationMilliseconds": 34492,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS201",
+      "title": "Include canonical LF qualified schema-2 Math Discovery manifest in the generated skill bundle",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Extend the existing Math skill generator to generate and check a canonical-LF projection of the qualified four-capability schema-2 manifest.",
+      "value": "Deliver references/manifest.json with identical qualified source content and canonicalized line endings only, using the existing C# write/check generator. Reject missing or drifted canonical-LF bytes without introducing capabilities or broker authority.",
+      "debtChanges": [
+        "RS200 succeeded attempt 001 first-pass with six navigation refusal cases; generated navigation and prior skill reference gates remain qualified.",
+        "The skill bundle lacked its planned machine-readable references/manifest.json; this run adds only the derived bundle file and the existing generator\u0027s byte-exact check.",
+        "M8-W01-C02 remains not-ready pending the remaining accepted skill examples, end-to-end qualification and a truthful plan transition. No BrokerReady, AURA adoption or public publication.",
+        "RS201 retry 0 failed before attempt allocation: Windows newline differences broke byte identity. The generator now compares canonical LF content; private packages and prior evidence remain untouched.",
+        "RS201 retry 1 failed before attempt allocation: contribution debtChanges entry exceeded DWF\u0027s 300-character maximum. This correction shortens the entry; staged generator, manifest and validations are unchanged."
+      ],
+      "nextAction": "After durable RS201 success, independently qualify canonical-LF bundled manifest drift and audit remaining skill examples before M8 progress transitions.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".agents/skills/dw-tools-math/references/manifest.json",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-skill-and-manifest-determinism",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS201",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS201",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "9e533c924174476148f67764532f133dd176bc65",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "df361e44602b6a7a7fd88911e60a16c4fe63b36054397d3a831be493f904ac6e"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: bundle qualified Math Discovery manifest byte-for-byte",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
