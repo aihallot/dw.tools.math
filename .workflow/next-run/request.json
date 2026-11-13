@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "RS200",
+  "title": "Independently validate Math Discovery navigation selection, links and six bounded drift refusals",
+  "commitMessage": "test: qualify Math Discovery navigation and six refusal cases",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Independently validate the RS199 Math Discovery navigation index against the four selected schema-2 capabilities and six targeted negative mutations.",
+    "value": "Install one standalone C# read-only validator of the generated index, exact ordered families and capability descriptions, existing reference links and the no-BrokerReady boundary. Reject missing links, unselected entries, renames, family and semantic drift without rerunning earlier package or protocol campaigns.",
+    "debtChanges": [
+      "RS199 succeeded attempt 001 first-pass and generated the three-family navigation index from four selected capabilities.",
+      "RS200 validates navigation independently; RS198 binary invocation and RS131 portable protocol evidence are retained, not replayed.",
+      "M8-W01-C02 remains not-ready; no AURA adoption, authorization grant or public package delivery is claimed."
+    ],
+    "nextAction": "After durable RS200 qualification, assess remaining skill delivery acceptance and verified examples before deciding any truthful M8 lifecycle transition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8SkillNavigation.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8SkillNavigation.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8SkillNavigation.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS199/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS199/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-navigation-adversarial",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8SkillNavigation.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-navigation-generation-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillReference.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
