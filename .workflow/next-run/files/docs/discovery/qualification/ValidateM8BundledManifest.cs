@@ -6,7 +6,7 @@ using System.Text.Json;
 const string SourcePath = "docs/discovery/qualification/m8-discovery-manifest.json";
 const string BundlePath = ".agents/skills/dw-tools-math/references/manifest.json";
 var source = File.ReadAllText(SourcePath).Replace("\r\n", "\n", StringComparison.Ordinal);
-var bundle = File.ReadAllText(BundlePath);
+var bundle = File.ReadAllText(BundlePath).Replace("\r\n", "\n", StringComparison.Ordinal);
 Validate(source, source, "canonical source");
 Validate(bundle, source, "bundled projection");
 var refusals = 0;
