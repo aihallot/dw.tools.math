@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 2,
+  "protocolId": "dw.discovery",
+  "protocolVersion": "1.0.0-draft.1",
+  "owner": "math",
+  "libraryRelease": "0.3.0-preview.1",
+  "generatorVersion": "0.1.0",
+  "skillBundleVersion": "0.1.0",
+  "capabilities": [
+    {
+      "capabilityId": "math.quantity.exact-pipeline.evaluate",
+      "legacyIds": [],
+      "contractVersion": "0.1.0",
+      "package": "dw.tools.math.composition",
+      "packageVersion": "0.3.0-preview.1",
+      "family": "quantities",
+      "exposure": "AgentCallable",
+      "binding": {
+        "assembly": "dw.tools.math.composition",
+        "assemblyVersion": "0.3.0.0",
+        "type": "Dw.Tools.Math.Composition.ExactQuantityPipeline",
+        "member": "Evaluate",
+        "canonicalSignature": "dw.tools.math.composition|0.3.0.0|Dw.Tools.Math.Composition.ExactQuantityPipeline|Evaluate|Dw.Tools.Math.Composition.ExactPipelineResult(System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E)",
+        "fingerprint": "2d0a6e50c25ec8a6fe0fd66c57480c62af20ebeb8552a7c8f52579de2e228fff"
+      },
+      "parameters": [
+        {
+          "name": "steps",
+          "type": "System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E",
+          "optional": false,
+          "defaultValue": null
+        }
+      ],
+      "result": {
+        "type": "Dw.Tools.Math.Composition.ExactPipelineResult",
+        "interpretation": "Exact bounded quantity-pipeline outcome."
+      },
+      "semantics": {
+        "numericModel": "exact rational",
+        "assumptions": [
+          "Caller provides valid explicitly typed Math inputs."
+        ],
+        "guarantee": "5 km / 2 min = exactly 150 km/h, dimensions and bounds checked",
+        "limits": "MaximumSteps=16 and MaximumNumeralDigits=256; only zero-offset linear units"
+      },
+      "execution": {
+        "kind": "direct-dotnet",
+        "budget": "MaximumSteps=16 and MaximumNumeralDigits=256; only zero-offset linear units",
+        "cancellation": "Bounded cooperative policy; method-specific cancellation rules apply.",
+        "provider": "Pure managed Math library; no external provider implied.",
+        "platformRequirements": "net10.0, current Math source-project evidence only.",
+        "effects": "In-process mathematical computation; no external effects granted.",
+        "failurePolicy": "Respect the method\u0027s explicit result or exception contract.",
+        "authorization": "runtime-only"
+      },
+      "provenance": {
+        "sourceCommit": "ae5125f809bbeea6b773ad99285fe2ce33fdbf46",
+        "evidence": [
+          "docs/planning/evidence/M2-W02-C02-boundary-qualified.json",
+          "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+          ".aura/workflow/reports/RS185/attempt-001.json"
+        ]
+      },
+      "example": {
+        "file": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+        "method": "top-level-entrypoint"
+      }
+    },
+    {
+      "capabilityId": "math.replay.try-evaluate",
+      "legacyIds": [],
+      "contractVersion": "0.1.0",
+      "package": "dw.tools.math.composition",
+      "packageVersion": "0.3.0-preview.1",
+      "family": "replay",
+      "exposure": "AgentCallable",
+      "binding": {
+        "assembly": "dw.tools.math.composition",
+        "assemblyVersion": "0.3.0.0",
+        "type": "Dw.Tools.Math.Composition.ExactReplayRunner",
+        "member": "TryRun",
+        "canonicalSignature": "dw.tools.math.composition|0.3.0.0|Dw.Tools.Math.Composition.ExactReplayRunner|TryRun|Dw.Tools.Math.Composition.ExactReplayAttempt(System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E,Dw.Tools.Math.Composition.ExactReplayContext,Dw.Tools.Math.Composition.ExactReplayCache,System.Threading.CancellationToken)",
+        "fingerprint": "8aa8781f285cb4b36bdd7eda6bedada37ee9bba5095de72f564e95b99e50e5ce"
+      },
+      "parameters": [
+        {
+          "name": "steps",
+          "type": "System.Collections.Generic.IEnumerable\u003CDw.Tools.Math.Composition.ExactPipelineStep\u003E",
+          "optional": false,
+          "defaultValue": null
+        },
+        {
+          "name": "context",
+          "type": "Dw.Tools.Math.Composition.ExactReplayContext",
+          "optional": false,
+          "defaultValue": null
+        },
+        {
+          "name": "cache",
+          "type": "Dw.Tools.Math.Composition.ExactReplayCache",
+          "optional": true,
+          "defaultValue": null
+        },
+        {
+          "name": "cancellationToken",
+          "type": "System.Threading.CancellationToken",
+          "optional": true,
+          "defaultValue": "default"
+        }
+      ],
+      "result": {
+        "type": "Dw.Tools.Math.Composition.ExactReplayAttempt",
+        "interpretation": "Typed replay attempt with explicit incomplete outcomes."
+      },
+      "semantics": {
+        "numericModel": "exact rational and typed status",
+        "assumptions": [
+          "Caller provides valid explicitly typed Math inputs."
+        ],
+        "guarantee": "Reproducible exact result and cache isolation across context versions",
+        "limits": "Cache 1..32 entries, cooperative cancellation, immutable success/no partial result"
+      },
+      "execution": {
+        "kind": "direct-dotnet",
+        "budget": "Cache 1..32 entries, cooperative cancellation, immutable success/no partial result",
+        "cancellation": "Bounded cooperative policy; method-specific cancellation rules apply.",
+        "provider": "Pure managed Math library; no external provider implied.",
+        "platformRequirements": "net10.0, current Math source-project evidence only.",
+        "effects": "In-process mathematical computation; no external effects granted.",
+        "failurePolicy": "Respect the method\u0027s explicit result or exception contract.",
+        "authorization": "runtime-only"
+      },
+      "provenance": {
+        "sourceCommit": "ae5125f809bbeea6b773ad99285fe2ce33fdbf46",
+        "evidence": [
+          "docs/planning/evidence/M2-W02-C03-boundary-qualified.json",
+          "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+          ".aura/workflow/reports/RS185/attempt-001.json"
+        ]
+      },
+      "example": {
+        "file": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+        "method": "top-level-entrypoint"
+      }
+    },
+    {
+      "capabilityId": "math.ir.canonical.encode",
+      "legacyIds": [],
+      "contractVersion": "0.1.0",
+      "package": "dw.tools.math.ir",
+      "packageVersion": "0.3.0-preview.1",
+      "family": "ir",
+      "exposure": "AgentCallable",
+      "binding": {
+        "assembly": "dw.tools.math.ir",
+        "assemblyVersion": "0.3.0.0",
+        "type": "Dw.Tools.Math.Ir.IrCanonicalJsonCodec",
+        "member": "Encode",
+        "canonicalSignature": "dw.tools.math.ir|0.3.0.0|Dw.Tools.Math.Ir.IrCanonicalJsonCodec|Encode|System.String(Dw.Tools.Math.Ir.IrNode)",
+        "fingerprint": "ec4026982c019292a25cf8a683210890ce30d6cd3da8bc0c58c069a324345676"
+      },
+      "parameters": [
+        {
+          "name": "node",
+          "type": "Dw.Tools.Math.Ir.IrNode",
+          "optional": false,
+          "defaultValue": null
+        }
+      ],
+      "result": {
+        "type": "System.String",
+        "interpretation": "Canonical math-ir/1 JSON for admitted bounded IR nodes."
+      },
+      "semantics": {
+        "numericModel": "exact and explicitly finite binary64, no silent mixing",
+        "assumptions": [
+          "Caller provides valid explicitly typed Math inputs."
+        ],
+        "guarantee": "Canonical round-trip preserves exact rational and bounded structural IR",
+        "limits": "MaximumJsonCharacters=262144; IR graph depth/nodes bounded"
+      },
+      "execution": {
+        "kind": "direct-dotnet",
+        "budget": "MaximumJsonCharacters=262144; IR graph depth/nodes bounded",
+        "cancellation": "Bounded cooperative policy; method-specific cancellation rules apply.",
+        "provider": "Pure managed Math library; no external provider implied.",
+        "platformRequirements": "net10.0, current Math source-project evidence only.",
+        "effects": "In-process mathematical computation; no external effects granted.",
+        "failurePolicy": "Respect the method\u0027s explicit result or exception contract.",
+        "authorization": "runtime-only"
+      },
+      "provenance": {
+        "sourceCommit": "ae5125f809bbeea6b773ad99285fe2ce33fdbf46",
+        "evidence": [
+          "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+          "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+          ".aura/workflow/reports/RS185/attempt-001.json"
+        ]
+      },
+      "example": {
+        "file": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+        "method": "top-level-entrypoint"
+      }
+    },
+    {
+      "capabilityId": "math.ir.hash.semantic",
+      "legacyIds": [],
+      "contractVersion": "0.1.0",
+      "package": "dw.tools.math.ir",
+      "packageVersion": "0.3.0-preview.1",
+      "family": "ir",
+      "exposure": "AgentCallable",
+      "binding": {
+        "assembly": "dw.tools.math.ir",
+        "assemblyVersion": "0.3.0.0",
+        "type": "Dw.Tools.Math.Ir.IrCanonicalHashes",
+        "member": "SemanticStructuralSha256",
+        "canonicalSignature": "dw.tools.math.ir|0.3.0.0|Dw.Tools.Math.Ir.IrCanonicalHashes|SemanticStructuralSha256|System.String(Dw.Tools.Math.Ir.IrNode)",
+        "fingerprint": "bee43baf778153e5d26959e8c803de9fc25df0026c65aa40f55f16dd189a621c"
+      },
+      "parameters": [
+        {
+          "name": "node",
+          "type": "Dw.Tools.Math.Ir.IrNode",
+          "optional": false,
+          "defaultValue": null
+        }
+      ],
+      "result": {
+        "type": "System.String",
+        "interpretation": "Structural identity, not algebraic equivalence."
+      },
+      "semantics": {
+        "numericModel": "typed IR structural identity",
+        "assumptions": [
+          "Caller provides valid explicitly typed Math inputs."
+        ],
+        "guarantee": "Ignore passive labels but preserve domain and quantities; stable across canonical encode/decode",
+        "limits": "Only admitted bounded mathematical IR graph"
+      },
+      "execution": {
+        "kind": "direct-dotnet",
+        "budget": "Only admitted bounded mathematical IR graph",
+        "cancellation": "Bounded cooperative policy; method-specific cancellation rules apply.",
+        "provider": "Pure managed Math library; no external provider implied.",
+        "platformRequirements": "net10.0, current Math source-project evidence only.",
+        "effects": "In-process mathematical computation; no external effects granted.",
+        "failurePolicy": "Respect the method\u0027s explicit result or exception contract.",
+        "authorization": "runtime-only"
+      },
+      "provenance": {
+        "sourceCommit": "ae5125f809bbeea6b773ad99285fe2ce33fdbf46",
+        "evidence": [
+          "docs/planning/evidence/M2-W01-C03-boundary-qualified.json",
+          "docs/discovery/qualification/RS131-portable-protocol-qualified.json",
+          ".aura/workflow/reports/RS185/attempt-001.json"
+        ]
+      },
+      "example": {
+        "file": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+        "method": "top-level-entrypoint"
+      }
+    }
+  ],
+  "brokerCandidateIds": []
+}
