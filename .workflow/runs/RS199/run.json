@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "id": "RS199",
+  "title": "Generate progressive Math Discovery navigation from the exact four selected schema-2 capabilities",
+  "state": "prepared",
+  "commitMessage": "feat: generate deterministic Math Discovery navigation index",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the existing deterministic Math skill-reference generator to produce a progressive three-family navigation index from the four selected capabilities.",
+    "value": "Reuse GenerateM8SkillReference.cs to generate/check references/index.md with exact quantity, replay and IR capability identities, links to existing selected-capabilities and version metadata, and explicit runtime-only/no BrokerReady boundaries. Preserve all existing source and published package evidence.",
+    "debtChanges": [
+      "RS198 succeeded attempt 001 after two pre-attempt C# compilation refusals; first-pass success is false.",
+      "RS199 adds navigation to the existing reference renderer rather than duplicating manifest parsing or rerunning earlier CLR and NuGet qualifications.",
+      "M8-W01-C02 remains not-ready; a progressive Markdown index does not grant broker privileges, public distribution, or AURA adoption."
+    ],
+    "nextAction": "After durable RS199 success, qualify navigation drift against exact selected manifest order and audit remaining accepted skill examples and lifecycle obligations before M8 completion.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8SkillReference.cs",
+    ".agents/skills/dw-tools-math/references/index.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-navigation-generation-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8SkillReference.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
