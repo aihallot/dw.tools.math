@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "RS198",
+  "title": "Exercise four selected Math Discovery methods directly from immutable private packaged CLR binaries",
+  "commitMessage": "test: qualify source-free packaged Math Discovery invocations",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the qualified private binary identity audit with bounded real MethodInfo calls for all four selected Math Discovery CLR operations.",
+    "value": "Reuse RS197 exact private archive and CLR fingerprint checks, then invoke packaged IR Encode and StructuralSha256 on finite binary64, reject an empty exact pipeline, and confirm TryRun returns Unsupported without a final value. No source ProjectReference, feed mutation or broker authorization.",
+    "debtChanges": [
+      "RS197 succeeded attempt 001 first-pass: three immutable private package DLLs loaded and four selected CLR identities matched the source-qualified manifest.",
+      "RS198 extends the existing verifier rather than duplicating package readers; it checks bounded in-memory behavior but does not claim general input support, full integration or all operational outcomes.",
+      "M8-W01-C02 stays not-ready pending full accepted skill delivery and independent lifecycle qualification. No public package publication or AURA adoption."
+    ],
+    "nextAction": "After durable RS198 success, evaluate complete M8-W01-C01/C02 accepted evidence and remaining skill navigation, examples and refusal obligations before any lifecycle progress transition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+      "sourcePath": "files/docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS197/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS197/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-private-packaged-invocations",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/VerifyM8PrivateBinaryBindings.cs",
+        "--",
+        "--verify-private-invocations"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
