@@ -44,7 +44,7 @@ string List()
             .Append(Text(binding, "type")).Append('.')
             .Append(Text(binding, "member")).AppendLine("|AgentCallable|runtime-only");
     }
-    return output.ToString();
+    return output.ToString().Replace("\r\n", "\n", StringComparison.Ordinal);
 }
 
 string Explain(string id)
@@ -73,7 +73,7 @@ string Explain(string id)
             .Append(Text(parameter, "type")).Append('|')
             .AppendLine(parameter.GetProperty("optional").GetBoolean() ? "optional" : "required");
     }
-    return output.ToString();
+    return output.ToString().Replace("\r\n", "\n", StringComparison.Ordinal);
 }
 
 if (args.Length == 1 && args[0] == "--list")
