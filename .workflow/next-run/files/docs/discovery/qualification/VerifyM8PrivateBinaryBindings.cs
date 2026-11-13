@@ -174,11 +174,13 @@ foreach (var capability in selected)
             case "math.ir.canonical.encode":
             {
                 var json = method.Invoke(null, [SampleNode()]) as string;
-                Require(json is not null && json.Contains("\\"version\\":\\"math-ir/1\\"", StringComparison.Ordinal) &&
-                    json.Contains("\\"kind\\":\\"binary64\\"", StringComparison.Ordinal) &&
-                    json.Contains("3fe0000000000000", StringComparison.Ordinal),
+                using var canonical = JsonDocument.Parse(json ?? throw new InvalidDataException("Packaged IR Encode returned null."));
+                var envelope = canonical.RootElement;
+                var rootNode = envelope.GetProperty("root");
+                Require(envelope.GetProperty("version").GetString() == "math-ir/1" &&
+                    rootNode.GetProperty("kind").GetString() == "binary64" &&
+                    rootNode.GetProperty("bits").GetString() == "3fe0000000000000",
                     "Packaged IR Encode returned unexpected finite binary64 canonical JSON.");
-                break;
             }
             case "math.ir.hash.semantic":
             {
