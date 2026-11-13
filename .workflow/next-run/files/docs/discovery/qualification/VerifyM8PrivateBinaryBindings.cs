@@ -181,6 +181,7 @@ foreach (var capability in selected)
                     rootNode.GetProperty("kind").GetString() == "binary64" &&
                     rootNode.GetProperty("bits").GetString() == "3fe0000000000000",
                     "Packaged IR Encode returned unexpected finite binary64 canonical JSON.");
+                break;
             }
             case "math.ir.hash.semantic":
             {
