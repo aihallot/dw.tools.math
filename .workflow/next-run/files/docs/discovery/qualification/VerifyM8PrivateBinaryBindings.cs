@@ -212,10 +212,10 @@ foreach (var capability in selected)
                 else
                 {
                     var contextType = composition.GetType("Dw.Tools.Math.Composition.ExactReplayContext", true)!;
-                    var context = contextType.GetMethod("Create", BindingFlags.Static | BindingFlags.Public)!
+                    var replayContext = contextType.GetMethod("Create", BindingFlags.Static | BindingFlags.Public)!
                         .Invoke(null, ["assumptions", "policy", "catalog", "tolerance", "provider"]);
-                    Require(context is not null, "Replay context creation failed.");
-                    var result = method.Invoke(null, [emptySteps, context, null, CancellationToken.None]);
+                    Require(replayContext is not null, "Replay context creation failed.");
+                    var result = method.Invoke(null, [emptySteps, replayContext, null, CancellationToken.None]);
                     Require(result is not null &&
                         result.GetType().GetProperty("Status")?.GetValue(result)?.ToString() == "Unsupported" &&
                         result.GetType().GetProperty("HasFinalValue")?.GetValue(result) is false &&
