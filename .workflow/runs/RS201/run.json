@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "RS201",
+  "title": "Include canonical LF qualified schema-2 Math Discovery manifest in the generated skill bundle",
+  "state": "prepared",
+  "commitMessage": "feat: bundle qualified Math Discovery manifest byte-for-byte",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the existing Math skill generator to generate and check a canonical-LF projection of the qualified four-capability schema-2 manifest.",
+    "value": "Deliver references/manifest.json with identical qualified source content and canonicalized line endings only, using the existing C# write/check generator. Reject missing or drifted canonical-LF bytes without introducing capabilities or broker authority.",
+    "debtChanges": [
+      "RS200 succeeded attempt 001 first-pass with six navigation refusal cases; generated navigation and prior skill reference gates remain qualified.",
+      "The skill bundle lacked its planned machine-readable references/manifest.json; this run adds only the derived bundle file and the existing generator\u0027s byte-exact check.",
+      "M8-W01-C02 remains not-ready pending the remaining accepted skill examples, end-to-end qualification and a truthful plan transition. No BrokerReady, AURA adoption or public publication.",
+      "RS201 retry 0 failed before attempt allocation: Windows newline differences broke byte identity. The generator now compares canonical LF content; private packages and prior evidence remain untouched.",
+      "RS201 retry 1 failed before attempt allocation: contribution debtChanges entry exceeded DWF\u0027s 300-character maximum. This correction shortens the entry; staged generator, manifest and validations are unchanged."
+    ],
+    "nextAction": "After durable RS201 success, independently qualify canonical-LF bundled manifest drift and audit remaining skill examples before M8 progress transitions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/references/manifest.json"
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-and-manifest-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
