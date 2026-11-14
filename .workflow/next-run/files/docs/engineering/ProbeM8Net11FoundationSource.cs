@@ -35,7 +35,7 @@ File.WriteAllText(Path.Combine(root, "Program.cs"),
     "    FoundationContract.Identity != \"dw.tools.math.foundation/0.1\")\n" +
     "    throw new InvalidOperationException(\"Math Foundation source contract changed.\");\n" +
     "Console.WriteLine(\"MATH-RS218-FOUNDATION|runtime=11|identity=dw.tools.math.foundation/0.1|PASS\");\n");
-string Run(params string[] args)
+string Run(params string[] commandArguments)
 {
     var processInfo = new ProcessStartInfo("dotnet")
     {
@@ -44,13 +44,13 @@ string Run(params string[] args)
         RedirectStandardError = true,
         UseShellExecute = false
     };
-    foreach (var arg in args) processInfo.ArgumentList.Add(arg);
+    foreach (var arg in commandArguments) processInfo.ArgumentList.Add(arg);
     using var process = Process.Start(processInfo) ??
         throw new InvalidOperationException("RS218: dotnet could not start.");
     var output = process.StandardOutput.ReadToEnd();
     var errors = process.StandardError.ReadToEnd();
     if (!process.WaitForExit(120000) || process.ExitCode != 0)
-        throw new InvalidOperationException("RS218: dotnet " + string.Join(" ", args) +
+        throw new InvalidOperationException("RS218: dotnet " + string.Join(" ", commandArguments) +
             " failed:\n" + output + "\n" + errors);
     return output.Trim();
 }
