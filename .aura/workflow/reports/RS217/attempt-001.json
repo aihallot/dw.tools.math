@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS217",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-14T23:19:37.8646095+00:00",
+  "completedAtUtc": "2026-11-14T23:19:39.2345432+00:00",
+  "durationMilliseconds": 1369,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11PackageGraph.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/InspectM8Net11PackageGraph.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261114T220821Z-ee436a0555a67a4e"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261114T220821Z-ee436a0555a67a4e",
+        "runId": "RS217",
+        "scope": "preselection-rs217",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs217/run-next-20261114T220821Z-ee436a0555a67a4e"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS217/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-483592a86a484100a9bfa8db3debf02d\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 855,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS217 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS216/attempt-001.json run=RS216 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/engineering/InspectM8Net11PackageGraph.cs bytes=3963\r\n[payload] OK operations=7 changed=1 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS217/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS217 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2a4658bd9301fe7a9640ad9f251a276ffc969302b546cd01bc78a93cb309ed48",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS216/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS216 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b12e545f4fc3a614d87b75e4c257ecec677390ac3e5cdb13ac7118524e13bc8f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "Status": 1,
+        "Summary": "bytes=3963",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ed0e36ec06bc2c3e70572efe3bf6f154959c0c2971d5a658875d2a25407102bd",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-thirteen-package-dependency-topology",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261114T231841Z-030d8d92f3fe9eac",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "57746b1d78214a2bea8d39afa39c0cb676606e8a",
+  "invocationStartedAtUtc": "2026-11-14T23:18:41.9139292+00:00",
+  "invocationDurationMilliseconds": 57320,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS217",
+      "title": "Qualify dependency order of thirteen packable Math libraries before .NET 11 migration",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Inspect the existing thirteen-packable-project dependency graph and derive a safe topology without modifying source frameworks.",
+      "value": "Check exact package IDs, 16 direct project-reference edges, bounded dependency depth, zero cycles and no references outside the qualified packable set; emit deterministic migration-level evidence without building or publishing any .NET 11 Math package.",
+      "debtChanges": [
+        "RS216 succeeded attempt 001 first-pass true; isolated SDK 11.0.100 net11.0 C# 15 compile/run is proven, not Math package compatibility.",
+        "RS217 maps the existing packable project-reference graph; the source-only inspection does not qualify a .NET 11 port or assume compatibility.",
+        "M8-W02-C01 remains not-ready pending primary-source API/language deltas and targeted .NET 11 consumer evidence. Immutable .NET 10 archives are preserved.",
+        "RS217 retry 0 failed preselection without attempt allocation: the validator assumed 15 rather than 16 observed direct edges. Retry 1 corrects only that assertion; durable refusal evidence remains on its evidence branch."
+      ],
+      "nextAction": "After RS217 success, use the proven sixteen-edge dependency topology to plan a narrow net11 compatibility probe and primary-source .NET 11/C# 15 delta audit.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/InspectM8Net11PackageGraph.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-thirteen-package-dependency-topology",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS217",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS217",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "57746b1d78214a2bea8d39afa39c0cb676606e8a",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "7f3b8c1410fe5fd5efa452e1e76a95fb642d1d77864dbabf1c3b8c4ee00c60a5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify thirteen-package Math dependency graph",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
