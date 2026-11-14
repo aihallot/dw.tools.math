@@ -43,7 +43,33 @@ Require(IrCanonicalHashes.PresentationSha256(relabeled) !=
         IrCanonicalHashes.PresentationSha256(anotherLabel),
     "Presentation digest did not preserve labels.");
 
-Console.WriteLine("M8-DISCOVERY-CLR-SEED|bindings=4|examples=3|brokerReady=0|scope=source-project-consumer");
+// Positive selected Composition call: exact, bounded, typed input.
+static UnitDefinition Linear(string id, DimensionVector dimension, ExactRational scale) =>
+    new(id, id, id, UnitSystem.Si, dimension, scale,
+        ExactRational.Zero, UnitTransformKind.Linear);
+var km = Linear("km", DimensionVector.LengthDimension, new ExactRational(1000, 1));
+var metre = Linear("m", DimensionVector.LengthDimension, ExactRational.One);
+var minute = Linear("min", DimensionVector.TimeDimension, new ExactRational(60, 1));
+var kmPerHour = Linear("km/h",
+    DimensionVector.LengthDimension - DimensionVector.TimeDimension,
+    new ExactRational(5, 18));
+var boundedSteps = new[]
+{
+    ExactPipelineStep.Start(new ExactRational(5, 1), km),
+    ExactPipelineStep.Convert(metre),
+    ExactPipelineStep.Divide(new ExactRational(2, 1), minute),
+    ExactPipelineStep.Convert(kmPerHour)
+};
+var directQuantity = ExactQuantityPipeline.Evaluate(boundedSteps);
+Require(directQuantity.DisplayValue == new ExactRational(150, 1) &&
+        directQuantity.BaseQuantity.Value == new ExactRational(125, 3) &&
+        directQuantity.BaseQuantity.Dimension ==
+            DimensionVector.LengthDimension - DimensionVector.TimeDimension &&
+        directQuantity.PresentationUnit?.Id == "km/h" &&
+        directQuantity.DetailedSteps.Length == 4,
+    "Selected positive exact-pipeline invocation changed.");
+
+Console.WriteLine("M8-DISCOVERY-CLR-SEED|bindings=4|examples=4|positiveComposition=1|brokerReady=0|scope=source-project-consumer");
 
 static void Require(bool condition, string message)
 {
