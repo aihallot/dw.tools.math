@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS217",
+  "title": "Qualify dependency order of thirteen packable Math libraries before .NET 11 migration",
+  "commitMessage": "test: qualify thirteen-package Math dependency graph",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Inspect the existing thirteen-packable-project dependency graph and derive a safe topology without modifying source frameworks.",
+    "value": "Check exact package IDs, 15 direct project-reference edges, bounded dependency depth, zero cycles and no references outside the qualified packable set; emit deterministic migration-level evidence without building or publishing any .NET 11 Math package.",
+    "debtChanges": [
+      "RS216 succeeded attempt 001 first-pass true; isolated SDK 11.0.100 net11.0 C# 15 compile/run is proven, not Math package compatibility.",
+      "RS217 maps the existing packable project-reference graph; the source-only inspection does not qualify a .NET 11 port or assume compatibility.",
+      "M8-W02-C01 remains not-ready pending primary-source API/language deltas and targeted .NET 11 consumer evidence. Immutable .NET 10 archives are preserved."
+    ],
+    "nextAction": "Use the verified dependency levels to plan a targeted, isolated .NET 11 build and an authoritative .NET 11/C# 15 delta assessment before altering project TFMs.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11PackageGraph.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/InspectM8Net11PackageGraph.cs",
+      "sourcePath": "files/docs/engineering/InspectM8Net11PackageGraph.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS216/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS216/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-thirteen-package-dependency-topology",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
