@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "id": "RS217",
+  "title": "Qualify dependency order of thirteen packable Math libraries before .NET 11 migration",
+  "state": "prepared",
+  "commitMessage": "test: qualify thirteen-package Math dependency graph",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Inspect the existing thirteen-packable-project dependency graph and derive a safe topology without modifying source frameworks.",
+    "value": "Check exact package IDs, 16 direct project-reference edges, bounded dependency depth, zero cycles and no references outside the qualified packable set; emit deterministic migration-level evidence without building or publishing any .NET 11 Math package.",
+    "debtChanges": [
+      "RS216 succeeded attempt 001 first-pass true; isolated SDK 11.0.100 net11.0 C# 15 compile/run is proven, not Math package compatibility.",
+      "RS217 maps the existing packable project-reference graph; the source-only inspection does not qualify a .NET 11 port or assume compatibility.",
+      "M8-W02-C01 remains not-ready pending primary-source API/language deltas and targeted .NET 11 consumer evidence. Immutable .NET 10 archives are preserved.",
+      "RS217 retry 0 failed preselection without attempt allocation: the validator assumed 15 rather than 16 observed direct edges. Retry 1 corrects only that assertion; durable refusal evidence remains on its evidence branch."
+    ],
+    "nextAction": "After RS217 success, use the proven sixteen-edge dependency topology to plan a narrow net11 compatibility probe and primary-source .NET 11/C# 15 delta audit.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11PackageGraph.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-thirteen-package-dependency-topology",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
