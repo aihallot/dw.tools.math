@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "RS208",
+  "title": "Reconcile accepted M8-W01 Discovery gates with retained qualified evidence and outstanding admission criteria",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile M8 Discovery acceptance evidence and gaps",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Map M8-W01-C01/C02 acceptance recipes to existing durable Discovery qualifications and identify non-proven gates without fabricating progress.",
+    "value": "Deliver one evidence-limited English reconciliation dossier covering manifest conformance, CLR binding and private package proofs, positive selected source examples, skill generation, drift refusals and remaining protocol/consumer/readiness boundaries.",
+    "debtChanges": [
+      "RS207 succeeded at attempt 001, first-pass true; five example-link/refusal checks are durably reported.",
+      "M8-W01-C01/C02 and native children remain not-ready. The accepted 13 pinned protocol fixtures and any separate consumer delivery admission still require exact qualification mapping.",
+      "Preserve immutable packages, prior failed-invocation provenance, runtime-only AgentCallable and zero BrokerReady. No plan transitions, external adoption or publication."
+    ],
+    "nextAction": "Verify the complete pinned 13-fixture portable protocol proof and associate it with M8-W01-C01-T1 before deciding native node readiness.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+  ],
+  "validations": [
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
