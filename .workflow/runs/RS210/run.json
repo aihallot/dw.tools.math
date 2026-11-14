@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "RS210",
+  "title": "Reconcile current Math Discovery README with RS131 and RS185\u2013RS209 qualified evidence",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile current Math Discovery status and historical scope",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Correct the Discovery entrypoint\u0027s outdated pre-RS131 claims while preserving original historical decisions.",
+    "value": "Expose current qualified portable fixtures, selected CLR binding, skill, navigation and source examples with direct links; explicitly distinguish immutable private probes, non-authorized runtime metadata and not-ready M8 from actual independent adoption.",
+    "debtChanges": [
+      "RS209 succeeded attempt 001 first-pass true; its pinned 13-case fixture receipt check is durable.",
+      "The old Discovery README still described the pre-RS131 baseline and denied existence of a generated skill, despite subsequent bounded Math-owned evidence.",
+      "RS210 changes only the Discovery documentation entrypoint. No M8 progress movement, external adoption, BrokerReady, NuGet publication or sibling mutation."
+    ],
+    "nextAction": "Evaluate the remaining isolated skill consumer admission criteria and native readiness of M8-W01-C01/C02 before choosing targeted further qualification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/README.md"
+  ],
+  "validations": [
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
