@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "RS218",
+  "title": "Qualify real Math Foundation source compilation and identity under isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math Foundation source on isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile and run the existing Math Foundation contract in an offline isolated .NET 11/C# 15 consumer without changing repository projects.",
+    "value": "Copy the unmodified FoundationContract.cs into an ignored temporary net11.0 C#15 project pinned to SDK 11.0.100; perform offline restore, build and runtime identity assertion. This proves only the first source-level Math compatibility probe, not thirteen-package certification.",
+    "debtChanges": [
+      "RS217 succeeded at attempt 001 after one durable preselection refusal; first-pass false, corrected source graph has 16 direct edges.",
+      "RS218 tests one actual Math Foundation source contract on isolated SDK11, reusing qualified toolchain discipline rather than changing project TFMs or creating new packages.",
+      "M8-W02-C01 remains not-ready. Existing net10 archives, package versions and SDK pins are immutable; no adoption or broader net11 compatibility is implied."
+    ],
+    "nextAction": "Use the qualified dependency topology to select the next bounded .NET 11 source/package consumer and document primary-source C# 15 differences before migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11FoundationSource.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11FoundationSource.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11FoundationSource.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS217/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS217/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS217/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-real-foundation-source",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11FoundationSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
