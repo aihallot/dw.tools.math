@@ -1,11 +1,12 @@
 #:property NuGetAudit=false
 #:property PublishAot=false
 
+using System.Diagnostics;
 using System.Text.Json;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] != "--check")
-    throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || args[0] is not ("--check" or "--check-sdk11"))
+    throw new ArgumentException("Expected --check or --check-sdk11.");
 
 var expected = new[] {
     "dw.tools.math.foundation",
@@ -71,6 +72,30 @@ foreach (var item in all)
 }
 Require(ids.SetEquals(expected), "Thirteen-package roster drift.");
 Console.WriteLine("MATH-RS214-DOTNET-BASELINE|packable=13|sdkPin=10.0.401|rollForward=latestPatch|tfm=net10.0|lang=CSharp14|sdk11Qualified=false|noMutation=true|PASS");
+if (args[0] == "--check-sdk11")
+{
+    var start = new ProcessStartInfo("dotnet")
+    {
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true
+    };
+    start.ArgumentList.Add("--list-sdks");
+    using var process = Process.Start(start) ??
+        throw new InvalidDataException("RS215: dotnet SDK listing could not start.");
+    var stdout = process.StandardOutput.ReadToEnd();
+    var stderr = process.StandardError.ReadToEnd();
+    Require(process.WaitForExit(30000) && process.ExitCode == 0,
+        "dotnet --list-sdks failed: " + stderr);
+    var versions = stdout.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries)
+        .Select(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries)[0])
+        .ToArray();
+    Require(versions.Contains("11.0.100", StringComparer.Ordinal),
+        "The independently installed stable SDK 11.0.100 is not available.");
+    Require(versions.All(v => !v.StartsWith("11.0.100-", StringComparison.Ordinal)),
+        "Do not qualify an SDK 11 preview as the stable 11.0.100 baseline.");
+    Console.WriteLine("MATH-RS215-SDK11-INVENTORY|sdk=11.0.100|installed=true|repoSdkPin=10.0.401|packable=13|net11BuildTested=false|mutation=false|PASS");
+}
 static void Require(bool condition, string message)
 {
     if (!condition) throw new InvalidDataException("RS214: " + message);
