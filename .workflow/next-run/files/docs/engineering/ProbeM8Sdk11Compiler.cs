@@ -49,7 +49,8 @@ string Run(params string[] arguments)
 var sdk = Run("--version");
 if (sdk != "11.0.100")
     throw new InvalidDataException("RS216: isolated SDK was " + sdk + ", expected 11.0.100.");
-var build = Run("build", "probe.csproj", "-c", "Release", "--configfile", "NuGet.Config");
+Run("restore", "probe.csproj", "--configfile", "NuGet.Config");
+var build = Run("build", "probe.csproj", "-c", "Release", "--no-restore");
 if (!build.Contains("Build succeeded.", StringComparison.Ordinal))
     throw new InvalidDataException("RS216: net11/C#15 compilation was not confirmed.");
 var result = Run("run", "--project", "probe.csproj", "-c", "Release", "--no-build", "--no-restore");
