@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "id": "RS211",
+  "title": "Independently inspect selected Math Discovery skill metadata without canonical source input",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated Discovery skill metadata consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a read-only, bundle-root-only Math Discovery metadata consumer with four deliberate refusal cases.",
+    "value": "Consume only skill files to verify four selected method IDs and SHA-256 fingerprints, two package identities, navigation, runtime-only authorization and zero BrokerReady; reject selection and authority drift without relying on the canonical source manifest.",
+    "debtChanges": [
+      "RS210 succeeded attempt 001 first-pass true; Discovery README now separates current qualification from historic planning.",
+      "RS211 checks self-contained skill metadata inspectability; it does not claim independent NuGet installation, executable provider routing or AURA adoption.",
+      "M8 remains not-ready. Immutable private packages, existing source evidence and broker boundary are unchanged."
+    ],
+    "nextAction": "Assess whether an isolated packaged consumer of the accepted skill delivery is required and reconcile native DWF readiness with the accepted M8 tasks.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-isolated-skill-metadata-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs",
+        "--",
+        "--bundle",
+        ".agents/skills/dw-tools-math"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
