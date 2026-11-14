@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "id": "RS213",
+  "title": "Qualify the Math Discovery skill entrypoint-to-example navigation chain and four refusals",
+  "commitMessage": "test: qualify Discovery skill navigation chain and refusals",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add an independent bounded C# verifier for the selected skill entrypoint, references and source-example navigation chain.",
+    "value": "Require the generated SKILL.md link to the existing index, all selected references, four manifest IDs, a resolvable seed example and runtime-only non-broker boundaries; reject four controlled link and authority mutations.",
+    "debtChanges": [
+      "RS212 succeeded attempt 001 first-pass true and delivered the generator-owned SKILL.md navigation link.",
+      "RS213 qualifies only that newly connected navigation chain; earlier private-package and protocol campaigns are not replayed.",
+      "M8-W01-C02 remains not-ready. Packages are immutable, four AgentCallable entries remain runtime-only, BrokerReady remains absent."
+    ],
+    "nextAction": "Review remaining admitted M8-W01 deliverables and native progress conditions, then choose a narrow evidence-based successor.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8SkillNavigationChain.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8SkillNavigationChain.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8SkillNavigationChain.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS212/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS212/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-navigation-chain-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8SkillNavigationChain.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
