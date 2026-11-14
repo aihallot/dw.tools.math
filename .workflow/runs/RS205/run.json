@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS205",
+  "title": "Exercise positive selected Replay TryRun with bounded cache and context separation",
+  "state": "prepared",
+  "commitMessage": "test: add positive selected Discovery replay example",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the independent Math Discovery CLR seed with a positive selected replay invocation and bounded local cache isolation.",
+    "value": "Run TryRun on the existing exact 150 km/h steps, check Exact final receipt and cached repeat, then require a different assumptions context to miss the local cache and produce a distinct digest. No runtime authorization is inferred.",
+    "debtChanges": [
+      "RS204 succeeded attempt 001, first-pass true, and added the positive exact-quantity pipeline seed.",
+      "RS205 reuses the same typed bounded input and tests Replay TryRun success and context isolation; it does not modify Composition, IR, private packages or broker authority.",
+      "M8-W01-C02 remains not-ready until selected positive examples are navigable, qualified against accepted skill delivery criteria and reconciled with the native plan."
+    ],
+    "nextAction": "Link selected runnable examples to skill documentation and qualify source-to-skill example references without asserting BrokerReady.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/m8-discovery-clr-seed/Program.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-positive-replay-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+        "-c",
+        "Release"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
