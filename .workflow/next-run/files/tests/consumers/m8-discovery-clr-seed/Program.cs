@@ -77,11 +77,11 @@ var firstReplay = ExactReplayRunner.TryRun(boundedSteps, replayContext, replayCa
 var cachedReplay = ExactReplayRunner.TryRun(boundedSteps, replayContext, replayCache);
 Require(firstReplay.Status == ExactReplayStatus.Exact &&
         firstReplay.HasFinalValue && firstReplay.Receipt is { CacheHit: false } &&
-        firstReplay.Receipt.Result.DisplayValue == new ExactRational(150, 1) &&
+        firstReplay.Receipt?.Result.DisplayValue == new ExactRational(150, 1) &&
         cachedReplay.Status == ExactReplayStatus.Exact &&
         cachedReplay.HasFinalValue && cachedReplay.Receipt is { CacheHit: true } &&
-        cachedReplay.Receipt.Result.DisplayValue == new ExactRational(150, 1) &&
-        cachedReplay.Receipt.Key.Digest == firstReplay.Receipt.Key.Digest &&
+        cachedReplay.Receipt?.Result.DisplayValue == new ExactRational(150, 1) &&
+        cachedReplay.Receipt?.Key.Digest == firstReplay.Receipt?.Key.Digest &&
         replayCache.Count == 1,
     "Selected positive replay/cached result changed.");
 var changedContext = ExactReplayContext.Create(
@@ -89,7 +89,7 @@ var changedContext = ExactReplayContext.Create(
 var isolatedReplay = ExactReplayRunner.TryRun(boundedSteps, changedContext, replayCache);
 Require(isolatedReplay.Status == ExactReplayStatus.Exact &&
         isolatedReplay.Receipt is { CacheHit: false } &&
-        isolatedReplay.Receipt.Key.Digest != firstReplay.Receipt.Key.Digest &&
+        isolatedReplay.Receipt?.Key.Digest != firstReplay.Receipt?.Key.Digest &&
         replayCache.Count == 2,
     "Replay cache admitted cross-context reuse.");
 
