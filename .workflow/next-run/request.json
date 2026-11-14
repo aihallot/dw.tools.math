@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS215",
+  "title": "Qualify installed stable SDK 11 availability against the unchanged thirteen-project Math .NET 10 baseline",
+  "commitMessage": "test: qualify stable SDK 11 availability without Math migration",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Extend the qualified thirteen-project baseline inspector with a read-only check for the installed stable .NET SDK 11.0.100.",
+    "value": "Preserve original net10/C#14 baseline checks, inspect dotnet --list-sdks for stable 11.0.100 and explicitly report that no Math net11 build or package compatibility has yet been qualified. Make no edits to global.json, project files or packages.",
+    "debtChanges": [
+      "RS214 succeeded at attempt 001, first-pass true; the thirteen packable source projects and inherited net10/C#14 policy were verified.",
+      "RS215 only checks installed SDK availability using the existing inspector. This is not an SDK selection change, net11 build qualification or package migration.",
+      "M8-W02-C01 remains not-ready pending primary-source .NET11/C#15 delta and independently observed source/package behavior. Immutable archives stay untouched."
+    ],
+    "nextAction": "Prepare a bounded .NET 11/C# 15 isolated compile probe or authoritative delta inventory before considering source-level migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11SourceBaseline.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/InspectM8Net11SourceBaseline.cs",
+      "sourcePath": "files/docs/engineering/InspectM8Net11SourceBaseline.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS214/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS214/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-stable-sdk11-inventory",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11SourceBaseline.cs",
+        "--",
+        "--check-sdk11"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
