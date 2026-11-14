@@ -3,9 +3,9 @@ using Dw.Tools.Workflow.Payloads;
 
 const string Inspector = "docs/engineering/InspectM8Net11SourceBaseline.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS214", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS213", 1,
-    "test: qualify Discovery skill navigation chain and refusals",
+p.Workflow.RequireCurrentRun("RS215", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS214", 1,
+    "test: inspect thirteen Math packable project upgrade baseline",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
