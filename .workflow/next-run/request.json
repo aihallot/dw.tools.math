@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "id": "RS211",
+  "title": "Independently inspect selected Math Discovery skill metadata without canonical source input",
+  "commitMessage": "test: qualify isolated Discovery skill metadata consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a read-only, bundle-root-only Math Discovery metadata consumer with four deliberate refusal cases.",
+    "value": "Consume only skill files to verify four selected method IDs and SHA-256 fingerprints, two package identities, navigation, runtime-only authorization and zero BrokerReady; reject selection and authority drift without relying on the canonical source manifest.",
+    "debtChanges": [
+      "RS210 succeeded attempt 001 first-pass true; Discovery README now separates current qualification from historic planning.",
+      "RS211 checks self-contained skill metadata inspectability; it does not claim independent NuGet installation, executable provider routing or AURA adoption.",
+      "M8 remains not-ready. Immutable private packages, existing source evidence and broker boundary are unchanged."
+    ],
+    "nextAction": "Assess whether an isolated packaged consumer of the accepted skill delivery is required and reconcile native DWF readiness with the accepted M8 tasks.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS210/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS210/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-discovery-manifest.json",
+      "jsonPointer": "/schemaVersion",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-isolated-skill-metadata-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs",
+        "--",
+        "--bundle",
+        ".agents/skills/dw-tools-math"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
