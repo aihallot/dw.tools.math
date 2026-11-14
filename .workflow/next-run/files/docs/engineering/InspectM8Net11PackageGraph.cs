@@ -53,7 +53,7 @@ foreach (var (path, xml) in projects)
         "Duplicate dependency: " + id);
     graph.Add(id, references.OrderBy(x => x, StringComparer.Ordinal).ToArray());
 }
-Require(graph.Values.Sum(x => x.Length) == 15, "Unexpected direct dependency edge count.");
+Require(graph.Values.Sum(x => x.Length) == 16, "Expected sixteen observed direct dependency edges.");
 Require(graph["dw.tools.math.distribution"].Length == 6,
     "Distribution composition graph changed.");
 var colors = new Dictionary<string, int>(StringComparer.Ordinal);
