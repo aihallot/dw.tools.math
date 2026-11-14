@@ -82,6 +82,7 @@ Nav("Selected Math capability metadata from `docs/discovery/qualification/m8-dis
 Nav();
 Nav("- [Capability signatures, parameters and numerical limits](selected-capabilities.md)");
 Nav("- [Separated protocol, generator, bundle and package versions](skill-version.json)");
+Nav("- [Runnable source consumer examples and limitations](examples.md)");
 Nav();
 Nav("The entries below are intentionally selected `AgentCallable` surfaces, not broker authorization.");
 string? family = null;
@@ -101,6 +102,8 @@ Nav();
 Nav("Inspect without invoking: `dotnet run --file docs/discovery/qualification/DescribeM8Discovery.cs -- --list` or `--explain <selected-capability-id>`.");
 Nav();
 Nav("Runtime permission and broker routing are external; none of these capabilities is `BrokerReady`.");
+Require(File.Exists(".agents/skills/dw-tools-math/references/examples.md"),
+    "Selected example reference is absent.");
 var expectedIndex = navigation.ToString();
 if (args[0] == "--write")
 {

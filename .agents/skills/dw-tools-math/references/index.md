@@ -4,6 +4,7 @@ Selected Math capability metadata from `docs/discovery/qualification/m8-discover
 
 - [Capability signatures, parameters and numerical limits](selected-capabilities.md)
 - [Separated protocol, generator, bundle and package versions](skill-version.json)
+- [Runnable source consumer examples and limitations](examples.md)
 
 The entries below are intentionally selected `AgentCallable` surfaces, not broker authorization.
 
