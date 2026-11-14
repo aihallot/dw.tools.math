@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS204",
+  "title": "Exercise a positive bounded selected exact-quantity pipeline in the independent Discovery CLR seed",
+  "state": "prepared",
+  "commitMessage": "test: add positive selected Discovery exact pipeline example",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a positive direct exact-pipeline example to the existing independent Math Discovery CLR consumer.",
+    "value": "Exercise the selected Composition Evaluate(IEnumerable\u003CExactPipelineStep\u003E) binding on 5 km divided by 2 min, checking exact 150 km/h display, 125/3 base value, dimensions and four bounded step snapshots. Preserve earlier IR seed checks.",
+    "debtChanges": [
+      "RS203 succeeded attempt 001, first-pass true; its audit distinguished four CLR signatures from only IR positive examples.",
+      "The private binary probe\u0027s Composition empty-step refusal is not evidence of a successful quantity computation; this run adds one typed positive source-project consumer example.",
+      "Replay positive example and navigable runnable skill samples remain pending. M8-W01-C02 stays not-ready; no broker permission or package publication."
+    ],
+    "nextAction": "Qualify a positive reproducible Replay TryRun example with the existing bounded typed contracts, then connect selected examples to the skill.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/m8-discovery-clr-seed/Program.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-positive-exact-pipeline-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+        "-c",
+        "Release"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
