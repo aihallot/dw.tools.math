@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS216",
+  "title": "Qualify an isolated SDK 11 net11.0 C# 15 compile-and-run probe without migrating Math projects",
+  "commitMessage": "test: qualify isolated .NET 11 C# 15 compiler probe",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a reproducible isolated SDK 11.0.100 compile and runtime probe under ignored build artifacts.",
+    "value": "Generate a temporary zero-package net11.0/C#15 project with an exact SDK 11.0.100 pin and offline NuGet source configuration, then restore, compile and run it without changing Math sources, global.json, packages or plan states.",
+    "debtChanges": [
+      "RS215 succeeded at attempt 001 first-pass true; stable SDK 11.0.100 is installed while the Math repository remains pinned to net10/C#14.",
+      "RS216 tests only compiler/runtime availability with an isolated temporary project; no Math library compatibility, new packages, publication or adoption is implied.",
+      "M8-W02-C01 remains not-ready until the thirteen-package delta/risk audit and bounded independent consumer checks are complete."
+    ],
+    "nextAction": "Inspect primary-source .NET11/C#15 deltas affecting the thirteen Math packable projects, then design targeted source-free compatibility tests without overwriting net10 packages.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Sdk11Compiler.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Sdk11Compiler.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Sdk11Compiler.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS215/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS215/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-isolated-net11-csharp15-compiler",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Sdk11Compiler.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
