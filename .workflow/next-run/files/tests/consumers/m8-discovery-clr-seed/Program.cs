@@ -69,7 +69,31 @@ Require(directQuantity.DisplayValue == new ExactRational(150, 1) &&
         directQuantity.DetailedSteps.Length == 4,
     "Selected positive exact-pipeline invocation changed.");
 
-Console.WriteLine("M8-DISCOVERY-CLR-SEED|bindings=4|examples=4|positiveComposition=1|brokerReady=0|scope=source-project-consumer");
+// Positive selected Replay TryRun call; cache and context are local, not runtime permissions.
+var replayContext = ExactReplayContext.Create(
+    "assumptions/1", "policy/1", "catalog/1", "exact", "none/1");
+var replayCache = new ExactReplayCache(2);
+var firstReplay = ExactReplayRunner.TryRun(boundedSteps, replayContext, replayCache);
+var cachedReplay = ExactReplayRunner.TryRun(boundedSteps, replayContext, replayCache);
+Require(firstReplay.Status == ExactReplayStatus.Exact &&
+        firstReplay.HasFinalValue && firstReplay.Receipt is { CacheHit: false } &&
+        firstReplay.Receipt.Result.DisplayValue == new ExactRational(150, 1) &&
+        cachedReplay.Status == ExactReplayStatus.Exact &&
+        cachedReplay.HasFinalValue && cachedReplay.Receipt is { CacheHit: true } &&
+        cachedReplay.Receipt.Result.DisplayValue == new ExactRational(150, 1) &&
+        cachedReplay.Receipt.Key.Digest == firstReplay.Receipt.Key.Digest &&
+        replayCache.Count == 1,
+    "Selected positive replay/cached result changed.");
+var changedContext = ExactReplayContext.Create(
+    "assumptions/2", "policy/1", "catalog/1", "exact", "none/1");
+var isolatedReplay = ExactReplayRunner.TryRun(boundedSteps, changedContext, replayCache);
+Require(isolatedReplay.Status == ExactReplayStatus.Exact &&
+        isolatedReplay.Receipt is { CacheHit: false } &&
+        isolatedReplay.Receipt.Key.Digest != firstReplay.Receipt.Key.Digest &&
+        replayCache.Count == 2,
+    "Replay cache admitted cross-context reuse.");
+
+Console.WriteLine("M8-DISCOVERY-CLR-SEED|bindings=4|examples=5|positiveComposition=2|brokerReady=0|scope=source-project-consumer");
 
 static void Require(bool condition, string message)
 {
