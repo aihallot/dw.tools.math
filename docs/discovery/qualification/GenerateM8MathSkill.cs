@@ -64,6 +64,10 @@ foreach (var cap in caps.EnumerateArray())
         "`; resolve permissions in the caller.");
     Line();
 }
+Line("## Navigation");
+Line();
+Line("Read [the selected capability index](references/index.md) for signatures, versions and bounded runnable examples.");
+Line();
 Line("## Boundaries");
 Line();
 Line("Only explicitly typed, qualified, bounded Math inputs are supported. Respect each CLR method's failure and cancellation contract. Structural IR hashes do not imply algebraic equivalence. Do not expose any capability as BrokerReady.");

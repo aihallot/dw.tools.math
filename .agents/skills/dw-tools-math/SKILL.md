@@ -57,6 +57,10 @@ Exposure: `AgentCallable` only. This file grants no runtime permission, broker r
 - Source example: `tests/consumers/m8-discovery-clr-seed/Program.cs`.
 - Authorization: `runtime-only`; resolve permissions in the caller.
 
+## Navigation
+
+Read [the selected capability index](references/index.md) for signatures, versions and bounded runnable examples.
+
 ## Boundaries
 
 Only explicitly typed, qualified, bounded Math inputs are supported. Respect each CLR method's failure and cancellation contract. Structural IR hashes do not imply algebraic equivalence. Do not expose any capability as BrokerReady.
