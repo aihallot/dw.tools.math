@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS204",
+  "title": "Exercise a positive bounded selected exact-quantity pipeline in the independent Discovery CLR seed",
+  "commitMessage": "test: add positive selected Discovery exact pipeline example",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a positive direct exact-pipeline example to the existing independent Math Discovery CLR consumer.",
+    "value": "Exercise the selected Composition Evaluate(IEnumerable<ExactPipelineStep>) binding on 5 km divided by 2 min, checking exact 150 km/h display, 125/3 base value, dimensions and four bounded step snapshots. Preserve earlier IR seed checks.",
+    "debtChanges": [
+      "RS203 succeeded attempt 001, first-pass true; its audit distinguished four CLR signatures from only IR positive examples.",
+      "The private binary probe's Composition empty-step refusal is not evidence of a successful quantity computation; this run adds one typed positive source-project consumer example.",
+      "Replay positive example and navigable runnable skill samples remain pending. M8-W01-C02 stays not-ready; no broker permission or package publication."
+    ],
+    "nextAction": "Qualify a positive reproducible Replay TryRun example with the existing bounded typed contracts, then connect selected examples to the skill.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "tests/consumers/m8-discovery-clr-seed/Program.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "tests/consumers/m8-discovery-clr-seed/Program.cs",
+      "sourcePath": "files/tests/consumers/m8-discovery-clr-seed/Program.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS203/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS203/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-positive-exact-pipeline-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tests/consumers/m8-discovery-clr-seed/m8-discovery-clr-seed.csproj",
+        "-c",
+        "Release"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
