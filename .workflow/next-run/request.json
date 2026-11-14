@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS214",
+  "title": "Inspect the thirteen existing Math packable source projects and frozen .NET 10 to .NET 11 modernization baseline",
+  "commitMessage": "test: inspect thirteen Math packable project upgrade baseline",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a bounded, read-only .NET source inventory for M8-W02 modernization preparation without changing the build toolchain.",
+    "value": "Verify the existing global.json SDK 10.0.401 latestPatch pin, central net10.0/C#14 build contract, all thirteen packable project IDs and version declarations, locked restores, and sibling-project dependency absence; report current baseline only, not .NET 11 compatibility.",
+    "debtChanges": [
+      "RS213 succeeded at attempt 001, first-pass true, and qualified the Discovery skill navigation chain.",
+      "M8-W02-C01 accepts a 13-library modernization audit, but current global.json and central props still pin .NET 10 and C# 14. Inventory is prerequisite evidence, not an upgrade.",
+      "RS214 preserves existing net10 archives, NuGet versions, DWF node states, and sibling boundaries. SDK 11 capability and package compatibility remain unqualified."
+    ],
+    "nextAction": "Use the thirteen-project source inventory to develop a primary-source .NET 11/C# 15 delta matrix and a separately qualified SDK 11 consumer check.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11SourceBaseline.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/InspectM8Net11SourceBaseline.cs",
+      "sourcePath": "files/docs/engineering/InspectM8Net11SourceBaseline.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS213/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS213/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-thirteen-packable-modernization-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11SourceBaseline.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
