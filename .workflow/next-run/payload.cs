@@ -3,9 +3,9 @@ using Dw.Tools.Workflow.Payloads;
 
 const string Consumer = "tests/consumers/m8-discovery-clr-seed/Program.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS204", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS203", 1,
-    "docs: audit Math Discovery positive and refusal example coverage",
+p.Workflow.RequireCurrentRun("RS205", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS204", 1,
+    "test: add positive selected Discovery exact pipeline example",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
