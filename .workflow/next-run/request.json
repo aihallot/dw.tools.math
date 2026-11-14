@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "RS203",
+  "title": "Audit selected Math Discovery runnable-example coverage and acceptance gaps",
+  "commitMessage": "docs: audit Math Discovery positive and refusal example coverage",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Record an evidence-based runnable-example coverage matrix for the four selected Discovery CLR methods.",
+    "value": "Distinguish positive IR examples from Composition refusal probes in existing source and immutable private-binary consumers, and identify precise missing positive examples without claiming M8 readiness.",
+    "debtChanges": [
+      "RS202 succeeded attempt 001 with no prior refusals; the bundled manifest and six refusal mutations were qualified.",
+      "RS203 is a bounded evidence audit, not an additional executable guard or broad qualification campaign.",
+      "The existing source seed reflects four signatures but positively exercises IR behavior; private Composition probes exercise refusal/unsupported paths. M8-W01-C02 stays not-ready."
+    ],
+    "nextAction": "Prepare a small independent positive typed Composition quantity-pipeline example before replay example and final skill-example linking.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/m8-skill-example-coverage-audit.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/m8-skill-example-coverage-audit.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-skill-example-coverage-audit.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS202/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS202/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS202/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
