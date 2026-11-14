@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "id": "RS209",
+  "title": "Verify all thirteen pinned portable Discovery fixture verdicts against durable RS131 evidence",
+  "commitMessage": "test: verify pinned Discovery protocol fixture receipt parity",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add a bounded read-only verifier aligning thirteen immutable portable Discovery fixtures with their original C# conformance receipt.",
+    "value": "Check pinned schema and fixture SHA-256, Decision commit, thirteen ordered case identities and two accepted/eleven refused durable RS131 results without executing the historical campaign or implying runtime interoperability.",
+    "debtChanges": [
+      "RS208 succeeded attempt 001, first-pass true; M8 acceptance gaps are documented without native plan transitions.",
+      "RS131 originally qualified the portable synthetic envelope corpus. RS209 checks its immutable fixtures and recorded per-case C# verdicts; it does not replay RS131.",
+      "Selected CLR and skill delivery remain separate gates. M8 stays not-ready, with zero BrokerReady, package publication or sibling modifications."
+    ],
+    "nextAction": "Assess remaining independent skill-consumer delivery criteria and exact DWF readiness requirements for M8-W01-C01/C02 after the protocol evidence is reconciled.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8PortableFixtureReceipt.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ValidateM8PortableFixtureReceipt.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8PortableFixtureReceipt.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS208/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS208/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-pinned-portable-fixture-receipt",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8PortableFixtureReceipt.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
