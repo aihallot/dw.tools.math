@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "id": "RS212",
+  "title": "Connect generated Math Discovery skill entrypoint to existing qualified progressive navigation",
+  "state": "prepared",
+  "commitMessage": "docs: link Discovery skill entrypoint to selected navigation",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Make the generated Math Discovery SKILL.md explicitly link its already-qualified navigation index.",
+    "value": "Update the existing skill generator and its deterministic SKILL.md projection to point to references/index.md, allowing readers to reach selected signatures, versions and source examples without altering the canonical manifest or authorizations.",
+    "debtChanges": [
+      "RS211 succeeded attempt 001 with no prior failures and qualified a bundle-root-only metadata inspection path.",
+      "The generated SKILL.md lacked a direct link to its qualified references/index.md; this bounded change repairs the entrypoint, not another guard or new capability.",
+      "M8-W01-C02 remains not-ready. Existing private packages, runtime-only authorization, zero BrokerReady and historical evidence are preserved."
+    ],
+    "nextAction": "Independently qualify SKILL.md-to-index link reachability and review remaining M8-W01 delivery admission before any lifecycle transition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    ".agents/skills/dw-tools-math/SKILL.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-entrypoint-determinism",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "m8-bundle-entrypoint-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8IsolatedSkillMetadata.cs",
+        "--",
+        "--bundle",
+        ".agents/skills/dw-tools-math"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
