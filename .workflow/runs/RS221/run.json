@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS221",
+  "title": "Qualify existing Math IR and exact quantities source under isolated .NET 11 C# 15",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math IR sources under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Probe Math IR and exact quantities source compilation in isolated SDK 11.0.100 net11.0/C#15 without changing main projects.",
+    "value": "Copy existing IR and exact quantities source into an ignored offline net11 C#15 consumer, restore and compile source unchanged, check runtime identity and exact rational normalization, then report source-only compatibility. Keep production SDK pin and immutable packages untouched.",
+    "debtChanges": [
+      "RS220 succeeded at attempt 001 first-pass true; the thirteen-project graph report now reflects the verified sixteen direct references.",
+      "RS221 expands isolated source evidence to IR atop quantities, not package installability, production TFM migration, or external AURA adoption. M8-W02-C01 remains not-ready."
+    ],
+    "nextAction": "Continue targeted net11/C#15 qualification across downstream Math source families and review official modernization deltas.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11IrSource.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-ir-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11IrSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
