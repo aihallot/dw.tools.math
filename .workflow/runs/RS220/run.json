@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS220",
+  "title": "Correct observed .NET 11 Math package graph edge count in machine-readable evidence",
+  "state": "prepared",
+  "commitMessage": "fix: report observed Math package dependency edge count",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Make the existing thirteen-package .NET 11 audit report its verified sixteen direct dependencies instead of the stale fifteen-edge literal.",
+    "value": "Keep the RS217 roster, graph traversal, cycle checks and sixteen-edge structural guard unchanged; replace only the false machine-readable summary count with the computed graph edge count. Re-run the exact graph probe and whitespace check. Do not migrate SDK settings or touch immutable packages.",
+    "debtChanges": [
+      "RS217 verified sixteen direct ProjectReference edges but its terminal summary still reported fifteen; this run repairs the evidence inconsistency without altering its accepted checks.",
+      "RS219 succeeded first-pass at attempt 001; Math source-only net11/C#15 findings remain bounded and M8-W02-C01 stays not-ready."
+    ],
+    "nextAction": "Extend isolated .NET 11/C#15 source qualification to another dependency-root Math family and gather official modernization deltas.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11PackageGraph.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-math-package-graph-summary",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
