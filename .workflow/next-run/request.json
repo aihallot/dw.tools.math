@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "RS219",
+  "title": "Qualify existing exact quantities source compilation and bounded arithmetic under isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math quantities source under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Prove isolated .NET 11/C# 15 source-level compatibility for nine existing Math exact-quantities files.",
+    "value": "Copy nine unchanged dw.quantities source files into an ignored SDK 11.0.100 net11.0/C#15 project, restore offline, build and assert exact rational normalization and dimension-safe addition. Do not change or publish the net10 project or immutable archives.",
+    "debtChanges": [
+      "RS218 succeeded at attempt 001 first-pass true; its isolated Foundation source compile/run proof is durable.",
+      "RS219 expands source-only compatibility to the dependency-root exact quantities family without changing SDK pins or project TFMs.",
+      "This isolated test is not thirteen-package net11 certification, package publication, or external adoption. M8-W02-C01 remains not-ready."
+    ],
+    "nextAction": "Verify the remaining dependency-root source families under .NET 11 and collect official .NET 11/C# 15 delta evidence before deciding migration readiness.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11QuantitiesSource.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11QuantitiesSource.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11QuantitiesSource.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS218/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS218/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-quantities-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11QuantitiesSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
