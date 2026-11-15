@@ -1,12 +1,12 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Probe = "docs/engineering/ProbeM8Net11FoundationSource.cs";
+const string Probe = "docs/engineering/ProbeM8Net11QuantitiesSource.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS218", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS217", 1,
-    "test: qualify thirteen-package Math dependency graph",
-    "0.1.66", 1, 1, 0, false);
+p.Workflow.RequireCurrentRun("RS219", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS218", 1,
+    "test: qualify Math Foundation source on isolated net11 C#15",
+    "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02-C01", "not-ready");
