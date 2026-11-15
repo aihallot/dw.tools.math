@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS226",
+  "title": "Qualify Math numerics source and IR prerequisites in isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math numerics sources under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify unchanged Math numerics source alongside IR and quantities under isolated .NET11/C#15.",
+    "value": "Copy existing quantities, IR and numerics sources to an independent offline SDK 11.0.100 net11.0/C#15 consumer; verify the direct project reference, compile and execute a bounded runtime and type-presence smoke check. Preserve production projects and immutable archives.",
+    "debtChanges": [
+      "RS225 succeeded on attempt 001 first-pass true, providing isolated codecs and IR source compatibility evidence.",
+      "RS226 expands source-only compatibility to the numerics layer, without proving package binary compatibility, all-library migration, or M8 readiness."
+    ],
+    "nextAction": "Continue prioritized source compatibility qualification and prepare primary-source .NET11/C#15 delta assessment.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11NumericsSource.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11NumericsSource.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11NumericsSource.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS225/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS225/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-numerics-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11NumericsSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
