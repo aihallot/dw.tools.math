@@ -78,7 +78,7 @@ foreach (var (id, references) in graph)
     Console.WriteLine("MATH-RS217-PACKAGE-GRAPH|id=" + id +
         "|level=" + levels[id] + "|directDependencies=" +
         (references.Length == 0 ? "none" : string.Join(",", references)));
-Console.WriteLine("MATH-RS217-GRAPH|projects=13|edges=15|cycles=0|externalProjectRefs=0|maxLevel=" +
+Console.WriteLine("MATH-RS217-GRAPH|projects=13|edges=" + graph.Values.Sum(x => x.Length) + "|cycles=0|externalProjectRefs=0|maxLevel=" +
     levels.Values.Max() + "|net11BuildQualified=false|mutation=false|PASS");
 
 static void Require(bool condition, string message)
