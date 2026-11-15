@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS229",
+  "title": "Qualify standalone Math analysis sources under isolated .NET 11 C# 15",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math analysis sources under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify unchanged standalone Math analysis source compilation under an isolated .NET 11/C# 15 consumer.",
+    "value": "Copy existing analysis source into an offline SDK 11.0.100 net11.0/C#15 consumer; assert no project references, restore, compile and run a runtime/type-presence smoke test. Preserve the repository SDK baseline, production projects and immutable packages.",
+    "debtChanges": [
+      "RS228 succeeded first-pass at attempt 001, extending isolated source evidence to the symbolics and IR graph.",
+      "RS229 adds independent analysis-source compatibility evidence but does not establish package binary compatibility, full migration or M8-W02-C01 readiness."
+    ],
+    "nextAction": "Evaluate remaining scientific source scope and prepare official .NET11/C#15 delta evidence before modernization readiness decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11AnalysisSource.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-analysis-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11AnalysisSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
