@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS225",
+  "title": "Qualify Math codecs source and IR prerequisites in isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math codecs sources under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify unchanged Math codecs source alongside IR and quantities under isolated .NET11/C#15.",
+    "value": "Copy quantities, IR and codecs source to a separate offline SDK 11.0.100 net11.0/C#15 consumer; verify direct project references, compile and run a bounded exact rational and codecs-type smoke test. Keep production project TFMs, SDK pin and immutable NuGet archives unchanged.",
+    "debtChanges": [
+      "RS224 succeeded first-pass at attempt 001; isolated composition-source compatibility evidence is durable.",
+      "RS225 adds source-only codecs coverage without asserting complete package compatibility, full solution migration or M8-W02-C01 readiness."
+    ],
+    "nextAction": "Continue bounded net11/C#15 source graph coverage and review official framework and language deltas before migration decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11CodecsSource.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11CodecsSource.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11CodecsSource.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS224/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS224/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-codecs-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11CodecsSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
