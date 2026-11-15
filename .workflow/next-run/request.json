@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS228",
+  "title": "Qualify Math symbolics sources with IR and quantities in isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math symbolics sources under isolated net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify unchanged Math symbolic computation sources alongside their IR and quantities prerequisites under isolated net11/C#15.",
+    "value": "Copy source from quantities, IR and symbolics into an independent offline SDK 11.0.100 net11.0/C#15 consumer. Verify direct references, compile and run a focused runtime/exact rational and type-presence smoke check. Preserve production SDK pins, archives, and project configuration.",
+    "debtChanges": [
+      "RS227 succeeded first-pass at attempt 001 and qualified the isolated statistics plus quantities source compiler boundary.",
+      "RS228 extends source-only net11/C#15 coverage to symbolics, not published package compatibility, external adoption or completion of M8-W02-C01."
+    ],
+    "nextAction": "Continue bounded source compatibility evidence for remaining Math families and review official .NET11/C#15 deltas before upgrade readiness decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11SymbolicsSource.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11SymbolicsSource.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11SymbolicsSource.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS227/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS227/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-symbolics-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11SymbolicsSource.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
