@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS234",
+  "title": "Inventory numeric API migration signals across thirteen packable Math source trees",
+  "commitMessage": "test: inventory Math numerical API signals for net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Record a deterministic lexical inventory of numeric API migration signals across all thirteen packable Math source families.",
+    "value": "Install a bounded read-only .NET source inspector that scans packable project roots for rounding, BigInteger, Complex, integer conversion and checked-operation tokens. Report exact lexical matches by file without inferring type binding or semantic impact.",
+    "debtChanges": [
+      "RS233 succeeded first-pass attempt 001, qualifying thirteen separate Math source projects with sixteen direct references under SDK 11.0.100.",
+      "Lexical sightings locate potential .NET11 risk sites; they do not prove runtime behavior changes, binary-package compatibility or M8 readiness."
+    ],
+    "nextAction": "Inspect reported API call sites, author focused semantic regression tests where applicable and qualify binary consumers before a migration decision.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8Net11NumericApiSignals.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+      "sourcePath": "files/docs/engineering/InspectM8Net11NumericApiSignals.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS233/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS233/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-numerical-api-signal-scan",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
