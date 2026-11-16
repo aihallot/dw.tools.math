@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS235",
+  "title": "Capture line-addressable numerical API migration signals as durable DWF evidence",
+  "commitMessage": "docs: capture Math net11 numeric API triage evidence",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Preserve bounded file-and-line evidence for numerical .NET11 API risk review in the thirteen-package Math source tree.",
+    "value": "Install a concise triage protocol and use the DWF inspection API to capture literal Math.Round, BigInteger, Complex, Convert.To and checked occurrences as evidence artifacts. Preserve known lexical limitations and do not claim behavioral or binary compatibility.",
+    "debtChanges": [
+      "RS234 succeeded first-pass attempt 001; its lexical scanner is installed but its detailed output is not part of the payload operation report.",
+      "RS235 captures bounded, line-addressable findings for later semantic tests without changing Math source, package archives, SDK pins or M8 lifecycle state."
+    ],
+    "nextAction": "Read the captured source line evidence, select affected numeric call sites, and qualify their net10/net11 behavior against independent oracles.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-numeric-api-triage.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/m8-net11-numeric-api-triage.md",
+      "sourcePath": "files/docs/engineering/m8-net11-numeric-api-triage.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS234/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS234/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-numeric-triage-context",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
