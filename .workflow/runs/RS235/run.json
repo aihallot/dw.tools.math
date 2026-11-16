@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS235",
+  "title": "Capture line-addressable numerical API migration signals as durable DWF evidence",
+  "state": "prepared",
+  "commitMessage": "docs: capture Math net11 numeric API triage evidence",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Preserve bounded file-and-line evidence for numerical .NET11 API risk review in the thirteen-package Math source tree.",
+    "value": "Install a concise triage protocol and use the DWF inspection API to capture literal Math.Round, BigInteger, Complex, Convert.To and checked occurrences as evidence artifacts. Preserve known lexical limitations and do not claim behavioral or binary compatibility.",
+    "debtChanges": [
+      "RS234 succeeded first-pass attempt 001; its lexical scanner is installed but its detailed output is not part of the payload operation report.",
+      "RS235 captures bounded, line-addressable findings for later semantic tests without changing Math source, package archives, SDK pins or M8 lifecycle state."
+    ],
+    "nextAction": "Read the captured source line evidence, select affected numeric call sites, and qualify their net10/net11 behavior against independent oracles.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-numeric-api-triage.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-numeric-triage-context",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
