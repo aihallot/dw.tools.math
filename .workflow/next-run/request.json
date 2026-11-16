@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS231",
+  "title": "Record Math .NET 11 and C# 15 migration delta assessment with explicit unresolved gates",
+  "commitMessage": "docs: assess Math net11 migration evidence and remaining gates",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Document observed Math source-level .NET11/C#15 evidence and official migration deltas without overstating package readiness.",
+    "value": "Inventory the twelve distinct source-family probes, the thirteen-package dependency graph and the unqualified Distribution boundary; link official Microsoft compatibility references, record concrete rounding/runtime/restore risk checks, and preserve M8 not-ready and immutable releases.",
+    "debtChanges": [
+      "RS230 succeeded first-pass attempt 001; Foundation through Scientific have bounded source-only probes across twelve packable families.",
+      "The six-reference Distribution aggregator, external binary/package consumers and behavioral migration gates remain unqualified; the audit names these gaps rather than manufacturing readiness."
+    ],
+    "nextAction": "Design a genuinely project-separated isolated net11 source consumer for the six-reference Math Distribution dependency closure.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+      "sourcePath": "files/docs/engineering/m8-net11-csharp15-migration-evidence.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS230/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS230/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-package-graph-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
