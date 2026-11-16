@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS235",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-16T21:14:22.0789006+00:00",
+  "completedAtUtc": "2026-11-16T21:14:25.7173042+00:00",
+  "durationMilliseconds": 3638,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-numeric-api-triage.md"
+  ],
+  "changedPaths": [
+    "docs/engineering/m8-net11-numeric-api-triage.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS235/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-36b42f251d424914a1ec594d9ca4e6e7\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 2820,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS235 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS234/attempt-001.json run=RS234 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.text-contains] VERIFIED path=docs/engineering/InspectM8Net11NumericApiSignals.cs semantic text found\r\n[files.replace-from-staged] CHANGED path=docs/engineering/m8-net11-numeric-api-triage.md bytes=1964\r\n[inspect.search] VERIFIED path=src/projects matches=0 truncated=false\r\n[inspect.search] VERIFIED path=src/projects matches=132 truncated=false\r\n[inspect.search] VERIFIED path=src/projects matches=70 truncated=false\r\n[inspect.search] VERIFIED path=src/projects matches=11 truncated=false\r\n[inspect.search] VERIFIED path=src/projects matches=35 truncated=false\r\n[payload] OK operations=13 changed=1 no-change=0 verified=12 artifacts=5\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS235/attempt-001.md",
+    "ArtifactRootPath": ".aura/workflow/reports/RS235/artifacts/attempt-001",
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS235 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "1f068f3eb8ea5504d073eacd3553a1c71ed82bc80a79c39795647e8d81c6333b",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS234/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS234 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "061cd14696b667c5ffb5052fb1e435bf2932aeb4690fcb480942d5650e0891e2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/m8-net11-numeric-api-triage.md",
+        "Status": 1,
+        "Summary": "bytes=1964",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "387a7a1c93f7a7935ee40db6b28fc8813a5cfdc27c0d9aee7ad806f1dfd4e191",
+        "Artifacts": null
+      },
+      {
+        "Area": "inspect",
+        "Operation": "search",
+        "Path": "src/projects",
+        "Status": 0,
+        "Summary": "matches=0 truncated=false",
+        "Details": "pattern=Math.Round(",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": [
+          {
+            "Path": "numeric-math-round.md",
+            "Purpose": 0,
+            "MediaType": "text/markdown",
+            "Bytes": 60,
+            "Truncated": false
+          }
+        ]
+      },
+      {
+        "Area": "inspect",
+        "Operation": "search",
+        "Path": "src/projects",
+        "Status": 0,
+        "Summary": "matches=132 truncated=false",
+        "Details": "pattern=BigInteger",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": [
+          {
+            "Path": "numeric-biginteger.md",
+            "Purpose": 0,
+            "MediaType": "text/markdown",
+            "Bytes": 17284,
+            "Truncated": false
+          }
+        ]
+      },
+      {
+        "Area": "inspect",
+        "Operation": "search",
+        "Path": "src/projects",
+        "Status": 0,
+        "Summary": "matches=70 truncated=false",
+        "Details": "pattern=Complex",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": [
+          {
+            "Path": "numeric-complex.md",
+            "Purpose": 0,
+            "MediaType": "text/markdown",
+            "Bytes": 9843,
+            "Truncated": false
+          }
+        ]
+      },
+      {
+        "Area": "inspect",
+        "Operation": "search",
+        "Path": "src/projects",
+        "Status": 0,
+        "Summary": "matches=11 truncated=false",
+        "Details": "pattern=Convert.To",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": [
+          {
+            "Path": "numeric-convert.md",
+            "Purpose": 0,
+            "MediaType": "text/markdown",
+            "Bytes": 1550,
+            "Truncated": false
+          }
+        ]
+      },
+      {
+        "Area": "inspect",
+        "Operation": "search",
+        "Path": "src/projects",
+        "Status": 0,
+        "Summary": "matches=35 truncated=false",
+        "Details": "pattern=checked(",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": [
+          {
+            "Path": "numeric-checked.md",
+            "Purpose": 0,
+            "MediaType": "text/markdown",
+            "Bytes": 4199,
+            "Truncated": false
+          }
+        ]
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-net11-numeric-triage-context",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261116T211227Z-d568b8fce19de32c",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "aa57e11a37fb17d8b6121be35c4943825c1314d4",
+  "invocationStartedAtUtc": "2026-11-16T21:12:27.0502731+00:00",
+  "invocationDurationMilliseconds": 118667,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS235",
+      "title": "Capture line-addressable numerical API migration signals as durable DWF evidence",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Preserve bounded file-and-line evidence for numerical .NET11 API risk review in the thirteen-package Math source tree.",
+      "value": "Install a concise triage protocol and use the DWF inspection API to capture literal Math.Round, BigInteger, Complex, Convert.To and checked occurrences as evidence artifacts. Preserve known lexical limitations and do not claim behavioral or binary compatibility.",
+      "debtChanges": [
+        "RS234 succeeded first-pass attempt 001; its lexical scanner is installed but its detailed output is not part of the payload operation report.",
+        "RS235 captures bounded, line-addressable findings for later semantic tests without changing Math source, package archives, SDK pins or M8 lifecycle state."
+      ],
+      "nextAction": "Read the captured source line evidence, select affected numeric call sites, and qualify their net10/net11 behavior against independent oracles.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/m8-net11-numeric-api-triage.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-net11-numeric-triage-context",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS235",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS235",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "aa57e11a37fb17d8b6121be35c4943825c1314d4",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "3c9930785c0573a13ec4f3bad2dcbc9fbb43d475e90d6405252f6dfb05470c65"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: capture Math net11 numeric API triage evidence",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
