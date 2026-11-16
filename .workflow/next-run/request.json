@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS232",
+  "title": "Qualify seven-project Math Distribution closure under isolated .NET 11 C# 15",
+  "commitMessage": "test: qualify Math distribution project graph under net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile and run Distribution's seven-project source graph with real separate project references under offline .NET 11/C#15.",
+    "value": "Copy unchanged sources into seven distinct nonpackable SDK 11.0.100 net11.0/C#15 projects, preserve all twelve verified dependency edges and run an eighth independent consumer. No production project mutation, archive overwrite, package release or framework cutover.",
+    "debtChanges": [
+      "RS231 succeeded first-pass attempt 001 and documented twelve source-compatible libraries plus Distribution's outstanding graph gate.",
+      "RS232 targets Distribution with seven physically distinct projects and twelve graph edges; it remains source-only evidence, not published-package or full API/behavior compatibility."
+    ],
+    "nextAction": "Audit independent net10/net11 binary consumers and official breaking-change applicability before any production migration decision.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11DistributionGraph.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11DistributionGraph.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11DistributionGraph.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS231/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS231/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-distribution-separated-source-projects",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11DistributionGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
