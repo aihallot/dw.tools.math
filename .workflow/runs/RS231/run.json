@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS231",
+  "title": "Record Math .NET 11 and C# 15 migration delta assessment with explicit unresolved gates",
+  "state": "prepared",
+  "commitMessage": "docs: assess Math net11 migration evidence and remaining gates",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Document observed Math source-level .NET11/C#15 evidence and official migration deltas without overstating package readiness.",
+    "value": "Inventory the twelve distinct source-family probes, the thirteen-package dependency graph and the unqualified Distribution boundary; link official Microsoft compatibility references, record concrete rounding/runtime/restore risk checks, and preserve M8 not-ready and immutable releases.",
+    "debtChanges": [
+      "RS230 succeeded first-pass attempt 001; Foundation through Scientific have bounded source-only probes across twelve packable families.",
+      "The six-reference Distribution aggregator, external binary/package consumers and behavioral migration gates remain unqualified; the audit names these gaps rather than manufacturing readiness."
+    ],
+    "nextAction": "Design a genuinely project-separated isolated net11 source consumer for the six-reference Math Distribution dependency closure.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-package-graph-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
