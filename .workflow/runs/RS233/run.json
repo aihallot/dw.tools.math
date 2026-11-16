@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS233",
+  "title": "Qualify thirteen separate packable Math source projects under isolated .NET 11 C# 15",
+  "state": "prepared",
+  "commitMessage": "test: qualify thirteen-project Math source graph under net11 C#15",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile all thirteen unchanged packable Math source families as separate projects with sixteen references under isolated .NET 11/C#15.",
+    "value": "Copy sources to thirteen nonpackable isolated SDK11 projects and connect all sixteen observed ProjectReference edges. Build an independent consumer referencing all thirteen, execute runtime/source-identity assertions, and preserve SDK10 production projects and immutable archives.",
+    "debtChanges": [
+      "RS232 succeeded first-pass attempt 001 for the seven-project Distribution source graph with twelve direct references.",
+      "RS233 extends isolated source compilation to all thirteen projects; this is not qualification of production csproj, immutable NuGet binaries or full behavioral compatibility. M8 remains not-ready."
+    ],
+    "nextAction": "Qualify independently installed package binaries in net10/net11 consumers and review applicable official breaking changes before migration readiness.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11AllPackableGraph.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-thirteen-separated-source-projects",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11AllPackableGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
