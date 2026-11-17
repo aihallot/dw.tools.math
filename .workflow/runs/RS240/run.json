@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS240",
+  "title": "Qualify observed Ubuntu WSL Linux x64 SDK10 SDK11 host before Math cross-platform consumers",
+  "state": "prepared",
+  "commitMessage": "test: qualify Ubuntu WSL net10 net11 SDK host",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the default Ubuntu WSL environment can supply the observed Linux x64 .NET 10 and 11 SDK/runtime baselines.",
+    "value": "Read-only Windows-to-WSL host check for Ubuntu 24.04, x86_64, installed SDKs 10.0.401/11.0.100, selected SDK from neutral Linux HOME, and both runtime majors. No WSL configuration or production repository mutation.",
+    "debtChanges": [
+      "RS239 succeeded first-pass attempt 001 for exact temperature conversion and invalid-operation parity under net10 and net11.",
+      "The operator supplied evidence of Ubuntu 24.04 WSL with SDK 10.0.401 and 11.0.100; RS240 independently checks host readiness without changing packages or M8 state.",
+      "RS240 initial invocation was refused at preselection before attempt allocation: inherited Windows checkout selected a different WSL SDK. This correction checks the neutral Linux home directory without changing the SDK or workflow methodology."
+    ],
+    "nextAction": "Use a separate isolated Linux Math source consumer in WSL and then qualify immutable NuGet binary consumers before framework migration decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11Host.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-net10-net11-host-readiness",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11Host.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
