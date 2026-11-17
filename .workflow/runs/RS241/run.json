@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS241",
+  "title": "Qualify real dw.quantities source consumer on Ubuntu WSL Linux x64 net11 C#15",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math quantities Linux WSL net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile and execute unchanged Math quantities source under Linux x64 .NET 11 via the qualified WSL host.",
+    "value": "Copy nine unchanged quantities sources into an offline Linux net11/C#15 WSL consumer; invoke dotnet through the same login-shell resolution qualified by RS240, preserve the isolated SDK pin and verify runtime and exact quantity behavior. No production SDK or package changes.",
+    "debtChanges": [
+      "RS240 succeeded on attempt 001 after one preselection refusal; firstPassSucceeded=false and the Ubuntu WSL SDK host was qualified.",
+      "RS241 tests actual Linux execution of one source consumer; it does not qualify all thirteen Math packages, published NuGet binary compatibility, or M8 readiness.",
+      "RS241 was refused before attempt allocation: bash -c selected /usr/lib/dotnet SDK 10.0.115; RS240 used bash -lc to select the installed SDK 11.0.100. Correction aligns the shell invocation."
+    ],
+    "nextAction": "Use Linux evidence to plan independent released-package consumers and review remaining deployment architecture gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-quantities-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
