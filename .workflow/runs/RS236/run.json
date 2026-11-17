@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS236",
+  "title": "Prove bounded ExactRational net10 versus net11 deterministic parity from unchanged Math source",
+  "state": "prepared",
+  "commitMessage": "test: qualify exact Math rational parity on net10 and net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compare deterministic ExactRational behavior under isolated net10/C#14 and net11/C#15 consumers with independent canonical expected values.",
+    "value": "Copy nine unchanged dw.quantities source files into separate offline SDK10 and SDK11 consumers, compile and assert canonical rational normalization, arithmetic, large powers, decimal parsing and divide-by-zero refusal. Compare exact outputs; do not touch production SDK or published packages.",
+    "debtChanges": [
+      "RS235 succeeded first-pass attempt 001; its durable untruncated inspections report BigInteger=132, Complex=70, Convert.To=11, checked(=35, Math.Round(=0 lexical matches.",
+      "RS236 validates one real exact arithmetic contract across runtimes; it does not imply all numerical API behavior or package binary compatibility. M8-W02-C01 stays not-ready."
+    ],
+    "nextAction": "Evaluate a second independent numeric boundary from the RS235 findings and plan separate binary package consumers for net10/net11.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net10Net11ExactRationalParity.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net10-net11-exact-rational-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net10Net11ExactRationalParity.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
