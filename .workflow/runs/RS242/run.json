@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS242",
+  "title": "Qualify exact Math temperature conversion in Ubuntu WSL Linux x64 net11 consumer",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math temperature Linux WSL net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify real Linux x64 .NET 11 Math temperature conversions against the independently qualified RS239 canonical values.",
+    "value": "Reuse the RS241 qualified WSL SDK11 login-shell and isolated nine-file quantities source consumer. Compile and run under Linux x64, verify Celsius/Fahrenheit affine and interval semantics, plus absolute temperature addition refusal. No production or package changes.",
+    "debtChanges": [
+      "RS241 succeeded at attempt 001 after one preselection refusal; firstPassSucceeded=false and Linux Math source execution is durable.",
+      "RS242 extends real Linux source behavior to the exact RS239 temperature oracle without claiming package binary compatibility or M8 readiness.",
+      "RS242 failed preselection before attempt allocation: Linux C# compiler CS7036 in probe-only new ExactRational(10); corrected to explicit numerator and denominator (10,1)."
+    ],
+    "nextAction": "Qualify independent binary NuGet consumers on Windows/Linux, including immutable versions, before planning production .NET11 migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-temperature-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
