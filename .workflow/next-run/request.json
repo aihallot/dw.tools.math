@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS242",
+  "title": "Qualify exact Math temperature conversion in Ubuntu WSL Linux x64 net11 consumer",
+  "commitMessage": "test: qualify Math temperature Linux WSL net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify real Linux x64 .NET 11 Math temperature conversions against the independently qualified RS239 canonical values.",
+    "value": "Reuse the RS241 qualified WSL SDK11 login-shell and isolated nine-file quantities source consumer. Compile and run under Linux x64, verify Celsius/Fahrenheit affine and interval semantics, plus absolute temperature addition refusal. No production or package changes.",
+    "debtChanges": [
+      "RS241 succeeded at attempt 001 after one preselection refusal; firstPassSucceeded=false and Linux Math source execution is durable.",
+      "RS242 extends real Linux source behavior to the exact RS239 temperature oracle without claiming package binary compatibility or M8 readiness."
+    ],
+    "nextAction": "Qualify independent binary NuGet consumers on Windows/Linux, including immutable versions, before planning production .NET11 migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS241/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS241/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-temperature-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11TemperatureConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
