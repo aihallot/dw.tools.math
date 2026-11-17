@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS244",
+  "title": "Qualify immutable published dw.quantities net10 package in independent net11 consumer",
+  "commitMessage": "test: qualify published Math quantities binary in net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the physically published immutable dw.quantities NuGet archive and its original net10 DLL in an independent SDK11/net11 consumer.",
+    "value": "Read the exact NUGET_LOCAL archive from RS137; require archive and DLL SHA-256, restore a source-free exact PackageReference under SDK 11.0.100/net11/C#15, execute arithmetic and refusal assertions, and re-hash the original archive. No repacking or publishing.",
+    "debtChanges": [
+      "RS243 succeeded first-pass at attempt 001 and qualified canonical exact parsing under Ubuntu WSL .NET11.",
+      "RS137 independently verified published dw.quantities 20260.20261102.1001; RS244 tests its net11 consumer without implying other binary package compatibility or M8 readiness."
+    ],
+    "nextAction": "Extend independent immutable package consumption to Linux and dependent published quantities packages, using exact physical feed identities.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedQuantitiesBinary.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11PublishedQuantitiesBinary.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11PublishedQuantitiesBinary.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS243/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS243/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f4-quantities-published-qualified.json",
+      "jsonPointer": "/observation/packageVersion",
+      "expectedValue": "20260.20261102.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-published-quantities-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11PublishedQuantitiesBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
