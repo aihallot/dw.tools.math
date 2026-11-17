@@ -80,7 +80,7 @@ string RunLinux(params string[] arguments)
 {
     var command = new List<string>
     {
-        "--exec", "bash", "-c", "cd \"$1\" && shift && dotnet \"$@\"", "bash", linuxRoot
+        "--exec", "bash", "-lc", "cd \"$1\" && shift && dotnet \"$@\"", "bash", linuxRoot
     };
     command.AddRange(arguments);
     return Wsl(command.ToArray());
