@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS238",
+  "title": "Qualify Math exact text parsing parity on .NET 10 C# 14 versus .NET 11 C# 15",
+  "commitMessage": "test: qualify exact parser parity on net10 and net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compare canonical ExactRational parsing and invalid-input refusals under independent net10 and net11 source consumers.",
+    "value": "Copy nine unchanged quantities source files into offline SDK10/C#14 and SDK11/C#15 consumers; assert canonical decimal, mixed, fractional and negative-zero parsing, formatting and invalid denominator/decimal refusal, then require byte-exact result parity.",
+    "debtChanges": [
+      "RS237 succeeded first-pass attempt 001 for net10/net11 quantity dimensions, incompatible arithmetic refusal and checked exponent overflow.",
+      "RS238 adds bounded parsing and refusal parity but does not qualify full package compatibility or Linux runtime execution; M8-W02-C01 stays not-ready."
+    ],
+    "nextAction": "Extend migration qualification with independent package consumers and an optional Ubuntu WSL SDK11 run without requiring WSL for Windows DWF execution.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net10Net11ExactParserParity.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net10Net11ExactParserParity.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net10Net11ExactParserParity.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS237/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS237/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net10-net11-exact-parser-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net10Net11ExactParserParity.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
