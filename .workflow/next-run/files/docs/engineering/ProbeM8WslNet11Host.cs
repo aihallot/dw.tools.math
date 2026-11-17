@@ -46,8 +46,10 @@ Require(sdks.Split('\n', StringSplitOptions.RemoveEmptyEntries)
         sdks.Split('\n', StringSplitOptions.RemoveEmptyEntries)
         .Any(line => line.StartsWith("11.0.100 ", StringComparison.Ordinal)),
     "WSL does not expose the exact SDK 10.0.401 and 11.0.100 baselines.");
-var selected = RunLinux("dotnet --version");
-Require(selected == "11.0.100", "Default WSL SDK selection is not 11.0.100.");
+// A WSL invocation inherited from a Windows checkout can resolve its global.json.
+// Check the default Linux toolchain from a neutral home directory instead.
+var selected = RunLinux("cd \"$HOME\" && dotnet --version");
+Require(selected == "11.0.100", "Default WSL home-directory SDK selection is not 11.0.100.");
 var runtimes = RunLinux("dotnet --list-runtimes");
 Require(runtimes.Split('\n', StringSplitOptions.RemoveEmptyEntries)
         .Any(line => line.StartsWith("Microsoft.NETCore.App 10.", StringComparison.Ordinal)) &&
