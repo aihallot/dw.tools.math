@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS237",
+  "title": "Qualify dimension-aware Math quantity behavior parity under net10 C#14 and net11 C#15",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math quantity dimension parity on net10 and net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compare unchanged Quantity and DimensionVector behavior under net10/C#14 and net11/C#15 against an exact independent oracle.",
+    "value": "Copy nine dw.quantities source files into separate offline SDK 10 and 11 consumers. Verify compatible exact addition, incompatible dimension refusal, multiplication/division dimensions and checked dimension exponent overflow. Require matching canonical output; do not change production SDK or packages.",
+    "debtChanges": [
+      "RS236 succeeded first-pass on attempt 001, qualifying bounded ExactRational canonical parity across net10/net11.",
+      "RS237 extends parity to real dimension-aware operations and overflow refusal without claiming all package binary/semantic compatibility or M8 readiness."
+    ],
+    "nextAction": "Qualify a targeted Complex/numeric boundary and independent immutable package consumers before proposing framework cutover.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net10Net11QuantityDimensionParity.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net10-net11-quantity-dimension-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net10Net11QuantityDimensionParity.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
