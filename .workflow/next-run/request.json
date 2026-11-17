@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS240",
+  "title": "Qualify observed Ubuntu WSL Linux x64 SDK10 SDK11 host before Math cross-platform consumers",
+  "commitMessage": "test: qualify Ubuntu WSL net10 net11 SDK host",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the default Ubuntu WSL environment can supply the observed Linux x64 .NET 10 and 11 SDK/runtime baselines.",
+    "value": "Install a read-only Windows-to-WSL host probe checking Ubuntu 24.04, x86_64, installed SDK 10.0.401 and 11.0.100, the default SDK choice and both runtime majors. Do not change WSL configuration, invoke a Math Linux consumer or claim cross-platform compatibility.",
+    "debtChanges": [
+      "RS239 succeeded first-pass attempt 001 for exact temperature conversion and invalid-operation parity under net10 and net11.",
+      "The operator supplied evidence of Ubuntu 24.04 WSL with SDK 10.0.401 and 11.0.100; RS240 independently checks host readiness without changing packages or M8 state."
+    ],
+    "nextAction": "Use a separate isolated Linux Math source consumer in WSL and then qualify immutable NuGet binary consumers before framework migration decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11Host.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11Host.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11Host.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS239/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS239/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-net10-net11-host-readiness",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11Host.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
