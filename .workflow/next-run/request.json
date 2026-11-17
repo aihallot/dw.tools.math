@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS243",
+  "title": "Qualify exact rational parser on Ubuntu WSL Linux x64 net11 C#15 against RS238 oracle",
+  "commitMessage": "test: qualify Math exact parser Linux WSL net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify exact rational parsing, normalization and rejection behavior under Linux x64 SDK11/C#15 against the RS238 oracle.",
+    "value": "Reuse the qualified WSL login-shell and a separate offline nine-source quantities consumer, run under Linux x64 and assert canonical decimal, mixed and fractional parsing plus invalid-input refusal. Preserve immutable packages, production SDK pins and M8 not-ready state.",
+    "debtChanges": [
+      "RS242 succeeded attempt 001 after one preselection refusal, so its firstPassSucceeded is false; Linux exact temperature behavior is qualified.",
+      "RS243 extends Linux source evidence to exact parsing; neither this test nor previous source probes certify published NuGet binaries or all Math behavior."
+    ],
+    "nextAction": "Prioritize independent immutable NuGet package consumption on net10 and net11, with Linux qualification where available.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11ExactParserConsumer.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11ExactParserConsumer.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11ExactParserConsumer.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS242/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS242/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-exact-parser-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11ExactParserConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
