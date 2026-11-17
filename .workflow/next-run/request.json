@@ -9,10 +9,11 @@
   ],
   "contribution": {
     "summary": "Verify the default Ubuntu WSL environment can supply the observed Linux x64 .NET 10 and 11 SDK/runtime baselines.",
-    "value": "Install a read-only Windows-to-WSL host probe checking Ubuntu 24.04, x86_64, installed SDK 10.0.401 and 11.0.100, the default SDK choice and both runtime majors. Do not change WSL configuration, invoke a Math Linux consumer or claim cross-platform compatibility.",
+    "value": "Read-only Windows-to-WSL host check for Ubuntu 24.04, x86_64, installed SDKs 10.0.401/11.0.100, selected SDK from neutral Linux HOME, and both runtime majors. No WSL configuration or production repository mutation.",
     "debtChanges": [
       "RS239 succeeded first-pass attempt 001 for exact temperature conversion and invalid-operation parity under net10 and net11.",
-      "The operator supplied evidence of Ubuntu 24.04 WSL with SDK 10.0.401 and 11.0.100; RS240 independently checks host readiness without changing packages or M8 state."
+      "The operator supplied evidence of Ubuntu 24.04 WSL with SDK 10.0.401 and 11.0.100; RS240 independently checks host readiness without changing packages or M8 state.",
+      "RS240 initial invocation was refused at preselection before attempt allocation: inherited Windows checkout selected a different WSL SDK. This correction checks the neutral Linux home directory without changing the SDK or workflow methodology."
     ],
     "nextAction": "Use a separate isolated Linux Math source consumer in WSL and then qualify immutable NuGet binary consumers before framework migration decisions.",
     "achievements": []
