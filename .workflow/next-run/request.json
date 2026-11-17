@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS241",
+  "title": "Qualify real dw.quantities source consumer on Ubuntu WSL Linux x64 net11 C#15",
+  "commitMessage": "test: qualify Math quantities Linux WSL net11 consumer",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile and execute unchanged Math quantities source under Linux x64 .NET 11 via the qualified WSL host.",
+    "value": "Stage a Windows-invoked WSL test that copies nine existing source files into an ignored net11/C#15 offline consumer, uses the WSL-mapped workspace to restore/build/run with Linux dotnet, and asserts runtime identity, exact rational arithmetic and dimension mismatch refusal. No published package mutation.",
+    "debtChanges": [
+      "RS240 succeeded on attempt 001 after one preselection refusal; firstPassSucceeded=false and the Ubuntu WSL SDK host was qualified.",
+      "RS241 tests actual Linux execution of one source consumer; it does not qualify all thirteen Math packages, published NuGet binary compatibility, or M8 readiness."
+    ],
+    "nextAction": "Use Linux evidence to plan independent released-package consumers and review remaining deployment architecture gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS240/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS240/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-quantities-source-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11QuantitiesConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
