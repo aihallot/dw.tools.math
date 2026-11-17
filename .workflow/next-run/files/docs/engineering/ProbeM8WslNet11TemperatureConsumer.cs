@@ -56,7 +56,7 @@ File.WriteAllText(Path.Combine(root, "Program.cs"), """
         UnitTransformKind.AbsoluteTemperature);
     var freezing = celsius.ToBase(TemperatureMeasurement.Absolute(ExactRational.Zero));
     var freezingF = fahrenheit.FromBase(freezing);
-    var interval = celsius.ToBase(TemperatureMeasurement.Interval(new ExactRational(10)));
+    var interval = celsius.ToBase(TemperatureMeasurement.Interval(new ExactRational(10, 1)));
     var intervalF = fahrenheit.FromBase(interval);
     if (freezing.Value.ToFractionString() != "5463/20" ||
         freezingF.Value.ToFractionString() != "32" ||
