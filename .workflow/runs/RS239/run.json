@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS239",
+  "title": "Qualify affine temperature conversion parity in exact quantities under net10/net11",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math temperature parity on net10 and net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify exact Celsius/Fahrenheit temperature point and interval conversions across net10/C#14 and net11/C#15.",
+    "value": "Compile nine unchanged quantities sources in two isolated offline SDK10 and SDK11 consumers; assert canonical freezing point, interval scaling and refusal of invalid temperature arithmetic. Require identical deterministic results and leave production SDK, package archives and M8 state untouched.",
+    "debtChanges": [
+      "RS238 succeeded first-pass at attempt 001 for canonical exact parser and invalid-input refusal parity.",
+      "RS239 qualifies bounded affine temperature semantics; it does not certify published package binaries, all numerical behavior or Linux runtime compatibility."
+    ],
+    "nextAction": "Qualify independent released package consumers under net10/net11 or a separately evidenced Linux runtime gate before migration promotion.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net10Net11TemperatureParity.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net10-net11-temperature-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net10Net11TemperatureParity.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
