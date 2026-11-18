@@ -1,11 +1,11 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Probe = "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs";
+const string Probe = "docs/engineering/ProbeM8WslNet11DistributionProjectGraph.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS250", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS249", 1,
-    "test: qualify published Math Standard binaries on Linux net11",
+p.Workflow.RequireCurrentRun("RS251", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS250", 1,
+    "test: qualify Math distribution project graph on net11",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
