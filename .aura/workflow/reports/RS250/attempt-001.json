@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS250",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-18T15:32:23.0879667+00:00",
+  "completedAtUtc": "2026-11-18T15:32:23.7856891+00:00",
+  "durationMilliseconds": 697,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS250/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-a843d4019e534824b0a8822497c04be8\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 534,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS250 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS249/attempt-001.json run=RS249 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.text-contains] VERIFIED path=src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj semantic text found\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM8Net11DistributionProjectGraph.cs bytes=6381\r\n[payload] OK operations=8 changed=1 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS250/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS250 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ff97f4114d3ad97f01c3608d5ee72b55684d0b741da61285fed93079a23dd0fb",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS249/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS249 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "6a350551fb2deec5d9c9969a98f3221a409f82d988527bf1ad4c2756ee0a5092",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "text-contains",
+        "Path": "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+        "Status": 0,
+        "Summary": "semantic text found",
+        "Details": "comparison=Ordinal normalizeLineEndings=False trimOuterWhitespace=False",
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs",
+        "Status": 1,
+        "Summary": "bytes=6381",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "05bd450cdccee77fa16e91684429329735794668a96ba14615ee6837cd53e358",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-net11-distribution-seven-project-graph",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261118T153125Z-9e3aabf4f500dfe2",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "70647aedf2877a5b10d95bfe31deae0a1e2d0881",
+  "invocationStartedAtUtc": "2026-11-18T15:31:25.1713589+00:00",
+  "invocationDurationMilliseconds": 58614,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS250",
+      "title": "Qualify isolated net11 distribution seven-project source graph with genuine project boundaries",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Compile and run the previously unqualified seven-project dw.tools.math.distribution dependency closure under SDK11/C#15.",
+      "value": "Mirror unchanged Math sources into isolated projects preserving the 12 genuine ProjectReference edges; build separate assemblies and an independent .NET11 consumer. Verify runtime, all seven assembly identities and exact rational behavior. No production SDK, source, NuGet or release mutations.",
+      "debtChanges": [
+        "RS249 succeeded first-pass attempt 001 for the Standard-Expression-Quantities immutable published package closure under Linux net11.",
+        "M8 audit explicitly leaves distribution graph build unqualified. RS250 targets the seven-project source graph without claiming all Math APIs or production migration."
+      ],
+      "nextAction": "Reconcile distribution topology evidence and remaining behavioral, packaging, rollback and platform gates before considering M8 migration.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-net11-distribution-seven-project-graph",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS250",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS250",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "70647aedf2877a5b10d95bfe31deae0a1e2d0881",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "973573a93b92720c9d793cffc408a37e34fd3ec0e06e56ae7ba51b90c2eb9cf5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify Math distribution project graph on net11",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
