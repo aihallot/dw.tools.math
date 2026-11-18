@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS253",
+  "title": "Qualify net11 isolated Distribution seven-project locked restore topology",
+  "state": "prepared",
+  "commitMessage": "test: qualify Math distribution net11 locked restore",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify deterministic locked restore on the seven-project distribution source graph under SDK11.",
+    "value": "Mirror the original seven-project, twelve-edge ProjectReference topology into an isolated workspace with NuGet sources cleared. Restore to create lock files, then use locked mode and verify lock hashes and project boundaries without recompiling binaries or changing existing packages.",
+    "debtChanges": [
+      "RS252 succeeded first-pass attempt 001 and reconciled RS240-RS251 migration evidence without approving M8.",
+      "RS253 targets isolated project graph lock stability only; immutable package graph locks, runtime compatibility breadth and deployment remain open."
+    ],
+    "nextAction": "Extend locked restore to exact physically published Math package dependencies, then address outstanding behavior and migration gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11DistributionLockedRestore.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-distribution-locked-restore",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11DistributionLockedRestore.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
