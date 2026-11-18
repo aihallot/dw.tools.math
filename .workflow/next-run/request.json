@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "id": "RS252",
+  "title": "Reconcile M8 net11 evidence RS240-RS251 without manufacturing migration acceptance",
+  "commitMessage": "docs: reconcile Math net11 distribution and binary evidence",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Reconcile verified SDK11 Math source graph and immutable NuGet consumer evidence against remaining migration gates.",
+    "value": "Update the existing M8 migration audit from durable RS240-RS251 receipts and add a focused C# validator that checks first-pass lineage, exact successful runs and unchanged production SDK/TFM. Keep M8 not-ready, no new publication or migration claims.",
+    "debtChanges": [
+      "RS251 succeeded first-pass attempt 001; Distribution source graph is now boundedly qualified under Windows/Linux net11.",
+      "RS244-RS249 cover three immutable Quantities-family NuGet packages, not all Math packages. Remaining restore, compatibility, deployment and rollback gates stay open."
+    ],
+    "nextAction": "Qualify the actual locked restore and dependency topology before considering further package ABI or production SDK migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+      "sourcePath": "files/docs/engineering/m8-net11-csharp15-migration-evidence.md"
+    },
+    {
+      "path": "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs",
+      "sourcePath": "files/docs/engineering/ValidateM8Net11EvidenceReconciliation.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS251/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS251/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-reconciled-net11-reports-and-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
