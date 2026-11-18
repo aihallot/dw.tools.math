@@ -1,11 +1,11 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Probe = "docs/engineering/ProbeM8Net10Net11PublishedQuantitiesParity.cs";
+const string Probe = "docs/engineering/ProbeM8WslNet11PublishedQuantitiesBinary.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS245", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS244", 1,
-    "test: qualify published Math quantities binary in net11 consumer",
+p.Workflow.RequireCurrentRun("RS246", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS245", 1,
+    "test: qualify published Math quantities net10 net11 binary parity",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
