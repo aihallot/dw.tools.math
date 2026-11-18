@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS250",
+  "title": "Qualify isolated net11 distribution seven-project source graph with genuine project boundaries",
+  "commitMessage": "test: qualify Math distribution project graph on net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Compile and run the previously unqualified seven-project dw.tools.math.distribution dependency closure under SDK11/C#15.",
+    "value": "Mirror unchanged Math sources into isolated projects preserving the 12 genuine ProjectReference edges; build separate assemblies and an independent .NET11 consumer. Verify runtime, all seven assembly identities and exact rational behavior. No production SDK, source, NuGet or release mutations.",
+    "debtChanges": [
+      "RS249 succeeded first-pass attempt 001 for the Standard-Expression-Quantities immutable published package closure under Linux net11.",
+      "M8 audit explicitly leaves distribution graph build unqualified. RS250 targets the seven-project source graph without claiming all Math APIs or production migration."
+    ],
+    "nextAction": "Reconcile distribution topology evidence and remaining behavioral, packaging, rollback and platform gates before considering M8 migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11DistributionProjectGraph.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS249/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS249/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-distribution-seven-project-graph",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11DistributionProjectGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
