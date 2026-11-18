@@ -1,11 +1,11 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Probe = "docs/engineering/ProbeM8Net11PublishedStandardBinary.cs";
+const string Probe = "docs/engineering/ProbeM8WslNet11PublishedStandardBinary.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS248", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS247", 1,
-    "test: qualify published Math Expression binaries on net11",
+p.Workflow.RequireCurrentRun("RS249", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS248", 1,
+    "test: qualify published Math Standard binaries on net11",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
