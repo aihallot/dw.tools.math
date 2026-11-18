@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS254",
+  "title": "Qualify exact locked restore of published Standard Expression Quantities NuGet dependency closure under net11",
+  "commitMessage": "test: qualify published Math Standard net11 locked restore",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify SDK11 locked package restore and direct/transitive topology for the three published immutable Math Quantities-family archives.",
+    "value": "Create a disposable source-free net11 Standard consumer with exact NuGet reference, inspect packages.lock.json for the exact three package versions and dependency kinds, restore again in locked mode, compare lock SHA-256, and rerun the original RS143 ten-check fixture. Read and rehash NUGET_LOCAL originals only.",
+    "debtChanges": [
+      "RS253 succeeded first-pass attempt 001 for the isolated seven-project Distribution source graph locked restore.",
+      "RS254 targets the separate published three-package NuGet lock and dependency topology; other Math libraries, deployment/rollback and M8 readiness remain unqualified."
+    ],
+    "nextAction": "Qualify the published three-package locked restoration under Linux and inspect additional published Math package identities before migration decisions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedStandardLockedRestore.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11PublishedStandardLockedRestore.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11PublishedStandardLockedRestore.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS253/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS253/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f10-standard-published-qualified.json",
+      "jsonPointer": "/observation/packageVersion",
+      "expectedValue": "20260.20261103.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-published-standard-net11-locked-restore",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11PublishedStandardLockedRestore.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
