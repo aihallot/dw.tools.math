@@ -107,7 +107,7 @@ foreach (var item in hashes)
             File.ReadAllBytes(item.Path))) == item.Sha,
         "Locked restore changed dependency lock: " + item.Path);
 Require(graph.Count == 7 && graph.Values.Sum(x => x.Length) == 12 &&
-    File.ReadAllText("NuGet.Config").Contains("<clear />", StringComparison.Ordinal),
+    File.ReadAllText(Path.Combine(root, "NuGet.Config")).Contains("<clear />", StringComparison.Ordinal),
     "Distribution topology or isolated feed policy drift.");
 Console.WriteLine("MATH-RS253-LOCKED-RESTORE|sdk=11.0.100|net=11.0|projects=7|" +
     "edges=12|consumerLock=present|lockedRestore=pass|locksStable=true|" +
