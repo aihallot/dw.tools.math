@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS252",
+  "title": "Reconcile M8 net11 evidence RS240-RS251 without manufacturing migration acceptance",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile Math net11 distribution and binary evidence",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Reconcile verified SDK11 Math source graph and immutable NuGet consumer evidence against remaining migration gates.",
+    "value": "Update the existing M8 migration audit from durable RS240-RS251 receipts and add a focused C# validator that checks first-pass lineage, exact successful runs and unchanged production SDK/TFM. Keep M8 not-ready, no new publication or migration claims.",
+    "debtChanges": [
+      "RS251 succeeded first-pass attempt 001; Distribution source graph is now boundedly qualified under Windows/Linux net11.",
+      "RS244-RS249 cover three immutable Quantities-family NuGet packages, not all Math packages. Remaining restore, compatibility, deployment and rollback gates stay open."
+    ],
+    "nextAction": "Qualify the actual locked restore and dependency topology before considering further package ABI or production SDK migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-reconciled-net11-reports-and-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
