@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS263",
+  "title": "Qualify immutable published Statistics and Quantities binaries under Ubuntu WSL Linux net11",
+  "state": "prepared",
+  "commitMessage": "test: qualify published Math Statistics binaries on Linux net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify the original published Statistics-Quantities two-package binary consumer under Ubuntu WSL Linux x64 net11.",
+    "value": "Verify RS160 and RS137 immutable archive and packaged DLL hashes, copy the original published archives to an isolated WSL feed, restore source-free Statistics PackageReference under Linux SDK11, execute the original eighteen statistical checks and rehash source and snapshot archives. No publishing or production SDK changes.",
+    "debtChanges": [
+      "RS262 succeeded first-pass attempt 001 with the published Statistics-Quantities binary closure on Windows net11.",
+      "RS263 extends bounded immutable Statistics binary qualification to Linux x64 net11; wider numerical compatibility, rollback and M8 readiness remain open."
+    ],
+    "nextAction": "Inspect remaining published Math libraries and relevant numerical changes before proposing any production migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedStatisticsBinary.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-published-statistics-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11PublishedStatisticsBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
