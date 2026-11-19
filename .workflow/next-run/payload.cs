@@ -1,12 +1,12 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
-const string Probe = "docs/engineering/ProbeM8Net11PublishedStandardLockedRestore.cs";
+const string Probe = "docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs";
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS254", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS253", 1,
-    "test: qualify Math distribution net11 locked restore",
-    "0.1.66", 0, 0, 0, true);
+p.Workflow.RequireCurrentRun("RS255", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS254", 1,
+    "test: qualify published Math Standard net11 locked restore",
+    "0.1.66", 1, 1, 0, false);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02-C01", "not-ready");
