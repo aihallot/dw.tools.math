@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS259",
+  "title": "Qualify immutable published Codecs IR Quantities binary closure under Ubuntu WSL Linux net11",
+  "state": "prepared",
+  "commitMessage": "test: qualify published Math Codecs binaries on Linux net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Execute the published Codecs-IR-Quantities three-package binary consumer on Ubuntu WSL x64 net11.",
+    "value": "Verify each original NUGET_LOCAL archive and packaged DLL hash, copy immutable archives into an isolated WSL-visible feed, restore exact Codecs PackageReference under SDK11/C#15, run the original RS163 fifteen-check binary fixture and rehash originals and copies. No republishing or production migration.",
+    "debtChanges": [
+      "RS258 succeeded first-pass attempt 001 for published Codecs-IR-Quantities binary closure under Windows net11.",
+      "RS259 extends bounded published Codecs binary evidence to Linux net11; it does not qualify all Math packages or make M8 ready."
+    ],
+    "nextAction": "Review remaining immutable published Math package identities and prioritize cross-runtime compatibility gaps.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedCodecsBinary.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-linux-net11-published-codecs-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11PublishedCodecsBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
