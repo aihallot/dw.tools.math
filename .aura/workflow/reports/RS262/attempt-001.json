@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS262",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-19T17:59:49.6470525+00:00",
+  "completedAtUtc": "2026-11-19T17:59:50.3348109+00:00",
+  "durationMilliseconds": 687,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedStatisticsBinary.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM8Net11PublishedStatisticsBinary.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS262/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-ed2c62ce03dd406ab0c2b3986a0042aa\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 521,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS262 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS261/attempt-001.json run=RS261 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f27-statistics-published-qualified.json pointer=/observation/packageVersion\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM8Net11PublishedStatisticsBinary.cs bytes=6119\r\n[payload] OK operations=8 changed=1 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS262/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS262 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "655be14956f6e91de002e0ab0d53da367daed900e170fc47bcf96e67e8fad63b",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS261/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS261 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f1b8ba8a5fd822fe2a7ffa4b5182cf7656f99040e60a74a4712be8a9de1fa543",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f27-statistics-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/observation/packageVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM8Net11PublishedStatisticsBinary.cs",
+        "Status": 1,
+        "Summary": "bytes=6119",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b0edd4f86add560a780ef0e0b8eddb67374edf64dba3b7310a34bb7500f63566",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-net11-published-statistics-binary-consumer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261119T175859Z-66adb0b7b27c5cfa",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "e399e0b19c94d1f1affc229defc3909275ec56d4",
+  "invocationStartedAtUtc": "2026-11-19T17:58:59.9109224+00:00",
+  "invocationDurationMilliseconds": 50423,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS262",
+      "title": "Qualify immutable published Statistics and Quantities binaries under independent Windows net11 consumer",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify published Statistics/Quantities binary dependency closure on Windows net11 with the original eighteen-check statistical consumer.",
+      "value": "Verify immutable RS160 and RS137 archive and DLL identities from NUGET_LOCAL, copy archives into an isolated feed, restore exact Statistics PackageReference under SDK11/C#15, execute the original eighteen-check fixture including descriptive, quantile, correlation, distribution and deterministic replay contracts; rehash originals and copies. No publication.",
+      "debtChanges": [
+        "RS261 succeeded first-pass attempt 001 for published Composition-IR-Quantities binaries under Linux x64 net11.",
+        "RS262 extends published binary coverage to Statistics and Quantities under Windows net11; Linux, broader Math behavior and M8 readiness remain open."
+      ],
+      "nextAction": "Qualify unchanged published Statistics binary closure on Linux net11, then prioritize remaining physically published Math packages and rollout gates.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/ProbeM8Net11PublishedStatisticsBinary.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-net11-published-statistics-binary-consumer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS262",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS262",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "e399e0b19c94d1f1affc229defc3909275ec56d4",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "94d4a2789453fc52f6e3b69e62c38476d56a25fe8befe32137cfd9e660bcea20"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify published Math Statistics binaries on net11",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
