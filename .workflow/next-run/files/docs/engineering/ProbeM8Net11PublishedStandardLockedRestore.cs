@@ -92,8 +92,9 @@ using (var document = JsonDocument.Parse(File.ReadAllText(lockFile)))
 {
     var frameworks = document.RootElement.GetProperty("dependencies");
     Require(frameworks.EnumerateObject().Count() == 1 &&
-        frameworks.TryGetProperty("net11.0", out var framework),
+        frameworks.TryGetProperty("net11.0", out _),
         "Lock must contain exactly net11.0 dependencies.");
+    var framework = frameworks.GetProperty("net11.0");
     var locked = framework.EnumerateObject().ToDictionary(
         item => item.Name, item => item.Value, StringComparer.OrdinalIgnoreCase);
     Require(locked.Count == packages.Length, "Lock closure must contain exactly three packages.");
