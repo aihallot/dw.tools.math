@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS256",
+  "title": "Qualify published IR and Quantities binaries in independent net11 consumer with original fifteen-check fixture",
+  "commitMessage": "test: qualify published Math IR binaries on net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify immutable published dw.tools.math.ir and dw.quantities binaries on net11/C#15 through the original fifteen-check consumer.",
+    "value": "Verify physical RS146/RS137 NuGet archive and DLL SHA-256 identities from NUGET_LOCAL, copy two archives to a temporary isolated feed, restore an exact IR PackageReference, and execute original fifteen-check fixture under SDK11. Rehash originals and copies; never publish or mutate original packages.",
+    "debtChanges": [
+      "RS255 succeeded first-pass attempt 001 for Linux net11 locked restore of the published Standard-Expression-Quantities closure.",
+      "RS256 advances the separate immutable IR-Quantities package closure from its original net10 RS146 proof to a net11 consumer; other Math binaries and M8 gates remain open."
+    ],
+    "nextAction": "Qualify the exact IR dependency closure under Linux net11 and prioritize other physically published Math binaries for migration coverage.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedIrBinary.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8Net11PublishedIrBinary.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8Net11PublishedIrBinary.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS255/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS255/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f13-ir-published-qualified.json",
+      "jsonPointer": "/observation/packageVersion",
+      "expectedValue": "20260.20261104.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-published-ir-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11PublishedIrBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
