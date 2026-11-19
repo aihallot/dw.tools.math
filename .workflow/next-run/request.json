@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS257",
+  "title": "Qualify published Math IR and Quantities immutable binaries under Linux WSL SDK11",
+  "commitMessage": "test: qualify published Math IR binaries on Linux net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the immutable IR/Quantities binary dependency closure and original fifteen-check fixture on Ubuntu WSL Linux x64 net11.",
+    "value": "Re-use the RS256 verified archive snapshots and fifteen-check binary fixture in a Linux WSL net11/C#15 independent source-free PackageReference consumer, check the loaded DLL hashes and bounded numeric/IR contracts, then rehash both original feed archives and snapshots. No publication.",
+    "debtChanges": [
+      "RS256 succeeded first-pass attempt 001 for published IR and Quantities binary consumption on Windows net11.",
+      "RS257 independently checks the same two immutable packages on Linux net11, without certifying all Math public APIs, rollback or M8 readiness."
+    ],
+    "nextAction": "Continue published dependent Math package qualification from exact physical evidence; retain M8 not-ready pending complete migration gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedIrBinary.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11PublishedIrBinary.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11PublishedIrBinary.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS256/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS256/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f13-ir-published-qualified.json",
+      "jsonPointer": "/observation/packageVersion",
+      "expectedValue": "20260.20261104.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-linux-net11-published-ir-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11PublishedIrBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
