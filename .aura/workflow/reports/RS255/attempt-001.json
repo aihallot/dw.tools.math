@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS255",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-19T10:08:56.6003136+00:00",
+  "completedAtUtc": "2026-11-19T10:08:57.2500724+00:00",
+  "durationMilliseconds": 649,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS255/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-aeae272e30d347b0aaffe48b54ec71ba\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 506,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS255 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS254/attempt-001.json run=RS254 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/distribution/nuget-federation-f10-standard-published-qualified.json pointer=/observation/packageVersion\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs bytes=8683\r\n[payload] OK operations=8 changed=1 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS255/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS255 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e3b3ae7c208039b411a5dcde568c36837cf4d60df2ee50c302f4aa19003e6ebe",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS254/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS254 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "cb6324c23330dbfb9732781cc6fbcfb578820f0600cbbb1d50d0c37e811b2e76",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/distribution/nuget-federation-f10-standard-published-qualified.json",
+        "Status": 0,
+        "Summary": "pointer=/observation/packageVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs",
+        "Status": 1,
+        "Summary": "bytes=8683",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7e6f3fd0eaa83957c2db9ff7ffac6acec9b53a708d03001a829b0f3ecea16eab",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-wsl-linux-net11-published-standard-locked-restore",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261119T100750Z-ba7fcbca4efcdcd6",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "4ccc764fbc9b2358db5f494392f14c7cfbbcd74b",
+  "invocationStartedAtUtc": "2026-11-19T10:07:50.3274351+00:00",
+  "invocationDurationMilliseconds": 66922,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS255",
+      "title": "Qualify Linux WSL net11 locked restore of published Standard Expression Quantities NuGet closure",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Qualify locked NuGet restoration of the published three-package Standard closure on Ubuntu WSL Linux x64 SDK11.",
+      "value": "Reuse RS249 WSL source-free binary fixture and verified immutable archive copies; create and inspect net11 packages.lock.json for the three expected direct/transitive identities, re-restore with --locked-mode, check lock hash stability, then execute all ten RS143 binary checks. Never modify original NUGET_LOCAL feed.",
+      "debtChanges": [
+        "RS254 succeeded attempt 001 after one preselection compilation refusal; firstPassSucceeded=false; Windows net11 three-package locked restore is qualified.",
+        "RS255 checks Linux net11 locked restore for the same published three-package dependency closure; other Math packages, deployment/rollback and M8 completion remain open."
+      ],
+      "nextAction": "Audit physically published dependent Math archives and choose the next independent net11 binary compatibility gate.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/ProbeM8WslNet11PublishedStandardLockedRestore.cs"
+      ],
+      "validations": [
+        {
+          "id": "m8-wsl-linux-net11-published-standard-locked-restore",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS255",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS255",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "4ccc764fbc9b2358db5f494392f14c7cfbbcd74b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "d9bb94ddba03e6a5caa09598278afeee708b48242b93310efcdf37d8f2db796b"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify published Math Standard Linux net11 locked restore",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
