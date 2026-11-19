@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS261",
+  "title": "Qualify published Composition IR Quantities immutable binaries under Ubuntu WSL Linux net11",
+  "commitMessage": "test: qualify published Math Composition binaries on Linux net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the original published Composition-IR-Quantities binary closure on Ubuntu WSL Linux x64 net11 with its fifteen-check fixture.",
+    "value": "Check physical archive/DLL SHA-256 identities from the existing local private feed, copy unchanged published archives to an isolated WSL feed, restore exact Composition PackageReference with Linux SDK11/C#15, execute the original RS167 fifteen-check consumer and rehash originals and copies. Never publish or mutate production.",
+    "debtChanges": [
+      "RS260 succeeded first-pass attempt 001 and qualified the Composition-IR-Quantities published binary closure on Windows net11.",
+      "RS261 extends published Composition binary evidence to Linux x64 net11 without claiming untested Math modules, broader runtime behavior or M8 readiness."
+    ],
+    "nextAction": "Inspect remaining published Math package binaries, runtime compatibility deltas and rollout/rollback boundaries before any production migration.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedCompositionBinary.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8WslNet11PublishedCompositionBinary.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8WslNet11PublishedCompositionBinary.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS260/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS260/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/distribution/nuget-federation-f34-composition-published-qualified.json",
+      "jsonPointer": "/observation/packageVersion",
+      "expectedValue": "20260.20261107.1001"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-published-composition-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11PublishedCompositionBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
