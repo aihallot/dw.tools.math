@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS260",
+  "title": "Qualify immutable published Composition IR Quantities binaries in independent Windows net11 consumer",
+  "state": "prepared",
+  "commitMessage": "test: qualify published Math Composition binaries on net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the original immutable Composition-IR-Quantities three-package binary closure with the fifteen-check consumer on Windows net11.",
+    "value": "Check original RS167/RS146/RS137 archive and packaged DLL SHA-256 identities, copy exact private NuGet archives to an isolated feed, restore an independent Composition PackageReference under SDK11/C#15, execute all fifteen original package-only checks and rehash originals and snapshots without publishing.",
+    "debtChanges": [
+      "RS259 succeeded first-pass attempt 001 for the published Codecs-IR-Quantities binary closure under Ubuntu WSL Linux net11.",
+      "RS260 advances the separately published Composition-IR-Quantities package closure to Windows net11; Linux, broader Math behavior and M8 migration gates remain open."
+    ],
+    "nextAction": "Qualify the unchanged published Composition binary closure on Linux net11, then assess other published Math families and remaining migration gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedCompositionBinary.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-net11-published-composition-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11PublishedCompositionBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
