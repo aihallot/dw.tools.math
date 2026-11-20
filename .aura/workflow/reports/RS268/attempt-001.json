@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS268",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-20T17:45:33.8202254+00:00",
+  "completedAtUtc": "2026-11-20T17:45:34.4265971+00:00",
+  "durationMilliseconds": 606,
+  "projectNodes": [
+    "M9"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+    "docs/distribution/bounded-integer-sampling.md"
+  ],
+  "changedPaths": [
+    "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+    "docs/distribution/bounded-integer-sampling.md",
+    "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261120T152343Z-610c98c521589707"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261120T152343Z-610c98c521589707",
+        "runId": "RS268",
+        "scope": "preselection-rs268",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs268/run-next-20261120T152343Z-610c98c521589707"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS268/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 900,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-42892c4155134229b3eaf8c5575130c4\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 900000,
+      "DurationMilliseconds": 477,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS268 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS267/attempt-001.json run=RS267 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=src/projects/dw.tools.math.statistics/SplitMix64Random.cs bytes=5168\r\n[files.replace-from-staged] CHANGED path=tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs bytes=6529\r\n[files.replace-from-staged] CHANGED path=docs/distribution/bounded-integer-sampling.md bytes=2127\r\n[payload] OK operations=11 changed=3 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS268/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS268 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "37d15e670dcd4ed12ff003d1d9c9cea3748824f6f16c3c597b42f577f5ed0fcd",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS267/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS267 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0ac66b72dd3cd88c8222d20ae3332f1e728c661f65c51a969629c9caf710d051",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "Status": 1,
+        "Summary": "bytes=5168",
+        "Details": null,
+        "BeforeSha256": "e84b02dd47391bd63dae99ae26ed3624b74693c1d56220109205c556428f31ee",
+        "AfterSha256": "9c1ca16250090fd58aac645052903e25090f9b5058d0df138161f4fee1c2eba4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+        "Status": 1,
+        "Summary": "bytes=6529",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2d24c4f58a583ca3b0cb8ccd06e3004846818c0a734da8948a95f3bca3242f35",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/distribution/bounded-integer-sampling.md",
+        "Status": 1,
+        "Summary": "bytes=2127",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "9d3808aa7621e48a00965a998426fe5c973401c74a9179312241e8819f23deb1",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m9-bounded-integer-exact-regressions",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m3-existing-splitmix-regressions",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261120T174447Z-4a01f0072c5143e9",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "d3762658d719237816e98248101275ec6300d6e6",
+  "invocationStartedAtUtc": "2026-11-20T17:44:47.6687961+00:00",
+  "invocationDurationMilliseconds": 46757,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS268",
+      "title": "Implement generic bounded SplitMix64 integer sampling with rejection proof and deterministic regression",
+      "projectNodes": [
+        "M9"
+      ]
+    },
+    "declared": {
+      "summary": "Implement and qualify a generic versioned unbiased bounded integer transformation for SplitMix64, including exact counter, budget and checkpoint behavior.",
+      "value": "Add two bounded methods to the existing noncryptographic SplitMix64Random, preserving raw generator vectors, and target independent exhaustive 8-bit rejection proof, forced raw-word rejection, output boundaries, signed extremes, typed invalid-input and counter refusals, replay and existing statistics regressions. Do not pack or publish.",
+      "debtChanges": [
+        "RS267 succeeded attempt 001 after two preselection refusals; its first-pass indicator is false. Canonical M9 backlog v0.1.124 and native planned hierarchy are admitted.",
+        "RS268 implements only M9 T1 source behavior and bounded tests. A new immutable Statistics candidate, source-free net11 binary consumer, rights and publication remain separate gates.",
+        "RS268 initial invocation refused before attempt allocation: MSTEST0032 on a compile-time constant assertion. Corrected test via reflected version field and fixed the full-range signed golden oracle; no product implementation changed."
+      ],
+      "nextAction": "Build a nonpublished versioned Statistics NuGet candidate and independently consume its new bounded API using a real net11 PackageReference; only then assess authorized publication.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/distribution/bounded-integer-sampling.md",
+        "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs"
+      ],
+      "validations": [
+        {
+          "id": "m9-bounded-integer-exact-regressions",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m3-existing-splitmix-regressions",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M9",
+        "objective": "Cross-consumer deterministic bounded integer sampling",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS268",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS268",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "d3762658d719237816e98248101275ec6300d6e6",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "193a168ce00e2c0cd39e1276990c9eb1a0528e6ec12a09d63a4fa3d21370d8da"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: implement bounded unbiased SplitMix64 integer draws",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
