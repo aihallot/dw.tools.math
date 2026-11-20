@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS271",
+  "title": "Verify bounded Statistics private publication readiness without modifying NUGET_LOCAL",
+  "state": "prepared",
+  "commitMessage": "test: qualify bounded Statistics private release readiness",
+  "timeoutSeconds": 660,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Establish read-only private release readiness for the bounded Statistics candidate qualified via a net11 consumer, leaving owner publication authorization explicit.",
+    "value": "Check durable RS268\u2013RS270 provenance, owner rights, exact immutable Quantities/old Statistics archive hashes, regenerate candidate only in disposable artifacts, verify candidate identity/dependency/DLL SHA, and refuse any collision with published version. Do not invoke publication.",
+    "debtChanges": [
+      "RS270 succeeded attempt 001 after one preselection compiler refusal; independent net11 PackageReference bounded Statistics candidate passed 12 checks and locked restore.",
+      "RS271 is a prepublication assessment only: no new NuGet version is in NUGET_LOCAL, no owner release permission is inferred, and Assessa adoption stays blocked pending real private publication/readback."
+    ],
+    "nextAction": "Seek explicit owner authorization for private feed publication of dw.tools.math.statistics 20260.20261120.1001; only then prepare separate publication/readback DWF runs and hand the factual package receipt to Assessa.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 440
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9StatisticsPrivateReadiness.cs",
+    "docs/distribution/m9-statistics-private-publication-readiness.md"
+  ],
+  "validations": [
+    {
+      "id": "m9-statistics-private-readiness-no-publish",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9StatisticsPrivateReadiness.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
