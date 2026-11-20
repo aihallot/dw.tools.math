@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS267",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-20T14:48:21.8504743+00:00",
+  "completedAtUtc": "2026-11-20T14:48:22.3655387+00:00",
+  "durationMilliseconds": 515,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateAssessaM9Admission.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 2,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261120T101811Z-1e1ee3348618d357",
+      "run-next-20261120T124031Z-c78bd9fd896fdfeb"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261120T101811Z-1e1ee3348618d357",
+        "runId": "RS267",
+        "scope": "preselection-rs267",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs267/run-next-20261120T101811Z-1e1ee3348618d357"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261120T124031Z-c78bd9fd896fdfeb",
+        "runId": "RS267",
+        "scope": "preselection-rs267",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs267/run-next-20261120T124031Z-c78bd9fd896fdfeb"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS267/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-6b0423ee85a74d4882c9fe52408955cc\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 420000,
+      "DurationMilliseconds": 405,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS267 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS266/attempt-001.json run=RS266 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C03 state=done\r\n[files.replace-from-staged] CHANGED path=docs/planning/backlog.json bytes=534400\r\n[files.replace-from-staged] CHANGED path=.aura/workflow/plan/project.json bytes=191868\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11364\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=3090\r\n[payload] OK operations=8 changed=4 no-change=0 verified=4 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS267/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS267 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f2e597cbbaecafa0ebd01e972a19c04feb2fd00a44cb9b08d438c4a193dc29fd",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS266/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS266 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "defddef44593ba54982c1d030507dc28480787e64356e080e59e3393264556f3",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "bytes=534400",
+        "Details": null,
+        "BeforeSha256": "804ceda0c3c6e5d85f8d9c22c51f797549396822dfb35ab287cc8be05b6cc18b",
+        "AfterSha256": "ea3cf8fbdbfb6b92e13a92909679395e3c81d875bdd964e2d346426a03cb1782",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "bytes=191868",
+        "Details": null,
+        "BeforeSha256": "ba92e3d481499113d33c5319ecc52e6283b22f5c616edde206a16a38bb5de0c2",
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11364",
+        "Details": null,
+        "BeforeSha256": "758cc1c167cb97046cbc6430cc287cc13751d4df717dc06e106452e4c38fad43",
+        "AfterSha256": "0f4868693466a20c29d6198b48fe38fd3eb600f99b0b0bad21ce6bdbcf7ec97e",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=3090",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "da11e51c975896197a481bb018b7a7a7b430a091ad2d1c5451ba89ce7cbcdedd",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "native-backlog-hierarchy",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "assessa-m9-admission-contract",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261120T144735Z-b66d8a9d693975eb",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "304883fdf4b01059a1c22393247d7a7965183e2f",
+  "invocationStartedAtUtc": "2026-11-20T14:47:35.1343101+00:00",
+  "invocationDurationMilliseconds": 47231,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS267",
+      "title": "Admit independent M9 bounded integer sampling milestone into canonical Math backlog and native DWF plan",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Synchronize the new P0 Math-only M9 bounded integer sampling roadmap, native DWF hierarchy and projection validator, preserving completed M3 and unchanged M8.",
+      "value": "Add M9-W01-C01 with T1 source behavior and T2 independent package qualification in canonical backlog v0.1.124 and mirrored native plan; update adoption validator 580 to 591 nodes. All new nodes not-ready, no implementation or publication.",
+      "debtChanges": [
+        "RS266 recorded Assessa EG-A-01 MATH-XR-004 request without modifying any existing product lifecycle.",
+        "RS267 adds 11 planned native nodes in standalone M9 dependent on completed M3; project planning projections must be regenerated using the canonical renderer after mutation, without claiming qualified code.",
+        "RS267 first invocation was refused before attempt allocation (payload-target-reentry): a source baseline version assertion conflicted with its own staged v0.1.124 target. Removed only that payload assertion; request precondition retains v0.1.123 baseline guard.",
+        "RS267 retry 1 was refused pre-attempt by a pre-existing self-test that mutated an already-done chunk without invalidating it. Replaced that unrelated broken self-test with an executable M9-specific structural acceptance test; native plan parity remains mandatory."
+      ],
+      "nextAction": "Prioritize M9-W01-C01-T1 bounded source API with independent proof of rejection sampling, forced-rejection budget and checkpoint replay; do not work on M8 first.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json"
+      ],
+      "validations": [
+        {
+          "id": "native-backlog-hierarchy",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "assessa-m9-admission-contract",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS267",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS267",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "304883fdf4b01059a1c22393247d7a7965183e2f",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f2e733de399dc4c9346540e48af91641633a3c653bbf3fbc1c1738cb3880871a"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: admit Assessa bounded integer Math milestone",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
