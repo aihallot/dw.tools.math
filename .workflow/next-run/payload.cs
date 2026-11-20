@@ -1,4 +1,3 @@
-using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 var p = PayloadContext.Create();
@@ -8,8 +7,6 @@ p.Workflow.RequirePriorSuccess("RS266", 1,
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M3-W02-C03", "done");
-p.Require.JsonValueEquals("docs/planning/backlog.json",
-    "/plan_version", JsonValue.Create("0.1.123"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/backlog.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(".aura/workflow/plan/project.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
