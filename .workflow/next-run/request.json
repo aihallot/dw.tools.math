@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "RS269",
+  "title": "Construct and inspect unpublished bounded Statistics NuGet candidate with exact immutable Quantities dependency",
+  "commitMessage": "test: qualify unpublished bounded Statistics NuGet candidate",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Build an independently inspectable versioned Statistics NuGet candidate containing RS268 bounded integer sampling without publication.",
+    "value": "Package copied current Statistics sources in disposable isolated .NET 10 packaging projection with exact published dw.quantities dependency, inspect NuGet package ID/version/TFM/dependency closure and candidate DLL/ZIP SHA-256, and prove original feed remains unchanged. No installed/published package mutation or net11 consumer claim.",
+    "debtChanges": [
+      "RS268 succeeded attempt 001 after one preselection MSTest refusal; source-level unbiased bounded SplitMix64 with exact behavior and legacy regressions is qualified.",
+      "RS269 qualifies only an unpublished Statistics candidate 20260.20261120.1001, NOT a published artifact nor yet a net11 package-only consumer. Assessa adoption remains gated."
+    ],
+    "nextAction": "Qualify candidate archive under independent net11 PackageReference with existing Quantities dependency and bounded replay/refusal fixture; then obtain separate publishing authority if necessary.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 340
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
+      "sourcePath": "files/docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS268/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS268/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-unpublished-statistics-candidate-exact-package",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
