@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS269",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-20T20:49:43.343471+00:00",
+  "completedAtUtc": "2026-11-20T20:49:43.9339058+00:00",
+  "durationMilliseconds": 590,
+  "projectNodes": [
+    "M9"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261120T190124Z-e64d80afa6c793cd"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261120T190124Z-e64d80afa6c793cd",
+        "runId": "RS269",
+        "scope": "preselection-rs269",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs269/run-next-20261120T190124Z-e64d80afa6c793cd"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS269/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-7ad86114ef76409a826427afb0f5aa35\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 600000,
+      "DurationMilliseconds": 460,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS269 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS268/attempt-001.json run=RS268 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs bytes=8138\r\n[payload] OK operations=7 changed=1 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS269/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS269 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "46c220f5b60f135feff2d7e089c6de83f4b2bb0635a06e93c0e23e10575c6e35",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS268/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS268 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "58257a6cfd3c6856102eca5c33adbe35bb921f7c0604e1a7737af6268bd0f93b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
+        "Status": 1,
+        "Summary": "bytes=8138",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "386d8629543c86f1ed64b4f6b98af9e3ed284c1cfef8bf1ad483283f50843cbe",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m9-unpublished-statistics-candidate-exact-package",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261120T204901Z-cb84ee76a909add0",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "7ff1dc7e0846d7596b96c67f69a73a72114efcdf",
+  "invocationStartedAtUtc": "2026-11-20T20:49:01.1954918+00:00",
+  "invocationDurationMilliseconds": 42738,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS269",
+      "title": "Construct and inspect unpublished bounded Statistics NuGet candidate with exact immutable Quantities dependency",
+      "projectNodes": [
+        "M9"
+      ]
+    },
+    "declared": {
+      "summary": "Build an independently inspectable versioned Statistics NuGet candidate containing RS268 bounded integer sampling without publication.",
+      "value": "Package copied current Statistics sources in disposable isolated .NET 10 packaging projection with exact published dw.quantities dependency, inspect NuGet package ID/version/TFM/dependency closure and candidate DLL/ZIP SHA-256, and prove original feed remains unchanged. No installed/published package mutation or net11 consumer claim.",
+      "debtChanges": [
+        "RS268 succeeded attempt 001 after one preselection MSTest refusal; source-level unbiased bounded SplitMix64 with exact behavior and legacy regressions is qualified.",
+        "RS269 qualifies only an unpublished Statistics candidate 20260.20261120.1001, NOT a published artifact nor yet a net11 package-only consumer. Assessa adoption remains gated.",
+        "RS269 first invocation refused before attempt allocation: generated AssemblyVersion/FileVersion inherited calendar NuGet version incompatible with four-part assembly numeric fields. Isolated candidate now pins binary versions to 1.0.0.0 without changing package version."
+      ],
+      "nextAction": "Qualify candidate archive under independent net11 PackageReference with existing Quantities dependency and bounded replay/refusal fixture; then obtain separate publishing authority if necessary.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs"
+      ],
+      "validations": [
+        {
+          "id": "m9-unpublished-statistics-candidate-exact-package",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M9",
+        "objective": "Cross-consumer deterministic bounded integer sampling",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS269",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS269",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "7ff1dc7e0846d7596b96c67f69a73a72114efcdf",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "e749dc4b40e2b87614758a79df56317349884d916138133ba4246d74749e41c5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify unpublished bounded Statistics NuGet candidate",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
