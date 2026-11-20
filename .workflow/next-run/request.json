@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "id": "RS270",
+  "title": "Qualify unpublished bounded Statistics NuGet candidate with independent net11 PackageReference consumer",
+  "commitMessage": "test: qualify bounded Statistics candidate net11 binary consumer",
+  "timeoutSeconds": 720,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Execute a real independent net11 PackageReference consumer of the unpublished bounded Statistics candidate and exact published Quantities dependency.",
+    "value": "Reproduce qualified RS269 candidate recipe in a disposable workspace, verify candidate archive DLL and exact dependency identity, restore both packages into a locked net11-only graph, execute 12 original bounded sampling/replay/refusal checks through the loaded candidate DLL, and rehash immutable feed archives. No publication.",
+    "debtChanges": [
+      "RS269 succeeded attempt 001 after one preselection compiler-version refusal; it qualified the unpublished Statistics 20260.20261120.1001 candidate, not a net11 consumer.",
+      "RS270 qualifies a source-free package-only net11 binary use of the candidate; rights, formal release authorization, private feed publication and Assessa adoption remain distinct gates."
+    ],
+    "nextAction": "Review native release authority for private publication of the immutable Statistics candidate and provide Assessa exact package metadata only after actual feed readback; do not claim distribution before it occurs.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 470
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs",
+    "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs",
+      "sourcePath": "files/docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs"
+    },
+    {
+      "path": "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs",
+      "sourcePath": "files/docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS269/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS269/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-net11-locked-bounded-candidate-package-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 440,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
