@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.123",
+  "plan_version": "0.1.124",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -242,6 +242,21 @@
       ],
       "depends_on": [
         "M7"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M9",
+      "version": "1.4.0-preview",
+      "title": "Cross-consumer deterministic bounded integer sampling",
+      "outcome": "Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers.",
+      "status": "planned",
+      "gate": "G-M9",
+      "required_chunks": [
+        "M9-W01-C01"
+      ],
+      "depends_on": [
+        "M3"
       ],
       "evidence": []
     }
@@ -599,6 +614,19 @@
         "docs/engineering/"
       ],
       "path_policy": "Exact files and commands are refined before readiness; no changes to prior immutable artifacts.",
+      "evidence": []
+    },
+    {
+      "id": "M9-W01",
+      "release": "M9",
+      "title": "Versioned bounded integer sampling",
+      "status": "planned",
+      "paths": [
+        "src/projects/dw.tools.math.statistics/",
+        "tests/projects/dw.tools.math.statistics.tests/",
+        "docs/distribution/"
+      ],
+      "path_policy": "Consumer-triggered extension of existing SplitMix64 engine; refine exact files and commands before ready.",
       "evidence": []
     }
   ],
@@ -9551,6 +9579,111 @@
           ]
         }
       ]
+    },
+    {
+      "id": "M9-W01-C01",
+      "tag": "statistics",
+      "release": "M9",
+      "work_package": "M9-W01",
+      "title": "Unbiased bounded integer draws and consumer qualification",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M3-W02-C03"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M9-W01-C01-R1",
+        "M9-W01-C01-R2"
+      ],
+      "deliverables": "Extend or qualify the existing versioned SplitMix64 PRNG with unbiased bounded integer sampling, explicit raw-word budget, replay and overflow-safe inclusive ranges; produce a new independent binary consumer candidate.",
+      "acceptance": "Exclusive bounds [0,n), inclusive ranges, rejection-based unbiased transform, typed budget/counter refusals, independent exhaustive reduction oracle, forced rejection, seeded replay and a real .NET 11 package-only consumer.",
+      "boundary_acceptance": "Preserve splitmix64/v1 vectors/checkpoints and prior published archives; Math owns no Assessa recipe/session/assessment model, no cryptographic claim and no premature publication.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY",
+        "PACKAGE"
+      ],
+      "proposed_files": [
+        "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+        "docs/distribution/bounded-integer-sampling.md"
+      ],
+      "proposed_test_file": "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+      "proposed_commands": [
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~BoundedSamplingTests"
+      ],
+      "refinement": "MATH-XR-004 accepted consumer request P0. RS266 intake succeeded; no new API or candidate package has been qualified. Source and package qualification are successive bounded DWF runs. Resolve exact signature by auditing existing APIs first.",
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "readiness": "planned; prioritize source API and independent proof before candidate binary or publication",
+      "tasks": [
+        {
+          "id": "M9-W01-C01-T1",
+          "title": "Unbiased sampling and replay contract",
+          "behavior": "Versioned integer selection with unbiased rejection, bounded raw draw count and checkpoint compatibility.",
+          "test_case": "0/1/2/3/extreme bounds, inclusive range overflow, forced rejection, golden replay and exhausted counter.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M9-W01-C01-T1-R",
+              "title": "RED",
+              "description": "Write independent failing oracles for source implementation and exact oracle evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M9-W01-C01-T1-G",
+              "title": "GREEN",
+              "description": "Implement the minimum generic source API for source implementation and exact oracle evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M9-W01-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Verify and document source implementation and exact oracle evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "M9-W01-C01-T2",
+          "title": "Immutable candidate and independent net11 consumer",
+          "behavior": "Qualify candidate package identity and explicit package-only .NET 11 consumer, without claiming publication.",
+          "test_case": "Exact package graph, source-free PackageReference load, checksum, seed/replay/budget proof, and no archive overwrite.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M9-W01-C01-T2-R",
+              "title": "RED",
+              "description": "Write independent failing oracles for candidate package and external consumer evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M9-W01-C01-T2-G",
+              "title": "GREEN",
+              "description": "Implement the minimum generic source API for candidate package and external consumer evidence.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M9-W01-C01-T2-V",
+              "title": "Verify and document",
+              "description": "Verify and document candidate package and external consumer evidence.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
     }
   ],
   "requirements": [
@@ -10351,6 +10484,20 @@
       "release": "M8",
       "owner": "M8-W02-C02",
       "acceptance": "No retrospective mutation of .NET 10 archives; no public release."
+    },
+    {
+      "id": "M9-W01-C01-R1",
+      "title": "Versioned unbiased bounded integer selection with budget and replay",
+      "release": "M9",
+      "owner": "M9-W01-C01",
+      "acceptance": "A mathematically unbiased rejection transform with bounded draws, exact seed/counter replay, typed refusals and source regression evidence."
+    },
+    {
+      "id": "M9-W01-C01-R2",
+      "title": "Independent package consumer and ownership boundary",
+      "release": "M9",
+      "owner": "M9-W01-C01",
+      "acceptance": "A new qualified immutable package candidate consumed via net11 PackageReference, with version/dependencies/SHA-256; no published archive rewrite or Assessa implementation."
     }
   ],
   "external_dependencies": [
@@ -10713,6 +10860,14 @@
         "M3-W02-C04"
       ],
       "disposition": "Planned finite delivery or explicit research decision; see chunk kind and acceptance."
+    },
+    {
+      "source_id": "ASSSESSA-EG-A-01",
+      "title": "Assessa EG-A-01 generic bounded integer PRNG requirement",
+      "targets": [
+        "M9-W01-C01"
+      ],
+      "disposition": "P0 Math-owned generic primitive; Assessa retains pedagogical generation and session ownership."
     }
   ]
 }
