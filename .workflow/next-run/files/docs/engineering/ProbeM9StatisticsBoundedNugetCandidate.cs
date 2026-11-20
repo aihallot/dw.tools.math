@@ -72,6 +72,7 @@ File.WriteAllText(Path.Combine(root, "candidate.csproj"),
     "<AssemblyName>dw.tools.math.statistics</AssemblyName>" +
     "<RootNamespace>Dw.Tools.Math.Statistics</RootNamespace>" +
     "<PackageId>" + Id + "</PackageId><Version>" + Version + "</Version>" +
+    "<AssemblyVersion>1.0.0.0</AssemblyVersion><FileVersion>1.0.0.0</FileVersion>" +
     "<Authors>dw.tools.math</Authors><IsPackable>true</IsPackable>" +
     "<NuGetAudit>false</NuGetAudit><ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>" +
     "<RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>" +
