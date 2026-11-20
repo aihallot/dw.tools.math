@@ -13,7 +13,8 @@
     "debtChanges": [
       "RS266 recorded Assessa EG-A-01 MATH-XR-004 request without modifying any existing product lifecycle.",
       "RS267 adds 11 planned native nodes in standalone M9 dependent on completed M3; project planning projections must be regenerated using the canonical renderer after mutation, without claiming qualified code.",
-      "RS267 first invocation was refused before attempt allocation (payload-target-reentry): a source baseline version assertion conflicted with its own staged v0.1.124 target. Removed only that payload assertion; request precondition retains v0.1.123 baseline guard."
+      "RS267 first invocation was refused before attempt allocation (payload-target-reentry): a source baseline version assertion conflicted with its own staged v0.1.124 target. Removed only that payload assertion; request precondition retains v0.1.123 baseline guard.",
+      "RS267 retry 1 was refused pre-attempt by a pre-existing self-test that mutated an already-done chunk without invalidating it. Replaced that unrelated broken self-test with an executable M9-specific structural acceptance test; native plan parity remains mandatory."
     ],
     "nextAction": "Prioritize M9-W01-C01-T1 bounded source API with independent proof of rejection sampling, forced-rejection budget and checkpoint replay; do not work on M8 first.",
     "achievements": []
@@ -31,7 +32,8 @@
     ".aura/workflow/plan/project.json",
     ".aura/workflow/state.json",
     "docs/planning/backlog.json",
-    "docs/planning/ValidateNativeDwfAdoption.cs"
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs"
   ],
   "stagedFiles": [
     {
@@ -45,6 +47,10 @@
     {
       "path": "docs/planning/ValidateNativeDwfAdoption.cs",
       "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/planning/ValidateAssessaM9Admission.cs",
+      "sourcePath": "files/docs/planning/ValidateAssessaM9Admission.cs"
     }
   ],
   "preconditions": [
@@ -88,15 +94,13 @@
       "packs": []
     },
     {
-      "id": "backlog-structural-self-test",
+      "id": "assessa-m9-admission-contract",
       "classification": "structural",
       "fileName": "dotnet",
       "arguments": [
         "run",
         "--file",
-        "docs/planning/ValidatePlan.cs",
-        "--",
-        "--self-test"
+        "docs/planning/ValidateAssessaM9Admission.cs"
       ],
       "workingDirectory": ".",
       "timeoutSeconds": 140,
