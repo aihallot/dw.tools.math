@@ -10,7 +10,9 @@ public sealed class M9W01C01BoundedSamplingTests
     [TestMethod]
     public void VersionedTransformAndLegacyRawVectorRemainStable()
     {
-        Assert.AreEqual("splitmix64-bounded-rejection/v1", SplitMix64Random.BoundedTransformId);
+        Assert.AreEqual("splitmix64-bounded-rejection/v1",
+            typeof(SplitMix64Random).GetField(nameof(SplitMix64Random.BoundedTransformId))!
+                .GetRawConstantValue());
         var random = new SplitMix64Random(0UL);
         Assert.AreEqual(0xe220a8397b1dcdafUL, random.NextUInt64());
         Assert.AreEqual(0x6e789e6aa1b965f4UL, random.NextUInt64());
@@ -101,7 +103,7 @@ public sealed class M9W01C01BoundedSamplingTests
         Assert.AreEqual(long.MinValue, one.NextInt64Inclusive(long.MinValue, long.MinValue, 1));
         Assert.AreEqual(long.MaxValue, one.NextInt64Inclusive(long.MaxValue, long.MaxValue, 1));
         var full = new SplitMix64Random(0UL);
-        Assert.AreEqual(unchecked((long)0xe220a8397b1dcdafUL),
+        Assert.AreEqual(unchecked((long)(0xe220a8397b1dcdafUL ^ (1UL << 63))),
             full.NextInt64Inclusive(long.MinValue, long.MaxValue, 1));
         Assert.AreEqual(1UL, full.Counter);
         var edge = new SplitMix64Random(17UL);
