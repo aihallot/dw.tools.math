@@ -29,6 +29,14 @@ Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) &&
 var originalDependency = Path.Combine(feed!, "dw.quantities." + DependencyVersion + ".nupkg");
 Need(File.Exists(originalDependency) && Hash(originalDependency) == DependencySha,
     "Original published Quantities archive changed.");
+using (var dependencyArchive = ZipFile.OpenRead(originalDependency))
+{
+    var dependencyDll = dependencyArchive.Entries.Single(x =>
+        x.FullName == "lib/net10.0/dw.quantities.dll");
+    using var stream = dependencyDll.Open();
+    Need(Convert.ToHexStringLower(SHA256.HashData(stream)) == DependencyDllSha,
+        "Original published Quantities DLL SHA-256 differs.");
+}
 var previousPublished = Path.Combine(feed!, CandidateId + ".20260.20261106.1001.nupkg");
 Need(File.Exists(previousPublished), "Original published Statistics archive missing.");
 var previousHash = Hash(previousPublished);
