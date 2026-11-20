@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS265",
+  "title": "Qualify immutable published Scientific binary under independent Ubuntu WSL Linux net11 consumer",
+  "state": "prepared",
+  "commitMessage": "test: qualify published Math Scientific binary on Linux net11",
+  "timeoutSeconds": 600,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify immutable published Scientific binary on Ubuntu WSL Linux x64 net11 with its original fifteen-check independent consumer.",
+    "value": "Verify the original RS156 private archive and packaged DLL SHA-256, copy exact archive to isolated WSL-visible feed, restore independent Scientific PackageReference under Linux SDK11/C#15, run original fifteen numerical and refusal checks, and rehash original and copied archive. No publication.",
+    "debtChanges": [
+      "RS264 succeeded first-pass attempt 001 with the original Scientific published binary on Windows net11.",
+      "RS265 extends that immutable Scientific binary qualification to Linux x64 net11; full numerical coverage, rollback, other Math packages and M8 readiness remain open."
+    ],
+    "nextAction": "Inspect remaining physically published Math packages and prioritize numerical runtime compatibility plus migration deployment gates.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8WslNet11PublishedScientificBinary.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-wsl-linux-net11-published-scientific-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8WslNet11PublishedScientificBinary.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
