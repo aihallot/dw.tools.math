@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "id": "RS266",
+  "title": "Admit Assessa EG-A-01 unbiased bounded integer sampling request and sequence native Math planning",
+  "commitMessage": "docs: record Assessa unbiased bounded integer Math request",
+  "timeoutSeconds": 360,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Admit the external Assessa EG-A-01 generic bounded integer sampling request as a priority, without changing immutable packages or completed M3 history.",
+    "value": "Record observed SplitMix64/v1 and RS262–RS265 evidence, anti-bias and budget contract, independent oracle requirements, Math/Assessa ownership boundaries and a sequential native-backlog admission then code/candidate/binary rollout path.",
+    "debtChanges": [
+      "RS265 succeeded first-pass attempt 001 for the existing Scientific immutable binary on Linux net11.",
+      "MATH-XR-004 is documented planning intake only; no new native plan node, bounded API, publication or Assessa consumption is claimed. Native 580-node projection must be reconciled in the next run."
+    ],
+    "nextAction": "Immediately refine the canonical backlog and matching native DWF plan for a new planned Statistics bounded integer feature, preserving historical M3 completion and the 580-node validator's projection rules.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 240
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+      "sourcePath": "files/docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS265/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS265/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "assessa-bounded-sampling-planning-intake",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
