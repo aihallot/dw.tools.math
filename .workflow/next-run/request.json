@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "RS267",
+  "title": "Admit independent M9 bounded integer sampling milestone into canonical Math backlog and native DWF plan",
+  "commitMessage": "docs: admit Assessa bounded integer Math milestone",
+  "timeoutSeconds": 420,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Synchronize the new P0 Math-only M9 bounded integer sampling roadmap, native DWF hierarchy and projection validator, preserving completed M3 and unchanged M8.",
+    "value": "Add M9-W01-C01 with T1 source behavior and T2 independent package qualification in canonical backlog v0.1.124 and mirrored native plan; update adoption validator 580 to 591 nodes. All new nodes not-ready, no implementation or publication.",
+    "debtChanges": [
+      "RS266 recorded Assessa EG-A-01 MATH-XR-004 request without modifying any existing product lifecycle.",
+      "RS267 adds 11 planned native nodes in standalone M9 dependent on completed M3; project planning projections must be regenerated using the canonical renderer after mutation, without claiming qualified code."
+    ],
+    "nextAction": "Prioritize M9-W01-C01-T1 bounded source API with independent proof of rejection sampling, forced-rejection budget and checkpoint replay; do not work on M8 first.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/backlog.json",
+      "sourcePath": "files/docs/planning/backlog.json"
+    },
+    {
+      "path": ".aura/workflow/plan/project.json",
+      "sourcePath": "files/.aura/workflow/plan/project.json"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS266/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.123"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "native-backlog-hierarchy",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 140,
+      "packs": []
+    },
+    {
+      "id": "backlog-structural-self-test",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--self-test"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 140,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
