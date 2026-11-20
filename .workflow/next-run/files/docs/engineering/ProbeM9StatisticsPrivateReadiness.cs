@@ -71,6 +71,31 @@ using (var zip = ZipFile.OpenRead(basePackage))
     Require(Convert.ToHexStringLower(SHA256.HashData(raw)) == BaseDllSha,
         "Base Quantities packaged DLL differs.");
 }
+// Disposable DWF validation workspaces do not retain RS269 output files.
+// Reproduce the qualified candidate recipe without writing into NUGET_LOCAL.
+var start = new ProcessStartInfo("dotnet")
+{
+    UseShellExecute = false,
+    WorkingDirectory = Directory.GetCurrentDirectory(),
+    RedirectStandardOutput = true,
+    RedirectStandardError = true
+};
+foreach (var argument in new[]
+{
+    "run", "--file", "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
+    "--", "--check"
+})
+    start.ArgumentList.Add(argument);
+using (var process = Process.Start(start) ??
+    throw new InvalidOperationException("Cannot start isolated Statistics packaging recipe."))
+{
+    var output = process.StandardOutput.ReadToEnd();
+    var error = process.StandardError.ReadToEnd();
+    Require(process.WaitForExit(120000) && process.ExitCode == 0 &&
+        output.Contains("MATH-RS269-CANDIDATE|", StringComparison.Ordinal) &&
+        output.Contains("published=false", StringComparison.Ordinal),
+        "Previously qualified candidate recipe refused: " + output + "\n" + error);
+}
 var candidate = Path.GetFullPath("build/artifacts/m9-rs269-bounded-statistics-candidate/candidate/" +
     PackageId + "." + Version + ".nupkg");
 Require(File.Exists(candidate),
