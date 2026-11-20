@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "RS268",
+  "title": "Implement generic bounded SplitMix64 integer sampling with rejection proof and deterministic regression",
+  "commitMessage": "feat: implement bounded unbiased SplitMix64 integer draws",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Implement and qualify a generic versioned unbiased bounded integer transformation for SplitMix64, including exact counter, budget and checkpoint behavior.",
+    "value": "Add two bounded methods to the existing noncryptographic SplitMix64Random, preserving raw generator vectors, and target independent exhaustive 8-bit rejection proof, forced raw-word rejection, output boundaries, signed extremes, typed invalid-input and counter refusals, replay and existing statistics regressions. Do not pack or publish.",
+    "debtChanges": [
+      "RS267 succeeded attempt 001 after two preselection refusals; its first-pass indicator is false. Canonical M9 backlog v0.1.124 and native planned hierarchy are admitted.",
+      "RS268 implements only M9 T1 source behavior and bounded tests. A new immutable Statistics candidate, source-free net11 binary consumer, rights and publication remain separate gates."
+    ],
+    "nextAction": "Build a nonpublished versioned Statistics NuGet candidate and independently consume its new bounded API using a real net11 PackageReference; only then assess authorized publication.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 480
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+    "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+    "docs/distribution/bounded-integer-sampling.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+      "sourcePath": "files/src/projects/dw.tools.math.statistics/SplitMix64Random.cs"
+    },
+    {
+      "path": "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+      "sourcePath": "files/tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs"
+    },
+    {
+      "path": "docs/distribution/bounded-integer-sampling.md",
+      "sourcePath": "files/docs/distribution/bounded-integer-sampling.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS267/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS267/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-bounded-integer-exact-regressions",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "test",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "-c",
+        "Release",
+        "--filter",
+        "FullyQualifiedName~M9W01C01BoundedSamplingTests"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": []
+    },
+    {
+      "id": "m3-existing-splitmix-regressions",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "test",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "-c",
+        "Release",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~M3W02C03"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
