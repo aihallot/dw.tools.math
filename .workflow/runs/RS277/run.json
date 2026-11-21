@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "RS277",
+  "title": "Qualify actual published bounded Statistics package through WSL Linux net11 locked binary consumer",
+  "state": "prepared",
+  "commitMessage": "test: qualify published bounded Statistics binaries on Linux net11",
+  "timeoutSeconds": 720,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Extend independent binary qualification of the already published immutable bounded Statistics package to Linux WSL .NET 11.",
+    "value": "Reuse qualified RS263 WSL Linux consumer infrastructure with the new RS273 physical Statistics 20260.20261120.1001 archive, exact Quantities dependency, DLL SHA-256, Linux net11-only locked PackageReference restore, and the RS270 twelve-check bounded sampling fixture. No publication, no source references or Assessa edits.",
+    "debtChanges": [
+      "RS276 succeeded first-pass, confirming M9 should remain planned/not-ready and that earlier RED/GREEN/verify progress must not be manufactured retroactively.",
+      "The new published bounded Statistics version has only Windows net11 binary evidence from RS270/RS273. RS277 adds the missing Linux WSL net11 binary boundary independently; previous RS263 Linux proof concerned the OLD Statistics version."
+    ],
+    "nextAction": "If Linux WSL qualification succeeds, offer Assessa the expanded exact platform evidence; continue forward-only M9 planning or other substantive Math work without altering downstream Assessa acceptance.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9WslNet11PublishedBoundedStatistics.cs"
+  ],
+  "validations": [
+    {
+      "id": "m9-published-bounded-statistics-linux-net11-independent-binary",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9WslNet11PublishedBoundedStatistics.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 320
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
