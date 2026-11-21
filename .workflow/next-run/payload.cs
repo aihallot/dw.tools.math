@@ -13,4 +13,5 @@ p.Require.JsonValueEquals("docs/planning/backlog.json",
     "/plan_version", JsonValue.Create("0.1.124"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/m8-portable-discovery-bundle.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/README.md"));
 return p.Complete();
