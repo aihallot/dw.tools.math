@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "RS274",
+  "title": "Deliver verified private bounded Statistics package handoff and reconcile published documentation for Assessa",
+  "state": "prepared",
+  "commitMessage": "docs: deliver published bounded Statistics handoff to Assessa",
+  "timeoutSeconds": 480,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Reconcile stale Math Statistics publication statuses with durable RS273 and deliver exact P0 private package contract to the Assessa owning agent.",
+    "value": "Replace obsolete source-candidate and awaiting-readback documentation, add Math-owned handoff with exact physically verified package/DLL/dependency SHA-256, versioned unbiased bounded API and consumer-specific Assessa acceptance boundaries. Validate handoff against durable first-pass RS273 evidence; do not touch package files, sibling repositories or M9 progress.",
+    "debtChanges": [
+      "RS273 succeeded attempt 001 first-pass, verified the physical NUGET_LOCAL archive and independent locked net11 package-only consumer after explicit authorized private publication.",
+      "M9 backlog/native statuses remain planned/not-ready; source, package and release documentation can state qualified delivery without claiming task closure or Assessa acceptance. Subsequent progress reconciliation is a separate evidence-backed decision.",
+      "RS274 initial invocation refused pre-attempt, no attempt allocated: handoff validator required explicit \u0027source-free\u0027 wording absent from the document. Corrected only the binary consumer evidence wording, retaining validator and all hashes."
+    ],
+    "nextAction": "Hand the committed Math-owned package provenance and MATH-XR-004 contract to the aihallot/dw.tools.assessa agent. Only that owner validates GENERATE-001 / EG-A-01 / T002 and returns adoption evidence.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 260
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/bounded-integer-sampling.md",
+    "docs/distribution/m9-statistics-physical-private-publication-readback.md",
+    "docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs"
+  ],
+  "validations": [
+    {
+      "id": "m9-assessa-private-package-handoff-durable-identities",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
