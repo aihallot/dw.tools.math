@@ -1,11 +1,11 @@
 # MATH-XR-004 — Assessa EG-A-01 unbiased bounded integer sampling
 
-Status: **accepted consumer request for Math planning intake; no API implementation, binary delivery, or Assessa adoption qualified**.
+Status: **Math-owned bounded-integer API and private NuGet delivery independently qualified through RS273; Assessa EG-A-01 / T002 adoption not yet qualified**.
 Origin: `aihallot/dw.tools.assessa`, GENERATE-001 / EG-A-01 / T002; request received 2026-11-20.
 Priority: **P0 consumer unblock**, ahead of optional additional .NET 11 migration package smoke tests, without displacing an already pending DWF run.
 Ownership: Math owns reusable integer sampling; Assessa owns pedagogical recipes, profiles, answer protection, identifiers, sessions, and receipts.
 
-## Verified starting point
+## Historical starting point (as of RS266 intake)
 
 - RS265 succeeded attempt 001 first-pass and qualified the **existing** immutable Scientific package under Ubuntu WSL net11. This does not deliver any bounded-integer API.
 - `src/projects/dw.tools.math.statistics/SplitMix64Random.cs` exposes `splitmix64/v1`, `NextUInt64()`, `NextUnitInterval()`, the seed, consumed-word counter, `Snapshot()` and `FromSnapshot()`.
@@ -13,7 +13,7 @@ Ownership: Math owns reusable integer sampling; Assessa owns pedagogical recipes
 - `M3-W02-C03` and `M3-W02` are durably done. Preserve that historical completion; **do not reopen or relabel them**.
 - RS262–RS263 independently exercised the existing Statistics 18-check fixture with immutable `dw.tools.math.statistics 20260.20261106.1001` and `dw.quantities 20260.20261102.1001` packages on Windows/Linux net11. **Neither old archive contains a newly written bounded integer API**.
 
-## Minimal new Math contract: acceptance for a new planned work item
+## Accepted contract (historical intake requirements)
 
 First inspect all existing Math public APIs and tests for an equivalent bounded-integer operation. Reuse if genuinely present; otherwise extend the **existing** SplitMix64 engine, never invent a second generator.
 
@@ -31,7 +31,7 @@ Assessa usage constraints are **consumer test cases**, not Math types:
 - F2 denominator 2–24, LCM at most 144.
 Assessa must never receive a silently widened sampling range. Existing `ExactRational` fraction comparisons and zero-denominator refusals are to be reused and independently checked; no Study Buddy behavior is added to Math.
 
-## Priority sequence under DWF (one pending run at a time)
+## Original priority sequence at intake (historical, now executed)
 
 1. **RS266 planning intake (this run):** record the external request, verified existing reusable surfaces, explicit contract and consumer boundaries. This is not code or native backlog-node admission.
 2. **Immediate next bounded run:** refine the *canonical* `docs/planning/backlog.json` and matching `.aura/workflow/plan/project.json` together, with the native adoption validator's fixed 580-node baseline and generated projections deliberately reconciled. Create a **new planned, Math-owned Statistics-extension work item**, not a retrospective change to done M3-W02-C03, nor an unrelated task in modernization M8-W02-C02.
@@ -40,3 +40,38 @@ Assessa must never receive a silently widened sampling range. Existing `ExactRat
 5. Separate **release authorization/publication** only if policy permits. Deliver exact package identifiers, versions, SHA-256, dependency closure, runtime evidence and failure boundaries to the Assessa owner. Only Assessa resumes and validates T002 / EG-A-01.
 
 No user action besides `dwf run next` is required for planning intake. No task-level DWF progress/achievement or Assessa adoption is claimed.
+
+## Delivered Math qualification — durable evidence as of RS274
+
+The historical intake and plan above are retained for traceability; their present-tense
+statements describe the original RS266 scope, **not** the current delivery state.
+
+- **RS267:** canonical M9 Math roadmap admission, success attempt 001 after two pre-attempt refusals.
+- **RS268:** the versioned `SplitMix64Random` rejection-based bounded sampling API, raw-word budget,
+  exact reduced-domain oracle, forced rejection, overflow-safe inclusive ranges and checkpoint replay.
+- **RS269:** versioned unpublished NuGet candidate, followed by **RS270** independent
+  source-free Windows .NET 11 / SDK 11.0.100 package-only consumer with twelve checks.
+- **RS271:** first-pass private release readiness.
+- **RS272:** controlled private publisher rehearsal with independent binary check; actual private
+  publication was separately authorized and invoked afterward.
+- **RS273:** **first-pass** physical `NUGET_LOCAL` readback, exact SHA-256 identities, immutable
+  earlier archives, locked .NET 11 package-only consumer and twelve checks.
+- **RS274:** delivered the Math-owned Assessa handover,
+  `docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md`.
+
+Published private identities:
+- `dw.tools.math.statistics 20260.20261120.1001`
+- Physical archive SHA-256: `feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1`
+- Packaged DLL SHA-256: `684e8d5f35e53d4c38e9d02479539de3dfb8ac677535d0acfc8d9236509631ea`
+- Exact dependency: `dw.quantities [20260.20261102.1001]`, SHA-256
+  `e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d`.
+- Durable release evidence: `.aura/workflow/reports/RS273/attempt-001.json`,
+  GitHub commit `f31003c94f722cb0b15f1f4d4697002c3d36e788`.
+- Durable delivery evidence: `.aura/workflow/reports/RS274/attempt-001.json`,
+  GitHub commit `06590d4fe6183b7f0c3628c68c627a68659f9524`.
+
+**Owner boundary:** Assessa must select the new private package version and independently
+qualify `GENERATE-001 / EG-A-01 / T002`, including F0/F2 domain-specific range limits
+and any separate `ExactRational` dependency. Math does not claim that this downstream
+adoption occurred. Accepted M9 backlog remains `planned` and its native DWF plan
+remains `not-ready`; any progress reconciliation must use separate truthful run evidence.

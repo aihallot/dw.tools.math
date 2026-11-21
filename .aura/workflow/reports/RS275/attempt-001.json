@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS275",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-21T14:10:54.6106552+00:00",
+  "completedAtUtc": "2026-11-21T14:10:55.2810391+00:00",
+  "durationMilliseconds": 670,
+  "projectNodes": [
+    "M9"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+  ],
+  "changedPaths": [
+    "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS275/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-af26523a9fd64b3fb08a1e47a112f8ca\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 420000,
+      "DurationMilliseconds": 511,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS275 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS274/attempt-001.json run=RS274 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M3-W02-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md bytes=7645\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3345\r\n[payload] OK operations=8 changed=2 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS275/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS275 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "434aec382c062fbe4ef0fcba77d8a096ec1621fc324c41eadc02b836d7739736",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS274/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS274 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a386f367fdc957a2b2bb3e749d9f60fa137d722e81c661b64bac343fdbda0e04",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M3-W02-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+        "Status": 1,
+        "Summary": "bytes=7645",
+        "Details": null,
+        "BeforeSha256": "be966189af92f2cb4de25e76d8a89ce2c280cc13ed46881ce43298975e4a84d3",
+        "AfterSha256": "99801718e941cf2b765b364c3c410477df9e9f55233f21ee36cde2aaaa56d835",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3345",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "aa27eb398ad43ed8b0720c62e7ffa20006fccf6a22f3278dc444906eb4cc0410",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m9-reconcile-delivered-assessa-request",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261121T141017Z-7498bbb2fbd11805",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "09abb78054fbbd0be387e3baab13fa9642f2d237",
+  "invocationStartedAtUtc": "2026-11-21T14:10:17.2190476+00:00",
+  "invocationDurationMilliseconds": 38061,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS275",
+      "title": "Reconcile MATH-XR-004 Assessa request with durably qualified private Statistics delivery",
+      "projectNodes": [
+        "M9"
+      ]
+    },
+    "declared": {
+      "summary": "Reconcile outdated MATH-XR-004 intake status with the physical private Statistics package release and committed Assessa handoff.",
+      "value": "Retain the historical Assessa requirements while recording RS268\u2013RS274 source, package, release and handoff provenance; validate exact published package SHA-256 and DLL identity, durable RS273 first-pass and RS274 corrected success, and explicitly preserve Assessa adoption as unqualified and M9 native progress as not-ready.",
+      "debtChanges": [
+        "RS274 succeeded attempt 001 after one preselection text-refusal, delivering the Math-owned Assessa package handoff and publication documentation.",
+        "The original MATH-XR-004 intake still claimed no API or binary qualified. RS275 reconciles only its present status without altering accepted requirements, package archives, M9 lifecycle states or the Assessa repository."
+      ],
+      "nextAction": "After RS275 success, use the reconciled Math-owned request and published handoff to guide the Assessa agent; a separate evidence-backed planning reconciliation must review M9 native/product lifecycle progress.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+      ],
+      "validations": [
+        {
+          "id": "m9-reconcile-delivered-assessa-request",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M9",
+        "objective": "Cross-consumer deterministic bounded integer sampling",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS275",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS275",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "09abb78054fbbd0be387e3baab13fa9642f2d237",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "eec04c63a228b678facf5b946c83dfc5a1b13a46b9012aa8fde6e77e5c2601e7"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: reconcile Assessa bounded Statistics request with qualified delivery",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
