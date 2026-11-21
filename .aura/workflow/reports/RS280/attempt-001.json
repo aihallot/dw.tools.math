@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS280",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-21T21:34:01.6217611+00:00",
+  "completedAtUtc": "2026-11-21T21:34:02.439068+00:00",
+  "durationMilliseconds": 817,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+  ],
+  "changedPaths": [
+    "docs/discovery/README.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS280/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 520,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-acd2e0e36ea248fb8b6d262bdf86f979\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 520000,
+      "DurationMilliseconds": 641,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS280 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS279/attempt-001.json run=RS279 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=7039\r\n[files.replace-from-staged] CHANGED path=docs/discovery/README.md bytes=9550\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=6791\r\n[payload] OK operations=9 changed=3 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS280/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS280 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7a0225a1b6fac91067cfd255f703de445808d755e7dc94c6d2bbc4ed394cd418",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS279/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS279 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "39de7ce827d022a8b72b18689a9a80948977a747921703949a33f61139148c48",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=7039",
+        "Details": null,
+        "BeforeSha256": "cf02b04f2c687bbc53f0e3df9bd9a3c9ae025a23b72c8c641f2d77a397094ed7",
+        "AfterSha256": "b16837e693419dae21c323bb5dd7b6c95f8ed9f4355d6a74b21ab8f63355f158",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/README.md",
+        "Status": 1,
+        "Summary": "bytes=9550",
+        "Details": null,
+        "BeforeSha256": "637b99b85b0534cc72ddc4ff160152fe7d2df87458b3673b48f1022fa0f338d7",
+        "AfterSha256": "79a53b2263bf361bc24e8e597ddfe30485b4c2152dc296e0ed3c2dda25685467",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=6791",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "ad39806ac406516b1972e35af80fa15b0e1e4c764f04aae77422f197b0456dfa",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-w01-acceptance-frontier-protocol-and-locked-net11-binary",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261121T213313Z-4bed5b924a1a2620",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "3724d804c7de599e64db19afe1407f10111fbd21",
+  "invocationStartedAtUtc": "2026-11-21T21:33:13.3285862+00:00",
+  "invocationDurationMilliseconds": 49110,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS280",
+      "title": "Reconcile M8 Discovery protocol and actual published CLR consumer proofs without inventing lifecycle completion",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Replace stale M8-W01 acceptance gaps with exact RS131/RS209 portable protocol and RS279 source-free published CLR consumer evidence.",
+      "value": "Refresh the canonical Math-owned Discovery acceptance frontier and README to distinguish proven 13-case pinned protocol (2 accepted/11 refused), original four source-qualified capabilities and RS279\u0027s five-example Windows net11 locked private-binary consumer from missing external skill installation and runtime permission. Add a bounded C# structural validator that checks durable report lineage, exact package identities, source-manifest version separation and unchanged M8 lifecycle state.",
+      "debtChanges": [
+        "The acceptance document still cited backlog 0.1.123 and listed already completed RS209 thirteen-case provenance verification as a future action; align it with accepted 0.1.124.",
+        "RS279 succeeded first-pass, adding a positive source-free locked .NET 11 published Composition/IR/Quantities consumer; package and source-manifest versions remain separate.",
+        "Native M8-W01 phases, tasks and RED/GREEN/verify subtasks remain not-ready; no external broker permission, installed skill, AURA adoption or retroactive achievements are claimed."
+      ],
+      "nextAction": "Use the evidence frontier to inspect lawful forward-only native task readiness and remaining external skill installation/authorization boundaries, without changing prior receipt histories.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/discovery/README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-w01-acceptance-frontier-protocol-and-locked-net11-binary",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS280",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS280",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "3724d804c7de599e64db19afe1407f10111fbd21",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f54cc8ec154197be6af17ca6432894a7638695a1a6ffd664169b7958bd0b48e4"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: reconcile M8 Discovery positive binary evidence and acceptance frontier",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
