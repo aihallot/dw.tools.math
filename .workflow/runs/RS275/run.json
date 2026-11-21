@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS275",
+  "title": "Reconcile MATH-XR-004 Assessa request with durably qualified private Statistics delivery",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile Assessa bounded Statistics request with qualified delivery",
+  "timeoutSeconds": 420,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Reconcile outdated MATH-XR-004 intake status with the physical private Statistics package release and committed Assessa handoff.",
+    "value": "Retain the historical Assessa requirements while recording RS268\u2013RS274 source, package, release and handoff provenance; validate exact published package SHA-256 and DLL identity, durable RS273 first-pass and RS274 corrected success, and explicitly preserve Assessa adoption as unqualified and M9 native progress as not-ready.",
+    "debtChanges": [
+      "RS274 succeeded attempt 001 after one preselection text-refusal, delivering the Math-owned Assessa package handoff and publication documentation.",
+      "The original MATH-XR-004 intake still claimed no API or binary qualified. RS275 reconciles only its present status without altering accepted requirements, package archives, M9 lifecycle states or the Assessa repository."
+    ],
+    "nextAction": "After RS275 success, use the reconciled Math-owned request and published handoff to guide the Assessa agent; a separate evidence-backed planning reconciliation must review M9 native/product lifecycle progress.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 250
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+  ],
+  "validations": [
+    {
+      "id": "m9-reconcile-delivered-assessa-request",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 150
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
