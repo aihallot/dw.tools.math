@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "id": "RS276",
+  "title": "Assess M9 bounded Statistics delivery evidence and legitimate forward-only workflow progress",
+  "commitMessage": "docs: assess M9 bounded Statistics lifecycle evidence without retroactive progress",
+  "timeoutSeconds": 480,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Assess the durable completed bounded Statistics package delivery evidence against still-planned M9 native and product task hierarchy, without manufacturing historic progress.",
+    "value": "Audit eight successive RS268–RS275 durable run reports, exact lineage/first-pass histories and the two source/package tasks with six native RED/GREEN/verify subtasks; document the genuine qualified Math delivery, pending Assessa adoption and a forward-only reconciliation boundary. Do not alter the existing native or product lifecycle.",
+    "debtChanges": [
+      "RS275 succeeded first-pass attempt 001, reconciling the original MATH-XR-004 intake with the independently qualified private package and RS274 Assessa handoff.",
+      "M9 is still planned/not-ready despite qualified source and package evidence; RS276 explicitly assesses legitimate future readiness progression but does not invent past subtask transitions or close Assessa-owned acceptance."
+    ],
+    "nextAction": "Plan a separate legal, evidence-backed forward-only M9 lifecycle reconciliation after consulting native transition rules and structural validators; Assessa adoption evidence must come from its owning repository.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 280
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/decisions/m9-w01-c01-evidence-lifecycle-assessment.md",
+    "docs/planning/ValidateM9EvidenceLifecycleAssessment.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/decisions/m9-w01-c01-evidence-lifecycle-assessment.md",
+      "sourcePath": "files/docs/planning/decisions/m9-w01-c01-evidence-lifecycle-assessment.md"
+    },
+    {
+      "path": "docs/planning/ValidateM9EvidenceLifecycleAssessment.cs",
+      "sourcePath": "files/docs/planning/ValidateM9EvidenceLifecycleAssessment.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS275/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS275/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-lifecycle-durable-evidence-and-no-retroactive-progress",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM9EvidenceLifecycleAssessment.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
