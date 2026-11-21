@@ -200,7 +200,7 @@ internal static class Program
         using var zip=ZipFile.OpenRead(path);
         Need(zip.Entries.Count is >= 3 and <= 48 &&
             zip.Entries.All(x => !x.FullName.Contains("..",StringComparison.Ordinal) &&
-                !x.FullName.StartsWith('/',StringComparison.Ordinal) &&
+                !x.FullName.StartsWith("/",StringComparison.Ordinal) &&
                 !x.FullName.Contains('\\')),
             "Noncanonical or oversized package manifest.");
         var dll=zip.Entries.Single(x=>x.FullName=="lib/net10.0/"+PackageId+".dll");
