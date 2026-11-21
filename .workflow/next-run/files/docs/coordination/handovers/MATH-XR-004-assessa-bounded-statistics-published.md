@@ -41,7 +41,7 @@ var checkpoint = SplitMix64PositionCodec.Format(rng.Snapshot());
 | --- | --- |
 | RS268 | Source API and exact bounded rejection oracles |
 | RS269 | New unpublished NuGet candidate |
-| RS270 | Independent package-only locked net11 consumer |
+| RS270 | Independent source-free, package-only locked net11 consumer |
 | RS271 | Private publication readiness, first-pass |
 | RS272 | Authorized guarded publisher rehearsal, disposable feed |
 | RS273 | **Actual NUGET_LOCAL physical readback and independent net11 consumer, first-pass** |
