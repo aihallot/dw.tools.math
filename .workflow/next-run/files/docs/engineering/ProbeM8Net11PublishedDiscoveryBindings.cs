@@ -174,7 +174,8 @@ foreach (var item in packages)
     Require(File.Exists(assemblyPath) && Hash(assemblyPath) == item.Binary,
         "Loaded-consumer dependency bytes changed: " + item.Id);
     var assemblyName = AssemblyName.GetAssemblyName(assemblyPath);
-    Require(assemblyName.Name == item.Id && assemblyName.Version?.ToString() == "0.3.0.0",
+    Require(assemblyName.Name == item.Id && assemblyName.Version?.ToString() ==
+        (item.Id == "dw.quantities" ? "0.2.0.0" : "0.3.0.0"),
         "Published CLR assembly identity drift: " + item.Id);
 }
 var stdout = Run("run", "--project", "consumer.csproj",
