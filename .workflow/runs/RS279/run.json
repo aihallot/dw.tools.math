@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "RS279",
+  "title": "Qualify four selected Math Discovery CLR bindings against immutable published packages under isolated net11",
+  "state": "prepared",
+  "commitMessage": "test: qualify published Discovery CLR bindings on net11",
+  "timeoutSeconds": 720,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Verify the four selected Math Discovery CLR operations through an independent source-free .NET 11 consumer of the already published private packages.",
+    "value": "Reuse the existing four-binding and five-example CLR seed consumer with only a locked Composition PackageReference, its exact IR and Quantities transitive closure, published archive/DLL SHA-256 checks and SDK 11.0.100 isolation. Bind selected fingerprints to existing source provenance without editing production packages or claiming an authorized broker or runtime adoption.",
+    "debtChanges": [
+      "The selected Discovery operations had source-project CLR verification; RS256-RS261 individually qualified published IR and Composition binaries, but their combined four-binding consumer was not yet qualified as a locked published package graph.",
+      "The already published immutable package identities are Composition 20260.20261107.1001, IR 20260.20261104.1001 and Quantities 20260.20261102.1001; this run reads and copies, never republishes.",
+      "M8 and M9 native states remain not-ready, canonical statuses planned; the source-only Discovery receipt and runtime-only authorization boundary are not promoted by this test."
+    ],
+    "nextAction": "If the independent binary consumer succeeds, reconcile that exact package-only Discovery evidence in a later bounded documentation decision; no broker readiness or cross-repository acceptance is implied.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8Net11PublishedDiscoveryBindings.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-discovery-four-selected-published-binary-net11-locked-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8Net11PublishedDiscoveryBindings.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 340
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
