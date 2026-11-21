@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "RS273",
+  "title": "Independently qualify physical NUGET_LOCAL publication and bounded Statistics net11 consumer",
+  "commitMessage": "test: qualify published bounded Statistics private feed readback",
+  "timeoutSeconds": 720,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Independently verify owner-reported controlled publication of Statistics bounded-integer package in the actual private NUGET_LOCAL feed.",
+    "value": "Re-open actual physical shared-feed archives and exact SHA-256 values, inspect package DLL and dependency closure, run a fresh locked net11 PackageReference binary consumer with twelve checks, and preserve previous immutable NuGet versions. No publication or cross-repo edit.",
+    "debtChanges": [
+      "RS272 succeeded attempt 001 after one NU1010 preselection refusal and qualified disposable-feed private publisher rehearsal, not actual NUGET_LOCAL publication.",
+      "Owner reports exact private --publish success and SHA-256s; RS273 must independently attest physical feed bytes and locked net11 behavior before Assessa consumption is claimed. No repeat publish.",
+      "Process improvement requested: investigate exactly-once authorized post-attempt external publication and durable receipts in DWF owner repo; Math does not change workflow mechanics."
+    ],
+    "nextAction": "After durable RS273 success, send exact published Statistics version, archive/DLL SHA-256, dependency closure and net11 evidence to the Assessa owner; only Assessa may qualify GENERATE-001 / EG-A-01 / T002.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 400
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM9PublishedStatisticsReadback.cs",
+    "docs/distribution/m9-statistics-physical-private-publication-readback.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM9PublishedStatisticsReadback.cs",
+      "sourcePath": "files/docs/engineering/ProbeM9PublishedStatisticsReadback.cs"
+    },
+    {
+      "path": "docs/distribution/m9-statistics-physical-private-publication-readback.md",
+      "sourcePath": "files/docs/distribution/m9-statistics-physical-private-publication-readback.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS272/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS272/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-physical-private-feed-independent-net11-readback",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9PublishedStatisticsReadback.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
