@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "RS281",
+  "title": "Export an independently runnable source-free private-package Math Discovery skill bundle",
+  "commitMessage": "feat: export portable Math Discovery skill with locked net11 example",
+  "timeoutSeconds": 800,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Deliver an explicit reproducible Math Discovery skill export with a portable private-package .NET 11 sample instead of repository-only example links.",
+    "value": "Create a Math-owned C# exporter that copies the six selected skill files, projects source-local examples to a self-contained portable sample, pins SDK 11.0.100 and the existing Composition PackageReference, and refuses an existing output destination. Qualify two byte-identical isolated exports, links, runtime-only authorization, SHA-256 of three immutable private archives and loaded DLLs, locked net11 restore, and all four preexisting positive selected CLR calls. Document usage and limits without broker/AURA claims.",
+    "debtChanges": [
+      "The current generated skill's example link resolves only inside the Math repository; RS211 verified metadata in isolation but did not export an independently runnable package-only example.",
+      "RS279 confirmed source-free net11 positive calls for the exact three published private packages; RS281 reuses that seed rather than inventing new Math semantics or republishing archives.",
+      "M8 and M9 remain planned/not-ready, the original generated skill and source-version manifest stay unchanged, and no external agent-host installation, broker authorization or adoption is claimed."
+    ],
+    "nextAction": "After successful portable export qualification, assess the next forward-only M8-W01 readiness step and any separate host-specific installation contract; do not infer completed RED/GREEN/verify history.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/discovery/README.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+      "sourcePath": "files/docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-portable-discovery-bundle.md"
+    },
+    {
+      "path": "docs/discovery/README.md",
+      "sourcePath": "files/docs/discovery/README.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS280/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS280/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS280/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS279/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/discovery/qualification/m8-selected-clr-bindings.json",
+      "jsonPointer": "/packageConsumerQualified",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-portable-discovery-skill-export-net11-private-package-locked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 520,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
