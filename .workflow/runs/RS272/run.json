@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "RS272",
+  "title": "Qualify the authorized private bounded Statistics publisher in a disposable feed with independent net11 readback",
+  "state": "prepared",
+  "commitMessage": "test: qualify guarded private bounded Statistics publisher",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Qualify authorized, collision-refusing private Statistics publication controls using a disposable feed and independent net11 package-only readback.",
+    "value": "Record explicit owner permission for only Statistics 20260.20261120.1001, install a guarded release controller reusing Dw.Tools.NuGet, test non-overwriting publication in a disposable feed, verify NuGet archive/DLL/dependency identities and twelve net11 independent consumer checks; require clean main and durable RS272 success before any real NUGET_LOCAL write.",
+    "debtChanges": [
+      "RS271 succeeded first-pass attempt 001 and qualified publication readiness without modifying NUGET_LOCAL.",
+      "RS272 verifies only a disposable-feed rehearsal. The real target private feed is NOT written by DWF preselection or payload; actual --publish follows successful RS272 under explicit guarded operator execution, then physical independent readback.",
+      "RS272 first invocation refused pre-attempt at publisher rehearsal restore: NU1010 missing Dw.Tools.NuGet central PackageVersion. Stage the exact existing publisher pin [20260.20261026.1010] without changing the publishing contract or feed."
+    ],
+    "nextAction": "After durable RS272 success, invoke the guarded private --publish mode once on clean main, then validate exact physical feed readback and establish an independent DWF receipt before telling Assessa to adopt.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 440
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/decisions/m9-bounded-statistics-private-publish-authorization.md",
+    "docs/engineering/VerifyM9BoundedStatisticsPrivateFeed.cs",
+    "tools/dw.tools.math.nuget-bounded-statistics-release/dw.tools.math.nuget-bounded-statistics-release.csproj",
+    "tools/dw.tools.math.nuget-bounded-statistics-release/Program.cs",
+    "tools/dw.tools.math.nuget-bounded-statistics-release/Directory.Packages.props"
+  ],
+  "validations": [
+    {
+      "id": "m9-private-publisher-disposable-rehearsal-and-net11-readback",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--project",
+        "tools/dw.tools.math.nuget-bounded-statistics-release/dw.tools.math.nuget-bounded-statistics-release.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--rehearse"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 420
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
