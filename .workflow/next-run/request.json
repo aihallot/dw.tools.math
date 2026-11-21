@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "RS274",
+  "title": "Deliver verified private bounded Statistics package handoff and reconcile published documentation for Assessa",
+  "commitMessage": "docs: deliver published bounded Statistics handoff to Assessa",
+  "timeoutSeconds": 480,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Reconcile stale Math Statistics publication statuses with durable RS273 and deliver exact P0 private package contract to the Assessa owning agent.",
+    "value": "Replace obsolete source-candidate and awaiting-readback documentation, add Math-owned handoff with exact physically verified package/DLL/dependency SHA-256, versioned unbiased bounded API and consumer-specific Assessa acceptance boundaries. Validate handoff against durable first-pass RS273 evidence; do not touch package files, sibling repositories or M9 progress.",
+    "debtChanges": [
+      "RS273 succeeded attempt 001 first-pass, verified the physical NUGET_LOCAL archive and independent locked net11 package-only consumer after explicit authorized private publication.",
+      "M9 backlog/native statuses remain planned/not-ready; source, package and release documentation can state qualified delivery without claiming task closure or Assessa acceptance. Subsequent progress reconciliation is a separate evidence-backed decision."
+    ],
+    "nextAction": "Hand the committed Math-owned package provenance and MATH-XR-004 contract to the aihallot/dw.tools.assessa agent. Only that owner validates GENERATE-001 / EG-A-01 / T002 and returns adoption evidence.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 260
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/distribution/bounded-integer-sampling.md",
+    "docs/distribution/m9-statistics-physical-private-publication-readback.md",
+    "docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/distribution/bounded-integer-sampling.md",
+      "sourcePath": "files/docs/distribution/bounded-integer-sampling.md"
+    },
+    {
+      "path": "docs/distribution/m9-statistics-physical-private-publication-readback.md",
+      "sourcePath": "files/docs/distribution/m9-statistics-physical-private-publication-readback.md"
+    },
+    {
+      "path": "docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md",
+      "sourcePath": "files/docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md"
+    },
+    {
+      "path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+      "sourcePath": "files/docs/engineering/ValidateM9AssessaPublishedHandoff.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS273/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS273/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-assessa-private-package-handoff-durable-identities",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
