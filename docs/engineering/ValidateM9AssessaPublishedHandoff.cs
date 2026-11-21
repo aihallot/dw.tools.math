@@ -1,6 +1,7 @@
 #:property NuGetAudit=false
 #:property PublishAot=false
 using System.Text.Json;
+using System.Linq;
 
 const string PublishedVersion = "20260.20261120.1001";
 const string Archive = "feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1";
@@ -47,8 +48,41 @@ Need(report.GetProperty("runId").GetString()=="RS273" &&
     report.GetProperty("git").GetProperty("commitMessage").GetString() ==
         "test: qualify published bounded Statistics private feed readback",
     "RS273 durable publication qualification differs.");
+const string LinuxReport = ".aura/workflow/reports/RS277/attempt-001.json";
+Need(handoff.Contains("Linux/WSL binary consumer", StringComparison.Ordinal) &&
+    handoff.Contains("RS277 report:", StringComparison.Ordinal) &&
+    handoff.Contains("source-free locked", StringComparison.OrdinalIgnoreCase) &&
+    handoff.Contains("aed67c6e5b2a4ccceb87e9737a74bbf8e1f0ff6b", StringComparison.Ordinal) &&
+    handoff.Contains("Assessa adoption pending", StringComparison.Ordinal) &&
+    handoff.Contains("no rebuild, republication, Assessa adoption", StringComparison.Ordinal),
+    "Missing Linux consumer evidence or non-adoption boundary.");
+using (var linuxDoc = JsonDocument.Parse(File.ReadAllText(LinuxReport)))
+{
+    var linux = linuxDoc.RootElement;
+    var prior = linux.GetProperty("priorInvocationFailures");
+    var observed = linux.GetProperty("contribution").GetProperty("observed");
+    Need(linux.GetProperty("runId").GetString() == "RS277" &&
+        linux.GetProperty("attempt").GetInt32() == 1 &&
+        linux.GetProperty("outcome").GetString() == "succeeded" &&
+        linux.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.66" &&
+        linux.GetProperty("git").GetProperty("commitMessage").GetString() ==
+            "test: qualify published bounded Statistics binaries on Linux net11" &&
+        prior.GetProperty("count").GetInt32() == 0 &&
+        prior.GetProperty("firstPassSucceeded").GetBoolean() &&
+        linux.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+        observed.GetProperty("mutationBoundaryClean").GetBoolean() &&
+        observed.GetProperty("changedPaths").EnumerateArray().Count() == 1 &&
+        observed.GetProperty("changedPaths").EnumerateArray().Any(x =>
+            x.GetString() == "docs/engineering/ProbeM9WslNet11PublishedBoundedStatistics.cs") &&
+        observed.GetProperty("validations").EnumerateArray().Any(x =>
+            x.GetProperty("id").GetString() ==
+                "m9-published-bounded-statistics-linux-net11-independent-binary"),
+        "RS277 Linux/WSL source-free independent binary evidence differs.");
+}
 using var backlog=JsonDocument.Parse(File.ReadAllText("docs/planning/backlog.json"));
 Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.124",
     "The canonical backlog baseline changed.");
 Console.WriteLine("MATH-RS274-ASSESSA-HANDOFF|package=dw.tools.math.statistics|version="+
     PublishedVersion+"|durableRS273=first-pass|status=published-private|assessaAdoption=pending|PASS");
+Console.WriteLine("MATH-RS278-LINUX-HANDOFF|durableRS277=first-pass|linuxNet11=source-free-locked|" +
+    "publishedVersion=" + PublishedVersion + "|assessaAdoption=pending|M9=not-ready|PASS");
