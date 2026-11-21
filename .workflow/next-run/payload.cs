@@ -13,6 +13,7 @@ p.Require.JsonValueEquals("docs/planning/backlog.json",
     "/plan_version", JsonValue.Create("0.1.124"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-statistics-private-publish-authorization.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/VerifyM9BoundedStatisticsPrivateFeed.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("tools/dw.tools.math.nuget-bounded-statistics-release/Directory.Packages.props"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("tools/dw.tools.math.nuget-bounded-statistics-release/dw.tools.math.nuget-bounded-statistics-release.csproj"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("tools/dw.tools.math.nuget-bounded-statistics-release/Program.cs"));
 return p.Complete();
