@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "RS280",
+  "title": "Reconcile M8 Discovery protocol and actual published CLR consumer proofs without inventing lifecycle completion",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile M8 Discovery positive binary evidence and acceptance frontier",
+  "timeoutSeconds": 520,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Replace stale M8-W01 acceptance gaps with exact RS131/RS209 portable protocol and RS279 source-free published CLR consumer evidence.",
+    "value": "Refresh the canonical Math-owned Discovery acceptance frontier and README to distinguish proven 13-case pinned protocol (2 accepted/11 refused), original four source-qualified capabilities and RS279\u0027s five-example Windows net11 locked private-binary consumer from missing external skill installation and runtime permission. Add a bounded C# structural validator that checks durable report lineage, exact package identities, source-manifest version separation and unchanged M8 lifecycle state.",
+    "debtChanges": [
+      "The acceptance document still cited backlog 0.1.123 and listed already completed RS209 thirteen-case provenance verification as a future action; align it with accepted 0.1.124.",
+      "RS279 succeeded first-pass, adding a positive source-free locked .NET 11 published Composition/IR/Quantities consumer; package and source-manifest versions remain separate.",
+      "Native M8-W01 phases, tasks and RED/GREEN/verify subtasks remain not-ready; no external broker permission, installed skill, AURA adoption or retroactive achievements are claimed."
+    ],
+    "nextAction": "Use the evidence frontier to inspect lawful forward-only native task readiness and remaining external skill installation/authorization boundaries, without changing prior receipt histories.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 260
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+  ],
+  "validations": [
+    {
+      "id": "m8-w01-acceptance-frontier-protocol-and-locked-net11-binary",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
