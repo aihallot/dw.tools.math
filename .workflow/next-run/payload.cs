@@ -2,17 +2,15 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 var p = PayloadContext.Create();
-p.Workflow.RequireCurrentRun("RS274", null, null, null, null, null);
-p.Workflow.RequirePriorSuccess("RS273", 1,
-    "test: qualify published bounded Statistics private feed readback",
-    "0.1.66", 0, 0, 0, true);
+p.Workflow.RequireCurrentRun("RS275", null, null, null, null, null);
+p.Workflow.RequirePriorSuccess("RS274", 1,
+    "docs: deliver published bounded Statistics handoff to Assessa",
+    "0.1.66", 1, 1, 0, false);
 p.ProjectPlan.RequireNodeState("M3-W02-C03", "done");
 p.ProjectPlan.RequireNodeState("M9", "not-ready");
 p.ProjectPlan.RequireNodeState("M9-W01-C01", "not-ready");
 p.Require.JsonValueEquals("docs/planning/backlog.json",
     "/plan_version", JsonValue.Create("0.1.124"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/bounded-integer-sampling.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/m9-statistics-physical-private-publication-readback.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9AssessaPublishedHandoff.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 return p.Complete();
