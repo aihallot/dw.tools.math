@@ -42,7 +42,8 @@ using (var zip = ZipFile.OpenRead(archive))
         deps[0].Attribute("version")?.Value == "[" + BaseVersion + "]",
         "Unexpected exact dependency.");
 }
-var work = Path.GetFullPath("build/artifacts/m9-rs272-private-independent-verification");
+var work = Path.Combine(Path.GetFullPath("build/artifacts"),
+    "m9-rs272-private-independent-verification-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(work);
 var localFeed = Path.Combine(work, "feed");
 Directory.CreateDirectory(localFeed);
