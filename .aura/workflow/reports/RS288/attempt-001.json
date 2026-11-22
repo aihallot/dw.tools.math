@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS288",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-22T23:40:16.6532284+00:00",
+  "completedAtUtc": "2026-11-22T23:40:17.2347126+00:00",
+  "durationMilliseconds": 581,
+  "projectNodes": [
+    "M8-W01-C01-T1-R",
+    "M8-W01-C01-T1-G"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS288/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 940,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-ec54d238971b4b9a95f726c821d349ee\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 940000,
+      "DurationMilliseconds": 471,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS288 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS287/attempt-001.json run=RS287 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs bytes=12988\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11778\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=7373\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=14219\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-portable-discovery-bundle.md bytes=6316\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md bytes=2972\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-G not-ready-\u003Eready\r\n[payload] OK operations=16 changed=8 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS288/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS288 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "542eacbb05b6fc0e852c3ac6bf31b1a6531cf98fdddb91cbfb4eeb1f0e10c171",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS287/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS287 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b6ad740933b4cdea057fdacdad557fe89b7724741cd40694e1ad95422e9b7e9e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+        "Status": 1,
+        "Summary": "bytes=12988",
+        "Details": null,
+        "BeforeSha256": "eec2143e27d0676e535e136d96b0605c1ea86bca63d1ecd8bc21df1460486509",
+        "AfterSha256": "8533af92e8044eb2ad1bbcdf73085fdc29b2a132278c4246c3cf8df8da61bf96",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11778",
+        "Details": null,
+        "BeforeSha256": "dd6350e9adc6ef15ef61962132713de57336191c363019eee41419d21e6eaebb",
+        "AfterSha256": "1f6188f3718d77eac6415e0ddacabb61ea9b21e061604efe470da83280be69fe",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=7373",
+        "Details": null,
+        "BeforeSha256": "1670609addd0d6cc41cc84bdbb00ad7d5d3fca42eeb36aeec19afa941b7b5404",
+        "AfterSha256": "3275a57d35b6ed0952c6b5c81c8b0feb14e6046e909253a011aad3b3ba4c9931",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=14219",
+        "Details": null,
+        "BeforeSha256": "6baac7b7e681b9e1386f783863fd597228d7e5b5ae5a16ff28ebe63608490694",
+        "AfterSha256": "395e076f5b779ef447bf7f20b3b42584729ad57748562162c3c8bd2d55a384d0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+        "Status": 1,
+        "Summary": "bytes=6316",
+        "Details": null,
+        "BeforeSha256": "04b8a727b6c6f3e22ed20f5b008c30c2d136b011ee84dceaaef96526a42a6c1e",
+        "AfterSha256": "4ed94beae6a6f959d16a4e70686a2026f7824c9e79845046a760491765a6ec7f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md",
+        "Status": 1,
+        "Summary": "bytes=2972",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "73aa1d6d15f603b0e08662c68319afa3f876a5ee0b83401aa989ff32271e69c9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "8ddeb8eb2ec669ca0773e840c0a8c6955f229c2048c9b9f2db9ab05cd71726f1",
+        "AfterSha256": "fad729e7ca821072c1fba1c9e227201548cabef1c6d1d4b818c2eab4ff43f399",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "fad729e7ca821072c1fba1c9e227201548cabef1c6d1d4b818c2eab4ff43f399",
+        "AfterSha256": "2c326f1df256f0928f5ab79f3e6af002fefff86bf19144bff32d599fee7f3402",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-strict-binding-metadata-green-input-retained",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-attested-export-enforces-strict-metadata",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "native-dwf-591-node-red-done-green-ready",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-red-done-green-ready-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261122T233900Z-6d7a0d07b6b0b72a",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "4ce6765877d6fcd8acc6849b83319640cf564b9b",
+  "invocationStartedAtUtc": "2026-11-22T23:39:00.6341359+00:00",
+  "invocationDurationMilliseconds": 76600,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS288",
+      "title": "Complete evidenced Math Discovery protocol RED, ready GREEN and enforce strict metadata in attested skill export",
+      "projectNodes": [
+        "M8-W01-C01-T1-R",
+        "M8-W01-C01-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Complete the newly evidenced Math Discovery protocol RED subtask, admit GREEN to ready and wire strict metadata validation into the attested export boundary.",
+      "value": "Use RS286\u0027s new RED parameter/member drift observations and RS287\u0027s independently qualified strict gate to converge only M8-W01-C01-T1-R to done with one truthful achievement. Admit the GREEN sibling from not-ready to ready without executing it. In the existing Math attestation wrapper, invoke the RS287 --validate CLI on the actually exported Discovery manifest before issuing the unsigned SHA-256 receipt. Requalify the focused strict gate, deterministic attestation and standalone offline verifier; leave pinned protocol sources, packages and broker authority unchanged.",
+      "debtChanges": [
+        "RS287 succeeded attempt 001 after one preselection CS8602 refusal, so firstPassSucceeded=false. The RS286 RED gap and RS287 stricter refuser remain distinct evidence scopes.",
+        "The attested portable export previously checked selected runtime-only manifest metadata and file hashes, but did not invoke the new strict CLR signature-to-fields admission gate before issuing its receipt.",
+        "RED completion is limited to M8-W01-C01-T1-R; GREEN is only ready, the parent and ancestors remain in-progress, and Verification, public publication, signed provenance and broker adoption remain open."
+      ],
+      "nextAction": "Activate the single ready GREEN leaf in a separate DWF run and prove tampered exported metadata is refused at the consumer-facing attestation boundary while the valid bundle remains accepted.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M8-W01-C01-T1-R",
+          "achievement": "RS286 independently reproduced two missing signature-to-metadata refusals using the unchanged pinned protocol validator while preserving its authorization refusal; RS287 qualified a new strict Math-owned gate with four selected positives, one synthetic positive and seven independent refusals. The new RED qualification is complete without claiming parent task, GREEN or broker completion."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-strict-binding-metadata-green-input-retained",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-attested-export-enforces-strict-metadata",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "native-dwf-591-node-red-done-green-ready",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-red-done-green-ready-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS286 independently reproduced two missing signature-to-metadata refusals using the unchanged pinned protocol validator while preserving its authorization refusal; RS287 qualified a new strict Math-owned gate with four selected positives, one synthetic positive and seven independent refusals. The new RED qualification is complete without claiming parent task, GREEN or broker completion."
+      },
+      {
+        "id": "M8-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M8-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS286 independently reproduced two missing signature-to-metadata refusals using the unchanged pinned protocol validator while preserving its authorization refusal; RS287 qualified a new strict Math-owned gate with four selected positives, one synthetic positive and seven independent refusals. The new RED qualification is complete without claiming parent task, GREEN or broker completion."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS288",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS288",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "4ce6765877d6fcd8acc6849b83319640cf564b9b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "a92f381166287990eb37336c42765895703c48d262617c7c85697dd25be22044"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: enforce strict Discovery metadata before attested export",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

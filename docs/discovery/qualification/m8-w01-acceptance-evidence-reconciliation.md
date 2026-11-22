@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **new RED work in progress, not product acceptance**. RS284/RS285 made M8 and its protocol RED lineage `ready`; RS286 targets `in-progress` for exactly `M8`, `M8-W01`, `M8-W01-C01`, `M8-W01-C01-T1`, and `M8-W01-C01-T1-R`. Other Discovery and modernization nodes remain `not-ready`. The canonical backlog remains `planned`; no node is completed and no broker authorization is granted.
+Status: **protocol RED closure and GREEN readiness, not product acceptance**. RS286 established the RED gaps, and RS287 qualified a separate strict Math metadata gate. RS288 targets `M8-W01-C01-T1-R = done` and `M8-W01-C01-T1-G = ready` with the four M8 ancestors still `in-progress`. The other Discovery and modernization nodes remain `not-ready`. The canonical backlog remains `planned`; no task or phase is completed and no broker authorization is granted.
 
 ## Accepted product authority
 
@@ -71,16 +71,26 @@ RS287 targets four selected Math positive examples and one independently pinned 
 
 **Scope:** This additional qualification is Math-specific metadata alignment, not a retrospective replacement for portable protocol conformance or proof of cross-repository broker routing. M8's protocol RED leaf remains `in-progress`; GREEN/Verification sibling states remain `not-ready` until a separate forward-only DWF decision and run.
 
+## RS288 — RED completion, GREEN readiness and actual export enforcement
+
+The new RED observations (RS286: signature/member drift admitted by the historical validator, while authorization escalation remained refused) and the RS287 strict metadata guard (four selected Math positives, one synthetic positive and seven refusals) justify a **new DWF-recorded RED subtask completion**, not fabricated historical progress. RS287 attempt 001 succeeded **after one pre-attempt refusal** (`firstPassSucceeded=false`).
+
+RS288 uses the typed target-reentrant DWF `ConvergeNodeToDone` operation only for `M8-W01-C01-T1-R`, with exactly one corresponding completion achievement. It then makes its GREEN sibling `ready`. The parent task, phase, work package and milestone remain `in-progress`, and no other subtask or release becomes `done`.
+
+The existing Math-owned `AttestM8PortableDiscoveryExport.cs` must now call the already qualified strict gate in `--validate` mode **against the actual generated export's manifest**, before producing the unsigned SHA-256 receipt. The wrapper still checks deterministic exports, three tamper refusals and standalone offline verification. Its independent `--verify` path continues to verify recorded hashes and authorization metadata without needing the Math repository or running the strict gate. The historic twelve-file exporter, generated source manifest, published packages and all prior qualification receipts remain untouched.
+
+See [RS288 RED/GREEN delivery decision](../../planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md). This integration is Math-owned and **does not** grant broker authority, prove external host adoption, or authenticate an unsigned receipt.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS286 activates exactly one protocol RED `in-progress` chain and observes new falsifiable binding drift gaps. GREEN and Verification siblings remain `not-ready`. No subtask is `implemented`, `validated` or `done`, and no completion achievement is claimed.
+4. **Native DWF progress:** RS288 targets an evidence-backed RED `done` receipt with one matching achievement, followed by GREEN `ready`. The parent task and ancestors remain `in-progress`; Verification and all other M8 children remain `not-ready`. New GREEN work needs separately observed forward-only execution.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-Use the RS286 RED observations to design a separate narrowly scoped GREEN gate that rejects parameter and binding member inconsistencies without rewriting the pinned historical verifier. The active RED subtask must earn its own subsequent lifecycle evidence; do not backfill history, alter immutable source manifests, or infer broker authorization.
+After the RS288 RED completion and export gate admission, activate the now-ready GREEN leaf in a separate run and qualify a fresh end-to-end strict metadata refusal at the actual consumer entrypoint. Do not backfill historical evidence, modify pinned source manifests or claim external broker adoption.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.

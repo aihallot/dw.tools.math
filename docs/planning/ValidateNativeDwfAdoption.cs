@@ -46,12 +46,17 @@ try
     {
         "M8-W01",
         "M8-W01-C01",
-        "M8-W01-C01-T1",
-        "M8-W01-C01-T1-R"
+        "M8-W01-C01-T1"
     };
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
-            activeM8ProtocolRedLineage.Contains(entry.Key) ? "in-progress" : "not-ready");
+            entry.Key switch
+            {
+                "M8-W01-C01-T1-R" => "done",
+                "M8-W01-C01-T1-G" => "ready",
+                _ => activeM8ProtocolRedLineage.Contains(entry.Key)
+                    ? "in-progress" : "not-ready"
+            });
     foreach (var entry in actual)
     {
         var id = entry.Key;
