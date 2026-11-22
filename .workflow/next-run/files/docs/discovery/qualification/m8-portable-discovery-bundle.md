@@ -1,6 +1,6 @@
 # M8-W01 — Portable private-package Discovery skill export
 
-Status: RS281 candidate; this file is not a publication or adoption receipt. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
+Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification is proposed, not yet executed. No external adoption or publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
 
 ## Purpose
 
@@ -21,6 +21,10 @@ The existing Math Discovery skill supports four selected AgentCallable operation
 | `dw.quantities` | `20260.20261102.1001` | `e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d` |
 
 Restore is limited to the selected private feed and exact three-package closure. No package is built, republished or overwritten. The original consumer algorithm is reused without new Math semantics; only its result scope label changes for the exported package-only invocation.
+
+## Independent Linux/WSL qualification — proposed RS282
+
+The Math-owned probe `docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs` reuses the exact RS281 `--export` path to create a new disposable twelve-file bundle. On the default WSL Linux distribution, it checks SDK `11.0.100`, the three immutable private archive/DLL SHA-256 identities, an isolated locked `net11.0` `PackageReference` restore and the same four selected positive CLR calls. It also verifies that no exported input files or original archives changed. This qualifies the Linux package-only example if and only if RS282 succeeds; it does not install the skill in a remote agent host or confer broker permissions.
 
 ## Limits
 
