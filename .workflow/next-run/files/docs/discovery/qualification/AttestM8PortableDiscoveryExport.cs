@@ -67,10 +67,20 @@ foreach (var item in a)
     Need(Hash(Path.Combine(first, item.Replace('/', Path.DirectorySeparatorChar))) ==
         Hash(Path.Combine(second, item.Replace('/', Path.DirectorySeparatorChar))),
         "Two independent attested exports differ: " + item);
-var standalone = RunDotnet(first, "run", "--file", SelfPath, "--",
+var verifierHost = Path.Combine(root, "verifier-host");
+Directory.CreateDirectory(verifierHost);
+File.Copy(Path.Combine(first, SelfPath), Path.Combine(verifierHost, SelfPath));
+Need(Hash(Path.Combine(first, SelfPath)) ==
+    Hash(Path.Combine(verifierHost, SelfPath)),
+    "Copied verifier differs from the exported source.");
+File.WriteAllText(Path.Combine(verifierHost, "global.json"),
+    "{\"sdk\":{\"version\":\"11.0.100\",\"rollForward\":\"disable\",\"allowPrerelease\":false}}\n",
+    new UTF8Encoding(false));
+var standalone = RunDotnet(verifierHost, "run", "--file", SelfPath, "--",
     "--verify", first);
 Need(standalone.Contains("MATH-RS283-PORTABLE-VERIFY|files=13|hashes=matched|brokerReady=false|PASS",
     StringComparison.Ordinal), "Independent exported verifier did not accept its own clean bundle.");
+Verify(first);
 
 var selected = Path.Combine(second, Skill, "references", "manifest.json");
 var saved = File.ReadAllBytes(selected);
