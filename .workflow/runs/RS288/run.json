@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "RS288",
+  "title": "Complete evidenced Math Discovery protocol RED, ready GREEN and enforce strict metadata in attested skill export",
+  "state": "prepared",
+  "commitMessage": "feat: enforce strict Discovery metadata before attested export",
+  "timeoutSeconds": 940,
+  "projectNodes": [
+    "M8-W01-C01-T1-R",
+    "M8-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Complete the newly evidenced Math Discovery protocol RED subtask, admit GREEN to ready and wire strict metadata validation into the attested export boundary.",
+    "value": "Use RS286\u0027s new RED parameter/member drift observations and RS287\u0027s independently qualified strict gate to converge only M8-W01-C01-T1-R to done with one truthful achievement. Admit the GREEN sibling from not-ready to ready without executing it. In the existing Math attestation wrapper, invoke the RS287 --validate CLI on the actually exported Discovery manifest before issuing the unsigned SHA-256 receipt. Requalify the focused strict gate, deterministic attestation and standalone offline verifier; leave pinned protocol sources, packages and broker authority unchanged.",
+    "debtChanges": [
+      "RS287 succeeded attempt 001 after one preselection CS8602 refusal, so firstPassSucceeded=false. The RS286 RED gap and RS287 stricter refuser remain distinct evidence scopes.",
+      "The attested portable export previously checked selected runtime-only manifest metadata and file hashes, but did not invoke the new strict CLR signature-to-fields admission gate before issuing its receipt.",
+      "RED completion is limited to M8-W01-C01-T1-R; GREEN is only ready, the parent and ancestors remain in-progress, and Verification, public publication, signed provenance and broker adoption remain open."
+    ],
+    "nextAction": "Activate the single ready GREEN leaf in a separate DWF run and prove tampered exported metadata is refused at the consumer-facing attestation boundary while the valid bundle remains accepted.",
+    "achievements": [
+      {
+        "projectNode": "M8-W01-C01-T1-R",
+        "achievement": "RS286 independently reproduced two missing signature-to-metadata refusals using the unchanged pinned protocol validator while preserving its authorization refusal; RS287 qualified a new strict Math-owned gate with four selected positives, one synthetic positive and seven independent refusals. The new RED qualification is complete without claiming parent task, GREEN or broker completion."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 320
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-strict-binding-metadata-green-input-retained",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 210
+    },
+    {
+      "id": "m8-attested-export-enforces-strict-metadata",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 510
+    },
+    {
+      "id": "native-dwf-591-node-red-done-green-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 160
+    },
+    {
+      "id": "m8-discovery-red-done-green-ready-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 150
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
