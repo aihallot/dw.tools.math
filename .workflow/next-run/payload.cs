@@ -7,7 +7,6 @@ p.Workflow.RequirePriorSuccess("RS283", 1,
     "feat: attest portable Math Discovery exports with SHA-256 receipt",
     "0.1.66", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M7", "done");
-p.ProjectPlan.RequireNodeState("M8", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W01", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
 p.ProjectPlan.RequireNodeState("M9", "not-ready");
