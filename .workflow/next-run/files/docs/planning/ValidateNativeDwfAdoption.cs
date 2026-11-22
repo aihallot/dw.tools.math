@@ -38,11 +38,11 @@ try
     foreach (var id in historicalOmissions)
         Require(!actual.ContainsKey(id), "Historical C01 subtask must not be backfilled: " + id + ".");
 
-    RequireState(actual, "M8", "ready");
+    RequireState(actual, "M8", "in-progress");
     RequireState(actual, "M9", "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, "not-ready");
-    var readyM8ProtocolRedLineage = new HashSet<string>(StringComparer.Ordinal)
+    var activeM8ProtocolRedLineage = new HashSet<string>(StringComparer.Ordinal)
     {
         "M8-W01",
         "M8-W01-C01",
@@ -51,7 +51,7 @@ try
     };
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
-            readyM8ProtocolRedLineage.Contains(entry.Key) ? "ready" : "not-ready");
+            activeM8ProtocolRedLineage.Contains(entry.Key) ? "in-progress" : "not-ready");
     foreach (var entry in actual)
     {
         var id = entry.Key;
