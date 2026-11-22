@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "id": "RS286",
+  "title": "Activate one Math Discovery protocol RED chain and independently observe unbound CLR metadata drift",
+  "commitMessage": "test: begin Math Discovery protocol RED binding consistency",
+  "timeoutSeconds": 780,
+  "projectNodes": [
+    "M8",
+    "M8-W01",
+    "M8-W01-C01",
+    "M8-W01-C01-T1",
+    "M8-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Start the ready M8 protocol RED hierarchy and record two newly falsifiable CLR signature/metadata alignment gaps.",
+    "value": "Transition exactly M8, M8-W01, M8-W01-C01, M8-W01-C01-T1 and its RED leaf from ready to in-progress using typed, target-reentrant DWF transitions. Add a Math-owned .NET 11 probe that runs the unchanged historical portable verifier and pinned thirteen-case corpus in an isolated copy while adding three new controlled inputs: parameter-type drift and binding-member drift must be observed admitted (RED gaps), and metadata-granted authorization must remain refused (control). Retain all canonical historical source and package identities and no completed achievements.",
+    "debtChanges": [
+      "RS285 succeeded first-pass and prepared the one M8 protocol RED leaf, but no native work was active and no new RED falsification had yet been observed.",
+      "The existing portable verifier checks the SHA-256 of its canonicalSignature but does not bind the declared parameter type or binding member to that signature; new controlled probes characterize both gaps.",
+      "The original pinned verifier and its thirteen fixtures remain unchanged; M8 GREEN/Verification, other M8 branches, M9, product backlog, published packages and broker authority are not advanced."
+    ],
+    "nextAction": "Build an independent strict Math-owned binding-metadata admission gate in a later GREEN run, showing both drift cases refused while matching metadata and runtime-only authorization remain accepted.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8ProtocolRedSignatureMetadata.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ProbeM8ProtocolRedSignatureMetadata.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8ProtocolRedSignatureMetadata.cs"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS285/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS285/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS285/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS285/attempt-001.json",
+      "jsonPointer": "/progress/transitions/3/id",
+      "expectedValue": "M8-W01-C01-T1-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS285/attempt-001.json",
+      "jsonPointer": "/progress/transitions/3/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-protocol-red-original-verifier-metadata-gap",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8ProtocolRedSignatureMetadata.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 290,
+      "packs": []
+    },
+    {
+      "id": "native-dwf-591-node-m8-active-protocol-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-active-red-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
