@@ -1,6 +1,6 @@
 # M8-W01 — Portable private-package Discovery skill export
 
-Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification succeeded at attempt 001, first-pass true. RS283 proposes an unsigned, locally verifiable export integrity receipt; not yet qualified. No external adoption or public publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
+Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification succeeded at attempt 001, first-pass true. RS283 defines a candidate unsigned local export integrity receipt; qualification is determined only by the durable RS283 attempt report, not by this page. No external adoption or public publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
 
 ## Purpose
 
