@@ -56,9 +56,12 @@ using (var installed = JsonDocument.Parse(File.ReadAllText(
             x.GetProperty("packageVersion").GetString() == "0.3.0-preview.1" &&
             x.GetProperty("exposure").GetString() == "AgentCallable" &&
             x.GetProperty("execution").GetProperty("authorization").GetString() == "runtime-only") &&
-        File.ReadAllBytes("docs/discovery/qualification/m8-discovery-manifest.json")
-            .AsSpan().SequenceEqual(File.ReadAllBytes(
-                Path.Combine(Skill, "references/manifest.json"))),
+        Encoding.UTF8.GetBytes(File.ReadAllText(
+                "docs/discovery/qualification/m8-discovery-manifest.json")
+            .Replace("\r\n", "\n", StringComparison.Ordinal))
+            .AsSpan().SequenceEqual(Encoding.UTF8.GetBytes(File.ReadAllText(
+                Path.Combine(Skill, "references/manifest.json"))
+            .Replace("\r\n", "\n", StringComparison.Ordinal))),
         "Canonical source-generated Discovery identity differs.");
 }
 if (args[0] == "--export")
