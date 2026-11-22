@@ -34,8 +34,8 @@ var m8 = native.RootElement.GetProperty("milestones").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8");
 var w1 = m8.GetProperty("workPackages").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W01");
-Need(m8.GetProperty("state").GetString() == "not-ready" &&
-    w1.GetProperty("state").GetString() == "not-ready", "Native milestone/work package changed.");
+Need(m8.GetProperty("state").GetString() == "ready" &&
+    w1.GetProperty("state").GetString() == "not-ready", "Native milestone readiness/work package boundary changed.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
     Need(phase.GetProperty("state").GetString() == "not-ready", "Native phase state changed.");
@@ -110,5 +110,5 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("RS279", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
-Console.WriteLine("MATH-RS280-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=not-ready|brokerReady=0|PASS");
+Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=ready|W01=not-ready|brokerReady=0|PASS");

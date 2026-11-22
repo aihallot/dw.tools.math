@@ -38,7 +38,7 @@ try
     foreach (var id in historicalOmissions)
         Require(!actual.ContainsKey(id), "Historical C01 subtask must not be backfilled: " + id + ".");
 
-    RequireState(actual, "M8", "not-ready");
+    RequireState(actual, "M8", "ready");
     RequireState(actual, "M9", "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, "not-ready");
