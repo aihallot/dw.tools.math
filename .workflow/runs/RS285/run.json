@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "id": "RS285",
+  "title": "Admit one forward-only Math Discovery protocol RED readiness lineage under M8",
+  "state": "prepared",
+  "commitMessage": "chore: ready Math Discovery protocol RED development chain",
+  "timeoutSeconds": 620,
+  "projectNodes": [
+    "M8-W01",
+    "M8-W01-C01",
+    "M8-W01-C01-T1",
+    "M8-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Make the existing M8-W01 protocol RED lineage ready for a new independently falsifiable Discovery development cycle.",
+    "value": "With M8 already ready from first-pass RS284, use four target-reentrant typed ProjectPlan transitions to admit exactly M8-W01, M8-W01-C01, M8-W01-C01-T1 and its RED leaf as ready. Keep all other M8/M9 nodes not-ready and accepted product statuses planned. Adjust the two maintained C# projection validators and record a bounded new RED test contract without inferring execution or completion from prior RS131/209 portable conformance or RS279-283 package/export qualification.",
+    "debtChanges": [
+      "RS284 succeeded first-pass and made only the M8 root ready; no M8 Discovery descendant was yet eligible for a new RED task cycle.",
+      "RS131/209 established the pinned thirteen-case conformance history (2 accepted, 11 refused), but that historical evidence cannot count as newly executed RED/GREEN/verification progress.",
+      "Only four existing native readiness states change; package binaries, source manifests, historic receipts, M8-W02, the rest of M8-W01 and M9 remain unchanged."
+    ],
+    "nextAction": "Activate the single ready M8-W01-C01-T1-R leaf in a separate controlled run, then create fresh independent Math-owned negative protocol-drift and authority-escalation checks before further lifecycle progress.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 290
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md"
+  ],
+  "validations": [
+    {
+      "id": "native-dwf-591-node-m8-protocol-red-readiness-projection",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200
+    },
+    {
+      "id": "discovery-protocol-red-ready-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
