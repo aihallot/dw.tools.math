@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **readiness evidence assessment, not product acceptance**. RS284 set the native M8 root to `ready`. RS285 targets a forward-only `ready` lineage for `M8-W01`, `M8-W01-C01`, `M8-W01-C01-T1` and `M8-W01-C01-T1-R` only; other Discovery and modernization nodes remain `not-ready`. The accepted product backlog remains `planned`. Readiness is not a RED execution, runtime authorization, release or completion claim.
+Status: **new RED work in progress, not product acceptance**. RS284/RS285 made M8 and its protocol RED lineage `ready`; RS286 targets `in-progress` for exactly `M8`, `M8-W01`, `M8-W01-C01`, `M8-W01-C01-T1`, and `M8-W01-C01-T1-R`. Other Discovery and modernization nodes remain `not-ready`. The canonical backlog remains `planned`; no node is completed and no broker authorization is granted.
 
 ## Accepted product authority
 
@@ -57,16 +57,22 @@ The first RED responsibility is pinned portable protocol and conformance, based 
 
 See [RS285 protocol RED readiness decision](../../planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md). The target plan is checked by the maintained native DWF adoption validator and the Discovery frontier validator; no new parallel validator is introduced.
 
+## RS286 — new independent protocol RED gap observation
+
+RS286 begins the single M8 protocol RED chain (`M8 → M8-W01 → M8-W01-C01 → M8-W01-C01-T1 → M8-W01-C01-T1-R`) at `in-progress`. An isolated test-only copy of the original pinned `ValidatePortableProtocol.cs` runs the unchanged 13/13 fixtures, then checks three new scenarios using its **actual** `ValidateMathDraftEnvelope` method: a CLR parameter type changed while the signature/fingerprint stay fixed; a CLR member name changed while the signature/fingerprint stay fixed; and a prohibited metadata authorization escalation. The two identity mismatches are currently *admitted* (RED gaps); the authorization escalation is refused (existing safety control).
+
+The new Math-owned `ProbeM8ProtocolRedSignatureMetadata.cs` observes these differences without modifying the historical verifier or pinned schema, rebuilding a Math library, or changing published packages. The RED subtask is **active**, not `done`; an independent stricter binding-metadata gate and separate GREEN/Verification cycles remain necessary. See [RS286 RED decision](../../planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md).
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS284 admitted only the milestone root, and RS285 targets exactly one protocol RED `ready` lineage. No node is `in-progress`, `validated` or `done` because of these scheduling transitions. Actual RED/GREEN/verification execution requires distinct forward-only evidence and any matching future completion achievements.
+4. **Native DWF progress:** RS286 activates exactly one protocol RED `in-progress` chain and observes new falsifiable binding drift gaps. GREEN and Verification siblings remain `not-ready`. No subtask is `implemented`, `validated` or `done`, and no completion achievement is claimed.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After the RS285 RED readiness chain is admitted, activate only its already-ready protocol leaf under a separate controlled run. Produce fresh, independently falsifiable RED evidence for bounded portable protocol drift and refusal semantics. Do not backfill historical subtasks, alter the source-only manifest version, or infer broker readiness.
+Use the RS286 RED observations to design a separate narrowly scoped GREEN gate that rejects parameter and binding member inconsistencies without rewriting the pinned historical verifier. The active RED subtask must earn its own subsequent lifecycle evidence; do not backfill history, alter immutable source manifests, or infer broker authorization.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
