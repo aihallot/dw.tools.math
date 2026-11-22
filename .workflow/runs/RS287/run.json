@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "id": "RS287",
+  "title": "Enforce strict Math Discovery CLR signature-to-metadata alignment after proven RED drift",
+  "state": "prepared",
+  "commitMessage": "feat: validate strict Math Discovery binding metadata alignment",
+  "timeoutSeconds": 610,
+  "projectNodes": [
+    "M8-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Add a reusable strict Math-owned CLR metadata admission gate that rejects both signature alignment gaps reproduced by RS286.",
+    "value": "Create a standalone C# validator with --check and read-only --validate modes that reconstructs canonical signatures from assembly, version, type, member, return type and ordered parameter types, then verifies SHA-256. Qualify four selected Math manifests and one pinned synthetic positive against seven separate tamper refusals, including RS286\u0027s parameter/member drift and retained runtime-only broker boundaries. Keep the historical portable verifier, source-generated manifest, packages and active RED lifecycle state unchanged.",
+    "debtChanges": [
+      "RS286 succeeded first-pass and observed two real metadata-alignment gaps in the immutable historical portable verifier, despite its correctly functioning authorization refusal.",
+      "The existing Math manifest validator checks selected source pins and canonical fingerprint but not the complete consistency of all declared fields against the canonical signature; the new independent gate covers this distinct responsibility.",
+      "The Math-specific supplementary gate is not a protocol-schema change, CLR runtime reflection, AURA broker authorization, GREEN lifecycle completion, or historical receipt rewrite.",
+      "RS287 invocation run-next-20261122T190619Z-4491f4f3c6369975 was refused before attempt allocation (CS8602 in selected JSON capability enumeration). The staged C# gate now explicitly refuses null nodes without weakening its positive/negative tests."
+    ],
+    "nextAction": "Use the qualified strict admission gate as the new GREEN input, then separately reconcile RED completion and GREEN readiness using forward-only native DWF transitions and fresh evidence.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 260
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-strict-binding-metadata-rs287.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-strict-binding-metadata-positive-and-seven-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "m8-strict-binding-metadata-public-validate-mode",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs",
+        "--",
+        "--validate",
+        "docs/discovery/qualification/m8-discovery-manifest.json"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
