@@ -144,8 +144,9 @@ Require(File.Exists(lockPath), "Isolated package lockfile is absent.");
 using (var lockDocument = JsonDocument.Parse(File.ReadAllText(lockPath)))
 {
     var targets = lockDocument.RootElement.GetProperty("dependencies");
-    Require(targets.EnumerateObject().Count() == 1 &&
-        targets.TryGetProperty("net11.0", out var net11),
+    if (!targets.TryGetProperty("net11.0", out var net11))
+        throw new InvalidDataException("RS281: Missing net11.0 locked dependency group.");
+    Require(targets.EnumerateObject().Count() == 1,
         "Portable example must restore only net11.0.");
     var closure = net11.EnumerateObject()
         .ToDictionary(x => x.Name, x => x.Value, StringComparer.OrdinalIgnoreCase);
