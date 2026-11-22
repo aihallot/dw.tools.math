@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **evidence assessment only**. Native M8, M8-W01, M8-W01-C01 and M8-W01-C02 remain `not-ready`; product backlog remains `planned`. This document does not advance native lifecycle states, grant runtime permission or qualify a release.
+Status: **readiness evidence assessment, not product acceptance**. Native M8 is `ready` only at its milestone root following the RS284 forward-only readiness decision; M8-W01, M8-W01-C01, M8-W01-C02 and every RED/GREEN/verification task remain `not-ready`. The accepted product backlog remains `planned`. This document does not grant runtime permission, qualify a release or declare a task complete.
 
 ## Accepted product authority
 
@@ -40,16 +40,25 @@ The previously selected `M8-W01-C01-T2` four bindings gained a distinct source-f
 
 The net11 locked restore and loaded DLL SHA checks were exercised by `docs/engineering/ProbeM8Net11PublishedDiscoveryBindings.cs`, reusing `tests/consumers/m8-discovery-clr-seed/Program.cs`. It is **positive private-package binary evidence**, not a version rewrite: the canonical source-generated `m8-discovery-manifest.json` still declares source package version `0.3.0-preview.1`; the physical calendar versions are independent. The historical `m8-selected-clr-bindings.json` keeps its source-only flag and remains immutable in meaning.
 
+## RS281–RS283 independent delivery evidence and RS284 milestone readiness
+
+- RS281 produced a reproducible **twelve-file portable Discovery skill export** on Windows .NET 11 and exercised the original four selected operations. Its durable report records three pre-attempt refusals before success at attempt 001; `firstPassSucceeded=false`, not first-pass success.
+- RS282 reproduced the exact exported package-only positive sample under default Linux/WSL SDK 11.0.100 with locked private-feed restore and three SHA-pinned binaries. The durable attempt 001 succeeded first-pass with zero prior failures.
+- RS283 provided an **unsigned, reproducible integrity receipt** and a standalone C# verifier with three tamper refusals. Its attempt 001 succeeded first-pass. This is local file-integrity evidence only, not trusted distribution provenance or installation into an external broker.
+- RS284 changes only the root milestone M8 from `not-ready` to `ready`. Its prerequisite M7 is durably `done`. `ready` means the milestone is eligible for future **forward-only** task readiness work; it is neither `in-progress` nor `done`, and does not retroactively complete any RED/GREEN/verification subtask. See [the exact readiness decision](../../planning/decisions/m8-root-readiness-rs284.md).
+
+All source-only Discovery manifests, package calendars, historical report lineages and external runtime authority remain unchanged.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** reconcile readiness, dependencies, current node states and accepted RED/GREEN/Verification requirements before proposing a state transition. Only transition nodes with exact evidence and matching achievements; do not mark the parent chunk or milestone done by inference.
+4. **Native DWF progress:** the RS284 milestone-level `not-ready → ready` admission has no completion achievement. W01 and all descendants still require separate bounded, forward-only readiness and actual RED/GREEN/Verification execution; do not mark any node `done` by inference.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-Use the verified RS131/RS209 protocol proof and RS279 positive private-package consumer to design a **forward-only** native M8-W01 task-readiness path. Inspect actual permissible DWF lifecycle operations and their source/projection validators before any transition. Do not recreate historical RED/GREEN/Verification completions, alter the source-only manifest version, or infer installed-broker readiness.
+After the root M8 readiness transition, refine a **single** forward-only M8-W01 task starting from its accepted RED/GREEN/Verification contract and existing evidence. Require new DWF progress receipts for subsequent task transitions; do not backfill historical subtasks, alter the source-only manifest version, or infer broker readiness.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
