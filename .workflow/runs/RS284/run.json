@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "RS284",
+  "title": "Admit M8 root milestone readiness through typed forward-only DWF transition after qualified Discovery handoff",
+  "state": "prepared",
+  "commitMessage": "chore: admit M8 milestone readiness for forward-only development",
+  "timeoutSeconds": 660,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Advance only the M8 native milestone from not-ready to ready after its completed M7 dependency, keeping all accepted child work pending.",
+    "value": "Use the documented target-reentrant ProjectPlan.TransitionNode to make the M8 root eligible for a new bounded development cycle, supported by the preserved RS131/209 protocol evidence, RS279 source-free Windows consumer, RS281 portable exporter, RS282 Linux .NET 11 qualification and RS283 standalone unsigned integrity receipt. Align the native adoption validator and Discovery acceptance frontier with the exact one-node target; explicitly retain M8-W01/M8-W02 and all tasks not-ready, M9 not-ready, canonical backlog planned and no completion achievements.",
+    "debtChanges": [
+      "The accepted M8 milestone has M7 done and independently qualified Discovery delivery evidence, but its native root still remained not-ready and could not be scheduled forward.",
+      "RS281 succeeded attempt 001 with three preselection refusals, not first-pass; RS282 and RS283 succeeded first-pass. None constitutes task-level RED/GREEN/verification completion.",
+      "The root readiness transition does not grant broker permission, install in AURA, migrate production packages, publish NuGet, or promote any child node or product release."
+    ],
+    "nextAction": "Refine and admit one new M8-W01 task under its accepted RED/GREEN/verification contract, then earn actual forward-only lifecycle evidence before any task completion.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 320
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-root-readiness-rs284.md"
+  ],
+  "validations": [
+    {
+      "id": "native-dwf-591-node-projection-m8-root-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "discovery-m8-w01-evidence-frontier-root-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
