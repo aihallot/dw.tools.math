@@ -1,6 +1,6 @@
 # M8-W01 — Portable private-package Discovery skill export
 
-Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification succeeded at attempt 001, first-pass true. RS283 defines a candidate unsigned local export integrity receipt; qualification is determined only by the durable RS283 attempt report, not by this page. No external adoption or public publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
+Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification succeeded at attempt 001, first-pass true. RS283's unsigned local export integrity receipt succeeded at attempt 001, first-pass; the durable attempt report remains authoritative. No external adoption or public publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
 
 ## Purpose
 
@@ -44,4 +44,4 @@ The offline `verify-export.cs` contract is **unchanged**: it checks the unsigned
 
 ## Limits
 
-An isolated directory copy plus a package-only executable is not an installation in a supported agent host, a runtime authorization grant, BrokerReady status, AURA integration or external consumer acceptance. The generated source skill still declares its source package versions. M8 native tasks and RED/GREEN/verify subtasks remain not-ready unless a separate lawful forward-only transition is made.
+An isolated directory copy plus a package-only executable is not an installation in a supported agent host, a runtime authorization grant, BrokerReady status, AURA integration or external consumer acceptance. The generated source skill still declares its source package versions. RS288 may close only the active protocol RED leaf and admit its GREEN sibling to ready after DWF succeeds; Verification, other M8 tasks and external authorization remain unqualified.
