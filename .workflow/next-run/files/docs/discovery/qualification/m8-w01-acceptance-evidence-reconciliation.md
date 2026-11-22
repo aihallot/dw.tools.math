@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **readiness evidence assessment, not product acceptance**. Native M8 is `ready` only at its milestone root following the RS284 forward-only readiness decision; M8-W01, M8-W01-C01, M8-W01-C02 and every RED/GREEN/verification task remain `not-ready`. The accepted product backlog remains `planned`. This document does not grant runtime permission, qualify a release or declare a task complete.
+Status: **readiness evidence assessment, not product acceptance**. RS284 set the native M8 root to `ready`. RS285 targets a forward-only `ready` lineage for `M8-W01`, `M8-W01-C01`, `M8-W01-C01-T1` and `M8-W01-C01-T1-R` only; other Discovery and modernization nodes remain `not-ready`. The accepted product backlog remains `planned`. Readiness is not a RED execution, runtime authorization, release or completion claim.
 
 ## Accepted product authority
 
@@ -49,16 +49,24 @@ The net11 locked restore and loaded DLL SHA checks were exercised by `docs/engin
 
 All source-only Discovery manifests, package calendars, historical report lineages and external runtime authority remain unchanged.
 
+## RS285 bounded RED admission (target state, not completed work)
+
+The next DWF delivery selects one native Discovery path for new work: `M8-W01 → M8-W01-C01 → M8-W01-C01-T1 → M8-W01-C01-T1-R`. Each of these four nodes is admitted only to `ready` by typed transitions, starting from the RS284-ready M8 parent. The canonical product plan remains `planned` and no historical RED, GREEN, verification, task or phase receives `done` evidence.
+
+The first RED responsibility is pinned portable protocol and conformance, based on the immutable Decision-derived `dw.discovery/1.0.0-draft.1` schema 2 corpus. RS131 and RS209 establish historical thirteen-case identity and results (2 accepted, 11 refused); those reports are prerequisites, not new RS285 execution receipts. The next bounded RED run must create independent falsification on **new inputs** (for example, a controlled schema-pin drift and a broker-authorization escalation), preserving the pinned originals and refusing incorrect acceptance. The runtime broker and other repositories remain separate owners.
+
+See [RS285 protocol RED readiness decision](../../planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md). The target plan is checked by the maintained native DWF adoption validator and the Discovery frontier validator; no new parallel validator is introduced.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** the RS284 milestone-level `not-ready → ready` admission has no completion achievement. W01 and all descendants still require separate bounded, forward-only readiness and actual RED/GREEN/Verification execution; do not mark any node `done` by inference.
+4. **Native DWF progress:** RS284 admitted only the milestone root, and RS285 targets exactly one protocol RED `ready` lineage. No node is `in-progress`, `validated` or `done` because of these scheduling transitions. Actual RED/GREEN/verification execution requires distinct forward-only evidence and any matching future completion achievements.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After the root M8 readiness transition, refine a **single** forward-only M8-W01 task starting from its accepted RED/GREEN/Verification contract and existing evidence. Require new DWF progress receipts for subsequent task transitions; do not backfill historical subtasks, alter the source-only manifest version, or infer broker readiness.
+After the RS285 RED readiness chain is admitted, activate only its already-ready protocol leaf under a separate controlled run. Produce fresh, independently falsifiable RED evidence for bounded portable protocol drift and refusal semantics. Do not backfill historical subtasks, alter the source-only manifest version, or infer broker readiness.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
