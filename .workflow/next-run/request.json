@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "RS282",
+  "title": "Qualify exported Math Discovery skill positive private-package consumer under default WSL Linux net11",
+  "commitMessage": "test: qualify exported Discovery skill binaries on Linux net11",
+  "timeoutSeconds": 840,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Qualify the portable Discovery skill's actual exported package-only sample on Linux WSL net11 without requalifying or rewriting private packages.",
+    "value": "Invoke the existing RS281 deterministic exporter into a fresh disposable directory and consume the exact four selected Math CLR operations on the default WSL Linux distribution under SDK 11.0.100. Verify twelve exported files, original runtime-only selection, three immutable private archive and DLL SHA-256 identities, exact locked net11 Composition/IR/Quantities NuGet closure, positive five-example output, and unchanged export/source archives. No broker installation, public publication, or native progress transition.",
+    "debtChanges": [
+      "RS281 succeeded attempt 001 after three pre-attempt refusals (firstPassSucceeded=false); its exported positive package-only example is qualified on Windows .NET 11, not Linux.",
+      "Earlier RS261 Linux binary proof used a different Composition fixture and did not exercise the complete four-selected-operation portable skill export.",
+      "The source-generated skill and private package identities remain immutable; RS282 covers a distinct Linux boundary while M8/M9 stay planned/not-ready."
+    ],
+    "nextAction": "After Linux source-free qualification, reconcile exact cross-platform export evidence and assess a forward-only M8 readiness path; leave external agent-host installation and broker authorization to their owners.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 260
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-portable-discovery-bundle.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS281/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS281/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 3
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS281/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 3
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS281/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-portable-discovery-linux-net11-source-free-binary-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 560,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
