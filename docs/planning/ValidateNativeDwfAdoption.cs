@@ -42,8 +42,16 @@ try
     RequireState(actual, "M9", "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, "not-ready");
+    var readyM8ProtocolRedLineage = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "M8-W01",
+        "M8-W01-C01",
+        "M8-W01-C01-T1",
+        "M8-W01-C01-T1-R"
+    };
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
-        RequireState(actual, entry.Key, "not-ready");
+        RequireState(actual, entry.Key,
+            readyM8ProtocolRedLineage.Contains(entry.Key) ? "ready" : "not-ready");
     foreach (var entry in actual)
     {
         var id = entry.Key;

@@ -35,15 +35,22 @@ var m8 = native.RootElement.GetProperty("milestones").EnumerateArray()
 var w1 = m8.GetProperty("workPackages").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W01");
 Need(m8.GetProperty("state").GetString() == "ready" &&
-    w1.GetProperty("state").GetString() == "not-ready", "Native milestone readiness/work package boundary changed.");
+    w1.GetProperty("state").GetString() == "ready",
+    "Native M8 and Discovery work-package readiness changed.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
-    Need(phase.GetProperty("state").GetString() == "not-ready", "Native phase state changed.");
+    Need(phase.GetProperty("state").GetString() ==
+        (phase.GetProperty("id").GetString() == "M8-W01-C01" ? "ready" : "not-ready"),
+        "Native Discovery phase readiness differs.");
     foreach (var task in phase.GetProperty("tasks").EnumerateArray())
     {
-        Need(task.GetProperty("state").GetString() == "not-ready", "Native task state changed.");
+        Need(task.GetProperty("state").GetString() ==
+            (task.GetProperty("id").GetString() == "M8-W01-C01-T1" ? "ready" : "not-ready"),
+            "Native protocol task readiness differs.");
         foreach (var sub in task.GetProperty("subtasks").EnumerateArray())
-            Need(sub.GetProperty("state").GetString() == "not-ready", "Native subtask state changed.");
+            Need(sub.GetProperty("state").GetString() ==
+                (sub.GetProperty("id").GetString() == "M8-W01-C01-T1-R" ? "ready" : "not-ready"),
+                "Native protocol RED readiness differs.");
     }
 }
 var receipt = protocol.RootElement;
@@ -111,4 +118,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=ready|W01=not-ready|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=ready|W01=ready|C01=ready|T1=ready|RED=ready|brokerReady=0|PASS");

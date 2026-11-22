@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS285",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-22T16:02:45.1695909+00:00",
+  "completedAtUtc": "2026-11-22T16:02:46.460644+00:00",
+  "durationMilliseconds": 1291,
+  "projectNodes": [
+    "M8-W01",
+    "M8-W01-C01",
+    "M8-W01-C01-T1",
+    "M8-W01-C01-T1-R"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS285/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 620,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-282aad1b066b48b59772c1172f284242\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 620000,
+      "DurationMilliseconds": 1008,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS285 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS284/attempt-001.json run=RS284 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M7 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11614\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=7144\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=9958\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md bytes=2770\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-R not-ready-\u003Eready\r\n[payload] OK operations=16 changed=8 no-change=0 verified=8 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS285/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS285 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c635a32d46c2fdd6be6e616766dae7ca220b64f54668bda01980226548b20908",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS284/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS284 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "eda3366d079238389784da1fb731ffcc38428bbb160410cedef3d195affa4e84",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M7 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11614",
+        "Details": null,
+        "BeforeSha256": "e2a134aeef3fb2592e805747dce5d5ccc2552e98673dff70f43600a6d55a3bdf",
+        "AfterSha256": "0e755941cb37022634c1bc2cbf2aba6bbe0facab37b40cca64f3ea02833b1e68",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=7144",
+        "Details": null,
+        "BeforeSha256": "8e4bcfaaedf0b6555356d97b1db5bb7515ff0a6318a704d893fcffe49fa50a7f",
+        "AfterSha256": "a5ac32face893085a062da6735a39b4638c1fa1b92837f05c81eb0add8ed3f94",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=9958",
+        "Details": null,
+        "BeforeSha256": "9e934c0d03a39a546de1b3d606aed9eca4daa434b482a054b22dd9970e74858c",
+        "AfterSha256": "5beb43dcbc91bbb22e4b495eca916c474971a0ed8c55779b1e263667ad00309c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md",
+        "Status": 1,
+        "Summary": "bytes=2770",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f426c4448cdef7557b3c5573f28f26fd7679b07aba8f93eac923665db2c0b253",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "614a21d2b23b5da6fe592f4a77e0fe84113eccec4ad90b06e7ea4112e78c47f6",
+        "AfterSha256": "90cf8d941aa0f760a0d618e4970253b3e8bc2ac28369ad84b6d6d8914c38715b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "90cf8d941aa0f760a0d618e4970253b3e8bc2ac28369ad84b6d6d8914c38715b",
+        "AfterSha256": "9c74faafdc463557219f2ebafba5744dac6efa5c2fb9ee8cef1a75a91a273b00",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "9c74faafdc463557219f2ebafba5744dac6efa5c2fb9ee8cef1a75a91a273b00",
+        "AfterSha256": "ccd18770572cb514ec68464fea288010d931f3871380a1630f9ebb399b6fadb9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "ccd18770572cb514ec68464fea288010d931f3871380a1630f9ebb399b6fadb9",
+        "AfterSha256": "40f746f61b7328b4efeb81135c786e78b4dfd4cc87f579b5ab4abb734a54f695",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "native-dwf-591-node-m8-protocol-red-readiness-projection",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "discovery-protocol-red-ready-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261122T160137Z-c8b8dbc970609486",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "724e286745d579ab3ea081235acd6733f0c5ac50",
+  "invocationStartedAtUtc": "2026-11-22T16:01:37.7933017+00:00",
+  "invocationDurationMilliseconds": 68667,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS285",
+      "title": "Admit one forward-only Math Discovery protocol RED readiness lineage under M8",
+      "projectNodes": [
+        "M8-W01",
+        "M8-W01-C01",
+        "M8-W01-C01-T1",
+        "M8-W01-C01-T1-R"
+      ]
+    },
+    "declared": {
+      "summary": "Make the existing M8-W01 protocol RED lineage ready for a new independently falsifiable Discovery development cycle.",
+      "value": "With M8 already ready from first-pass RS284, use four target-reentrant typed ProjectPlan transitions to admit exactly M8-W01, M8-W01-C01, M8-W01-C01-T1 and its RED leaf as ready. Keep all other M8/M9 nodes not-ready and accepted product statuses planned. Adjust the two maintained C# projection validators and record a bounded new RED test contract without inferring execution or completion from prior RS131/209 portable conformance or RS279-283 package/export qualification.",
+      "debtChanges": [
+        "RS284 succeeded first-pass and made only the M8 root ready; no M8 Discovery descendant was yet eligible for a new RED task cycle.",
+        "RS131/209 established the pinned thirteen-case conformance history (2 accepted, 11 refused), but that historical evidence cannot count as newly executed RED/GREEN/verification progress.",
+        "Only four existing native readiness states change; package binaries, source manifests, historic receipts, M8-W02, the rest of M8-W01 and M9 remain unchanged."
+      ],
+      "nextAction": "Activate the single ready M8-W01-C01-T1-R leaf in a separate controlled run, then create fresh independent Math-owned negative protocol-drift and authority-escalation checks before further lifecycle progress.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c01-t1-red-readiness-rs285.md"
+      ],
+      "validations": [
+        {
+          "id": "native-dwf-591-node-m8-protocol-red-readiness-projection",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "discovery-protocol-red-ready-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01",
+        "objective": "Independent Math Discovery",
+        "kind": "work-package",
+        "parentId": "M8",
+        "state": "ready",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C01",
+        "objective": "Selected CLR bindings and portable protocol",
+        "kind": "phase",
+        "parentId": "M8-W01",
+        "state": "ready",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C01-T1",
+        "objective": "Pinned protocol and conformance",
+        "kind": "task",
+        "parentId": "M8-W01-C01",
+        "state": "ready",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01",
+        "objective": "Independent Math Discovery",
+        "kind": "work-package",
+        "parentId": "M8",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C01",
+        "objective": "Selected CLR bindings and portable protocol",
+        "kind": "phase",
+        "parentId": "M8-W01",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C01-T1",
+        "objective": "Pinned protocol and conformance",
+        "kind": "task",
+        "parentId": "M8-W01-C01",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS285",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS285",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "724e286745d579ab3ea081235acd6733f0c5ac50",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "9f9898f383b8feca20181947a30b7ea1d8482957f0bc76baa6eff246866f78d6"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: ready Math Discovery protocol RED development chain",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
