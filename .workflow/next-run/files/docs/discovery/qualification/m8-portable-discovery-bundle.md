@@ -22,11 +22,11 @@ The existing Math Discovery skill supports four selected AgentCallable operation
 
 Restore is limited to the selected private feed and exact three-package closure. No package is built, republished or overwritten. The original consumer algorithm is reused without new Math semantics; only its result scope label changes for the exported package-only invocation.
 
-## Independent Linux/WSL qualification — proposed RS282
+## Independent Linux/WSL qualification — RS282 succeeded
 
 The Math-owned probe `docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs` reuses the exact RS281 `--export` path to create a new disposable twelve-file bundle. On the default WSL Linux distribution, it checks SDK `11.0.100`, the three immutable private archive/DLL SHA-256 identities, an isolated locked `net11.0` `PackageReference` restore and the same four selected positive CLR calls. It also verifies that no exported input files or original archives changed. This qualifies the Linux package-only example if and only if RS282 succeeds; it does not install the skill in a remote agent host or confer broker permissions.
 
-## Optional portable integrity receipt — RS283 candidate
+## Optional portable integrity receipt — RS283 succeeded
 
 The existing qualified twelve-file export remains unchanged. The Math-owned `AttestM8PortableDiscoveryExport.cs` wrapper invokes that export into a fresh destination, adds its own standalone `verify-export.cs` verifier, and creates an unsigned `portable-attestation.json` with SHA-256 digests for the 13 payload files. A clean export contains 14 files including the receipt. The verifier can be run **from the exported directory without the Math repository or private feed**, before package restore:
 
@@ -35,6 +35,12 @@ The existing qualified twelve-file export remains unchanged. The Math-owned `Att
 It refuses changed, missing or unexpected files and altered source capability authorization. The RS283 `--check` profile compares two exports byte-for-byte, runs the copied verifier independently and tests three deliberate corruptions without replaying the RS281/RS282 package suites. The wrapper offers `--export <NEW_ABSOLUTE_DIRECTORY>` for an opt-in local export; the destination must not exist. No operator-side export command is needed for DWF run-next.
 
 The integrity receipt is **not digitally signed** and does not authenticate provenance against a malicious party able to replace both the receipt and verifier. External distribution would require a trusted out-of-band digest or signature. It does not install the bundle in an agent host, confer execution permission, promote BrokerReady or authorize publication.
+
+## Strict CLR metadata before attestation — RS288 integration
+
+The RS288 qualified path reuses the existing `ValidateM8StrictBindingMetadata.cs --validate` mode against the **exported** `.agents/skills/dw-tools-math/references/manifest.json` from each newly generated bundle. The attestation wrapper must refuse metadata whose canonical signature disagrees with declared assembly, member, return value or ordered CLR parameters, or whose fingerprint or runtime-only authorization is inconsistent. No additional generated file, new package or secret is inserted; the existing unsigned fourteen-file export identity remains.
+
+The offline `verify-export.cs` contract is **unchanged**: it checks the unsigned receipt, the recorded file hashes and the selected runtime-only authorization boundaries without requiring the Math source repository. This local checksum does not replace a trusted signature, prove actual loaded CLR assemblies or authorize any broker invocation.
 
 ## Limits
 

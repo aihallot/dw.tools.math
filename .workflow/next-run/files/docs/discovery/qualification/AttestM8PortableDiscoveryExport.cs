@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 
 const string SourceExporter = "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs";
+const string StrictMetadataGate = "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs";
 const string SelfPath = "verify-export.cs";
 const string ReceiptPath = "portable-attestation.json";
 const string ReceiptKind = "math-discovery-portable-integrity-sha256/1";
@@ -136,14 +137,22 @@ void ExportWithReceipt(string destination)
 {
     Need(!Directory.Exists(destination) && !File.Exists(destination),
         "Attested export must never overwrite an existing destination.");
-    Need(File.Exists(SourceExporter) && File.Exists(
+    Need(File.Exists(SourceExporter) && File.Exists(StrictMetadataGate) && File.Exists(
         "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs"),
-        "Qualified source exporter or attestation source is missing.");
+        "Qualified source exporter, strict metadata gate, or attestation source is missing.");
     var stdout = RunDotnet(Path.GetFullPath("."), "run", "--file", SourceExporter,
         "--", "--export", destination);
     Need(stdout.Contains(
         "MATH-RS281-PORTABLE-EXPORTED|files=12|privatePackages=not-included|authorization=runtime-only",
         StringComparison.Ordinal), "The original twelve-file Math exporter refused.");
+    var exportedManifest = Path.Combine(destination, Skill, "references", "manifest.json");
+    Need(File.Exists(exportedManifest), "Portable Discovery metadata is absent.");
+    var strictOutput = RunDotnet(Path.GetFullPath("."), "run", "--file",
+        StrictMetadataGate, "--", "--validate", exportedManifest);
+    Need(strictOutput.Contains(
+        "MATH-M8-STRICT-BINDING|mode=validate|capabilities=4|metadataOnly=true|brokerReady=0|PASS",
+        StringComparison.Ordinal),
+        "Portable Discovery export failed strict CLR metadata admission.");
     var source = File.ReadAllText(
         "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs")
         .Replace("\r\n", "\n", StringComparison.Ordinal);

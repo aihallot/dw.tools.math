@@ -48,9 +48,16 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
             (task.GetProperty("id").GetString() == "M8-W01-C01-T1" ? "in-progress" : "not-ready"),
             "Native protocol task readiness differs.");
         foreach (var sub in task.GetProperty("subtasks").EnumerateArray())
-            Need(sub.GetProperty("state").GetString() ==
-                (sub.GetProperty("id").GetString() == "M8-W01-C01-T1-R" ? "in-progress" : "not-ready"),
-                "Native protocol RED readiness differs.");
+        {
+            var expected = sub.GetProperty("id").GetString() switch
+            {
+                "M8-W01-C01-T1-R" => "done",
+                "M8-W01-C01-T1-G" => "ready",
+                _ => "not-ready"
+            };
+            Need(sub.GetProperty("state").GetString() == expected,
+                "Native protocol RED closure or GREEN readiness differs.");
+        }
     }
 }
 var receipt = protocol.RootElement;
@@ -118,4 +125,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|RED=in-progress|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|RED=done|GREEN=ready|brokerReady=0|PASS");
