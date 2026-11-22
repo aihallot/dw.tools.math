@@ -1,6 +1,6 @@
 # M8-W01 — Portable private-package Discovery skill export
 
-Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification is proposed, not yet executed. No external adoption or publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
+Status: RS281 Windows .NET 11 export qualification succeeded at attempt 001 after three pre-attempt refusals (`firstPassSucceeded=false`). RS282 Linux/WSL qualification succeeded at attempt 001, first-pass true. RS283 defines a candidate unsigned local export integrity receipt; qualification is determined only by the durable RS283 attempt report, not by this page. No external adoption or public publication is claimed. Generated source metadata remains canonical in `docs/discovery/qualification/m8-discovery-manifest.json`.
 
 ## Purpose
 
@@ -25,6 +25,16 @@ Restore is limited to the selected private feed and exact three-package closure.
 ## Independent Linux/WSL qualification — proposed RS282
 
 The Math-owned probe `docs/discovery/qualification/ProbeM8WslNet11PortableDiscoverySkill.cs` reuses the exact RS281 `--export` path to create a new disposable twelve-file bundle. On the default WSL Linux distribution, it checks SDK `11.0.100`, the three immutable private archive/DLL SHA-256 identities, an isolated locked `net11.0` `PackageReference` restore and the same four selected positive CLR calls. It also verifies that no exported input files or original archives changed. This qualifies the Linux package-only example if and only if RS282 succeeds; it does not install the skill in a remote agent host or confer broker permissions.
+
+## Optional portable integrity receipt — RS283 candidate
+
+The existing qualified twelve-file export remains unchanged. The Math-owned `AttestM8PortableDiscoveryExport.cs` wrapper invokes that export into a fresh destination, adds its own standalone `verify-export.cs` verifier, and creates an unsigned `portable-attestation.json` with SHA-256 digests for the 13 payload files. A clean export contains 14 files including the receipt. The verifier can be run **from the exported directory without the Math repository or private feed**, before package restore:
+
+`dotnet run --file verify-export.cs -- --verify <ABSOLUTE_EXPORT_DIRECTORY>`
+
+It refuses changed, missing or unexpected files and altered source capability authorization. The RS283 `--check` profile compares two exports byte-for-byte, runs the copied verifier independently and tests three deliberate corruptions without replaying the RS281/RS282 package suites. The wrapper offers `--export <NEW_ABSOLUTE_DIRECTORY>` for an opt-in local export; the destination must not exist. No operator-side export command is needed for DWF run-next.
+
+The integrity receipt is **not digitally signed** and does not authenticate provenance against a malicious party able to replace both the receipt and verifier. External distribution would require a trusted out-of-band digest or signature. It does not install the bundle in an agent host, confer execution permission, promote BrokerReady or authorize publication.
 
 ## Limits
 
