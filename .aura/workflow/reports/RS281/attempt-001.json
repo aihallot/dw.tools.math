@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS281",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-22T10:03:38.3038379+00:00",
+  "completedAtUtc": "2026-11-22T10:03:38.8725797+00:00",
+  "durationMilliseconds": 568,
+  "projectNodes": [
+    "M8"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/discovery/README.md"
+  ],
+  "changedPaths": [
+    "docs/discovery/README.md",
+    "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 3,
+    "preparationFailureCount": 3,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261122T093752Z-8bb451eca6e3ecc8",
+      "run-next-20261122T095159Z-61ace35584bc0319",
+      "run-next-20261122T095755Z-ab4060663da66701"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261122T093752Z-8bb451eca6e3ecc8",
+        "runId": "RS281",
+        "scope": "preselection-rs281",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs281/run-next-20261122T093752Z-8bb451eca6e3ecc8"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261122T095159Z-61ace35584bc0319",
+        "runId": "RS281",
+        "scope": "preselection-rs281",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs281/run-next-20261122T095159Z-61ace35584bc0319"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261122T095755Z-ab4060663da66701",
+        "runId": "RS281",
+        "scope": "preselection-rs281",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs281/run-next-20261122T095755Z-ab4060663da66701"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS281/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 800,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-bd42baf487d8448380ce065fdecc37de\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 800000,
+      "DurationMilliseconds": 442,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS281 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS280/attempt-001.json run=RS280 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs bytes=21281\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-portable-discovery-bundle.md bytes=2788\r\n[files.replace-from-staged] CHANGED path=docs/discovery/README.md bytes=10187\r\n[payload] OK operations=9 changed=3 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS281/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS281 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "42899611f9d747859ce71ab2688c49eab0bea896924664a6d09d1d56784e7dce",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS280/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS280 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "3114f2e499bb29772a1d84d0252fd2026b6e3f4dfd55751b0d2b7affe54d2a96",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "32cd0df1cbe6ca643e7a3bf17cbf9b4d4fe2a6f5a3082bcb77a5449205fcfcd9",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+        "Status": 1,
+        "Summary": "bytes=21281",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2edbe78203135b97931a36e22a5630209cd023747aa599d42bfdba470bfbf9da",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+        "Status": 1,
+        "Summary": "bytes=2788",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "5e9432312ec80f28d994f890df75166937e26ba46d89f71e2bf106079376d9fb",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/README.md",
+        "Status": 1,
+        "Summary": "bytes=10187",
+        "Details": null,
+        "BeforeSha256": "79a53b2263bf361bc24e8e597ddfe30485b4c2152dc296e0ed3c2dda25685467",
+        "AfterSha256": "a8b6552659296707f0fc49d6111fd8c5b4563783d1fd1ed5e973f8aa8c36c226",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-portable-discovery-skill-export-net11-private-package-locked",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261122T100254Z-6c931ad7904f25c5",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "75ccd24c7ec29f1cfa239c4825cd7d0eb59fb269",
+  "invocationStartedAtUtc": "2026-11-22T10:02:54.6482362+00:00",
+  "invocationDurationMilliseconds": 44224,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS281",
+      "title": "Export an independently runnable source-free private-package Math Discovery skill bundle",
+      "projectNodes": [
+        "M8"
+      ]
+    },
+    "declared": {
+      "summary": "Deliver an explicit reproducible Math Discovery skill export with a portable private-package .NET 11 sample instead of repository-only example links.",
+      "value": "Create a Math-owned C# exporter that copies the six selected skill files, projects source-local examples to a self-contained portable sample, pins SDK 11.0.100 and the existing Composition PackageReference, and refuses an existing output destination. Qualify two byte-identical isolated exports, links, runtime-only authorization, SHA-256 of three immutable private archives and loaded DLLs, locked net11 restore, and all four preexisting positive selected CLR calls. Document usage and limits without broker/AURA claims.",
+      "debtChanges": [
+        "The current generated skill\u0027s example link resolves only inside the Math repository; RS211 verified metadata in isolation but did not export an independently runnable package-only example.",
+        "RS279 confirmed source-free net11 positive calls for the exact three published private packages; RS281 reuses that seed rather than inventing new Math semantics or republishing archives.",
+        "M8 and M9 remain planned/not-ready, the original generated skill and source-version manifest stay unchanged, and no external agent-host installation, broker authorization or adoption is claimed.",
+        "RS281 invocation run-next-20261122T093752Z-8bb451eca6e3ecc8 was refused before any attempt (CS0165, net11 definite assignment). The staged validator now checks the net11.0 lockfile group with an explicit branch; no working-tree mutation or attempt occurred.",
+        "RS281 retry 1 invocation run-next-20261122T095159Z-61ace35584bc0319 refused pre-attempt: canonical CRLF source and LF bundled manifest compared as raw bytes. Corrected to the generator\u0027s LF-normalized UTF-8 comparison; no attempt allocated.",
+        "RS281 retry 2 invocation run-next-20261122T095755Z-ab4060663da66701 refused pre-attempt: expected seed output doubled \u0027scope=\u0027. Fixed exact comparison using PortableMarker (already includes \u0027scope=\u0027) and added observed output diagnostics; zero attempts allocated."
+      ],
+      "nextAction": "After successful portable export qualification, assess the next forward-only M8-W01 readiness step and any separate host-specific installation contract; do not infer completed RED/GREEN/verify history.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/discovery/README.md",
+        "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+        "docs/discovery/qualification/m8-portable-discovery-bundle.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-portable-discovery-skill-export-net11-private-package-locked",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8",
+        "objective": "Foundation and Discovery",
+        "kind": "milestone",
+        "parentId": null,
+        "state": "not-ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS281",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS281",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "75ccd24c7ec29f1cfa239c4825cd7d0eb59fb269",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "ad66e8767c154c9eda660ec27bdf194075ff2fd403e212de8712a5493c4492ef"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "feat: export portable Math Discovery skill with locked net11 example",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

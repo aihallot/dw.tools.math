@@ -11,6 +11,10 @@ Math Discovery is **opt-in**, broker-neutral, and constrained to the pinned `dw.
 
 The canonical source manifest, private package versions and the generated skill version are distinct identities. Existing published packages remain immutable. Runtime permission, broker routing, consumer installation and cross-repository adoption remain owned and independently qualified by their respective consumers.
 
+## Portable package-only skill export
+
+The canonical skill's historical examples link to source files in the Math repository. The [portable export recipe](qualification/m8-portable-discovery-bundle.md) describes a Math-owned C# exporter that copies the selected skill into a fresh isolated directory, projects its example links to a bundled `net11.0` `PackageReference` consumer and verifies exact immutable private dependencies. This is an opt-in local Math capability, not an agent-host installation, broker permission, public package release or external adoption. Its controlled RS281 check must pass before any qualification claim.
+
 ## Historical preparation context (RS130–RS131)
 
 The sections below preserve historical planning decisions and the pre-RS131 authoring baseline; prospective statements there describe their original time and must not override the current checkpoint above.
