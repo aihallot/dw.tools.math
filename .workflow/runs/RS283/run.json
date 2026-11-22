@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "id": "RS283",
+  "title": "Deliver portable Math Discovery export integrity receipts and standalone tamper verification",
+  "state": "prepared",
+  "commitMessage": "feat: attest portable Math Discovery exports with SHA-256 receipt",
+  "timeoutSeconds": 640,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Add an optional portable Discovery export integrity receipt and independently executable offline verifier without modifying the qualified canonical exporter.",
+    "value": "Wrap the existing twelve-file RS281 exporter to attach a deterministic unsigned SHA-256 receipt and a copied, self-contained C# verifier. Require exact thirteen-file payload membership, selected AgentCallable/runtime-only boundaries, no BrokerReady claims, reproducible independent exports, standalone verification outside the Math repository, and three tamper refusals. Reuse durable RS281 Windows and RS282 Linux package evidence instead of rerunning those binary suites.",
+    "debtChanges": [
+      "RS281 Windows export succeeded attempt 001 after three pre-attempt refusals; RS282 Linux source-free export consumer succeeded first-pass. Neither delivered an independently checkable file-integrity receipt.",
+      "The new receipt is explicitly unsigned and therefore cannot authenticate origin against an actor able to replace the receipt and verifier; a trusted external digest/signature remains a separate delivery responsibility.",
+      "The original twelve-file exporter, published private packages, source-only Discovery manifest, M8/M9 not-ready states, and broker authorization boundaries are preserved."
+    ],
+    "nextAction": "Use the attested export as Math-owned input for a separately qualified consumer installation; assess forward-only M8 readiness without retroactively asserting RED/GREEN/verify completion or broker approval.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 240
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-portable-export-integrity-receipt-and-tamper-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 370
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
