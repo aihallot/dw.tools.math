@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **protocol RED closure and GREEN readiness, not product acceptance**. RS286 established the RED gaps, and RS287 qualified a separate strict Math metadata gate. RS288 targets `M8-W01-C01-T1-R = done` and `M8-W01-C01-T1-G = ready` with the four M8 ancestors still `in-progress`. The other Discovery and modernization nodes remain `not-ready`. The canonical backlog remains `planned`; no task or phase is completed and no broker authorization is granted.
+Status: **protocol GREEN work, not product acceptance**. RS288 durably completed `M8-W01-C01-T1-R` and admitted `M8-W01-C01-T1-G` to `ready`, first-pass. RS289 targets only `M8-W01-C01-T1-G = in-progress`, while the M8 ancestor hierarchy remains `in-progress`. Verification and other Discovery/modernization nodes stay `not-ready`; the canonical backlog remains `planned`. Neither broker authorization nor completion of the parent task is claimed.
 
 ## Accepted product authority
 
@@ -81,16 +81,30 @@ The existing Math-owned `AttestM8PortableDiscoveryExport.cs` must now call the a
 
 See [RS288 RED/GREEN delivery decision](../../planning/decisions/m8-w01-c01-t1-red-closure-green-readiness-rs288.md). This integration is Math-owned and **does not** grant broker authority, prove external host adoption, or authenticate an unsigned receipt.
 
+## RS289 — activate GREEN and test pre-attestation refusals
+
+The RS288 DWF report records `RED = done` with exactly one evidence-backed achievement and `GREEN = ready`, first-pass at attempt 001. RS289 activates **only** `M8-W01-C01-T1-G` using the target-reentrant `ProjectPlan.ActivateReadyContinuation` operation. All four ancestors remain `in-progress`; RED remains `done`; Verification remains `not-ready`; the product backlog stays `planned`. This step does not declare GREEN complete.
+
+RS289 extends the existing Math-owned `AttestM8PortableDiscoveryExport.cs --check` validation to inject three independent, test-only corruptions in freshly generated disposable exports, **before** the established RS287 strict metadata validation and **before** creation of `verify-export.cs` or the unsigned SHA-256 receipt:
+
+- CLR member name changed while the canonical signature/fingerprint are unchanged
+- CLR parameter type changed while the canonical signature/fingerprint are unchanged
+- Runtime-only authorization escalated to `granted`
+
+For each case, the actual attestation path must surface the precise RS287 strict validator refusal and produce **no receipt or exported verifier**. The same check retains two byte-identical valid exports, the copied standalone offline verifier, all three previous post-attestation tamper refusals, and unchanged canonical Math metadata. The injection is internal to `--check`, not a public `--export` option. Consult [the RS289 GREEN decision](../../planning/decisions/m8-w01-c01-t1-green-pre-attestation-rs289.md).
+
+This adds independent end-to-end GREEN evidence, not a new protocol, publicly signed provenance, external skill installation, mathematical runtime execution or broker authorization.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS288 targets an evidence-backed RED `done` receipt with one matching achievement, followed by GREEN `ready`. The parent task and ancestors remain `in-progress`; Verification and all other M8 children remain `not-ready`. New GREEN work needs separately observed forward-only execution.
+4. **Native DWF progress:** RS288 recorded the RED `done` receipt and GREEN `ready` target, while RS289 activates the GREEN leaf to `in-progress` for fresh end-to-end refusal observations. Neither GREEN nor its parent is completed; Verification and other M8 children remain `not-ready`.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After the RS288 RED completion and export gate admission, activate the now-ready GREEN leaf in a separate run and qualify a fresh end-to-end strict metadata refusal at the actual consumer entrypoint. Do not backfill historical evidence, modify pinned source manifests or claim external broker adoption.
+After RS289 qualifies the actual pre-attestation refusal boundary, review the newly recorded GREEN evidence before a separate forward-only GREEN completion and Verification readiness decision. Preserve the historical schema, private package identities and runtime-only broker boundary.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
