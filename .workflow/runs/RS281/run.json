@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "RS281",
+  "title": "Export an independently runnable source-free private-package Math Discovery skill bundle",
+  "state": "prepared",
+  "commitMessage": "feat: export portable Math Discovery skill with locked net11 example",
+  "timeoutSeconds": 800,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Deliver an explicit reproducible Math Discovery skill export with a portable private-package .NET 11 sample instead of repository-only example links.",
+    "value": "Create a Math-owned C# exporter that copies the six selected skill files, projects source-local examples to a self-contained portable sample, pins SDK 11.0.100 and the existing Composition PackageReference, and refuses an existing output destination. Qualify two byte-identical isolated exports, links, runtime-only authorization, SHA-256 of three immutable private archives and loaded DLLs, locked net11 restore, and all four preexisting positive selected CLR calls. Document usage and limits without broker/AURA claims.",
+    "debtChanges": [
+      "The current generated skill\u0027s example link resolves only inside the Math repository; RS211 verified metadata in isolation but did not export an independently runnable package-only example.",
+      "RS279 confirmed source-free net11 positive calls for the exact three published private packages; RS281 reuses that seed rather than inventing new Math semantics or republishing archives.",
+      "M8 and M9 remain planned/not-ready, the original generated skill and source-version manifest stay unchanged, and no external agent-host installation, broker authorization or adoption is claimed.",
+      "RS281 invocation run-next-20261122T093752Z-8bb451eca6e3ecc8 was refused before any attempt (CS0165, net11 definite assignment). The staged validator now checks the net11.0 lockfile group with an explicit branch; no working-tree mutation or attempt occurred.",
+      "RS281 retry 1 invocation run-next-20261122T095159Z-61ace35584bc0319 refused pre-attempt: canonical CRLF source and LF bundled manifest compared as raw bytes. Corrected to the generator\u0027s LF-normalized UTF-8 comparison; no attempt allocated.",
+      "RS281 retry 2 invocation run-next-20261122T095755Z-ab4060663da66701 refused pre-attempt: expected seed output doubled \u0027scope=\u0027. Fixed exact comparison using PortableMarker (already includes \u0027scope=\u0027) and added observed output diagnostics; zero attempts allocated."
+    ],
+    "nextAction": "After successful portable export qualification, assess the next forward-only M8-W01 readiness step and any separate host-specific installation contract; do not infer completed RED/GREEN/verify history.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/discovery/README.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-portable-discovery-skill-export-net11-private-package-locked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 520
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
