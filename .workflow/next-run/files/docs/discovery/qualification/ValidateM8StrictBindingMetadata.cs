@@ -46,7 +46,10 @@ string[] selected =
     "math.ir.canonical.encode",
     "math.ir.hash.semantic"
 ];
-var actual = Capabilities(manifest).Select(item => Read(item.AsObject(), "capabilityId")).ToArray();
+var actual = Capabilities(manifest)
+    .Select(item => Read(item?.AsObject() ??
+        throw new InvalidDataException("RS287: Null selected capability."), "capabilityId"))
+    .ToArray();
 Need(admitted == selected.Length && actual.SequenceEqual(selected, StringComparer.Ordinal),
     "Only the four source-qualified Math capability identities are admitted.");
 
