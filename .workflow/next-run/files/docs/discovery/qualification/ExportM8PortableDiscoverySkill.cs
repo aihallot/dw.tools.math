@@ -173,10 +173,12 @@ foreach (var item in packages)
         "Published DLL bytes changed during isolated consumer build: " + item.Id);
 var stdoutFinal = RunDotnet("run", "--project", Project,
     "-c", "Release", "--no-build", "--no-restore");
-Require(stdoutFinal.Contains(
-        "M8-DISCOVERY-CLR-SEED|bindings=4|examples=5|positiveComposition=2|brokerReady=0|scope=" +
-        PortableMarker, StringComparison.Ordinal),
-    "The installed package-only seed did not pass all original selected examples.");
+var expectedSeedOutput =
+    "M8-DISCOVERY-CLR-SEED|bindings=4|examples=5|positiveComposition=2|brokerReady=0|" +
+    PortableMarker;
+Require(stdoutFinal.Contains(expectedSeedOutput, StringComparison.Ordinal),
+    "Installed package-only seed result differed. Expected: " + expectedSeedOutput +
+    "; actual: " + stdoutFinal);
 foreach (var item in packages)
     Require(Hash(Path.Combine(privateFeed!, item.Id + "." + item.Version + ".nupkg")) ==
         item.Archive, "Original immutable private archive was modified: " + item.Id);
