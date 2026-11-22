@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "id": "RS289",
+  "title": "Activate Math Discovery protocol GREEN and prove pre-attestation metadata refusals",
+  "commitMessage": "test: qualify Discovery GREEN pre-attestation refusals",
+  "timeoutSeconds": 1010,
+  "projectNodes": [
+    "M8-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Activate the ready Math Discovery protocol GREEN leaf and prove the real attested export refuses malformed metadata before issuing its receipt.",
+    "value": "Reuse the existing attestation exporter and strict Math CLR metadata gate, adding three --check-only pre-receipt injections after generation: binding member drift, parameter type drift and unauthorized execution grant. Require the exact RS287 refusal and absence of both receipt and exported verifier for each. Preserve two identical positive exports, the independent offline verifier, three previous post-receipt tamper refusals and canonical source bytes. Activate only M8-W01-C01-T1-G through target-reentrant DWF continuation; RED remains done, Verification not-ready and no completion is declared.",
+    "debtChanges": [
+      "RS288 durably completed the protocol RED leaf and admitted GREEN as ready, first-pass; GREEN still lacks fresh end-to-end evidence at the actual attestation entrypoint.",
+      "RS288 inserted the strict gate before receipt generation but its previous checks exercised only valid pre-attestation metadata and post-attestation tampering, not strict refusal at that seam.",
+      "The new malformed exports live only in ignored disposable build/artifacts; the public --export/--verify APIs, prior proofs, unsigned receipt semantics, immutable packages and broker boundaries remain unchanged."
+    ],
+    "nextAction": "After RS289 succeeds, separately assess GREEN completion and admit Verification using the new end-to-end refusal receipts; do not infer consumer adoption or external authorization.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 320
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/planning/decisions/m8-w01-c01-t1-green-pre-attestation-rs289.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+      "sourcePath": "files/docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-portable-discovery-bundle.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c01-t1-green-pre-attestation-rs289.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c01-t1-green-pre-attestation-rs289.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/id",
+      "expectedValue": "M8-W01-C01-T1-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/afterState",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C01-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-green-actual-attestation-pre-receipt-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/AttestM8PortableDiscoveryExport.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 650,
+      "packs": []
+    },
+    {
+      "id": "m8-native-591-node-active-protocol-green",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-green-activation-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 160,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
