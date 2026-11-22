@@ -63,6 +63,14 @@ RS286 begins the single M8 protocol RED chain (`M8 → M8-W01 → M8-W01-C01 →
 
 The new Math-owned `ProbeM8ProtocolRedSignatureMetadata.cs` observes these differences without modifying the historical verifier or pinned schema, rebuilding a Math library, or changing published packages. The RED subtask is **active**, not `done`; an independent stricter binding-metadata gate and separate GREEN/Verification cycles remain necessary. See [RS286 RED decision](../../planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md).
 
+## RS287 — additional strict CLR metadata admission gate (pending validation)
+
+The proposed Math-owned `ValidateM8StrictBindingMetadata.cs` checks that each capability's canonical CLR signature can be reconstructed **exactly** from its declared assembly, assembly version, type, member, return type and ordered parameter types, then recomputes its SHA-256 fingerprint. It supplements the original portable-envelope validation without modifying the historical SHA-pinned verifier or changing the four selected Math capabilities.
+
+RS287 targets four selected Math positive examples and one independently pinned synthetic envelope, plus seven explicit tamper refusals. The two newly reproduced RS286 RED gaps (parameter type and binding member drift) must now be refused by this stricter gate. The existing `runtime-only` authority boundary remains mandatory. It can be invoked read-only with `dotnet run --file docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs -- --validate <manifest-path>` and does not load or authorize CLR assemblies.
+
+**Scope:** This additional qualification is Math-specific metadata alignment, not a retrospective replacement for portable protocol conformance or proof of cross-repository broker routing. M8's protocol RED leaf remains `in-progress`; GREEN/Verification sibling states remain `not-ready` until a separate forward-only DWF decision and run.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
