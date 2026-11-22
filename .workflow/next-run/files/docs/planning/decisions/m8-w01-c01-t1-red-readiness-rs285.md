@@ -14,7 +14,7 @@ RS131 executed the 13-case corpus (2 accepted, 11 rejected); RS209 independently
 
 ## Next fresh RED test boundary
 
-The next task run should activate the currently ready protocol RED leaf and independently falsify a new bounded admission/refusal scenario, without changing the immutable pinned fixture, schema, historical receipts or library outputs. Candidate cases are: altered protocol schema identity or content digest must be refused; unauthorized BrokerReady or metadata-granted permission must be refused. A valid pinned envelope should remain accepted. Use Math-owned C# validators, deterministic fixtures, no sibling project reference and no generic shell-domain logic. The RED step remains incomplete until DWF records new execution and proper later lifecycle transitions.
+After this readiness run succeeds, a separate task run may activate the protocol RED leaf and independently falsify a new bounded admission/refusal scenario, without changing the immutable pinned fixture, schema, historical receipts or library outputs. Candidate cases are: altered protocol schema identity or content digest must be refused; unauthorized BrokerReady or metadata-granted permission must be refused. A valid pinned envelope should remain accepted. Use Math-owned C# validators, deterministic fixtures, no sibling project reference and no generic shell-domain logic. The RED step remains incomplete until DWF records new execution and proper later lifecycle transitions.
 
 ## Nonclaims and safeguards
 
