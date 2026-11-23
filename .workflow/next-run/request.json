@@ -13,7 +13,7 @@
     "debtChanges": [
       "RS295 succeeded first-pass, completing only T2-RED and moving T2-GREEN to ready; GREEN has no completed evidence.",
       "RS294 exposed a single shared real published-CLR admission CLI, but GREEN still needs fresh evidence from a separate caller process.",
-      "RS296 activates GREEN and runs new separate-process consumer checks without completing GREEN, republishing archives, or authorizing any external broker."
+      "RS296 activates GREEN via target-reentrant DWF continuation and runs separate-process admission checks; the RS296 pre-attempt target-reentry refusal revealed that a rehearsal can already observe GREEN in-progress, so the exact ready-only precondition was removed without changing the intended scope."
     ],
     "nextAction": "Use durable RS296 independent consumer results in a separate bounded DWF run to decide whether GREEN can close and Verification can become ready; do not claim external broker authorization.",
     "achievements": []
