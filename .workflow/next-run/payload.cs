@@ -9,7 +9,8 @@ p.ProjectPlan.RequireNodeState("M8", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01-C01", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T1", "done");
-p.ProjectPlan.RequireNodeState("M8-W01-C01-T2", "in-progress");
+// Parent T2 can already be done in the target-reentry rehearsal.
+// ConvergeNodeToDone checks its own admissible baseline/completed states.
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T2-R", "done");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T2-G", "done");
 p.ProjectPlan.RequireNodeState("M8-W01-C02", "not-ready");
