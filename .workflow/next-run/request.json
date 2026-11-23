@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "id": "RS303",
+  "title": "Activate deterministic skill GREEN with strict CLR fingerprint and independent generation evidence",
+  "commitMessage": "feat: enforce strict CLR metadata in deterministic skill generation",
+  "timeoutSeconds": 1030,
+  "projectNodes": [
+    "M8-W01-C02-T1-G"
+  ],
+  "contribution": {
+    "summary": "Activate deterministic skill GREEN and enforce existing strict selected CLR metadata validation before writing skill outputs.",
+    "value": "RS302 succeeded first-pass, closing only C02/T1 RED and admitting GREEN to ready. Reuse the existing strict Math CLR metadata gate inside the existing generator before --write or --check can accept source metadata. Two independent isolated --write runs must generate byte-identical skill/manifest files and pass --check; forged fingerprint and parameter type must be refused without touching generated outputs. Preserve the older RED probe by copying the shared validator into its isolated fixture. Activate only C02/T1-GREEN, without completing it or authorizing external brokers.",
+    "debtChanges": [
+      "RS302 succeeded attempt 001 first-pass, completing C02/T1 RED and readying GREEN without changing canonical generator outputs.",
+      "The current generator checks four selected runtime-only methods but does not reconstruct SHA-256 CLR fingerprint validity before writing; reuse the qualified RS287 strict checker instead of cloning its algorithm.",
+      "RS303 tests two reproducible isolated builds, refuses source fingerprint/signature tampering, and preserves RED refusals. No GREEN completion, external skill installation or broker grant is claimed."
+    ],
+    "nextAction": "After RS303 qualifies strict metadata prewrite and deterministic independent outputs, separately decide GREEN closure and Verification readiness on exact durable evidence.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 360
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/GenerateM8MathSkill.cs",
+    "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+    "docs/discovery/qualification/ProbeM8C02SkillGeneratorGreen.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c02-t1-green-strict-generator-rs303.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/GenerateM8MathSkill.cs",
+      "sourcePath": "files/docs/discovery/qualification/GenerateM8MathSkill.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ProbeM8C02SkillGeneratorGreen.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8C02SkillGeneratorGreen.cs"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c02-t1-green-strict-generator-rs303.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c02-t1-green-strict-generator-rs303.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/progress/completions/0/id",
+      "expectedValue": "M8-W01-C02-T1-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C02-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS302/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M8-W01-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": "M8-W01-C02-T1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-green-independent-strict-generation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8C02SkillGeneratorGreen.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 580,
+      "packs": []
+    },
+    {
+      "id": "m8-skill-red-existing-regression",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 420,
+      "packs": []
+    },
+    {
+      "id": "m8-native-591-node-active-skill-green",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-active-skill-green-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
