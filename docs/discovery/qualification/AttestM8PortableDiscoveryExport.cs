@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 const string SourceExporter = "docs/discovery/qualification/ExportM8PortableDiscoverySkill.cs";
 const string StrictMetadataGate = "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs";
@@ -107,9 +108,75 @@ Reject("altered-receipt-identity", second);
 File.WriteAllText(receiptFile, originalReceipt, new UTF8Encoding(false));
 Verify(second);
 
+// These three test-only mutations reach the actual strict gate before attestation.
+// Neither --export nor --verify offers a mutation callback through the CLI.
+var canonicalManifestPath = Path.Combine(Skill, "references", "manifest.json");
+var canonicalManifestHash = Hash(canonicalManifestPath);
+RejectStrictExport("binding-member-drift",
+    item => (item["binding"]?.AsObject() ??
+        throw new InvalidDataException("RS289: Missing binding."))["member"] = "NotMultiply",
+    "Canonical CLR signature does not match declared fields");
+RejectStrictExport("parameter-type-drift",
+    item =>
+    {
+        var parameters = item["parameters"]?.AsArray() ??
+            throw new InvalidDataException("RS289: Missing parameters.");
+        (parameters[0]?.AsObject() ??
+            throw new InvalidDataException("RS289: Missing first parameter."))["type"] =
+            "System.String";
+    },
+    "Canonical CLR signature does not match declared fields");
+RejectStrictExport("authorization-escalation",
+    item => (item["execution"]?.AsObject() ??
+        throw new InvalidDataException("RS289: Missing execution."))["authorization"] =
+        "granted",
+    "Runtime-only authorization is required");
+Need(Hash(canonicalManifestPath) == canonicalManifestHash,
+    "The canonical source manifest changed during GREEN tests.");
+Verify(first);
+Verify(second);
+Console.WriteLine("MATH-RS289-GREEN-PRE-ATTEST|cleanExports=2|newRefusals=3|" +
+    "receiptsBlocked=3|canonicalUnchanged=true|offlineVerifierPreserved=true|PASS");
+
 Console.WriteLine("MATH-RS283-PORTABLE-INTEGRITY|exportPairs=2|files=14|" +
     "trackedHashes=13|negative=3|independentVerifier=true|" +
     "sourcePackagesUntouched=true|receipt=unsigned|brokerReady=false|PASS");
+
+void RejectStrictExport(string label, Action<JsonObject> mutate, string reason)
+{
+    var destination = Path.Combine(root, "green-refusal-" + label);
+    var injected = false;
+    try
+    {
+        ExportWithReceipt(destination, manifestPath =>
+        {
+            var manifest = JsonNode.Parse(File.ReadAllText(manifestPath))?.AsObject() ??
+                throw new InvalidDataException("RS289: Invalid exported manifest.");
+            var capabilities = manifest["capabilities"]?.AsArray() ??
+                throw new InvalidDataException("RS289: Missing exported capabilities.");
+            Need(capabilities.Count == 4, "Unexpected exported capability count.");
+            var firstCapability = capabilities[0]?.AsObject() ??
+                throw new InvalidDataException("RS289: Missing first capability.");
+            mutate(firstCapability);
+            File.WriteAllText(manifestPath,
+                manifest.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) +
+                "\n", new UTF8Encoding(false));
+            injected = true;
+        });
+    }
+    catch (InvalidDataException error)
+        when (injected && error.Message.Contains("RS287: " + reason,
+            StringComparison.Ordinal))
+    {
+        Need(!File.Exists(Path.Combine(destination, ReceiptPath)) &&
+            !File.Exists(Path.Combine(destination, SelfPath)),
+            "Refused export emitted receipt or verifier: " + label);
+        Console.WriteLine("MATH-RS289-GREEN-REFUSAL|" + label +
+            "|strictGate=true|beforeReceipt=true|PASS");
+        return;
+    }
+    throw new InvalidDataException("RS289: Invalid export was admitted: " + label);
+}
 
 void RequirePriorEvidence()
 {
@@ -133,7 +200,7 @@ void RequirePriorEvidence()
     }
 }
 
-void ExportWithReceipt(string destination)
+void ExportWithReceipt(string destination, Action<string>? injectBeforeStrictValidation = null)
 {
     Need(!Directory.Exists(destination) && !File.Exists(destination),
         "Attested export must never overwrite an existing destination.");
@@ -147,6 +214,7 @@ void ExportWithReceipt(string destination)
         StringComparison.Ordinal), "The original twelve-file Math exporter refused.");
     var exportedManifest = Path.Combine(destination, Skill, "references", "manifest.json");
     Need(File.Exists(exportedManifest), "Portable Discovery metadata is absent.");
+    injectBeforeStrictValidation?.Invoke(exportedManifest);
     var strictOutput = RunDotnet(Path.GetFullPath("."), "run", "--file",
         StrictMetadataGate, "--", "--validate", exportedManifest);
     Need(strictOutput.Contains(

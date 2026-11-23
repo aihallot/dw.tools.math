@@ -53,7 +53,7 @@ try
             entry.Key switch
             {
                 "M8-W01-C01-T1-R" => "done",
-                "M8-W01-C01-T1-G" => "ready",
+                "M8-W01-C01-T1-G" => "in-progress",
                 _ => activeM8ProtocolRedLineage.Contains(entry.Key)
                     ? "in-progress" : "not-ready"
             });
