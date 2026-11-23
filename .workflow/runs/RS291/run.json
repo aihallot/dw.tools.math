@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "RS291",
+  "title": "Activate Math Discovery protocol Verification with independent public-export consumer proof",
+  "state": "prepared",
+  "commitMessage": "test: verify portable Discovery public export from isolated consumer",
+  "timeoutSeconds": 880,
+  "projectNodes": [
+    "M8-W01-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Start Math Discovery protocol Verification and prove an attested public export is structurally valid and tamper-refusing when copied to an isolated consumer.",
+    "value": "Activate only the ready M8-W01-C01-T1-V subtask through target-reentrant DWF continuation. Add a Math-owned .NET 11 test that uses the actual public --export CLI, copies all fourteen exported files into an isolated consumer, checks thirteen receipt SHA-256 identities and four selected CLR metadata identities against the pinned 13-case protocol boundary, runs the existing strict gate on the copied manifest, and executes its standalone verifier from a separate working directory. Require fresh member and authorization mutations to be refused and restore the clean export. No completion or broker adoption claimed.",
+    "debtChanges": [
+      "RS290 succeeded first-pass and completed GREEN with one evidence-backed achievement, admitting the Verification leaf to ready while the accepted parent task stayed in-progress.",
+      "Prior positive exports and in-wrapper refusal tests did not independently exercise the public --export mode followed by a copied portable consumer and a separately launched offline verifier.",
+      "The new verification is checksum/metadata-only; private published binaries, source-qualified protocol pins, historical receipts, unsigned-origin limitations and external broker responsibility are preserved."
+    ],
+    "nextAction": "If independent RS291 Verification succeeds, separately assess one evidence-backed Verification completion and truthful parent-task progress before moving to the selected CLR-binding task.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-verification-independent-public-export-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 620
+    },
+    {
+      "id": "m8-native-591-node-active-protocol-verification",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 190
+    },
+    {
+      "id": "m8-discovery-verification-activation-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 180
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
