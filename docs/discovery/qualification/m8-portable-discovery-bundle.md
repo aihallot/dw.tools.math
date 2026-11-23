@@ -48,6 +48,10 @@ The Math-owned attestation wrapper now tests **three new controlled metadata cor
 
 The mutation callback exists only inside the wrapper's `--check` test path. The public `--export` and `--verify` modes retain their prior contracts. No archive, credential, published DLL, canonical source manifest or broker authorization is changed; the receipt remains unsigned.
 
+## Public-export consumer Verification — RS291 succeeded
+
+The durable RS291 attempt 001 succeeded first-pass. A Math-owned independent consumer test obtained a fresh unsigned fourteen-file bundle through the real `--export` CLI, copied it into an isolated directory, verified the thirteen receipt file hashes and four selected Math CLR metadata records, ran the strict Math validation gate and executed the copied `verify-export.cs` from a separate working directory. Two new tamper refusals (member drift and authorization escalation) were observed by both the strict gate and the offline file-integrity check; the original canonical source remained untouched. This **does not** establish signed origin, external host installation or broker authority.
+
 ## Limits
 
 An isolated directory copy plus a package-only executable is not an installation in a supported agent host, a runtime authorization grant, BrokerReady status, AURA integration or external consumer acceptance. The generated source skill still declares its source package versions. RS288 durably closed RED; RS289 activated GREEN and qualified the pre-attestation refusal boundary. RS290 targets GREEN completion and Verification readiness only. The parent task, unrelated M8 work, external authorization and trusted provenance remain unqualified.
