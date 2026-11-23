@@ -13,7 +13,8 @@ const string Generator = "docs/discovery/qualification/GenerateM8MathSkill.cs";
 const string Source = "docs/discovery/qualification/m8-discovery-manifest.json";
 const string Skill = ".agents/skills/dw-tools-math/SKILL.md";
 const string Bundle = ".agents/skills/dw-tools-math/references/manifest.json";
-var files = new[] { Generator, Source, Skill, Bundle };
+const string StrictGate = "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs";
+var files = new[] { Generator, Source, Skill, Bundle, StrictGate };
 var before = files.ToDictionary(x => x, Hash, StringComparer.Ordinal);
 var work = Path.GetFullPath(Path.Combine("build", "artifacts",
     "m8-rs301-generator-red", Guid.NewGuid().ToString("N")));
