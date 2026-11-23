@@ -42,12 +42,12 @@ The RS288 qualified path reuses the existing `ValidateM8StrictBindingMetadata.cs
 
 The offline `verify-export.cs` contract is **unchanged**: it checks the unsigned receipt, the recorded file hashes and the selected runtime-only authorization boundaries without requiring the Math source repository. This local checksum does not replace a trusted signature, prove actual loaded CLR assemblies or authorize any broker invocation.
 
-## GREEN pre-attestation qualification — RS289 target
+## GREEN pre-attestation qualification — RS289 succeeded
 
-The Math-owned attestation wrapper now tests **three new controlled metadata corruptions** using the existing exporter and the already qualified RS287 strict gate, before creating any signed or unsigned receipt: binding member, parameter type and execution authorization. A successful RS289 run must observe the expected rejection from the real `--validate` process and confirm that the rejected export contains neither `portable-attestation.json` nor `verify-export.cs`. It must also preserve the two positive deterministic exports, three prior post-receipt tamper refusals and standalone offline verifier.
+The Math-owned attestation wrapper now tests **three new controlled metadata corruptions** using the existing exporter and the already qualified RS287 strict gate, before creating any signed or unsigned receipt: binding member, parameter type and execution authorization. The durable RS289 attempt 001 succeeded first-pass, confirming exact refusals from the real `--validate` process before either `portable-attestation.json` or `verify-export.cs` was emitted. It preserved two positive deterministic exports, three prior post-receipt tamper refusals and the standalone offline verifier.
 
 The mutation callback exists only inside the wrapper's `--check` test path. The public `--export` and `--verify` modes retain their prior contracts. No archive, credential, published DLL, canonical source manifest or broker authorization is changed; the receipt remains unsigned.
 
 ## Limits
 
-An isolated directory copy plus a package-only executable is not an installation in a supported agent host, a runtime authorization grant, BrokerReady status, AURA integration or external consumer acceptance. The generated source skill still declares its source package versions. RS288 durably closed the protocol RED leaf and admitted its GREEN sibling to ready. RS289 can only activate GREEN for new evidence, not complete it; Verification, other M8 tasks and external authorization remain unqualified.
+An isolated directory copy plus a package-only executable is not an installation in a supported agent host, a runtime authorization grant, BrokerReady status, AURA integration or external consumer acceptance. The generated source skill still declares its source package versions. RS288 durably closed RED; RS289 activated GREEN and qualified the pre-attestation refusal boundary. RS290 targets GREEN completion and Verification readiness only. The parent task, unrelated M8 work, external authorization and trusted provenance remain unqualified.
