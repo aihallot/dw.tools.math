@@ -51,7 +51,9 @@ try
             entry.Key switch
             {
                 "M8-W01-C01" => "done",
-                "M8-W01-C02" => "ready",
+                "M8-W01-C02" => "in-progress",
+                "M8-W01-C02-T1" => "in-progress",
+                "M8-W01-C02-T1-R" => "in-progress",
                 "M8-W01-C01-T1" => "done",
                 "M8-W01-C01-T1-R" => "done",
                 "M8-W01-C01-T1-G" => "done",

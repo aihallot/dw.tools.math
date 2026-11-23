@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS301",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-23T17:13:33.1144931+00:00",
+  "completedAtUtc": "2026-11-23T17:13:34.3550098+00:00",
+  "durationMilliseconds": 1240,
+  "projectNodes": [
+    "M8-W01-C02",
+    "M8-W01-C02-T1",
+    "M8-W01-C02-T1-R"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+    "docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261123T170323Z-786f0e1ea49c3093"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261123T170323Z-786f0e1ea49c3093",
+        "runId": "RS301",
+        "scope": "preselection-rs301",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs301/run-next-20261123T170323Z-786f0e1ea49c3093"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS301/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 850,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-1d99779c5fff45cb9ec21ede8b6bd9e1\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 850000,
+      "DurationMilliseconds": 968,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS300/attempt-001.json run=RS300 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T1-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs bytes=4791\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=12189\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=18236\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=31792\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md bytes=1553\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C02-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C02-T1-R not-ready-\u003Eready\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M8-W01-C02-T1-R activated=M8-W01-C02,M8-W01-C02-T1,M8-W01-C02-T1-R\r\n[payload] OK operations=18 changed=8 no-change=0 verified=10 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS301/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS300/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS300 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b7da439fd6f3cecb208541df583ba03e2f38c2cbc719fe98cd6d8a42ff6f78d7",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T1-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+        "Status": 1,
+        "Summary": "bytes=4791",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "04a01bc47937ffa7e3e07a7c83fafb4613864d6163a22527848007091c3d7682",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=12189",
+        "Details": null,
+        "BeforeSha256": "3c16f2928547da3431552ff44fe965732b9b85f568221f6b14436ae21c60e630",
+        "AfterSha256": "246b12d6e734517871f305af23fa662e337594c9dcf8266e9336d2ce53790d2e",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=18236",
+        "Details": null,
+        "BeforeSha256": "704c0a176c674e859d1cc2e2943888556633d33447e2206516f92d3c6c4972a1",
+        "AfterSha256": "c7016fd7988204850e088643f7937c3a4bc8be33166862f02cd573a8b4ec0eea",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=31792",
+        "Details": null,
+        "BeforeSha256": "f5661c4061923a173a969565c60b47d667b776249e0cd6e914d4e29533f63be6",
+        "AfterSha256": "895a5452c36057d420c39336c2993eb29363cc5e06bde5048157c6684f070fb0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md",
+        "Status": 1,
+        "Summary": "bytes=1553",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "14b4f6543579159c24b08f2c3a46c46943cd7e1e61ad402142ef15c83e895abc",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C02-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "11b18d3c828bba07fa9fec302d1fe6ed849dfe661f9441995f684b6f9b842262",
+        "AfterSha256": "9ad8f4267b9a252e66be577e9fcff69c6eb0a4e44e95773b75446a5bb65a8ee8",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C02-T1-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "9ad8f4267b9a252e66be577e9fcff69c6eb0a4e44e95773b75446a5bb65a8ee8",
+        "AfterSha256": "1d3b90ff11f2d68d28248f2b2f7690bf9dcbdcf243906cda48efc396faf31b50",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M8-W01-C02-T1-R activated=M8-W01-C02,M8-W01-C02-T1,M8-W01-C02-T1-R",
+        "Details": null,
+        "BeforeSha256": "1d3b90ff11f2d68d28248f2b2f7690bf9dcbdcf243906cda48efc396faf31b50",
+        "AfterSha256": "65a5a72bb0018cd1dfd3ec38331b2adfa252f69959d89043673433292d7c2d0a",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-skill-generator-red-isolated-drift",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-591-node-active-c02-generator-red",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-active-c02-generator-red-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261123T171150Z-864bc412ad6feee9",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "7b1ac0ac5624943d5d97fe996ceeea3ec09d0729",
+  "invocationStartedAtUtc": "2026-11-23T17:11:50.621628+00:00",
+  "invocationDurationMilliseconds": 103733,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS301",
+      "title": "Activate deterministic Discovery skill generator RED and falsify isolated output drift",
+      "projectNodes": [
+        "M8-W01-C02",
+        "M8-W01-C02-T1",
+        "M8-W01-C02-T1-R"
+      ]
+    },
+    "declared": {
+      "summary": "Activate the Math Discovery deterministic skill-generator RED and test isolated drift and unauthorized grant refusal without rewriting its existing generator.",
+      "value": "RS300 succeeded first-pass and completed C01 while admitting C02 ready. Activate C02/T1/RED through typed DWF continuation. A new isolated test copies the existing canonical generator, four-capability source-qualified manifest, skill text and bundled manifest, proves the original --check accepts clean bytes, then demands refusals for skill drift, bundled manifest drift and a metadata-granted execution authorization, restoring pristine bytes after each case. Preserve C01 done, immutability, source CLR fingerprints, optional skill status and runtime-only broker permission; no RED completion is declared.",
+      "debtChanges": [
+        "RS300 succeeded attempt 001 first-pass, completing pinned protocol and selected compiled CLR C01 and only readying deterministic skill generation C02.",
+        "The existing GenerateM8MathSkill.cs has one authoritative --check path; avoid a parallel generator and qualify its current drift and authorization refusal in an isolated copy.",
+        "RS301 preselection refused activation because T1 and RED were not-ready. Typed, target-reentrant readiness admissions now precede their activation; RED is still only in-progress and no broker permission is granted."
+      ],
+      "nextAction": "After RS301 establishes fresh RED refusal evidence, assess the exact uncovered generator contract and deliver a separate GREEN implementation or closure decision before Verification.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ProbeM8C02SkillGeneratorRed.cs",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-skill-generator-red-isolated-drift",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-591-node-active-c02-generator-red",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-active-c02-generator-red-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01-C02",
+        "objective": "Deterministic skill generator and qualification",
+        "kind": "phase",
+        "parentId": "M8-W01",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C02-T1",
+        "objective": "Skill generator contract",
+        "kind": "task",
+        "parentId": "M8-W01-C02",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C02-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01-C02",
+        "objective": "Deterministic skill generator and qualification",
+        "kind": "phase",
+        "parentId": "M8-W01",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C02-T1",
+        "objective": "Skill generator contract",
+        "kind": "task",
+        "parentId": "M8-W01-C02",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C02-T1",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS301",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS301",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "7b1ac0ac5624943d5d97fe996ceeea3ec09d0729",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "5b933148e0764031536e52e3a8eb7cb4494a26e85c5d50e6b9dd23dbcd666d20"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: falsify isolated Discovery skill generator drift",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
