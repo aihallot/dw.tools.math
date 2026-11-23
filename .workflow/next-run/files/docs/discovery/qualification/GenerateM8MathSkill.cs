@@ -1,11 +1,13 @@
 #:property NuGetAudit=false
 #:property PublishAot=false
 
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
 const string Input = "docs/discovery/qualification/m8-discovery-manifest.json";
 const string Output = ".agents/skills/dw-tools-math/SKILL.md";
+const string StrictGate = "docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs";
 if (args.Length != 1 || (args[0] != "--write" && args[0] != "--check"))
     throw new ArgumentException("Expected --write or --check.");
 
@@ -75,6 +77,35 @@ Line();
 Line("## Evidence");
 Line();
 Line("Generated from `docs/discovery/qualification/m8-discovery-manifest.json`; qualified by RS186 and RS187. Recreate with `dotnet run --file docs/discovery/qualification/GenerateM8MathSkill.cs -- --write`; verify drift with `--check`.");
+// Qualify source-declared CLR signatures with the established metadata validator.
+// Do this before --write may create or overwrite either output.
+Require(File.Exists(StrictGate), "Canonical strict CLR metadata gate is missing.");
+var start = new ProcessStartInfo("dotnet")
+{
+    WorkingDirectory = Path.GetFullPath("."),
+    UseShellExecute = false,
+    RedirectStandardOutput = true,
+    RedirectStandardError = true
+};
+foreach (var argument in new[] { "run", "--file", StrictGate, "--", "--validate", Input })
+    start.ArgumentList.Add(argument);
+using (var process = Process.Start(start) ??
+    throw new InvalidOperationException("Cannot start strict CLR metadata validation."))
+{
+    var stdout = process.StandardOutput.ReadToEndAsync();
+    var stderr = process.StandardError.ReadToEndAsync();
+    if (!process.WaitForExit(120000))
+    {
+        process.Kill(entireProcessTree: true);
+        throw new TimeoutException("Strict CLR metadata validation timed out.");
+    }
+    var outputText = stdout.GetAwaiter().GetResult() + "\n" +
+        stderr.GetAwaiter().GetResult();
+    Require(process.ExitCode == 0 &&
+        outputText.Contains("MATH-M8-STRICT-BINDING|mode=validate|capabilities=4|metadataOnly=true|brokerReady=0|PASS",
+            StringComparison.Ordinal),
+        "Strict CLR signature/fingerprint refusal: " + outputText);
+}
 var expected = output.ToString();
 if (args[0] == "--write")
 {
