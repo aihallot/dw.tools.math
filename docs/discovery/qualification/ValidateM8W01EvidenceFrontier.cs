@@ -28,6 +28,8 @@ using var rs288 = Load(".aura/workflow/reports/RS288/attempt-001.json");
 using var rs289 = Load(".aura/workflow/reports/RS289/attempt-001.json");
 using var rs290 = Load(".aura/workflow/reports/RS290/attempt-001.json");
 using var rs291 = Load(".aura/workflow/reports/RS291/attempt-001.json");
+using var rs293 = Load(".aura/workflow/reports/RS293/attempt-001.json");
+using var rs294 = Load(".aura/workflow/reports/RS294/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -63,11 +65,12 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
                 "M8-W01-C01-T1-R" => "done",
                 "M8-W01-C01-T1-G" => "done",
                 "M8-W01-C01-T1-V" => "done",
-                "M8-W01-C01-T2-R" => "in-progress",
+                "M8-W01-C01-T2-R" => "done",
+                "M8-W01-C01-T2-G" => "ready",
                 _ => "not-ready"
             };
             Need(sub.GetProperty("state").GetString() == expected,
-                "Native completed T1 or active selected CLR RED state differs.");
+                "Native T1 completion, T2 RED closure or GREEN readiness differs.");
         }
     }
 }
@@ -148,6 +151,36 @@ Need(greenDone.GetProperty("runId").GetString() == "RS290" &&
             item.GetProperty("id").GetString() ==
             "m8-verification-independent-public-export-consumer"),
     "RS290 GREEN or RS291 independent Verification durable evidence differs.");
+var clrRed = rs293.RootElement;
+var clrAdmission = rs294.RootElement;
+Need(clrRed.GetProperty("runId").GetString() == "RS293" &&
+    clrRed.GetProperty("outcome").GetString() == "succeeded" &&
+    clrRed.GetProperty("attempt").GetInt32() == 1 &&
+    clrRed.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    clrRed.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    clrRed.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    clrRed.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Count(x => x.GetProperty("afterState").GetString() == "in-progress") == 2 &&
+    clrRed.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-selected-clr-red-published-reflection-falsifications") &&
+    clrAdmission.GetProperty("runId").GetString() == "RS294" &&
+    clrAdmission.GetProperty("outcome").GetString() == "succeeded" &&
+    clrAdmission.GetProperty("attempt").GetInt32() == 1 &&
+    clrAdmission.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    clrAdmission.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    clrAdmission.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    clrAdmission.GetProperty("progress").GetProperty("completions").GetArrayLength() == 0 &&
+    clrAdmission.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-real-published-clr-admission-four-selected") &&
+    clrAdmission.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-real-published-clr-reject-coherent-forgeries"),
+    "RS293 actual published CLR RED or RS294 real method admission evidence changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -181,4 +214,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|T1=done|RED=done|GREEN=done|VERIFY=done|T2=in-progress|T2RED=in-progress|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|T1=done|RED=done|GREEN=done|VERIFY=done|T2=in-progress|T2RED=done|T2GREEN=ready|brokerReady=0|PASS");

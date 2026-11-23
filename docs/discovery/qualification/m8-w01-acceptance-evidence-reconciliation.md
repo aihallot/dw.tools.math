@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **selected CLR RED active, with a new real-method admission gate awaiting RS294**, not M8 release acceptance. RS293 succeeded first-pass and proved three coherent metadata forgeries against actual SHA-pinned private DLLs. RS294 prepares a reusable real-CLR validation mode in the existing probe, with T2/T2-RED still in-progress and T2 GREEN/Verification still not-ready. M8/W01/C01 remain in-progress; product backlog v0.1.124 remains planned. No external host, signed provenance or broker permission is claimed.
+Status: **selected CLR RED closure and GREEN readiness under RS295, not M8 release acceptance**. RS293 and RS294 both succeeded first-pass, providing new compiled-method falsification and a single reusable reflection-backed admission routine. RS295 targets T2-RED `done` with exactly one achievement and T2-GREEN `ready`; parent T2 and M8/W01/C01 remain `in-progress`, T2 Verification remains `not-ready`, and the canonical backlog v0.1.124 remains `planned`. No external host, signed origin or broker authorization is granted.
 
 ## Accepted product authority
 
@@ -135,24 +135,32 @@ All four positive selected CLR bindings, original source manifests, package hash
 
 See the RS293 bounded RED decision at docs/planning/decisions/m8-w01-c01-t2-red-reflection-falsification-rs293.md.
 
-## RS294 — reusable real published CLR binding admission (planned)
+## RS294 — qualified reusable real published CLR binding admission
 
 RS293 succeeded at attempt 001, first-pass, demonstrating that metadata-only validation can admit three internally coherent but nonexistent CLR descriptions (unknown member, changed first parameter type, changed result type), whereas reflection over the three SHA-pinned published private DLLs refuses them. The actual four selected methods still exist and match their source-qualified canonical signatures. T2-RED remains `in-progress`; no new completion is asserted.
 
-Rather than introduce a second near-identical reflection validator, RS294 extends the **same Math-owned probe** `ProbeM8SelectedClrReflectionRed.cs` with `--validate <manifest-path>`, sharing exactly one `AdmitRealPublishedBindings` implementation with the existing RED `--check` mode. It verifies protocol/owner/schema identity, exactly four selected capabilities and source package identities, `AgentCallable` plus `runtime-only` exposure, three immutable private package/DLL digests, the actual public static CLR signature by reflection and its pinned canonical SHA-256 identity. The `--check` path must additionally prove the real gate refuses the three coherent forgeries, while the existing RS287 metadata-only validator continues to accept them for its documented limited purpose.
+Rather than introduce a second near-identical reflection validator, RS294 durably extended the **same Math-owned probe** `ProbeM8SelectedClrReflectionRed.cs` with `--validate <manifest-path>`, sharing exactly one `AdmitRealPublishedBindings` implementation with the existing RED `--check` mode. It verifies protocol/owner/schema identity, exactly four selected capabilities and source package identities, `AgentCallable` plus `runtime-only` exposure, three immutable private package/DLL digests, the actual public static CLR signature by reflection and its pinned canonical SHA-256 identity. The `--check` path additionally proved the real gate refuses the three coherent forgeries, while the existing RS287 metadata-only validator continues to accept them for its documented limited purpose.
 
-This is a local private-feed **admission/qualification tool**, not a broker, method-invocation engine, cross-repository integration or public package release. No historical RED code path is removed and no source-only pins or published archives are modified. A distinct future DWF run may close RED and ready GREEN only after the new CLI-mode and adversarial checks succeed. See [RS294 bounded admission decision](../../planning/decisions/m8-w01-c01-t2-real-clr-admission-rs294.md).
+This is a local private-feed **admission/qualification tool**, not a broker, method-invocation engine, cross-repository integration or public package release. No historical RED code path is removed and no source-only pins or published archives are modified. RS294 succeeded attempt 001 first-pass, with both the new CLI-mode and adversarial checks qualified. A distinct DWF run must still close RED and ready GREEN. See [RS294 bounded admission decision](../../planning/decisions/m8-w01-c01-t2-real-clr-admission-rs294.md).
+
+## RS295 — finish selected CLR RED and admit GREEN
+
+RS293 proved **three new coherent but non-existent published CLR bindings** by independently inspecting SHA-pinned Composition, IR and Quantities DLLs: missing method, wrong first parameter type and wrong result type. They remained acceptable to the RS287 *metadata-only* consistency check but could not be resolved in the actual published CLR. RS294 then qualified the same reflection probe with a reusable `--validate <manifest-path>` mode, sharing one admission routine for the four selected real methods and the three forgery refusals. Both executions are durable attempt-001 first-pass successes, with zero boundary violations and no method invocation, new package publication, or runtime authorization.
+
+RS295 proposes exactly one completion: `M8-W01-C01-T2-R` goes from `in-progress` through typed DWF convergence to `done`, with exactly one matching RED achievement. Its sibling `M8-W01-C01-T2-G` moves from `not-ready` to `ready` using typed target-reentrant DWF state transition. Parent T2 stays `in-progress`, its Verification sibling stays `not-ready`, and the C01 phase, W01 and M8 remain `in-progress`. The maintained native 591-node and Discovery frontier validators now require the RS293/RS294 durable evidence and target states rather than replaying the costly private-binary test campaigns merely to record lifecycle changes.
+
+The next GREEN cycle must produce new independent use of the **real CLR admission API** against the chosen runtime delivery boundary; RED completion alone does not qualify external consumers, broker authorization or mathematical method invocation. See [RS295 RED closure and GREEN readiness decision](../../planning/decisions/m8-w01-c01-t2-red-closure-green-readiness-rs295.md).
 
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS293 durably activated T2 and T2-RED, both still in-progress; RS294 develops and qualifies the reusable real-method admission boundary without changing those states. T2-GREEN/Verification remain not-ready, and C01/W01/M8 remain in-progress.
+4. **Native DWF progress:** RS293/RS294 provide durable RED and new real-method admission evidence. RS295 targets T2-RED `done` and T2-GREEN `ready` only; T2 Verification and all unrelated M8 work remain `not-ready`, with C01/W01/M8 still `in-progress`.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After RS294 validates the reusable real-CLR admission mode and all three coherent-forgery refusals, separately decide evidence-backed T2-RED completion and GREEN readiness in DWF. Preserve canonical source pins, immutable private packages and runtime-only authority.
+After RS295 closes T2-RED and admits GREEN, activate GREEN in a separate forward-only run and qualify the real published-CLR admission API at a bounded consumer boundary, including refusal of coherently forged methods. Preserve canonical pins, immutable packages and runtime-only authority.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
