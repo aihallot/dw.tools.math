@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "id": "RS294",
+  "title": "Qualify reusable real published CLR binding admission in the existing Math Discovery probe",
+  "commitMessage": "feat: admit selected Discovery bindings against real published CLR",
+  "timeoutSeconds": 850,
+  "projectNodes": [
+    "M8-W01-C01-T2-R"
+  ],
+  "contribution": {
+    "summary": "Reuse the existing published-CLR reflection probe as a callable selected-binding admission gate, refusing coherent forgeries without duplicating the package loader.",
+    "value": "Extend ProbeM8SelectedClrReflectionRed.cs with a read-only --validate <manifest-path> mode. Reuse a single bounded AdmitRealPublishedBindings routine in both the existing RED --check path and the new CLI: verify the three SHA-pinned immutable private DLLs, exact four selected public static CLR methods, source pins and runtime-only authorization. The original three coherently signed forgeries must still pass metadata-only RS287 validation but be refused by the shared real-method gate; the unauthorized grant must remain refused. Keep T2-RED in-progress and historical assets/packages unchanged.",
+    "debtChanges": [
+      "RS293 succeeded first-pass and established three coherent metadata-only forgeries that fail when matched against actual immutable private CLR binaries; T2-RED remains active.",
+      "The real-method reflection and SHA-pinned package loader already exist in ProbeM8SelectedClrReflectionRed.cs; extend that tool instead of creating a competing near-identical validator.",
+      "RS294 only qualifies a reusable local private-feed admission CLI; it cannot execute methods, grant broker permission, publish archives, complete RED/GREEN or assert external consumer adoption."
+    ],
+    "nextAction": "After RS294 qualifies four selected real methods and three coherent forgery refusals, separately close T2-RED and ready T2-GREEN on exact new DWF evidence; do not backfill prior consumer reports.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 265
+  },
+  "mutationPaths": [
+    "docs/discovery/qualification/ProbeM8SelectedClrReflectionRed.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t2-real-clr-admission-rs294.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ProbeM8SelectedClrReflectionRed.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8SelectedClrReflectionRed.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c01-t2-real-clr-admission-rs294.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c01-t2-real-clr-admission-rs294.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/id",
+      "expectedValue": "M8-W01-C01-T2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS293/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C01-T2-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": "M8-W01-C01-T2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": "M8-W01-C01-T2-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-real-published-clr-admission-four-selected",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8SelectedClrReflectionRed.cs",
+        "--",
+        "--validate",
+        "docs/discovery/qualification/m8-discovery-manifest.json"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 290,
+      "packs": []
+    },
+    {
+      "id": "m8-real-published-clr-reject-coherent-forgeries",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8SelectedClrReflectionRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 440,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
