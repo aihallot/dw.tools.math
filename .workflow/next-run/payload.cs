@@ -1,29 +1,12 @@
-using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 var p = PayloadContext.Create();
-using var state = JsonDocument.Parse(File.ReadAllText(
-    Path.Combine(p.RepositoryRoot, ".aura", "workflow", "state.json")));
-var activeLeaf = state.RootElement.GetProperty("activeSubtask").GetString();
-if (activeLeaf is not ("M8-W01-C01-T2-G" or null))
-    throw new InvalidDataException("RS297: Unexpected active GREEN leaf.");
-p.Workflow.RequireCurrentRun("RS297",
-    "M8", "M8-W01", "M8-W01-C01", "M8-W01-C01-T2", activeLeaf);
-using (var prior = JsonDocument.Parse(File.ReadAllText(
-    Path.Combine(p.RepositoryRoot, ".aura/workflow/reports/RS296/attempt-001.json"))))
-{
-    var report = prior.RootElement;
-    var failures = report.GetProperty("priorInvocationFailures");
-    if (report.GetProperty("runId").GetString() != "RS296" ||
-        report.GetProperty("outcome").GetString() != "succeeded" ||
-        report.GetProperty("attempt").GetInt32() != 1 ||
-        failures.GetProperty("count").GetInt32() != 1 ||
-        failures.GetProperty("preparationFailureCount").GetInt32() != 1 ||
-        failures.GetProperty("allocatedAttemptFailureCount").GetInt32() != 0 ||
-        failures.GetProperty("firstPassSucceeded").GetBoolean())
-        throw new InvalidDataException("RS297: RS296 delivery or history changed.");
-}
+// The DWF run selection is verified by the executor. Avoid manually traversing
+// canonical workflow state, and use the typed lineage contract for RS296.
+p.Workflow.RequirePriorSuccess("RS296", 1,
+    "test: qualify independent selected CLR GREEN admission",
+    "0.1.66", 1, 1, 0, false);
 p.ProjectPlan.RequireNodeState("M8", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T1", "done");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T2", "in-progress");
