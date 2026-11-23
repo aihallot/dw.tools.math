@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **bounded protocol T1 closure and next CLR RED readiness, not M8 release acceptance**. RS291 succeeded first-pass with a copied public-export consumer and two new independent refusals. RS292 targets T1 Verification and parent T1 as `done`, with the selected CLR task T2 and its RED subtask `ready`. M8, W01 and C01 remain `in-progress`; other M8/M9 work and the canonical backlog remain `not-ready`/`planned`. No external adoption, signed origin or broker authorization is implied.
+Status: **selected CLR RED active, not M8 release acceptance**. RS292 succeeded first-pass and durably completed protocol T1 and its Verification leaf with two achievements, while admitting T2 and T2-RED to ready. RS293 targets only T2 and T2-RED in-progress, investigating coherent forged CLR metadata against actual three SHA-pinned private binaries. The M8/W01/C01 ancestor chain stays in-progress, T2 GREEN/Verification and all unrelated M8/M9 work remain not-ready; canonical backlog remains planned. No external host, signed provenance or broker permission is claimed.
 
 ## Accepted product authority
 
@@ -123,16 +123,28 @@ The existing maintained native adoption and Discovery frontier validators enforc
 
 See [RS292 closure and next RED admission](../../planning/decisions/m8-w01-c01-t1-verification-closure-t2-red-readiness-rs292.md).
 
+## RS293 — actual published CLR reflection RED falsification
+
+RS292 durably completed protocol T1 and its Verification leaf at attempt 001, first-pass. RS293 activates only the already-ready T2 and T2-RED lineage; it does not complete RED, GREEN, T2, C01 or M8.
+
+The new Math-owned ProbeM8SelectedClrReflectionRed.cs reads the three already-published immutable private NuGet archives from NUGET_LOCAL, checks their pinned archive and embedded DLL SHA-256 identities, extracts their net10 binaries into ignored build/artifacts and loads them into a disposable AssemblyLoadContext. Actual reflected public static method signatures are compared against all four selected source-pinned CLR declarations, including assembly version, owning type, method name, ordered parameter types, return type and SHA-256 fingerprint. The probe does not invoke the mathematical operations or restore/publish any package.
+
+Three new independently falsifiable RED cases forge an internally consistent declaration: a nonexistent method, a wrong parameter type, and a wrong return type. Each has its canonical signature and fingerprint coherently recomputed. The existing RS287 metadata-only validator should admit these structurally consistent forgeries, while the actual compiled DLL reflection boundary must refuse every one. A metadata-granted execution authorization remains forbidden by RS287 as a safety control. The result identifies a missing real-CLR admission step, **not** a defect in the metadata-only validator's documented scope.
+
+All four positive selected CLR bindings, original source manifests, package hashes and the source-only historical binding flags remain unchanged. An independently qualified future GREEN gate must bind the runtime method to the declared metadata; do not count the RED observations or RS279/282 previous positive consumers as GREEN or broker authorization.
+
+See the RS293 bounded RED decision at docs/planning/decisions/m8-w01-c01-t2-red-reflection-falsification-rs293.md.
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS291 has fresh first-pass consumer Verification evidence. RS292 targets one Verification and one parent T1 completion, while only T2 and T2-RED become `ready`; the C01 phase, W01 and M8 remain `in-progress`, with all other M8 children `not-ready`.
+4. **Native DWF progress:** RS292 completed protocol T1 and Verification with two truthful achievements. RS293 targets T2 and its RED leaf at in-progress for fresh compiled-CLR falsification, but T2 GREEN/Verification remain not-ready. C01, W01 and M8 remain in-progress; no external broker readiness is admitted.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After RS292 closes protocol T1 and admits CLR T2-RED, activate only that new ready leaf in a later bounded run. Establish fresh, falsifiable selected CLR signature or runtime reflection boundary evidence before GREEN; do not infer external broker authorization or broad Math coverage.
+After RS293 records the runtime reflection RED observations, build a narrow Math-owned actual CLR signature admission path for GREEN, proving that coherent but nonexistent methods are refused while all four selected published bindings remain qualified. Do not modify the immutable packages or grant broker authorization.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
