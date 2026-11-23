@@ -10,8 +10,11 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-if (args.Length != 1 || args[0] != "--check")
-    throw new ArgumentException("Expected --check.");
+var validationInput = args.Length == 2 && args[0] == "--validate"
+    ? Path.GetFullPath(args[1])
+    : null;
+if (validationInput is null && (args.Length != 1 || args[0] != "--check"))
+    throw new ArgumentException("Expected --check or --validate <manifest-path>.");
 
 const string ManifestFile = "docs/discovery/qualification/m8-discovery-manifest.json";
 const string BindingsFile = "docs/discovery/qualification/m8-selected-clr-bindings.json";
@@ -109,26 +112,17 @@ string[] selected =
     "math.ir.canonical.encode",
     "math.ir.hash.semantic"
 ];
-for (var i = 0; i < selected.Length; i++)
+var positiveCount = AdmitRealPublishedBindings(manifest, pinned, loaded, selected);
+Need(positiveCount == selected.Length, "All selected real published bindings must qualify.");
+if (validationInput is not null)
 {
-    var item = caps[i]?.AsObject() ??
-        throw new InvalidDataException("RS293: Selected item absent.");
-    var pin = pinned[i]?.AsObject() ??
-        throw new InvalidDataException("RS293: Binding pin absent.");
-    Need(Read(item, "capabilityId") == selected[i] &&
-        Read(pin, "capabilityId") == selected[i] &&
-        Read(item, "exposure") == "AgentCallable" &&
-        Read(item["execution"]?.AsObject() ??
-            throw new InvalidDataException("RS293: Execution missing."), "authorization")
-            == "runtime-only", "Capability authorization or selection changed.");
-    foreach (var field in new[]
-    {
-        "assembly", "assemblyVersion", "type", "member", "canonicalSignature", "fingerprint"
-    })
-        Need(Read(Binding(item), field) == Read(pin, field),
-            "Pinned selected binding changed: " + selected[i] + " " + field);
-    Need(ExactMethodExists(item, loaded),
-        "Real published CLR method does not match selected signature: " + selected[i]);
+    var external = JsonNode.Parse(File.ReadAllText(validationInput))?.AsObject() ??
+        throw new InvalidDataException("RS294: Invalid input manifest.");
+    var admittedCount = AdmitRealPublishedBindings(external, pinned, loaded, selected);
+    Need(admittedCount == selected.Length, "Incomplete real published CLR selection.");
+    Console.WriteLine("MATH-RS294-REAL-CLR-ADMISSION|mode=validate|bindings=4|archives=3|" +
+        "assemblyHashes=matched|runtimeOnly=true|methodInvocations=0|brokerReady=0|PASS");
+    return;
 }
 var unaltered = RunStrict(ManifestFile);
 Need(unaltered.ExitCode == 0 &&
@@ -157,6 +151,18 @@ void Falsify(string name, Action<JsonObject> change)
         "\n" + accepted.Output);
     Need(!ExactMethodExists(first, loaded),
         "Published CLR accepted a coherent but false method: " + name);
+    var refusedByAdmission = false;
+    try
+    {
+        AdmitRealPublishedBindings(altered, pinned, loaded, selected);
+    }
+    catch (InvalidDataException error)
+        when (error.Message.Contains("RS294: Real published CLR method mismatch:",
+            StringComparison.Ordinal))
+    {
+        refusedByAdmission = true;
+    }
+    Need(refusedByAdmission, "Coherent forgery bypassed the real published CLR gate: " + name);
     negative++;
     Console.WriteLine("MATH-RS293-RED-FORGERY|" + name +
         "|metadata=accepted|actualCLR=refused|PASS");
@@ -193,6 +199,51 @@ foreach (var p in packages)
 Console.WriteLine("MATH-RS293-CLR-RED|bindings=4|archives=3|" +
     "coherentForgeries=3|metadataOnlyAccepted=3|realCLRRefused=3|" +
     "authorizationRefusal=1|methodInvocations=0|brokerReady=0|PASS");
+Console.WriteLine("MATH-RS294-REAL-CLR-ADMISSION|mode=check|positive=4|" +
+    "coherentForgeriesRefused=3|authorizationRefused=1|brokerReady=0|PASS");
+
+static int AdmitRealPublishedBindings(JsonObject candidate, JsonArray pinned,
+    IReadOnlyDictionary<string, Assembly> binaries, IReadOnlyList<string> approved)
+{
+    Need(candidate["schemaVersion"]?.GetValue<int>() == 2 &&
+        candidate["protocolId"]?.GetValue<string>() == "dw.discovery" &&
+        candidate["protocolVersion"]?.GetValue<string>() == "1.0.0-draft.1" &&
+        candidate["owner"]?.GetValue<string>() == "math" &&
+        candidate["brokerCandidateIds"] is JsonArray brokerCandidates &&
+        brokerCandidates.Count == 0,
+        "RS294: Only source-qualified Math Discovery schema-2 metadata is admitted.");
+    var list = Caps(candidate);
+    Need(list.Count == approved.Count && pinned.Count == approved.Count,
+        "RS294: Exactly four selected Math operations are required.");
+    for (var i = 0; i < approved.Count; i++)
+    {
+        var item = list[i]?.AsObject() ??
+            throw new InvalidDataException("RS294: Null selected capability.");
+        var pin = pinned[i]?.AsObject() ??
+            throw new InvalidDataException("RS294: Missing selected source binding.");
+        var id = Read(item, "capabilityId");
+        Need(id == approved[i] && Read(pin, "capabilityId") == id &&
+            Read(item, "exposure") == "AgentCallable" &&
+            !item.ContainsKey("brokerContract") &&
+            Read(item, "package") == Read(Binding(item), "assembly") &&
+            Read(item, "packageVersion") == "0.3.0-preview.1" &&
+            Read(item["execution"]?.AsObject() ??
+                throw new InvalidDataException("RS294: Execution metadata absent."),
+                "authorization") == "runtime-only",
+            "RS294: Selected identities, source packages and runtime-only scope differ.");
+        Need(ExactMethodExists(item, binaries),
+            "RS294: Real published CLR method mismatch: " + id);
+        foreach (var field in new[]
+        {
+            "assembly", "assemblyVersion", "type", "member",
+            "canonicalSignature", "fingerprint"
+        })
+            Need(Read(Binding(item), field) == Read(pin, field),
+                "RS294: Actual runtime method does not match selected source pin: " +
+                id + " field=" + field);
+    }
+    return list.Count;
+}
 
 ProcessResult RunStrict(string manifestPath)
 {
