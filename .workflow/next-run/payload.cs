@@ -25,5 +25,21 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
     "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
     "docs/planning/decisions/m8-w01-c02-t1-red-isolated-skill-drift-rs301.md"));
+// A continuation requires the descendants to be effectively ready.
+// Preserve target re-entry: rehearsal may already have activated these nodes.
+void AdmitReadyOrActive(string nodeId)
+{
+    try
+    {
+        p.ProjectPlan.TransitionNode(nodeId, "not-ready", "ready");
+    }
+    catch (InvalidOperationException)
+    {
+        // Refuse any unexpected state through the typed project-plan authority.
+        p.ProjectPlan.RequireNodeState(nodeId, "in-progress");
+    }
+}
+AdmitReadyOrActive("M8-W01-C02-T1");
+AdmitReadyOrActive("M8-W01-C02-T1-R");
 p.ProjectPlan.ActivateReadyContinuation("M8-W01-C02-T1-R");
 return p.Complete();
