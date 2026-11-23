@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "id": "RS290",
+  "title": "Close evidence-backed Math Discovery protocol GREEN and admit Verification readiness",
+  "commitMessage": "chore: complete Discovery protocol GREEN and ready Verification",
+  "timeoutSeconds": 690,
+  "projectNodes": [
+    "M8-W01-C01-T1-G",
+    "M8-W01-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Complete the Math Discovery protocol GREEN subtask on durable end-to-end attestation refusals and prepare the Verification leaf.",
+    "value": "Use RS289's first-pass qualification of the actual pre-attestation strict metadata boundary, including two valid deterministic exports, a standalone verifier, the three retained tamper checks and three newly observed metadata/authorization refusals, to complete only M8-W01-C01-T1-G via typed DWF convergence with one exact achievement. Admit its Verification sibling from not-ready to ready without executing it. Update the two existing 591-node/evidence frontier validators to require exact RS288 RED and RS289 GREEN receipts, and keep historical protocol sources, private packages, parent tasks and broker authority unchanged.",
+    "debtChanges": [
+      "RS288 completed RED first-pass and RS289 activated GREEN first-pass, validating the real exporter's three new before-receipt refusals while keeping valid portable exports and offline verification intact.",
+      "GREEN can now close on new RS289 evidence; Verification remains an independent future acceptance responsibility and cannot be backfilled from historical RS131/209 or the just-completed GREEN checks.",
+      "Only GREEN done and Verification ready are admitted. The parent M8 task/ancestors stay in-progress, backlog v0.1.124 remains planned, private archives immutable and AURA/broker authorization external."
+    ],
+    "nextAction": "Activate the ready Verification subtask in the next bounded DWF run and qualify a fresh cross-boundary acceptance dossier, without promoting the parent task or claiming external agent adoption.",
+    "achievements": [
+      {
+        "projectNode": "M8-W01-C01-T1-G",
+        "achievement": "RS289 independently qualified the actual strict Math Discovery attestation entrypoint: two deterministic valid exports and standalone offline verification remained intact, while three injected CLR member, parameter type and authorization mismatches were refused before a receipt or verifier could be emitted. GREEN is complete without claiming Verification, parent task or external broker readiness."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 320
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-portable-discovery-bundle.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/id",
+      "expectedValue": "M8-W01-C01-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS289/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/afterState",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS288/attempt-001.json",
+      "jsonPointer": "/progress/completions/0/id",
+      "expectedValue": "M8-W01-C01-T1-R"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": "M8-W01-C01-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-native-591-node-green-done-verification-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-protocol-evidence-green-completion-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 210,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
