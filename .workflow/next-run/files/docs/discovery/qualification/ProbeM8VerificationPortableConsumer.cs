@@ -21,7 +21,7 @@ const string ExpectedExport = "MATH-RS283-PORTABLE-ATTESTED|files=13|receipt=uns
 const string ExpectedStrict = "MATH-M8-STRICT-BINDING|mode=validate|capabilities=4|metadataOnly=true|brokerReady=0|PASS";
 const string Schema = "docs/discovery/interop/decision-1.0.0-draft.1/manifest.schema.json";
 const string Fixtures = "docs/discovery/interop/decision-1.0.0-draft.1/conformance.json";
-const string ExpectedSchemaSha = "678b42aa871eceec5f26d9b5dbfbbb31dff0e62ef003204d6c623ba7e7d95170";
+const string ExpectedSchemaSha = "678b42aa871eceec5f26d9b5dbfbbb31fdd0e62ef003204d6c623ba7e7d95170";
 const string ExpectedFixturesSha = "5344a3bce40aa58990123cd51bee1b4a5cf72feb4c2e802da072ad19ac37001e";
 
 Need(File.Exists(Attester) && File.Exists(StrictGate) &&
