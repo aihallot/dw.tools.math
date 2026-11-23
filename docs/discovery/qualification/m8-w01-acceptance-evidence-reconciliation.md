@@ -168,3 +168,7 @@ This document is a checkpoint for an eventual coherent M8-W01 qualification, **n
 ## RS296 — bounded independent real-CLR GREEN consumer (prepared scope)
 
 RS295 succeeded on attempt 001 with T2-RED `done` and T2-GREEN `ready`. RS296 is a forward-only GREEN activation plus separate-process admission probe, retaining the published four-method positives and proving the real CLI refuses three coherent false CLR declarations and an unauthorized metadata grant. It may set T2-GREEN to `in-progress` only, never `done`, while its Verification sibling remains `not-ready`. It does not grant an external broker or modify immutable package archives. See [RS296 GREEN decision](../../planning/decisions/m8-w01-c01-t2-green-independent-admission-rs296.md).
+
+## RS297 — selected CLR GREEN completion and Verification readiness
+
+RS296 succeeded at allocated attempt 001 but **not global first-pass**: a prior pre-attempt target-reentry refusal was durably recorded. Its independent caller checked the actual four-method compiled CLR admission against three coherently forged signatures and refused metadata-granted execution without granting a broker. RS297 closes only GREEN with a single evidenced DWF achievement and admits the Verification sibling to `ready`; Verification, T2 and parent M8 boundaries remain unfinished. See [RS297 decision](../../planning/decisions/m8-w01-c01-t2-green-closure-verification-readiness-rs297.md).
