@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **independent protocol Verification in progress, not product acceptance**. RS290 durably completed GREEN and admitted Verification to `ready`, first-pass. RS291 targets only `M8-W01-C01-T1-V = in-progress` while RED/GREEN remain `done` and M8, W01, C01 and T1 remain `in-progress`. Other Discovery/modernization nodes are `not-ready`; canonical backlog is still `planned`. No broker authorization, external installation or signed provenance is claimed.
+Status: **bounded protocol T1 closure and next CLR RED readiness, not M8 release acceptance**. RS291 succeeded first-pass with a copied public-export consumer and two new independent refusals. RS292 targets T1 Verification and parent T1 as `done`, with the selected CLR task T2 and its RED subtask `ready`. M8, W01 and C01 remain `in-progress`; other M8/M9 work and the canonical backlog remain `not-ready`/`planned`. No external adoption, signed origin or broker authorization is implied.
 
 ## Accepted product authority
 
@@ -113,16 +113,26 @@ The new Math-owned `ProbeM8VerificationPortableConsumer.cs` exercises the **publ
 
 This qualifies only portable **consumer-side structural metadata and integrity**, not a new Math calculation, signed origin, actual broker host installation, external AURA acceptance or runtime permission. The existing source package versions, previously qualified private DLLs, pinned protocol corpus and historic DWF evidence remain unchanged. See [RS291 Verification decision](../../planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md).
 
+## RS292 — close protocol T1; admit selected CLR T2 RED
+
+The durable RS291 attempt 001 succeeded **first-pass**, with zero preparation failures or boundary violations. Its fresh Math-owned test invoked the actual public `AttestM8PortableDiscoveryExport.cs --export` command, copied fourteen files into an isolated consumer, checked the unsigned receipt's thirteen SHA-256 file identities, cross-checked four selected CLR binding declarations and immutable 13-case Decision protocol pins, and executed the copied offline verifier from a different working directory. It independently refused altered CLR member and authorization metadata through both the strict gate and recorded file-hash boundary, restoring clean verification after each test. **This is structural/metadata consumer proof**, not independent broker installation or an additional compiled Math runtime execution.
+
+RS292 now proposes **two separate, truthful DWF completions**: the active `M8-W01-C01-T1-V` Verification leaf, using fresh RS291 evidence; then its parent `M8-W01-C01-T1`, whose RED (RS288), GREEN (RS290) and Verification (RS292) are all completed. Each completion has one matching contribution achievement. Only `M8-W01-C01-T2` and its RED leaf `M8-W01-C01-T2-R` become `ready`; neither is executed or completed.
+
+The existing maintained native adoption and Discovery frontier validators enforce the exact 591-node target and the durable RS290/RS291 evidence, without rerunning expensive cross-platform or private-package campaigns. The next work should obtain fresh negative and positive evidence specifically for the selected compiled CLR bindings, not backfill the T2 RED/GREEN/Verification lifecycles from older Windows/WSL consumer tests.
+
+See [RS292 closure and next RED admission](../../planning/decisions/m8-w01-c01-t1-verification-closure-t2-red-readiness-rs292.md).
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS290 durably completed GREEN and admitted Verification; RS291 activates only the Verification leaf to `in-progress` for a fresh public-export consumer test. No parent task, phase or milestone is completed; unrelated M8 children remain `not-ready`.
+4. **Native DWF progress:** RS291 has fresh first-pass consumer Verification evidence. RS292 targets one Verification and one parent T1 completion, while only T2 and T2-RED become `ready`; the C01 phase, W01 and M8 remain `in-progress`, with all other M8 children `not-ready`.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After RS291 records the independent consumer Verification outcome, assess its exact receipts before proposing any Verification completion or parent T1 lifecycle transition. Do not infer broker installation, signed provenance, broader Math coverage or public publication.
+After RS292 closes protocol T1 and admits CLR T2-RED, activate only that new ready leaf in a later bounded run. Establish fresh, falsifiable selected CLR signature or runtime reflection boundary evidence before GREEN; do not infer external broker authorization or broad Math coverage.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.

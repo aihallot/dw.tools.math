@@ -42,20 +42,22 @@ try
     RequireState(actual, "M9", "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, "not-ready");
-    var activeM8ProtocolTaskLineage = new HashSet<string>(StringComparer.Ordinal)
+    var activeM8ProtocolPhaseLineage = new HashSet<string>(StringComparer.Ordinal)
     {
         "M8-W01",
-        "M8-W01-C01",
-        "M8-W01-C01-T1"
+        "M8-W01-C01"
     };
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
             entry.Key switch
             {
+                "M8-W01-C01-T1" => "done",
                 "M8-W01-C01-T1-R" => "done",
                 "M8-W01-C01-T1-G" => "done",
-                "M8-W01-C01-T1-V" => "in-progress",
-                _ => activeM8ProtocolTaskLineage.Contains(entry.Key)
+                "M8-W01-C01-T1-V" => "done",
+                "M8-W01-C01-T2" => "ready",
+                "M8-W01-C01-T2-R" => "ready",
+                _ => activeM8ProtocolPhaseLineage.Contains(entry.Key)
                     ? "in-progress" : "not-ready"
             });
     foreach (var entry in actual)
