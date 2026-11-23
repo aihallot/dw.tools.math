@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS291",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-23T08:35:08.2266586+00:00",
+  "completedAtUtc": "2026-11-23T08:35:08.8582967+00:00",
+  "durationMilliseconds": 631,
+  "projectNodes": [
+    "M8-W01-C01-T1-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+    "docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS291/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 880,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-08f5647dd8804f88927cc291910ae46d\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 880000,
+      "DurationMilliseconds": 492,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS291 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS290/attempt-001.json run=RS290 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs bytes=13368\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11831\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=9163\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=19134\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md bytes=2758\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M8-W01-C01-T1-V activated=M8-W01-C01-T1-V\r\n[payload] OK operations=15 changed=6 no-change=0 verified=9 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS291/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS291 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7a37021d7204d9c5d14d7d19b232b982b0332d0eb5d4d0ed672a8e73bc523600",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS290/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS290 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "69f65155bebe0619f47e04babf6abf151ffcfc05264651d1ca8bb258a09c32a4",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01-T1-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+        "Status": 1,
+        "Summary": "bytes=13368",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "31b538feaa20e58bbc1bf25a4b66b61a54fb075a9c9dcfd2af98cd177350bfbf",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11831",
+        "Details": null,
+        "BeforeSha256": "286c56690665634f43cd80f4340b861d1edb79d5ae35a29581e05517a96bc732",
+        "AfterSha256": "33cda2819e99fe224a24a393e80054073c3ed5adcbd6e2c14ad7b1fb036f1e85",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=9163",
+        "Details": null,
+        "BeforeSha256": "c0e6126dedf9ad268f52af73cc7c22e144c0f2e5713b2983fead1d3dc90763b7",
+        "AfterSha256": "92db73a0275cef5276f187402277e8ab5e72b21ac0580a99323a03dfa2ed35d9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=19134",
+        "Details": null,
+        "BeforeSha256": "5ff3f298c16fc8c8512f28efb236653f3c5209656efa29c0e335ed6144e1eee9",
+        "AfterSha256": "784219dbbfb0748bc054fa7b419428f8be6def9e5ea97bca75d05684d7e7f3e9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md",
+        "Status": 1,
+        "Summary": "bytes=2758",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7ec44d395b63cd3b6f81584c791635b7505eb088a62ff65d55d014a01e3e62ce",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M8-W01-C01-T1-V activated=M8-W01-C01-T1-V",
+        "Details": null,
+        "BeforeSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "AfterSha256": "502b5dfd1cb09aee8c5167a8337abd8cbd45af1f98247367b30df079f073acb6",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-verification-independent-public-export-consumer",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-591-node-active-protocol-verification",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-verification-activation-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261123T083353Z-119d0186a6a8c6f8",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "9666d875c459039bd175766f6b4c224443bae213",
+  "invocationStartedAtUtc": "2026-11-23T08:33:53.7905779+00:00",
+  "invocationDurationMilliseconds": 75067,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS291",
+      "title": "Activate Math Discovery protocol Verification with independent public-export consumer proof",
+      "projectNodes": [
+        "M8-W01-C01-T1-V"
+      ]
+    },
+    "declared": {
+      "summary": "Start Math Discovery protocol Verification and prove an attested public export is structurally valid and tamper-refusing when copied to an isolated consumer.",
+      "value": "Activate only the ready M8-W01-C01-T1-V subtask through target-reentrant DWF continuation. Add a Math-owned .NET 11 test that uses the actual public --export CLI, copies all fourteen exported files into an isolated consumer, checks thirteen receipt SHA-256 identities and four selected CLR metadata identities against the pinned 13-case protocol boundary, runs the existing strict gate on the copied manifest, and executes its standalone verifier from a separate working directory. Require fresh member and authorization mutations to be refused and restore the clean export. No completion or broker adoption claimed.",
+      "debtChanges": [
+        "RS290 succeeded first-pass and completed GREEN with one evidence-backed achievement, admitting the Verification leaf to ready while the accepted parent task stayed in-progress.",
+        "Prior positive exports and in-wrapper refusal tests did not independently exercise the public --export mode followed by a copied portable consumer and a separately launched offline verifier.",
+        "The new verification is checksum/metadata-only; private published binaries, source-qualified protocol pins, historical receipts, unsigned-origin limitations and external broker responsibility are preserved."
+      ],
+      "nextAction": "If independent RS291 Verification succeeds, separately assess one evidence-backed Verification completion and truthful parent-task progress before moving to the selected CLR-binding task.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ProbeM8VerificationPortableConsumer.cs",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c01-t1-verification-independent-consumer-rs291.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-verification-independent-public-export-consumer",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-591-node-active-protocol-verification",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-verification-activation-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS291",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS291",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "9666d875c459039bd175766f6b4c224443bae213",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "fb36cd7a9e692ba72e6b5ff4717d1c7b63514ad5908673b9ca3512e94ad052e5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: verify portable Discovery public export from isolated consumer",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

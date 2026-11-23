@@ -54,7 +54,7 @@ try
             {
                 "M8-W01-C01-T1-R" => "done",
                 "M8-W01-C01-T1-G" => "done",
-                "M8-W01-C01-T1-V" => "ready",
+                "M8-W01-C01-T1-V" => "in-progress",
                 _ => activeM8ProtocolTaskLineage.Contains(entry.Key)
                     ? "in-progress" : "not-ready"
             });
