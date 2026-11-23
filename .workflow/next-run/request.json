@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "id": "RS305",
+  "title": "Activate copied deterministic Discovery skill Verification with strict metadata and drift refusal",
+  "commitMessage": "test: verify copied Discovery skill and strict CLR metadata",
+  "timeoutSeconds": 950,
+  "projectNodes": [
+    "M8-W01-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Activate C02/T1 Verification and independently verify a copied generated Math skill with the existing strict CLR metadata and generator gates.",
+    "value": "RS304 succeeded first-pass, completing C02/T1 GREEN and admitting Verification ready. Copy the existing generator, strict RS287 validator, canonical source manifest, skill and bundled manifest to an isolated consumer. Validate copied bytes and four runtime-only CLR identities; run the existing strict admission against the copied manifest and the existing generator --check against the copied skill. Require copied fingerprint forgery and skill text drift to be refused, restore clean bytes and confirm canonical tracked files unchanged. Activate Verification only, without completing the task or granting an external broker.",
+    "debtChanges": [
+      "RS304 succeeded first-pass on attempt 001, completing C02/T1 GREEN and admitting its Verification sibling to ready.",
+      "GREEN qualified deterministic independent generation and source-side refusals, but did not check the shipped, copied generated skill via independent strict metadata and --check acceptance from its destination.",
+      "RS305 qualifies only a local isolated copy of the generated bundle, not a signed source or third-party agent-host installation. Verification and parent T1 remain incomplete."
+    ],
+    "nextAction": "After independent RS305 copied-skill evidence passes, separately decide Verification and T1 completion and whether to admit C02/T2 delivery/refusal RED.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 315
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8C02SkillVerificationConsumer.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c02-t1-verification-copied-skill-rs305.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ProbeM8C02SkillVerificationConsumer.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8C02SkillVerificationConsumer.cs"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c02-t1-verification-copied-skill-rs305.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c02-t1-verification-copied-skill-rs305.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/progress/completions/0/id",
+      "expectedValue": "M8-W01-C02-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C02-T1-V"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS304/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M8-W01-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": "M8-W01-C02-T1"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-skill-copied-independent-verification",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8C02SkillVerificationConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 520,
+      "packs": []
+    },
+    {
+      "id": "m8-native-591-node-active-skill-verification",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-skill-verification-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
