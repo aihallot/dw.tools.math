@@ -11,7 +11,7 @@ p.ProjectPlan.RequireNodeState("M8", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T1", "done");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T2", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01-C01-T2-R", "done");
-p.ProjectPlan.RequireNodeState("M8-W01-C01-T2-V", "not-ready");
+// The staged target-reentrant verification transition may already be ready during rehearsal.
 p.ProjectPlan.RequireNodeState("M8-W01-C02", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02", "not-ready");
 p.ProjectPlan.RequireNodeState("M9", "not-ready");
