@@ -1,6 +1,6 @@
 # M8-W01 — Discovery acceptance evidence reconciliation
 
-Status: **protocol GREEN work, not product acceptance**. RS288 durably completed `M8-W01-C01-T1-R` and admitted `M8-W01-C01-T1-G` to `ready`, first-pass. RS289 targets only `M8-W01-C01-T1-G = in-progress`, while the M8 ancestor hierarchy remains `in-progress`. Verification and other Discovery/modernization nodes stay `not-ready`; the canonical backlog remains `planned`. Neither broker authorization nor completion of the parent task is claimed.
+Status: **GREEN closure and Verification readiness gate, not product acceptance**. RS288 durably completed RED and RS289 activated GREEN and qualified three additional pre-attestation refusals, both first-pass. RS290 targets `M8-W01-C01-T1-G = done` and `M8-W01-C01-T1-V = ready`, with M8 and the parent task still `in-progress`. The RS290 durable report determines whether this transition succeeded. Other Discovery/modernization nodes remain `not-ready`, the canonical backlog remains `planned`, and broker authorization is not granted.
 
 ## Accepted product authority
 
@@ -63,13 +63,13 @@ RS286 begins the single M8 protocol RED chain (`M8 → M8-W01 → M8-W01-C01 →
 
 The new Math-owned `ProbeM8ProtocolRedSignatureMetadata.cs` observes these differences without modifying the historical verifier or pinned schema, rebuilding a Math library, or changing published packages. The RED subtask is **active**, not `done`; an independent stricter binding-metadata gate and separate GREEN/Verification cycles remain necessary. See [RS286 RED decision](../../planning/decisions/m8-w01-c01-t1-red-signature-metadata-rs286.md).
 
-## RS287 — additional strict CLR metadata admission gate (pending validation)
+## RS287 — qualified strict CLR metadata admission gate
 
-The proposed Math-owned `ValidateM8StrictBindingMetadata.cs` checks that each capability's canonical CLR signature can be reconstructed **exactly** from its declared assembly, assembly version, type, member, return type and ordered parameter types, then recomputes its SHA-256 fingerprint. It supplements the original portable-envelope validation without modifying the historical SHA-pinned verifier or changing the four selected Math capabilities.
+The qualified Math-owned `ValidateM8StrictBindingMetadata.cs` checks that each capability's canonical CLR signature can be reconstructed **exactly** from its declared assembly, assembly version, type, member, return type and ordered parameter types, then recomputes its SHA-256 fingerprint. It supplements the original portable-envelope validation without modifying the historical SHA-pinned verifier or changing the four selected Math capabilities.
 
-RS287 targets four selected Math positive examples and one independently pinned synthetic envelope, plus seven explicit tamper refusals. The two newly reproduced RS286 RED gaps (parameter type and binding member drift) must now be refused by this stricter gate. The existing `runtime-only` authority boundary remains mandatory. It can be invoked read-only with `dotnet run --file docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs -- --validate <manifest-path>` and does not load or authorize CLR assemblies.
+RS287 qualified four selected Math positive examples and one independently pinned synthetic envelope, plus seven explicit tamper refusals. The two newly reproduced RS286 RED gaps (parameter type and binding member drift) are refused by this stricter gate. The existing `runtime-only` authority boundary remains mandatory. It can be invoked read-only with `dotnet run --file docs/discovery/qualification/ValidateM8StrictBindingMetadata.cs -- --validate <manifest-path>` and does not load or authorize CLR assemblies.
 
-**Scope:** This additional qualification is Math-specific metadata alignment, not a retrospective replacement for portable protocol conformance or proof of cross-repository broker routing. M8's protocol RED leaf remains `in-progress`; GREEN/Verification sibling states remain `not-ready` until a separate forward-only DWF decision and run.
+**Scope:** This additional qualification is Math-specific metadata alignment, not a retrospective replacement for portable protocol conformance or proof of cross-repository broker routing. At RS287, RED was `in-progress` and GREEN/Verification remained `not-ready`; later RS288/RS289 reports provide the distinct forward-only state transitions.
 
 ## RS288 — RED completion, GREEN readiness and actual export enforcement
 
@@ -95,16 +95,26 @@ For each case, the actual attestation path must surface the precise RS287 strict
 
 This adds independent end-to-end GREEN evidence, not a new protocol, publicly signed provenance, external skill installation, mathematical runtime execution or broker authorization.
 
+## RS290 — evidence-backed GREEN closure and Verification readiness
+
+RS288 and RS289 are separate successful first-pass executions. RS288 completed only the newly evidenced RED subtask, with one truthful achievement. RS289 activated GREEN and ran the **actual Math attestation boundary**, preserving two deterministic fourteen-file positive exports, independent offline verification and three historical post-receipt tamper refusals. It additionally confirmed three new before-receipt refusals: mismatched CLR member, mismatched parameter type and unauthorized execution grant; each was rejected by the RS287 strict gate before the exporter emitted a receipt or verifier.
+
+RS290 records the resulting **GREEN completion** with exactly one matching DWF achievement and admits only its Verification sibling to `ready`. The parent `M8-W01-C01-T1` and its M8 ancestor chain remain `in-progress`. Verification must still perform distinct fresh acceptance checks and cannot be completed by the GREEN evidence alone. This is a forward-only progress transition, not a retrospective completion of historical protocol fixtures.
+
+The maintained `ValidateM8W01EvidenceFrontier.cs` now validates the durable RS288/RS289 lineage and exact new target states. This avoids rerunning all attestation exports merely to change lifecycle status. The canonical signed-or-unsigned trust boundary remains unchanged: the receipt is **unsigned** and confers no provenance authentication, broker authorization or AURA installation.
+
+See [RS290 GREEN/Verification decision](../../planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md).
+
 ## Acceptance gaps before native lifecycle transitions
 
 1. **Protocol acceptance:** pinned *13 portable fixtures* have independent RS131 and RS209 proof; verify the same exact pins during readiness assessment instead of re-running the protocol merely for ceremony. Completion remains a distinct native lifecycle decision.
 2. **Consumer boundary:** positive source-project examples and RS279's positive immutable private-package consumer both exist. Neither proves installation of the generated skill bundle in a fresh external consumer, authority to invoke through a broker, or AURA adoption.
 3. **Delivery contract:** decide explicitly whether the accepted opt-in skill delivery recipe requires another isolated consumer packaging/installation check. If required, make it a bounded separate qualification; do not silently treat existing source examples as installation proof.
-4. **Native DWF progress:** RS288 recorded the RED `done` receipt and GREEN `ready` target, while RS289 activates the GREEN leaf to `in-progress` for fresh end-to-end refusal observations. Neither GREEN nor its parent is completed; Verification and other M8 children remain `not-ready`.
+4. **Native DWF progress:** RS288 completed RED, RS289 activated GREEN and qualified end-to-end refusals, and RS290 targets GREEN `done` with Verification `ready`. No parent task, phase or milestone is completed; Verification and unrelated M8 children require separate forward-only evidence.
 5. **Authorization:** all four capabilities remain `AgentCallable` with `runtime-only` authorization. `brokerCandidateIds=[]`; no `BrokerReady`, host-action grant, public package publication or sibling-repository modification.
 
 ## Next bounded action
 
-After RS289 qualifies the actual pre-attestation refusal boundary, review the newly recorded GREEN evidence before a separate forward-only GREEN completion and Verification readiness decision. Preserve the historical schema, private package identities and runtime-only broker boundary.
+After RS290 records the GREEN completion, activate the ready Verification leaf separately. Use a bounded final acceptance matrix across pinned protocol identity, selected CLR metadata, the attested portable export and explicit runtime-only authorization limits; do not infer broker installation or public publication.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.

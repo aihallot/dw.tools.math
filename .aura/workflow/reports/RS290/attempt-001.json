@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS290",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-23T08:22:00.2083149+00:00",
+  "completedAtUtc": "2026-11-23T08:22:00.8283769+00:00",
+  "durationMilliseconds": 620,
+  "projectNodes": [
+    "M8-W01-C01-T1-G",
+    "M8-W01-C01-T1-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS290/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 690,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-090eb87f443b4e689e0fe1d848f02128\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 690000,
+      "DurationMilliseconds": 490,
+      "StandardOutput": "[workflow.require-current-run] VERIFIED path=.aura/workflow/state.json run=RS290 hierarchy=exact\r\n[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS289/attempt-001.json run=RS289 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=11825\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=9151\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=17646\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-portable-discovery-bundle.md bytes=7330\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md bytes=2537\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W01-C01-T1-V not-ready-\u003Eready\r\n[payload] OK operations=16 changed=7 no-change=0 verified=9 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS290/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-current-run",
+        "Path": ".aura/workflow/state.json",
+        "Status": 0,
+        "Summary": "run=RS290 hierarchy=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "3c6293af8a248d3f1264dd53eab0df6ec4755983d204dc04e8ee8cb30529bb8a",
+        "Artifacts": null
+      },
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS289/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS289 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "66932e5f4daef1ef852802c4cf05bc1fe4d861548f4084d71c64d83d7b46840e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=11825",
+        "Details": null,
+        "BeforeSha256": "5a2c1d0343b75cc57ce652ad897a67ed403ec623c51f200efd37892132e9220a",
+        "AfterSha256": "286c56690665634f43cd80f4340b861d1edb79d5ae35a29581e05517a96bc732",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=9151",
+        "Details": null,
+        "BeforeSha256": "0f5c7e98ed8ecdaf35c7696229b49ee41550e96ae992b77369061b13184a9856",
+        "AfterSha256": "c0e6126dedf9ad268f52af73cc7c22e144c0f2e5713b2983fead1d3dc90763b7",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=17646",
+        "Details": null,
+        "BeforeSha256": "77af689bb82a7a4d7b6b9b609ec06f1695ec4d85eb0d25dbe9aea8457e54af00",
+        "AfterSha256": "5ff3f298c16fc8c8512f28efb236653f3c5209656efa29c0e335ed6144e1eee9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+        "Status": 1,
+        "Summary": "bytes=7330",
+        "Details": null,
+        "BeforeSha256": "e46d84d84d513764900ac085fec70254526d6f42e0a83724cf6a30a74d073048",
+        "AfterSha256": "8632bb1c6d2dd450a774070b1ad684e61fd6270c62964a9a68e8654285d7000b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md",
+        "Status": 1,
+        "Summary": "bytes=2537",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7b630e0459255b3aaccd766dbdbe9ca6bdd9f90486463673d34047b0043d1c17",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "7bb93f13b86c2702cb620d1c0cc66ee410981bb4ee3bb8a735fbcae79fdd7145",
+        "AfterSha256": "e097b33f8ffd8cbf7fdc9aad531bb70cf60e88c872415b799c4b603d58e99137",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W01-C01-T1-V not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "e097b33f8ffd8cbf7fdc9aad531bb70cf60e88c872415b799c4b603d58e99137",
+        "AfterSha256": "4255994e07cedff55d27c6bb7e183714e3a675e026b22258038b26ede6130584",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-native-591-node-green-done-verification-ready",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-protocol-evidence-green-completion-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261123T082112Z-21499b9c3f1760ad",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "8575a4b4f2ad75af01d4dd1496af0736ff1f376b",
+  "invocationStartedAtUtc": "2026-11-23T08:21:12.1592447+00:00",
+  "invocationDurationMilliseconds": 48669,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS290",
+      "title": "Close evidence-backed Math Discovery protocol GREEN and admit Verification readiness",
+      "projectNodes": [
+        "M8-W01-C01-T1-G",
+        "M8-W01-C01-T1-V"
+      ]
+    },
+    "declared": {
+      "summary": "Complete the Math Discovery protocol GREEN subtask on durable end-to-end attestation refusals and prepare the Verification leaf.",
+      "value": "Use RS289\u0027s first-pass qualification of the actual pre-attestation strict metadata boundary, including two valid deterministic exports, a standalone verifier, the three retained tamper checks and three newly observed metadata/authorization refusals, to complete only M8-W01-C01-T1-G via typed DWF convergence with one exact achievement. Admit its Verification sibling from not-ready to ready without executing it. Update the two existing 591-node/evidence frontier validators to require exact RS288 RED and RS289 GREEN receipts, and keep historical protocol sources, private packages, parent tasks and broker authority unchanged.",
+      "debtChanges": [
+        "RS288 completed RED first-pass and RS289 activated GREEN first-pass, validating the real exporter\u0027s three new before-receipt refusals while keeping valid portable exports and offline verification intact.",
+        "GREEN can now close on new RS289 evidence; Verification remains an independent future acceptance responsibility and cannot be backfilled from historical RS131/209 or the just-completed GREEN checks.",
+        "Only GREEN done and Verification ready are admitted. The parent M8 task/ancestors stay in-progress, backlog v0.1.124 remains planned, private archives immutable and AURA/broker authorization external."
+      ],
+      "nextAction": "Activate the ready Verification subtask in the next bounded DWF run and qualify a fresh cross-boundary acceptance dossier, without promoting the parent task or claiming external agent adoption.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M8-W01-C01-T1-G",
+          "achievement": "RS289 independently qualified the actual strict Math Discovery attestation entrypoint: two deterministic valid exports and standalone offline verification remained intact, while three injected CLR member, parameter type and authorization mismatches were refused before a receipt or verifier could be emitted. GREEN is complete without claiming Verification, parent task or external broker readiness."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-portable-discovery-bundle.md",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c01-t1-green-closure-verification-readiness-rs290.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-native-591-node-green-done-verification-ready",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-protocol-evidence-green-completion-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS289 independently qualified the actual strict Math Discovery attestation entrypoint: two deterministic valid exports and standalone offline verification remained intact, while three injected CLR member, parameter type and authorization mismatches were refused before a receipt or verifier could be emitted. GREEN is complete without claiming Verification, parent task or external broker readiness."
+      },
+      {
+        "id": "M8-W01-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M8-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS289 independently qualified the actual strict Math Discovery attestation entrypoint: two deterministic valid exports and standalone offline verification remained intact, while three injected CLR member, parameter type and authorization mismatches were refused before a receipt or verifier could be emitted. GREEN is complete without claiming Verification, parent task or external broker readiness."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS290",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS290",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "8575a4b4f2ad75af01d4dd1496af0736ff1f376b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "8b7fcdbadf9b6c05acb32e79305b898637163bcfa41d6fe95d66ceff8bddf644"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: complete Discovery protocol GREEN and ready Verification",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

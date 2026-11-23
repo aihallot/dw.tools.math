@@ -24,6 +24,8 @@ using var historical = Load("docs/discovery/qualification/m8-selected-clr-bindin
 using var rs131 = Load(".aura/workflow/reports/RS131/attempt-001.json");
 using var rs209 = Load(".aura/workflow/reports/RS209/attempt-001.json");
 using var rs279 = Load(".aura/workflow/reports/RS279/attempt-001.json");
+using var rs288 = Load(".aura/workflow/reports/RS288/attempt-001.json");
+using var rs289 = Load(".aura/workflow/reports/RS289/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -52,11 +54,12 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
             var expected = sub.GetProperty("id").GetString() switch
             {
                 "M8-W01-C01-T1-R" => "done",
-                "M8-W01-C01-T1-G" => "in-progress",
+                "M8-W01-C01-T1-G" => "done",
+                "M8-W01-C01-T1-V" => "ready",
                 _ => "not-ready"
             };
             Need(sub.GetProperty("state").GetString() == expected,
-                "Native protocol RED closure or GREEN readiness differs.");
+                "Native protocol RED/GREEN completion or Verification readiness differs.");
         }
     }
 }
@@ -92,6 +95,27 @@ Need(latest.GetProperty("git").GetProperty("commitMessage").GetString() ==
         .EnumerateArray().Any(x => x.GetProperty("id").GetString() ==
             "m8-discovery-four-selected-published-binary-net11-locked-consumer"),
     "RS279 independent package-only qualification changed.");
+var previousRed = rs288.RootElement;
+var previousGreen = rs289.RootElement;
+Need(previousRed.GetProperty("runId").GetString() == "RS288" &&
+    previousRed.GetProperty("outcome").GetString() == "succeeded" &&
+    previousRed.GetProperty("attempt").GetInt32() == 1 &&
+    previousRed.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    previousRed.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    previousRed.GetProperty("progress").GetProperty("completions")
+        .EnumerateArray().Single().GetProperty("id").GetString() == "M8-W01-C01-T1-R" &&
+    previousGreen.GetProperty("runId").GetString() == "RS289" &&
+    previousGreen.GetProperty("outcome").GetString() == "succeeded" &&
+    previousGreen.GetProperty("attempt").GetInt32() == 1 &&
+    previousGreen.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    previousGreen.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    previousGreen.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    previousGreen.GetProperty("progress").GetProperty("transitions")
+        .EnumerateArray().Single().GetProperty("id").GetString() == "M8-W01-C01-T1-G" &&
+    previousGreen.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() == "m8-green-actual-attestation-pre-receipt-refusals"),
+    "RS288 RED or RS289 GREEN durable execution evidence differs.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -125,4 +149,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|RED=done|GREEN=in-progress|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|RED=done|GREEN=done|VERIFY=ready|brokerReady=0|PASS");
