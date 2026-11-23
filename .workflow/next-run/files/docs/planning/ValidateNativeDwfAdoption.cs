@@ -44,13 +44,14 @@ try
         RequireState(actual, entry.Key, "not-ready");
     var activeM8ProtocolPhaseLineage = new HashSet<string>(StringComparer.Ordinal)
     {
-        "M8-W01",
-        "M8-W01-C01"
+        "M8-W01"
     };
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
             entry.Key switch
             {
+                "M8-W01-C01" => "done",
+                "M8-W01-C02" => "ready",
                 "M8-W01-C01-T1" => "done",
                 "M8-W01-C01-T1-R" => "done",
                 "M8-W01-C01-T1-G" => "done",

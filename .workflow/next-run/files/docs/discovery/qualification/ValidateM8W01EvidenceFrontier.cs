@@ -33,6 +33,7 @@ using var rs294 = Load(".aura/workflow/reports/RS294/attempt-001.json");
 using var rs296 = Load(".aura/workflow/reports/RS296/attempt-001.json");
 using var rs297 = Load(".aura/workflow/reports/RS297/attempt-001.json");
 using var rs298 = Load(".aura/workflow/reports/RS298/attempt-001.json");
+using var rs299 = Load(".aura/workflow/reports/RS299/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -49,7 +50,7 @@ Need(m8.GetProperty("state").GetString() == "in-progress" &&
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
     Need(phase.GetProperty("state").GetString() ==
-        (phase.GetProperty("id").GetString() == "M8-W01-C01" ? "in-progress" : "not-ready"),
+        (phase.GetProperty("id").GetString() == "M8-W01-C01" ? "done" : "ready"),
         "Native Discovery phase readiness differs.");
     foreach (var task in phase.GetProperty("tasks").EnumerateArray())
     {
@@ -226,6 +227,19 @@ Need(greenClosure.GetProperty("runId").GetString() == "RS297" &&
         .EnumerateArray().Any(v => v.GetProperty("id").GetString() ==
             "m8-selected-clr-isolated-portable-verification"),
     "RS297 GREEN completion or RS298 independent published-CLR Verification evidence changed.");
+var taskClosure = rs299.RootElement;
+Need(taskClosure.GetProperty("runId").GetString() == "RS299" &&
+    taskClosure.GetProperty("outcome").GetString() == "succeeded" &&
+    taskClosure.GetProperty("attempt").GetInt32() == 1 &&
+    taskClosure.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 1 &&
+    taskClosure.GetProperty("priorInvocationFailures").GetProperty("preparationFailureCount").GetInt32() == 1 &&
+    taskClosure.GetProperty("priorInvocationFailures").GetProperty("allocatedAttemptFailureCount").GetInt32() == 0 &&
+    !taskClosure.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    taskClosure.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    taskClosure.GetProperty("progress").GetProperty("completions").EnumerateArray()
+        .Select(x => x.GetProperty("id").GetString()).OrderBy(x => x, StringComparer.Ordinal)
+        .SequenceEqual(new[] { "M8-W01-C01-T2", "M8-W01-C01-T2-V" }, StringComparer.Ordinal),
+    "RS299 selected CLR Verification and parent completion evidence changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -259,4 +273,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=in-progress|T1=in-progress|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=ready|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
