@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "id": "RS298",
+  "title": "Activate selected CLR Verification and qualify fresh isolated public-export consumer",
+  "commitMessage": "test: verify selected CLR admission from isolated portable export",
+  "timeoutSeconds": 1100,
+  "projectNodes": [
+    "M8-W01-C01-T2-V"
+  ],
+  "contribution": {
+    "summary": "Activate CLR Verification and exercise copied public Discovery export against real published method admission and independent checksum refusal.",
+    "value": "RS297 durably completed T2-GREEN, admitted Verification ready and recorded two pre-attempt refusals before successful attempt 001. Activate only Verification. Freshly export Math's unsigned portable Discovery bundle, copy its fourteen files into a separate consumer, use a copied standalone verifier from a third working directory, and qualify the copied manifest against the single existing reflection-backed SHA-pinned published CLR method gate. Refuse two coherent false signatures through both real-CLR and offline checks, then restore and reverify clean. Preserve source pins, private packages and runtime-only authority.",
+    "debtChanges": [
+      "RS297 succeeded at attempt 001 after two pre-attempt failures; GREEN is done and Verification is ready, not completed.",
+      "RS296 qualified a real-CLR admission gate on a copied manifest from the canonical source, but did not combine public portable export, independent copied receipt verification and actual compiled CLR admission.",
+      "RS298 is fresh isolated Verification evidence only: unsigned integrity remains unsigned; packages and source bindings stay immutable; broker authorization is external."
+    ],
+    "nextAction": "After fresh RS298 consumer evidence is durable, separately assess Verification completion and exact T2 parent closure before admitting later M8 work.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 350
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8SelectedClrVerificationConsumer.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c01-t2-verification-isolated-real-clr-rs298.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/discovery/qualification/ProbeM8SelectedClrVerificationConsumer.cs",
+      "sourcePath": "files/docs/discovery/qualification/ProbeM8SelectedClrVerificationConsumer.cs"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w01-c01-t2-verification-isolated-real-clr-rs298.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w01-c01-t2-verification-isolated-real-clr-rs298.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/id",
+      "expectedValue": "M8-W01-C01-T2-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/afterState",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C01-T2-V"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS297/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": "M8-W01-C01-T2"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-selected-clr-isolated-portable-verification",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8SelectedClrVerificationConsumer.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 770,
+      "packs": []
+    },
+    {
+      "id": "m8-native-591-node-active-clr-verification",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-active-clr-verification-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 210,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
