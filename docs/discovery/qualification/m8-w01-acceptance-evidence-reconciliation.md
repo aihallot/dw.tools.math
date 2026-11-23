@@ -164,3 +164,7 @@ The next GREEN cycle must produce new independent use of the **real CLR admissio
 After RS295 closes T2-RED and admits GREEN, activate GREEN in a separate forward-only run and qualify the real published-CLR admission API at a bounded consumer boundary, including refusal of coherently forged methods. Preserve canonical pins, immutable packages and runtime-only authority.
 
 This document is a checkpoint for an eventual coherent M8-W01 qualification, **not** an acceptance verdict.
+
+## RS296 — bounded independent real-CLR GREEN consumer (prepared scope)
+
+RS295 succeeded on attempt 001 with T2-RED `done` and T2-GREEN `ready`. RS296 is a forward-only GREEN activation plus separate-process admission probe, retaining the published four-method positives and proving the real CLI refuses three coherent false CLR declarations and an unauthorized metadata grant. It may set T2-GREEN to `in-progress` only, never `done`, while its Verification sibling remains `not-ready`. It does not grant an external broker or modify immutable package archives. See [RS296 GREEN decision](../../planning/decisions/m8-w01-c01-t2-green-independent-admission-rs296.md).
