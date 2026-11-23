@@ -57,7 +57,8 @@ try
                 "M8-W01-C01-T1-V" => "done",
                 "M8-W01-C01-T2" => "in-progress",
                 "M8-W01-C01-T2-R" => "done",
-                "M8-W01-C01-T2-G" => "in-progress",
+                "M8-W01-C01-T2-G" => "done",
+                "M8-W01-C01-T2-V" => "ready",
                 _ => activeM8ProtocolPhaseLineage.Contains(entry.Key)
                     ? "in-progress" : "not-ready"
             });
