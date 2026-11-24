@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "RS307",
+  "title": "Activate opt-in portable Discovery skill delivery RED and refuse unauthorized or mutated bundles",
+  "state": "prepared",
+  "commitMessage": "test: falsify opt-in Discovery skill delivery boundaries",
+  "timeoutSeconds": 950,
+  "projectNodes": [
+    "M8-W01-C02-T2",
+    "M8-W01-C02-T2-R"
+  ],
+  "contribution": {
+    "summary": "Activate C02 opt-in portable skill delivery RED and falsify occupied destinations, altered bundles and unauthorized receipt grants.",
+    "value": "RS306 succeeded first-pass and completed the deterministic generator contract, readying the delivery T2 and RED leaf. Activate those nodes only, and qualify the existing Math-owned attester\u0027s public --export and --verify commands from an independent process. Require a fresh fourteen-file unsigned export, a separately launched copied verifier to match thirteen hashes, refusal of an already occupied opt-in directory without changing it, and refusal of altered skill text, extra copied files and forged receipt authorization with clean restoration. Do not complete RED or grant broker or host installation rights.",
+    "debtChanges": [
+      "RS306 succeeded first-pass on attempt 001 and completed the generator T1 and Verification with independent copied skill evidence, readying delivery RED.",
+      "Existing portable attestation already offers --export and --verify; test their public fail-closed delivery boundary instead of adding another exporter, verifier or new package.",
+      "RS307 starts delivery RED and qualifies only local opt-in portable integrity: unsigned receipt, immutable sources and no external installation, AURA integration or broker authority."
+    ],
+    "nextAction": "After RS307 records fresh independent delivery RED refusals, separately close RED with its evidence and ready GREEN; then qualify a bounded delivery candidate and later Verification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 330
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-delivery-red-independent-portable-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 620
+    },
+    {
+      "id": "m8-native-591-node-active-delivery-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200
+    },
+    {
+      "id": "m8-discovery-active-delivery-red-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 230
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
