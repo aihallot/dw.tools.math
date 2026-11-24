@@ -2,19 +2,24 @@ using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS318", 1,
-    "test: verify copied Math SDK candidate inventory refusals",
-    "0.1.66", 1, 1, 0, false);
+p.Workflow.RequirePriorSuccess("RS319", 1,
+    "chore: complete Math SDK inventory T1 and ready package risk RED",
+    "0.1.72", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W01", "done");
 p.ProjectPlan.RequireNodeState("M8-W02", "in-progress");
 p.ProjectPlan.RequireNodeState("M8-W02-C01", "in-progress");
-p.ProjectPlan.RequireNodeState("M8-W02-C01-T1-R", "done");
-p.ProjectPlan.RequireNodeState("M8-W02-C01-T1-G", "done");
+p.ProjectPlan.RequireNodeState("M8-W02-C01-T1", "done");
+p.ProjectPlan.RequireNodeState("M8-W02-C01-T2-G", "not-ready");
+p.ProjectPlan.RequireNodeState("M8-W02-C01-T2-V", "not-ready");
 p.ProjectPlan.RequireNodeState("M8-W02-C02", "not-ready");
 p.ProjectPlan.RequireNodeState("M9", "not-ready");
 p.Require.JsonValueEquals("docs/planning/backlog.json",
     "/plan_version", JsonValue.Create("0.1.124"));
+p.Require.JsonValueEquals("docs/workflow/manifest.json",
+    "/guidanceVersion", JsonValue.Create("0.26"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
+    "docs/engineering/ProbeM8W02PackageGraphRed.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
     "docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
@@ -24,9 +29,6 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
     "docs/engineering/m8-net11-csharp15-migration-evidence.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile(
-    "docs/planning/decisions/m8-w02-c01-t1-verification-closure-t2-red-readiness-rs319.md"));
-p.ProjectPlan.ConvergeNodeToDone("M8-W02-C01-T1-V");
-p.ProjectPlan.ConvergeNodeToDone("M8-W02-C01-T1");
-p.ProjectPlan.TransitionNode("M8-W02-C01-T2", "not-ready", "ready");
-p.ProjectPlan.TransitionNode("M8-W02-C01-T2-R", "not-ready", "ready");
+    "docs/planning/decisions/m8-w02-c01-t2-red-independent-graph-rs320.md"));
+p.ProjectPlan.ActivateReadyContinuation("M8-W02-C01-T2-R");
 return p.Complete();
