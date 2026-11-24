@@ -36,6 +36,7 @@ using var rs298 = Load(".aura/workflow/reports/RS298/attempt-001.json");
 using var rs299 = Load(".aura/workflow/reports/RS299/attempt-001.json");
 using var rs301 = Load(".aura/workflow/reports/RS301/attempt-001.json");
 using var rs303 = Load(".aura/workflow/reports/RS303/attempt-001.json");
+using var rs305 = Load(".aura/workflow/reports/RS305/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -60,7 +61,8 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
         {
             "M8-W01-C01-T1" => "done",
             "M8-W01-C01-T2" => "done",
-            "M8-W01-C02-T1" => "in-progress",
+            "M8-W01-C02-T1" => "done",
+            "M8-W01-C02-T2" => "ready",
             _ => "not-ready"
         };
         Need(task.GetProperty("state").GetString() == targetTaskState,
@@ -77,7 +79,8 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
                 "M8-W01-C01-T2-V" => "done",
                 "M8-W01-C02-T1-R" => "done",
                 "M8-W01-C02-T1-G" => "done",
-                "M8-W01-C02-T1-V" => "in-progress",
+                "M8-W01-C02-T1-V" => "done",
+                "M8-W01-C02-T2-R" => "ready",
                 _ => "not-ready"
             };
             Need(sub.GetProperty("state").GetString() == expected,
@@ -277,6 +280,19 @@ Need(skillGreen.GetProperty("runId").GetString() == "RS303" &&
         .EnumerateArray().Any(v => v.GetProperty("id").GetString() ==
             "m8-skill-red-existing-regression"),
     "RS303 strict generator GREEN or prior RED regression evidence changed.");
+var copiedSkillProof = rs305.RootElement;
+Need(copiedSkillProof.GetProperty("runId").GetString() == "RS305" &&
+    copiedSkillProof.GetProperty("outcome").GetString() == "succeeded" &&
+    copiedSkillProof.GetProperty("attempt").GetInt32() == 1 &&
+    copiedSkillProof.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    copiedSkillProof.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    copiedSkillProof.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    copiedSkillProof.GetProperty("progress").GetProperty("transitions").EnumerateArray().Single()
+        .GetProperty("id").GetString() == "M8-W01-C02-T1-V" &&
+    copiedSkillProof.GetProperty("contribution").GetProperty("observed").GetProperty("validations")
+        .EnumerateArray().Any(v => v.GetProperty("id").GetString() ==
+            "m8-skill-copied-independent-verification"),
+    "RS305 independent copied skill Verification evidence changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -310,4 +326,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=in-progress|C02RED=done|C02GREEN=done|C02VERIFY=in-progress|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=ready|C02T2RED=ready|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
