@@ -81,8 +81,8 @@ string? Evaluate(JsonObject proposal, JsonObject audit, JsonObject archives)
         !published.Select(x => x!["packageId"]!.GetValue<string>())
             .ToHashSet(StringComparer.Ordinal).SetEquals(
                 new[] { "dw.quantities", "dw.quantities.expression", "dw.quantities.standard" }) ||
-        !published.All(x => x?["archiveSha256"]?.GetValue<string>().Length == 64 &&
-            x?["binarySha256"]?.GetValue<string>().Length == 64))
+        !published.All(x => x?["archiveSha256"]?.GetValue<string>() is { Length: 64 } &&
+            x?["binarySha256"]?.GetValue<string>() is { Length: 64 }))
         return "An unsupported published archive was added or a physical identity lost.";
     if (archives["limitations"]?.AsArray().Count != 5 ||
         !archives["limitations"]!.AsArray().Any(x =>
