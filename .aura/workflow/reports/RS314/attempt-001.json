@@ -1,0 +1,564 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS314",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-24T12:31:24.232627+00:00",
+  "completedAtUtc": "2026-11-24T12:31:25.2830728+00:00",
+  "durationMilliseconds": 1050,
+  "projectNodes": [
+    "M8-W02",
+    "M8-W02-C01",
+    "M8-W02-C01-T1",
+    "M8-W02-C01-T1-R"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8W02TestCoverage.cs",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/engineering/InspectM8W02TestCoverage.cs",
+    "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS314/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 940,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-7e23db9fb28b46d398142d71e7ab852f\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 940000,
+      "DurationMilliseconds": 869,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS313/attempt-001.json run=RS313 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/engineering/InspectM8W02TestCoverage.cs bytes=5798\r\n[files.replace-from-staged] CHANGED path=docs/engineering/m8-net11-csharp15-migration-evidence.md bytes=11032\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=12464\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=28530\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=44455\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md bytes=2235\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W02-C01 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1-R not-ready-\u003Eready\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M8-W02-C01-T1-R activated=M8-W02,M8-W02-C01,M8-W02-C01-T1,M8-W02-C01-T1-R\r\n[payload] OK operations=21 changed=10 no-change=0 verified=11 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS314/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS313/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS313 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "a2297bca27c3f5b3b55b615e4c0c74b6d386b141df6bdb9a26ccc501af5906ac",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T1-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/InspectM8W02TestCoverage.cs",
+        "Status": 1,
+        "Summary": "bytes=5798",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "11c3ea6983898b7552ce01a8f9b612c239ddb3c1cc3cbee5932b0d2068e6623a",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+        "Status": 1,
+        "Summary": "bytes=11032",
+        "Details": null,
+        "BeforeSha256": "2ed64a0c9b8e868967cd575228ec7f42858255b15e93c66271c57c8f95427b00",
+        "AfterSha256": "47755c720255bde7bbc44a99c9bda8ecc2a57ae52e8d1d5561a5802e1744b37f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=12464",
+        "Details": null,
+        "BeforeSha256": "2c7c52ff39ca73e0ae5ccafb058711a8662b7ba6a015a7db6d46fe5cebe2d494",
+        "AfterSha256": "bcfbf99ba462a3f2afe8f97462f07cca2b9d0c8124a77dfd6bb19065691a0f78",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=28530",
+        "Details": null,
+        "BeforeSha256": "db92fa5fce4d177d9cf91e2c42ec9a494ce2a8754318ded5427b7af416988067",
+        "AfterSha256": "18f2b4949e09372f5c9b38e650fe81e2c3463eaeff46760a26bf3472ee6ccabf",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=44455",
+        "Details": null,
+        "BeforeSha256": "32fb0f8e1f30692076416f1de9802d1f7cdb9d26577b18cbfc19c37b6f4a3c83",
+        "AfterSha256": "1d9dce43278fe9f102c1187b034001e99f152babc8dfa95c1dcedfc5c9734ad4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md",
+        "Status": 1,
+        "Summary": "bytes=2235",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e06e49540a8b861d008df5d8d52c447bb55d902db9813b63a288f156c5138b5b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W02-C01 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "308ab9c499271a3729a0d28409eb421e0b635ba180528243cccef8904035928a",
+        "AfterSha256": "da896b9efe92bf679ce289561b5a28fd5a476a737c639f265e7695dc8771c143",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W02-C01-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "da896b9efe92bf679ce289561b5a28fd5a476a737c639f265e7695dc8771c143",
+        "AfterSha256": "a5c679be2699f97e9a22c1d112b0a4f70945ff55bcbb274ce88e3b8c938c4ff6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W02-C01-T1-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "a5c679be2699f97e9a22c1d112b0a4f70945ff55bcbb274ce88e3b8c938c4ff6",
+        "AfterSha256": "3e7a1c47758828f9746e79d360416a61e32f36fc7e4dbde2f728a64355a7e6bf",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M8-W02-C01-T1-R activated=M8-W02,M8-W02-C01,M8-W02-C01-T1,M8-W02-C01-T1-R",
+        "Details": null,
+        "BeforeSha256": "3e7a1c47758828f9746e79d360416a61e32f36fc7e4dbde2f728a64355a7e6bf",
+        "AfterSha256": "7a5139216a8c23c6a18ad4cec377de7ffd7d16d9db48ae19d50f6c8ea651cb62",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-w02-sdk11-stable-source-baseline",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-w02-packable-source-reference-graph",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-w02-test-project-coverage-red",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-w02-prior-net11-historical-evidence",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-591-node-active-sdk-audit-red",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-closed-sdk-audit-active-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261124T122955Z-31c990157f8ebb24",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "3d44d6f4867efa295339187c2041e3f3d1f0f6e3",
+  "invocationStartedAtUtc": "2026-11-24T12:29:55.792345+00:00",
+  "invocationDurationMilliseconds": 89490,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS314",
+      "title": "Activate M8 SDK 11/C# 15 official audit RED using existing package inventory and direct test coverage",
+      "projectNodes": [
+        "M8-W02",
+        "M8-W02-C01",
+        "M8-W02-C01-T1",
+        "M8-W02-C01-T1-R"
+      ]
+    },
+    "declared": {
+      "summary": "Start the Math .NET 11 and C# 15 audit RED, preserving production .NET 10 packages while qualifying the existing thirteen-library SDK inventory and eleven-test coverage.",
+      "value": "RS313 succeeded first-pass, completing Discovery W01 and readying SDK modernization W02. Reuse existing Math SDK baseline and package-graph inspectors: production remains SDK 10.0.401/latestPatch, net10.0/C#14, thirteen packable libraries, sixteen acyclic direct references and an independently installed stable SDK 11.0.100. A new narrow C# source-to-test auditor verifies the eleven solution-listed test projects cover every packable source library through twenty-three direct references and refuses an in-memory missing-test counterexample. Activate W02/C01/T1/RED only, keeping GREEN, Verification, C01/T2, W02/C02 and M9 not-ready; no migration, publication, external broker authority or old package mutation.",
+      "debtChanges": [
+        "RS313 succeeded first-pass, completing the Discovery work package and admitting W02 SDK audit ready without authorizing migration or new package publication.",
+        "RS214-RS252 already provided SDK and thirteen-library source/graph evidence. Reuse these qualified tools instead of rebuilding duplicate auditors or replaying past packaging campaigns.",
+        "RS314 adds only the missing eleven-test-to-thirteen-package coverage dimension and starts audit RED; official API delta applicability, migration and behavioral certification remain open."
+      ],
+      "nextAction": "After RS314 establishes current SDK, source, graph and test coverage, separately assess RED completion and a GREEN audit of Microsoft .NET 11/C# 15 API deltas by Math library.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/engineering/InspectM8W02TestCoverage.cs",
+        "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-w02-sdk11-stable-source-baseline",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-w02-packable-source-reference-graph",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-w02-test-project-coverage-red",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-w02-prior-net11-historical-evidence",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-591-node-active-sdk-audit-red",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-closed-sdk-audit-active-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W02",
+        "objective": "Independent .NET 11 and C# 15 modernization",
+        "kind": "work-package",
+        "parentId": "M8",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W02-C01",
+        "objective": "SDK baseline and modernization audit",
+        "kind": "phase",
+        "parentId": "M8-W02",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W02-C01-T1",
+        "objective": "Official API and toolchain inventory",
+        "kind": "task",
+        "parentId": "M8-W02-C01",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W02-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W02-C01-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W02",
+        "objective": "Independent .NET 11 and C# 15 modernization",
+        "kind": "work-package",
+        "parentId": "M8",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W02-C01",
+        "objective": "SDK baseline and modernization audit",
+        "kind": "phase",
+        "parentId": "M8-W02",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W02-C01-T1",
+        "objective": "Official API and toolchain inventory",
+        "kind": "task",
+        "parentId": "M8-W02-C01",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W02-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W02-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS314",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS314",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "3d44d6f4867efa295339187c2041e3f3d1f0f6e3",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "dc440538657507c3415e552e7d6b4308e8811e69f5932cace42fa8e379390676"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify Math SDK audit RED source and test baseline",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
