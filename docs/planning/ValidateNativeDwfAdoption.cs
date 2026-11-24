@@ -53,7 +53,7 @@ try
                 "M8-W02-C02-T1" => "in-progress",
                 "M8-W02-C02-T1-R" => "done",
                 "M8-W02-C02-T1-G" => "done",
-                "M8-W02-C02-T1-V" => "ready",
+                "M8-W02-C02-T1-V" => "in-progress",
                 "M8-W02-C01-T1" => "done",
                 "M8-W02-C01-T2" => "done",
                 "M8-W02-C01-T2-R" => "done",
