@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "M8-W02-C02-T1-R-RS327",
+  "status": "blocked-not-authorized",
+  "sourceMatrix": "docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json",
+  "physicalArchiveLedger": "docs/engineering/m8-w02-c01-published-standard-closure-rs322.json",
+  "productionBaseline": {
+    "sdk": "10.0.401",
+    "targetFramework": "net10.0",
+    "language": "14.0"
+  },
+  "prospectiveTarget": {
+    "sdk": "11.0.100",
+    "targetFramework": "net11.0",
+    "language": "15.0"
+  },
+  "observed": {
+    "packableSourceProjects": 13,
+    "publishedArchiveClosuresPhysicallyProven": 3,
+    "publishedArchiveClosuresUnqualified": 10,
+    "unqualifiedSemanticVerdicts": 13,
+    "historicalProposalCandidates": 9
+  },
+  "gates": {
+    "migrationAuthorization": "not-granted",
+    "rollbackEvidence": "unqualified",
+    "crossPlatformAndRid": "unqualified",
+    "numericBehavior": "unqualified",
+    "allPublishedPackageGraph": "unqualified"
+  },
+  "limitations": [
+    "Thirteen packable source projects have an audit, not a qualified .NET 11 production migration.",
+    "Only Standard, Expression and base Quantities have a bounded physical published archive and Windows net11 locked-consumer proof.",
+    "The remaining ten published Math archive closures are unqualified; evidence must be produced, not inferred.",
+    "All thirteen source/API semantic compatibility verdicts remain unqualified in the original candidate-only matrix.",
+    "Rollback and cross-platform/RID behavior have no accepted Math migration authorization in this candidate profile.",
+    "Do not change production SDK, target framework, package archives, external broker or public release without distinct acceptance."
+  ]
+}
