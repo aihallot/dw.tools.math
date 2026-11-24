@@ -48,6 +48,7 @@ using var rs317 = Load(".aura/workflow/reports/RS317/attempt-001.json");
 using var rs318 = Load(".aura/workflow/reports/RS318/attempt-001.json");
 using var rs319 = Load(".aura/workflow/reports/RS319/attempt-001.json");
 using var rs320 = Load(".aura/workflow/reports/RS320/attempt-001.json");
+using var rs321 = Load(".aura/workflow/reports/RS321/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -84,7 +85,7 @@ Need(auditT1.GetProperty("state").GetString() == "done" &&
         .GetProperty("state").GetString() == "done" &&
     auditT2.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-G")
-        .GetProperty("state").GetString() == "ready" &&
+        .GetProperty("state").GetString() == "in-progress" &&
     auditT2.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-V")
         .GetProperty("state").GetString() == "not-ready" &&
@@ -530,6 +531,20 @@ Need(sdkGraphRed.GetProperty("runId").GetString() == "RS320" &&
         .GetProperty("validations").EnumerateArray().Any(v =>
             v.GetProperty("id").GetString() == "m8-existing-13-project-dependency-graph"),
     "RS320 independent dependency graph RED or 0.1.72 first-pass evidence changed.");
+var graphRedClosure = rs321.RootElement;
+Need(graphRedClosure.GetProperty("runId").GetString() == "RS321" &&
+    graphRedClosure.GetProperty("outcome").GetString() == "succeeded" &&
+    graphRedClosure.GetProperty("attempt").GetInt32() == 1 &&
+    graphRedClosure.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    graphRedClosure.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    graphRedClosure.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.72" &&
+    graphRedClosure.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    graphRedClosure.GetProperty("progress").GetProperty("completions").EnumerateArray()
+        .Single().GetProperty("id").GetString() == "M8-W02-C01-T2-R" &&
+    graphRedClosure.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Any(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-G" &&
+            x.GetProperty("afterState").GetString() == "ready"),
+    "RS321 graph RED closure, 0.1.72 executor or GREEN readiness differs.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -563,4 +578,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=in-progress|W02T1=done|W02T2=in-progress|W02T2RED=done|W02T2GREEN=ready|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=in-progress|W02T1=done|W02T2=in-progress|W02T2RED=done|W02T2GREEN=in-progress|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
