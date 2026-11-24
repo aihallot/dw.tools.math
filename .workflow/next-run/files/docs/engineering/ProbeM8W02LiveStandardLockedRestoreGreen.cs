@@ -108,8 +108,9 @@ using (var locked = JsonDocument.Parse(File.ReadAllText(lockPath)))
 {
     var frameworks = locked.RootElement.GetProperty("dependencies");
     Need(frameworks.EnumerateObject().Count() == 1 &&
-        frameworks.TryGetProperty("net11.0", out var graph),
+        frameworks.TryGetProperty("net11.0", out _),
         "The package lock is not exclusively net11.0.");
+    var graph = frameworks.GetProperty("net11.0");
     var entries = graph.EnumerateObject().ToDictionary(x => x.Name, x => x.Value,
         StringComparer.OrdinalIgnoreCase);
     Need(entries.Count == 3, "The lock has an unqualified additional package.");
