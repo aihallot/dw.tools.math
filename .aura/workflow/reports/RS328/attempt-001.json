@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS328",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-24T23:01:34.9881747+00:00",
+  "completedAtUtc": "2026-11-24T23:01:35.6263366+00:00",
+  "durationMilliseconds": 638,
+  "projectNodes": [
+    "M8-W02-C02-T1-R",
+    "M8-W02-C02-T1-G"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/decisions/m8-w02-c02-t1-migration-red-closure-green-readiness-rs328.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m8-w02-c02-t1-migration-red-closure-green-readiness-rs328.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.72",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f50ab1a1ffd09377a3f458ea36ebe9999f6bc78a232b8b821f72d716aab0c1ad"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS328/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 840,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-0fe1263c7afa4f9985ee7032513abe1a\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 840000,
+      "DurationMilliseconds": 487,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS327/attempt-001.json run=RS327 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=12899\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=51345\r\n[files.replace-from-staged] NOCHANGE path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md staged content already installed\r\n[files.replace-from-staged] NOCHANGE path=docs/engineering/m8-net11-csharp15-migration-evidence.md staged content already installed\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w02-c02-t1-migration-red-closure-green-readiness-rs328.md bytes=2302\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M8-W02-C02-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M8-W02-C02-T1-G not-ready-\u003Eready\r\n[payload] OK operations=19 changed=5 no-change=2 verified=12 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS328/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS327/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS327 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "9682d3271eba540fad2773ed91a78966cef9661e017f4999ffc0fc72439d350b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=12899",
+        "Details": null,
+        "BeforeSha256": "f0f9f6bcfe5eaefb8040292435249d327bc07483680a2606ae456cb082ab8206",
+        "AfterSha256": "02571ffc0e53d96a714a5b2c37ae700097c964bf948150a1043695ecccd1ac53",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=51345",
+        "Details": null,
+        "BeforeSha256": "c0df946e880f2afbd61cedeaa84c5646e30839d00089d12318c065162911ea86",
+        "AfterSha256": "090f70ffdc2d71f3dd774821818b888ca202035a747366ed9f7ceb4589097528",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "9941368350836a94a20c61747e3f1e4d61a904a60d884dbb9247be133d39586c",
+        "AfterSha256": "9941368350836a94a20c61747e3f1e4d61a904a60d884dbb9247be133d39586c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "2ff37bd97a4e5dcf121813d2648e50f9ce602775fac9340cf5adab98343db3c1",
+        "AfterSha256": "2ff37bd97a4e5dcf121813d2648e50f9ce602775fac9340cf5adab98343db3c1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w02-c02-t1-migration-red-closure-green-readiness-rs328.md",
+        "Status": 1,
+        "Summary": "bytes=2302",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f50a009cc8a67884e2e72f9eb1af7c3f7fa2f46fe655ed07ffe9466a619812fa",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W02-C02-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "20830f77c59ac0d4fe20e2e4b8ab5d7e7e928e572bb4c68ee1257fdfbeaeb01d",
+        "AfterSha256": "a2b227644066d02aaefa198a697bef09fc68ae49c57c8ca2819c3887522a1e37",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M8-W02-C02-T1-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "a2b227644066d02aaefa198a697bef09fc68ae49c57c8ca2819c3887522a1e37",
+        "AfterSha256": "304a59c7c62edc221651065b0a3c0f7d5ba5f4df19a043d09adb3d9d56e179b4",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-rs328-migration-red-six-refusals-still-blocked",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-rs328-native-591-red-done-green-ready",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-rs328-discovery-rs327-firstpass-and-new-readiness-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261124T230051Z-850d1f352d2ebe58",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "8642cb55a562684bb3670be22af23c05fdd8cb9d",
+  "invocationStartedAtUtc": "2026-11-24T23:00:51.2436735+00:00",
+  "invocationDurationMilliseconds": 44382,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS328",
+      "title": "Complete Math net11 migration eligibility RED with six falsification proofs and ready bounded GREEN only",
+      "projectNodes": [
+        "M8-W02-C02-T1-R",
+        "M8-W02-C02-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Close C02/T1 fail-closed migration RED on RS327 six independent refusals and ready only bounded GREEN, preserving SDK10 production and unqualified package/semantic scope.",
+      "value": "RS327 succeeded first-pass at allocated attempt 001 under DWF 0.1.72 with all five targeted validations and no boundary violation. Its read-only migration-risk verifier reconciled 13 physical packable source project identities, the RS316 official delta matrix\u0027s 9 historical candidate risks and 13 unqualified semantic verdicts, and the RS322 ledger\u0027s exactly 3 SHA-pinned private archive closures, leaving 10 published package closures unqualified. Six independent false-readiness mutations were refused: invented physical coverage, promoted API compatibility, forged migration authority, invented rollback qualification, omitted source library and false production SDK baseline. Complete only RED with one truthful achievement and ready GREEN without activation. Keep migration blocked/not authorized, production SDK10/net10/C#14, original private packages and guidance 0.27 unchanged.",
+      "debtChanges": [
+        "RS327 succeeded first-pass on attempt 001 under DWF 0.1.72 and passed six independent read-only migration hazard refusals with untouched sources and package identities.",
+        "The candidate profile remains blocked-not-authorized: 13 source packages, 3 physically pinned archives, 10 archive gaps, 13 unqualified API verdicts and missing rollback/RID proof.",
+        "RS328 completes C02/T1 RED and readies GREEN only; there is no production SDK 11 upgrade, source rewrite, package publication or external authorization.",
+        "Guidance 0.27, native 591-node plan, exact SDK 10.0.401/net10.0/C#14 and immutable private archives are preserved."
+      ],
+      "nextAction": "Activate C02/T1 GREEN in a separate run for one isolated, explicitly bounded net11/C#15 migration candidate with real consumer/parity evidence; do not infer all-thirteen readiness.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M8-W02-C02-T1-R",
+          "achievement": "RS327 succeeded first-pass under DWF 0.1.72, checking the canonical thirteen-source Math audit, nine historical official delta candidates, three SHA-pinned private published archives, ten uncovered package closures and unchanged SDK 10.0.401/net10.0/C#14. A read-only prospective migration blocker was required to reject six independently falsified states: invented archive coverage, false API compatibility, unauthorized migration, fabricated rollback qualification, an omitted source project and a claimed SDK baseline rewrite. No original source or archive changed. This closes fail-closed migration RED, not approval of net11 product migration, semantic parity or publication."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w02-c02-t1-migration-red-closure-green-readiness-rs328.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-rs328-migration-red-six-refusals-still-blocked",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-rs328-native-591-red-done-green-ready",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-rs328-discovery-rs327-firstpass-and-new-readiness-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W02-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W02-C02-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W02-C02-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W02-C02-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W02-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W02-C02-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS327 succeeded first-pass under DWF 0.1.72, checking the canonical thirteen-source Math audit, nine historical official delta candidates, three SHA-pinned private published archives, ten uncovered package closures and unchanged SDK 10.0.401/net10.0/C#14. A read-only prospective migration blocker was required to reject six independently falsified states: invented archive coverage, false API compatibility, unauthorized migration, fabricated rollback qualification, an omitted source project and a claimed SDK baseline rewrite. No original source or archive changed. This closes fail-closed migration RED, not approval of net11 product migration, semantic parity or publication."
+      },
+      {
+        "id": "M8-W02-C02-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M8-W02-C02-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M8-W02-C02-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W02-C02-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS327 succeeded first-pass under DWF 0.1.72, checking the canonical thirteen-source Math audit, nine historical official delta candidates, three SHA-pinned private published archives, ten uncovered package closures and unchanged SDK 10.0.401/net10.0/C#14. A read-only prospective migration blocker was required to reject six independently falsified states: invented archive coverage, false API compatibility, unauthorized migration, fabricated rollback qualification, an omitted source project and a claimed SDK baseline rewrite. No original source or archive changed. This closes fail-closed migration RED, not approval of net11 product migration, semantic parity or publication."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS328",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS328",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "8642cb55a562684bb3670be22af23c05fdd8cb9d",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "dda27fd54c0550748e9bc0577ba4103e9124a62974981ce6dfe813a98de57e0b"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: close Math migration RED and ready bounded GREEN",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
