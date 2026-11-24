@@ -52,6 +52,9 @@ using var rs321 = Load(".aura/workflow/reports/RS321/attempt-001.json");
 using var rs322 = Load(".aura/workflow/reports/RS322/attempt-001.json");
 using var rs323 = Load(".aura/workflow/reports/RS323/attempt-001.json");
 using var rs324 = Load(".aura/workflow/reports/RS324/attempt-001.json");
+using var rs325 = Load(".aura/workflow/reports/RS325/attempt-001.json");
+using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json");
+using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -70,10 +73,10 @@ Need(m8.GetProperty("state").GetString() == "in-progress" &&
     w2.GetProperty("phases").EnumerateArray().Count() == 2 &&
     w2.GetProperty("phases").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01")
-        .GetProperty("state").GetString() == "in-progress" &&
+        .GetProperty("state").GetString() == "done" &&
     w2.GetProperty("phases").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02")
-        .GetProperty("state").GetString() == "not-ready",
+        .GetProperty("state").GetString() == "ready",
     "Native M8 Discovery closure or SDK audit readiness changed.");
 var auditPhase = w2.GetProperty("phases").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01");
@@ -82,7 +85,7 @@ var auditT1 = auditPhase.GetProperty("tasks").EnumerateArray()
 var auditT2 = auditPhase.GetProperty("tasks").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2");
 Need(auditT1.GetProperty("state").GetString() == "done" &&
-    auditT2.GetProperty("state").GetString() == "in-progress" &&
+    auditT2.GetProperty("state").GetString() == "done" &&
     auditT2.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-R")
         .GetProperty("state").GetString() == "done" &&
@@ -91,7 +94,7 @@ Need(auditT1.GetProperty("state").GetString() == "done" &&
         .GetProperty("state").GetString() == "done" &&
     auditT2.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-V")
-        .GetProperty("state").GetString() == "in-progress" &&
+        .GetProperty("state").GetString() == "done" &&
     auditT1.GetProperty("subtasks").EnumerateArray().Count() == 3 &&
     auditT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T1-R")
@@ -103,6 +106,23 @@ Need(auditT1.GetProperty("state").GetString() == "done" &&
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T1-V")
         .GetProperty("state").GetString() == "done",
     "SDK audit T1 RED activation widened to another task or state.");
+var nextPhase = w2.GetProperty("phases").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02");
+var nextT1 = nextPhase.GetProperty("tasks").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1");
+var nextT2 = nextPhase.GetProperty("tasks").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T2");
+Need(nextT1.GetProperty("state").GetString() == "ready" &&
+    nextT1.GetProperty("subtasks").EnumerateArray()
+        .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-R")
+        .GetProperty("state").GetString() == "ready" &&
+    nextT1.GetProperty("subtasks").EnumerateArray()
+        .Where(x => x.GetProperty("id").GetString() != "M8-W02-C02-T1-R")
+        .All(x => x.GetProperty("state").GetString() == "not-ready") &&
+    nextT2.GetProperty("state").GetString() == "not-ready" &&
+    nextT2.GetProperty("subtasks").EnumerateArray()
+        .All(x => x.GetProperty("state").GetString() == "not-ready"),
+    "SDK migration RED readiness exceeded the intended next bounded scope.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
     Need(phase.GetProperty("state").GetString() == "done",
@@ -598,6 +618,41 @@ Need(packageGreenClosure.GetProperty("runId").GetString() == "RS324" &&
         .Any(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-V" &&
             x.GetProperty("afterState").GetString() == "ready"),
     "RS324 first-pass package GREEN closure or Verification readiness changed.");
+var receivedPackageVerification = rs325.RootElement;
+Need(receivedPackageVerification.GetProperty("runId").GetString() == "RS325" &&
+    receivedPackageVerification.GetProperty("outcome").GetString() == "succeeded" &&
+    receivedPackageVerification.GetProperty("attempt").GetInt32() == 1 &&
+    receivedPackageVerification.GetProperty("priorInvocationFailures")
+        .GetProperty("count").GetInt32() == 0 &&
+    receivedPackageVerification.GetProperty("priorInvocationFailures")
+        .GetProperty("firstPassSucceeded").GetBoolean() &&
+    receivedPackageVerification.GetProperty("executor")
+        .GetProperty("toolVersion").GetString() == "0.1.72" &&
+    receivedPackageVerification.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    receivedPackageVerification.GetProperty("progress").GetProperty("completions")
+        .GetArrayLength() == 0 &&
+    receivedPackageVerification.GetProperty("progress").GetProperty("transitions")
+        .EnumerateArray().Single().GetProperty("id").GetString() == "M8-W02-C01-T2-V" &&
+    receivedPackageVerification.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(x =>
+            x.GetProperty("id").GetString() ==
+            "m8-rs325-received-copy-original-physical-verifier-four-tamper-refusals"),
+    "RS325 independent received archive Verification or first-pass history differs.");
+var inventoryIds = sdkInventoryMatrix.RootElement.GetProperty("packages")
+    .EnumerateArray().Select(x => x.GetProperty("packageId").GetString()!)
+    .ToHashSet(StringComparer.Ordinal);
+var verifiedArchiveIds = publishedSubset.RootElement.GetProperty("packages")
+    .EnumerateArray().Select(x => x.GetProperty("packageId").GetString()!)
+    .ToHashSet(StringComparer.Ordinal);
+Need(inventoryIds.Count == 13 &&
+    verifiedArchiveIds.Count == 3 &&
+    verifiedArchiveIds.IsSubsetOf(inventoryIds) &&
+    inventoryIds.Except(verifiedArchiveIds, StringComparer.Ordinal).Count() == 10 &&
+    sdkInventoryMatrix.RootElement.GetProperty("packages").EnumerateArray().All(x =>
+        x.GetProperty("compatibility").GetString() == "unqualified") &&
+    publishedSubset.RootElement.GetProperty("limitations").EnumerateArray().Any(x =>
+        x.GetString()!.Contains("other ten", StringComparison.Ordinal)),
+    "The SDK audit lost its thirteen-versus-three-versus-ten qualification boundary.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -631,4 +686,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=in-progress|W02T1=done|W02T2=in-progress|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=in-progress|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=done|W02C02=ready|W02C02T1=ready|W02C02RED=ready|W02T1=done|W02T2=done|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=done|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
