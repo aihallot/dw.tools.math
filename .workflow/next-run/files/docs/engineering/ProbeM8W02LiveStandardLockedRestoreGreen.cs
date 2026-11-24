@@ -19,7 +19,8 @@ Need(rows.Length == 3 &&
     rows[0].GetProperty("packageId").GetString() == "dw.quantities.standard" &&
     rows[1].GetProperty("packageId").GetString() == "dw.quantities.expression" &&
     rows[2].GetProperty("packageId").GetString() == "dw.quantities" &&
-    rows.All(x => x.GetProperty("archiveTargetFramework").ValueKind == JsonValueKind.Undefined),
+    profile.RootElement.GetProperty("archiveTargetFramework").GetString() == "net10.0" &&
+    profile.RootElement.GetProperty("observedSdk").GetString() == "11.0.100",
     "The RS322 three-archive identity/order changed.");
 
 using var global = JsonDocument.Parse(File.ReadAllText("global.json"));
