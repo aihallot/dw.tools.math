@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.bootstrap"
-documentVersion: 9
+documentVersion: 10
 kind: "guidance"
 title: "Workflow Bootstrap"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV022Draft.cs#Bootstrap"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV027Draft.cs#Bootstrap"
 ---
 # Workflow Bootstrap
 
@@ -39,6 +39,12 @@ Initial project-plan authoring is the one pre-run authority bootstrap needed bec
 ## Ongoing roadmap planning
 
 After the initial plan exists, do not recreate the hierarchy for every run. Reuse durable milestones, work packages, and meaningful phases; select an existing ready task or subtask when possible, and progressively refine lower-level planned work when evidence changes the next bounded deliverable. Treat a repeated singleton hierarchy that exists only to mirror RS boundaries as a planning smell. If newly accepted work does not fit current authority, replan or explicitly defer it rather than implementing it untracked; do not invent a second backlog authority.
+## New-project run ID convention
+
+For a genuinely greenfield project without prior workflow run identity, author `RS0001` as the first run and then `RS0002`. Use at least four zero-padded decimal positions, normally sorting lexically within the four-digit range. `dwf init` does not allocate a run; this guidance changes neither the executable parser nor the operator command.
+
+For existing unmanaged or legacy repositories, inspect durable history and preserve existing numbering width, including old run directories, reports and Git refs. Never rename or migrate those identities. Existing `^RS[0-9]+$` validation permits `RS9999` and `RS10000`; there is no hard ceiling at four digits.
+
 The normal operator command does not change across recoverable run states: use `dwf run next`. The runtime selects normal execution, same-run correction, or pending-delivery recovery from durable local evidence.
 
 Treat committed repository state as authority. The operator owns local execution. Never claim an execution, installation, publication, or external observation that has not been reported or recorded.

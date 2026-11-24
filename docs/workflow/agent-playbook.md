@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.agent-playbook"
-documentVersion: 11
+documentVersion: 12
 kind: "guidance"
 title: "Agent Playbook"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV024Draft.cs#AgentPlaybook"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV027Draft.cs#AgentPlaybook"
 ---
 # Agent Playbook
 
@@ -138,6 +138,11 @@ Requested versions must be canonical and match the next ordinary calendar candid
 A successful publication writes a hierarchical `.nupkg`, extracted nuspec, SHA512 sidecar and a JSON manifest with package SHA256 and caller-declared Git HEAD. **Git HEAD equality is not reproducible build-to-commit package provenance.** Ordinary local collision evidence does not prove crash recovery or distributed-filesystem safety. Real shared-feed publication, tool promotion and independent consumer adoption require separate explicit owner authorization and release qualification.
 
 
+## Greenfield run naming and legacy continuity
+
+For a genuinely new project start the agent-authored sequence at `RS0001`, then `RS0002`, using at least four decimal digits with leading zeros for ordinary lexical ordering. This is an education-first convention; `dwf init` allocates no run and no extra operator command is needed.
+
+Classify the actual repository as greenfield, existing unmanaged or legacy before authoring. In an existing repository retain its historical run ID width, for example `RS001` or `RS1005`; never rename reports, refs, snapshots or prior run artifacts. Existing parser `^RS[0-9]+$` already accepts `RS9999` and `RS10000`; no hard cap or new blocking guard is introduced.
 ## Prepare or correct
 
 - Preserve the active project hierarchy unless the run intentionally advances it.
