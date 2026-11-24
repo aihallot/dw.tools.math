@@ -82,7 +82,7 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
                 "M8-W01-C02-T1-G" => "done",
                 "M8-W01-C02-T1-V" => "done",
                 "M8-W01-C02-T2-R" => "done",
-                "M8-W01-C02-T2-G" => "ready",
+                "M8-W01-C02-T2-G" => "in-progress",
                 _ => "not-ready"
             };
             Need(sub.GetProperty("state").GetString() == expected,
@@ -342,4 +342,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=in-progress|C02T2RED=done|C02T2GREEN=ready|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=in-progress|C02T2RED=done|C02T2GREEN=in-progress|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
