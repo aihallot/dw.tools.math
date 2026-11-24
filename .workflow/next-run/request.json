@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "id": "RS314",
+  "title": "Activate M8 SDK 11/C# 15 official audit RED using existing package inventory and direct test coverage",
+  "commitMessage": "test: qualify Math SDK audit RED source and test baseline",
+  "timeoutSeconds": 940,
+  "projectNodes": [
+    "M8-W02",
+    "M8-W02-C01",
+    "M8-W02-C01-T1",
+    "M8-W02-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Start the Math .NET 11 and C# 15 audit RED, preserving production .NET 10 packages while qualifying the existing thirteen-library SDK inventory and eleven-test coverage.",
+    "value": "RS313 succeeded first-pass, completing Discovery W01 and readying SDK modernization W02. Reuse existing Math SDK baseline and package-graph inspectors: production remains SDK 10.0.401/latestPatch, net10.0/C#14, thirteen packable libraries, sixteen acyclic direct references and an independently installed stable SDK 11.0.100. A new narrow C# source-to-test auditor verifies the eleven solution-listed test projects cover every packable source library through twenty-three direct references and refuses an in-memory missing-test counterexample. Activate W02/C01/T1/RED only, keeping GREEN, Verification, C01/T2, W02/C02 and M9 not-ready; no migration, publication, external broker authority or old package mutation.",
+    "debtChanges": [
+      "RS313 succeeded first-pass, completing the Discovery work package and admitting W02 SDK audit ready without authorizing migration or new package publication.",
+      "RS214-RS252 already provided SDK and thirteen-library source/graph evidence. Reuse these qualified tools instead of rebuilding duplicate auditors or replaying past packaging campaigns.",
+      "RS314 adds only the missing eleven-test-to-thirteen-package coverage dimension and starts audit RED; official API delta applicability, migration and behavioral certification remain open."
+    ],
+    "nextAction": "After RS314 establishes current SDK, source, graph and test coverage, separately assess RED completion and a GREEN audit of Microsoft .NET 11/C# 15 API deltas by Math library.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 325
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/InspectM8W02TestCoverage.cs",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/InspectM8W02TestCoverage.cs",
+      "sourcePath": "files/docs/engineering/InspectM8W02TestCoverage.cs"
+    },
+    {
+      "path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+      "sourcePath": "files/docs/engineering/m8-net11-csharp15-migration-evidence.md"
+    },
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w02-c01-t1-red-sdk-baseline-rs314.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/progress/transitions/0/id",
+      "expectedValue": "M8-W01"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/progress/transitions/1/id",
+      "expectedValue": "M8-W01-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/progress/transitions/2/id",
+      "expectedValue": "M8-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS313/attempt-001.json",
+      "jsonPointer": "/progress/transitions/2/afterState",
+      "expectedValue": "ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.26"
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-w02-sdk11-stable-source-baseline",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11SourceBaseline.cs",
+        "--",
+        "--check-sdk11"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-w02-packable-source-reference-graph",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 190,
+      "packs": []
+    },
+    {
+      "id": "m8-w02-test-project-coverage-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8W02TestCoverage.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 190,
+      "packs": []
+    },
+    {
+      "id": "m8-w02-prior-net11-historical-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8Net11EvidenceReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 190,
+      "packs": []
+    },
+    {
+      "id": "m8-native-591-node-active-sdk-audit-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 200,
+      "packs": []
+    },
+    {
+      "id": "m8-discovery-closed-sdk-audit-active-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 230,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
