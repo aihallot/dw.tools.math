@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "id": "M8-W02-C01-T1-G-RS316",
+  "status": "candidate-only-no-migration-or-compatibility-certification",
+  "proposal": "docs/planning/proposals/net11-numerics-impact-matrix.json",
+  "baseline": {
+    "sdk": "10.0.401",
+    "rollForward": "latestPatch",
+    "tfm": "net10.0",
+    "language": "14.0",
+    "installedSdkToInspect": "11.0.100",
+    "packables": 13,
+    "testProjects": 11,
+    "sourceEdges": 16,
+    "mutated": false
+  },
+  "officialSources": [
+    {
+      "id": "MS-NET11-LIBRARIES",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/libraries",
+      "relevance": "available library and numeric APIs"
+    },
+    {
+      "id": "MS-NET11-COMPATIBILITY",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/compatibility/11",
+      "relevance": "source, binary and behavioral breaking changes"
+    },
+    {
+      "id": "MS-CSharp15",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15",
+      "relevance": "optional language constructs and compiler behavior"
+    },
+    {
+      "id": "MS-DOTNET-GLOBALJSON",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/global-json",
+      "relevance": "SDK selection distinct from target framework"
+    }
+  ],
+  "packages": [
+    {
+      "packageId": "dw.quantities",
+      "projectPath": "src/projects/dw.quantities/dw.quantities.csproj",
+      "testProject": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-01",
+        "N11-02"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Compare exact rational and floating-point conversion edge cases across net10 and net11 with independent rational oracles."
+    },
+    {
+      "packageId": "dw.quantities.expression",
+      "projectPath": "src/projects/dw.quantities.expression/dw.quantities.expression.csproj",
+      "testProject": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-04"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Test culture, incomplete parsing, overflow and exact/binary conversion boundaries against pinned parser fixtures."
+    },
+    {
+      "packageId": "dw.quantities.standard",
+      "projectPath": "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+      "testProject": "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Confirm inherited quantities/expression dependencies and unit-profile invariants under locked net11 restore."
+    },
+    {
+      "packageId": "dw.tools.math.analysis",
+      "projectPath": "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+      "testProject": "tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Compare Math.Round numerical tolerance and bounded integration/derivative results against independent net10 and net11 oracles."
+    },
+    {
+      "packageId": "dw.tools.math.codecs",
+      "projectPath": "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+      "testProject": "tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-08"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Require byte-identical canonical serialization and typed refusal behavior across both runtimes."
+    },
+    {
+      "packageId": "dw.tools.math.composition",
+      "projectPath": "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+      "testProject": "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Check exact result and runtime-only capability contracts with pinned dependencies and net11 binary consumers."
+    },
+    {
+      "packageId": "dw.tools.math.distribution",
+      "projectPath": "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+      "testProject": "tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Verify the full source graph and a future independently published distribution binary consumer with immutable archives."
+    },
+    {
+      "packageId": "dw.tools.math.foundation",
+      "projectPath": "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+      "testProject": "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Audit SDK selection, compilation and package restore without changing public contracts or production SDK."
+    },
+    {
+      "packageId": "dw.tools.math.ir",
+      "projectPath": "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
+      "testProject": "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-07"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Check union/closed-hierarchy proposals against existing IR wire schemas, exhaustiveness and serializer hashes."
+    },
+    {
+      "packageId": "dw.tools.math.numerics",
+      "projectPath": "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+      "testProject": "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-03",
+        "N11-05"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Exercise Complex special values and SIMD/scalar fallback with declared precision and architecture budgets."
+    },
+    {
+      "packageId": "dw.tools.math.scientific",
+      "projectPath": "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+      "testProject": "tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-09"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Compare numerical boundaries, financial day conventions and scientific kernels using independent reference values."
+    },
+    {
+      "packageId": "dw.tools.math.statistics",
+      "projectPath": "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+      "testProject": "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+      "proposalCandidateIds": [
+        "N11-06"
+      ],
+      "disposition": "candidate-requires-qualification",
+      "compatibility": "unqualified",
+      "nextOracle": "Compare seeded RNG reproducibility, distributions and rounding modes with a portable baseline."
+    },
+    {
+      "packageId": "dw.tools.math.symbolics",
+      "projectPath": "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+      "testProject": "tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj",
+      "proposalCandidateIds": [],
+      "disposition": "not-enumerated-in-proposal-requires-review",
+      "compatibility": "unqualified",
+      "nextOracle": "Qualify pattern/IR exhaustiveness and BigInteger-domain boundary fixtures before optional C#15 rewrites."
+    }
+  ],
+  "limits": [
+    "Proposal candidates are not evidence that APIs are actually used.",
+    "Absence from proposal does not establish inapplicability.",
+    "Lexical scanner signals require independently resolved overload and behavior verification.",
+    "Previously compiled source or binary examples do not certify full net11 package or runtime parity.",
+    "No production SDK or TFM migration, package publication, or external broker grant."
+  ]
+}
