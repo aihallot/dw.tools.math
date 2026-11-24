@@ -193,7 +193,7 @@ foreach (var item in packages)
 var result = Run(runtime, "run", "--project", Example,
     "-c", "Release", "--no-build", "--no-restore");
 Need(result.ExitCode == 0 &&
-    result.Output.Contains("M8-DISCOVERY-CLR-SEED|bindings=4|examples=5|positiveComposition=2|brokerReady=0|scope=package-reference-consumer", StringComparison.Ordinal),
+    result.Output.Contains(ExpectedProgram, StringComparison.Ordinal),
     "The five bounded package-only Math examples failed: " + result.Output);
 CheckReceived();
 foreach (var item in packages)
