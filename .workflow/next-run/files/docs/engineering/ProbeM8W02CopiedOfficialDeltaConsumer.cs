@@ -39,8 +39,7 @@ Need(originals.Count == 29, "Expected five shared inputs, thirteen sources and e
 
 var pristine = originals.ToDictionary(path => path, Sha256, StringComparer.Ordinal);
 var independentRoot = Path.GetFullPath(Path.Combine(
-    "build", "artifacts", "m8-rs318-independent-delta",
-    Guid.NewGuid().ToString("N")));
+    "build", "artifacts", "v318-" + Guid.NewGuid().ToString("N")[..12]));
 Directory.CreateDirectory(independentRoot);
 foreach (var relative in originals)
 {
