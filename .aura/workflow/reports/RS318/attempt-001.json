@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS318",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-24T15:01:56.6056577+00:00",
+  "completedAtUtc": "2026-11-24T15:01:58.247974+00:00",
+  "durationMilliseconds": 1642,
+  "projectNodes": [
+    "M8-W02-C01-T1-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/ProbeM8W02CopiedOfficialDeltaConsumer.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/decisions/m8-w02-c01-t1-verification-isolated-delta-consumer-rs318.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/engineering/ProbeM8W02CopiedOfficialDeltaConsumer.cs",
+    "docs/planning/decisions/m8-w02-c01-t1-verification-isolated-delta-consumer-rs318.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261124T144107Z-11fd4faae41beb0b"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261124T144107Z-11fd4faae41beb0b",
+        "runId": "RS318",
+        "scope": "preselection-rs318",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs318/run-next-20261124T144107Z-11fd4faae41beb0b"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS318/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1160,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-2b115c4d865548bf983c6ac231af9054\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1160000,
+      "DurationMilliseconds": 1323,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS317/attempt-001.json run=RS317 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T1-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C01-T2 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM8W02CopiedOfficialDeltaConsumer.cs bytes=7493\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=12554\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=34549\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=48621\r\n[files.replace-from-staged] CHANGED path=docs/engineering/m8-net11-csharp15-migration-evidence.md bytes=15650\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w02-c01-t1-verification-isolated-delta-consumer-rs318.md bytes=2268\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M8-W02-C01-T1-V activated=M8-W02-C01-T1-V\r\n[payload] OK operations=19 changed=7 no-change=0 verified=12 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS318/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS317/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS317 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "01911937dd55b2e127dbf82f7a6274f4ce85095f77633a5b61b6d269ef90de54",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T1-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C01-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM8W02CopiedOfficialDeltaConsumer.cs",
+        "Status": 1,
+        "Summary": "bytes=7493",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b3a75717b1114cf2a7ddb0c410e92d1a51142e3a9701c965e0a6349b6e4fff28",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=12554",
+        "Details": null,
+        "BeforeSha256": "e226f5f664515238540dd3c93804855c3ecfbee7411239b0b313d6675214dc23",
+        "AfterSha256": "5bc5f2ddc467ac677297cc9f800d2507faaac87d6a03b45dff0a008b31cd61a0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=34549",
+        "Details": null,
+        "BeforeSha256": "52e234653dc389fc77246c48f0e0f86375159bb7cbae040e597a96007bc75548",
+        "AfterSha256": "0684a9ea5197175bef7d798a1aa3527b2cd052d7411e215fd65f6c48ceeca7c9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=48621",
+        "Details": null,
+        "BeforeSha256": "36c9a1f66e4007aa72cd4fc19d7a39e3222cda329f94a758b3be525c4c8e1f55",
+        "AfterSha256": "ca547e3252fb91bb527e806a6ba26e345797d5a547e279ccf991691457c4713e",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+        "Status": 1,
+        "Summary": "bytes=15650",
+        "Details": null,
+        "BeforeSha256": "5fa83ffb76f191288ba6c0a954f3f0c7087e5a974384e2eff3ee506f1ee40ac0",
+        "AfterSha256": "cd30797d3c069cf76de6ea2b3dc16f8d82158890d1470e925b8d3bdb77584bd1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w02-c01-t1-verification-isolated-delta-consumer-rs318.md",
+        "Status": 1,
+        "Summary": "bytes=2268",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "3449e4e4fa6c5ebbfa03ae3e53403e919a011793f6d6430e311f130a26a9038c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M8-W02-C01-T1-V activated=M8-W02-C01-T1-V",
+        "Details": null,
+        "BeforeSha256": "773eb8f8405e66198471c45b212861262d274a8c2b2f8fe035a2a4579d5f7663",
+        "AfterSha256": "a1bf55bde0457467b75f7e2f3d749df79c0353b50b60305a274b76c8978ec00e",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-w02-official-delta-clean-source-validator",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-w02-independent-copied-sdk-delta-verification",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-591-node-active-sdk-inventory-verification",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-closed-sdk-inventory-verification-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261124T150012Z-40f983932ca24f37",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "6e53b945ee90c5420c19432f9a5d7f23931b00ec",
+  "invocationStartedAtUtc": "2026-11-24T15:00:12.3478743+00:00",
+  "invocationDurationMilliseconds": 105900,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS318",
+      "title": "Activate independent copied-consumer Verification of Math SDK official delta inventory and negative controls",
+      "projectNodes": [
+        "M8-W02-C01-T1-V"
+      ]
+    },
+    "declared": {
+      "summary": "Activate Math SDK 11/C#15 inventory Verification with an independent copied verifier that refuses falsified candidate identities, omissions and unwarranted compatibility.",
+      "value": "RS317 succeeded first-pass, closing the candidate-only official SDK delta GREEN inventory and readying Verification. In a disposable copied consumer containing 29 exact inputs (13 packable Math csproj files, 11 Math test csproj files, existing verifier, historical proposal, candidate matrix, global SDK pin and central build properties), run the existing RS316 validator unchanged. It must accept the clean copy, refuse a forged candidate ID, an omitted source library, a falsely qualified compatibility verdict and an unrelated test owner, then accept each byte-restored copy. Check original and copied file hashes. Activate only T1 Verification; do not certify actual .NET 11 behavior, migrate SDK pins, republish packages or grant broker authority.",
+      "debtChanges": [
+        "RS317 succeeded first-pass on allocated attempt 001 with no previous refusals; it completed candidate-only GREEN and readied independent T1 Verification.",
+        "The original RS316 validator is reused from an independently copied 29-file corpus rather than implemented again; four actual copy-only mutations must be rejected and restored.",
+        "RS318 starts Verification only, leaving SDK/runtime semantics, candidate applicability, full testing, production migration and public publication unqualified.",
+        "RS318 preselection refused before attempt allocation because the copied verifier\u0027s Windows executable path was too long. Only its isolated build/artifacts workspace path was shortened; all 29 copied inputs and four refusal cases remain unchanged."
+      ],
+      "nextAction": "After copied-consumer RS318 evidence succeeds, separately assess T1 Verification completion and whether its official inventory task T1 can be closed without claiming migration approval.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/engineering/ProbeM8W02CopiedOfficialDeltaConsumer.cs",
+        "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w02-c01-t1-verification-isolated-delta-consumer-rs318.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-w02-official-delta-clean-source-validator",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-w02-independent-copied-sdk-delta-verification",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-591-node-active-sdk-inventory-verification",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-closed-sdk-inventory-verification-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W02-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W02-C01-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W02-C01-T1-V",
+        "objective": "Verification",
+        "kind": "subtask",
+        "parentId": "M8-W02-C01-T1",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS318",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS318",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "6e53b945ee90c5420c19432f9a5d7f23931b00ec",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "87c4de78ea02f9c12a24e5591182e54ea38cddf73067ab3f0b132cf3cccf8c8a"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: verify copied Math SDK candidate inventory refusals",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
