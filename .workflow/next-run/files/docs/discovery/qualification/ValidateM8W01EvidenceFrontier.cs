@@ -55,10 +55,31 @@ var w2 = m8.GetProperty("workPackages").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02");
 Need(m8.GetProperty("state").GetString() == "in-progress" &&
     w1.GetProperty("state").GetString() == "done" &&
-    w2.GetProperty("state").GetString() == "ready" &&
-    w2.GetProperty("phases").EnumerateArray().All(x =>
-        x.GetProperty("state").GetString() == "not-ready"),
+    w2.GetProperty("state").GetString() == "in-progress" &&
+    w2.GetProperty("phases").EnumerateArray().Count() == 2 &&
+    w2.GetProperty("phases").EnumerateArray()
+        .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01")
+        .GetProperty("state").GetString() == "in-progress" &&
+    w2.GetProperty("phases").EnumerateArray()
+        .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02")
+        .GetProperty("state").GetString() == "not-ready",
     "Native M8 Discovery closure or SDK audit readiness changed.");
+var auditPhase = w2.GetProperty("phases").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01");
+var auditT1 = auditPhase.GetProperty("tasks").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T1");
+var auditT2 = auditPhase.GetProperty("tasks").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2");
+Need(auditT1.GetProperty("state").GetString() == "in-progress" &&
+    auditT2.GetProperty("state").GetString() == "not-ready" &&
+    auditT1.GetProperty("subtasks").EnumerateArray().Count() == 3 &&
+    auditT1.GetProperty("subtasks").EnumerateArray()
+        .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01-T1-R")
+        .GetProperty("state").GetString() == "in-progress" &&
+    auditT1.GetProperty("subtasks").EnumerateArray()
+        .Where(x => x.GetProperty("id").GetString() != "M8-W02-C01-T1-R")
+        .All(x => x.GetProperty("state").GetString() == "not-ready"),
+    "SDK audit T1 RED activation widened to another task or state.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
     Need(phase.GetProperty("state").GetString() == "done",
@@ -398,4 +419,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=ready|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=in-progress|W02T1=in-progress|W02RED=in-progress|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");

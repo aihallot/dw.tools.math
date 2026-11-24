@@ -64,3 +64,29 @@ Durable reports `.aura/workflow/reports/RS240` through `RS251`, not source files
 | RS250-RS251 | Seven-project Distribution source graph on Windows/Linux net11 | Not an immutable published Distribution binary |
 
 **Next priority:** target independent locked restore and topology qualification for the distribution graph, then other physically published Math packages, numerical and serialization compatibility deltas, deployment platform requirements and rollback. Preserve production `global.json` at SDK 10.0.401 and `Directory.Build.props` at net10.0/C#14. `M8`, `M8-W02` and `M8-W02-C01` remain `not-ready`; no migration, product acceptance or public release is authorized by this reconciliation.
+
+## RS314 — primary-source SDK baseline audit admission (2026-11-24)
+
+Earlier evidence RS214-RS252 was recorded while M8-W02 was not-ready. RS313 later completed Discovery and admitted W02 to ready; RS314 starts the SDK audit T1 RED only. No historical report or source artifact is retrospectively rewritten.
+
+Repository-observed baseline: global.json pins SDK 10.0.401 with latestPatch; Directory.Build.props supplies net10.0, C# 14.0, warnings-as-errors and build/artifacts output. The thirteen packable projects and eleven test projects are listed in dw.tools.math.slnx. Existing InspectM8Net11SourceBaseline.cs and InspectM8Net11PackageGraph.cs own the package roster and sixteen acyclic direct dependencies; the narrowly new InspectM8W02TestCoverage.cs qualifies the independent eleven-test-to-thirteen-package mapping and its twenty-three direct test edges.
+
+| Packable source project | Direct test project | Direct source dependencies |
+| --- | --- | ---: |
+| `dw.quantities` | `dw.quantities.tests` | 0 |
+| `dw.quantities.expression` | `dw.quantities.tests` | 1 |
+| `dw.quantities.standard` | `dw.quantities.tests` | 2 |
+| `dw.tools.math.analysis` | `dw.tools.math.analysis.tests` | 0 |
+| `dw.tools.math.codecs` | `dw.tools.math.codecs.tests` | 1 |
+| `dw.tools.math.composition` | `dw.tools.math.composition.tests` | 2 |
+| `dw.tools.math.distribution` | `dw.tools.math.distribution.tests` | 6 |
+| `dw.tools.math.foundation` | `dw.tools.math.foundation.tests` | 0 |
+| `dw.tools.math.ir` | `dw.tools.math.ir.tests` | 1 |
+| `dw.tools.math.numerics` | `dw.tools.math.numerics.tests` | 1 |
+| `dw.tools.math.scientific` | `dw.tools.math.scientific.tests` | 0 |
+| `dw.tools.math.statistics` | `dw.tools.math.statistics.tests` | 1 |
+| `dw.tools.math.symbolics` | `dw.tools.math.symbolics.tests` | 1 |
+
+Official Microsoft delta anchors for subsequent GREEN disposition: [.NET 11 release overview](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview), [.NET 11 breaking changes](https://learn.microsoft.com/en-us/dotnet/core/compatibility/11), [C# 15 changes](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15), and [global.json SDK selection](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json). SDK selection and target framework selection are distinct. A successful historical net11 source-graph smoke test does not certify every public API, numerical corner case, test suite or runtime deployment platform.
+
+Unqualified gates: per-project official API delta applicability, complete net11 test and package graph compatibility, CPU/RID constraints, locked restore behavior, bounded migration options and rollback. This RED entry does not update production SDK/TFM, repack old archives, authorize external brokers or claim M8-W02/C01 acceptance.
