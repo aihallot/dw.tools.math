@@ -125,7 +125,7 @@ Need(nextT1.GetProperty("state").GetString() == "in-progress" &&
         .GetProperty("state").GetString() == "done" &&
     nextT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-V")
-        .GetProperty("state").GetString() == "ready" &&
+        .GetProperty("state").GetString() == "in-progress" &&
     nextT2.GetProperty("state").GetString() == "not-ready" &&
     nextT2.GetProperty("subtasks").EnumerateArray()
         .All(x => x.GetProperty("state").GetString() == "not-ready"),
