@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "id": "RS322",
+  "title": "Activate bounded package risk GREEN with physical SHA-pinned Standard, Expression and Quantities archive closure",
+  "state": "prepared",
+  "commitMessage": "test: qualify bounded Math published Standard closure risk inventory",
+  "timeoutSeconds": 825,
+  "projectNodes": [
+    "M8-W02-C01-T2-G"
+  ],
+  "contribution": {
+    "summary": "Activate package-graph GREEN with a live three-archive Standard/Expression/Quantities physical identity check, preserving SDK 10 and the DWF guidance hold.",
+    "value": "RS321 succeeded first-pass under DWF 0.1.72 and completed the thirteen-project/sixteen-edge source dependency RED, readying package-risk GREEN. RS322 checks a strictly bounded physically published three-package Standard/Expression/Quantities closure in NUGET_LOCAL: exact package IDs and versions, original archive lengths and SHA-256, packaged net10 DLL SHA-256, and corresponding source dependencies, tied to existing RS254 source and historical RS253/RS254 net11 locked-restore reports without replay. Preserve RS254\u0027s one pre-attempt failure and firstPass=false; all ten other Math packages, new live net11 locked restore and runtime compatibility remain unqualified. Activate GREEN only; preserve repository guidance 0.26, SDK/TFM pins and immutable archives.",
+    "debtChanges": [
+      "RS321 succeeded first-pass with executor 0.1.72, closing graph RED and readying T2 GREEN while keeping generated Math guidance 0.26.",
+      "Reuse existing RS254 published-Standard archive/hash and net11 locked-restore evidence, plus RS253 source graph history; do not repeat original release builds.",
+      "RS322 performs current read-only physical verification of exactly three NUGET_LOCAL packages, not the remaining ten or a new net11 locked restore.",
+      "Guidance 0.27 transition remains held under DWF BL0028/RS0 delivery divergence. No SDK migration, package publication, broker authority or consumer upgrade."
+    ],
+    "nextAction": "After physical three-archive identity evidence, independently qualify isolated current net11 locked-restore/negative pin scenarios before completing T2 GREEN or admitting Verification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 320
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/engineering/m8-w02-c01-published-standard-closure-rs322.json",
+    "docs/engineering/ValidateM8W02PhysicalStandardClosure.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/decisions/m8-w02-c01-t2-green-physical-standard-closure-rs322.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-w02-published-standard-live-physical-three-archive-closure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8W02PhysicalStandardClosure.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 270
+    },
+    {
+      "id": "m8-w02-existing-thirteen-source-sixteen-dependency-graph",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 205
+    },
+    {
+      "id": "m8-w02-existing-unqualified-official-candidate-disposition",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8W02OfficialDeltaMatrix.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 210
+    },
+    {
+      "id": "m8-native-591-node-package-risk-green-active",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 210
+    },
+    {
+      "id": "m8-discovery-complete-package-green-firstpass-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 245
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}

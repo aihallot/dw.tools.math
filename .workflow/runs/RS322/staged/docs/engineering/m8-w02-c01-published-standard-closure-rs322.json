@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "M8-W02-C01-T2-G-RS322",
+  "status": "bounded-three-immutable-archives-source-graph-and-prior-net11-lock-evidence",
+  "privateFeedEnvironmentVariable": "NUGET_LOCAL",
+  "archiveTargetFramework": "net10.0",
+  "observedSdk": "11.0.100",
+  "historicalEvidence": [
+    {
+      "runId": "RS253",
+      "report": ".aura/workflow/reports/RS253/attempt-001.json",
+      "validation": "m8-net11-distribution-locked-restore",
+      "kind": "source-distribution-project-locked-restore-not-published"
+    },
+    {
+      "runId": "RS254",
+      "report": ".aura/workflow/reports/RS254/attempt-001.json",
+      "validation": "m8-published-standard-net11-locked-restore",
+      "kind": "three-immutable-published-package-net11-locked-restore-firstpass-false"
+    }
+  ],
+  "packages": [
+    {
+      "packageId": "dw.quantities.standard",
+      "version": "20260.20261103.1001",
+      "archiveSha256": "c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75",
+      "binarySha256": "5936468ecbcd8d8c27c04fe07ac8ca1e69dbebc9b7aa5145684f4ddf747fae0d",
+      "archiveBytes": 13604,
+      "topology": "Direct",
+      "directSourceDeps": [
+        "dw.quantities",
+        "dw.quantities.expression"
+      ]
+    },
+    {
+      "packageId": "dw.quantities.expression",
+      "version": "20260.20261102.1001",
+      "archiveSha256": "d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae",
+      "binarySha256": "f19c71d1313388f8cf3f05661ef78aaac8687d5230ed5673207f8fc0c9ff03e1",
+      "archiveBytes": 13951,
+      "topology": "Transitive",
+      "directSourceDeps": [
+        "dw.quantities"
+      ]
+    },
+    {
+      "packageId": "dw.quantities",
+      "version": "20260.20261102.1001",
+      "archiveSha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d",
+      "binarySha256": "c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4",
+      "archiveBytes": 14747,
+      "topology": "Transitive",
+      "directSourceDeps": []
+    }
+  ],
+  "limitations": [
+    "Three archived packages only: the other ten packable Math libraries are not qualified by this ledger.",
+    "The source-project graph is not a released transitive package graph.",
+    "RS253 and RS254 are historical reports; no current net11 locked restore is repeated by RS322.",
+    "Published archives are immutable; no packaging, SDK pin/TFM migration, public release or broker rights.",
+    "Absence of evidence is not compatibility or support for a target platform."
+  ]
+}
