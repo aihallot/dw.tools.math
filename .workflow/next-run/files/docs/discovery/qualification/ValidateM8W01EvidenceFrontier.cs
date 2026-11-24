@@ -49,6 +49,7 @@ using var rs318 = Load(".aura/workflow/reports/RS318/attempt-001.json");
 using var rs319 = Load(".aura/workflow/reports/RS319/attempt-001.json");
 using var rs320 = Load(".aura/workflow/reports/RS320/attempt-001.json");
 using var rs321 = Load(".aura/workflow/reports/RS321/attempt-001.json");
+using var rs322 = Load(".aura/workflow/reports/RS322/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -545,6 +546,23 @@ Need(graphRedClosure.GetProperty("runId").GetString() == "RS321" &&
         .Any(x => x.GetProperty("id").GetString() == "M8-W02-C01-T2-G" &&
             x.GetProperty("afterState").GetString() == "ready"),
     "RS321 graph RED closure, 0.1.72 executor or GREEN readiness differs.");
+var physicalStandardGreen = rs322.RootElement;
+Need(physicalStandardGreen.GetProperty("runId").GetString() == "RS322" &&
+    physicalStandardGreen.GetProperty("outcome").GetString() == "succeeded" &&
+    physicalStandardGreen.GetProperty("attempt").GetInt32() == 1 &&
+    physicalStandardGreen.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    physicalStandardGreen.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    physicalStandardGreen.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.72" &&
+    physicalStandardGreen.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    physicalStandardGreen.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("id").GetString() == "M8-W02-C01-T2-G" &&
+    physicalStandardGreen.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("afterState").GetString() == "in-progress" &&
+    physicalStandardGreen.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-w02-published-standard-live-physical-three-archive-closure"),
+    "RS322 physical three-archive GREEN entry or first-pass evidence differs.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
