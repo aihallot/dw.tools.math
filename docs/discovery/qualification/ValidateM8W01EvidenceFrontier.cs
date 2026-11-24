@@ -39,6 +39,7 @@ using var rs303 = Load(".aura/workflow/reports/RS303/attempt-001.json");
 using var rs305 = Load(".aura/workflow/reports/RS305/attempt-001.json");
 using var rs307 = Load(".aura/workflow/reports/RS307/attempt-001.json");
 using var rs309 = Load(".aura/workflow/reports/RS309/attempt-001.json");
+using var rs311 = Load(".aura/workflow/reports/RS311/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -64,7 +65,7 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
             "M8-W01-C01-T1" => "done",
             "M8-W01-C01-T2" => "done",
             "M8-W01-C02-T1" => "done",
-            "M8-W01-C02-T2" => "in-progress",
+            "M8-W01-C02-T2" => "done",
             _ => "not-ready"
         };
         Need(task.GetProperty("state").GetString() == targetTaskState,
@@ -84,7 +85,7 @@ foreach (var phase in w1.GetProperty("phases").EnumerateArray())
                 "M8-W01-C02-T1-V" => "done",
                 "M8-W01-C02-T2-R" => "done",
                 "M8-W01-C02-T2-G" => "done",
-                "M8-W01-C02-T2-V" => "in-progress",
+                "M8-W01-C02-T2-V" => "done",
                 _ => "not-ready"
             };
             Need(sub.GetProperty("state").GetString() == expected,
@@ -326,6 +327,27 @@ Need(deliveryGreen.GetProperty("runId").GetString() == "RS309" &&
         .GetProperty("validations").EnumerateArray().Any(x => x.GetProperty("id").GetString() ==
             "m8-delivery-green-reproducible-independent-exports"),
     "RS309 independent opt-in portable delivery GREEN evidence changed.");
+var deliveredConsumer = rs311.RootElement;
+var rs311Prior = deliveredConsumer.GetProperty("priorInvocationFailures");
+Need(deliveredConsumer.GetProperty("runId").GetString() == "RS311" &&
+    deliveredConsumer.GetProperty("outcome").GetString() == "succeeded" &&
+    deliveredConsumer.GetProperty("attempt").GetInt32() == 1 &&
+    rs311Prior.GetProperty("count").GetInt32() == 1 &&
+    rs311Prior.GetProperty("preparationFailureCount").GetInt32() == 1 &&
+    rs311Prior.GetProperty("allocatedAttemptFailureCount").GetInt32() == 0 &&
+    !rs311Prior.GetProperty("firstPassSucceeded").GetBoolean() &&
+    deliveredConsumer.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    deliveredConsumer.GetProperty("progress").GetProperty("transitions")
+        .EnumerateArray().Single().GetProperty("id").GetString() ==
+            "M8-W01-C02-T2-V" &&
+    deliveredConsumer.GetProperty("progress").GetProperty("transitions")
+        .EnumerateArray().Single().GetProperty("afterState").GetString() ==
+            "in-progress" &&
+    deliveredConsumer.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-delivery-verification-pinned-net11-package-consumer"),
+    "RS311 portable package-only Verification or preparation refusal lineage changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -359,4 +381,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=in-progress|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=in-progress|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
