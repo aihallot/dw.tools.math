@@ -40,6 +40,7 @@ using var rs305 = Load(".aura/workflow/reports/RS305/attempt-001.json");
 using var rs307 = Load(".aura/workflow/reports/RS307/attempt-001.json");
 using var rs309 = Load(".aura/workflow/reports/RS309/attempt-001.json");
 using var rs311 = Load(".aura/workflow/reports/RS311/attempt-001.json");
+using var rs312 = Load(".aura/workflow/reports/RS312/attempt-001.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
@@ -50,14 +51,18 @@ var m8 = native.RootElement.GetProperty("milestones").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8");
 var w1 = m8.GetProperty("workPackages").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W01");
+var w2 = m8.GetProperty("workPackages").EnumerateArray()
+    .Single(x => x.GetProperty("id").GetString() == "M8-W02");
 Need(m8.GetProperty("state").GetString() == "in-progress" &&
-    w1.GetProperty("state").GetString() == "in-progress",
-    "Native M8 and Discovery work-package readiness changed.");
+    w1.GetProperty("state").GetString() == "done" &&
+    w2.GetProperty("state").GetString() == "ready" &&
+    w2.GetProperty("phases").EnumerateArray().All(x =>
+        x.GetProperty("state").GetString() == "not-ready"),
+    "Native M8 Discovery closure or SDK audit readiness changed.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
-    Need(phase.GetProperty("state").GetString() ==
-        (phase.GetProperty("id").GetString() == "M8-W01-C01" ? "done" : "in-progress"),
-        "Native Discovery phase readiness differs.");
+    Need(phase.GetProperty("state").GetString() == "done",
+        "Native Discovery phase completion differs.");
     foreach (var task in phase.GetProperty("tasks").EnumerateArray())
     {
         var targetTaskState = task.GetProperty("id").GetString() switch
@@ -348,6 +353,18 @@ Need(deliveredConsumer.GetProperty("runId").GetString() == "RS311" &&
             v.GetProperty("id").GetString() ==
             "m8-delivery-verification-pinned-net11-package-consumer"),
     "RS311 portable package-only Verification or preparation refusal lineage changed.");
+var discoveryClosure = rs312.RootElement;
+Need(discoveryClosure.GetProperty("runId").GetString() == "RS312" &&
+    discoveryClosure.GetProperty("outcome").GetString() == "succeeded" &&
+    discoveryClosure.GetProperty("attempt").GetInt32() == 1 &&
+    discoveryClosure.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    discoveryClosure.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    discoveryClosure.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    discoveryClosure.GetProperty("progress").GetProperty("completions").EnumerateArray()
+        .Select(x => x.GetProperty("id").GetString())
+        .OrderBy(x => x, StringComparer.Ordinal)
+        .SequenceEqual(new[] { "M8-W01-C02-T2", "M8-W01-C02-T2-V" }, StringComparer.Ordinal),
+    "RS312 delivery Verification/task closure or first-pass evidence changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -381,4 +398,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=in-progress|C01=done|C02=in-progress|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=ready|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
