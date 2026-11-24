@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS307",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-24T09:03:44.7089951+00:00",
+  "completedAtUtc": "2026-11-24T09:03:45.9991994+00:00",
+  "durationMilliseconds": 1290,
+  "projectNodes": [
+    "M8-W01-C02-T2",
+    "M8-W01-C02-T2-R"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+    "docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.66",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "9bf4a4bc78a8ecb1aab18fa1210f90cc85ef8457f0af640358f6e40a54522235"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS307/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 950,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-0575544e5afc4e04840db2aa10447859\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 950000,
+      "DurationMilliseconds": 981,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS306/attempt-001.json run=RS306 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C01 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T2-G state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W01-C02-T2-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8-W02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=not-ready\r\n[require.json-value-equals] VERIFIED path=docs/planning/backlog.json pointer=/plan_version\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ProbeM8C02DeliveryRed.cs bytes=6862\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=12367\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=22074\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=37217\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md bytes=1609\r\n[project-plan.activate-ready-continuation] CHANGED path=.aura/workflow/plan/project.json leaf=M8-W01-C02-T2-R activated=M8-W01-C02-T2,M8-W01-C02-T2-R\r\n[payload] OK operations=17 changed=6 no-change=0 verified=11 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS307/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS306/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS306 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f101f78caa10dc2c00dc23f25af97acb688300125fd5216489f4aa4d17194136",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C01 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T2-G state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W01-C02-T2-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8-W02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+        "Status": 1,
+        "Summary": "bytes=6862",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "75023b11552e06df934ae921d8d080264f46d751add0acded3731498bb5ffd5e",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=12367",
+        "Details": null,
+        "BeforeSha256": "691c0439586b9d0cbe462c08a38050768a3c33448a6415e47f3aaccb03e7ab2f",
+        "AfterSha256": "4ebe88a52b9b0f0515b5c82ed06eaf775eb5b3532fde86a8ee08fe755aee2e81",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=22074",
+        "Details": null,
+        "BeforeSha256": "3a24f85846027b73b04de5c947cd4581865a2a08b16eadee26f436b2786e440e",
+        "AfterSha256": "8a29a40184c58707fcff2e2452df941217703f7dd9f1492e06079f70ab2cbbc8",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=37217",
+        "Details": null,
+        "BeforeSha256": "cd212ac07ccec6e1c1cc405b7b6d8f393326c6bcf4130234ccbcefa5168d8306",
+        "AfterSha256": "fb4371da35a367118f43be8fd4e8c0b3e2e71879dadc0bf696a6e57d03e6460c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md",
+        "Status": 1,
+        "Summary": "bytes=1609",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "439090818ca4473dc0d3171439ec25b77c08462b4833ce71019e6656267842bc",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "activate-ready-continuation",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "leaf=M8-W01-C02-T2-R activated=M8-W01-C02-T2,M8-W01-C02-T2-R",
+        "Details": null,
+        "BeforeSha256": "279e25a0f183e85ce5dfeb5339e0b56462597540ca7a5ee3e370dda481bf129e",
+        "AfterSha256": "923481fcfa82fc86e10fcf512a610ee0eb74e81f11b8da349b6cde94e35f7a84",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m8-delivery-red-independent-portable-refusals",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-native-591-node-active-delivery-red",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m8-discovery-active-delivery-red-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261124T090209Z-4baa3d585bf129bb",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "ef4e09132f06e8322f42ec37a66eb352139b5d5b",
+  "invocationStartedAtUtc": "2026-11-24T09:02:09.7367984+00:00",
+  "invocationDurationMilliseconds": 96262,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS307",
+      "title": "Activate opt-in portable Discovery skill delivery RED and refuse unauthorized or mutated bundles",
+      "projectNodes": [
+        "M8-W01-C02-T2",
+        "M8-W01-C02-T2-R"
+      ]
+    },
+    "declared": {
+      "summary": "Activate C02 opt-in portable skill delivery RED and falsify occupied destinations, altered bundles and unauthorized receipt grants.",
+      "value": "RS306 succeeded first-pass and completed the deterministic generator contract, readying the delivery T2 and RED leaf. Activate those nodes only, and qualify the existing Math-owned attester\u0027s public --export and --verify commands from an independent process. Require a fresh fourteen-file unsigned export, a separately launched copied verifier to match thirteen hashes, refusal of an already occupied opt-in directory without changing it, and refusal of altered skill text, extra copied files and forged receipt authorization with clean restoration. Do not complete RED or grant broker or host installation rights.",
+      "debtChanges": [
+        "RS306 succeeded first-pass on attempt 001 and completed the generator T1 and Verification with independent copied skill evidence, readying delivery RED.",
+        "Existing portable attestation already offers --export and --verify; test their public fail-closed delivery boundary instead of adding another exporter, verifier or new package.",
+        "RS307 starts delivery RED and qualifies only local opt-in portable integrity: unsigned receipt, immutable sources and no external installation, AURA integration or broker authority."
+      ],
+      "nextAction": "After RS307 records fresh independent delivery RED refusals, separately close RED with its evidence and ready GREEN; then qualify a bounded delivery candidate and later Verification.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ProbeM8C02DeliveryRed.cs",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/decisions/m8-w01-c02-t2-red-opt-in-portable-delivery-rs307.md"
+      ],
+      "validations": [
+        {
+          "id": "m8-delivery-red-independent-portable-refusals",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-native-591-node-active-delivery-red",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m8-discovery-active-delivery-red-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M8-W01-C02-T2",
+        "objective": "Skill delivery and refusal boundary",
+        "kind": "task",
+        "parentId": "M8-W01-C02",
+        "state": "in-progress",
+        "completionCondition": null
+      },
+      {
+        "id": "M8-W01-C02-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C02-T2",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M8-W01-C02-T2",
+        "objective": "Skill delivery and refusal boundary",
+        "kind": "task",
+        "parentId": "M8-W01-C02",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M8-W01-C02-T2-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M8-W01-C02-T2",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS307",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS307",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "ef4e09132f06e8322f42ec37a66eb352139b5d5b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "7005b13ebc7a61259196df666a9ddccb9a2453579cf3942297a3cabfa74bbd0e"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: falsify opt-in Discovery skill delivery boundaries",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
