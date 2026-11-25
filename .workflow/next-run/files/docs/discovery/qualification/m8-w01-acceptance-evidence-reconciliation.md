@@ -394,3 +394,7 @@ Product plan version `0.1.129` projects durable RS352 GREEN activation and its n
 ## RS354 — M9 source Verification activation
 
 Product plan version `0.1.130` projects durable RS353 GREEN closure and Verification readiness. The native Verification leaf is activated for independent source identity and report reconciliation and targeted bounded sampling replay. No parent completion, package publication or Assessa adoption is implied; M8 remains closed.
+
+## RS355 — M9 source task closure and package RED readiness
+
+Product plan version `0.1.131` projects durable RS354 Verification activation and its ten corroborated validations. RS355 closes native T1 Verification and T1, and readies T2 and its RED leaf. Canonical completion awaits durable RS355 delivery. No package qualification is performed here; M8 remains closed, immutable archives and Assessa ownership remain unchanged.
