@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.125",
+  "plan_version": "0.1.126",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -252,7 +252,7 @@
       "version": "1.4.0-preview",
       "title": "Cross-consumer deterministic bounded integer sampling",
       "outcome": "Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers.",
-      "status": "planned",
+      "status": "ready",
       "gate": "G-M9",
       "required_chunks": [
         "M9-W01-C01"
@@ -626,7 +626,7 @@
       "id": "M9-W01",
       "release": "M9",
       "title": "Versioned bounded integer sampling",
-      "status": "planned",
+      "status": "ready",
       "paths": [
         "src/projects/dw.tools.math.statistics/",
         "tests/projects/dw.tools.math.statistics.tests/",
@@ -9686,7 +9686,7 @@
       "title": "Unbiased bounded integer draws and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M3-W02-C03"
       ],
@@ -9713,25 +9713,33 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~BoundedSamplingTests"
       ],
-      "refinement": "MATH-XR-004 accepted consumer request P0. RS266 intake succeeded; no new API or candidate package has been qualified. Source and package qualification are successive bounded DWF runs. Resolve exact signature by auditing existing APIs first.",
-      "files": [],
-      "commands": [],
+      "refinement": "RS349 durable readiness; RS268-RS278 historical source and immutable candidate qualification reused. Independently falsify current contract without repeating publication.",
+      "files": [
+        "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+        "docs/engineering/ProbeM9BoundedSamplingRed.cs",
+        "docs/engineering/fixtures/M9BoundedSamplingRedOracle.cs"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM9BoundedSamplingRed.cs -- --check",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
+      ],
       "evidence": [],
-      "readiness": "planned; prioritize source API and independent proof before candidate binary or publication",
+      "readiness": "Ready from RS349 durable evidence; native RED activation and current oracle qualification are separate.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
           "title": "Unbiased sampling and replay contract",
           "behavior": "Versioned integer selection with unbiased rejection, bounded raw draw count and checkpoint compatibility.",
           "test_case": "0/1/2/3/extreme bounds, inclusive range overflow, forced rejection, golden replay and exhausted counter.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M9-W01-C01-T1-R",
               "title": "RED",
               "description": "Write independent failing oracles for source implementation and exact oracle evidence.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
