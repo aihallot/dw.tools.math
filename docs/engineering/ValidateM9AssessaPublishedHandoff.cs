@@ -80,9 +80,9 @@ using (var linuxDoc = JsonDocument.Parse(File.ReadAllText(LinuxReport)))
         "RS277 Linux/WSL source-free independent binary evidence differs.");
 }
 using var backlog=JsonDocument.Parse(File.ReadAllText("docs/planning/backlog.json"));
-Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.124",
+Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.125",
     "The canonical backlog baseline changed.");
 Console.WriteLine("MATH-RS274-ASSESSA-HANDOFF|package=dw.tools.math.statistics|version="+
     PublishedVersion+"|durableRS273=first-pass|status=published-private|assessaAdoption=pending|PASS");
 Console.WriteLine("MATH-RS278-LINUX-HANDOFF|durableRS277=first-pass|linuxNet11=source-free-locked|" +
-    "publishedVersion=" + PublishedVersion + "|assessaAdoption=pending|M9=not-ready|PASS");
+    "publishedVersion=" + PublishedVersion + "|assessaAdoption=pending|historicalM9=not-ready|PASS");
