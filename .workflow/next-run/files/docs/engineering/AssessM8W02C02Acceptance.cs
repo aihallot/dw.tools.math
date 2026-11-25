@@ -4,6 +4,11 @@ using System.Text.Json.Nodes;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
+if (args.Length == 1 && args[0] == "--check-closure")
+{
+    CheckClosure();
+    return;
+}
 if (args.Length != 1 || args[0] != "--check") throw new ArgumentException("Expected --check.");
 const string Profile = "docs/engineering/m8-w02-c02-phase-acceptance-rs339.json";
 const string Risk = "docs/engineering/m8-w02-c02-migration-risk-rs327.json";
@@ -109,3 +114,100 @@ static string ReportPath(string id) => ".aura/workflow/reports/" + id + "/attemp
 static JsonObject Read(string path) => JsonNode.Parse(File.ReadAllText(path))!.AsObject();
 static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexStringLower(SHA256.HashData(stream)); }
 static void Need(bool ok, string reason) { if (!ok) throw new InvalidDataException("RS339: " + reason); }
+
+static void CheckClosure()
+{
+    const string path = "docs/engineering/m8-w02-c02-phase-acceptance-rs345.json";
+    const string riskPath = "docs/engineering/m8-w02-c02-migration-risk-rs327.json";
+    const string oldPath = "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json";
+    const string sourcePath = "src/projects/dw.quantities/ExactRational.cs";
+    var ids = new[] { "RS342", "RS343", "RS344" };
+    var tracked = ids.Select(ReportPath).Concat(ids.Select(id => ".workflow/runs/" + id + "/preparation-proof.json"))
+        .Concat(new[] { path, riskPath, oldPath, sourcePath, "global.json", "Directory.Build.props",
+            "docs/planning/backlog.json", ".aura/workflow/plan/project.json" })
+        .ToDictionary(p => p, Hash, StringComparer.Ordinal);
+    var reports = ids.ToDictionary(id => id, id => Read(ReportPath(id)), StringComparer.Ordinal);
+    foreach (var id in ids)
+    {
+        var r = reports[id];
+        var proof = Read(".workflow/runs/" + id + "/preparation-proof.json");
+        Need(r["runId"]?.GetValue<string>() == id && r["outcome"]?.GetValue<string>() == "succeeded" &&
+            r["attempt"]?.GetValue<int>() == 1 && r["executor"]?["toolVersion"]?.GetValue<string>() == "0.1.76" &&
+            r["priorInvocationFailures"]?["count"]?.GetValue<int>() == 0 &&
+            r["priorInvocationFailures"]?["firstPassSucceeded"]?.GetValue<bool>() == true &&
+            r["boundaryViolations"]?.AsArray().Count == 0 &&
+            r["contribution"]?["observed"]?["mutationBoundaryClean"]?.GetValue<bool>() == true &&
+            proof["runId"]?.GetValue<string>() == id && proof["payloadCompiled"]?.GetValue<bool>() == true &&
+            proof["rehearsedValidationCount"]?.GetValue<int>() == (id == "RS343" ? 5 : 4) &&
+            Strings(proof, "preparationValidationIds").SequenceEqual(
+                r["contribution"]!["observed"]!["validations"]!.AsArray().Select(v => v!["id"]!.GetValue<string>()),
+                StringComparer.Ordinal), "Missing durable compiled evidence: " + id);
+    }
+    Need(HasValidation(reports["RS342"], "m8-rs342-exact-rational-source-delta-oracle-and-allocation") &&
+        HasValidation(reports["RS343"], "m8-rs343-integrated-exact-rational-dual-sdk-oracle") &&
+        HasValidation(reports["RS343"], "m8-rs343-quantities-regression-locked") &&
+        HasValidation(reports["RS344"], "m8-rs344-integrated-net11-package-graph-and-two-binary-oracles") &&
+        Strings(reports["RS343"]["contribution"]!["observed"]!, "changedPaths").Contains(sourcePath, StringComparer.Ordinal),
+        "Source integration and rebuilt graph are not jointly qualified.");
+    Need(File.ReadAllText(sourcePath).Contains("var digits = string.Concat(integral.IsEmpty ? \"0\".AsSpan() : integral, fractional);",
+        StringComparison.Ordinal), "Integrated source no longer present.");
+    var backlog = Read("docs/planning/backlog.json");
+    Need(Find(backlog, "chunks", "M8-W02-C02")["deliverables"]?.GetValue<string>() ==
+        "Migrate only measured targeted Math constructs and qualify a source-free consumer." &&
+        Find(backlog, "requirements", "M8-W02-C02-R1")["acceptance"]?.GetValue<string>() ==
+        "Prove new exact package graph, tests and external consumer behavior without old package overwrite." &&
+        Find(backlog, "requirements", "M8-W02-C02-R2")["acceptance"]?.GetValue<string>() ==
+        "No retrospective mutation of .NET 10 archives; no public release.", "Canonical acceptance drift.");
+    var old = Read(oldPath);
+    Need(old["status"]?.GetValue<string>() == "acceptance-incomplete" &&
+        old["phaseClosureAuthorized"]?.GetValue<bool>() == false, "Historical disposition overwritten.");
+    var risk = Read(riskPath);
+    Need(risk["gates"]?["migrationAuthorization"]?.GetValue<string>() == "not-granted" &&
+        risk["gates"]?["allPublishedPackageGraph"]?.GetValue<string>() == "unqualified",
+        "Production migration falsely authorized.");
+    var plan = Read(".aura/workflow/plan/project.json");
+    var m8 = Find(plan, "milestones", "M8");
+    var w2 = Find(m8, "workPackages", "M8-W02");
+    var phase = Find(w2, "phases", "M8-W02-C02");
+    Need(m8["state"]?.GetValue<string>() == "in-progress" && w2["state"]?.GetValue<string>() == "in-progress" &&
+        phase["state"]?.GetValue<string>() == "done" &&
+        phase["tasks"]!.AsArray().Count == 2 &&
+        phase["tasks"]!.AsArray().All(t => t?["state"]?.GetValue<string>() == "done") &&
+        Find(plan, "milestones", "M9")["state"]?.GetValue<string>() == "not-ready", "Closure exceeded C02.");
+    var disposition = Read(path);
+    void CheckBounded(JsonObject d)
+    {
+        var c = d["candidate"]!;
+        Need(d["phase"]?.GetValue<string>() == "M8-W02-C02" && d["status"]?.GetValue<string>() == "accepted-bounded" &&
+            d["supersedes"]?.GetValue<string>() == oldPath && d["phaseClosureAuthorized"]?.GetValue<bool>() == true &&
+            d["productionMigrationAuthorized"]?.GetValue<bool>() == false && d["publicationAuthorized"]?.GetValue<bool>() == false &&
+            c["version"]?.GetValue<string>() == "20260.20261125.1001-rs344" &&
+            c["targetFramework"]?.GetValue<string>() == "net11.0" &&
+            Strings(c, "packages").SequenceEqual(new[] { "dw.tools.math.statistics", "dw.quantities" }, StringComparer.Ordinal) &&
+            c["sourceIntegration"]?.GetValue<string>() == "RS343" &&
+            c["binaryQualification"]?.GetValue<string>() == "RS344" &&
+            c["individualArchiveFingerprintsRetained"]?.GetValue<bool>() == false, "Bounded closure disposition differs.");
+        var r1 = Find(d, "requirements", "M8-W02-C02-R1");
+        var r2 = Find(d, "requirements", "M8-W02-C02-R2");
+        Need(d["requirements"]!.AsArray().Count == 2 &&
+            r1["status"]?.GetValue<string>() == "qualified-bounded" && Strings(r1, "evidence").SequenceEqual(ids, StringComparer.Ordinal) &&
+            r2["status"]?.GetValue<string>() == "preserved-in-observed-scope" &&
+            Strings(r2, "evidence").SequenceEqual(new[] { "RS343", "RS344" }, StringComparer.Ordinal),
+            "Requirement scope or evidence differs.");
+    }
+    CheckBounded(disposition);
+    foreach (var mutation in new Action<JsonObject>[] {
+        d => d["productionMigrationAuthorized"] = true,
+        d => d["publicationAuthorized"] = true,
+        d => d["candidate"]!["binaryQualification"] = "RS340",
+        d => d["candidate"]!["individualArchiveFingerprintsRetained"] = true })
+    {
+        var copy = disposition.DeepClone().AsObject();
+        mutation(copy);
+        bool refused = false;
+        try { CheckBounded(copy); } catch (InvalidDataException) { refused = true; }
+        Need(refused, "An unsupported closure claim escaped.");
+    }
+    foreach (var item in tracked) Need(Hash(item.Key) == item.Value, "Original changed: " + item.Key);
+    Console.WriteLine("MATH-RS345-C02-ACCEPTANCE|R1=qualified-bounded|R2=preserved|negativeControls=4|phase=done|productionMigration=false|publication=false|PASS");
+}
