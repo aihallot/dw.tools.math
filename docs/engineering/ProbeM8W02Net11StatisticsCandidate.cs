@@ -6,11 +6,16 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] != "--check") throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || (args[0] != "--check" && args[0] != "--check-integrated"))
+    throw new ArgumentException("Expected --check or --check-integrated.");
+var integrated = args[0] == "--check-integrated";
 if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("RS340 bounds Windows net11.");
 const string BaseId = "dw.quantities";
 const string Id = "dw.tools.math.statistics";
-const string Version = "20260.20261125.1001-rs340";
+var Version = integrated ? "20260.20261125.1001-rs344" : "20260.20261125.1001-rs340";
+const string RationalFixture = "docs/engineering/fixtures/M8ExactRationalSpanModernizationConsumer.cs";
+const string RationalSource = "src/projects/dw.quantities/ExactRational.cs";
+const string IntegratedAnchor = "var digits = string.Concat(integral.IsEmpty ? \"0\".AsSpan() : integral, fractional);";
 const string Fixture = "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs";
 const string Risk = "docs/engineering/m8-w02-c02-migration-risk-rs327.json";
 const string Assessment = "docs/engineering/m8-w02-c02-phase-acceptance-rs339.json";
@@ -35,7 +40,10 @@ var oldArchives = new Dictionary<string, string>(StringComparer.Ordinal)
     [Path.Combine(feed!, Id + ".20260.20261106.1001.nupkg")] = "9232edaedf57f5f67530905398648fa240141146cb55eed14e7910d54717e4f8"
 };
 foreach (var p in oldArchives) Need(Hash(p.Key) == p.Value, "Historical archive differs: " + p.Key);
-var tracked = sources.Concat(new[] { Fixture, Risk, Assessment, "global.json", "Directory.Build.props", "Directory.Packages.props" })
+Need(sources.Contains(RationalSource, StringComparer.Ordinal), "Exact rational source missing.");
+Need(File.ReadAllText(RationalSource).Contains(IntegratedAnchor, StringComparison.Ordinal) == integrated,
+    "Requested candidate mode does not match the actual source.");
+var tracked = sources.Concat(new[] { Fixture, RationalFixture, Risk, Assessment, "global.json", "Directory.Build.props", "Directory.Packages.props" })
     .ToDictionary(x => x, Hash, StringComparer.Ordinal);
 using (var risk = JsonDocument.Parse(File.ReadAllText(Risk)))
 using (var assessment = JsonDocument.Parse(File.ReadAllText(Assessment)))
@@ -45,7 +53,7 @@ using (var assessment = JsonDocument.Parse(File.ReadAllText(Assessment)))
         !assessment.RootElement.GetProperty("newNet11PackageGraphQualified").GetBoolean(),
         "Historical refusal or incomplete acceptance changed.");
 }
-var work = Path.GetFullPath(Path.Combine("build", "artifacts", "f340-" + Guid.NewGuid().ToString("N")[..8]));
+var work = Path.GetFullPath(Path.Combine("build", "artifacts", (integrated ? "f344-" : "f340-") + Guid.NewGuid().ToString("N")[..8]));
 Directory.CreateDirectory(work);
 var candidateFeed = Path.Combine(work, "feed");
 var producer = Path.Combine(work, "producer");
@@ -154,7 +162,7 @@ void Replay()
 Replay();
 try
 {
-    File.WriteAllText(projectPath, cleanProject.Replace("[" + Version + "]", "[20260.20261125.9999-rs340]", StringComparison.Ordinal));
+    File.WriteAllText(projectPath, cleanProject.Replace("[" + Version + "]", (integrated ? "[20260.20261125.9999-rs344]" : "[20260.20261125.9999-rs340]"), StringComparison.Ordinal));
     var refusal = Execute(consumer, RestoreArgs(true));
     Need(refusal.ExitCode != 0 && (refusal.Output.Contains("NU1004", StringComparison.OrdinalIgnoreCase) ||
         refusal.Output.Contains("NU1102", StringComparison.OrdinalIgnoreCase)), "Wrong locked candidate version was not refused: " + refusal.Output);
@@ -165,12 +173,39 @@ Need(Hash(projectPath) == projectHash && Hash(lockPath) == lockHash, "Clean cons
 Pass(consumer, RestoreArgs(true));
 Need(Hash(lockPath) == lockHash, "Restored lock differs.");
 Replay();
+if (integrated)
+{
+    // Use the same already locked binary graph; the existing rational oracle contains no Math source.
+    var originalProgram = File.ReadAllBytes(program);
+    var rationalProgram = File.ReadAllText(RationalFixture) +
+        "\nNeed(Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(typeof(ExactRational).Assembly.Location))) == \"" +
+        baseDll + "\", \"Loaded Quantities binary differs.\");\n" +
+        "Console.WriteLine(\"MATH-RS344-QUANTITIES-LOADED|PASS\");\n";
+    try
+    {
+        File.WriteAllText(program, rationalProgram);
+        Need(Directory.GetFiles(consumer, "*.cs", SearchOption.TopDirectoryOnly).Length == 1 &&
+            !XDocument.Load(projectPath).Descendants("ProjectReference").Any() &&
+            Hash(lockPath) == lockHash, "Rational consumer is not using the same locked source-free graph.");
+        Pass(consumer, "dotnet", "build", projectPath, "-c", "Release", "--no-restore");
+        var rationalOutput = Pass(consumer, "dotnet", "run", "--project", projectPath, "-c", "Release",
+            "--no-build", "--no-restore", "--", "11");
+        Need(rationalOutput.Contains("MATH-RS342-ORACLE|PASS", StringComparison.Ordinal) &&
+            rationalOutput.Contains("MATH-RS344-QUANTITIES-LOADED|PASS", StringComparison.Ordinal),
+            "Integrated Quantities binary oracle failed.");
+        Console.WriteLine(rationalOutput);
+    }
+    finally { File.WriteAllBytes(program, originalProgram); }
+    Need(Hash(program) == tracked[Fixture] && Hash(lockPath) == lockHash, "Restored fixture or lock differs.");
+    Replay();
+    Console.WriteLine("MATH-RS344-INTEGRATED-GRAPH|exactRational=PASS|statistics=PASS|binaryIdentity=PASS|PASS");
+}
 foreach (var item in archiveHashes) Need(Hash(item.Key) == item.Value, "New archive changed after packing.");
 foreach (var item in oldArchives) Need(Hash(item.Key) == item.Value, "Historical archive changed.");
 foreach (var item in tracked) Need(Hash(item.Key) == item.Value, "Original repository input changed: " + item.Key);
 foreach (var source in sources.Where(x => x.EndsWith(".cs", StringComparison.Ordinal)))
     Need(Hash(Path.Combine(producer, source["src/projects/".Length..])) == tracked[source], "Candidate source changed: " + source);
-Console.WriteLine("MATH-RS340-NET11-CANDIDATE|version=" + Version + "|packages=2|edges=1|checks=12|negativeControls=1|lockSha256=" + lockHash +
+Console.WriteLine((integrated ? "MATH-RS344-NET11-CANDIDATE|version=" : "MATH-RS340-NET11-CANDIDATE|version=") + Version + "|packages=2|edges=1|checks=12|negativeControls=1|lockSha256=" + lockHash +
     "|statisticsArchiveSha256=" + archiveHashes[statArchive] + "|statisticsDllSha256=" + statDll +
     "|quantitiesArchiveSha256=" + archiveHashes[baseArchive] + "|quantitiesDllSha256=" + baseDll +
     "|published=false|productionMutation=false|PASS");
