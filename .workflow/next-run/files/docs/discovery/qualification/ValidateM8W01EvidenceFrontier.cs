@@ -127,10 +127,10 @@ Need(nextT1.GetProperty("state").GetString() == "done" &&
     nextT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-V")
         .GetProperty("state").GetString() == "done" &&
-    nextT2.GetProperty("state").GetString() == "ready" &&
+    nextT2.GetProperty("state").GetString() == "in-progress" &&
     nextT2.GetProperty("subtasks").EnumerateArray()
         .All(x => x.GetProperty("state").GetString() ==
-            (x.GetProperty("id").GetString() == "M8-W02-C02-T2-R" ? "ready" : "not-ready")),
+            (x.GetProperty("id").GetString() == "M8-W02-C02-T2-R" ? "in-progress" : "not-ready")),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {

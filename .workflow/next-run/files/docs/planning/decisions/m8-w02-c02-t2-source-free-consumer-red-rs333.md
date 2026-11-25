@@ -1,0 +1,3 @@
+# RS333 — Source-free consumer RED
+
+RS332 succeeded first-pass using DWF 0.1.75 and guidance 0.27. RS333 activates only C02/T2 and its RED. The source-free consumer acceptance boundary requires an exact package version, isolated feed, locked restore, no project references or source copies, archive and DLL hashes, and a runtime contract. Eight in-memory negative controls falsify weakened boundary declarations. This is a policy-level RED test, not actual consumer execution or candidate selection. Existing three historical physical closures remain bounded; ten other archive closures and thirteen semantic verdicts remain unqualified. No package publication or production migration is authorized.
