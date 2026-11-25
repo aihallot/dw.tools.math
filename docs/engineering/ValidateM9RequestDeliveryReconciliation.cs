@@ -45,10 +45,10 @@ foreach(var item in new[]
         "Durable result differs: "+item.Run);
 }
 using var backlog=JsonDocument.Parse(File.ReadAllText("docs/planning/backlog.json"));
-Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.126" &&
+Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.127" &&
     backlog.RootElement.GetProperty("releases").EnumerateArray()
         .Single(x=>x.GetProperty("id").GetString()=="M9")
-        .GetProperty("status").GetString()=="ready",
+        .GetProperty("status").GetString()=="in_progress",
     "Unexpected M9 product plan progress.");
 using var native=JsonDocument.Parse(File.ReadAllText(".aura/workflow/plan/project.json"));
 Need(native.RootElement.GetProperty("milestones").EnumerateArray()

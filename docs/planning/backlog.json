@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.126",
+  "plan_version": "0.1.127",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -252,7 +252,7 @@
       "version": "1.4.0-preview",
       "title": "Cross-consumer deterministic bounded integer sampling",
       "outcome": "Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers.",
-      "status": "ready",
+      "status": "in_progress",
       "gate": "G-M9",
       "required_chunks": [
         "M9-W01-C01"
@@ -626,7 +626,7 @@
       "id": "M9-W01",
       "release": "M9",
       "title": "Versioned bounded integer sampling",
-      "status": "ready",
+      "status": "in_progress",
       "paths": [
         "src/projects/dw.tools.math.statistics/",
         "tests/projects/dw.tools.math.statistics.tests/",
@@ -9686,7 +9686,7 @@
       "title": "Unbiased bounded integer draws and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [
         "M3-W02-C03"
       ],
@@ -9725,21 +9725,21 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "Ready from RS349 durable evidence; native RED activation and current oracle qualification are separate.",
+      "readiness": "Native source RED activation and independent oracle qualification delivered in RS350; RED closure and GREEN readiness pending durable result.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
           "title": "Unbiased sampling and replay contract",
           "behavior": "Versioned integer selection with unbiased rejection, bounded raw draw count and checkpoint compatibility.",
           "test_case": "0/1/2/3/extreme bounds, inclusive range overflow, forced rejection, golden replay and exhausted counter.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M9-W01-C01-T1-R",
               "title": "RED",
               "description": "Write independent failing oracles for source implementation and exact oracle evidence.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {

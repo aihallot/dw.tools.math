@@ -1,0 +1,523 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS351",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-25T22:28:49.9272822+00:00",
+  "completedAtUtc": "2026-11-25T22:28:51.095031+00:00",
+  "durationMilliseconds": 1167,
+  "projectNodes": [
+    "M9-W01-C01-T1-R",
+    "M9-W01-C01-T1-G"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M9.md",
+    "docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.76",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f76f25891c284a586ffac9ba616efcaed57f769f34fa95f57502da5c2da2e011"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS351/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 1500,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-1ce58cb250ed40ae9ff1b1ec9df23af3\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 1500000,
+      "DurationMilliseconds": 1039,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS350/attempt-001.json run=RS350 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T2 state=not-ready\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=13242\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67759\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=7264\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3353\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md bytes=696\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=78513\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\nplanning valid: 0.1.127 | 63 chunks | e0591fdc86027294150c16cdb61b6062fff4483477b04fcfb5f024fc34a02ad5 | mode --write\r\n\n\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-G not-ready-\u003Eready\r\n[payload] OK operations=17 changed=10 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS351/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS350/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS350 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "91d621a82e17070b66c16e67f80587d4b2f42ff8cf1bf576bf0314a5db4d7152",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b16e533339e6483165cfc7ca9df0ba9b2bafc7c630c2346bcfca8ecf9a3daa5a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b16e533339e6483165cfc7ca9df0ba9b2bafc7c630c2346bcfca8ecf9a3daa5a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b16e533339e6483165cfc7ca9df0ba9b2bafc7c630c2346bcfca8ecf9a3daa5a",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T2 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "b16e533339e6483165cfc7ca9df0ba9b2bafc7c630c2346bcfca8ecf9a3daa5a",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=13242",
+        "Details": null,
+        "BeforeSha256": "41a12720721d8508027453a35ac3143912292516f70807f678a69b3a080160f6",
+        "AfterSha256": "e0b410a5891dfea41346340b1bda875ee879f3b68718e88a03a3790485c9d7dd",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67759",
+        "Details": null,
+        "BeforeSha256": "5e5bea7edc0455c5408309b923b30084515749e2b4939a29a262948f16d9bafd",
+        "AfterSha256": "a31d6c3595a8b7a3995cd0de56a532b537c0a97f44d6b47a763ea952b52e01c1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=7264",
+        "Details": null,
+        "BeforeSha256": "5d6093ddf37318e55f2d5f74f01ff7ec24e4bc8a07131081f8d0b0f6e1dd4ea5",
+        "AfterSha256": "8520a16837d7f7d0f55f3ae95393d40f35872edc80d997bdab10d8ec8ea5d822",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "13723cf72188cb779935f22c447f0275daba1ba9ffbc0df32d8012dc7ebfbd27",
+        "AfterSha256": "f969fae8a8fbf7d9fb396b3a797824502515707fb8976d91c98271f0a5757ee0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3353",
+        "Details": null,
+        "BeforeSha256": "0dfd3d69ea2c420b84f052c8650031d054a28a1964a905b7b2e69c5d4150b5ec",
+        "AfterSha256": "ba2072bf65e8717982cbf5a1457e0b914de34e764a6f4f539269509b9ee6672d",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md",
+        "Status": 1,
+        "Summary": "bytes=696",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "52aed2b7bed1f87ec79196b6a878d686b1826a24edb93147beaa1d7b82390482",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=78513",
+        "Details": null,
+        "BeforeSha256": "f58a5280ab31c96ae40042610a5a4bba502c826f7dad9dbb1f23f67b788812cb",
+        "AfterSha256": "47a2e9a475912d75ff5ffd6fbe05062e1c97d15ba60eef19fc14be3c2c12331a",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "06bfafae4439bbc4418102dd519882935dd18711eb5ec39f741fb683e839d250",
+        "AfterSha256": "e0591fdc86027294150c16cdb61b6062fff4483477b04fcfb5f024fc34a02ad5",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M9-W01-C01-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "b16e533339e6483165cfc7ca9df0ba9b2bafc7c630c2346bcfca8ecf9a3daa5a",
+        "AfterSha256": "2f64cbcfb790f46db39d48f5ff3053fe72567249c53d275fad041919d89e0a1f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M9-W01-C01-T1-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "2f64cbcfb790f46db39d48f5ff3053fe72567249c53d275fad041919d89e0a1f",
+        "AfterSha256": "7ec4c3a1cacdb03c5142df78ddb43e53d44669e2a1a581f9116088dd917cc63b",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m9-rs351-red-closure-evidence",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs351-native-red-done-green-ready",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs351-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs351-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs351-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs351-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261125T222735Z-98ff68945e4187f5",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "377b7cbf754061e468098178494b8111ce091e7a",
+  "invocationStartedAtUtc": "2026-11-25T22:27:35.1347069+00:00",
+  "invocationDurationMilliseconds": 75960,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS351",
+      "title": "Complete qualified M9 source RED and ready existing implementation GREEN",
+      "projectNodes": [
+        "M9-W01-C01-T1-R",
+        "M9-W01-C01-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Close RED from RS350 independent falsification and ready GREEN without duplicating existing generator implementation.",
+      "value": "RS350 succeeded first-pass: the existing generator passed the independent BigInteger oracle and three compiled faulty variants were refused. RS351 reconciles the durable native activation into canonical backlog v0.1.127, then closes source RED and readies GREEN using actual current-run evidence, without repeating compilation of mutants. Preserve the prior sampling implementation, immutable private archives, Assessa boundary and M8 closure. Canonical RED remains in_progress for this run because its new completion is not yet durable; reconcile it after successful delivery. GREEN must qualify the existing implementation, not invent a source change.",
+      "debtChanges": [
+        "Project RS350 durable activation into the canonical backlog.",
+        "Corroborate the compiled three-mutant refusal evidence and close the RED leaf only.",
+        "Preserve source, prior packages and Assessa ownership; qualify existing source under GREEN."
+      ],
+      "nextAction": "Qualify the existing bounded sampling implementation in GREEN with current source regression evidence.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M9-W01-C01-T1-R",
+          "achievement": "RS350 independently compiled the authentic SplitMix64 source and three controlled variants, accepted the authentic BigInteger rejection and signed-range oracle, and refused rejection bypass, budget overrun and corrupt signed encoding at runtime. RS351 corroborates its first-pass durable report and compiled preparation proof. This qualifies source falsification without inventing an implementation defect."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M9.md"
+      ],
+      "validations": [
+        {
+          "id": "m9-rs351-red-closure-evidence",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs351-native-red-done-green-ready",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs351-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs351-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs351-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs351-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M9-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M9-W01-C01-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M9-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M9-W01-C01-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M9-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M9-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS350 independently compiled the authentic SplitMix64 source and three controlled variants, accepted the authentic BigInteger rejection and signed-range oracle, and refused rejection bypass, budget overrun and corrupt signed encoding at runtime. RS351 corroborates its first-pass durable report and compiled preparation proof. This qualifies source falsification without inventing an implementation defect."
+      },
+      {
+        "id": "M9-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M9-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M9-W01-C01-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M9-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS350 independently compiled the authentic SplitMix64 source and three controlled variants, accepted the authentic BigInteger rejection and signed-range oracle, and refused rejection bypass, budget overrun and corrupt signed encoding at runtime. RS351 corroborates its first-pass durable report and compiled preparation proof. This qualifies source falsification without inventing an implementation defect."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS351",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS351",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "377b7cbf754061e468098178494b8111ce091e7a",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "579417c002475f8436a1cb80a580aa81796ed4a741e8e4cbc4ce4524c07b9904"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: complete M9 sampling RED and ready GREEN",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
