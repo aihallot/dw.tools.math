@@ -406,3 +406,7 @@ Product plan version `0.1.132` projects durable RS355 T1 and Verification closur
 ## RS357 — M9 exact package RED closure
 
 Product plan version `0.1.133` projects durable RS356 T2 and RED activation. RS357 corroborates all eight matching validation identities and closes native T2 RED, readying GREEN. The RS356 isolated package probe performed two actual locked restore refusals, restored the clean lock and passed twelve runtime checks against the immutable archive and DLL identities. No campaign replay, new publication, source modification, migration or Assessa adoption. Canonical RED completion awaits durable RS357 delivery; M8 remains closed.
+
+## RS358 — M9 immutable package GREEN activation
+
+Product plan version `0.1.134` projects durable RS357 package RED closure and GREEN readiness. RS358 activates only GREEN; corroborate original candidate RS269, candidate consumer RS270, published Windows RS273 and Linux RS277 compiled proofs, preserving the preselection failures of RS269/RS270. Replay the existing physical Windows published readback with exact immutable archive identities and twelve runtime checks. Do not rebuild the unpublished candidate or republish. Independent Verification remains pending; M8 remains closed and Assessa adoption unqualified.
