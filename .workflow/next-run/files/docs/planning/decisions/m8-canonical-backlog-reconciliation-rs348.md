@@ -1,0 +1,3 @@
+# RS348 — canonical M8 backlog reconciliation
+
+RS347 durably closed M8 first-pass under DWF 0.1.76. RS348 reconciles canonical backlog v0.1.124 to v0.1.125 using the exact native M8 node roster and actual successful completion reports, requiring a matching durable completion for each of 39 nodes. The existing ValidatePlan renderer regenerates all canonical projections in the payload; observational validation checks exact rendered output. M9 and its statuses remain unchanged, as do other product scope and all existing release and migration limitations. No new native completion, publication, external broker grant or production SDK migration is declared.

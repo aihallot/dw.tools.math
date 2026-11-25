@@ -8,7 +8,7 @@ if (args.Length != 1 || args[0] != "--check")
     throw new ArgumentException("Expected --check.");
 const string Decision = "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md";
 const string Readme = "docs/discovery/README.md";
-const string Baseline = "0.1.124";
+const string Baseline = "0.1.125";
 var decision = File.ReadAllText(Decision);
 var readme = File.ReadAllText(Readme);
 static void Need(bool ok, string reason)
@@ -73,9 +73,9 @@ using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
     decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
-foreach (var phaseId in new[] { "M8-W01-C01", "M8-W01-C02" })
+foreach (var phaseId in new[] { "M8-W01-C01", "M8-W01-C02", "M8-W02-C01", "M8-W02-C02" })
     Need(product.GetProperty("chunks").EnumerateArray().Single(x => x.GetProperty("id").GetString() == phaseId)
-        .GetProperty("status").GetString() == "planned", "Accepted chunk state drift: " + phaseId);
+        .GetProperty("status").GetString() == "done", "Accepted chunk state drift: " + phaseId);
 var m8 = native.RootElement.GetProperty("milestones").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8");
 var w1 = m8.GetProperty("workPackages").EnumerateArray()
@@ -895,7 +895,7 @@ Need(milestoneProduct.GetProperty("gate").GetString() == "G-M8" &&
         .SequenceEqual(new[] { "M8-W01-C01", "M8-W01-C02", "M8-W02-C01", "M8-W02-C02" }, StringComparer.Ordinal) &&
     milestoneProduct.GetProperty("outcome").GetString() ==
         "Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer." &&
-    milestoneProduct.GetProperty("status").GetString() == "planned" &&
+    milestoneProduct.GetProperty("status").GetString() == "done" &&
     native.RootElement.GetProperty("milestones").EnumerateArray()
         .Single(v => v.GetProperty("id").GetString() == "M9").GetProperty("state").GetString() == "not-ready",
     "Canonical M8 outcome or deferred reconciliation boundary differs.");
