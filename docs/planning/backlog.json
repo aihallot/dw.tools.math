@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.132",
+  "plan_version": "0.1.133",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9725,7 +9725,7 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "RS355 durable source closure and package RED readiness; falsify the immutable package consumer boundary.",
+      "readiness": "RS356 durable package RED activation and exact locked restore falsification; RED closure and GREEN readiness pending durable result.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
@@ -9771,14 +9771,14 @@
           "title": "Immutable candidate and independent net11 consumer",
           "behavior": "Qualify candidate package identity and explicit package-only .NET 11 consumer, without claiming publication.",
           "test_case": "Exact package graph, source-free PackageReference load, checksum, seed/replay/budget proof, and no archive overwrite.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M9-W01-C01-T2-R",
               "title": "RED",
               "description": "Write independent failing oracles for candidate package and external consumer evidence.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
