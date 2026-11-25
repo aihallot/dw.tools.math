@@ -160,3 +160,7 @@ RS330 succeeded first-pass with DWF 0.1.73/guidance 0.27 and readied C02/T1 Veri
 ## RS332 — close bounded Foundation Verification and ready package RED
 
 RS331 succeeded first-pass at allocated attempt 001 under DWF 0.1.73 and guidance 0.27. Six validations corroborated the bounded Foundation source-only experiment and its independent report auditor, three in-memory report refusals, the targeted dual-SDK replay and the unchanged migration blocker. RS332 closes C02/T1 Verification and its parent T1 only as a bounded source modernization assessment; T2 and its RED become ready, not active. No production migration, source-free package qualification, new C#15 syntax proof, archive publication, all-library parity or rollback is asserted. The twelve other source cases, thirteen semantic/API verdicts and ten published archive closures remain unqualified.
+
+## RS333 — source-free consumer RED
+
+RS332 succeeded first-pass using DWF 0.1.75 and guidance 0.27. RS333 activates only C02/T2 and its RED. The source-free consumer acceptance boundary requires an exact package version, isolated feed, locked restore, no project references or source copies, archive and DLL hashes, and a runtime contract. Eight in-memory negative controls falsify weakened boundary declarations. This is a policy-level RED test, not actual consumer execution or candidate selection. Existing three historical physical closures remain bounded; ten other archive closures and thirteen semantic verdicts remain unqualified. No package publication or production migration is authorized.
