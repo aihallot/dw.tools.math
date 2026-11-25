@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "RS344",
+  "title": "Qualify rebuilt net11 Statistics and Quantities graph from integrated rational source",
+  "state": "prepared",
+  "commitMessage": "test: qualify integrated ExactRational net11 package graph",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Rebuild the unpublished net11 graph from actual integrated source and verify both independent binary consumers.",
+    "value": "RS343 succeeded first-pass and integrated the measured ExactRational span delta with dual-SDK exact oracles, allocation improvement and locked Quantities regression tests. RS344 extends the existing candidate probe with an integrated-source mode and distinct unpublished package version. Rebuild the two-node net11 graph from actual tracked sources, require the integrated source anchor, validate locked direct/transitive versions and physical DLL identities, repeat the existing Statistics fixture and wrong-version refusal, then run the existing exact rational oracle against the loaded Quantities DLL from that same source-free locked graph. Restore the Statistics fixture and replay it. No production SDK/TFM or published archive changes and no C02 closure. Per-build hashes are checked in the rehearsal, not claimed to be retained in the durable report.",
+    "debtChanges": [
+      "Bind the fresh candidate graph to RS343 integrated source without reusing the old experimental version.",
+      "Reuse the proven package probe and both existing functional fixtures, with a loaded Quantities DLL hash check.",
+      "Keep the production SDK and immutable published archives unchanged; defer phase acceptance to durable evidence review."
+    ],
+    "nextAction": "Assess C02 canonical acceptance from the integrated source and newly rebuilt bounded package graph, retaining all broader migration limitations.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+    "docs/planning/decisions/m8-w02-c02-integrated-net11-candidate-rs344.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs344-integrated-net11-package-graph-and-two-binary-oracles",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+        "--",
+        "--check-integrated"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1200
+    },
+    {
+      "id": "m8-rs344-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs344-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
