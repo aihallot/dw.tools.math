@@ -90,7 +90,10 @@ edge.ReplaceWith(new XElement("PackageReference", new XAttribute("Include", Base
     new XAttribute("Version", "[" + Version + "]")));
 foreach (var (doc, path) in new[] { (baseDoc, baseProject), (statDoc, statProject) })
 {
-    doc.Descendants("Version").Single().Value = Version;
+    // The calendar candidate version is a NuGet identity, not a CLR assembly version.
+    // Preserve the original project Version and its valid SDK-derived assembly/file versions.
+    Need(!doc.Descendants("PackageVersion").Any(), "Unexpected existing package version override.");
+    doc.Descendants("Version").Single().AddAfterSelf(new XElement("PackageVersion", Version));
     doc.Save(path);
 }
 foreach (var project in new[] { baseProject, statProject })
