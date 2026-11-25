@@ -58,6 +58,7 @@ using var rs327 = Load(".aura/workflow/reports/RS327/attempt-001.json");
 using var rs328 = Load(".aura/workflow/reports/RS328/attempt-001.json");
 using var rs329 = Load(".aura/workflow/reports/RS329/attempt-001.json");
 using var rs331 = Load(".aura/workflow/reports/RS331/attempt-001.json");
+using var rs333 = Load(".aura/workflow/reports/RS333/attempt-001.json");
 using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json");
 using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
@@ -130,7 +131,12 @@ Need(nextT1.GetProperty("state").GetString() == "done" &&
     nextT2.GetProperty("state").GetString() == "in-progress" &&
     nextT2.GetProperty("subtasks").EnumerateArray()
         .All(x => x.GetProperty("state").GetString() ==
-            (x.GetProperty("id").GetString() == "M8-W02-C02-T2-R" ? "in-progress" : "not-ready")),
+            (x.GetProperty("id").GetString() switch
+            {
+                "M8-W02-C02-T2-R" => "done",
+                "M8-W02-C02-T2-G" => "ready",
+                _ => "not-ready"
+            })),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
@@ -748,6 +754,22 @@ Need(foundationVerification.GetProperty("runId").GetString() == "RS331" &&
             v.GetProperty("id").GetString() ==
             "m8-rs331-targeted-foundation-dual-sdk-source-replay"),
     "RS331 independent Foundation Verification provenance changed.");
+var packageRed = rs333.RootElement;
+Need(packageRed.GetProperty("runId").GetString() == "RS333" &&
+    packageRed.GetProperty("outcome").GetString() == "succeeded" &&
+    packageRed.GetProperty("attempt").GetInt32() == 1 &&
+    packageRed.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.75" &&
+    packageRed.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    packageRed.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    packageRed.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    packageRed.GetProperty("progress").GetProperty("completions").GetArrayLength() == 0 &&
+    packageRed.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Any(x => x.GetProperty("id").GetString() == "M8-W02-C02-T2-R" &&
+            x.GetProperty("afterState").GetString() == "in-progress") &&
+    packageRed.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() == "m8-rs333-source-free-consumer-red-eight-refusals"),
+    "RS333 source-free consumer RED provenance changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
