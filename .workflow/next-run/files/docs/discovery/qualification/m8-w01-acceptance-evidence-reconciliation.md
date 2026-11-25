@@ -378,3 +378,7 @@ Product plan version `0.1.125` is the reconciled M8 baseline. RS347 durably clos
 ## RS350 — M9 readiness reconciliation
 
 Product plan version `0.1.126` projects the durable RS349 readiness; native M8 remains closed.
+
+## RS351 — M9 activation reconciliation
+
+Product plan version `0.1.127` projects durable RS350 native activation. The historical M8 scope is unchanged.

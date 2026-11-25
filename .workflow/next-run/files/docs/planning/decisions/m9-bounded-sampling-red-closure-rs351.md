@@ -1,0 +1,3 @@
+# RS351 — bounded sampling RED closure
+
+RS350 succeeded first-pass: the existing generator passed the independent BigInteger oracle and three compiled faulty variants were refused. RS351 reconciles the durable native activation into canonical backlog v0.1.127, then closes source RED and readies GREEN using actual current-run evidence, without repeating compilation of mutants. Preserve the prior sampling implementation, immutable private archives, Assessa boundary and M8 closure. Canonical RED remains in_progress for this run because its new completion is not yet durable; reconcile it after successful delivery. GREEN must qualify the existing implementation, not invent a source change.
