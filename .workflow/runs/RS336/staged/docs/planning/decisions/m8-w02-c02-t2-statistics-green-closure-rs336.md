@@ -1,0 +1,3 @@
+# RS336 — Statistics GREEN closure and Verification readiness
+
+RS335 succeeded first-pass at attempt 001 under DWF 0.1.75 and guidance 0.27, with seven validations and a clean mutation boundary. Its isolated Windows net11 source-free consumer used immutable Statistics 20260.20261120.1001 and Quantities 20260.20261102.1001, checked archive and DLL identities and the two-package direct/transitive lock, executed the twelve-check runtime fixture, refused wrong exact version and transitive-to-direct changes, restored the original lock and replayed the fixture. RS336 closes only M8-W02-C02-T2-G and readies M8-W02-C02-T2-V. The independent Verification remains pending; no new publication, production migration, all-library or semantic compatibility verdict is authorized.
