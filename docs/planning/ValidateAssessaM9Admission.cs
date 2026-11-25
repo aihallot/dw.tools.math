@@ -7,7 +7,7 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.130", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.131", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
@@ -35,9 +35,9 @@ Need(nativeWp["state"]!.GetValue<string>() == "in-progress" && phase["state"]!.G
 Need(phase["tasks"]!.AsArray().Count == 2, "Native plan must contain both tasks.");
 foreach (var task in phase["tasks"]!.AsArray().Select(x => x!.AsObject()))
 {
-    Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "in-progress" : "not-ready"), "Unexpected task progress.");
+    Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "done" : "ready"), "Unexpected task progress.");
     Need(task["subtasks"]!.AsArray().Count == 3, "Expected RED/GREEN/verify subtasks.");
-    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" => "done", "M9-W01-C01-T1-V" => "in-progress", _ => "not-ready" })),
+    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2-R" => "ready", _ => "not-ready" })),
         "Subtasks must not claim progress.");
 }
 Need(Record(releases, "M8")["status"]!.GetValue<string>() == "done", "M8 canonical reconciliation absent.");
@@ -110,7 +110,9 @@ Need((string?)productRed["status"] == "done" &&
     (string?)productRed["evidence"]![0] == ".aura/workflow/reports/RS351/attempt-001.json" &&
     (string?)productGreen["status"] == "done" && productGreen["evidence"]!.AsArray().Count == 1 &&
     (string?)productGreen["evidence"]![0] == ".aura/workflow/reports/RS353/attempt-001.json" &&
-    (string?)Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-V")["status"] == "ready", "Canonical durable GREEN closure and Verification readiness projection differs.");
+    (string?)Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-V")["status"] == "in_progress" &&
+    (string?)productTask["status"] == "in_progress" &&
+    (string?)Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["status"] == "planned", "Canonical durable Verification activation projection differs.");
 var greenReport = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS352/attempt-001.json"))!.AsObject();
 var greenProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS352/preparation-proof.json"))!.AsObject();
 var greenIds = greenReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
@@ -137,4 +139,33 @@ Need((string?)greenReport["runId"] == "RS352" && (string?)greenReport["outcome"]
     "RS352 durable GREEN qualification or compiled preparation proof differs.");
 Need(!greenReport["contribution"]!["observed"]!["changedPaths"]!.AsArray().Any(x =>
     ((string?)x)?.StartsWith("src/", StringComparison.Ordinal) == true), "GREEN modified production source.");
-Console.WriteLine("MATH-M9-RS354-VERIFICATION-ACTIVE|RS352=first-pass|validations=9|T1GREEN=done|T1Verification=in-progress|assessaAdoption=pending|PASS");
+var verificationReport = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS354/attempt-001.json"))!.AsObject();
+var verificationProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS354/preparation-proof.json"))!.AsObject();
+var verificationIds = verificationReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedVerificationIds = [
+    "m9-rs354-independent-source-report-and-blob-audit", "m9-rs354-authentic-source-oracle-replay",
+    "m9-rs354-targeted-bounded-sampling-replay", "m9-rs354-historical-admission",
+    "m9-rs354-native-verification-active", "m9-rs354-published-handoff",
+    "m9-rs354-request-reconciliation", "m9-rs354-m8-evidence-frontier",
+    "m9-rs354-planning-render-check", "diff-check"
+];
+var verificationTransitions = verificationReport["progress"]!["transitions"]!.AsArray();
+Need((string?)verificationReport["runId"] == "RS354" && (string?)verificationReport["outcome"] == "succeeded" &&
+    (int?)verificationReport["attempt"] == 1 && (string?)verificationReport["executor"]?["toolVersion"] == "0.1.76" &&
+    (string?)verificationReport["git"]?["commitMessage"] == "test: independently verify M9 bounded sampling source and replay" &&
+    (int?)verificationReport["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)verificationReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    verificationReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    (bool?)verificationReport["contribution"]?["observed"]?["mutationBoundaryClean"] == true &&
+    verificationReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    verificationTransitions.Count == 1 && (string?)verificationTransitions[0]?["id"] == "M9-W01-C01-T1-V" &&
+    (string?)verificationTransitions[0]?["beforeState"] == "ready" && (string?)verificationTransitions[0]?["afterState"] == "in-progress" &&
+    verificationIds.SequenceEqual(expectedVerificationIds, StringComparer.Ordinal) &&
+    (string?)verificationProof["runId"] == "RS354" &&
+    (string?)verificationProof["sourceCommit"] == "51ce6b3984d926aefd137942367ea8d318754cd4" &&
+    (bool?)verificationProof["payloadCompiled"] == true && (int?)verificationProof["rehearsedValidationCount"] == 10 &&
+    verificationProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(verificationIds, StringComparer.Ordinal),
+    "RS354 durable Verification or compiled preparation proof differs.");
+Need(!verificationReport["contribution"]!["observed"]!["changedPaths"]!.AsArray().Any(x =>
+    ((string?)x)?.StartsWith("src/", StringComparison.Ordinal) == true), "Verification modified production source.");
+Console.WriteLine("MATH-M9-RS355-SOURCE-CLOSURE|RS354=first-pass|validations=10|T1=done|T2RED=ready|assessaAdoption=pending|PASS");
