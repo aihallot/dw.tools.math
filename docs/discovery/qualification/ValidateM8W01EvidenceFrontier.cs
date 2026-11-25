@@ -57,6 +57,7 @@ using var rs326 = Load(".aura/workflow/reports/RS326/attempt-001.json");
 using var rs327 = Load(".aura/workflow/reports/RS327/attempt-001.json");
 using var rs328 = Load(".aura/workflow/reports/RS328/attempt-001.json");
 using var rs329 = Load(".aura/workflow/reports/RS329/attempt-001.json");
+using var rs331 = Load(".aura/workflow/reports/RS331/attempt-001.json");
 using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json");
 using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
@@ -116,7 +117,7 @@ var nextT1 = nextPhase.GetProperty("tasks").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1");
 var nextT2 = nextPhase.GetProperty("tasks").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T2");
-Need(nextT1.GetProperty("state").GetString() == "in-progress" &&
+Need(nextT1.GetProperty("state").GetString() == "done" &&
     nextT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-R")
         .GetProperty("state").GetString() == "done" &&
@@ -125,10 +126,11 @@ Need(nextT1.GetProperty("state").GetString() == "in-progress" &&
         .GetProperty("state").GetString() == "done" &&
     nextT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-V")
-        .GetProperty("state").GetString() == "in-progress" &&
-    nextT2.GetProperty("state").GetString() == "not-ready" &&
+        .GetProperty("state").GetString() == "done" &&
+    nextT2.GetProperty("state").GetString() == "ready" &&
     nextT2.GetProperty("subtasks").EnumerateArray()
-        .All(x => x.GetProperty("state").GetString() == "not-ready"),
+        .All(x => x.GetProperty("state").GetString() ==
+            (x.GetProperty("id").GetString() == "M8-W02-C02-T2-R" ? "ready" : "not-ready")),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
 foreach (var phase in w1.GetProperty("phases").EnumerateArray())
 {
@@ -725,6 +727,27 @@ Need(foundationSourceGreen.GetProperty("runId").GetString() == "RS329" &&
             v.GetProperty("id").GetString() ==
             "m8-rs329-isolated-foundation-net10-net11-parity-and-two-contract-refusals"),
     "RS329 independent Foundation cross-SDK GREEN or first-pass provenance changed.");
+var foundationVerification = rs331.RootElement;
+Need(foundationVerification.GetProperty("runId").GetString() == "RS331" &&
+    foundationVerification.GetProperty("outcome").GetString() == "succeeded" &&
+    foundationVerification.GetProperty("attempt").GetInt32() == 1 &&
+    foundationVerification.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.73" &&
+    foundationVerification.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    foundationVerification.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    foundationVerification.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    foundationVerification.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("id").GetString() == "M8-W02-C02-T1-V" &&
+    foundationVerification.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("afterState").GetString() == "in-progress" &&
+    foundationVerification.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-rs331-independent-foundation-source-evidence-and-three-refusals") &&
+    foundationVerification.GetProperty("contribution").GetProperty("observed")
+        .GetProperty("validations").EnumerateArray().Any(v =>
+            v.GetProperty("id").GetString() ==
+            "m8-rs331-targeted-foundation-dual-sdk-source-replay"),
+    "RS331 independent Foundation Verification provenance changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
