@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.129",
+  "plan_version": "0.1.130",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9725,7 +9725,7 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "RS352 durable source GREEN activation and qualification; GREEN closure and Verification readiness pending durable result.",
+      "readiness": "RS353 durable GREEN closure and Verification readiness; independent source identity and replay verification pending.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
@@ -9748,14 +9748,16 @@
               "id": "M9-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum generic source API for source implementation and exact oracle evidence.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS353/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Verify and document source implementation and exact oracle evidence.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]
