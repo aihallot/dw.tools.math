@@ -60,6 +60,8 @@ using var rs329 = Load(".aura/workflow/reports/RS329/attempt-001.json");
 using var rs331 = Load(".aura/workflow/reports/RS331/attempt-001.json");
 using var rs333 = Load(".aura/workflow/reports/RS333/attempt-001.json");
 using var rs335 = Load(".aura/workflow/reports/RS335/attempt-001.json");
+using var rs337 = Load(".aura/workflow/reports/RS337/attempt-001.json");
+using var rs337Proof = Load(".workflow/runs/RS337/preparation-proof.json");
 using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json");
 using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
@@ -129,14 +131,14 @@ Need(nextT1.GetProperty("state").GetString() == "done" &&
     nextT1.GetProperty("subtasks").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02-T1-V")
         .GetProperty("state").GetString() == "done" &&
-    nextT2.GetProperty("state").GetString() == "in-progress" &&
+    nextT2.GetProperty("state").GetString() == "done" &&
     nextT2.GetProperty("subtasks").EnumerateArray()
         .All(x => x.GetProperty("state").GetString() ==
             (x.GetProperty("id").GetString() switch
             {
                 "M8-W02-C02-T2-R" => "done",
                 "M8-W02-C02-T2-G" => "done",
-                "M8-W02-C02-T2-V" => "in-progress",
+                "M8-W02-C02-T2-V" => "done",
                 _ => "not-ready"
             })),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
@@ -790,6 +792,32 @@ Need(statisticsGreen.GetProperty("runId").GetString() == "RS335" &&
     statisticsGreen.GetProperty("contribution").GetProperty("observed").GetProperty("validations").EnumerateArray()
         .Any(v => v.GetProperty("id").GetString() == "m8-rs335-statistics-source-free-locked-consumer"),
     "RS335 bounded Statistics source-free GREEN provenance changed.");
+var statisticsVerification = rs337.RootElement;
+Need(statisticsVerification.GetProperty("runId").GetString() == "RS337" &&
+    statisticsVerification.GetProperty("outcome").GetString() == "succeeded" &&
+    statisticsVerification.GetProperty("attempt").GetInt32() == 1 &&
+    statisticsVerification.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.75" &&
+    statisticsVerification.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    statisticsVerification.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    statisticsVerification.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    statisticsVerification.GetProperty("progress").GetProperty("completions").GetArrayLength() == 0 &&
+    statisticsVerification.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("id").GetString() == "M8-W02-C02-T2-V" &&
+    statisticsVerification.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("afterState").GetString() == "in-progress" &&
+    statisticsVerification.GetProperty("contribution").GetProperty("observed").GetProperty("mutationBoundaryClean").GetBoolean(),
+    "RS337 independent Statistics Verification provenance changed.");
+var statisticsValidationIds = statisticsVerification.GetProperty("contribution").GetProperty("observed")
+    .GetProperty("validations").EnumerateArray().Select(v => v.GetProperty("id").GetString()).ToArray();
+Need(statisticsValidationIds.Length == 6 &&
+    statisticsValidationIds.Contains("m8-rs337-independent-statistics-package-evidence-and-three-refusals", StringComparer.Ordinal) &&
+    statisticsValidationIds.Contains("m8-rs337-targeted-statistics-locked-consumer-replay", StringComparer.Ordinal) &&
+    rs337Proof.RootElement.GetProperty("runId").GetString() == "RS337" &&
+    rs337Proof.RootElement.GetProperty("payloadCompiled").GetBoolean() &&
+    rs337Proof.RootElement.GetProperty("rehearsedValidationCount").GetInt32() == 6 &&
+    rs337Proof.RootElement.GetProperty("preparationValidationIds").EnumerateArray()
+        .Select(v => v.GetString()).SequenceEqual(statisticsValidationIds, StringComparer.Ordinal),
+    "RS337 independent compiled evidence and targeted replay proof differ.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
@@ -823,4 +851,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=done|W02C02=in-progress|W02C02T1=in-progress|W02C02RED=done|W02C02GREEN=done|W02C02VERIFY=ready|W02T1=done|W02T2=done|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=done|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=done|W02C02=in-progress|W02C02T1=done|W02C02RED=done|W02C02GREEN=done|W02C02VERIFY=done|W02C02T2=done|W02C02T2RED=done|W02C02T2GREEN=done|W02C02T2VERIFY=done|W02T1=done|W02T2=done|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=done|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
