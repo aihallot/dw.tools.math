@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "id": "RS351",
+  "title": "Complete qualified M9 source RED and ready existing implementation GREEN",
+  "state": "prepared",
+  "commitMessage": "chore: complete M9 sampling RED and ready GREEN",
+  "timeoutSeconds": 1500,
+  "projectNodes": [
+    "M9-W01-C01-T1-R",
+    "M9-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Close RED from RS350 independent falsification and ready GREEN without duplicating existing generator implementation.",
+    "value": "RS350 succeeded first-pass: the existing generator passed the independent BigInteger oracle and three compiled faulty variants were refused. RS351 reconciles the durable native activation into canonical backlog v0.1.127, then closes source RED and readies GREEN using actual current-run evidence, without repeating compilation of mutants. Preserve the prior sampling implementation, immutable private archives, Assessa boundary and M8 closure. Canonical RED remains in_progress for this run because its new completion is not yet durable; reconcile it after successful delivery. GREEN must qualify the existing implementation, not invent a source change.",
+    "debtChanges": [
+      "Project RS350 durable activation into the canonical backlog.",
+      "Corroborate the compiled three-mutant refusal evidence and close the RED leaf only.",
+      "Preserve source, prior packages and Assessa ownership; qualify existing source under GREEN."
+    ],
+    "nextAction": "Qualify the existing bounded sampling implementation in GREEN with current source regression evidence.",
+    "achievements": [
+      {
+        "projectNode": "M9-W01-C01-T1-R",
+        "achievement": "RS350 independently compiled the authentic SplitMix64 source and three controlled variants, accepted the authentic BigInteger rejection and signed-range oracle, and refused rejection bypass, budget overrun and corrupt signed encoding at runtime. RS351 corroborates its first-pass durable report and compiled preparation proof. This qualifies source falsification without inventing an implementation defect."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/decisions/m9-bounded-sampling-red-closure-rs351.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+  ],
+  "validations": [
+    {
+      "id": "m9-rs351-red-closure-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs351-native-red-done-green-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs351-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs351-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs351-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs351-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
