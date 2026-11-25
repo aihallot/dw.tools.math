@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "RS343",
+  "title": "Integrate measured ExactRational span optimization with dual-SDK and Quantities regression proof",
+  "state": "prepared",
+  "commitMessage": "perf: integrate qualified ExactRational span parsing optimization",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Integrate only the qualified span concatenation and validate the actual production-compatible source across SDKs.",
+    "value": "RS342 succeeded first-pass with the exact rational oracle and a measured allocation reduction for the isolated net11 variant. RS343 integrates precisely that one-line span concatenation into the actual Quantities source, using the existing compatible API without changing the production SDK or language level. The existing probe gains an explicit integrated mode, reconstructing the baseline solely by reversing the exact delta and compiling the actual integrated source on both SDKs. Both same-runtime allocation comparisons must improve and all exact/refusal checks must pass. The existing Quantities test project is run with locked restore. Historical published packages remain untouched; no new package publication, broad SDK migration or C02 closure is asserted. The net11 package graph was previously qualified before this source delta; fresh candidate packaging remains a subsequent acceptance boundary.",
+    "debtChanges": [
+      "Integrate one exact source delta after RS342 first-pass evidence; no TFM, SDK, API or archive change.",
+      "Reuse and extend the existing probe to test the actual integrated source with both SDKs and same-runtime allocation comparisons.",
+      "Run existing Quantities tests with locked restore; retain phase acceptance pending fresh candidate package proof."
+    ],
+    "nextAction": "Rebuild and qualify the isolated net11 package graph from the integrated source before reassessing C02 acceptance.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "src/projects/dw.quantities/ExactRational.cs",
+    "docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs",
+    "docs/planning/decisions/m8-w02-c02-exact-rational-span-integration-rs343.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs343-integrated-exact-rational-dual-sdk-oracle",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs",
+        "--",
+        "--check-integrated"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1000
+    },
+    {
+      "id": "m8-rs343-quantities-regression-locked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "test",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "--configuration",
+        "Release",
+        "-p:RestoreLockedMode=true"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 600
+    },
+    {
+      "id": "m8-rs343-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs343-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
