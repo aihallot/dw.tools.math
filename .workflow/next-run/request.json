@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "id": "RS342",
+  "title": "Qualify a measured isolated ExactRational span modernization candidate",
+  "commitMessage": "test: qualify measured ExactRational span modernization candidate",
+  "timeoutSeconds": 1600,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Qualify a concrete isolated exact decimal parsing source delta across SDK baselines and measure same-runtime allocation improvement.",
+    "value": "RS341 succeeded first-pass and independently corroborated the new isolated net11 Statistics/Quantities graph. RS342 qualifies a measured, narrowly targeted ExactRational decimal parser modernization within the Quantities candidate: concatenate existing spans directly rather than allocating two temporary strings. It uses an actual isolated source delta, an independent rational oracle, format/refusal checks and a same-runtime allocation comparison against the unchanged net11 baseline, with the net10 baseline also exercised. The span overload is not exclusive to net11; this is a migration candidate and allocation improvement, not a claim about a new C#15 API or production SDK migration. No original source, published archive, canonical acceptance status or production configuration is changed.",
+    "debtChanges": [
+      "Reuse the original ExactRational source and preserve the exact rational contract with independently specified values and format refusals.",
+      "Measure allocated bytes for original and modified net11 copies, with an unchanged net10 baseline; no throughput or cross-platform claim.",
+      "Keep production source, SDK, immutable packages and phase closure unchanged."
+    ],
+    "nextAction": "Review durable measured source candidate evidence and integrate or explicitly dispose of the targeted migration acceptance gap.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs",
+    "docs/engineering/fixtures/M8ExactRationalSpanModernizationConsumer.cs",
+    "docs/planning/decisions/m8-w02-c02-exact-rational-span-candidate-rs342.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs"
+    },
+    {
+      "path": "docs/engineering/fixtures/M8ExactRationalSpanModernizationConsumer.cs",
+      "sourcePath": "files/docs/engineering/fixtures/M8ExactRationalSpanModernizationConsumer.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w02-c02-exact-rational-span-candidate-rs342.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w02-c02-exact-rational-span-candidate-rs342.md"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+      "sourcePath": "files/docs/engineering/m8-net11-csharp15-migration-evidence.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.76"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M8-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M8-W02-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.27"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json",
+      "jsonPointer": "/status",
+      "expectedValue": "acceptance-incomplete"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json",
+      "jsonPointer": "/boundedNewNet11PackageGraphQualified",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS341/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-rs342-exact-rational-source-delta-oracle-and-allocation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02ExactRationalSpanModernization.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 900,
+      "packs": []
+    },
+    {
+      "id": "m8-rs342-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m8-rs342-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
