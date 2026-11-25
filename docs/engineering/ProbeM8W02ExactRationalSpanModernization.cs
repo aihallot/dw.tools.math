@@ -5,7 +5,9 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text.Json;
 
-if (args.Length != 1 || args[0] != "--check") throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || (args[0] != "--check" && args[0] != "--check-integrated"))
+    throw new ArgumentException("Expected --check or --check-integrated.");
+var integrated = args[0] == "--check-integrated";
 if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("RS342 bounds Windows SDKs.");
 const string Source = "src/projects/dw.quantities/ExactRational.cs";
 const string Fixture = "docs/engineering/fixtures/M8ExactRationalSpanModernizationConsumer.cs";
@@ -15,11 +17,15 @@ const string Old = "var digits = string.Concat(integral.IsEmpty ? \"0\" : integr
 const string New = "var digits = string.Concat(integral.IsEmpty ? \"0\".AsSpan() : integral, fractional);";
 var tracked = new[] { Source, Fixture, Risk, Profile, "global.json", "Directory.Build.props",
     "src/projects/dw.quantities/dw.quantities.csproj" }.ToDictionary(x => x, Hash, StringComparer.Ordinal);
-var original = File.ReadAllText(Source);
-Need(original.Split(Old, StringSplitOptions.None).Length == 2 && !original.Contains(New, StringComparison.Ordinal),
-    "Expected exact original source anchor.");
+var actual = File.ReadAllText(Source);
+Need(integrated
+    ? actual.Split(New, StringSplitOptions.None).Length == 2 && !actual.Contains(Old, StringComparison.Ordinal)
+    : actual.Split(Old, StringSplitOptions.None).Length == 2 && !actual.Contains(New, StringComparison.Ordinal),
+    "Expected exact source anchor for selected mode.");
+var original = integrated ? actual.Replace(New, Old, StringComparison.Ordinal) : actual;
 var candidate = original.Replace(Old, New, StringComparison.Ordinal);
-Need(candidate.Replace(New, Old, StringComparison.Ordinal) == original, "Unexpected source delta.");
+Need(candidate.Replace(New, Old, StringComparison.Ordinal) == original && (!integrated || candidate == actual),
+    "Unexpected source delta.");
 using (var risk = JsonDocument.Parse(File.ReadAllText(Risk)))
 using (var profile = JsonDocument.Parse(File.ReadAllText(Profile)))
     Need(risk.RootElement.GetProperty("gates").GetProperty("migrationAuthorization").GetString() == "not-granted" &&
@@ -50,7 +56,7 @@ long RunCase(string name, int major, bool changed)
         "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><IsPackable>false</IsPackable>" +
         "<NuGetAudit>false</NuGetAudit></PropertyGroup></Project>\n");
     var source = Path.Combine(root, "ExactRational.cs");
-    if (changed) File.WriteAllText(source, candidate); else File.Copy(Source, source);
+    if (changed == integrated) File.Copy(Source, source); else File.WriteAllText(source, changed ? candidate : original);
     File.Copy(Fixture, Path.Combine(root, "Program.cs"));
     Need(File.ReadAllText(source) == (changed ? candidate : original), "Source copy drift.");
     var sdk = Pass(root, "--version").Trim();
@@ -69,11 +75,18 @@ long RunCase(string name, int major, bool changed)
 var net10 = RunCase("net10-original", 10, false);
 var net11 = RunCase("net11-original", 11, false);
 var modernized = RunCase("net11-candidate", 11, true);
+if (integrated)
+{
+    var currentNet10 = RunCase("net10-integrated", 10, true);
+    Need(currentNet10 < net10, "Integrated net10 source did not reduce same-runtime allocations.");
+    Console.WriteLine("MATH-RS343-NET10-INTEGRATED|baseline=" + net10 + "|candidate=" + currentNet10 + "|PASS");
+}
 Need(modernized < net11, "Candidate did not reduce measured same-runtime allocations.");
 foreach (var item in tracked) Need(Hash(item.Key) == item.Value, "Original changed: " + item.Key);
 Console.WriteLine("MATH-RS342-SPAN-MODERNIZATION|net10=" + net10 + "|net11=" + net11 +
     "|candidate=" + modernized + "|saved=" + (net11 - modernized) +
     "|iterations=4096|scope=isolated-source|productionMutation=false|PASS");
+if (integrated) Console.WriteLine("MATH-RS343-INTEGRATED|source=actual-repository|net10=PASS|net11=PASS|allocationReduction=both|PASS");
 
 static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexStringLower(SHA256.HashData(stream)); }
 static void Need(bool ok, string why) { if (!ok) throw new InvalidDataException("RS342: " + why); }

@@ -68,7 +68,7 @@ public readonly record struct ExactRational : IComparable<ExactRational>
             throw new FormatException("The exact decimal must use invariant base-10 notation.");
         }
 
-        var digits = string.Concat(integral.IsEmpty ? "0" : integral.ToString(), fractional.ToString());
+        var digits = string.Concat(integral.IsEmpty ? "0".AsSpan() : integral, fractional);
         var numerator = BigInteger.Parse(digits, NumberStyles.None, CultureInfo.InvariantCulture);
         if (sign < 0)
         {
