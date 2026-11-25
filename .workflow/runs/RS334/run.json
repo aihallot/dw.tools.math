@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "RS334",
+  "title": "Close source-free package consumer RED and ready bounded package GREEN",
+  "state": "prepared",
+  "commitMessage": "chore: close source-free package RED and ready GREEN",
+  "timeoutSeconds": 1050,
+  "projectNodes": [
+    "M8-W02-C02-T2-R",
+    "M8-W02-C02-T2-G"
+  ],
+  "contribution": {
+    "summary": "Close the independently tested package acceptance RED and ready only the bounded source-free package GREEN.",
+    "value": "RS333 succeeded first-pass with DWF 0.1.75 and six validations. Its eight policy-level refusals established exact version, isolated feed, locked restore, source-free and binary identity requirements, rejected unsupported scope and preserved migration and publication refusal. RS334 closes only RED and readies GREEN. Actual source-free consumer execution and physical package qualification remain future evidence; three historical archive closures, ten unqualified closures and thirteen unqualified semantic verdicts remain unchanged.",
+    "debtChanges": [
+      "RS333 first-pass passed all eight acceptance-declaration negative controls with no mutation-boundary violation.",
+      "RED closure is limited to the acceptance policy; actual package identity, locked restore and runtime proof remain pending.",
+      "Preserve the existing immutable archives, SDK baseline and migration refusal."
+    ],
+    "nextAction": "Activate GREEN with one exact existing immutable package and an actual isolated source-free locked consumer; qualify its runtime contract and physical identity without publication.",
+    "achievements": [
+      {
+        "projectNode": "M8-W02-C02-T2-R",
+        "achievement": "RS333 established a fail-closed source-free package consumer acceptance profile and rejected eight weakened in-memory declarations, including source references, floating versions, ambient feeds, unlocked restore, missing physical identity and unsupported selection, scope or publication. Six validations passed first-pass. This is policy evidence only, not actual package consumption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+    "docs/planning/decisions/m8-w02-c02-t2-package-red-closure-rs334.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs334-source-free-consumer-red-eight-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02SourceFreeConsumerRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "m8-rs334-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs334-official-delta-compatibility-still-unqualified",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM8W02OfficialDeltaMatrix.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs334-native-package-red-done-green-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "m8-rs334-verified-rs333-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 270
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
