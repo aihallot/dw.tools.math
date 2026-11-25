@@ -7,7 +7,7 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.129", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.130", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
@@ -37,7 +37,7 @@ foreach (var task in phase["tasks"]!.AsArray().Select(x => x!.AsObject()))
 {
     Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "in-progress" : "not-ready"), "Unexpected task progress.");
     Need(task["subtasks"]!.AsArray().Count == 3, "Expected RED/GREEN/verify subtasks.");
-    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" => "done", "M9-W01-C01-T1-V" => "ready", _ => "not-ready" })),
+    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" => "done", "M9-W01-C01-T1-V" => "in-progress", _ => "not-ready" })),
         "Subtasks must not claim progress.");
 }
 Need(Record(releases, "M8")["status"]!.GetValue<string>() == "done", "M8 canonical reconciliation absent.");
@@ -108,8 +108,9 @@ var productGreen = Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-G")
 Need((string?)productRed["status"] == "done" &&
     productRed["evidence"]!.AsArray().Count == 1 &&
     (string?)productRed["evidence"]![0] == ".aura/workflow/reports/RS351/attempt-001.json" &&
-    (string?)productGreen["status"] == "in_progress" && productGreen["evidence"]!.AsArray().Count == 0 &&
-    (string?)Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-V")["status"] == "planned", "Canonical durable RED closure and GREEN activation projection differs.");
+    (string?)productGreen["status"] == "done" && productGreen["evidence"]!.AsArray().Count == 1 &&
+    (string?)productGreen["evidence"]![0] == ".aura/workflow/reports/RS353/attempt-001.json" &&
+    (string?)Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-V")["status"] == "ready", "Canonical durable GREEN closure and Verification readiness projection differs.");
 var greenReport = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS352/attempt-001.json"))!.AsObject();
 var greenProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS352/preparation-proof.json"))!.AsObject();
 var greenIds = greenReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
@@ -136,4 +137,4 @@ Need((string?)greenReport["runId"] == "RS352" && (string?)greenReport["outcome"]
     "RS352 durable GREEN qualification or compiled preparation proof differs.");
 Need(!greenReport["contribution"]!["observed"]!["changedPaths"]!.AsArray().Any(x =>
     ((string?)x)?.StartsWith("src/", StringComparison.Ordinal) == true), "GREEN modified production source.");
-Console.WriteLine("MATH-M9-RS353-GREEN-CLOSURE|RS352=first-pass|validations=9|T1GREEN=done|T1Verification=ready|assessaAdoption=pending|PASS");
+Console.WriteLine("MATH-M9-RS354-VERIFICATION-ACTIVE|RS352=first-pass|validations=9|T1GREEN=done|T1Verification=in-progress|assessaAdoption=pending|PASS");

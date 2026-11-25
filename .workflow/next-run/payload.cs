@@ -2,37 +2,44 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS352", 1, "test: qualify existing M9 bounded sampling GREEN", "0.1.76", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS353", 1, "chore: complete M9 sampling GREEN and ready Verification", "0.1.76", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1", "in-progress");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-R", "done");
+p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T2", "not-ready");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.128"), JsonValue.Create("0.1.129"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.129"), JsonValue.Create("0.1.130"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.27"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9AssessaPublishedHandoff.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-sampling-green-closure-rs353.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-sampling-verification-rs354.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/VerifyM9BoundedSamplingSource.cs"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     var version = (string?)doc["plan_version"];
-    if (version is not ("0.1.128" or "0.1.129")) throw new InvalidOperationException("Backlog version differs.");
-    var target = version == "0.1.129";
+    if (version is not ("0.1.129" or "0.1.130")) throw new InvalidOperationException("Backlog version differs.");
+    var target = version == "0.1.130";
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
     var chunk = Find(doc, "chunks", "M9-W01-C01");
     var task = Find(chunk, "tasks", "M9-W01-C01-T1");
-    var green = Find(task, "subtasks", "M9-W01-C01-T1-G");
     var red = Find(task, "subtasks", "M9-W01-C01-T1-R");
+    var green = Find(task, "subtasks", "M9-W01-C01-T1-G");
     var verification = Find(task, "subtasks", "M9-W01-C01-T1-V");
-    if ((string?)red["status"] != "done" || (string?)green["status"] != (target ? "in_progress" : "ready") ||
-        (string?)verification["status"] != "planned" || green["evidence"]!.AsArray().Count != 0)
-        throw new InvalidOperationException("Unexpected canonical GREEN activation baseline.");
-    green["status"] = "in_progress";
-    chunk["readiness"] = "RS352 durable source GREEN activation and qualification; GREEN closure and Verification readiness pending durable result.";
-    doc["plan_version"] = "0.1.129";
+    const string evidencePath = ".aura/workflow/reports/RS353/attempt-001.json";
+    var evidence = green["evidence"]!.AsArray();
+    if ((string?)red["status"] != "done" || (string?)green["status"] != (target ? "done" : "in_progress") ||
+        (string?)verification["status"] != (target ? "ready" : "planned") ||
+        (target ? evidence.Count != 1 || (string?)evidence[0] != evidencePath : evidence.Count != 0))
+        throw new InvalidOperationException("Unexpected canonical GREEN closure baseline.");
+    green["status"] = "done";
+    green["evidence"] = p.Json.StringArray(evidencePath);
+    verification["status"] = "ready";
+    chunk["readiness"] = "RS353 durable GREEN closure and Verification readiness; independent source identity and replay verification pending.";
+    doc["plan_version"] = "0.1.130";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
@@ -49,6 +56,5 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ConvergeNodeToDone("M9-W01-C01-T1-G");
-p.ProjectPlan.TransitionNode("M9-W01-C01-T1-V", "not-ready", "ready");
+p.ProjectPlan.ActivateReadyContinuation("M9-W01-C01-T1-V");
 return p.Complete();
