@@ -382,3 +382,7 @@ Product plan version `0.1.126` projects the durable RS349 readiness; native M8 r
 ## RS351 — M9 activation reconciliation
 
 Product plan version `0.1.127` projects durable RS350 native activation. The historical M8 scope is unchanged.
+
+## RS352 — M9 RED closure reconciliation
+
+Product plan version `0.1.128` projects durable RS351 RED closure and GREEN readiness; M8 remains closed.

@@ -3,7 +3,9 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 
-if (args.Length != 1 || args[0] != "--check") throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || (args[0] != "--check" && args[0] != "--check-original"))
+    throw new ArgumentException("Expected --check or --check-original.");
+var originalOnly = args[0] == "--check-original";
 const string Source = "src/projects/dw.tools.math.statistics/SplitMix64Random.cs";
 const string Fixture = "docs/engineering/fixtures/M9BoundedSamplingRedOracle.cs";
 var original = File.ReadAllText(Source);
@@ -17,7 +19,7 @@ var cases = new (string Name, string Old, string New, string Refusal)[]
     ("signed", "^ signBit));", "^ (signBit >> 1)));", "signed interval")
 };
 Run("original", original, "");
-foreach (var item in cases)
+foreach (var item in originalOnly ? Array.Empty<(string Name, string Old, string New, string Refusal)>() : cases)
 {
     if (original.Split(item.Old, StringSplitOptions.None).Length != 2)
         throw new InvalidDataException("Mutation anchor differs: " + item.Name);
@@ -26,7 +28,8 @@ foreach (var item in cases)
 foreach (var item in inputHashes)
     if (Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(item.Key))) != item.Value)
         throw new InvalidDataException("Original input changed: " + item.Key);
-Console.WriteLine("MATH-RS350-RED|original=PASS|compiledMutantsRefused=3|productionMutation=false|PASS");
+Console.WriteLine(originalOnly ? "MATH-RS352-GREEN|original=PASS|productionMutation=false|PASS" :
+    "MATH-RS350-RED|original=PASS|compiledMutantsRefused=3|productionMutation=false|PASS");
 
 void Run(string name, string source, string refusal)
 {
