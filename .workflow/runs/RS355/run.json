@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "RS355",
+  "title": "Close M9 source Verification and task and ready package RED",
+  "state": "prepared",
+  "commitMessage": "chore: close M9 sampling source and ready package RED",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M9-W01-C01-T1",
+    "M9-W01-C01-T1-V",
+    "M9-W01-C01-T2",
+    "M9-W01-C01-T2-R"
+  ],
+  "contribution": {
+    "summary": "Reconcile durable RS354 Verification activation, close the source task, and ready package qualification RED.",
+    "value": "RS354 independently corroborated exact source, codec, oracle, tests and contract identities and both earlier report/proof pairs, and replayed the authentic-source oracle and locked targeted sampling tests. All ten validation identities match the durable proof. Project activation to canonical backlog 0.1.131, close native Verification and T1 and ready T2 RED. Canonical completion awaits durable RS355 delivery. Do not replay expensive tests, modify source, publish packages or claim Assessa adoption.",
+    "debtChanges": [
+      "Reconcile RS354 durable Verification activation.",
+      "Close native source Verification and task with durable evidence.",
+      "Ready independent qualification of the existing immutable candidate."
+    ],
+    "nextAction": "Reconcile durable T1 closure and independently falsify the T2 package-only consumer acceptance boundary.",
+    "achievements": [
+      {
+        "projectNode": "M9-W01-C01-T1-V",
+        "achievement": "RS354 independently audited six qualified source and contract Git identities and the RS352/RS353 report-proof pairs, then passed the authentic oracle and locked targeted sampling tests. RS355 corroborates its first-pass report and all ten compiled preparation validations."
+      },
+      {
+        "projectNode": "M9-W01-C01-T1",
+        "achievement": "Source RED, GREEN and independent Verification are qualified through RS350\u2013RS354 and closed in their native lifecycle. The bounded integer rejection, budget, signed range, checkpoint and replay contract is qualified without changing production source or claiming package or Assessa adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m9-bounded-sampling-source-closure-rs355.md"
+  ],
+  "validations": [
+    {
+      "id": "m9-rs355-independent-source-report-and-blob-audit",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM9BoundedSamplingSource.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-verification-closure-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-native-source-done-package-red-ready",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs355-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
