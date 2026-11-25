@@ -134,7 +134,7 @@ Need(nextT1.GetProperty("state").GetString() == "done" &&
             (x.GetProperty("id").GetString() switch
             {
                 "M8-W02-C02-T2-R" => "done",
-                "M8-W02-C02-T2-G" => "ready",
+                "M8-W02-C02-T2-G" => "in-progress",
                 _ => "not-ready"
             })),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
