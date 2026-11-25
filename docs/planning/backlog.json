@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.131",
+  "plan_version": "0.1.132",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9725,15 +9725,17 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "RS354 durable Verification activation and independent source replay; T1 closure and T2 RED readiness pending durable result.",
+      "readiness": "RS355 durable source closure and package RED readiness; falsify the immutable package consumer boundary.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
           "title": "Unbiased sampling and replay contract",
           "behavior": "Versioned integer selection with unbiased rejection, bounded raw draw count and checkpoint compatibility.",
           "test_case": "0/1/2/3/extreme bounds, inclusive range overflow, forced rejection, golden replay and exhausted counter.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS355/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M9-W01-C01-T1-R",
@@ -9757,8 +9759,10 @@
               "id": "M9-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Verify and document source implementation and exact oracle evidence.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS355/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9767,14 +9771,14 @@
           "title": "Immutable candidate and independent net11 consumer",
           "behavior": "Qualify candidate package identity and explicit package-only .NET 11 consumer, without claiming publication.",
           "test_case": "Exact package graph, source-free PackageReference load, checksum, seed/replay/budget proof, and no archive overwrite.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M9-W01-C01-T2-R",
               "title": "RED",
               "description": "Write independent failing oracles for candidate package and external consumer evidence.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
