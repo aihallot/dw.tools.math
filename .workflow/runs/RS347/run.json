@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "RS347",
+  "title": "Complete bounded M8 internal milestone from both qualified work packages",
+  "state": "prepared",
+  "commitMessage": "chore: close bounded M8 internal qualification milestone",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Close the internal M8 qualification milestone on both completed work packages without release or production migration.",
+    "value": "RS346 succeeded first-pass under DWF 0.1.76 and closed M8-W02. RS313 durably closed M8-W01 with four selected CLR capabilities and bounded deterministic opt-in Discovery delivery. The four required phases are done; RS347 closes M8 as a bounded internal qualification milestone, not a public package release, external broker grant or production SDK migration. The accepted Discovery unsigned/runtime-only boundary and modernization limitations remain intact. M9 stays not-ready. Canonical backlog v0.1.124 remains the pre-reconciliation baseline for this run; after the durable M8 result, reconcile the product statuses and generated projections before admitting M9.",
+    "debtChanges": [
+      "Corroborate durable RS313 Discovery and RS346 modernization work package completions and all four required phases.",
+      "Preserve unsigned/runtime-only Discovery, broader modernization gaps, production SDK and publication refusal.",
+      "Canonical product backlog and generated projection reconciliation remains mandatory before M9 admission."
+    ],
+    "nextAction": "Reconcile M8 canonical product status and generated projections from the durable milestone result before M9 admission.",
+    "achievements": [
+      {
+        "projectNode": "M8",
+        "achievement": "M8 completes bounded internal Math Discovery (thirteen protocol cases, four selected CLR operations and deterministic opt-in unsigned skill delivery) and independent modernization assessment (thirteen-source audit, measured ExactRational integration and isolated locked two-package net11 consumer). No external broker grant, global compatibility, production SDK migration or publication is implied."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/AssessM8W02C02Acceptance.cs",
+    "docs/planning/decisions/m8-bounded-internal-milestone-closure-rs347.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs347-bounded-canonical-acceptance-and-four-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/AssessM8W02C02Acceptance.cs",
+        "--",
+        "--check-closure"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 260
+    },
+    {
+      "id": "m8-rs347-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs347-native-m8-milestone-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "m8-rs347-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 270
+    }
+  ]
+}
