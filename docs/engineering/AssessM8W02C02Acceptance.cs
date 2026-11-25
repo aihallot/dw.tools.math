@@ -169,8 +169,9 @@ static void CheckClosure()
     var m8 = Find(plan, "milestones", "M8");
     var w2 = Find(m8, "workPackages", "M8-W02");
     var phase = Find(w2, "phases", "M8-W02-C02");
-    Need(m8["state"]?.GetValue<string>() == "in-progress" &&
+    Need((m8["state"]?.GetValue<string>() is "in-progress" or "done") &&
         (w2["state"]?.GetValue<string>() is "in-progress" or "done") &&
+        (m8["state"]?.GetValue<string>() != "done" || w2["state"]?.GetValue<string>() == "done") &&
         phase["state"]?.GetValue<string>() == "done" &&
         phase["tasks"]!.AsArray().Count == 2 &&
         phase["tasks"]!.AsArray().All(t => t?["state"]?.GetValue<string>() == "done") &&

@@ -1,0 +1,3 @@
+# RS347 — bounded M8 internal milestone closure
+
+RS346 succeeded first-pass under DWF 0.1.76 and closed M8-W02. RS313 durably closed M8-W01 with four selected CLR capabilities and bounded deterministic opt-in Discovery delivery. The four required phases are done; RS347 closes M8 as a bounded internal qualification milestone, not a public package release, external broker grant or production SDK migration. The accepted Discovery unsigned/runtime-only boundary and modernization limitations remain intact. M9 stays not-ready. Canonical backlog v0.1.124 remains the pre-reconciliation baseline for this run; after the durable M8 result, reconcile the product statuses and generated projections before admitting M9.
