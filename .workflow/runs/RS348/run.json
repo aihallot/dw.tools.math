@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "id": "RS348",
+  "title": "Reconcile completed M8 canonical backlog and regenerate planning projections",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile completed M8 canonical planning projections",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M8"
+  ],
+  "contribution": {
+    "summary": "Reconcile the canonical M8 roster to durable DWF completion evidence and regenerate authoritative projections.",
+    "value": "RS347 durably closed M8 first-pass under DWF 0.1.76. RS348 reconciles canonical backlog v0.1.124 to v0.1.125 using the exact native M8 node roster and actual successful completion reports, requiring a matching durable completion for each of 39 nodes. The existing ValidatePlan renderer regenerates all canonical projections in the payload; observational validation checks exact rendered output. M9 and its statuses remain unchanged, as do other product scope and all existing release and migration limitations. No new native completion, publication, external broker grant or production SDK migration is declared.",
+    "debtChanges": [
+      "Reconcile each of 39 M8 nodes from actual successful completion reports, preserving all unrelated canonical scope.",
+      "Use the existing planning renderer in the payload, not a duplicated renderer or manual projection edits.",
+      "Keep M9 not-ready, production SDK and published packages unchanged."
+    ],
+    "nextAction": "Admit the next bounded M9 scope only after durable canonical reconciliation succeeds.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/decisions/m8-canonical-backlog-reconciliation-rs348.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs348-canonical-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs348-native-m8-reconciled",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "m8-rs348-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 270
+    }
+  ]
+}
