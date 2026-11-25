@@ -24,6 +24,7 @@ Backlog projection. Coverage means planned responsibility, not acquired qualific
 | USER-DWF | Complete hierarchy, .NET validation, and observational preparation | M0-W01-C01, M0-W01-C02 |
 | USER-BOUNDARY | Cross-agent prompts, no cross-repository writes | M0-W02-C03, M1-W03-C02, M3-W02-C04, M6-W02-C05 |
 | USER-CONSUMERS | Transitive nutrition/data/Decision/MCDM consumers | M1-W03-C02, M3-W02-C04 |
+| ASSSESSA-EG-A-01 | Assessa EG-A-01 generic bounded integer PRNG requirement | M9-W01-C01 |
 
 ## V1 framing criteria
 

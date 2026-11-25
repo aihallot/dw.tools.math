@@ -370,3 +370,7 @@ RS345 succeeded first-pass under DWF 0.1.76 and closed C02 with bounded acceptan
 ## RS347 — bounded M8 internal milestone closure
 
 RS346 succeeded first-pass under DWF 0.1.76 and closed M8-W02. RS313 durably closed M8-W01 with four selected CLR capabilities and bounded deterministic opt-in Discovery delivery. The four required phases are done; RS347 closes M8 as a bounded internal qualification milestone, not a public package release, external broker grant or production SDK migration. The accepted Discovery unsigned/runtime-only boundary and modernization limitations remain intact. M9 stays not-ready. Canonical backlog v0.1.124 remains the pre-reconciliation baseline for this run; after the durable M8 result, reconcile the product statuses and generated projections before admitting M9.
+
+## RS348 — canonical backlog reconciliation
+
+Product plan version `0.1.125` is the reconciled M8 baseline. RS347 durably closed M8 first-pass under DWF 0.1.76. RS348 reconciles canonical backlog v0.1.124 to v0.1.125 using the exact native M8 node roster and actual successful completion reports, requiring a matching durable completion for each of 39 nodes. The existing ValidatePlan renderer regenerates all canonical projections in the payload; observational validation checks exact rendered output. M9 and its statuses remain unchanged, as do other product scope and all existing release and migration limitations. No new native completion, publication, external broker grant or production SDK migration is declared.
