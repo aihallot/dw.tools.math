@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.127",
+  "plan_version": "0.1.128",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9725,7 +9725,7 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "Native source RED activation and independent oracle qualification delivered in RS350; RED closure and GREEN readiness pending durable result.",
+      "readiness": "RS351 durable source RED closure and GREEN readiness; qualify current implementation without source rewrite.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
@@ -9739,14 +9739,16 @@
               "id": "M9-W01-C01-T1-R",
               "title": "RED",
               "description": "Write independent failing oracles for source implementation and exact oracle evidence.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS351/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum generic source API for source implementation and exact oracle evidence.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {

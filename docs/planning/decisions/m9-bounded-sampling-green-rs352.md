@@ -1,0 +1,3 @@
+# RS352 — bounded sampling GREEN qualification
+
+RS351 durably closed source RED and readied GREEN. RS352 projects that closure and readiness to canonical backlog v0.1.128, activates GREEN, runs the full current Statistics project regression suite with locked restore, and reuses the existing independent oracle in authentic-source-only mode. The prior three compiled mutant refusals remain durable; no production source change is needed to make an already implemented contract pass. Preserve package identities and Assessa boundaries. GREEN completion requires a separate durable result review; no new completion or publication is claimed.
