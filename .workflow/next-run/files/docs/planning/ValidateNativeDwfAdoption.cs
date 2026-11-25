@@ -39,9 +39,9 @@ try
         Require(!actual.ContainsKey(id), "Historical C01 subtask must not be backfilled: " + id + ".");
 
     RequireState(actual, "M8", "done");
-    RequireState(actual, "M9", "not-ready");
+    RequireState(actual, "M9", "ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
-        RequireState(actual, entry.Key, "not-ready");
+        RequireState(actual, entry.Key, entry.Key is "M9-W01" or "M9-W01-C01" or "M9-W01-C01-T1" or "M9-W01-C01-T1-R" ? "ready" : "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
             entry.Key switch

@@ -897,7 +897,7 @@ Need(milestoneProduct.GetProperty("gate").GetString() == "G-M8" &&
         "Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer." &&
     milestoneProduct.GetProperty("status").GetString() == "done" &&
     native.RootElement.GetProperty("milestones").EnumerateArray()
-        .Single(v => v.GetProperty("id").GetString() == "M9").GetProperty("state").GetString() == "not-ready",
+        .Single(v => v.GetProperty("id").GetString() == "M9").GetProperty("state").GetString() == "ready",
     "Canonical M8 outcome or deferred reconciliation boundary differs.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;

@@ -1,0 +1,5 @@
+# RS349 — evidence-aware M9 readiness
+
+RS348 first-pass reconciled all 39 M8 nodes and regenerated canonical backlog v0.1.125. M9 already has real historical source and private package evidence (RS267-RS278), but no native task completions. RS349 corroborates exact report provenance and readiness prerequisites, preserves first-pass failures and the Assessa ownership boundary, and transitions only M9, W01, C01, T1 and T1 RED from not-ready to ready. Do not backfill invented RED/GREEN/Verification achievements, replay publication, alter the sampling API or claim Assessa adoption. Other M9 nodes remain not-ready. Canonical M9 remains planned pending the durable readiness projection; subsequent work must use actual bounded acceptance and refusal evidence.
+
+The historical Math-owned private package is `dw.tools.math.statistics 20260.20261120.1001`, not a newly published version. Existing reports retain their actual success and preselection failure counts. Native readiness is not historical task completion. The next bounded run must activate and falsify the current source acceptance contract independently of Assessa adoption.
