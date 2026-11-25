@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "id": "RS349",
+  "title": "Ready M9 bounded integer sampling with historical source and package evidence reconciliation",
+  "commitMessage": "chore: ready M9 bounded sampling from durable evidence",
+  "timeoutSeconds": 1500,
+  "projectNodes": [
+    "M9",
+    "M9-W01",
+    "M9-W01-C01",
+    "M9-W01-C01-T1",
+    "M9-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Admit the M9 native readiness path using actual historical evidence without inventing task completions.",
+    "value": "RS348 first-pass reconciled all 39 M8 nodes and regenerated canonical backlog v0.1.125. M9 already has real historical source and private package evidence (RS267-RS278), but no native task completions. RS349 corroborates exact report provenance and readiness prerequisites, preserves first-pass failures and the Assessa ownership boundary, and transitions only M9, W01, C01, T1 and T1 RED from not-ready to ready. Do not backfill invented RED/GREEN/Verification achievements, replay publication, alter the sampling API or claim Assessa adoption. Other M9 nodes remain not-ready. Canonical M9 remains planned pending the durable readiness projection; subsequent work must use actual bounded acceptance and refusal evidence.",
+    "debtChanges": [
+      "Recognize RS267-RS278 source, candidate, private publication and Windows/Linux evidence with exact prior failure counts.",
+      "Ready only the first native task and RED leaf; do not manufacture historical lifecycle transitions.",
+      "Preserve all package identities, existing sampling implementation, and Assessa ownership."
+    ],
+    "nextAction": "Reconcile canonical M9 readiness and activate the bounded source RED with independent current-contract falsification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/AssessM8W02C02Acceptance.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/decisions/m9-evidence-aware-readiness-rs349.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "docs/engineering/AssessM8W02C02Acceptance.cs",
+      "sourcePath": "files/docs/engineering/AssessM8W02C02Acceptance.cs"
+    },
+    {
+      "path": "docs/planning/ValidateAssessaM9Admission.cs",
+      "sourcePath": "files/docs/planning/ValidateAssessaM9Admission.cs"
+    },
+    {
+      "path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+      "sourcePath": "files/docs/engineering/ValidateM9AssessaPublishedHandoff.cs"
+    },
+    {
+      "path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+      "sourcePath": "files/docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m9-evidence-aware-readiness-rs349.md",
+      "sourcePath": "files/docs/planning/decisions/m9-evidence-aware-readiness-rs349.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.76"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.125"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.27"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json",
+      "jsonPointer": "/status",
+      "expectedValue": "acceptance-incomplete"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json",
+      "jsonPointer": "/boundedNewNet11PackageGraphQualified",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/preparationFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS348/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/allocatedAttemptFailureCount",
+      "expectedValue": 0
+    },
+    {
+      "repositoryPath": "src/projects/dw.quantities/ExactRational.cs",
+      "expectedText": "var digits = string.Concat(integral.IsEmpty ? \"0\".AsSpan() : integral, fractional);",
+      "expectedOccurrences": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs345.json",
+      "jsonPointer": "/phaseClosureAuthorized",
+      "expectedValue": true
+    }
+  ],
+  "validations": [
+    {
+      "id": "m9-rs349-ready-historical-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m9-rs349-native-readiness",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m9-rs349-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m9-rs349-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m9-rs349-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m9-rs349-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
