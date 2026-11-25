@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "RS349",
+  "title": "Ready M9 bounded integer sampling with historical source and package evidence reconciliation",
+  "state": "prepared",
+  "commitMessage": "chore: ready M9 bounded sampling from durable evidence",
+  "timeoutSeconds": 1500,
+  "projectNodes": [
+    "M9",
+    "M9-W01",
+    "M9-W01-C01",
+    "M9-W01-C01-T1",
+    "M9-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Admit the M9 native readiness path using actual historical evidence without inventing task completions.",
+    "value": "RS348 first-pass reconciled all 39 M8 nodes and regenerated canonical backlog v0.1.125. M9 already has real historical source and private package evidence (RS267-RS278), but no native task completions. RS349 corroborates exact report provenance and readiness prerequisites, preserves first-pass failures and the Assessa ownership boundary, and transitions only M9, W01, C01, T1 and T1 RED from not-ready to ready. Do not backfill invented RED/GREEN/Verification achievements, replay publication, alter the sampling API or claim Assessa adoption. Other M9 nodes remain not-ready. Canonical M9 remains planned pending the durable readiness projection; subsequent work must use actual bounded acceptance and refusal evidence.",
+    "debtChanges": [
+      "Recognize RS267-RS278 source, candidate, private publication and Windows/Linux evidence with exact prior failure counts.",
+      "Ready only the first native task and RED leaf; do not manufacture historical lifecycle transitions.",
+      "Preserve all package identities, existing sampling implementation, and Assessa ownership."
+    ],
+    "nextAction": "Reconcile canonical M9 readiness and activate the bounded source RED with independent current-contract falsification.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/AssessM8W02C02Acceptance.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/decisions/m9-evidence-aware-readiness-rs349.md"
+  ],
+  "validations": [
+    {
+      "id": "m9-rs349-ready-historical-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs349-native-readiness",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs349-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs349-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs349-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs349-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
