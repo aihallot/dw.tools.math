@@ -386,3 +386,7 @@ Product plan version `0.1.127` projects durable RS350 native activation. The his
 ## RS352 — M9 RED closure reconciliation
 
 Product plan version `0.1.128` projects durable RS351 RED closure and GREEN readiness; M8 remains closed.
+
+## RS353 — M9 bounded sampling GREEN closure
+
+Product plan version `0.1.129` projects durable RS352 GREEN activation and its nine corroborated preparation validations. RS353 closes native GREEN and readies independent Verification without replaying the oracle, regression or mutant campaign. Canonical completion awaits durable RS353 delivery; M8 remains closed and package identities and Assessa ownership remain unchanged.
