@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "RS339",
+  "title": "Assess C02 canonical acceptance and retain incomplete migration disposition",
+  "state": "prepared",
+  "commitMessage": "test: assess bounded C02 modernization acceptance gaps",
+  "timeoutSeconds": 1050,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Record and falsify the exact C02 acceptance disposition without falsely closing the phase.",
+    "value": "RS338 succeeded first-pass under DWF 0.1.75, completing the bounded source-free Statistics task; RS332 completed the bounded Foundation source assessment. Both tasks are done, but the canonical C02 deliverable and R1 require targeted migration and a new exact package graph. Existing net10 archives consumed by net11 and isolated Foundation source parity do not prove a newly built net11 package graph or production migration. RS339 records and validates a fail-closed phase acceptance disposition: R1 remains partial, R2 is preserved within the observed scope, C02 remains in-progress. A next bounded candidate should build a new isolated net11 package graph, verify its exact dependencies and source-free runtime, and avoid publication or changes to existing archives. No lifecycle completion or authorization is inferred.",
+    "debtChanges": [
+      "Distinguish completed bounded task evidence from the unmet new-package-graph and targeted migration deliverable.",
+      "Preserve R2 within observed evidence, existing archives, production SDK and migration refusal.",
+      "Record concrete remaining candidate work instead of replaying historic qualification."
+    ],
+    "nextAction": "Prepare a bounded isolated net11 package candidate with exact new graph and source-free consumer qualification; preserve production and published archives.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/engineering/m8-w02-c02-phase-acceptance-rs339.json",
+    "docs/engineering/AssessM8W02C02Acceptance.cs",
+    "docs/planning/decisions/m8-w02-c02-phase-acceptance-rs339.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs339-canonical-acceptance-gap-and-four-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/AssessM8W02C02Acceptance.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 260
+    },
+    {
+      "id": "m8-rs339-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs339-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
