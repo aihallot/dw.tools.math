@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "RS341",
+  "title": "Independently verify bounded new net11 candidate and reconcile C02 acceptance gap",
+  "state": "prepared",
+  "commitMessage": "test: independently verify isolated net11 Statistics candidate",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Corroborate RS340 corrected candidate evidence and update bounded phase acceptance without closure.",
+    "value": "RS340 succeeded on allocated attempt 001 after one preselection CS7034/CS7035 failure, so first-pass is false. The corrected probe separates NuGet PackageVersion from the original CLR Version and qualifies a new unpublished net11 Statistics/Quantities graph in isolation. RS341 independently corroborates the durable report, exact correction lineage and compiled preparation proof, refuses four corrupted evidence copies, and repeats only the bounded candidate probe. The original per-archive hashes were emitted to rehearsal stdout but are not retained in the durable report; do not claim original archive readback or byte-identical rebuild. The updated assessment recognizes the bounded new graph while retaining the targeted migration gap, unchanged historical risk profile, production SDK and publication refusal. C02 stays in-progress.",
+    "debtChanges": [
+      "RS340 succeeded at attempt 001 after one preselection version failure; first-pass remains false.",
+      "Verify the exact corrected preparation and replay only the bounded new package graph.",
+      "Recognize the bounded new package graph but retain the targeted source migration gap and no production or publication authorization."
+    ],
+    "nextAction": "Resolve the remaining canonical targeted source migration requirement with measured qualification or explicit scope disposition.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/engineering/VerifyM8W02Net11CandidateEvidence.cs",
+    "docs/engineering/m8-w02-c02-phase-acceptance-rs341.json",
+    "docs/planning/decisions/m8-w02-c02-net11-candidate-verification-rs341.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "validations": [
+    {
+      "id": "m8-rs341-independent-candidate-evidence-and-four-refusals",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM8W02Net11CandidateEvidence.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 260
+    },
+    {
+      "id": "m8-rs341-targeted-net11-candidate-replay",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1000
+    },
+    {
+      "id": "m8-rs341-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m8-rs341-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
