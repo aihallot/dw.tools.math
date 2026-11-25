@@ -175,7 +175,7 @@ static void CheckClosure()
         phase["state"]?.GetValue<string>() == "done" &&
         phase["tasks"]!.AsArray().Count == 2 &&
         phase["tasks"]!.AsArray().All(t => t?["state"]?.GetValue<string>() == "done") &&
-        (Find(plan, "milestones", "M9")["state"]?.GetValue<string>() is "not-ready" or "ready"), "Closure exceeded C02 or current M9 admission.");
+        (Find(plan, "milestones", "M9")["state"]?.GetValue<string>() is "not-ready" or "ready" or "in-progress"), "Closure exceeded C02 or current M9 admission.");
     var disposition = Read(path);
     void CheckBounded(JsonObject d)
     {

@@ -7,16 +7,16 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.125", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.126", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
-Need(release["status"]!.GetValue<string>() == "planned", "New release must remain planned.");
+Need(release["status"]!.GetValue<string>() == "ready", "M9 canonical readiness missing.");
 Need(release["depends_on"]!.AsArray().Single()!.GetValue<string>() == "M3", "M9 must depend on completed M3.");
 Need(Record(releases, "M3")["status"]!.GetValue<string>() == "done", "Do not rewrite M3 history.");
 var wp = Record(backlog["work_packages"]!.AsArray(), "M9-W01");
-Need(wp["status"]!.GetValue<string>() == "planned", "M9 work package must remain planned.");
+Need(wp["status"]!.GetValue<string>() == "ready", "M9 canonical work package readiness missing.");
 var chunk = Record(backlog["chunks"]!.AsArray(), "M9-W01-C01");
-Need(chunk["status"]!.GetValue<string>() == "planned", "New sampling chunk must remain planned.");
+Need(chunk["status"]!.GetValue<string>() == "ready", "M9 canonical phase readiness missing.");
 Need(chunk["depends_on"]!.AsArray().Single()!.GetValue<string>() == "M3-W02-C03",
     "Sampling must depend on qualified existing SplitMix64.");
 Need(chunk["tasks"]!.AsArray().Count == 2, "Expected source and package qualification tasks.");
@@ -28,16 +28,16 @@ Need(chunk["boundary_acceptance"]!.GetValue<string>().Contains("Assessa", String
 Need(Record(backlog["chunks"]!.AsArray(), "M3-W02-C03")["status"]!.GetValue<string>() == "done",
     "Historical PRNG chunk must remain done.");
 var milestone = Record(plan["milestones"]!.AsArray(), "M9");
-Need(milestone["state"]!.GetValue<string>() == "ready", "M9 must be ready without activation.");
+Need(milestone["state"]!.GetValue<string>() == "in-progress", "M9 source RED must be active.");
 var nativeWp = Record(milestone["workPackages"]!.AsArray(), "M9-W01");
 var phase = Record(nativeWp["phases"]!.AsArray(), "M9-W01-C01");
-Need(nativeWp["state"]!.GetValue<string>() == "ready" && phase["state"]!.GetValue<string>() == "ready", "M9 work package and phase must be ready.");
+Need(nativeWp["state"]!.GetValue<string>() == "in-progress" && phase["state"]!.GetValue<string>() == "in-progress", "M9 work package and phase must be active.");
 Need(phase["tasks"]!.AsArray().Count == 2, "Native plan must contain both tasks.");
 foreach (var task in phase["tasks"]!.AsArray().Select(x => x!.AsObject()))
 {
-    Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "ready" : "not-ready"), "Unexpected task progress.");
+    Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "in-progress" : "not-ready"), "Unexpected task progress.");
     Need(task["subtasks"]!.AsArray().Count == 3, "Expected RED/GREEN/verify subtasks.");
-    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() == "M9-W01-C01-T1-R" ? "ready" : "not-ready")),
+    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() == "M9-W01-C01-T1-R" ? "in-progress" : "not-ready")),
         "Subtasks must not claim progress.");
 }
 Need(Record(releases, "M8")["status"]!.GetValue<string>() == "done", "M8 canonical reconciliation absent.");
@@ -71,4 +71,4 @@ foreach (var item in evidence)
         r["contribution"]!["observed"]!["validations"]!.AsArray().Any(v => (string?)v?["id"] == item.Validation),
         "Historical evidence or scope differs: " + item.Id);
 }
-Console.WriteLine("MATH-M9-RS349-READINESS|version=0.1.125|historicalReports=11|M8=done|M9=ready|T1RED=ready|nativeCompletions=0|assessaAdoption=pending|PASS");
+Console.WriteLine("MATH-M9-RS349-READINESS|version=0.1.126|historicalReports=11|M8=done|M9=in-progress|T1RED=in-progress|nativeCompletions=0|assessaAdoption=pending|PASS");
