@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "id": "RS354",
+  "title": "Activate and independently verify M9 bounded sampling source and replay",
+  "state": "prepared",
+  "commitMessage": "test: independently verify M9 bounded sampling source and replay",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M9-W01-C01-T1-V"
+  ],
+  "contribution": {
+    "summary": "Reconcile durable GREEN closure and activate independent Verification with exact source identity and targeted replay.",
+    "value": "RS353 completed GREEN first-pass and readied Verification. Project its durable closure into backlog 0.1.130. Corroborate RS352 and RS353 report/proof pairs and six qualified Git blob identities through a separate read-only auditor; replay the existing authentic-source oracle and bounded sampling test class with locked restore. No mutant campaign, full suite replay, source changes, new publication or Assessa adoption. Verification stays in-progress until durable evidence is reviewed.",
+    "debtChanges": [
+      "Project durable RS353 GREEN closure and Verification readiness.",
+      "Independently corroborate source identity and replay without rewriting the generator.",
+      "Preserve M8 closure, immutable archives and Assessa boundaries."
+    ],
+    "nextAction": "Corroborate durable RS354 Verification evidence, close Verification and T1, and ready candidate qualification RED.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m9-bounded-sampling-verification-rs354.md",
+    "docs/engineering/VerifyM9BoundedSamplingSource.cs"
+  ],
+  "validations": [
+    {
+      "id": "m9-rs354-independent-source-report-and-blob-audit",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM9BoundedSamplingSource.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-authentic-source-oracle-replay",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM9BoundedSamplingRed.cs",
+        "--",
+        "--check-original"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 360
+    },
+    {
+      "id": "m9-rs354-targeted-bounded-sampling-replay",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "test",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "-c",
+        "Release",
+        "-p:RestoreLockedMode=true",
+        "--filter",
+        "FullyQualifiedName~M9W01C01BoundedSamplingTests"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 600
+    },
+    {
+      "id": "m9-rs354-historical-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-native-verification-active",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs354-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
