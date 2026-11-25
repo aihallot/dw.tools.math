@@ -85,7 +85,7 @@ Need(m8.GetProperty("state").GetString() == "in-progress" &&
         .GetProperty("state").GetString() == "done" &&
     w2.GetProperty("phases").EnumerateArray()
         .Single(x => x.GetProperty("id").GetString() == "M8-W02-C02")
-        .GetProperty("state").GetString() == "in-progress",
+        .GetProperty("state").GetString() == "done",
     "Native M8 Discovery closure or SDK audit readiness changed.");
 var auditPhase = w2.GetProperty("phases").EnumerateArray()
     .Single(x => x.GetProperty("id").GetString() == "M8-W02-C01");
@@ -851,4 +851,4 @@ Need(decision.Contains("RS131", StringComparison.Ordinal) &&
     readme.Contains("source-free", StringComparison.Ordinal),
     "Documentation lost qualified evidence or external boundary.");
 Console.WriteLine("MATH-M8-DISCOVERY-FRONTIER|portable=13|accept=2|reject=11|" +
-    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=done|W02C02=in-progress|W02C02T1=done|W02C02RED=done|W02C02GREEN=done|W02C02VERIFY=done|W02C02T2=done|W02C02T2RED=done|W02C02T2GREEN=done|W02C02T2VERIFY=done|W02T1=done|W02T2=done|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=done|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
+    "selected=4|binaryConsumer=RS279|firstPass=true|packages=3|M8=in-progress|W01=done|W02=in-progress|W02C01=done|W02C02=done|W02C02T1=done|W02C02RED=done|W02C02GREEN=done|W02C02VERIFY=done|W02C02T2=done|W02C02T2RED=done|W02C02T2GREEN=done|W02C02T2VERIFY=done|W02T1=done|W02T2=done|W02T2RED=done|W02T2GREEN=done|W02T2VERIFY=done|W02RED=done|W02GREEN=done|W02VERIFY=done|C01=done|C02=done|C02T1=done|C02T2=done|C02T2RED=done|C02T2GREEN=done|C02T2VERIFY=done|C02RED=done|C02GREEN=done|C02VERIFY=done|T1=done|RED=done|GREEN=done|VERIFY=done|T2=done|T2RED=done|T2GREEN=done|T2VERIFY=done|brokerReady=0|PASS");
