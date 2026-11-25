@@ -59,6 +59,7 @@ using var rs328 = Load(".aura/workflow/reports/RS328/attempt-001.json");
 using var rs329 = Load(".aura/workflow/reports/RS329/attempt-001.json");
 using var rs331 = Load(".aura/workflow/reports/RS331/attempt-001.json");
 using var rs333 = Load(".aura/workflow/reports/RS333/attempt-001.json");
+using var rs335 = Load(".aura/workflow/reports/RS335/attempt-001.json");
 using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-candidates-rs316.json");
 using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
@@ -134,7 +135,8 @@ Need(nextT1.GetProperty("state").GetString() == "done" &&
             (x.GetProperty("id").GetString() switch
             {
                 "M8-W02-C02-T2-R" => "done",
-                "M8-W02-C02-T2-G" => "in-progress",
+                "M8-W02-C02-T2-G" => "done",
+                "M8-W02-C02-T2-V" => "ready",
                 _ => "not-ready"
             })),
     "SDK migration RED readiness exceeded the intended next bounded scope.");
@@ -770,6 +772,24 @@ Need(packageRed.GetProperty("runId").GetString() == "RS333" &&
         .GetProperty("validations").EnumerateArray().Any(v =>
             v.GetProperty("id").GetString() == "m8-rs333-source-free-consumer-red-eight-refusals"),
     "RS333 source-free consumer RED provenance changed.");
+var statisticsGreen = rs335.RootElement;
+Need(statisticsGreen.GetProperty("runId").GetString() == "RS335" &&
+    statisticsGreen.GetProperty("outcome").GetString() == "succeeded" &&
+    statisticsGreen.GetProperty("attempt").GetInt32() == 1 &&
+    statisticsGreen.GetProperty("executor").GetProperty("toolVersion").GetString() == "0.1.75" &&
+    statisticsGreen.GetProperty("priorInvocationFailures").GetProperty("count").GetInt32() == 0 &&
+    statisticsGreen.GetProperty("priorInvocationFailures").GetProperty("firstPassSucceeded").GetBoolean() &&
+    statisticsGreen.GetProperty("boundaryViolations").GetArrayLength() == 0 &&
+    statisticsGreen.GetProperty("progress").GetProperty("completions").GetArrayLength() == 0 &&
+    statisticsGreen.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("id").GetString() == "M8-W02-C02-T2-G" &&
+    statisticsGreen.GetProperty("progress").GetProperty("transitions").EnumerateArray()
+        .Single().GetProperty("afterState").GetString() == "in-progress" &&
+    statisticsGreen.GetProperty("contribution").GetProperty("observed").GetProperty("mutationBoundaryClean").GetBoolean() &&
+    statisticsGreen.GetProperty("contribution").GetProperty("observed").GetProperty("validations").GetArrayLength() == 7 &&
+    statisticsGreen.GetProperty("contribution").GetProperty("observed").GetProperty("validations").EnumerateArray()
+        .Any(v => v.GetProperty("id").GetString() == "m8-rs335-statistics-source-free-locked-consumer"),
+    "RS335 bounded Statistics source-free GREEN provenance changed.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;
 Need(selection.GetProperty("bindings").GetArrayLength() == 4 &&
