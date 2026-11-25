@@ -1,9 +1,11 @@
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS345", 1, "chore: close bounded C02 modernization acceptance", "0.1.76", 0, 0, 0, true);
-p.ProjectPlan.RequireNodeState("M8", "in-progress");
+p.Workflow.RequirePriorSuccess("RS346", 1, "chore: close bounded M8 modernization work package", "0.1.76", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8-W01", "done");
+p.ProjectPlan.RequireNodeState("M8-W02", "done");
+p.ProjectPlan.RequireNodeState("M8-W01-C01", "done");
+p.ProjectPlan.RequireNodeState("M8-W01-C02", "done");
 p.ProjectPlan.RequireNodeState("M8-W02-C01", "done");
 p.ProjectPlan.RequireNodeState("M8-W02-C02", "done");
 p.ProjectPlan.RequireNodeState("M9", "not-ready");
@@ -12,8 +14,8 @@ p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", Jso
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/AssessM8W02C02Acceptance.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m8-w02-bounded-modernization-closure-rs346.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m8-bounded-internal-milestone-closure-rs347.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/m8-net11-csharp15-migration-evidence.md"));
-p.ProjectPlan.ConvergeNodeToDone("M8-W02");
+p.ProjectPlan.ConvergeNodeToDone("M8");
 return p.Complete();
