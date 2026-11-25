@@ -1,0 +1,3 @@
+# RS350 — source RED qualification
+
+RS349 durably readied the five-node M9 source RED chain. RS350 reconciles that ready canonical scope to backlog v0.1.126, regenerates projections, and activates the native chain. It adds an independent BigInteger rejection/interval oracle against the actual SplitMix64 source and demands runtime rejection of three independently compiled disposable source mutants: bypass rejection, overrun budget, and corrupt signed ordering. Existing production source and private archives remain unchanged. The current implementation is expected to pass because RS268 already delivered it; RED qualifies falsification rather than inventing a historical defect. No native completion or Assessa adoption is claimed.
