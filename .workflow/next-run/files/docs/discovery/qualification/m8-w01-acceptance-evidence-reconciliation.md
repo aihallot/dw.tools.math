@@ -398,3 +398,7 @@ Product plan version `0.1.130` projects durable RS353 GREEN closure and Verifica
 ## RS355 — M9 source task closure and package RED readiness
 
 Product plan version `0.1.131` projects durable RS354 Verification activation and its ten corroborated validations. RS355 closes native T1 Verification and T1, and readies T2 and its RED leaf. Canonical completion awaits durable RS355 delivery. No package qualification is performed here; M8 remains closed, immutable archives and Assessa ownership remain unchanged.
+
+## RS356 — M9 package RED activation
+
+Product plan version `0.1.132` projects durable RS355 T1 and Verification closure and T2 RED readiness. RS356 activates only T2 and RED. Reuse the existing RS335 isolated Windows net11 package-only probe: two actual locked restore refusals, exact archive and DLL identities, clean lock restoration and twelve runtime checks. No new package or publication, migration, Assessa adoption or RED completion is claimed. M8 remains closed.
