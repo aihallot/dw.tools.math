@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "id": "RS340",
+  "title": "Qualify a new isolated net11 Statistics and Quantities package candidate",
+  "commitMessage": "test: qualify isolated net11 Statistics package candidate",
+  "timeoutSeconds": 1800,
+  "projectNodes": [
+    "M8-W02-C02"
+  ],
+  "contribution": {
+    "summary": "Build and qualify a new two-node net11 candidate graph with a source-free locked consumer, no publication.",
+    "value": "RS339 succeeded first-pass under DWF 0.1.76 and retained incomplete C02 acceptance. RS340 builds a new unpublished two-node net11/C#15 Statistics and Quantities candidate in a disposable workspace from tracked copies of the actual source projects. Quantities is packed first; the copied Statistics project replaces its original project edge with an exact candidate package dependency, and is then packed. A separate source-free consumer restores only these two candidate archives into an isolated cache, locks the exact graph, checks package and binary identities, executes the existing twelve-check fixture and refuses a changed version under locked restore. Existing production files and immutable private packages are preserved. This is bounded candidate evidence, not production migration, publication, phase closure or universal compatibility.",
+    "debtChanges": [
+      "Build new candidate-only net11/C#15 archives from tracked source copies and verify the exact Statistics-to-Quantities package edge.",
+      "Reuse the existing twelve-check fixture, isolate the feed and caches, and refuse wrong locked candidate version.",
+      "Preserve immutable published archives, original production sources and SDK, and incomplete C02 disposition."
+    ],
+    "nextAction": "Review the durable candidate proof and reconcile the targeted migration requirement independently before any phase closure.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 300
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+    "docs/planning/decisions/m8-w02-c02-net11-statistics-candidate-rs340.md",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+      "sourcePath": "files/docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m8-w02-c02-net11-statistics-candidate-rs340.md",
+      "sourcePath": "files/docs/planning/decisions/m8-w02-c02-net11-statistics-candidate-rs340.md"
+    },
+    {
+      "path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+      "sourcePath": "files/docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"
+    },
+    {
+      "path": "docs/engineering/m8-net11-csharp15-migration-evidence.md",
+      "sourcePath": "files/docs/engineering/m8-net11-csharp15-migration-evidence.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS339/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS339/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS339/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS339/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS339/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.76"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": "M8"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": "M8-W02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": "M8-W02-C02"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/8/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/9/state",
+      "expectedValue": "not-ready"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.124"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.27"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs339.json",
+      "jsonPointer": "/status",
+      "expectedValue": "acceptance-incomplete"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/engineering/m8-w02-c02-phase-acceptance-rs339.json",
+      "jsonPointer": "/newNet11PackageGraphQualified",
+      "expectedValue": false
+    }
+  ],
+  "validations": [
+    {
+      "id": "m8-rs340-new-net11-two-package-locked-consumer",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02Net11StatisticsCandidate.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1000,
+      "packs": []
+    },
+    {
+      "id": "m8-rs340-source-migration-still-blocked",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "m8-rs340-native-package-verification-task-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 220,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    }
+  ]
+}
