@@ -4,7 +4,7 @@ Independent .NET 10 mathematical computation and representation libraries for ap
 
 ## Current status — completed M0–M9; M10 readiness and M11 numeric subsidiarity
 
-M0–M9 remain complete. Canonical backlog `0.1.145` adds the [M11 numeric subsidiarity scope](docs/planning/versions/M11.md); M10 readiness remains intact, and actual production cutover depends on M11 candidate qualification. No new lifecycle completion, publication or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
+M0–M9 remain complete. Canonical backlog `0.1.146` adds the [M11 numeric subsidiarity scope](docs/planning/versions/M11.md); M10 readiness remains intact, and actual production cutover depends on M11 candidate qualification. No new lifecycle completion, publication or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
 
 ### Completed M0–M9 checkpoint — RS366 (2026-11-26)
 
