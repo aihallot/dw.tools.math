@@ -2,12 +2,11 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS373", 1, "chore: close exact Int64 scaling RED and ready GREEN", "0.1.78", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS374", 1, "feat: implement checked exact rational Int64 scaling", "0.1.78", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M11-W01-C01-T1", "in-progress");
 p.ProjectPlan.RequireNodeState("M11-W01-C01-T1-R", "done");
-p.ProjectPlan.RequireNodeState("M11-W01-C01-T1-V", "not-ready");
 p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.146"), JsonValue.Create("0.1.147"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.147"), JsonValue.Create("0.1.148"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.31"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/backlog.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
@@ -18,9 +17,7 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-exact-int64-scaling-green-rs374.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("src/projects/dw.quantities/ExactRationalBudget.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("tests/projects/dw.quantities.tests/M11ExactInt64ScalingTests.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md"));
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
     FileName = "dotnet", WorkingDirectory = p.RepositoryRoot, UseShellExecute = false,
@@ -36,5 +33,6 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ActivateReadyContinuation("M11-W01-C01-T1-G");
+p.ProjectPlan.ConvergeNodeToDone("M11-W01-C01-T1-G");
+p.ProjectPlan.TransitionNode("M11-W01-C01-T1-V", "not-ready", "ready");
 return p.Complete();
