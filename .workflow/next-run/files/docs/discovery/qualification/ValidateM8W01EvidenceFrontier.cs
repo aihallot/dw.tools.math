@@ -8,7 +8,7 @@ if (args.Length != 1 || args[0] != "--check")
     throw new ArgumentException("Expected --check.");
 const string Decision = "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md";
 const string Readme = "docs/discovery/README.md";
-const string Baseline = "0.1.139";
+const string Baseline = "0.1.140";
 var decision = File.ReadAllText(Decision);
 var readme = File.ReadAllText(Readme);
 static void Need(bool ok, string reason)
@@ -897,7 +897,7 @@ Need(milestoneProduct.GetProperty("gate").GetString() == "G-M8" &&
         "Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer." &&
     milestoneProduct.GetProperty("status").GetString() == "done" &&
     native.RootElement.GetProperty("milestones").EnumerateArray()
-        .Single(v => v.GetProperty("id").GetString() == "M9").GetProperty("state").GetString() == "in-progress",
+        .Single(v => v.GetProperty("id").GetString() == "M9").GetProperty("state").GetString() == "done",
     "Canonical M8 outcome or deferred reconciliation boundary differs.");
 var selection = historical.RootElement;
 var sourceManifest = manifest.RootElement;

@@ -1,0 +1,3 @@
+# RS364 — Close native M9 at gate G-M9
+
+RS363 succeeded first-pass at allocated attempt 001 under DWF 0.1.78 and guidance 0.31. Its seven compiled preparation validations corroborate acceptance of R1 and R2 and closure of the sole work package. Reconcile that closure to canonical backlog 0.1.140. Gate G-M9 requires exactly M9-W01-C01, its sole work package M9-W01, and completed M3. Both tasks and six lifecycle leaves are durably done. Close the native milestone only; canonical release completion awaits durable RS364 delivery. Preserve original source, immutable package identities and Assessa ownership. This gate establishes bounded Math qualification, not a new publication, production migration, cryptographic security or Assessa adoption.

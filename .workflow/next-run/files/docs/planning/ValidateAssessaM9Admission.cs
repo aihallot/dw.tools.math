@@ -7,14 +7,15 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.139", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.140", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
 Need(release["depends_on"]!.AsArray().Single()!.GetValue<string>() == "M3", "M9 must depend on completed M3.");
 Need(Record(releases, "M3")["status"]!.GetValue<string>() == "done", "Do not rewrite M3 history.");
 var wp = Record(backlog["work_packages"]!.AsArray(), "M9-W01");
-Need(wp["status"]!.GetValue<string>() == "in_progress", "M9 canonical work package readiness missing.");
+Need(wp["status"]!.GetValue<string>() == "done" && wp["evidence"]!.AsArray().Count == 1 &&
+    (string?)wp["evidence"]![0] == ".aura/workflow/reports/RS363/attempt-001.json", "M9 canonical work package closure missing.");
 var chunk = Record(backlog["chunks"]!.AsArray(), "M9-W01-C01");
 Need(chunk["status"]!.GetValue<string>() == "done" && chunk["evidence"]!.AsArray().Count == 1 &&
     (string?)chunk["evidence"]![0] == ".aura/workflow/reports/RS362/attempt-001.json", "M9 canonical phase closure missing.");
@@ -29,7 +30,7 @@ Need(chunk["boundary_acceptance"]!.GetValue<string>().Contains("Assessa", String
 Need(Record(backlog["chunks"]!.AsArray(), "M3-W02-C03")["status"]!.GetValue<string>() == "done",
     "Historical PRNG chunk must remain done.");
 var milestone = Record(plan["milestones"]!.AsArray(), "M9");
-Need(milestone["state"]!.GetValue<string>() == "in-progress", "M9 source RED must be active.");
+Need(milestone["state"]!.GetValue<string>() == "done", "M9 native gate must be closed.");
 var nativeWp = Record(milestone["workPackages"]!.AsArray(), "M9-W01");
 var phase = Record(nativeWp["phases"]!.AsArray(), "M9-W01-C01");
 Need(nativeWp["state"]!.GetValue<string>() == "done" && phase["state"]!.GetValue<string>() == "done", "M9 work package and phase must be done.");
@@ -397,4 +398,36 @@ Need((string?)phaseClosure["runId"] == "RS362" && (string?)phaseClosure["outcome
 Need(backlog["chunks"]!.AsArray().Where(x => (string?)x?["work_package"] == "M9-W01")
     .Select(x => (string?)x?["id"]).SequenceEqual(new[] { "M9-W01-C01" }, StringComparer.Ordinal) &&
     nativeWp["phases"]!.AsArray().Count == 1, "Unexpected work package scope.");
-Console.WriteLine("MATH-M9-RS363-WORK-PACKAGE-CLOSURE|RS362=first-pass|R1=qualified|R2=qualified|phase=done|workPackage=done|assessaAdoption=pending|PASS");
+var workClosure = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS363/attempt-001.json"))!.AsObject();
+var workProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS363/preparation-proof.json"))!.AsObject();
+var workIds = workClosure["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedWorkIds = [
+    "m9-rs363-work-package-closure-evidence", "m9-rs363-native-work-package-done", "m9-rs363-published-handoff",
+    "m9-rs363-request-reconciliation", "m9-rs363-m8-evidence-frontier", "m9-rs363-planning-render-check", "diff-check"
+];
+var workMoves = workClosure["progress"]!["transitions"]!.AsArray();
+var workDone = workClosure["progress"]!["completions"]!.AsArray();
+Need((string?)workClosure["runId"] == "RS363" && (string?)workClosure["outcome"] == "succeeded" &&
+    (int?)workClosure["attempt"] == 1 && (string?)workClosure["executor"]?["toolVersion"] == "0.1.78" &&
+    (string?)workClosure["git"]?["commitMessage"] == "chore: close M9 bounded sampling work package" &&
+    (int?)workClosure["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)workClosure["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    workClosure["boundaryViolations"]!.AsArray().Count == 0 &&
+    (bool?)workClosure["contribution"]?["observed"]?["mutationBoundaryClean"] == true &&
+    workMoves.Count == 1 && workDone.Count == 1 &&
+    (string?)workDone[0]?["id"] == "M9-W01" && (string?)workMoves[0]?["id"] == "M9-W01" &&
+    (string?)workMoves[0]?["beforeState"] == "in-progress" && (string?)workMoves[0]?["afterState"] == "done" &&
+    workIds.SequenceEqual(expectedWorkIds, StringComparer.Ordinal) &&
+    (string?)workProof["runId"] == "RS363" && (string?)workProof["sourceCommit"] == "fd8e32a9591dff88d8b1cd432c7b308e0d0737cd" &&
+    (bool?)workProof["payloadCompiled"] == true && (int?)workProof["rehearsedValidationCount"] == 7 &&
+    workProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(workIds, StringComparer.Ordinal) &&
+    workClosure["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(workIds, StringComparer.Ordinal),
+    "RS363 durable work package closure differs.");
+Need(backlog["work_packages"]!.AsArray().Where(x => (string?)x?["release"] == "M9")
+    .Select(x => (string?)x?["id"]).SequenceEqual(new[] { "M9-W01" }, StringComparer.Ordinal) &&
+    backlog["chunks"]!.AsArray().Where(x => (string?)x?["release"] == "M9")
+    .Select(x => (string?)x?["id"]).SequenceEqual(new[] { "M9-W01-C01" }, StringComparer.Ordinal) &&
+    milestone["workPackages"]!.AsArray().Count == 1 &&
+    milestone["dependsOn"]!.AsArray().Select(x => (string?)x).SequenceEqual(new[] { "M3" }, StringComparer.Ordinal) &&
+    (string?)Record(plan["milestones"]!.AsArray(), "M3")["state"] == "done", "G-M9 scope or prerequisite differs.");
+Console.WriteLine("MATH-M9-RS364-MILESTONE-CLOSURE|RS363=first-pass|R1=qualified|R2=qualified|gate=G-M9|M3=done|nativeM9=done|assessaAdoption=pending|PASS");

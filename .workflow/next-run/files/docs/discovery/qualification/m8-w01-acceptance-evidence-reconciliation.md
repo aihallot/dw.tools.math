@@ -430,3 +430,7 @@ Product plan version `0.1.138` projects durable RS361 package Verification and t
 ## RS363 — M9 work package closure
 
 Product plan version `0.1.139` projects durable RS362 bounded phase acceptance. Both requirements, both tasks and all six leaves are qualified; M9-W01 owns exactly one phase, now durably done. RS363 closes only the native work package after corroborating the seven RS362 validation identities. Canonical work package completion and G-M9 milestone closure await subsequent durable evidence. No new publication, source modification, migration or Assessa adoption. M8 remains closed.
+
+## RS364 — M9 milestone gate closure
+
+Product plan version `0.1.140` projects durable RS363 work package closure. G-M9 owns exactly M9-W01 and M9-W01-C01; both requirements, both tasks and all six leaves are qualified, and M3 is done. RS364 corroborates the seven RS363 validation identities and closes native M9. Canonical milestone completion awaits durable RS364 delivery. No new publication, source modification, migration or Assessa adoption. M8 remains closed.
