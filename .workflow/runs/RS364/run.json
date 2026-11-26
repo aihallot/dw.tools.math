@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "RS364",
+  "title": "Reconcile M9 work package closure and close native milestone G-M9",
+  "state": "prepared",
+  "commitMessage": "chore: close M9 bounded sampling milestone",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Corroborate durable RS363 work package closure, reconcile its canonical completion and close native M9 at G-M9.",
+    "value": "RS363 closed the sole work package first-pass after phase acceptance. Reconcile work package completion in canonical backlog 0.1.140, corroborate all seven compiled validation identities, verify the exact G-M9 scope and completed M3 prerequisite, and close native M9. Canonical release completion awaits durable RS364 delivery. Preserve source, immutable archives and Assessa ownership.",
+    "debtChanges": [
+      "Project durable RS363 work package closure into the canonical backlog.",
+      "Close native M9 at G-M9 using qualified R1 and R2 evidence and completed M3.",
+      "Preserve package identities, source and historical boundaries."
+    ],
+    "nextAction": "Reconcile durable RS364 native milestone closure into the canonical release record and verify final M9 consistency.",
+    "achievements": [
+      {
+        "projectNode": "M9",
+        "achievement": "G-M9 has exactly one work package and one phase, both durably complete, with two qualified requirements, two tasks and six completed lifecycle leaves. M3 is complete. RS364 corroborates the first-pass RS363 report and seven compiled preparation validations and closes native M9 without new publication, migration or Assessa adoption."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m9-bounded-sampling-milestone-closure-rs364.md"
+  ],
+  "validations": [
+    {
+      "id": "m9-rs364-milestone-closure-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs364-native-milestone-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs364-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs364-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs364-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "m9-rs364-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
