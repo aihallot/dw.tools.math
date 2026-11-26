@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.142. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.143. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -18,6 +18,7 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 | [M7](versions/M7.md) | 1.2.0-candidate | Qualify advanced needs and deliver only those admitted by ADR; make deferrals explicit. | done |
 | [M8](versions/M8.md) | 1.3.0-preview | Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer. | done |
 | [M9](versions/M9.md) | 1.4.0-preview | Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers. | done |
+| [M10](versions/M10.md) | 1.5.0-preview | Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries. | planned |
 
 M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.
 
@@ -26,7 +27,7 @@ M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical
 - [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)
 - [Resource policy](resource-cost-policy.md)
 
-Scope: 10 releases, 20 work packages, 63 chunks, 126 tasks, 378 subtasks, 116 requirements.
+Scope: 11 releases, 21 work packages, 66 chunks, 129 tasks, 387 subtasks, 119 requirements.
 
 Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.
 
