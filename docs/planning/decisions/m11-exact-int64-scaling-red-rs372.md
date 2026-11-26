@@ -1,0 +1,7 @@
+# RS372 - Exact Int64 scaling RED
+
+RS371 first-pass success, result d19ceb98d2ad1abe30e52f41cc6799207579cd12, established five ready native M11 nodes. Reconcile their canonical readiness and activate exactly that chain. The current production sources and immutable archives remain unchanged.
+
+The isolated compiled oracle links the actual ExactRational and ExactRationalBudget source copies, validates 25 fixed mathematical expectations using independent BigInteger product/division arithmetic, checks historical addition and multiplication, and requires the proposed public member to be absent in RED. GREEN will use the same fixture in --green mode to validate the public signature, result shape, fixed and deterministic generated cases and invalid-budget exception. This RED observes an absent member rather than intentionally breaking the maintained solution build. No production implementation, binary package qualification or publication is asserted. If the public member already exists, stop and review it rather than introducing another implementation.
+
+Refusal precedence and cancellation-aware bounded implementation remain as specified in the RS371 decision. Keep result types in the existing ExactRationalBudget source file for the isolated source oracle. A subsequent GREEN must additionally qualify the maintained Quantities project and its focused tests. No Decision or M10 migration changes.
