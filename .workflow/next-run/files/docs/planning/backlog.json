@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.150",
+  "plan_version": "0.1.151",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10115,7 +10115,7 @@
       "title": "Checked exact rational scaling to Int64",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M1-W02-C01",
         "M3-W02-C04"
@@ -10154,15 +10154,19 @@
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M11ExactInt64Scaling",
         "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11ExactInt64ScalingVerificationTests"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS377/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M11-W01-C01-T1",
           "title": "Checked exact rational scaling to Int64",
           "behavior": "Add or expose generic exact checked rational times integer conversion to Int64 using existing rational and budget primitives, with typed nonintegral, overflow and resource refusal.",
           "test_case": "Independent integer oracle covers signed Int64 endpoints, zero, negative factors, nonintegral results, overflows and bounded large operands; preserve all existing rational behavior.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS377/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M11-W01-C01-T1-R",
@@ -10186,14 +10190,16 @@
               "id": "M11-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS377/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "RS371 durable readiness; use existing normalized rational and budget primitives with independent fixed and generated checked conversion oracles.",
-      "readiness": "RS376 durable verification activation and complementary boundary tests; native exact scaling closure and streaming moments readiness pending durable result."
+      "readiness": "RS377 durable source phase closure; exact Int64 conversion is source-qualified, with immutable package and independent consumer qualification deferred to C04."
     },
     {
       "id": "M11-W01-C02",
@@ -10203,7 +10209,7 @@
       "title": "Resumable finite streaming moments",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M3-W02-C01"
       ],
@@ -10227,8 +10233,19 @@
       "proposed_commands": [
         "dotnet test dw.tools.math.slnx --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "src/projects/dw.tools.math.statistics/DescriptiveStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/FrequencyWeightedStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/StreamingMoments64.cs",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "docs/engineering/ProbeM11StreamingMomentsRed.cs",
+        "docs/engineering/fixtures/M11StreamingMomentsOracle.cs"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM11StreamingMomentsRed.cs -- --red",
+        "dotnet run --file docs/engineering/ProbeM11StreamingMomentsRed.cs -- --green",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMoments"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10236,14 +10253,14 @@
           "title": "Resumable finite streaming moments",
           "behavior": "Qualify provider-free incremental mean and population/sample variance with constant-size state, explicit finite precision and budgets, validated versioned checkpoint and replay.",
           "test_case": "At least one million observations, independent reference oracles for large offsets and small variance, empty/singleton/constant data, refusal atomicity, budget exhaustion and interrupted versus uninterrupted replay.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M11-W01-C02-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10262,7 +10279,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Additive resumable finite binary64 moments with explicit budget, shifted Welford candidate, immutable structural checkpoint and independent exact closed-form reference; no change to existing bounded batch contracts.",
+      "readiness": "RS377 durable readiness; activate RED with executable missing-type and reference checks."
     },
     {
       "id": "M11-W01-C03",
