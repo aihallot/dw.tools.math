@@ -8,7 +8,7 @@ if (args.Length != 1 || args[0] != "--check")
     throw new ArgumentException("Expected --check.");
 const string Decision = "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md";
 const string Readme = "docs/discovery/README.md";
-const string Baseline = "0.1.146";
+const string Baseline = "0.1.147";
 const string HistoricalDecisionBaseline = "0.1.143";
 var decision = File.ReadAllText(Decision);
 var readme = File.ReadAllText(Readme);

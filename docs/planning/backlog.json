@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.146",
+  "plan_version": "0.1.147",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10144,7 +10144,8 @@
         "src/projects/dw.quantities/ExactRationalBudget.cs",
         "docs/engineering/ProbeM11ExactInt64ScalingRed.cs",
         "docs/engineering/fixtures/M11ExactInt64ScalingOracle.cs",
-        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+        "tests/projects/dw.quantities.tests/M11ExactInt64ScalingTests.cs"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM11ExactInt64ScalingRed.cs -- --red",
@@ -10165,14 +10166,16 @@
               "id": "M11-W01-C01-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS373/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10186,7 +10189,7 @@
         }
       ],
       "refinement": "RS371 durable readiness; use existing normalized rational and budget primitives with independent fixed and generated checked conversion oracles.",
-      "readiness": "RS372 durable RED activation and compiled oracle qualification; RED closure and GREEN readiness pending durable result."
+      "readiness": "RS373 durable RED closure and GREEN readiness; activate and qualify the additive exact scaling implementation."
     },
     {
       "id": "M11-W01-C02",
