@@ -1,0 +1,155 @@
+#:property NuGetAudit=false
+#:property PublishAot=false
+using System.Text.Json.Nodes;
+using System.Xml.Linq;
+static void Need(bool condition, string message) { if (!condition) throw new InvalidDataException("RS370: " + message); }
+static JsonObject Read(string path) => JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+var b = Read("docs/planning/backlog.json");
+var p = Read(".aura/workflow/plan/project.json");
+var report = Read(".aura/workflow/reports/RS369/attempt-001.json");
+var proof = Read(".workflow/runs/RS369/preparation-proof.json");
+Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &&
+    (bool?)report["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    report["boundaryViolations"]!.AsArray().Count == 0 &&
+    report["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
+    "RS369 durable source inventory evidence differs.");
+Need((string?)b["plan_version"] == "0.1.150" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+var canonical = new List<JsonNode>();
+foreach (var key in new[] { "releases", "work_packages", "chunks" })
+    canonical.AddRange(b[key]!.AsArray().Select(x => x!));
+foreach (var chunk in b["chunks"]!.AsArray())
+foreach (var task in chunk!["tasks"]!.AsArray()) {
+    canonical.Add(task!);
+    canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
+}
+var native = new List<JsonNode>();
+void Walk(JsonNode node) {
+    native.Add(node);
+    foreach (var key in new[] { "workPackages", "phases", "tasks", "subtasks" })
+        if (node[key] is JsonArray children) foreach (var child in children) Walk(child!);
+}
+foreach (var milestone in p["milestones"]!.AsArray()) Walk(milestone!);
+string Id(JsonNode x) => (string)x["id"]!;
+bool IsM11(JsonNode x) => Id(x) == "M11" || Id(x).StartsWith("M11-", StringComparison.Ordinal);
+bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringComparison.Ordinal);
+var c11 = canonical.Where(IsM11).ToArray();
+var n11 = native.Where(IsM11).ToArray();
+Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
+    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in_progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "done", "M11-W01-C01-T1-V" => "in_progress", _ => "planned" }) &&
+        (Id(x) switch { "M11-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS373/attempt-001.json", "M11-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS375/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
+    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" => "in-progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" => "ready", _ => "not-ready" })) &&
+    c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
+    "New scope roster or readiness frontier differs.");
+Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
+    native.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["state"] == "done") == 591,
+    "Historical completion frontier differs.");
+JsonNode C(string id) => canonical.Single(x => Id(x) == id);
+JsonNode N(string id) => native.Single(x => Id(x) == id);
+string[] Strings(JsonNode x, string key) => x[key]!.AsArray().Select(v => (string)v!).ToArray();
+string[] deps = ["M11-W01-C01", "M11-W01-C02", "M11-W01-C03"];
+Need(Strings(C("M11-W01-C04"), "depends_on").SequenceEqual(deps) &&
+    Strings(N("M11-W01-C04"), "dependsOn").SequenceEqual(deps) &&
+    Strings(C("M10-W01-C02"), "depends_on").SequenceEqual(new[] { "M10-W01-C01", "M11-W01-C04" }) &&
+    Strings(N("M10-W01-C02"), "dependsOn").SequenceEqual(new[] { "M10-W01-C01", "M11-W01-C04" }),
+    "Candidate qualification or cutover gate differs.");
+Need((string?)Read("global.json")["sdk"]?["version"] == "10.0.401" &&
+    XDocument.Load("Directory.Build.props").Descendants("TargetFramework").Single().Value == "net10.0" &&
+    XDocument.Load("Directory.Build.props").Descendants("LangVersion").Single().Value == "14.0", "Production baseline changed.");
+Need(File.Exists("docs/planning/evidence/decision-numeric-source-inventory-rs369.md") &&
+    File.Exists("docs/planning/decisions/m11-decision-numeric-subsidiarity-admission-rs370.md"), "Consultation evidence absent.");
+var admissionReport = Read(".aura/workflow/reports/RS370/attempt-001.json");
+var admissionProof = Read(".workflow/runs/RS370/preparation-proof.json");
+Need((string?)admissionReport["runId"] == "RS370" && (string?)admissionReport["outcome"] == "succeeded" &&
+    (int?)admissionReport["attempt"] == 1 && (bool?)admissionReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    admissionReport["boundaryViolations"]!.AsArray().Count == 0 && admissionReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)admissionProof["runId"] == "RS370" && (bool?)admissionProof["payloadCompiled"] == true &&
+    (int?)admissionProof["rehearsedValidationCount"] == 9, "RS370 durable admission evidence differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-readiness-rs371.md"), "Exact scaling readiness decision missing.");
+var readinessReport = Read(".aura/workflow/reports/RS371/attempt-001.json");
+var readinessProof = Read(".workflow/runs/RS371/preparation-proof.json");
+Need((string?)readinessReport["outcome"] == "succeeded" && (int?)readinessReport["attempt"] == 1 &&
+    (bool?)readinessReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    readinessReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    readinessReport["progress"]!["transitions"]!.AsArray().Count == 5 &&
+    (bool?)readinessProof["payloadCompiled"] == true && (int?)readinessProof["rehearsedValidationCount"] == 5,
+    "RS371 durable readiness differs.");
+var redReport = Read(".aura/workflow/reports/RS372/attempt-001.json");
+var redProof = Read(".workflow/runs/RS372/preparation-proof.json");
+Need((string?)redReport["runId"] == "RS372" && (string?)redReport["outcome"] == "succeeded" &&
+    (int?)redReport["attempt"] == 1 && (bool?)redReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    redReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    redReport["progress"]!["transitions"]!.AsArray().Count == 5 &&
+    redReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)redProof["runId"] == "RS372" && (bool?)redProof["payloadCompiled"] == true &&
+    (int?)redProof["rehearsedValidationCount"] == 10 &&
+    redProof["preparationValidationIds"]!.AsArray().Any(x => (string?)x == "math-rs372-exact-int64-red"),
+    "RS372 durable compiled RED evidence differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-red-closure-rs373.md"), "RED closure decision missing.");
+var closureReport = Read(".aura/workflow/reports/RS373/attempt-001.json");
+var closureProof = Read(".workflow/runs/RS373/preparation-proof.json");
+Need((string?)closureReport["runId"] == "RS373" && (string?)closureReport["outcome"] == "succeeded" &&
+    (int?)closureReport["attempt"] == 1 && (bool?)closureReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    closureReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    closureReport["progress"]!["transitions"]!.AsArray().Count == 2 &&
+    closureReport["progress"]!["completions"]!.AsArray().Count == 1 &&
+    (string?)closureReport["progress"]!["completions"]![0]!["id"] == "M11-W01-C01-T1-R" &&
+    (bool?)closureProof["payloadCompiled"] == true && (int?)closureProof["rehearsedValidationCount"] == 9,
+    "RS373 durable RED closure differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-green-rs374.md"), "GREEN decision missing.");
+var greenReport = Read(".aura/workflow/reports/RS374/attempt-001.json");
+var greenProof = Read(".workflow/runs/RS374/preparation-proof.json");
+string[] greenIds = [
+    "math-rs374-exact-int64-independent-green", "math-rs374-exact-int64-focused-maintained-tests",
+    "math-rs374-quantities-locked-regression", "math-rs374-m11-green-activation", "math-rs374-native-roadmap-parity",
+    "math-rs374-m10-readiness-preserved", "math-rs374-m9-admission", "math-rs374-published-handoff",
+    "math-rs374-request-reconciliation", "math-rs374-m8-evidence-frontier", "math-rs374-planning-render-check", "diff-check"
+];
+Need((string?)greenReport["runId"] == "RS374" && (string?)greenReport["outcome"] == "succeeded" &&
+    (int?)greenReport["attempt"] == 1 && (bool?)greenReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (string?)greenReport["executor"]?["toolVersion"] == "0.1.78" &&
+    greenReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    greenReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)greenReport["progress"]!["transitions"]![0]!["id"] == "M11-W01-C01-T1-G" &&
+    (string?)greenReport["progress"]!["transitions"]![0]!["afterState"] == "in-progress" &&
+    greenReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)greenProof["sourceCommit"] == "23c6d1d39215ae32cb0d73d970cff44875fbb5e0" &&
+    (bool?)greenProof["payloadCompiled"] == true && (int?)greenProof["rehearsedValidationCount"] == 12 &&
+    Strings(greenProof, "preparationValidationIds").SequenceEqual(greenIds) &&
+    greenReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(greenIds),
+    "RS374 durable GREEN qualification differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md"), "GREEN closure decision missing.");
+var greenClosureReport = Read(".aura/workflow/reports/RS375/attempt-001.json");
+var greenClosureProof = Read(".workflow/runs/RS375/preparation-proof.json");
+Need((string?)greenClosureReport["runId"] == "RS375" && (string?)greenClosureReport["outcome"] == "succeeded" &&
+    (int?)greenClosureReport["attempt"] == 1 && (bool?)greenClosureReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    greenClosureReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    greenClosureReport["progress"]!["transitions"]!.AsArray().Count == 2 &&
+    greenClosureReport["progress"]!["completions"]!.AsArray().Count == 1 &&
+    (string?)greenClosureReport["progress"]!["completions"]![0]!["id"] == "M11-W01-C01-T1-G" &&
+    (bool?)greenClosureProof["payloadCompiled"] == true && (int?)greenClosureProof["rehearsedValidationCount"] == 9,
+    "RS375 durable GREEN closure differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-verification-rs376.md"), "Verification decision missing.");
+var verifyReport = Read(".aura/workflow/reports/RS376/attempt-001.json");
+var verifyProof = Read(".workflow/runs/RS376/preparation-proof.json");
+string[] verifyIds = [
+    "math-rs376-exact-int64-independent-boundaries", "math-rs376-m11-verification-activation",
+    "math-rs376-native-roadmap-parity", "math-rs376-m10-readiness-preserved", "math-rs376-m9-admission",
+    "math-rs376-published-handoff", "math-rs376-request-reconciliation", "math-rs376-m8-evidence-frontier",
+    "math-rs376-planning-render-check", "diff-check"
+];
+Need((string?)verifyReport["runId"] == "RS376" && (string?)verifyReport["outcome"] == "succeeded" &&
+    (int?)verifyReport["attempt"] == 1 && (bool?)verifyReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (string?)verifyReport["executor"]?["toolVersion"] == "0.1.78" &&
+    verifyReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    verifyReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)verifyReport["progress"]!["transitions"]![0]!["id"] == "M11-W01-C01-T1-V" &&
+    (string?)verifyReport["progress"]!["transitions"]![0]!["afterState"] == "in-progress" &&
+    verifyReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)verifyProof["sourceCommit"] == "5c5586beaea8eff5be041b7c98ccc949850594b0" &&
+    (bool?)verifyProof["payloadCompiled"] == true && (int?)verifyProof["rehearsedValidationCount"] == 10 &&
+    Strings(verifyProof, "preparationValidationIds").SequenceEqual(verifyIds) &&
+    verifyReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(verifyIds),
+    "RS376 durable independent verification differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-source-closure-rs377.md"), "Source closure decision missing.");
+Console.WriteLine("MATH-RS377-M11-SCALING-CLOSURE|verify=done|task=done|phase=done|momentsRed=ready|cutoverGate=M11-W01-C04|publication=false|PASS");

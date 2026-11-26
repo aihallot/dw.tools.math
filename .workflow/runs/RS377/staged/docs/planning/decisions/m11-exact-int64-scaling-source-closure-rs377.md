@@ -1,0 +1,7 @@
+# RS377 - Close exact Int64 scaling source phase and ready streaming moments RED
+
+RS376 succeeded first-pass, attempt 001, DWF 0.1.78, result b44cdae30e36feeca918f4ae9cda25eac6233790. Ten preparation validations are durably recorded, including the focused maintained-project boundary tests. Reuse the independent RS374 GREEN and RS376 verification evidence without rerunning the campaigns. The new exact checked scaling API is source-qualified within the declared Windows net10 baseline. No package or downstream adoption is certified.
+
+Reconcile canonical verification activation in backlog 0.1.150. Close the verification leaf, its task and C01 phase in the native plan; each receives its own truthful achievement. Ready C02, its task and RED leaf only. The newly completed native nodes remain in_progress canonically until delivery is durable; C02 remains planned canonically until readiness is reconciled. Keep M11 and its work package active and preserve M10 readiness and cutover dependency.
+
+Next refine the generic streaming moments contract and executable RED, including explicit observation budget, state atomicity, finite mean and population/sample variance, empty/singleton semantics, versioned checkpoint replay, and independent large-offset and million-observation qualification. Welford is a candidate, not a mandated algorithm. Preserve existing batch statistics and Decision policy. No source changes, publication, sibling mutation or framework cutover.
