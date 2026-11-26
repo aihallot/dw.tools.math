@@ -41,7 +41,7 @@ try
     RequireState(actual, "M8", "done");
     RequireState(actual, "M9", "in-progress");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
-        RequireState(actual, entry.Key, entry.Key switch { "M9-W01" or "M9-W01-C01" => "in-progress", "M9-W01-C01-T1" or "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2" => "in-progress", "M9-W01-C01-T2-R" => "done", "M9-W01-C01-T2-G" => "in-progress", _ => "not-ready" });
+        RequireState(actual, entry.Key, entry.Key switch { "M9-W01" or "M9-W01-C01" => "in-progress", "M9-W01-C01-T1" or "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2" => "in-progress", "M9-W01-C01-T2-R" => "done", "M9-W01-C01-T2-G" => "done", "M9-W01-C01-T2-V" => "ready", _ => "not-ready" });
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key,
             entry.Key switch

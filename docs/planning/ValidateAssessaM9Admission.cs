@@ -7,7 +7,7 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.134", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.135", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
@@ -37,7 +37,7 @@ foreach (var task in phase["tasks"]!.AsArray().Select(x => x!.AsObject()))
 {
     Need(task["state"]!.GetValue<string>() == (task["id"]!.GetValue<string>() == "M9-W01-C01-T1" ? "done" : "in-progress"), "Unexpected task progress.");
     Need(task["subtasks"]!.AsArray().Count == 3, "Expected RED/GREEN/verify subtasks.");
-    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2-R" => "done", "M9-W01-C01-T2-G" => "in-progress", _ => "not-ready" })),
+    Need(task["subtasks"]!.AsArray().All(x => x!["state"]!.GetValue<string>() == (x["id"]!.GetValue<string>() switch { "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2-R" => "done", "M9-W01-C01-T2-G" => "done", "M9-W01-C01-T2-V" => "ready", _ => "not-ready" })),
         "Subtasks must not claim progress.");
 }
 Need(Record(releases, "M8")["status"]!.GetValue<string>() == "done", "M8 canonical reconciliation absent.");
@@ -117,7 +117,8 @@ Need((string?)productRed["status"] == "done" &&
     (string?)Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["status"] == "in_progress" &&
     (string?)Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-R")["status"] == "done" &&
     (string?)Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-R")["evidence"]![0] == ".aura/workflow/reports/RS357/attempt-001.json" &&
-    (string?)Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-G")["status"] == "ready", "Canonical durable package RED closure projection differs.");
+    (string?)Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-G")["status"] == "in_progress" &&
+    (string?)Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-V")["status"] == "planned", "Canonical durable package GREEN activation projection differs.");
 var greenReport = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS352/attempt-001.json"))!.AsObject();
 var greenProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS352/preparation-proof.json"))!.AsObject();
 var greenIds = greenReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
@@ -261,4 +262,32 @@ foreach (var item in new[]
         proof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(ids, StringComparer.Ordinal),
         "Historical candidate or consumer compiled proof differs: " + item.Run);
 }
-Console.WriteLine("MATH-M9-RS358-PACKAGE-GREEN-ACTIVE|candidateAndConsumerProofs=4|T2RED=done|T2GREEN=in-progress|assessaAdoption=pending|PASS");
+var packageGreenReport = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS358/attempt-001.json"))!.AsObject();
+var packageGreenProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS358/preparation-proof.json"))!.AsObject();
+var packageGreenIds = packageGreenReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedPackageGreenIds = [
+    "m9-rs358-physical-published-windows-net11-readback", "m9-rs358-candidate-and-consumer-proof-reconciliation",
+    "m9-rs358-native-package-green-active", "m9-rs358-published-handoff",
+    "m9-rs358-request-reconciliation", "m9-rs358-m8-evidence-frontier",
+    "m9-rs358-planning-render-check", "diff-check"
+];
+var packageGreenTransitions = packageGreenReport["progress"]!["transitions"]!.AsArray();
+Need((string?)packageGreenReport["runId"] == "RS358" && (string?)packageGreenReport["outcome"] == "succeeded" &&
+    (int?)packageGreenReport["attempt"] == 1 && (string?)packageGreenReport["executor"]?["toolVersion"] == "0.1.76" &&
+    (string?)packageGreenReport["git"]?["commitMessage"] == "test: qualify existing M9 immutable package GREEN" &&
+    (int?)packageGreenReport["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)packageGreenReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    packageGreenReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    (bool?)packageGreenReport["contribution"]?["observed"]?["mutationBoundaryClean"] == true &&
+    packageGreenReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    packageGreenTransitions.Count == 1 && (string?)packageGreenTransitions[0]?["id"] == "M9-W01-C01-T2-G" &&
+    (string?)packageGreenTransitions[0]?["beforeState"] == "ready" && (string?)packageGreenTransitions[0]?["afterState"] == "in-progress" &&
+    packageGreenIds.SequenceEqual(expectedPackageGreenIds, StringComparer.Ordinal) &&
+    (string?)packageGreenProof["runId"] == "RS358" &&
+    (string?)packageGreenProof["sourceCommit"] == "1b71d972dc468f3206ba485b5a4cb7ec20d3e3ea" &&
+    (bool?)packageGreenProof["payloadCompiled"] == true && (int?)packageGreenProof["rehearsedValidationCount"] == 8 &&
+    packageGreenProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(packageGreenIds, StringComparer.Ordinal),
+    "RS358 durable immutable package GREEN or compiled preparation proof differs.");
+Need(!packageGreenReport["contribution"]!["observed"]!["changedPaths"]!.AsArray().Any(x =>
+    ((string?)x)?.StartsWith("src/", StringComparison.Ordinal) == true), "Package GREEN modified production source.");
+Console.WriteLine("MATH-M9-RS359-PACKAGE-GREEN-CLOSURE|RS358=first-pass|validations=8|T2GREEN=done|T2Verification=ready|assessaAdoption=pending|PASS");
