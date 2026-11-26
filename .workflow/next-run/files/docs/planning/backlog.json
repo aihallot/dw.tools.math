@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.124",
+  "plan_version": "0.1.143",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -232,7 +232,7 @@
       "version": "1.3.0-preview",
       "title": "Foundation and Discovery",
       "outcome": "Qualify opt-in Math Discovery and independently assess safe .NET 11 / C# 15 modernization without consumer ownership transfer.",
-      "status": "planned",
+      "status": "done",
       "gate": "G-M8",
       "required_chunks": [
         "M8-W01-C01",
@@ -243,20 +243,42 @@
       "depends_on": [
         "M7"
       ],
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS347/attempt-001.json"
+      ]
     },
     {
       "id": "M9",
       "version": "1.4.0-preview",
       "title": "Cross-consumer deterministic bounded integer sampling",
       "outcome": "Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers.",
-      "status": "planned",
+      "status": "done",
       "gate": "G-M9",
       "required_chunks": [
         "M9-W01-C01"
       ],
       "depends_on": [
         "M3"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS364/attempt-001.json"
+      ]
+    },
+    {
+      "id": "M10",
+      "version": "1.5.0-preview",
+      "title": "Production .NET 11 and C# 15 migration",
+      "outcome": "Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries.",
+      "status": "planned",
+      "gate": "G-M10",
+      "required_chunks": [
+        "M10-W01-C01",
+        "M10-W01-C02",
+        "M10-W01-C03"
+      ],
+      "depends_on": [
+        "M8",
+        "M9"
       ],
       "evidence": []
     }
@@ -593,7 +615,7 @@
       "id": "M8-W01",
       "release": "M8",
       "title": "Independent Math Discovery",
-      "status": "planned",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.discovery/",
         "tests/projects/dw.tools.math.discovery.tests/",
@@ -601,32 +623,57 @@
         "docs/discovery/"
       ],
       "path_policy": "Exact files and commands are refined before readiness; no changes to prior immutable artifacts.",
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS313/attempt-001.json"
+      ]
     },
     {
       "id": "M8-W02",
       "release": "M8",
       "title": "Independent .NET 11 and C# 15 modernization",
-      "status": "planned",
+      "status": "done",
       "paths": [
         "src/projects/",
         "tests/projects/",
         "docs/engineering/"
       ],
       "path_policy": "Exact files and commands are refined before readiness; no changes to prior immutable artifacts.",
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS346/attempt-001.json"
+      ]
     },
     {
       "id": "M9-W01",
       "release": "M9",
       "title": "Versioned bounded integer sampling",
-      "status": "planned",
+      "status": "done",
       "paths": [
         "src/projects/dw.tools.math.statistics/",
         "tests/projects/dw.tools.math.statistics.tests/",
         "docs/distribution/"
       ],
       "path_policy": "Consumer-triggered extension of existing SplitMix64 engine; refine exact files and commands before ready.",
+      "evidence": [
+        ".aura/workflow/reports/RS363/attempt-001.json"
+      ]
+    },
+    {
+      "id": "M10-W01",
+      "release": "M10",
+      "title": "Controlled production framework cutover",
+      "status": "planned",
+      "paths": [
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "dw.tools.math.slnx",
+        "src/projects/",
+        "tests/projects/",
+        "tests/consumers/",
+        "tools/",
+        "docs/engineering/"
+      ],
+      "path_policy": "Audit actual source graph and historical fixtures before changing central defaults; preserve immutable package versions and historical probes.",
       "evidence": []
     }
   ],
@@ -9194,7 +9241,7 @@
       "title": "Selected CLR bindings and portable protocol",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [],
       "external_dependencies": [],
       "requirements": [
@@ -9214,40 +9261,55 @@
         "docs/discovery/README.md"
       ],
       "proposed_commands": [],
-      "refinement": "Await typed native admission and independent task-level readiness refinement.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "refinement": "Reconciled from exact durable native phase completion .aura/workflow/reports/RS300/attempt-001.json; see bounded achievement in the report.",
+      "files": [
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        ".aura/workflow/reports/RS300/attempt-001.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs -- --check"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS300/attempt-001.json"
+      ],
+      "readiness": "Completed bounded internal qualification; no broader release, migration or consumer authorization.",
       "tasks": [
         {
           "id": "M8-W01-C01-T1",
           "title": "Pinned protocol and conformance",
           "behavior": "Pinned protocol and conformance",
           "test_case": "Pinned protocol and conformance has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS292/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W01-C01-T1-R",
               "title": "RED",
               "description": "RED: qualify pinned protocol and conformance with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS288/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C01-T1-G",
               "title": "GREEN",
               "description": "GREEN: qualify pinned protocol and conformance with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS290/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Verification: qualify pinned protocol and conformance with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS292/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9256,29 +9318,37 @@
           "title": "Bound selected CLR operations",
           "behavior": "Bound selected CLR operations",
           "test_case": "Bound selected CLR operations has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS299/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W01-C01-T2-R",
               "title": "RED",
               "description": "RED: qualify bound selected clr operations with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS295/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C01-T2-G",
               "title": "GREEN",
               "description": "GREEN: qualify bound selected clr operations with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS297/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C01-T2-V",
               "title": "Verify and document",
               "description": "Verification: qualify bound selected clr operations with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS299/attempt-001.json"
+              ]
             }
           ]
         }
@@ -9292,7 +9362,7 @@
       "title": "Deterministic skill generator and qualification",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M8-W01-C01"
       ],
@@ -9314,40 +9384,55 @@
         "docs/discovery/README.md"
       ],
       "proposed_commands": [],
-      "refinement": "Await typed native admission and independent task-level readiness refinement.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "refinement": "Reconciled from exact durable native phase completion .aura/workflow/reports/RS313/attempt-001.json; see bounded achievement in the report.",
+      "files": [
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        ".aura/workflow/reports/RS313/attempt-001.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs -- --check"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS313/attempt-001.json"
+      ],
+      "readiness": "Completed bounded internal qualification; no broader release, migration or consumer authorization.",
       "tasks": [
         {
           "id": "M8-W01-C02-T1",
           "title": "Skill generator contract",
           "behavior": "Skill generator contract",
           "test_case": "Skill generator contract has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS306/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W01-C02-T1-R",
               "title": "RED",
               "description": "RED: qualify skill generator contract with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS302/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C02-T1-G",
               "title": "GREEN",
               "description": "GREEN: qualify skill generator contract with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS304/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Verification: qualify skill generator contract with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS306/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9356,29 +9441,37 @@
           "title": "Skill delivery and refusal boundary",
           "behavior": "Skill delivery and refusal boundary",
           "test_case": "Skill delivery and refusal boundary has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS312/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W01-C02-T2-R",
               "title": "RED",
               "description": "RED: qualify skill delivery and refusal boundary with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS308/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C02-T2-G",
               "title": "GREEN",
               "description": "GREEN: qualify skill delivery and refusal boundary with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS310/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W01-C02-T2-V",
               "title": "Verify and document",
               "description": "Verification: qualify skill delivery and refusal boundary with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS312/attempt-001.json"
+              ]
             }
           ]
         }
@@ -9392,7 +9485,7 @@
       "title": "SDK baseline and modernization audit",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [],
       "external_dependencies": [],
       "requirements": [
@@ -9411,40 +9504,55 @@
         "docs/engineering/dotnet-authoring-checklist.md"
       ],
       "proposed_commands": [],
-      "refinement": "Await typed native admission and independent task-level readiness refinement.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "refinement": "Reconciled from exact durable native phase completion .aura/workflow/reports/RS326/attempt-001.json; see bounded achievement in the report.",
+      "files": [
+        "docs/engineering/ProbeM8W02MigrationRiskRed.cs",
+        ".aura/workflow/reports/RS326/attempt-001.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM8W02MigrationRiskRed.cs -- --check"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS326/attempt-001.json"
+      ],
+      "readiness": "Completed bounded internal qualification; no broader release, migration or consumer authorization.",
       "tasks": [
         {
           "id": "M8-W02-C01-T1",
           "title": "Official API and toolchain inventory",
           "behavior": "Official API and toolchain inventory",
           "test_case": "Official API and toolchain inventory has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS319/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W02-C01-T1-R",
               "title": "RED",
               "description": "RED: qualify official api and toolchain inventory with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS315/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C01-T1-G",
               "title": "GREEN",
               "description": "GREEN: qualify official api and toolchain inventory with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS317/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C01-T1-V",
               "title": "Verify and document",
               "description": "Verification: qualify official api and toolchain inventory with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS319/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9453,29 +9561,37 @@
           "title": "Delta risk and package graph",
           "behavior": "Delta risk and package graph",
           "test_case": "Delta risk and package graph has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS326/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W02-C01-T2-R",
               "title": "RED",
               "description": "RED: qualify delta risk and package graph with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS321/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C01-T2-G",
               "title": "GREEN",
               "description": "GREEN: qualify delta risk and package graph with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS324/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C01-T2-V",
               "title": "Verify and document",
               "description": "Verification: qualify delta risk and package graph with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS326/attempt-001.json"
+              ]
             }
           ]
         }
@@ -9489,7 +9605,7 @@
       "title": "Targeted migration and external consumer proof",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M8-W02-C01"
       ],
@@ -9510,40 +9626,55 @@
         "docs/engineering/dotnet-authoring-checklist.md"
       ],
       "proposed_commands": [],
-      "refinement": "Await typed native admission and independent task-level readiness refinement.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; requires bounded task readiness and acceptance before activation",
+      "refinement": "Reconciled from exact durable native phase completion .aura/workflow/reports/RS345/attempt-001.json; see bounded achievement in the report.",
+      "files": [
+        "docs/engineering/AssessM8W02C02Acceptance.cs",
+        ".aura/workflow/reports/RS345/attempt-001.json"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/AssessM8W02C02Acceptance.cs -- --check-closure"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS345/attempt-001.json"
+      ],
+      "readiness": "Completed bounded internal qualification; no broader release, migration or consumer authorization.",
       "tasks": [
         {
           "id": "M8-W02-C02-T1",
           "title": "Bounded modern language and framework changes",
           "behavior": "Bounded modern language and framework changes",
           "test_case": "Bounded modern language and framework changes has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS332/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W02-C02-T1-R",
               "title": "RED",
               "description": "RED: qualify bounded modern language and framework changes with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS328/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C02-T1-G",
               "title": "GREEN",
               "description": "GREEN: qualify bounded modern language and framework changes with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS330/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C02-T1-V",
               "title": "Verify and document",
               "description": "Verification: qualify bounded modern language and framework changes with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS332/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9552,29 +9683,37 @@
           "title": "Package and independent client verification",
           "behavior": "Package and independent client verification",
           "test_case": "Package and independent client verification has independent falsification and refusal evidence.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS338/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M8-W02-C02-T2-R",
               "title": "RED",
               "description": "RED: qualify package and independent client verification with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS334/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C02-T2-G",
               "title": "GREEN",
               "description": "GREEN: qualify package and independent client verification with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS336/attempt-001.json"
+              ]
             },
             {
               "id": "M8-W02-C02-T2-V",
               "title": "Verify and document",
               "description": "Verification: qualify package and independent client verification with bounded evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS338/attempt-001.json"
+              ]
             }
           ]
         }
@@ -9588,7 +9727,7 @@
       "title": "Unbiased bounded integer draws and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "done",
       "depends_on": [
         "M3-W02-C03"
       ],
@@ -9615,40 +9754,58 @@
       "proposed_commands": [
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~BoundedSamplingTests"
       ],
-      "refinement": "MATH-XR-004 accepted consumer request P0. RS266 intake succeeded; no new API or candidate package has been qualified. Source and package qualification are successive bounded DWF runs. Resolve exact signature by auditing existing APIs first.",
-      "files": [],
-      "commands": [],
-      "evidence": [],
-      "readiness": "planned; prioritize source API and independent proof before candidate binary or publication",
+      "refinement": "RS349 durable readiness; RS268-RS278 historical source and immutable candidate qualification reused. Independently falsify current contract without repeating publication.",
+      "files": [
+        "src/projects/dw.tools.math.statistics/SplitMix64Random.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M9W01C01BoundedSamplingTests.cs",
+        "docs/engineering/ProbeM9BoundedSamplingRed.cs",
+        "docs/engineering/fixtures/M9BoundedSamplingRedOracle.cs"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM9BoundedSamplingRed.cs -- --check",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
+      ],
+      "evidence": [
+        ".aura/workflow/reports/RS362/attempt-001.json"
+      ],
+      "readiness": "RS364 durable G-M9 closure; bounded Math qualification complete, Assessa adoption remains external.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
           "title": "Unbiased sampling and replay contract",
           "behavior": "Versioned integer selection with unbiased rejection, bounded raw draw count and checkpoint compatibility.",
           "test_case": "0/1/2/3/extreme bounds, inclusive range overflow, forced rejection, golden replay and exhausted counter.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS355/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M9-W01-C01-T1-R",
               "title": "RED",
               "description": "Write independent failing oracles for source implementation and exact oracle evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS351/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum generic source API for source implementation and exact oracle evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS353/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Verify and document source implementation and exact oracle evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS355/attempt-001.json"
+              ]
             }
           ]
         },
@@ -9657,27 +9814,257 @@
           "title": "Immutable candidate and independent net11 consumer",
           "behavior": "Qualify candidate package identity and explicit package-only .NET 11 consumer, without claiming publication.",
           "test_case": "Exact package graph, source-free PackageReference load, checksum, seed/replay/budget proof, and no archive overwrite.",
-          "status": "planned",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS361/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M9-W01-C01-T2-R",
               "title": "RED",
               "description": "Write independent failing oracles for candidate package and external consumer evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS357/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T2-G",
               "title": "GREEN",
               "description": "Implement the minimum generic source API for candidate package and external consumer evidence.",
-              "status": "planned",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS359/attempt-001.json"
+              ]
             },
             {
               "id": "M9-W01-C01-T2-V",
               "title": "Verify and document",
               "description": "Verify and document candidate package and external consumer evidence.",
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS361/attempt-001.json"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M10-W01-C01",
+      "tag": "modernization",
+      "release": "M10",
+      "work_package": "M10-W01",
+      "title": "Cutover readiness and rollback baseline",
+      "kind": "spike",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M8-W02-C02",
+        "M9-W01-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M10-W01-C01-R1"
+      ],
+      "deliverables": "Inventory current production and test project graph, SDK/TFM/language overrides, lockfiles, maintained tools and consumers; establish a reproducible isolated target graph and exact rollback baseline using M8 evidence.",
+      "acceptance": "Actual target SDK selection and restored isolated source graph; fragile exact/numerical/replay tests; classify every active and historical project/consumer and every remaining migration risk; verify a clean rollback recipe.",
+      "boundary_acceptance": "No production SDK or source change in this phase; old archives and historical evidence stay immutable. No assumption that net11 consumers of net10 archives establish source compatibility.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE",
+        "REPLAY"
+      ],
+      "proposed_files": [
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "dw.tools.math.slnx",
+        "docs/engineering/m8-net11-csharp15-migration-evidence.md"
+      ],
+      "proposed_commands": [
+        "dotnet --version",
+        "dotnet restore dw.tools.math.slnx --locked-mode"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M10-W01-C01-T1",
+          "title": "Qualify cutover readiness",
+          "behavior": "Reconcile real current source graph, isolated target graph, fragile tests and recovery baseline before production cutover.",
+          "test_case": "Reject missing projects, incompatible SDK or lock closure and unsupported rollback or source-compatibility claims.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M10-W01-C01-T1-R",
+              "title": "RED",
+              "description": "Falsify cutover readiness and rollback baseline with independent bounded negative controls.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C01-T1-G",
+              "title": "GREEN",
+              "description": "Implement the minimum changes needed for cutover readiness and rollback baseline.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Independently qualify and document cutover readiness and rollback baseline.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M10-W01-C02",
+      "tag": "modernization",
+      "release": "M10",
+      "work_package": "M10-W01",
+      "title": "Production SDK and framework cutover",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M10-W01-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M10-W01-C02-R1"
+      ],
+      "deliverables": "Switch the production SDK, central framework/language configuration and affected maintained projects/lockfiles to net11.0/C# 15; make only necessary source/build corrections.",
+      "acceptance": "Actual solution selects SDK 11.0.100, all thirteen production libraries and eleven solution test projects resolve intended target, locked restore and Release build succeed, exact targeted tests pass; explicit historical fixture overrides and rollback verified.",
+      "boundary_acceptance": "No blanket rewrite of historic net10 reproduction fixtures, package publication or sibling changes. Do not relax warnings-as-errors or locked restore to obtain green.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE",
+        "REPLAY"
+      ],
+      "proposed_files": [
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "dw.tools.math.slnx",
+        "src/projects/",
+        "tests/projects/",
+        "tools/"
+      ],
+      "proposed_commands": [
+        "dotnet restore dw.tools.math.slnx --locked-mode",
+        "dotnet build dw.tools.math.slnx -c Release --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M10-W01-C02-T1",
+          "title": "Migrate actual production and maintained build graph",
+          "behavior": "Controlled actual SDK/TFM/language switch with exact build and semantic regression evidence.",
+          "test_case": "Reject net10 production fallback, stale lock targets, failed analyzers, behavior changes and unintended historical fixture drift.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M10-W01-C02-T1-R",
+              "title": "RED",
+              "description": "Falsify production sdk and framework cutover with independent bounded negative controls.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C02-T1-G",
+              "title": "GREEN",
+              "description": "Implement the minimum changes needed for production sdk and framework cutover.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C02-T1-V",
+              "title": "Verify and document",
+              "description": "Independently qualify and document production sdk and framework cutover.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M10-W01-C03",
+      "tag": "modernization",
+      "release": "M10",
+      "work_package": "M10-W01",
+      "title": "Post-cutover qualification and delivery readiness",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M10-W01-C02"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M10-W01-C03-R1"
+      ],
+      "deliverables": "Certify the migrated solution and unpublished package graph on supported local platforms, record exact package/assembly/dependency identities, consumer behavior, regression and rollback boundaries, and update current documentation.",
+      "acceptance": "Targeted fragile contracts then full solution regression at migration gate; fresh isolated unpublished net11 candidates for all thirteen libraries, exact source-free locked representative consumers, Windows and Linux/WSL evidence with explicit gaps and observed SDK/RID; verify rollback and no archive overwrite.",
+      "boundary_acceptance": "No new public or private publication, stable ABI promise or downstream adoption. Qualification is bounded to actual executed tests and platforms; no unsupported historical package compatibility claim.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE",
+        "REPLAY"
+      ],
+      "proposed_files": [
+        "dw.tools.math.slnx",
+        "src/projects/",
+        "tests/projects/",
+        "tests/consumers/",
+        "docs/distribution/",
+        "docs/engineering/"
+      ],
+      "proposed_commands": [
+        "dotnet test dw.tools.math.slnx -c Release --no-build --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M10-W01-C03-T1",
+          "title": "Verify migrated graph and independent consumers",
+          "behavior": "Prove migrated source and fresh isolated candidate graph with finite regression, platform and consumer evidence.",
+          "test_case": "Refuse floating dependencies, project-reference substitutes, changed immutable archives, unproved platform support and unsupported semantic equivalence.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M10-W01-C03-T1-R",
+              "title": "RED",
+              "description": "Falsify post-cutover qualification and delivery readiness with independent bounded negative controls.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C03-T1-G",
+              "title": "GREEN",
+              "description": "Implement the minimum changes needed for post-cutover qualification and delivery readiness.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M10-W01-C03-T1-V",
+              "title": "Verify and document",
+              "description": "Independently qualify and document post-cutover qualification and delivery readiness.",
               "status": "planned",
               "evidence": []
             }
@@ -10498,6 +10885,27 @@
       "release": "M9",
       "owner": "M9-W01-C01",
       "acceptance": "A new qualified immutable package candidate consumed via net11 PackageReference, with version/dependencies/SHA-256; no published archive rewrite or Assessa implementation."
+    },
+    {
+      "id": "M10-W01-C01-R1",
+      "title": "Cutover readiness and rollback baseline",
+      "release": "M10",
+      "owner": "M10-W01-C01",
+      "acceptance": "Actual target SDK selection and restored isolated source graph; fragile exact/numerical/replay tests; classify every active and historical project/consumer and every remaining migration risk; verify a clean rollback recipe."
+    },
+    {
+      "id": "M10-W01-C02-R1",
+      "title": "Production SDK and framework cutover",
+      "release": "M10",
+      "owner": "M10-W01-C02",
+      "acceptance": "Actual solution selects SDK 11.0.100, all thirteen production libraries and eleven solution test projects resolve intended target, locked restore and Release build succeed, exact targeted tests pass; explicit historical fixture overrides and rollback verified."
+    },
+    {
+      "id": "M10-W01-C03-R1",
+      "title": "Post-cutover qualification and delivery readiness",
+      "release": "M10",
+      "owner": "M10-W01-C03",
+      "acceptance": "Targeted fragile contracts then full solution regression at migration gate; fresh isolated unpublished net11 candidates for all thirteen libraries, exact source-free locked representative consumers, Windows and Linux/WSL evidence with explicit gaps and observed SDK/RID; verify rollback and no archive overwrite."
     }
   ],
   "external_dependencies": [
@@ -10868,6 +11276,16 @@
         "M9-W01-C01"
       ],
       "disposition": "P0 Math-owned generic primitive; Assessa retains pedagogical generation and session ownership."
+    },
+    {
+      "source_id": "USER-M10-PRODUCTION-NET11",
+      "title": "Owner-approved production .NET 11 and C# 15 migration",
+      "targets": [
+        "M10-W01-C01",
+        "M10-W01-C02",
+        "M10-W01-C03"
+      ],
+      "disposition": "Owner approved actual production migration following RS366; publication and downstream adoption are excluded."
     }
   ]
 }
