@@ -1,0 +1,7 @@
+# RS376 - Independently verify exact Int64 scaling boundaries
+
+RS375 succeeded first-pass, attempt 001, result 1cea177aecba2fff6ba169018150456ad6bfdd7c. Reconcile the durable GREEN completion and verification readiness into canonical backlog 0.1.149, then activate verification only. Preserve the RS374 source implementation and original oracle without modification.
+
+The additional maintained-project verification exercises normalized operands, a 4096-bit denominator and exact cancellation, adjacent nonintegral scales, signed Int64 asymmetry, exact product bit boundaries and refusal precedence, plus immutable result shape and absence of values on typed refusals. The focused new tests run with locked restore on the existing net10.0 baseline; no repeat of the broad Quantities regression is needed. Mathematical review: for reduced n/d with positive d, d divides n*s exactly iff d divides s; cancel d before multiplying. For nonzero factors with absolute bit lengths a and b, the product bit length lies in [a+b-1,a+b], so the existing guard avoids definitely oversized multiplication and the final exact check handles the ambiguous boundary. Zero still observes input budgets. This is a mathematical bound, not a measured memory or timing guarantee.
+
+The delivered public API remains source-qualified only; M11-W01-C04 must qualify fresh immutable packages and independent consumers before actual M10 cutover. No publication, Decision adoption, or cross-platform compatibility claim. No new completion is claimed by this verification activation run.
