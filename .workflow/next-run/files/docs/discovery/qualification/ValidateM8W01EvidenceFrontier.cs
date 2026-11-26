@@ -8,7 +8,8 @@ if (args.Length != 1 || args[0] != "--check")
     throw new ArgumentException("Expected --check.");
 const string Decision = "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md";
 const string Readme = "docs/discovery/README.md";
-const string Baseline = "0.1.143";
+const string Baseline = "0.1.144";
+const string HistoricalDecisionBaseline = "0.1.143";
 var decision = File.ReadAllText(Decision);
 var readme = File.ReadAllText(Readme);
 static void Need(bool ok, string reason)
@@ -72,7 +73,7 @@ using var sdkInventoryMatrix = Load("docs/engineering/m8-w02-c01-official-delta-
 using var publishedSubset = Load("docs/engineering/m8-w02-c01-published-standard-closure-rs322.json");
 var product = backlog.RootElement;
 Need(product.GetProperty("plan_version").GetString() == Baseline &&
-    decision.Contains("version `" + Baseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
+    decision.Contains("version `" + HistoricalDecisionBaseline + "`", StringComparison.Ordinal), "Canonical backlog version drift.");
 foreach (var phaseId in new[] { "M8-W01-C01", "M8-W01-C02", "M8-W02-C01", "M8-W02-C02" })
     Need(product.GetProperty("chunks").EnumerateArray().Single(x => x.GetProperty("id").GetString() == phaseId)
         .GetProperty("status").GetString() == "done", "Accepted chunk state drift: " + phaseId);
