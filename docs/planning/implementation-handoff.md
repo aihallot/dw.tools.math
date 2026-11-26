@@ -1,6 +1,12 @@
 # ChatGPT and DWF implementation handoff
 
-## Current situation
+## Current situation — RS365
+
+The accepted M0–M9 roadmap is completed in the native plan and canonical backlog. See the [planning index](README.md), [M9 reconciliation](decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md), and [current repository README](../../README.md). Use the installed guidance and live GitHub authority, not the historical bootstrap version below. No additional milestone is admitted by this handoff.
+
+## Historical adoption situation (original bootstrap)
+
+The original bootstrap description and instructions below are preserved for methodology and provenance; their roadmap counts, pending steps and tool versions are not current execution authority.
 
 The repository contains an accepted product roadmap, a .NET documentation validator, draft cross-repository requests, and an initialized DWF 0.1.58 / guidance 0.22 workflow.
 No AURA extraction has been delivered and no package has been publicly published.

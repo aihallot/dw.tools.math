@@ -61,4 +61,4 @@ Pin the real version via private `PackageReference` and independently verify the
 
 Use existing `ExactRational` for fraction operations only after separately verifying the relevant published dependency and zero-denominator contracts; the Statistics readback does not attest this distinct surface.
 
-Math's M9 backlog and native plan states remain unchanged (planned/not-ready). No retroactive task completion is inferred from the completed runs. Only the Assessa owner may claim GENERATE-001 / EG-A-01 / T002 successful adoption.
+At the historical RS278 handoff, Math's M9 backlog and native plan states were planned/not-ready. Subsequent actual native RED/GREEN/Verification and parent closure runs closed M9 (RS364), then RS365 reconciled the canonical backlog. No retroactive task completion is inferred from the historical candidate or readback runs. No new publication or downstream adoption follows from M9 closure. Only the Assessa owner may claim GENERATE-001 / EG-A-01 / T002 successful adoption.

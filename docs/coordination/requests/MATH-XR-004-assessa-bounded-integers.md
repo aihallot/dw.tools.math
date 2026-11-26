@@ -1,6 +1,8 @@
 # MATH-XR-004 — Assessa EG-A-01 unbiased bounded integer sampling
 
 Status: **Math-owned bounded-integer API and private NuGet delivery independently qualified through RS273; Assessa EG-A-01 / T002 adoption not yet qualified**.
+Current Math lifecycle: M9 is done in the native plan and canonical backlog following RS364/RS365. The immutable private delivery and downstream adoption boundary are unchanged. See [M9 reconciliation](../../planning/decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md).
+
 Origin: `aihallot/dw.tools.assessa`, GENERATE-001 / EG-A-01 / T002; request received 2026-11-20.
 Priority: **P0 consumer unblock**, ahead of optional additional .NET 11 migration package smoke tests, without displacing an already pending DWF run.
 Ownership: Math owns reusable integer sampling; Assessa owns pedagogical recipes, profiles, answer protection, identifiers, sessions, and receipts.
@@ -73,5 +75,4 @@ Published private identities:
 **Owner boundary:** Assessa must select the new private package version and independently
 qualify `GENERATE-001 / EG-A-01 / T002`, including F0/F2 domain-specific range limits
 and any separate `ExactRational` dependency. Math does not claim that this downstream
-adoption occurred. Accepted M9 backlog remains `planned` and its native DWF plan
-remains `not-ready`; any progress reconciliation must use separate truthful run evidence.
+adoption occurred. At RS274 the accepted M9 backlog was `planned` and the native DWF plan was `not-ready`. Those historical states were superseded by the subsequent controlled M9 lifecycle and the durable RS364/RS365 closure and reconciliation.

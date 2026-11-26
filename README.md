@@ -2,7 +2,17 @@
 
 Independent .NET 10 mathematical computation and representation libraries for applications, scientific consumers and agents. **Math does not depend on AURA, Decision or MCDM.**
 
-## Current status — 2026-10-21
+## Current status — RS365 completed roadmap (2026-11-26)
+
+**M0–M9 are complete in the accepted bounded roadmap.** The canonical backlog (`0.1.142` after status reconciliation) has 597 completed nodes; the native DWF plan has 591 completed nodes. Six historic subtasks remain intentionally omitted from the native hierarchy; no history is reconstructed. See [M9 final reconciliation](docs/planning/decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md) and the [planning index](docs/planning/README.md).
+
+- M8: selected portable Discovery protocol, four CLR capabilities, opt-in unsigned portable export and bounded SDK qualification; no BrokerReady permission, external host installation or production .NET migration.
+- M9: deterministic noncryptographic bounded integer sampling with exact rejection, raw-draw budget and checkpoint replay; independently qualified immutable private Statistics `20260.20261120.1001` and exact Quantities `20260.20261102.1001` with locked Windows and Linux/WSL net11 consumers. [Contract](docs/distribution/bounded-integer-sampling.md) · [Assessa handoff](docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md).
+- Production source remains .NET 10 / C# 14. No new public NuGet publication, universal cross-version compatibility, or downstream adoption is claimed. Any new capability or public release requires separately accepted scope and evidence.
+
+## Historical local qualification — 2026-10-21 (RS130)
+
+The following dated M0–M7 snapshot is retained for traceability. Its original source-pinned documents and validators can be inspected at [the RS130 result](https://github.com/aihallot/dw.tools.math/commit/174e92c9738a508a16044df0d042d488f0bc9697); it is not the current roadmap or package inventory.
 
 **As of 2026-10-21: implemented libraries and local delivery qualification completed; no public NuGet release.**
 
@@ -52,8 +62,8 @@ Consult the [implementation plan](docs/planning/README.md), [architecture](docs/
 ## Status, ownership and publication boundaries
 
 - **Local package evidence is not a registry release.** Source-declared `*-preview.*` versions are not public releases. Rights, license/NOTICE obligations, support matrix and source/binary compatibility need separate verification and owner authorization.
-- **Cross-repository requests are drafts.** AURA, Decision and MCDM each own their adoption and any actual integration. Math does not transmit requests or modify sibling repositories merely because its packages work locally.
-- **Agent Discovery is not shipped.** The pinned protocol and candidate API surface in `docs/discovery/` do not constitute a generated Math-owned skill, CLR binding or broker runtime.
+- **Downstream adoption remains independently owned.** Unsent AURA, Decision and MCDM requests are distinct from the Math-owned private Statistics handoff to Assessa. Math does not transmit new requests or modify sibling repositories merely because its packages work locally.
+- **Agent Discovery is bounded and opt-in.** The generated Math-owned skill, four selected CLR bindings and unsigned portable export are qualified within M8. No BrokerReady grant, installation in an external agent host, or broker runtime is claimed.
 - **DWF owns execution.** The native plan and durable run reports determine accepted progress; documentation claims must be grounded in those records.
 
 ## Historical baseline (2026-10-07) — archived statement, not current status
@@ -62,4 +72,4 @@ The original README statement is retained verbatim below **only as historical te
 
 > **Status on 2026-10-07: initial planning; no mathematical engine has been implemented in this repository yet.** Candidate extraction code exists in AURA; its presence there is not a Math delivery.
 
-That sentence described the repository on **2026-10-07**, *before* M0–M7 and the RS124–RS129 delivery qualifications. It must not be interpreted as the present project status. The historic validator source files and their prior receipt hashes remain unchanged; current README truth is checked separately by the post-M7 documentation reconciliation.
+That sentence described the repository on **2026-10-07**, *before* M0–M9 and the later delivery qualifications. It must not be interpreted as the present project status. The historic validator source files and prior receipt hashes remain unchanged; their live-document checks apply to the original result checkout, not the evolved current documents.
