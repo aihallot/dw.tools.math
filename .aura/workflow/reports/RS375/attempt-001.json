@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS375",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-26T23:06:31.452788+00:00",
+  "completedAtUtc": "2026-11-26T23:06:32.5396182+00:00",
+  "durationMilliseconds": 1086,
+  "projectNodes": [
+    "M11-W01-C01-T1-G",
+    "M11-W01-C01-T1-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md",
+    "docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.78",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "535afe9629637af208d0956c932a69c1887e01c13db0a96fccec921173039a64"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS375/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2400,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-c91aa38a62c74f3f952e1506bbec6f24\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2400000,
+      "DurationMilliseconds": 904,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS374/attempt-001.json run=RS374 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C01-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[files.replace-from-staged] CHANGED path=docs/planning/backlog.json bytes=568146\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=14223\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM11NumericSubsidiarityAdmission.cs bytes=9908\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=6439\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=43404\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3343\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67823\r\n[files.replace-from-staged] CHANGED path=README.md bytes=8334\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md bytes=1210\r\nplanning valid: 0.1.148 | 70 chunks | f89c67fb3193eb1400170b258dbc86484f1ba8c1b453c51c6b400afe42e19be7 | mode --write\r\n\n\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C01-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C01-T1-V not-ready-\u003Eready\r\n[payload] OK operations=18 changed=12 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS375/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS374/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS374 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "87a1ab303d61ffefd200762c282194780d3b72b095fa729986e68ab891b50231",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C01-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "efbfc844674a56067af5df6ff6eb70fd5b3cb70fc477b5716141db34888c0516",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "efbfc844674a56067af5df6ff6eb70fd5b3cb70fc477b5716141db34888c0516",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "efbfc844674a56067af5df6ff6eb70fd5b3cb70fc477b5716141db34888c0516",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "bytes=568146",
+        "Details": null,
+        "BeforeSha256": "0e82532f2995d0f86aed910dc1bb259d0860b2e83f0c3aaba0bded1613a53ae9",
+        "AfterSha256": "f89c67fb3193eb1400170b258dbc86484f1ba8c1b453c51c6b400afe42e19be7",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=14223",
+        "Details": null,
+        "BeforeSha256": "085422a697c08dc108e91e7d4cd7e1feb7be3969745aa6db27df95b31a8f8817",
+        "AfterSha256": "f73d0a3858699360d46204eafa28b9221ba8cec87fe37de81d9c4b34e08aedf1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=9908",
+        "Details": null,
+        "BeforeSha256": "3bd629d2738550d0cdeb8b8275d3342983f1fc0a9667b05b3e7bff0f846b52f6",
+        "AfterSha256": "e6ae52e7a9b3ccd3256d24b5b6a72c5b952c696bc059c1025114ddcd670718bc",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=6439",
+        "Details": null,
+        "BeforeSha256": "e6f9a073e1ad5e32ee93e31582b1e2d2ed0939d1a9034d8ae168fbbdead76e4c",
+        "AfterSha256": "da3421d5abde38089ba164ad980500f614a0c4bebe87e401bf38eeaa02e9a9eb",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=43404",
+        "Details": null,
+        "BeforeSha256": "118995c9c289aafd58054a1e57a935cdebd3601be5e97cb66e85924a6c7da203",
+        "AfterSha256": "a2bf67ab5ec3c0943af7b63d96e38091357e8ce980a97d1af4353da582295ba4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "6ad463ba9cb093d48c2461ed6f11410bb92039fe634bb98c9d94f1ef7c0b1bab",
+        "AfterSha256": "ac71aafd60c712755a0d71ddd841e5cf3b4338b475c79d1260169588392c66b9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3343",
+        "Details": null,
+        "BeforeSha256": "abc5c5334457a6685cfcb1fc3a328c1a04b8a7c3a64313861e578c84d95f0983",
+        "AfterSha256": "6460364b7451a1a89104a6c19fc4b84431905cc80d33761ce4a98e8353db5464",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67823",
+        "Details": null,
+        "BeforeSha256": "bc9eabaad783dd7c1aa26c133cb285afdf7251ad6a8e5308f651d6d227c109aa",
+        "AfterSha256": "b2be43b74ac9b401422c58fb1faec8175cce8b56574ec4a08ea9905a33b479a2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=8334",
+        "Details": null,
+        "BeforeSha256": "d8150389b373f2961714907a617baedb32a59eec5bd6e04ffcd69385d96a4a0b",
+        "AfterSha256": "be44e49179253b18d1c1451f152955ef882b85d22ed3df52c387d9441bea8b2c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md",
+        "Status": 1,
+        "Summary": "bytes=1210",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "92af5c94ef3fb2d9b9a414a53a1d4a675f1d06965b70e042837de99f2b2ed732",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C01-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "efbfc844674a56067af5df6ff6eb70fd5b3cb70fc477b5716141db34888c0516",
+        "AfterSha256": "c3bdc642e5d3d3e68045952ddd16978a4bb620f2259c4b752dec6183245e1a4c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C01-T1-V not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "c3bdc642e5d3d3e68045952ddd16978a4bb620f2259c4b752dec6183245e1a4c",
+        "AfterSha256": "5d369b325828dc93a08c238a3c5eb25baf45b3ffda77267e8438f448ff5a7d6b",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs375-m11-green-closure",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-native-roadmap-parity",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-m10-readiness-preserved",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-m9-admission",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs375-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261126T230456Z-bae5042771143736",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "862178f56b8b2c6de3ec5b4f7ec4f79ab2fb337b",
+  "invocationStartedAtUtc": "2026-11-26T23:04:56.0337113+00:00",
+  "invocationDurationMilliseconds": 96505,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS375",
+      "title": "Close exact Int64 scaling GREEN and ready independent verification",
+      "projectNodes": [
+        "M11-W01-C01-T1-G",
+        "M11-W01-C01-T1-V"
+      ]
+    },
+    "declared": {
+      "summary": "Close GREEN from durable RS374 evidence and ready verification without repeating the successful numerical tests.",
+      "value": "Reconcile canonical activation and corroborate all twelve RS374 preparation validations, including the independent exact scaling oracle, focused tests and locked Quantities regression. Preserve sources, package versions, immutable archives and M10 cutover gate.",
+      "debtChanges": [
+        "Reconcile canonical GREEN activation from RS374.",
+        "Close the qualified GREEN leaf and ready independent verification."
+      ],
+      "nextAction": "Independently verify the delivered scaling contract and resource boundaries, adding evidence rather than replaying the same suite.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M11-W01-C01-T1-G",
+          "achievement": "RS374 delivered the additive checked ExactRationalBudget scaling member and immutable result types, with successful independent fixed/generated numerical oracle, focused maintained tests and locked Quantities regression. RS375 corroborates the durable first-pass report and all twelve compiled preparation validations."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M11.md"
+      ],
+      "validations": [
+        {
+          "id": "math-rs375-m11-green-closure",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-native-roadmap-parity",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-m10-readiness-preserved",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-m9-admission",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs375-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M11-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M11-W01-C01-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C01-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M11-W01-C01-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M11-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M11-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS374 delivered the additive checked ExactRationalBudget scaling member and immutable result types, with successful independent fixed/generated numerical oracle, focused maintained tests and locked Quantities regression. RS375 corroborates the durable first-pass report and all twelve compiled preparation validations."
+      },
+      {
+        "id": "M11-W01-C01-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M11-W01-C01-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M11-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M11-W01-C01-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS374 delivered the additive checked ExactRationalBudget scaling member and immutable result types, with successful independent fixed/generated numerical oracle, focused maintained tests and locked Quantities regression. RS375 corroborates the durable first-pass report and all twelve compiled preparation validations."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS375",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS375",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "862178f56b8b2c6de3ec5b4f7ec4f79ab2fb337b",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "c53dd210b7da238541c9f697c4257b3820a18633cd91690928a160f9a183ddf9"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: close exact Int64 scaling GREEN and ready verification",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
