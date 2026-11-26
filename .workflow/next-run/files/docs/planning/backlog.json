@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.144",
+  "plan_version": "0.1.145",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -287,7 +287,7 @@
       "version": "1.6.0-preview",
       "title": "Cross-consumer numeric subsidiarity",
       "outcome": "Provide admitted generic exact Int64 scaling, resumable finite moments and larger-budget quantiles with compatibility-preserving candidate qualification before the actual M10 cutover.",
-      "status": "planned",
+      "status": "ready",
       "gate": "G-M11",
       "required_chunks": [
         "M11-W01-C01",
@@ -699,7 +699,7 @@
       "id": "M11-W01",
       "release": "M11",
       "title": "Generic numerical primitives requested by Decision",
-      "status": "planned",
+      "status": "ready",
       "paths": [
         "src/projects/dw.quantities",
         "src/projects/dw.tools.math.statistics",
@@ -10115,7 +10115,7 @@
       "title": "Checked exact rational scaling to Int64",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M1-W02-C01",
         "M3-W02-C04"
@@ -10139,8 +10139,18 @@
       "proposed_commands": [
         "dotnet test dw.tools.math.slnx --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "src/projects/dw.quantities/ExactRational.cs",
+        "src/projects/dw.quantities/ExactRationalBudget.cs",
+        "docs/engineering/ProbeM11ExactInt64ScalingRed.cs",
+        "docs/engineering/fixtures/M11ExactInt64ScalingOracle.cs",
+        "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM11ExactInt64ScalingRed.cs -- --red",
+        "dotnet run --file docs/engineering/ProbeM11ExactInt64ScalingRed.cs -- --green",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M11ExactInt64Scaling"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10148,14 +10158,14 @@
           "title": "Checked exact rational scaling to Int64",
           "behavior": "Add or expose generic exact checked rational times integer conversion to Int64 using existing rational and budget primitives, with typed nonintegral, overflow and resource refusal.",
           "test_case": "Independent integer oracle covers signed Int64 endpoints, zero, negative factors, nonintegral results, overflows and bounded large operands; preserve all existing rational behavior.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M11-W01-C01-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10174,7 +10184,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "RS371 durable readiness; use existing normalized rational and budget primitives with independent fixed and generated checked conversion oracles.",
+      "readiness": "Ready from RS371 evidence; native RED activation and oracle qualification are separate."
     },
     {
       "id": "M11-W01-C02",
