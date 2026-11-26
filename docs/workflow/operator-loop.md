@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.operator-loop"
-documentVersion: 17
+documentVersion: 21
 kind: "guidance"
 title: "Operator Loop"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV027Draft.cs#OperatorLoop"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV031Draft.cs#OperatorLoop"
 ---
 # Operator Loop
 
@@ -27,7 +27,7 @@ A successful direct run executes the pending payload and targeted validations, v
 
 ## Terminal verdict
 
-For every controlled `dwf run next` completion, the final terminal line is the operator verdict:
+For controlled ordinary run completions, the final terminal line is the operator verdict. Guidance-only outcomes are separate and do not establish an ordinary RS result (see below):
 
 - `pushed` in yellow means the exact result is durably delivered and remotely verified;
 - `failed` in red means the command did not reach that durable success boundary.
@@ -56,7 +56,17 @@ COMMAND: <authority-derived-run-next-or-aucune>
 
 Populate the completed-run line from durable report and verified result evidence, never a planned commit or assumption; use `n/a` and `none` when no completed run exists. `DIRECTORY` and `BRANCH` identify the operator's actual checkout/worktree; `EXPECTED RESULT` gives both pushed and failed verdicts with the exact next run ID, current retry ordinal and result commit message from its prepared request. Verify the prepared tip internally on GitHub, but omit it from the operator handback. Do not invent a run ID, retry ordinal or result subject when authority is missing. `STATUS` gives the next run, retry ordinal and cumulative attempts already allocated (zero before first invocation). `COMMAND` is the one authority-derived operator command (`dwf run next` or a qualified `dwfm run next`), or `aucune` if no next run is authorized. After `pushed` verify remote result and prepare one successor; after `failed` analyze durable evidence and correct the same run. A second failure requires incident review. This is agent education, not a chat-response runtime gate, repository-specific boilerplate, or an extra operator step.
 
+Use the exact absolute operator checkout/worktree path for `DIRECTORY`, as resolved from the current prompt or verified operator execution authority. A repository name, relative path, guessed path or stale handover is not a substitute. Keep the existing six-field handback on plain-text lines without additional blocks or fields; nothing follows `COMMAND`.
+
+## Optional project commands
+
+Only for an explicitly selected project and a compatible installed tool, `dwf exec list [--json]` and `dwf exec validate [--json]` inspect optional project recipe metadata. `dwf exec run --id <id>` is a separate, explicit operator action, not a second step of the ordinary workflow. For index selection pin the listed absolute checkout and catalogue digest; for deferred ID selection pin both as well. A missing catalogue is not a run-next blocker. `dwf info` reports its availability, not launch readiness. See [Agent Playbook](agent-playbook.md#optional-project-command-recipes) for authoring and exact command forms.
+
+Do not confuse a recipe exit code, timeout, cancellation, child output or metadata validation with an ordinary RS result. Continue to use `dwf run next` for normal controlled work, with the same mandatory operator handback.
+
 ## After installing a newer executable
+
+`dwf info` and `dwf version` (or the qualified meta command) share a read-only projection. The original version/schema/compatibility lines are retained. Channel, embedded and repository guidance, and bundled/installed skill observations are evidence-based; unknown means unverified, not a reason to install or overwrite. The external latest version is not queried. A local channel observation is not a full installation certification.
 
 Run:
 
@@ -67,13 +77,15 @@ dwf check
 
 The executable, workflow schema, and repository guidance have independent versions. Installing a new executable does not rewrite the repository.
 
-When `dwf check` reports an exact supported guidance upgrade, run:
+On a clean repository, use the normal `dwf run next` command for automatic convergence of an exact supported historical pack. `dwf guidance upgrade` remains an explicit maintenance command; it is not a routine prerequisite.
 
-```powershell
-dwf guidance upgrade
-```
+The supported 0.31 upgrade contract upgrades exact embedded guidance 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29 or 0.30 directly to 0.31. Unknown, divergent, partial or newer guidance is not overwritten or downgraded. Automatic convergence takes place after remote authority refresh in an eligible clean ordinary workspace. Corrections, selected or pending runs, pending delivery and self-replacement take precedence.
 
-The supported 0.27 upgrade contract requires a clean repository and no pending run; it upgrades exact embedded guidance 0.22, 0.23, 0.24, 0.25 or 0.26 directly to 0.27 in one result commit. Unknown, divergent or partial guidance is refused without overwrite; the operation replaces only `docs/workflow`, verifies the target pack, creates and pushes one deterministic result commit, and observes the remote result. No manual Git command follows a successful upgrade. If delivery fails after the guidance commit exists, restore connectivity and use normal `dwf run next`; pending-delivery recovery reuses that existing commit.
+An eligible ordinary direct committed request is preserved and freshly prepared against the new authority. Specialized requests and explicit guidance dependencies defer optional convergence. Preserve legitimate guidance pins; when the migrated authority requires request review, revise the committed request before retrying rather than replaying the old request.
+
+`Guidance upgraded; no run executed.` is a guidance-only success, not a delivered ordinary RS. `Guidance convergence failed; no run executed.` is not an allocated ordinary attempt failure. Inspect the diagnostic and guidance delivery evidence; never invent an ordinary attempt, retry or successor. Normal `dwf run next` recovers an existing pending result before later work.
+
+Complete outstanding guidance delivery with its compatible driver before changing versions when possible. A newer driver can recover the original commit only for a unique exact supported target, including a recognized historical target; subsequent convergence is separate. Unknown or mismatched targets are refused. Do not delete or rewrite a receipt or force a push to bypass recovery. Older drivers may not recognize newer targets or metadata.
 
 Divergent or unsupported guidance is refused without overwrite. Review the reported files and preserve repository-owned custom documentation outside `docs/workflow`.
 

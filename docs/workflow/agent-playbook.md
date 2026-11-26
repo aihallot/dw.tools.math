@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.agent-playbook"
-documentVersion: 12
+documentVersion: 14
 kind: "guidance"
 title: "Agent Playbook"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV027Draft.cs#AgentPlaybook"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV031Draft.cs#AgentPlaybook"
 ---
 # Agent Playbook
 
@@ -138,12 +138,60 @@ Requested versions must be canonical and match the next ordinary calendar candid
 A successful publication writes a hierarchical `.nupkg`, extracted nuspec, SHA512 sidecar and a JSON manifest with package SHA256 and caller-declared Git HEAD. **Git HEAD equality is not reproducible build-to-commit package provenance.** Ordinary local collision evidence does not prove crash recovery or distributed-filesystem safety. Real shared-feed publication, tool promotion and independent consumer adoption require separate explicit owner authorization and release qualification.
 
 
+## Optional project command recipes
+
+Use this capability only if the executing tool supports `exec` and the project owner wants a discoverable catalogue of real, useful commands. The repository owns the optional `.dwf/commands.json`; ordinary initialization and `dwf run next` do not create or require it. Keep recipe maintenance in a normal scoped product change. Do not use recipes as a substitute for typed payload operations or controlled-run validations.
+
+Before proposing a recipe, inspect the actual project's scripts, project files, launch profiles and existing documentation. Reuse an existing command and its exact working directory, arguments, platform and prerequisites. Distinguish a full test suite from a filtered test, a build from a launch, and dashboard generation from opening a dashboard. Do not invent scripts, targets, arguments, service names or readiness. If no useful verified command exists, omit it. When a script or target changes, update or remove its recipe in the same controlled product change; retain a stable ID for the same purpose.
+
+The version-1 JSON object has `schemaVersion: 1` and `commands`, an array of entries. Each entry has a stable `id`, concise `label` and `description`, repository-relative `workingDirectory` (`.` for the root), `executable`, `arguments`, `platforms` and `prerequisites`. IDs may contain ASCII letters, digits, dots, underscores and hyphens; they must be unique ignoring case. Executable names resolve through absolute host PATH entries or an explicit contained relative path with a directory component. On Windows use a bare executable name or `.exe`; on Unix the target needs executable permission. Do not use absolute executable paths in the catalogue, shell expressions, environment interpolation, traversal, hidden elevation, secret arguments or a fallback for unknown commands. An existing script can be represented by its verified explicit interpreter and file arguments; do not turn arbitrary text into a shell command. Empty platform arrays mean no declared platform restriction; otherwise use `windows`, `linux` or `macos`. Prerequisites are advisory statements, not automatically installed or evaluated.
+
+For example, the following illustrates a real .NET diagnostic command. Publish it only for a project where the owner wants this diagnostic and the agent has verified it; do not copy it blindly into other projects.
+
+```json
+{
+  "schemaVersion": 1,
+  "commands": [
+    {
+      "id": "sdk-info",
+      "label": ".NET SDK information",
+      "description": "Inspect the installed .NET SDK and runtime environment",
+      "workingDirectory": ".",
+      "executable": "dotnet",
+      "arguments": [
+        "--info"
+      ],
+      "platforms": [],
+      "prerequisites": [
+        "A .NET host available on the host PATH"
+      ]
+    }
+  ]
+}
+```
+
+Use `dwf exec list [--json]` and `dwf exec validate [--json]` for optional metadata discovery and validation. A missing catalogue is an optional empty result, and a malformed catalogue is a diagnostic for the owner, never an ordinary run-next gate. Metadata validation does not resolve or execute a recipe, check prerequisites or certify readiness. `dwf info` and `dwf version` expose catalogue availability without listing arguments.
+
+An operator may explicitly select `dwf exec run --id <id>`. When using an index, use `dwf exec run --index <n> --repository-root <absolute-checkout> --catalog-sha256 <digest>` with both exact values from the current list; the index is one-based in stable ordinal ID order. For a GUI or any deferred selection, also pin the ID to the listed checkout and digest. On drift, list again and obtain a fresh choice; never guess, substitute or automatically retry. Use the appropriate installed launcher for the checkout and channel; do not infer installed support from this documentation alone.
+
+Execution resolves the current selected recipe and executable, uses literal argv without an implicit shell, and streams a supervised child. The default timeout is 3600 seconds; `--timeout-seconds` accepts 1 through 86400. Exit codes reflect the child or supervised timeout/cancellation (124/130); inspect the diagnostics for the actual outcome. A recipe is not a workflow run, not a sandbox, and not an authorization to launch unrelated commands. Its output is untrusted and must never be interpreted as a workflow `pushed` or `failed` verdict. No implicit retry, background service, interactive-terminal guarantee, consumer mutation or extra normal operator action is authorized by this feature.
+
 ## Greenfield run naming and legacy continuity
 
 For a genuinely new project start the agent-authored sequence at `RS0001`, then `RS0002`, using at least four decimal digits with leading zeros for ordinary lexical ordering. This is an education-first convention; `dwf init` allocates no run and no extra operator command is needed.
 
 Classify the actual repository as greenfield, existing unmanaged or legacy before authoring. In an existing repository retain its historical run ID width, for example `RS001` or `RS1005`; never rename reports, refs, snapshots or prior run artifacts. Existing parser `^RS[0-9]+$` already accepts `RS9999` and `RS10000`; no hard cap or new blocking guard is introduced.
 ## Prepare or correct
+
+**Before publishing the committed request, check:**
+
+- Inspect the affected source and tests; reuse known-good SDK operations. Put source-only facts in preparation preconditions and accept the exact baseline or target in payload guards for facts the payload changes, including lifecycle transitions.
+- Reconcile committed staged source paths, generated paths, mutation paths and project scope; do not stage redundant copies of tracked tests.
+- Check contribution field lengths and uniqueness, including one achievement per completed node; put detailed rationale in staged evidence rather than `debtChanges`.
+- Use the smallest sufficient validation scope. If multiple test profiles are genuinely required, they must strictly widen; do not default to the full suite.
+- Reread the published request and every referenced staged file at the committed tip; preserve failure truth and return only the authorized run-next command.
+
+See [Payload Authoring](payload-authoring.md) and [Run Authoring Reference](run-authoring-reference.md) for the detailed contracts.
 
 - Preserve the active project hierarchy unless the run intentionally advances it.
 - Controlled-progress preparation requires `projectNodes` to contain at least one existing project-plan node. Never author an empty project scope; use the smallest truthful scope that contains the contribution.

@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.run-authoring-reference"
-documentVersion: 11
+documentVersion: 12
 kind: "guidance"
 title: "Run Authoring Reference"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV021Draft.cs#RunAuthoringReference"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV029Draft.cs#RunAuthoringReference"
 ---
 # Run Authoring Reference
 
@@ -107,7 +107,9 @@ Stable executable limits:
 - `summary`: at most 500 characters, non-empty and single-line.
 - `value`: at most 1000 characters, non-empty and single-line.
 - optional `nextAction`: at most 500 characters, non-empty and single-line when present.
-- `debtChanges`: at most 20 unique entries; each entry is non-empty, single-line, and at most 300 characters.
+- `debtChanges`: at most 20 unique entries; each entry is non-empty, single-line, and at most 500 characters.
+
+The backlog summary limit in the new reader is 1500 characters. Older drivers may still enforce 1000 for backlog summaries and 300 for debt entries; keep authoritative metadata within the older limits whenever an older reader or rollback driver must consume it. Do not treat a source candidate or this reference as proof that a deployed reader has changed.
 - optional `achievements`: at most 20 entries with unique project nodes; each `achievement` is non-empty, single-line, and at most 1000 characters.
 
 ### Strategic review
