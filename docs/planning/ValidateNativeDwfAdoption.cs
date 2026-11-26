@@ -17,7 +17,7 @@ try
     var expected = BuildExpected(backlog);
     var actual = BuildActual(plan);
 
-    Require(expected.Count == 608, $"Expected product projection count changed: {expected.Count}.");
+    Require(expected.Count == 630, $"Expected product projection count changed: {expected.Count}.");
     Require(actual.Count == expected.Count, $"Native DWF node count {actual.Count} differs from expected {expected.Count}.");
 
     foreach (var pair in expected)
@@ -41,6 +41,8 @@ try
     RequireState(actual, "M8", "done");
     RequireState(actual, "M9", "done");
     RequireState(actual, "M10", "ready");
+    foreach (var entry in actual.Where(pair => pair.Key == "M11" || pair.Key.StartsWith("M11-", StringComparison.Ordinal)))
+        RequireExactState(entry.Value, "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M10-", StringComparison.Ordinal)))
         RequireExactState(entry.Value, entry.Key is "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
@@ -145,7 +147,7 @@ try
             "Completed M0-W01-C02 target is missing its qualification decision.");
     }
 
-    Console.WriteLine($"native DWF adoption valid: nodes={actual.Count} milestones=10 workPackages=20 phases=61 tasks=122 subtasks=360 c02={(target ? "done" : "ready")}");
+    Console.WriteLine($"native DWF adoption valid: nodes={actual.Count} milestones={actual.Values.Count(x => x.Kind == "milestone")} workPackages={actual.Values.Count(x => x.Kind == "work-package")} phases={actual.Values.Count(x => x.Kind == "phase")} tasks={actual.Values.Count(x => x.Kind == "task")} subtasks={actual.Values.Count(x => x.Kind == "subtask")} c02={(target ? "done" : "ready")}");
     return 0;
 }
 catch (Exception ex)

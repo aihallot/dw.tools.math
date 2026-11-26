@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.143",
+  "plan_version": "0.1.144",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -278,6 +278,25 @@
       ],
       "depends_on": [
         "M8",
+        "M9"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M11",
+      "version": "1.6.0-preview",
+      "title": "Cross-consumer numeric subsidiarity",
+      "outcome": "Provide admitted generic exact Int64 scaling, resumable finite moments and larger-budget quantiles with compatibility-preserving candidate qualification before the actual M10 cutover.",
+      "status": "planned",
+      "gate": "G-M11",
+      "required_chunks": [
+        "M11-W01-C01",
+        "M11-W01-C02",
+        "M11-W01-C03",
+        "M11-W01-C04"
+      ],
+      "depends_on": [
+        "M3",
         "M9"
       ],
       "evidence": []
@@ -674,6 +693,21 @@
         "docs/engineering"
       ],
       "path_policy": "Audit actual source graph and historical fixtures before changing central defaults; preserve immutable package versions and historical probes.",
+      "evidence": []
+    },
+    {
+      "id": "M11-W01",
+      "release": "M11",
+      "title": "Generic numerical primitives requested by Decision",
+      "status": "planned",
+      "paths": [
+        "src/projects/dw.quantities",
+        "src/projects/dw.tools.math.statistics",
+        "tests/projects",
+        "tests/consumers",
+        "docs/distribution"
+      ],
+      "path_policy": "Reuse existing Math contracts, preserve historical callers and keep Decision policy external; no target migration in this scope.",
       "evidence": []
     }
   ],
@@ -9934,7 +9968,8 @@
       "size": "M",
       "status": "planned",
       "depends_on": [
-        "M10-W01-C01"
+        "M10-W01-C01",
+        "M11-W01-C04"
       ],
       "external_dependencies": [],
       "requirements": [
@@ -10065,6 +10100,285 @@
               "id": "M10-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Independently qualify and document post-cutover qualification and delivery readiness.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M11-W01-C01",
+      "tag": "dw.quantities",
+      "release": "M11",
+      "work_package": "M11-W01",
+      "title": "Checked exact rational scaling to Int64",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M1-W02-C01",
+        "M3-W02-C04"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M11-W01-C01-R1"
+      ],
+      "deliverables": "Add or expose generic exact checked rational times integer conversion to Int64 using existing rational and budget primitives, with typed nonintegral, overflow and resource refusal.",
+      "acceptance": "Independent integer oracle covers signed Int64 endpoints, zero, negative factors, nonintegral results, overflows and bounded large operands; preserve all existing rational behavior.",
+      "boundary_acceptance": "No floating conversion, rounding, CP-SAT decimal policy or Decision-specific exception. Review ExactRationalBudget and existing conversion contracts before adding a member.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY"
+      ],
+      "proposed_files": [
+        "src/projects/dw.quantities/ExactRational.cs",
+        "src/projects/dw.quantities/ExactRationalBudget.cs",
+        "tests/projects/dw.quantities.tests"
+      ],
+      "proposed_commands": [
+        "dotnet test dw.tools.math.slnx --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M11-W01-C01-T1",
+          "title": "Checked exact rational scaling to Int64",
+          "behavior": "Add or expose generic exact checked rational times integer conversion to Int64 using existing rational and budget primitives, with typed nonintegral, overflow and resource refusal.",
+          "test_case": "Independent integer oracle covers signed Int64 endpoints, zero, negative factors, nonintegral results, overflows and bounded large operands; preserve all existing rational behavior.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M11-W01-C01-T1-R",
+              "title": "RED",
+              "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C01-T1-G",
+              "title": "GREEN",
+              "description": "Implement or qualify only the minimum admitted contract.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C01-T1-V",
+              "title": "Verify and document",
+              "description": "Independently verify the result, historical compatibility and explicit limitations.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M11-W01-C02",
+      "tag": "statistics",
+      "release": "M11",
+      "work_package": "M11-W01",
+      "title": "Resumable finite streaming moments",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M3-W02-C01"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M11-W01-C02-R1"
+      ],
+      "deliverables": "Qualify provider-free incremental mean and population/sample variance with constant-size state, explicit finite precision and budgets, validated versioned checkpoint and replay.",
+      "acceptance": "At least one million observations, independent reference oracles for large offsets and small variance, empty/singleton/constant data, refusal atomicity, budget exhaustion and interrupted versus uninterrupted replay.",
+      "boundary_acceptance": "Preserve bounded batch APIs and their rounding/refusal semantics. No Monte Carlo, Wilson interval, cancellation policy or business meaning. Merge only if separately justified and qualified.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "REPLAY"
+      ],
+      "proposed_files": [
+        "src/projects/dw.tools.math.statistics/DescriptiveStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/FrequencyWeightedStatistics64.cs",
+        "tests/projects/dw.tools.math.statistics.tests"
+      ],
+      "proposed_commands": [
+        "dotnet test dw.tools.math.slnx --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M11-W01-C02-T1",
+          "title": "Resumable finite streaming moments",
+          "behavior": "Qualify provider-free incremental mean and population/sample variance with constant-size state, explicit finite precision and budgets, validated versioned checkpoint and replay.",
+          "test_case": "At least one million observations, independent reference oracles for large offsets and small variance, empty/singleton/constant data, refusal atomicity, budget exhaustion and interrupted versus uninterrupted replay.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M11-W01-C02-T1-R",
+              "title": "RED",
+              "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C02-T1-G",
+              "title": "GREEN",
+              "description": "Implement or qualify only the minimum admitted contract.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C02-T1-V",
+              "title": "Verify and document",
+              "description": "Independently verify the result, historical compatibility and explicit limitations.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M11-W01-C03",
+      "tag": "statistics",
+      "release": "M11",
+      "work_package": "M11-W01",
+      "title": "Explicit larger-sample quantile evaluation",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M3-W02-C02"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M11-W01-C03-R1"
+      ],
+      "deliverables": "Extend existing Type7 and NearestRank engine through an additive explicit observation budget; keep exact rational and finite binary64 paths distinct.",
+      "acceptance": "Independent oracle checks sizes 1, 4096, 4097 and one million finite observations, ties, extremes, endpoints and budget/refusal behavior. Existing overloads retain the 4096 limit and historical outputs.",
+      "boundary_acceptance": "No approximate sketch substituted implicitly. Exact rational budgets separately specified; no VaR/CVaR, loss or confidence policy. No parallel quantile engine.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY"
+      ],
+      "proposed_files": [
+        "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+        "tests/projects/dw.tools.math.statistics.tests"
+      ],
+      "proposed_commands": [
+        "dotnet test dw.tools.math.slnx --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M11-W01-C03-T1",
+          "title": "Explicit larger-sample quantile evaluation",
+          "behavior": "Extend existing Type7 and NearestRank engine through an additive explicit observation budget; keep exact rational and finite binary64 paths distinct.",
+          "test_case": "Independent oracle checks sizes 1, 4096, 4097 and one million finite observations, ties, extremes, endpoints and budget/refusal behavior. Existing overloads retain the 4096 limit and historical outputs.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M11-W01-C03-T1-R",
+              "title": "RED",
+              "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C03-T1-G",
+              "title": "GREEN",
+              "description": "Implement or qualify only the minimum admitted contract.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C03-T1-V",
+              "title": "Verify and document",
+              "description": "Independently verify the result, historical compatibility and explicit limitations.",
+              "status": "planned",
+              "evidence": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M11-W01-C04",
+      "tag": "statistics",
+      "release": "M11",
+      "work_package": "M11-W01",
+      "title": "Additive numeric package and consumer qualification",
+      "kind": "code",
+      "size": "M",
+      "status": "planned",
+      "depends_on": [
+        "M11-W01-C01",
+        "M11-W01-C02",
+        "M11-W01-C03"
+      ],
+      "external_dependencies": [],
+      "requirements": [
+        "M11-W01-C04-R1"
+      ],
+      "deliverables": "Qualify distinct immutable net10.0 Quantities and Statistics candidates with exact dependency closure and independent locked Windows net10/net11 consumers; record rollback and actual platform scope.",
+      "acceptance": "Focused new contracts and historical golden oracles pass; independently obtain and hash actual candidate archives and loaded DLLs, validate exact dependencies, package-only consumers and rollback recipe without changing previous archives.",
+      "boundary_acceptance": "No publication without separate authorization. No Decision adoption, sibling mutation, Linux/all-RID claim without evidence, or production target change. Refresh M10 cutover baseline after this gate.",
+      "test_suites": [
+        "CONTRACT",
+        "BOUNDARY",
+        "PACKAGE",
+        "REPLAY"
+      ],
+      "proposed_files": [
+        "src/projects/dw.quantities",
+        "src/projects/dw.tools.math.statistics",
+        "tests/consumers",
+        "docs/distribution",
+        "tools"
+      ],
+      "proposed_commands": [
+        "dotnet test dw.tools.math.slnx --no-restore"
+      ],
+      "files": [],
+      "commands": [],
+      "evidence": [],
+      "tasks": [
+        {
+          "id": "M11-W01-C04-T1",
+          "title": "Additive numeric package and consumer qualification",
+          "behavior": "Qualify distinct immutable net10.0 Quantities and Statistics candidates with exact dependency closure and independent locked Windows net10/net11 consumers; record rollback and actual platform scope.",
+          "test_case": "Focused new contracts and historical golden oracles pass; independently obtain and hash actual candidate archives and loaded DLLs, validate exact dependencies, package-only consumers and rollback recipe without changing previous archives.",
+          "status": "planned",
+          "evidence": [],
+          "subtasks": [
+            {
+              "id": "M11-W01-C04-T1-R",
+              "title": "RED",
+              "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C04-T1-G",
+              "title": "GREEN",
+              "description": "Implement or qualify only the minimum admitted contract.",
+              "status": "planned",
+              "evidence": []
+            },
+            {
+              "id": "M11-W01-C04-T1-V",
+              "title": "Verify and document",
+              "description": "Independently verify the result, historical compatibility and explicit limitations.",
               "status": "planned",
               "evidence": []
             }
@@ -10906,6 +11220,34 @@
       "release": "M10",
       "owner": "M10-W01-C03",
       "acceptance": "Targeted fragile contracts then full solution regression at migration gate; fresh isolated unpublished net11 candidates for all thirteen libraries, exact source-free locked representative consumers, Windows and Linux/WSL evidence with explicit gaps and observed SDK/RID; verify rollback and no archive overwrite."
+    },
+    {
+      "id": "M11-W01-C01-R1",
+      "title": "Checked exact rational scaling to Int64",
+      "release": "M11",
+      "owner": "M11-W01-C01",
+      "acceptance": "Independent integer oracle covers signed Int64 endpoints, zero, negative factors, nonintegral results, overflows and bounded large operands; preserve all existing rational behavior."
+    },
+    {
+      "id": "M11-W01-C02-R1",
+      "title": "Resumable finite streaming moments",
+      "release": "M11",
+      "owner": "M11-W01-C02",
+      "acceptance": "At least one million observations, independent reference oracles for large offsets and small variance, empty/singleton/constant data, refusal atomicity, budget exhaustion and interrupted versus uninterrupted replay."
+    },
+    {
+      "id": "M11-W01-C03-R1",
+      "title": "Explicit larger-sample quantile evaluation",
+      "release": "M11",
+      "owner": "M11-W01-C03",
+      "acceptance": "Independent oracle checks sizes 1, 4096, 4097 and one million finite observations, ties, extremes, endpoints and budget/refusal behavior. Existing overloads retain the 4096 limit and historical outputs."
+    },
+    {
+      "id": "M11-W01-C04-R1",
+      "title": "Additive numeric package and consumer qualification",
+      "release": "M11",
+      "owner": "M11-W01-C04",
+      "acceptance": "Focused new contracts and historical golden oracles pass; independently obtain and hash actual candidate archives and loaded DLLs, validate exact dependencies, package-only consumers and rollback recipe without changing previous archives."
     }
   ],
   "external_dependencies": [
@@ -11286,6 +11628,17 @@
         "M10-W01-C03"
       ],
       "disposition": "Owner approved actual production migration following RS366; publication and downstream adoption are excluded."
+    },
+    {
+      "source_id": "DECISION-D7-NUMERIC-SUBSIDIARITY",
+      "title": "Decision D7-W01-C02 operator-delivered numeric subsidiarity",
+      "targets": [
+        "M11-W01-C01",
+        "M11-W01-C02",
+        "M11-W01-C03",
+        "M11-W01-C04"
+      ],
+      "disposition": "Three additive proposals admitted after RS369 inventory; three existing capabilities remain unchanged. No publication or Decision adoption."
     }
   ]
 }

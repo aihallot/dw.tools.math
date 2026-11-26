@@ -26,6 +26,7 @@ Backlog projection. Coverage means planned responsibility, not acquired qualific
 | USER-CONSUMERS | Transitive nutrition/data/Decision/MCDM consumers | M1-W03-C02, M3-W02-C04 |
 | ASSSESSA-EG-A-01 | Assessa EG-A-01 generic bounded integer PRNG requirement | M9-W01-C01 |
 | USER-M10-PRODUCTION-NET11 | Owner-approved production .NET 11 and C# 15 migration | M10-W01-C01, M10-W01-C02, M10-W01-C03 |
+| DECISION-D7-NUMERIC-SUBSIDIARITY | Decision D7-W01-C02 operator-delivered numeric subsidiarity | M11-W01-C01, M11-W01-C02, M11-W01-C03, M11-W01-C04 |
 
 ## V1 framing criteria
 
