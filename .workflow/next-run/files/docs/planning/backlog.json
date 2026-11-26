@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.148",
+  "plan_version": "0.1.149",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10145,12 +10145,14 @@
         "docs/engineering/ProbeM11ExactInt64ScalingRed.cs",
         "docs/engineering/fixtures/M11ExactInt64ScalingOracle.cs",
         "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
-        "tests/projects/dw.quantities.tests/M11ExactInt64ScalingTests.cs"
+        "tests/projects/dw.quantities.tests/M11ExactInt64ScalingTests.cs",
+        "tests/projects/dw.quantities.tests/M11ExactInt64ScalingVerificationTests.cs"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM11ExactInt64ScalingRed.cs -- --red",
         "dotnet run --file docs/engineering/ProbeM11ExactInt64ScalingRed.cs -- --green",
-        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M11ExactInt64Scaling"
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release --filter FullyQualifiedName~M11ExactInt64Scaling",
+        "dotnet test tests/projects/dw.quantities.tests/dw.quantities.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11ExactInt64ScalingVerificationTests"
       ],
       "evidence": [],
       "tasks": [
@@ -10175,21 +10177,23 @@
               "id": "M11-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS375/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]
         }
       ],
       "refinement": "RS371 durable readiness; use existing normalized rational and budget primitives with independent fixed and generated checked conversion oracles.",
-      "readiness": "RS374 durable GREEN activation and independent exact scaling oracle plus maintained Quantities qualification; GREEN closure and verification readiness pending durable result."
+      "readiness": "RS375 durable GREEN closure and verification readiness; independently verify normalized operands, bit-boundary precedence and immutable results."
     },
     {
       "id": "M11-W01-C02",
