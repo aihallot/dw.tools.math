@@ -9,3 +9,7 @@ M10-W01 contains three dependent phases: C01 readiness/rollback, C02 actual prod
 ## Preselection correction
 
 RS367 retry 0 was refused before allocation by DWF 0.1.78 authoring preflight (`workflow-json-traversal`), with no repository mutation or attempt. Evidence: https://github.com/aihallot/dw.tools.math/commit/2d8e22df5e880ad88ab9ab435c386b9bf4622714. The corrected preparation uses complete reviewed staged mirrors for the two authoritative plans, as in RS267, instead of runtime JSON traversal. Historical records are unchanged; the M10 admission scope and validators are retained.
+
+## Second preselection refusal — incident review
+
+Retry 1 reached the canonical planning renderer but failed before attempt allocation on `Unsafe path src/projects/` (evidence: https://github.com/aihallot/dw.tools.math/commit/e6ed9e7f282433858328a03aef819a23d01f1fed). The authoring review missed the `Safe` contract, which rejects empty slash-delimited segments. Normalize all eight new invalid proposed file paths and the new work-package anchors to canonical repository-relative paths without a trailing slash. Recheck the complete target backlog, including IDs, parent links, dependencies, gates, requirements, path syntax and coverage, and exact native hierarchy and unchanged historical records. Neither refusal allocated an attempt or mutated the canonical source repository. Existing validators, scope, and guards remain unchanged; actual C# execution remains local.
