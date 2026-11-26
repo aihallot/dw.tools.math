@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.145" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.146" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -36,8 +36,8 @@ bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringCompa
 var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
-    c11.All(x => (string?)x["status"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "ready" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
-    n11.All(x => (string?)x["state"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "in-progress" : "not-ready")) &&
+    c11.All(x => (string?)x["status"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "in_progress" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
+    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in-progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "ready", _ => "not-ready" })) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
     "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
@@ -73,4 +73,16 @@ Need((string?)readinessReport["outcome"] == "succeeded" && (int?)readinessReport
     readinessReport["progress"]!["transitions"]!.AsArray().Count == 5 &&
     (bool?)readinessProof["payloadCompiled"] == true && (int?)readinessProof["rehearsedValidationCount"] == 5,
     "RS371 durable readiness differs.");
-Console.WriteLine("MATH-RS372-M11-RED|nativeInProgress=5|canonicalReady=5|remainingNotReady=17|cutoverGate=M11-W01-C04|newCompletion=false|publication=false|PASS");
+var redReport = Read(".aura/workflow/reports/RS372/attempt-001.json");
+var redProof = Read(".workflow/runs/RS372/preparation-proof.json");
+Need((string?)redReport["runId"] == "RS372" && (string?)redReport["outcome"] == "succeeded" &&
+    (int?)redReport["attempt"] == 1 && (bool?)redReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    redReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    redReport["progress"]!["transitions"]!.AsArray().Count == 5 &&
+    redReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)redProof["runId"] == "RS372" && (bool?)redProof["payloadCompiled"] == true &&
+    (int?)redProof["rehearsedValidationCount"] == 10 &&
+    redProof["preparationValidationIds"]!.AsArray().Any(x => (string?)x == "math-rs372-exact-int64-red"),
+    "RS372 durable compiled RED evidence differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-red-closure-rs373.md"), "RED closure decision missing.");
+Console.WriteLine("MATH-RS373-M11-RED-CLOSURE|red=done|green=ready|canonicalActivationReconciled=true|cutoverGate=M11-W01-C04|publication=false|PASS");
