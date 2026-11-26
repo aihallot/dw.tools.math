@@ -1,0 +1,3 @@
+# RS361 — Close independent package Verification and T2
+
+RS360 succeeded first-pass at allocated attempt 001 under DWF 0.1.78 and guidance 0.31. Its compiled preparation proof matches all nine durable validation identities, including independent exact package evidence and three altered evidence refusals and physical Linux/WSL net11 consumer replay. Reconcile durable Verification activation in canonical backlog 0.1.137; close native T2 Verification and T2 with two bounded achievements. Canonical completion awaits durable RS361 delivery. Review both M9 requirements and gate G-M9 before closing the phase and parent hierarchy. Preserve immutable archives, prior source and Assessa ownership; no new publication, production migration or candidate byte-equality inference.

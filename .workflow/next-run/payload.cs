@@ -2,30 +2,28 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS359", 1, "chore: complete M9 package GREEN and ready Verification", "0.1.78", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS360", 1, "test: independently verify M9 immutable package and Linux replay", "0.1.78", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-V", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1", "done");
-p.ProjectPlan.RequireNodeState("M9-W01-C01-T2", "in-progress");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T2-R", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T2-G", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.135"), JsonValue.Create("0.1.136"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.136"), JsonValue.Create("0.1.137"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.31"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9AssessaPublishedHandoff.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-sampling-package-verification-rs360.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-sampling-package-task-closure-rs361.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/VerifyM9BoundedSamplingPackageEvidence.cs"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     var version = (string?)doc["plan_version"];
-    if (version is not ("0.1.135" or "0.1.136")) throw new InvalidOperationException("Backlog version differs.");
-    var target = version == "0.1.136";
+    if (version is not ("0.1.136" or "0.1.137")) throw new InvalidOperationException("Backlog version differs.");
+    var target = version == "0.1.137";
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
     var chunk = Find(doc, "chunks", "M9-W01-C01");
     var source = Find(chunk, "tasks", "M9-W01-C01-T1");
@@ -33,18 +31,13 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
     var red = Find(package, "subtasks", "M9-W01-C01-T2-R");
     var green = Find(package, "subtasks", "M9-W01-C01-T2-G");
     var verification = Find(package, "subtasks", "M9-W01-C01-T2-V");
-    const string evidencePath = ".aura/workflow/reports/RS359/attempt-001.json";
-    var evidence = green["evidence"]!.AsArray();
     if ((string?)source["status"] != "done" || (string?)package["status"] != "in_progress" ||
-        (string?)red["status"] != "done" || (string?)green["status"] != (target ? "done" : "in_progress") ||
-        (string?)verification["status"] != (target ? "ready" : "planned") ||
-        (target ? evidence.Count != 1 || (string?)evidence[0] != evidencePath : evidence.Count != 0))
-        throw new InvalidOperationException("Unexpected canonical package GREEN closure baseline.");
-    green["status"] = "done";
-    green["evidence"] = p.Json.StringArray(evidencePath);
-    verification["status"] = "ready";
-    chunk["readiness"] = "RS359 durable package GREEN closure and Verification readiness; independently corroborate immutable identities and Linux consumer replay.";
-    doc["plan_version"] = "0.1.136";
+        (string?)red["status"] != "done" || (string?)green["status"] != "done" ||
+        (string?)verification["status"] != (target ? "in_progress" : "ready") || verification["evidence"]!.AsArray().Count != 0)
+        throw new InvalidOperationException("Unexpected canonical package Verification activation baseline.");
+    verification["status"] = "in_progress";
+    chunk["readiness"] = "RS360 durable independent package Verification activation and Linux replay; T2 closure pending durable result.";
+    doc["plan_version"] = "0.1.137";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
@@ -61,5 +54,6 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ActivateReadyContinuation("M9-W01-C01-T2-V");
+p.ProjectPlan.ConvergeNodeToDone("M9-W01-C01-T2-V");
+p.ProjectPlan.ConvergeNodeToDone("M9-W01-C01-T2");
 return p.Complete();
