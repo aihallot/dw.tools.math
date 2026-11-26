@@ -7,7 +7,7 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.138", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.139", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
@@ -16,7 +16,8 @@ Need(Record(releases, "M3")["status"]!.GetValue<string>() == "done", "Do not rew
 var wp = Record(backlog["work_packages"]!.AsArray(), "M9-W01");
 Need(wp["status"]!.GetValue<string>() == "in_progress", "M9 canonical work package readiness missing.");
 var chunk = Record(backlog["chunks"]!.AsArray(), "M9-W01-C01");
-Need(chunk["status"]!.GetValue<string>() == "in_progress", "M9 canonical phase readiness missing.");
+Need(chunk["status"]!.GetValue<string>() == "done" && chunk["evidence"]!.AsArray().Count == 1 &&
+    (string?)chunk["evidence"]![0] == ".aura/workflow/reports/RS362/attempt-001.json", "M9 canonical phase closure missing.");
 Need(chunk["depends_on"]!.AsArray().Single()!.GetValue<string>() == "M3-W02-C03",
     "Sampling must depend on qualified existing SplitMix64.");
 Need(chunk["tasks"]!.AsArray().Count == 2, "Expected source and package qualification tasks.");
@@ -31,7 +32,7 @@ var milestone = Record(plan["milestones"]!.AsArray(), "M9");
 Need(milestone["state"]!.GetValue<string>() == "in-progress", "M9 source RED must be active.");
 var nativeWp = Record(milestone["workPackages"]!.AsArray(), "M9-W01");
 var phase = Record(nativeWp["phases"]!.AsArray(), "M9-W01-C01");
-Need(nativeWp["state"]!.GetValue<string>() == "in-progress" && phase["state"]!.GetValue<string>() == "done", "M9 work package must remain active and phase must be done.");
+Need(nativeWp["state"]!.GetValue<string>() == "done" && phase["state"]!.GetValue<string>() == "done", "M9 work package and phase must be done.");
 Need(phase["tasks"]!.AsArray().Count == 2, "Native plan must contain both tasks.");
 foreach (var task in phase["tasks"]!.AsArray().Select(x => x!.AsObject()))
 {
@@ -367,4 +368,33 @@ foreach (var id in new[] { "M9-W01-C01-R1", "M9-W01-C01-R2" })
     Need((string?)requirement["release"] == "M9" && (string?)requirement["owner"] == "M9-W01-C01" &&
         !string.IsNullOrWhiteSpace((string?)requirement["acceptance"]), "Requirement authority differs: " + id);
 }
-Console.WriteLine("MATH-M9-RS362-PHASE-ACCEPTANCE|R1=qualified|R2=qualified|tasks=2|subtasks=6|phase=done|gate=G-M9-pending-parent-closure|assessaAdoption=pending|PASS");
+var phaseClosure = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS362/attempt-001.json"))!.AsObject();
+var phaseProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS362/preparation-proof.json"))!.AsObject();
+var phaseIds = phaseClosure["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedPhaseIds = [
+    "m9-rs362-phase-requirement-acceptance", "m9-rs362-native-phase-done", "m9-rs362-published-handoff",
+    "m9-rs362-request-reconciliation", "m9-rs362-m8-evidence-frontier", "m9-rs362-planning-render-check", "diff-check"
+];
+var phaseMoves = phaseClosure["progress"]!["transitions"]!.AsArray();
+var phaseDone = phaseClosure["progress"]!["completions"]!.AsArray();
+Need((string?)phaseClosure["runId"] == "RS362" && (string?)phaseClosure["outcome"] == "succeeded" &&
+    (int?)phaseClosure["attempt"] == 1 && (string?)phaseClosure["executor"]?["toolVersion"] == "0.1.78" &&
+    (string?)phaseClosure["git"]?["commitMessage"] == "chore: accept and close M9 bounded sampling phase" &&
+    (int?)phaseClosure["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)phaseClosure["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    phaseClosure["boundaryViolations"]!.AsArray().Count == 0 &&
+    (bool?)phaseClosure["contribution"]?["observed"]?["mutationBoundaryClean"] == true &&
+    phaseMoves.Count == 1 && phaseDone.Count == 1 &&
+    (string?)phaseDone[0]?["id"] == "M9-W01-C01" &&
+    (string?)phaseMoves[0]?["id"] == "M9-W01-C01" &&
+    (string?)phaseMoves[0]?["beforeState"] == "in-progress" && (string?)phaseMoves[0]?["afterState"] == "done" &&
+    phaseIds.SequenceEqual(expectedPhaseIds, StringComparer.Ordinal) &&
+    (string?)phaseProof["runId"] == "RS362" && (string?)phaseProof["sourceCommit"] == "817b8e6d39fc90dd469f6a9145234e34f8a433fb" &&
+    (bool?)phaseProof["payloadCompiled"] == true && (int?)phaseProof["rehearsedValidationCount"] == 7 &&
+    phaseProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(phaseIds, StringComparer.Ordinal) &&
+    phaseClosure["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(phaseIds, StringComparer.Ordinal),
+    "RS362 durable phase acceptance differs.");
+Need(backlog["chunks"]!.AsArray().Where(x => (string?)x?["work_package"] == "M9-W01")
+    .Select(x => (string?)x?["id"]).SequenceEqual(new[] { "M9-W01-C01" }, StringComparer.Ordinal) &&
+    nativeWp["phases"]!.AsArray().Count == 1, "Unexpected work package scope.");
+Console.WriteLine("MATH-M9-RS363-WORK-PACKAGE-CLOSURE|RS362=first-pass|R1=qualified|R2=qualified|phase=done|workPackage=done|assessaAdoption=pending|PASS");

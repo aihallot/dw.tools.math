@@ -426,3 +426,7 @@ Product plan version `0.1.137` projects durable RS360 Verification activation. R
 ## RS362 — M9 bounded phase acceptance and closure
 
 Product plan version `0.1.138` projects durable RS361 package Verification and task closure. R1 is supported by RS350–RS355 source falsification, regression and independent replay; R2 by RS269/RS270 candidate and independent consumer evidence, RS273/RS277 published readbacks, and RS356–RS361 current package RED, GREEN and independent Verification. Both tasks and all six leaves are durably done. RS362 closes only native phase M9-W01-C01; canonical phase closure awaits durable delivery. Gate G-M9 requires the single phase and its work package plus completed M3. No new publication, cryptographic claim, migration or Assessa adoption. M8 remains closed.
+
+## RS363 — M9 work package closure
+
+Product plan version `0.1.139` projects durable RS362 bounded phase acceptance. Both requirements, both tasks and all six leaves are qualified; M9-W01 owns exactly one phase, now durably done. RS363 closes only the native work package after corroborating the seven RS362 validation identities. Canonical work package completion and G-M9 milestone closure await subsequent durable evidence. No new publication, source modification, migration or Assessa adoption. M8 remains closed.

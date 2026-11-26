@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.138",
+  "plan_version": "0.1.139",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9686,7 +9686,7 @@
       "title": "Unbiased bounded integer draws and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C03"
       ],
@@ -9724,8 +9724,10 @@
         "dotnet run --file docs/engineering/ProbeM9BoundedSamplingRed.cs -- --check",
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
-      "evidence": [],
-      "readiness": "RS361 durable package task closure; both M9 requirements qualified and native phase closure pending durable result.",
+      "evidence": [
+        ".aura/workflow/reports/RS362/attempt-001.json"
+      ],
+      "readiness": "RS362 durable phase acceptance and closure; work package closure pending durable result.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
