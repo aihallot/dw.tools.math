@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.152",
+  "plan_version": "0.1.153",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10239,7 +10239,8 @@
         "src/projects/dw.tools.math.statistics/StreamingMoments64.cs",
         "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
         "docs/engineering/ProbeM11StreamingMomentsRed.cs",
-        "docs/engineering/fixtures/M11StreamingMomentsOracle.cs"
+        "docs/engineering/fixtures/M11StreamingMomentsOracle.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M11StreamingMomentsTests.cs"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM11StreamingMomentsRed.cs -- --red",
@@ -10260,14 +10261,16 @@
               "id": "M11-W01-C02-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS379/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10281,7 +10284,7 @@
         }
       ],
       "refinement": "Additive resumable finite binary64 moments with explicit budget, shifted Welford candidate, immutable structural checkpoint and independent exact closed-form reference; no change to existing bounded batch contracts.",
-      "readiness": "RS378 durable streaming moments RED activation and independent reference oracle; RED closure and GREEN readiness pending durable result."
+      "readiness": "RS379 durable RED closure and GREEN readiness; activate and qualify the additive shifted Welford streaming moments implementation."
     },
     {
       "id": "M11-W01-C03",
