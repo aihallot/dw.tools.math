@@ -7,10 +7,11 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.140", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.141", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
-Need(release["status"]!.GetValue<string>() == "in_progress", "M9 canonical readiness missing.");
+Need(release["status"]!.GetValue<string>() == "done" && release["evidence"]!.AsArray().Count == 1 &&
+    (string?)release["evidence"]![0] == ".aura/workflow/reports/RS364/attempt-001.json", "M9 canonical milestone closure missing.");
 Need(release["depends_on"]!.AsArray().Single()!.GetValue<string>() == "M3", "M9 must depend on completed M3.");
 Need(Record(releases, "M3")["status"]!.GetValue<string>() == "done", "Do not rewrite M3 history.");
 var wp = Record(backlog["work_packages"]!.AsArray(), "M9-W01");
@@ -430,4 +431,53 @@ Need(backlog["work_packages"]!.AsArray().Where(x => (string?)x?["release"] == "M
     milestone["workPackages"]!.AsArray().Count == 1 &&
     milestone["dependsOn"]!.AsArray().Select(x => (string?)x).SequenceEqual(new[] { "M3" }, StringComparer.Ordinal) &&
     (string?)Record(plan["milestones"]!.AsArray(), "M3")["state"] == "done", "G-M9 scope or prerequisite differs.");
-Console.WriteLine("MATH-M9-RS364-MILESTONE-CLOSURE|RS363=first-pass|R1=qualified|R2=qualified|gate=G-M9|M3=done|nativeM9=done|assessaAdoption=pending|PASS");
+var milestoneClosure = JsonNode.Parse(File.ReadAllText(".aura/workflow/reports/RS364/attempt-001.json"))!.AsObject();
+var milestoneProof = JsonNode.Parse(File.ReadAllText(".workflow/runs/RS364/preparation-proof.json"))!.AsObject();
+var milestoneIds = milestoneClosure["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedMilestoneIds = [
+    "m9-rs364-milestone-closure-evidence", "m9-rs364-native-milestone-done", "m9-rs364-published-handoff",
+    "m9-rs364-request-reconciliation", "m9-rs364-m8-evidence-frontier", "m9-rs364-planning-render-check", "diff-check"
+];
+var milestoneMoves = milestoneClosure["progress"]!["transitions"]!.AsArray();
+var milestoneDone = milestoneClosure["progress"]!["completions"]!.AsArray();
+Need((string?)milestoneClosure["runId"] == "RS364" && (string?)milestoneClosure["outcome"] == "succeeded" &&
+    (int?)milestoneClosure["attempt"] == 1 && (string?)milestoneClosure["executor"]?["toolVersion"] == "0.1.78" &&
+    (string?)milestoneClosure["git"]?["commitMessage"] == "chore: close M9 bounded sampling milestone" &&
+    (int?)milestoneClosure["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)milestoneClosure["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    milestoneClosure["boundaryViolations"]!.AsArray().Count == 0 &&
+    (bool?)milestoneClosure["contribution"]?["observed"]?["mutationBoundaryClean"] == true &&
+    milestoneMoves.Count == 1 && milestoneDone.Count == 1 &&
+    (string?)milestoneDone[0]?["id"] == "M9" && (string?)milestoneMoves[0]?["id"] == "M9" &&
+    (string?)milestoneMoves[0]?["beforeState"] == "in-progress" && (string?)milestoneMoves[0]?["afterState"] == "done" &&
+    milestoneIds.SequenceEqual(expectedMilestoneIds, StringComparer.Ordinal) &&
+    (string?)milestoneProof["runId"] == "RS364" && (string?)milestoneProof["sourceCommit"] == "b9e2cf4a74f2e4cee085367073ca14bdc0517413" &&
+    (bool?)milestoneProof["payloadCompiled"] == true && (int?)milestoneProof["rehearsedValidationCount"] == 7 &&
+    milestoneProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(milestoneIds, StringComparer.Ordinal) &&
+    milestoneClosure["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(milestoneIds, StringComparer.Ordinal),
+    "RS364 durable milestone closure differs.");
+var completionMap = new (JsonObject Node, string Run)[]
+{
+    (release, "RS364"), (wp, "RS363"), (chunk, "RS362"),
+    (productTask, "RS355"), (Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-R"), "RS351"),
+    (Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-G"), "RS353"),
+    (Record(productTask["subtasks"]!.AsArray(), "M9-W01-C01-T1-V"), "RS355"),
+    (Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2"), "RS361"),
+    (Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-R"), "RS357"),
+    (Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-G"), "RS359"),
+    (Record(Record(chunk["tasks"]!.AsArray(), "M9-W01-C01-T2")["subtasks"]!.AsArray(), "M9-W01-C01-T2-V"), "RS361")
+};
+foreach (var (node, run) in completionMap)
+{
+    var path = ".aura/workflow/reports/" + run + "/attempt-001.json";
+    var report = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+    var id = (string?)node["id"];
+    Need((string?)node["status"] == "done" && node["evidence"]!.AsArray().Count == 1 && (string?)node["evidence"]![0] == path &&
+        (string?)report["runId"] == run && (string?)report["outcome"] == "succeeded" &&
+        report["boundaryViolations"]!.AsArray().Count == 0 &&
+        report["progress"]!["completions"]!.AsArray().Count(x => (string?)x?["id"] == id &&
+            (string?)x?["afterState"] == "done" && (bool?)x?["completed"] == true &&
+            !string.IsNullOrWhiteSpace((string?)x?["achievement"])) == 1,
+        "Canonical completion evidence differs: " + id);
+}
+Console.WriteLine("MATH-M9-RS365-CANONICAL-CLOSURE|RS364=first-pass|nodes=11|R1=qualified|R2=qualified|gate=G-M9|nativeM9=done|canonicalM9=done|assessaAdoption=pending|PASS");

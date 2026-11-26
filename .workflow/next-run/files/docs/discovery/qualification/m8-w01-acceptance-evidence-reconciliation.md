@@ -434,3 +434,7 @@ Product plan version `0.1.139` projects durable RS362 bounded phase acceptance. 
 ## RS364 — M9 milestone gate closure
 
 Product plan version `0.1.140` projects durable RS363 work package closure. G-M9 owns exactly M9-W01 and M9-W01-C01; both requirements, both tasks and all six leaves are qualified, and M3 is done. RS364 corroborates the seven RS363 validation identities and closes native M9. Canonical milestone completion awaits durable RS364 delivery. No new publication, source modification, migration or Assessa adoption. M8 remains closed.
+
+## RS365 — M9 final canonical reconciliation
+
+Product plan version `0.1.141` projects durable RS364 milestone closure at G-M9. The native hierarchy is unchanged. All eleven M9 nodes are reconciled against their exact successful completion reports, including both tasks, six lifecycle leaves, phase, work package and milestone. Both requirements remain qualified. No new publication, production source change, migration or Assessa adoption. M8 remains closed. No new native achievement is claimed by this reconciliation.

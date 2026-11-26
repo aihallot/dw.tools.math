@@ -45,10 +45,10 @@ foreach(var item in new[]
         "Durable result differs: "+item.Run);
 }
 using var backlog=JsonDocument.Parse(File.ReadAllText("docs/planning/backlog.json"));
-Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.140" &&
+Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.141" &&
     backlog.RootElement.GetProperty("releases").EnumerateArray()
         .Single(x=>x.GetProperty("id").GetString()=="M9")
-        .GetProperty("status").GetString()=="in_progress",
+        .GetProperty("status").GetString()=="done",
     "Unexpected M9 product plan progress.");
 using var native=JsonDocument.Parse(File.ReadAllText(".aura/workflow/plan/project.json"));
 Need(native.RootElement.GetProperty("milestones").EnumerateArray()
@@ -56,4 +56,4 @@ Need(native.RootElement.GetProperty("milestones").EnumerateArray()
         .GetProperty("state").GetString()=="done",
     "Unexpected M9 native progress.");
 Console.WriteLine("MATH-RS275-REQUEST-RECONCILED|version="+Version+
-    "|RS273=first-pass|RS274=delivered|Assessa=not-yet-accepted|M9=native-done|PASS");
+    "|RS273=first-pass|RS274=delivered|Assessa=not-yet-accepted|M9=reconciled-done|PASS");
