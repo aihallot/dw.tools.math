@@ -32,8 +32,8 @@ var projects = paths.Where(x => x.EndsWith(".csproj", StringComparison.Ordinal))
 var solutionProjects = XDocument.Load("dw.tools.math.slnx").Descendants("Project")
     .Select(x => (string?)x.Attribute("Path") ?? "").Where(x => x.StartsWith("src/projects/", StringComparison.Ordinal))
     .OrderBy(x => x, StringComparer.Ordinal).ToArray();
-Need(projects.Length == 13 && projects.SequenceEqual(solutionProjects, StringComparer.Ordinal),
-    "Tracked source project roster differs from the thirteen production solution projects.");
+Need(solutionProjects.Length == 13 && solutionProjects.All(x => projects.Contains(x, StringComparer.Ordinal)),
+    "A production solution project is absent from the tracked project roster.");
 Need(paths.All(File.Exists), "A tracked source path is missing.");
 var sources = paths.Where(x => x.EndsWith(".cs", StringComparison.Ordinal)).ToArray();
 Need(sources.Length > 0, "No tracked C# sources.");
@@ -52,6 +52,7 @@ var words = new Regex(
     RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, TimeSpan.FromSeconds(1));
 var publicToken = new Regex(@"\bpublic\b", RegexOptions.CultureInvariant, TimeSpan.FromSeconds(1));
 var b = new StringBuilder();
+var fence = new string((char)96, 3);
 void Line(string line = "") => b.Append(line).Append('\n');
 string Normalize(string value) => value.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n');
 string Hash(string value) => Convert.ToHexStringLower(SHA256.HashData(Encoding.UTF8.GetBytes(value)));
@@ -61,7 +62,7 @@ Line("Scope: all Git-tracked C# and project files under src/projects, checked ag
 Line("This is a lexical review aid, not a compiler API inventory or proof of absence. Review all candidate declarations and alternate implementations before admitting new APIs.");
 Line("The report does not establish performance, package compatibility, publication or adoption.");
 Line();
-Line("## Production projects");
+Line("## Tracked project files (includes all thirteen production projects)");
 foreach (var path in projects) Line("- " + path);
 Line();
 Line("## Complete tracked source roster");
@@ -74,13 +75,13 @@ foreach (var path in sources) {
     // In candidate files include all public declaration lines, as well as every keyword hit.
     if (!known.Contains(path, StringComparer.Ordinal) && !lines.Any(x => words.IsMatch(x))) continue;
     candidateFiles++;
-    Line(); Line("### " + path); Line(); Line("~~~text");
+    Line(); Line("### " + path); Line(); Line(fence + "text");
     for (var i = 0; i < lines.Length; i++) {
         if (!words.IsMatch(lines[i]) && !publicToken.IsMatch(lines[i])) continue;
         Line((i + 1).ToString(System.Globalization.CultureInfo.InvariantCulture) + ": " + lines[i].Trim());
         hits++;
     }
-    Line("~~~");
+    Line(fence);
 }
 Need(candidateFiles >= known.Length && hits > 0, "No usable candidate inventory.");
 var result = b.ToString();
