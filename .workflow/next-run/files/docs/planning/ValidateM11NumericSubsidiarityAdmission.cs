@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.147" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.148" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -36,9 +36,9 @@ bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringCompa
 var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
-    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in_progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "ready", _ => "planned" }) &&
+    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in_progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "in_progress", _ => "planned" }) &&
         (Id(x) == "M11-W01-C01-T1-R" ? x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS373/attempt-001.json" : x["evidence"]!.AsArray().Count == 0)) &&
-    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in-progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "in-progress", _ => "not-ready" })) &&
+    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" => "in-progress", "M11-W01-C01-T1-R" => "done", "M11-W01-C01-T1-G" => "done", "M11-W01-C01-T1-V" => "ready", _ => "not-ready" })) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
     "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
@@ -97,4 +97,26 @@ Need((string?)closureReport["runId"] == "RS373" && (string?)closureReport["outco
     (bool?)closureProof["payloadCompiled"] == true && (int?)closureProof["rehearsedValidationCount"] == 9,
     "RS373 durable RED closure differs.");
 Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-green-rs374.md"), "GREEN decision missing.");
-Console.WriteLine("MATH-RS374-M11-GREEN|red=done|green=in-progress|canonicalClosureReconciled=true|cutoverGate=M11-W01-C04|publication=false|PASS");
+var greenReport = Read(".aura/workflow/reports/RS374/attempt-001.json");
+var greenProof = Read(".workflow/runs/RS374/preparation-proof.json");
+string[] greenIds = [
+    "math-rs374-exact-int64-independent-green", "math-rs374-exact-int64-focused-maintained-tests",
+    "math-rs374-quantities-locked-regression", "math-rs374-m11-green-activation", "math-rs374-native-roadmap-parity",
+    "math-rs374-m10-readiness-preserved", "math-rs374-m9-admission", "math-rs374-published-handoff",
+    "math-rs374-request-reconciliation", "math-rs374-m8-evidence-frontier", "math-rs374-planning-render-check", "diff-check"
+];
+Need((string?)greenReport["runId"] == "RS374" && (string?)greenReport["outcome"] == "succeeded" &&
+    (int?)greenReport["attempt"] == 1 && (bool?)greenReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (string?)greenReport["executor"]?["toolVersion"] == "0.1.78" &&
+    greenReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    greenReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)greenReport["progress"]!["transitions"]![0]!["id"] == "M11-W01-C01-T1-G" &&
+    (string?)greenReport["progress"]!["transitions"]![0]!["afterState"] == "in-progress" &&
+    greenReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)greenProof["sourceCommit"] == "23c6d1d39215ae32cb0d73d970cff44875fbb5e0" &&
+    (bool?)greenProof["payloadCompiled"] == true && (int?)greenProof["rehearsedValidationCount"] == 12 &&
+    Strings(greenProof, "preparationValidationIds").SequenceEqual(greenIds) &&
+    greenReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(greenIds),
+    "RS374 durable GREEN qualification differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-green-closure-rs375.md"), "GREEN closure decision missing.");
+Console.WriteLine("MATH-RS375-M11-GREEN-CLOSURE|green=done|verify=ready|canonicalActivationReconciled=true|cutoverGate=M11-W01-C04|publication=false|PASS");
