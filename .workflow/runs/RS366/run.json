@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "id": "RS366",
+  "title": "Reconcile completed roadmap status and current delivery documentation",
+  "state": "prepared",
+  "commitMessage": "docs: reconcile completed Math roadmap and delivery status",
+  "timeoutSeconds": 2000,
+  "projectNodes": [
+    "M8",
+    "M9"
+  ],
+  "contribution": {
+    "summary": "Reconcile aggregate canonical status after RS365 and align the reader-facing documents with bounded M8/M9 completion.",
+    "value": "RS365 reconciled all eleven M9 completion records. All ten milestones, 597 canonical nodes and 591 native nodes are done, but the aggregate canonical status remains in_progress and current documentation still presents old M0\u2013M7, M8 and M9 checkpoints as current. Reconcile aggregate status in backlog 0.1.142, regenerate planning projections, and distinguish actual private delivery and bounded Discovery evidence from historical records and external adoption. Preserve native hierarchy, historical receipts and source-pinned validators. No new capability, public release, migration or downstream adoption.",
+    "debtChanges": [
+      "Reconcile aggregate canonical completion without changing native lifecycle or historic node identities.",
+      "Correct current status in six reader-facing documents and preserve historical checkpoints and source-pinned evidence.",
+      "Preserve package identities, source and external ownership; no new capability or release approval."
+    ],
+    "nextAction": "After durable RS366 delivery, stop at the completed roadmap checkpoint unless the owner admits new scope or a verified external request requires Math work.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "README.md",
+    "docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md",
+    "docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md",
+    "docs/discovery/README.md",
+    "docs/distribution/current-local-consumption.md",
+    "docs/planning/ValidateCompletedRoadmapStatus.cs",
+    "docs/planning/decisions/completed-roadmap-status-reconciliation-rs366.md",
+    "docs/planning/implementation-handoff.md"
+  ],
+  "validations": [
+    {
+      "id": "math-rs366-completed-roadmap-and-current-documentation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateCompletedRoadmapStatus.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-canonical-completion-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-native-milestone-done",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs366-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
