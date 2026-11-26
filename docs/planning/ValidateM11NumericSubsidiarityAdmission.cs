@@ -37,9 +37,9 @@ var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
     c11.All(x => (string?)x["status"] == "planned" && x["evidence"]!.AsArray().Count == 0) &&
-    n11.All(x => (string?)x["state"] == "not-ready") &&
+    n11.All(x => (string?)x["state"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "ready" : "not-ready")) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
-    "New scope roster or unstarted state differs.");
+    "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
     native.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["state"] == "done") == 591,
     "Historical completion frontier differs.");
@@ -57,4 +57,12 @@ Need((string?)Read("global.json")["sdk"]?["version"] == "10.0.401" &&
     XDocument.Load("Directory.Build.props").Descendants("LangVersion").Single().Value == "14.0", "Production baseline changed.");
 Need(File.Exists("docs/planning/evidence/decision-numeric-source-inventory-rs369.md") &&
     File.Exists("docs/planning/decisions/m11-decision-numeric-subsidiarity-admission-rs370.md"), "Consultation evidence absent.");
-Console.WriteLine("MATH-RS370-M11-ADMISSION|newNodes=22|canonical=636|native=630|cutoverGate=M11-W01-C04|newCompletion=false|publication=false|PASS");
+var admissionReport = Read(".aura/workflow/reports/RS370/attempt-001.json");
+var admissionProof = Read(".workflow/runs/RS370/preparation-proof.json");
+Need((string?)admissionReport["runId"] == "RS370" && (string?)admissionReport["outcome"] == "succeeded" &&
+    (int?)admissionReport["attempt"] == 1 && (bool?)admissionReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    admissionReport["boundaryViolations"]!.AsArray().Count == 0 && admissionReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)admissionProof["runId"] == "RS370" && (bool?)admissionProof["payloadCompiled"] == true &&
+    (int?)admissionProof["rehearsedValidationCount"] == 9, "RS370 durable admission evidence differs.");
+Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-readiness-rs371.md"), "Exact scaling readiness decision missing.");
+Console.WriteLine("MATH-RS371-M11-READINESS|nativeReady=5|remainingNotReady=17|canonicalPlanned=22|cutoverGate=M11-W01-C04|newCompletion=false|publication=false|PASS");
