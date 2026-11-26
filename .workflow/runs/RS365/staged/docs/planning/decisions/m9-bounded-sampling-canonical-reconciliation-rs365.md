@@ -1,0 +1,5 @@
+# RS365 — Reconcile the completed M9 milestone
+
+RS364 succeeded first-pass at allocated attempt 001 under DWF 0.1.78 and guidance 0.31. Its seven compiled preparation validations and durable achievement establish native M9 completion at G-M9. Reconcile the canonical release to done in backlog 0.1.141, preserving all descendant completion evidence. The final auditor checks each of the eleven canonical M9 nodes against its exact durable completion report. Regenerate the existing planning projections and verify native/canonical consistency. No new lifecycle transitions or achievements are declared.
+
+R1 remains qualified by source falsification, regression and independent replay; R2 by exact candidate and immutable published package consumer evidence, real locked restore refusals and independent Windows/Linux net11 verification. The package remains dw.tools.math.statistics 20260.20261120.1001 with the exact dw.quantities 20260.20261102.1001 dependency. No new publication, production migration, cryptographic claim or Assessa adoption is authorized. No additional milestone is invented.
