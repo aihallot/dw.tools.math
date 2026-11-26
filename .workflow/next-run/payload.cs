@@ -38,7 +38,7 @@ static void AddExact(JsonObject doc, string key, JsonObject entry, string identi
         return;
     }
     if (matches.Length != 0) throw new InvalidOperationException("Unexpected baseline entry: " + id);
-    arr.Add(entry);
+    arr.Add((JsonNode)entry);
 }
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
@@ -480,7 +480,7 @@ p.Json.EditObject(".aura/workflow/plan/project.json", doc =>
 }
 """)!.AsObject();
     var matches = nodes.Where(x => (string?)x?["id"] == "M10").ToArray();
-    if (matches.Length == 0) nodes.Add(entry);
+    if (matches.Length == 0) nodes.Add((JsonNode)entry);
     else if (matches.Length != 1 || !JsonNode.DeepEquals(matches[0], entry)) throw new InvalidOperationException("Unexpected native M10 target.");
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
