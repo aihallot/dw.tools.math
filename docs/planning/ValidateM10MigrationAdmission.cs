@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 608 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == "not-ready") &&
+Need(native.Count == 608 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "not-ready")) &&
     native.Except(newNative).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -48,4 +48,30 @@ var projects = XDocument.Load("dw.tools.math.slnx").Descendants("Project").Selec
 Need(projects.Length == 24 && projects.Count(x => x.StartsWith("src/projects/", StringComparison.Ordinal)) == 13 &&
     projects.Count(x => x.StartsWith("tests/projects/", StringComparison.Ordinal)) == 11 &&
     projects.All(x => File.Exists(x) && File.Exists(Path.Combine(Path.GetDirectoryName(x)!, "packages.lock.json"))), "Current solution inventory differs.");
-Console.WriteLine("MATH-RS367-M10-ADMISSION|priorCanonical=597|priorNative=591|newPlanned=17|sourceProjects=13|testProjects=11|migrationExecuted=false|publication=false|PASS");
+var admissionReport = Read(".aura/workflow/reports/RS367/attempt-001.json");
+var admissionProof = Read(".workflow/runs/RS367/preparation-proof.json");
+var admissionIds = admissionReport["contribution"]!["observed"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).ToArray();
+string[] expectedAdmissionIds = [
+    "math-rs367-m10-admission-and-production-baseline", "math-rs367-canonical-completion-evidence",
+    "math-rs367-native-roadmap-parity", "math-rs367-published-handoff", "math-rs367-request-reconciliation",
+    "math-rs367-m8-evidence-frontier", "math-rs367-planning-render-check", "diff-check"
+];
+var failures = admissionReport["priorInvocationFailures"]!;
+Need((string?)admissionReport["runId"] == "RS367" && (string?)admissionReport["outcome"] == "succeeded" &&
+    (int?)admissionReport["attempt"] == 1 && (string?)admissionReport["executor"]?["toolVersion"] == "0.1.78" &&
+    (string?)admissionReport["git"]?["commitMessage"] == "docs: admit M10 production net11 migration" &&
+    (int?)failures["count"] == 2 && (int?)failures["preparationFailureCount"] == 2 &&
+    (int?)failures["allocatedAttemptFailureCount"] == 0 && (bool?)failures["firstPassSucceeded"] == false &&
+    failures["invocationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(new[] {
+        "run-next-20261126T211313Z-6b84b19eaa528d69", "run-next-20261126T211657Z-f35c7156243b042f"
+    }, StringComparer.Ordinal) &&
+    admissionReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    admissionReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    admissionReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)admissionProof["runId"] == "RS367" &&
+    (string?)admissionProof["sourceCommit"] == "e6b7a13a87c93701b9eb6a45dea4a12372ff30a4" &&
+    (bool?)admissionProof["payloadCompiled"] == true && (int?)admissionProof["rehearsedValidationCount"] == 8 &&
+    admissionIds.SequenceEqual(expectedAdmissionIds, StringComparer.Ordinal) &&
+    admissionProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(admissionIds, StringComparer.Ordinal),
+    "Durable RS367 admission evidence or refusal lineage differs.");
+Console.WriteLine("MATH-RS368-M10-READINESS|RS367=corrected|priorRefusals=2|nativeReady=5|remainingNotReady=12|sourceProjects=13|testProjects=11|migrationExecuted=false|publication=false|PASS");

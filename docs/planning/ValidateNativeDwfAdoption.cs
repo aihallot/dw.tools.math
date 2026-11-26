@@ -40,9 +40,9 @@ try
 
     RequireState(actual, "M8", "done");
     RequireState(actual, "M9", "done");
-    RequireState(actual, "M10", "not-ready");
+    RequireState(actual, "M10", "ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M10-", StringComparison.Ordinal)))
-        RequireExactState(entry.Value, "not-ready");
+        RequireExactState(entry.Value, entry.Key is "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "not-ready");
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, entry.Key switch { "M9-W01" => "done", "M9-W01-C01" => "done", "M9-W01-C01-T1" or "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2" or "M9-W01-C01-T2-R" or "M9-W01-C01-T2-G" or "M9-W01-C01-T2-V" => "done", _ => "not-ready" });
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
