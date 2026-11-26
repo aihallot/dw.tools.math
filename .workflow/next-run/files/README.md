@@ -2,13 +2,13 @@
 
 Independent .NET 10 mathematical computation and representation libraries for applications, scientific consumers and agents. **Math does not depend on AURA, Decision or MCDM.**
 
-## Current status — completed M0–M9; M10 migration admitted
+## Current status — completed M0–M9; M10 readiness and M11 numeric subsidiarity
 
-M0–M9 remain complete. M10 is newly planned under canonical backlog `0.1.143` and native DWF; no new lifecycle completion or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
+M0–M9 remain complete. Canonical backlog `0.1.144` adds the [M11 numeric subsidiarity scope](docs/planning/versions/M11.md); M10 readiness remains intact, and actual production cutover depends on M11 candidate qualification. No new lifecycle completion, publication or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
 
 ### Completed M0–M9 checkpoint — RS366 (2026-11-26)
 
-**M0–M9 are complete in the accepted bounded roadmap.** At the RS366 checkpoint, canonical backlog `0.1.142` had 597 completed nodes and native DWF had 591 completed nodes. M10 adds 17 planned nodes to both authorities without changing these completions. Six historic subtasks remain intentionally omitted from the native hierarchy; no history is reconstructed. See [M9 final reconciliation](docs/planning/decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md) and the [planning index](docs/planning/README.md).
+**M0–M9 are complete in the accepted bounded roadmap.** At the RS366 checkpoint, canonical backlog `0.1.142` had 597 completed nodes and native DWF had 591 completed nodes. M10 added 17 planned nodes and M11 adds 22 planned nodes to both authorities without changing these completions. Six historic subtasks remain intentionally omitted from the native hierarchy; no history is reconstructed. See [M9 final reconciliation](docs/planning/decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md) and the [planning index](docs/planning/README.md).
 
 - M8: selected portable Discovery protocol, four CLR capabilities, opt-in unsigned portable export and bounded SDK qualification; no BrokerReady permission, external host installation or production .NET migration.
 - M9: deterministic noncryptographic bounded integer sampling with exact rejection, raw-draw budget and checkpoint replay; independently qualified immutable private Statistics `20260.20261120.1001` and exact Quantities `20260.20261102.1001` with locked Windows and Linux/WSL net11 consumers. [Contract](docs/distribution/bounded-integer-sampling.md) · [Assessa handoff](docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md).
