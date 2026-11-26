@@ -1,0 +1,7 @@
+# RS379 - Close streaming moments RED and ready GREEN
+
+RS378 succeeded first-pass at attempt 001, DWF 0.1.78, result 0d2ebe5f9285cff1f3249c7cf2bfa129376ae747. Its durable report and compiled preparation proof identify ten successful preparation validations, including the isolated source RED: the proposed accumulator type is absent in the compiled source subset, existing batch mean and variance and the 4096-observation limit are preserved, and the independent integer-deviation reference for one million observations is established. This is reference evidence, not a claim that an accumulator has processed one million samples.
+
+Reconcile canonical C02/T1/RED activation in backlog 0.1.152. Close only the native RED leaf and ready GREEN; canonical RED remains in_progress until the new completion is durable. Preserve C01 completion, the existing batch implementation, the unchanged RS378 oracle, and the M10 cutover gate. No repeated numerical campaign or product source change.
+
+GREEN must implement the additive StreamingMoments64 contract documented by RS378, with shifted Welford state, explicit bounded count, finite arithmetic, atomic refusals, immutable structurally validated snapshots and same-order checkpoint replay. Run the existing oracle in GREEN mode plus maintained focused tests, including malformed snapshot rejection. No merge, persisted wire codec, package publication, downstream adoption or production framework change is certified.
