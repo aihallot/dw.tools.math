@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS364", 1, "chore: close M9 bounded sampling milestone", "0.1.78", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS365", 1, "chore: reconcile completed M9 milestone", "0.1.78", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M8", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M9-W01-C01-T1-G", "done");
@@ -16,34 +16,36 @@ p.ProjectPlan.RequireNodeState("M9-W01-C01", "done");
 p.ProjectPlan.RequireNodeState("M9-W01", "done");
 p.ProjectPlan.RequireNodeState("M9", "done");
 p.ProjectPlan.RequireNodeState("M3", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.140"), JsonValue.Create("0.1.141"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.141"), JsonValue.Create("0.1.142"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.31"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9AssessaPublishedHandoff.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m9-bounded-sampling-canonical-reconciliation-rs365.md"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/README.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/current-local-consumption.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/requests/MATH-XR-004-assessa-bounded-integers.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/handovers/MATH-XR-004-assessa-bounded-statistics-published.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/implementation-handoff.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/completed-roadmap-status-reconciliation-rs366.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateCompletedRoadmapStatus.cs"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     var version = (string?)doc["plan_version"];
-    if (version is not ("0.1.140" or "0.1.141")) throw new InvalidOperationException("Backlog version differs.");
-    var target = version == "0.1.141";
-    JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
-    var chunk = Find(doc, "chunks", "M9-W01-C01");
-    var wp = Find(doc, "work_packages", "M9-W01");
-    var release = Find(doc, "releases", "M9");
-    const string evidencePath = ".aura/workflow/reports/RS364/attempt-001.json";
-    var evidence = release["evidence"]!.AsArray();
-    if ((string?)release["gate"] != "G-M9" || (string?)wp["status"] != "done" ||
-        (string?)chunk["status"] != "done" || (string?)Find(doc, "releases", "M3")["status"] != "done" ||
-        (string?)release["status"] != (target ? "done" : "in_progress") ||
-        (target ? evidence.Count != 1 || (string?)evidence[0] != evidencePath : evidence.Count != 0))
-        throw new InvalidOperationException("Unexpected canonical milestone closure baseline.");
-    release["status"] = "done";
-    release["evidence"] = p.Json.StringArray(evidencePath);
-    chunk["readiness"] = "RS364 durable G-M9 closure; bounded Math qualification complete, Assessa adoption remains external.";
-    doc["plan_version"] = "0.1.141";
+    if (version is not ("0.1.141" or "0.1.142")) throw new InvalidOperationException("Backlog version differs.");
+    var target = version == "0.1.142";
+    if ((string?)doc["status"] != (target ? "done" : "in_progress") ||
+        doc["releases"]!.AsArray().Count != 10 ||
+        !doc["releases"]!.AsArray().All(x => (string?)x?["status"] == "done") ||
+        !doc["work_packages"]!.AsArray().All(x => (string?)x?["status"] == "done") ||
+        !doc["chunks"]!.AsArray().All(x => (string?)x?["status"] == "done" &&
+            x!["tasks"]!.AsArray().All(t => (string?)t?["status"] == "done" &&
+                t!["subtasks"]!.AsArray().All(s => (string?)s?["status"] == "done"))))
+        throw new InvalidOperationException("Unexpected aggregate completed roadmap baseline.");
+    doc["status"] = "done";
+    doc["plan_version"] = "0.1.142";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {

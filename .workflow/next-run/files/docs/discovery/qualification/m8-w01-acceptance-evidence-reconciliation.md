@@ -438,3 +438,7 @@ Product plan version `0.1.140` projects durable RS363 work package closure. G-M9
 ## RS365 — M9 final canonical reconciliation
 
 Product plan version `0.1.141` projects durable RS364 milestone closure at G-M9. The native hierarchy is unchanged. All eleven M9 nodes are reconciled against their exact successful completion reports, including both tasks, six lifecycle leaves, phase, work package and milestone. Both requirements remain qualified. No new publication, production source change, migration or Assessa adoption. M8 remains closed. No new native achievement is claimed by this reconciliation.
+
+## RS366 — Completed roadmap status documentation
+
+Product plan version `0.1.142` records the completion of the accepted roadmap as a whole following durable RS365 reconciliation. All 597 canonical and 591 native nodes are done; the six historical omitted subtasks remain documented, not fabricated as native transitions. M8 and M9 remain closed. The current README, Discovery and consumer-facing documentation distinguish current status from historical snapshots. No new capability, publication, migration, external adoption or native achievement is claimed.

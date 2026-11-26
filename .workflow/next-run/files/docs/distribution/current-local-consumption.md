@@ -1,6 +1,12 @@
-# Current local Math delivery and consumption — qualified snapshot 2026-10-21
+# Local Math delivery and consumption
 
-**Scope:** the present Math source and its **bounded local** acceptance results, not a public registry release or promise of stable binary compatibility. See [repository README](../../README.md) for current product status. All commands here are local; no other GitHub repository is modified.
+## Current checkpoint — RS365
+
+The complete accepted M0–M9 roadmap is reconciled. The historical local source-package roster below is **not** an inventory of the current private feed. For actual immutable private Statistics `20260.20261120.1001` and exact Quantities `20260.20261102.1001` identity, Windows and Linux/WSL locked .NET 11 consumption, use the [bounded sampling contract](bounded-integer-sampling.md) and [physical readback evidence](m9-statistics-physical-private-publication-readback.md). For the opt-in package-only Discovery export use the [M8 portable bundle guide](../discovery/qualification/m8-portable-discovery-bundle.md). No public NuGet release or full platform/ABI guarantee is claimed.
+
+## Historical qualified snapshot — 2026-10-21
+
+**Historical scope:** the Math source and its **bounded local** acceptance results at RS129/RS130, not a public registry release or promise of stable binary compatibility. See [repository README](../../README.md) for current product status. All commands here are local; no other GitHub repository is modified.
 
 ## Verified package roster (13 packable projects)
 
@@ -50,8 +56,10 @@ For an offline NuGet consumer, **first create the required package dependency cl
 
 **Do not** install packages from an untrusted remote feed, assume a specific historical local archive persists in a fresh clone, or count a source-only consumer directory as an executed test. This guide does not imply the command to package one csproj also creates all dependent `.nupkg` archives.
 
-## Open release and agent gates
+## Historical release and agent gates at RS130
+
+The statements below describe that checkpoint, not later M8/M9 qualifications. In particular, M8 now has a qualified generated skill and portable export; actual downstream authorization and public publication remain separate.
 
 No public NuGet packages, stable source/binary ABI guarantee, inherited-rights/license grant, non-Windows RID certification, advanced M7 tensor/precision/interval/DAG/PlotModel/formal engine, or complete arbitrary Office document fidelity is established. `docs/discovery/` is a protocol and API **candidate**, not a generated Math skill or qualified broker runtime. The AURA, Decision and MCDM request files remain **unsent drafts**.
 
-The next owner-authorized order is **documentation reconciliation → Math Discovery/AURA qualification → authorized cross-repository coordination**, with the distinct next scopes separately DWF prepared and tested. No source-free package consumption implies transmission rights.
+The owner-authorized order at that historical checkpoint was **documentation reconciliation → Math Discovery/AURA qualification → authorized cross-repository coordination**, with the distinct next scopes separately DWF prepared and tested. No source-free package consumption implies transmission rights.
