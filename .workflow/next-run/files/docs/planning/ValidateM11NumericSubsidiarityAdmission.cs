@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.144" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.145" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -36,8 +36,8 @@ bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringCompa
 var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
-    c11.All(x => (string?)x["status"] == "planned" && x["evidence"]!.AsArray().Count == 0) &&
-    n11.All(x => (string?)x["state"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "ready" : "not-ready")) &&
+    c11.All(x => (string?)x["status"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "ready" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
+    n11.All(x => (string?)x["state"] == (Id(x) is "M11" or "M11-W01" or "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" ? "in-progress" : "not-ready")) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
     "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
@@ -65,4 +65,12 @@ Need((string?)admissionReport["runId"] == "RS370" && (string?)admissionReport["o
     (string?)admissionProof["runId"] == "RS370" && (bool?)admissionProof["payloadCompiled"] == true &&
     (int?)admissionProof["rehearsedValidationCount"] == 9, "RS370 durable admission evidence differs.");
 Need(File.Exists("docs/planning/decisions/m11-exact-int64-scaling-readiness-rs371.md"), "Exact scaling readiness decision missing.");
-Console.WriteLine("MATH-RS371-M11-READINESS|nativeReady=5|remainingNotReady=17|canonicalPlanned=22|cutoverGate=M11-W01-C04|newCompletion=false|publication=false|PASS");
+var readinessReport = Read(".aura/workflow/reports/RS371/attempt-001.json");
+var readinessProof = Read(".workflow/runs/RS371/preparation-proof.json");
+Need((string?)readinessReport["outcome"] == "succeeded" && (int?)readinessReport["attempt"] == 1 &&
+    (bool?)readinessReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    readinessReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    readinessReport["progress"]!["transitions"]!.AsArray().Count == 5 &&
+    (bool?)readinessProof["payloadCompiled"] == true && (int?)readinessProof["rehearsedValidationCount"] == 5,
+    "RS371 durable readiness differs.");
+Console.WriteLine("MATH-RS372-M11-RED|nativeInProgress=5|canonicalReady=5|remainingNotReady=17|cutoverGate=M11-W01-C04|newCompletion=false|publication=false|PASS");
