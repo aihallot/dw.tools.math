@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS362",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-26T20:25:57.756777+00:00",
+  "completedAtUtc": "2026-11-26T20:25:58.8983421+00:00",
+  "durationMilliseconds": 1141,
+  "projectNodes": [
+    "M9-W01-C01"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/coverage.md",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M0.md",
+    "docs/planning/versions/M1.md",
+    "docs/planning/versions/M2.md",
+    "docs/planning/versions/M3.md",
+    "docs/planning/versions/M4.md",
+    "docs/planning/versions/M5.md",
+    "docs/planning/versions/M6.md",
+    "docs/planning/versions/M7.md",
+    "docs/planning/versions/M8.md",
+    "docs/planning/versions/M9.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/planning/decisions/m9-bounded-sampling-phase-acceptance-rs362.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M9.md",
+    "docs/planning/decisions/m9-bounded-sampling-phase-acceptance-rs362.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.78",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "535afe9629637af208d0956c932a69c1887e01c13db0a96fccec921173039a64"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS362/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2000,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-9000e2de7d1f456796b359bcf5f84795\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2000000,
+      "DurationMilliseconds": 984,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS361/attempt-001.json run=RS361 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M8 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1-V state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T1 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T2-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T2-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T2-V state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01-C01-T2 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9-W01 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M9 state=in-progress\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=13352\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67759\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=33608\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3353\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m9-bounded-sampling-phase-acceptance-rs362.md bytes=1754\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md bytes=84233\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\nplanning valid: 0.1.138 | 63 chunks | f5517078f8a51acde68d136435e0cb715ea315fa1465fa501080a38f3aaa956c | mode --write\r\n\n\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M9-W01-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[payload] OK operations=23 changed=9 no-change=0 verified=14 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS362/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS361/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS361 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "04f1cde81805849904003ae08f4d405d418e26f57a654c3fd5e517d258686186",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M8 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1-V state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T1 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T2-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T2-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T2-V state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01-C01-T2 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9-W01 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M9 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=13352",
+        "Details": null,
+        "BeforeSha256": "0f80b2aceb79165630f85388a8127987e406f295a6bbb71c7c265c74513dc424",
+        "AfterSha256": "5af9000fc95186bf60d4f890b393a38d352cba6c570ceeb2c66bc7ea1954004d",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67759",
+        "Details": null,
+        "BeforeSha256": "c9876fc87d2c441758225159b3ba574c1a6348fb832988eb5c4f6a655bce471a",
+        "AfterSha256": "34ccd2c102ff45f87453db00d63544bbcf9bd093766c9d7c0b065c3906c50171",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=33608",
+        "Details": null,
+        "BeforeSha256": "65aee0f035b164f33a1747e7a384eb4572e79a8ca79bffaebf03c70774149d40",
+        "AfterSha256": "88f7c6228569a6c1c479bddff8b6a90cfbcd3cd37d8a148c16893bee6799c23c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "a9c8bbec5f95317d470a0c485e85d54233bfca6700b0176fb78298d019bdaf9b",
+        "AfterSha256": "c08ea71cde563fc76bebaba8d8a1bbd0f7818337a491870df8842c04be2a12e2",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3353",
+        "Details": null,
+        "BeforeSha256": "4d8ccda3acbd55972c60f289041ae4c60b22eed424fd4863f5e2a678418290ec",
+        "AfterSha256": "ec0701e2150eb1aaef2f1577a4e23e086b55fa1ffe75369967e50bebb6de6780",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m9-bounded-sampling-phase-acceptance-rs362.md",
+        "Status": 1,
+        "Summary": "bytes=1754",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "4f655220baf9aadaa1540d554eaa9cd0ac170bd917511c83facd860697089e0f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "Status": 1,
+        "Summary": "bytes=84233",
+        "Details": null,
+        "BeforeSha256": "04ec14cc01d41d535418b4c8b218b6cfe3e5a0f6e5e77c1fb0d5ba3f4def0f65",
+        "AfterSha256": "48a0c0f2dcd3eea3b63459ed48a7986a2342d90d8371b1a469875467bf72bdbd",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "85795835c66717709e34141524b25bd96dbfd0100832756a654ad1db7aa0e0e5",
+        "AfterSha256": "f5517078f8a51acde68d136435e0cb715ea315fa1465fa501080a38f3aaa956c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M9-W01-C01 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "f5ddbbb83fdd9c81a824b7f15dcd59f31f6b833d5c6baf4d582f6cdf89f87b8d",
+        "AfterSha256": "a7b4303dfe50f22688484967847760d57b4e79ce04905afb4c4741e45220e795",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "m9-rs362-phase-requirement-acceptance",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs362-native-phase-done",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs362-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs362-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs362-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "m9-rs362-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261126T202432Z-b327ef0a6268b7fa",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "918d96da8e191cc15b5242b1d041bc8a7d732466",
+  "invocationStartedAtUtc": "2026-11-26T20:24:32.1821728+00:00",
+  "invocationDurationMilliseconds": 86716,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS362",
+      "title": "Accept and close bounded M9 phase against both requirements",
+      "projectNodes": [
+        "M9-W01-C01"
+      ]
+    },
+    "declared": {
+      "summary": "Reconcile durable T2 closure and close the bounded phase against both M9 requirements.",
+      "value": "RS361 completed T2 and its Verification first-pass. R1 is supported by RS350\u2013RS355 independent source and replay evidence; R2 by RS269/RS270 original candidate evidence, RS273/RS277 published readbacks and RS356\u2013RS361 native RED, GREEN and Verification evidence. Reconcile T2 in backlog 0.1.138, corroborate all eight RS361 validation identities and both requirement records and close only the native phase. Gate G-M9 parent closure and canonical phase reconciliation remain pending durable result. No source change, new publication, migration or Assessa adoption.",
+      "debtChanges": [
+        "Reconcile RS361 durable package task closure.",
+        "Accept R1 and R2 from bounded source and package evidence and close the native phase.",
+        "Preserve published archive identities and Assessa ownership."
+      ],
+      "nextAction": "Reconcile durable phase closure and close the M9 work package after reviewing its single required phase.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M9-W01-C01",
+          "achievement": "Both source and package tasks and six lifecycle leaves are durably complete. R1 is qualified by independent source oracle, regression and replay; R2 by original candidate, immutable published archive identities, actual locked restore refusals, Windows and Linux net11 consumers and independent evidence verification. The bounded phase is accepted without new publication, migration or Assessa adoption."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/discovery/qualification/m8-w01-acceptance-evidence-reconciliation.md",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m9-bounded-sampling-phase-acceptance-rs362.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M9.md"
+      ],
+      "validations": [
+        {
+          "id": "m9-rs362-phase-requirement-acceptance",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs362-native-phase-done",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs362-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs362-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs362-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "m9-rs362-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M9-W01-C01",
+        "objective": "Unbiased bounded integer draws and consumer qualification",
+        "kind": "phase",
+        "parentId": "M9-W01",
+        "state": "done",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M9-W01-C01",
+        "objective": "Unbiased bounded integer draws and consumer qualification",
+        "kind": "phase",
+        "parentId": "M9-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "Both source and package tasks and six lifecycle leaves are durably complete. R1 is qualified by independent source oracle, regression and replay; R2 by original candidate, immutable published archive identities, actual locked restore refusals, Windows and Linux net11 consumers and independent evidence verification. The bounded phase is accepted without new publication, migration or Assessa adoption."
+      }
+    ],
+    "completions": [
+      {
+        "id": "M9-W01-C01",
+        "objective": "Unbiased bounded integer draws and consumer qualification",
+        "kind": "phase",
+        "parentId": "M9-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "Both source and package tasks and six lifecycle leaves are durably complete. R1 is qualified by independent source oracle, regression and replay; R2 by original candidate, immutable published archive identities, actual locked restore refusals, Windows and Linux net11 consumers and independent evidence verification. The bounded phase is accepted without new publication, migration or Assessa adoption."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS362",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS362",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "918d96da8e191cc15b5242b1d041bc8a7d732466",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "0264aa64e2b8a58a120a0bc687beb3ec9610b7f5ed4dd45c76d585c7ba5f6ee0"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: accept and close M9 bounded sampling phase",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.137",
+  "plan_version": "0.1.138",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9725,7 +9725,7 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release --filter FullyQualifiedName~M9W01C01BoundedSamplingTests"
       ],
       "evidence": [],
-      "readiness": "RS360 durable independent package Verification activation and Linux replay; T2 closure pending durable result.",
+      "readiness": "RS361 durable package task closure; both M9 requirements qualified and native phase closure pending durable result.",
       "tasks": [
         {
           "id": "M9-W01-C01-T1",
@@ -9771,8 +9771,10 @@
           "title": "Immutable candidate and independent net11 consumer",
           "behavior": "Qualify candidate package identity and explicit package-only .NET 11 consumer, without claiming publication.",
           "test_case": "Exact package graph, source-free PackageReference load, checksum, seed/replay/budget proof, and no archive overwrite.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS361/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M9-W01-C01-T2-R",
@@ -9796,8 +9798,10 @@
               "id": "M9-W01-C01-T2-V",
               "title": "Verify and document",
               "description": "Verify and document candidate package and external consumer evidence.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS361/attempt-001.json"
+              ]
             }
           ]
         }
