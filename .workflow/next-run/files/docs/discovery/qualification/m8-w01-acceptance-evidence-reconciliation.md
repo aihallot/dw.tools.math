@@ -442,3 +442,7 @@ Product plan version `0.1.141` projects durable RS364 milestone closure at G-M9.
 ## RS366 — Completed roadmap status documentation
 
 Product plan version `0.1.142` records the completion of the accepted roadmap as a whole following durable RS365 reconciliation. All 597 canonical and 591 native nodes are done; the six historical omitted subtasks remain documented, not fabricated as native transitions. M8 and M9 remain closed. The current README, Discovery and consumer-facing documentation distinguish current status from historical snapshots. No new capability, publication, migration, external adoption or native achievement is claimed.
+
+## RS367 — Owner-approved production migration admission
+
+Product plan version `0.1.143` admits a new planned M10 migration scope following RS366. M8 and M9 remain durably done, their historical migration-not-authorized evidence is unchanged, and the new owner decision is prospective only. No production configuration, source, package archive, publication or downstream adoption changes in admission. See `docs/planning/decisions/m10-production-net11-migration-admission-rs367.md`.
