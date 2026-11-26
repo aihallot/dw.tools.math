@@ -422,3 +422,7 @@ Product plan version `0.1.136` projects durable RS359 GREEN closure and Verifica
 ## RS361 — M9 package Verification and task closure
 
 Product plan version `0.1.137` projects durable RS360 Verification activation. RS361 corroborates all nine validation identities and closes native T2 Verification and T2. RS360 independently verified physical archive and DLL identity, rejected three altered evidence controls, and replayed the existing Linux/WSL net11 locked consumer. Windows proof is preserved from RS358 and RS356. Canonical completion awaits durable RS361 delivery; phase, work package and milestone closure remain separate pending acceptance review. No publication, source modification, migration or Assessa adoption. M8 remains closed.
+
+## RS362 — M9 bounded phase acceptance and closure
+
+Product plan version `0.1.138` projects durable RS361 package Verification and task closure. R1 is supported by RS350–RS355 source falsification, regression and independent replay; R2 by RS269/RS270 candidate and independent consumer evidence, RS273/RS277 published readbacks, and RS356–RS361 current package RED, GREEN and independent Verification. Both tasks and all six leaves are durably done. RS362 closes only native phase M9-W01-C01; canonical phase closure awaits durable delivery. Gate G-M9 requires the single phase and its work package plus completed M3. No new publication, cryptographic claim, migration or Assessa adoption. M8 remains closed.
