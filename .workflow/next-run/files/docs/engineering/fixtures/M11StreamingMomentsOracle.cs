@@ -11,7 +11,7 @@ void Near(double actual, double expected, double tolerance, string label) =>
 void Refuses<T>(Action action, string label) where T : Exception {
     try { action(); }
     catch (TargetInvocationException ex) when (ex.InnerException?.GetType() == typeof(T)) { return; }
-    catch (T ex) when (ex.GetType() == typeof(T)) { return; }
+    catch (Exception ex) when (ex.GetType() == typeof(T)) { return; }
     throw new InvalidDataException("M11-MOMENTS-ORACLE: " + label);
 }
 const int Million = 1_000_000;
@@ -26,6 +26,14 @@ Refuses<ArgumentOutOfRangeException>(() => DescriptiveStatistics64.Analyze(Enume
 var high = DescriptiveStatistics64.Analyze(Enumerable.Range(0,4096).Select(i => Origin + (i % 2 == 0 ? -1d : 1d)));
 Near(high.Mean, Origin, 0, "independent offset mean");
 Near(high.PopulationVariance, 1d, 0, "independent offset variance");
+// Independently accumulate integer deviations, rather than running the proposed recurrence.
+long deviationSum = 0, squareSum = 0;
+for (var i = 0; i < Million; i++) {
+    long deviation = i % 2 == 0 ? -1 : 1;
+    deviationSum += deviation;
+    squareSum += deviation * deviation;
+}
+Need(deviationSum == 0 && squareSum == Million, "million closed-form reference");
 // Exact closed-form reference for an even alternating pair sequence:
 // mean=Origin, sum of squared deviations=Million, sample variance=Million/(Million-1).
 var type = typeof(DescriptiveStatistics64).Assembly.GetType("Dw.Tools.Math.Statistics.StreamingMoments64");
