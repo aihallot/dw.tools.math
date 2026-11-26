@@ -414,3 +414,7 @@ Product plan version `0.1.134` projects durable RS357 package RED closure and GR
 ## RS359 — M9 immutable package GREEN closure
 
 Product plan version `0.1.135` projects durable RS358 GREEN activation. RS359 corroborates all eight validation identities and closes native T2 GREEN, readying independent Verification. RS358 qualified physical Windows readback of the exact published archives and twelve runtime checks and corroborated historical candidate and consumer proofs, without inferring candidate byte equality. No campaign replay, publication, source modification, migration or Assessa adoption. Canonical GREEN completion awaits durable RS359 delivery; M8 remains closed.
+
+## RS360 — M9 independent package Verification activation
+
+Product plan version `0.1.136` projects durable RS359 GREEN closure and Verification readiness. RS359 succeeded under executor 0.1.78; the separate guidance-only upgrade to 0.31 did not execute an ordinary run. RS360 activates only T2 Verification, independently corroborates RED, GREEN and GREEN closure report/proof provenance and physical archive identities, rejects three altered evidence controls, and replays the existing isolated Linux/WSL net11 consumer. Windows evidence is reused from RS358 and RS356. No new publication, source modification, migration, Assessa adoption or parent completion. M8 remains closed.
