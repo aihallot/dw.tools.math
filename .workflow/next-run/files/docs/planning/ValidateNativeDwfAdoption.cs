@@ -44,7 +44,7 @@ try
     foreach (var entry in actual.Where(pair => pair.Key == "M11" || pair.Key.StartsWith("M11-", StringComparison.Ordinal)))
         RequireExactState(entry.Value, entry.Key switch { "M11" or "M11-W01" => "done", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" or "M11-W01-C02-T1-G" or "M11-W01-C02-T1-V" => "done", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-R" or "M11-W01-C03-T1-G" or "M11-W01-C03-T1-V" => "done", "M11-W01-C04" or "M11-W01-C04-T1" or "M11-W01-C04-T1-R" or "M11-W01-C04-T1-G" or "M11-W01-C04-T1-V" => "done", _ => "not-ready" });
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M10-", StringComparison.Ordinal)))
-        RequireExactState(entry.Value, entry.Key switch { "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in-progress", "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" => "done", "M10-W01-C01-T1-V" => "ready", _ => "not-ready" });
+        RequireExactState(entry.Value, entry.Key switch { "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in-progress", "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" => "done", "M10-W01-C01-T1-V" => "in-progress", _ => "not-ready" });
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M9-", StringComparison.Ordinal)))
         RequireState(actual, entry.Key, entry.Key switch { "M9-W01" => "done", "M9-W01-C01" => "done", "M9-W01-C01-T1" or "M9-W01-C01-T1-R" or "M9-W01-C01-T1-G" or "M9-W01-C01-T1-V" => "done", "M9-W01-C01-T2" or "M9-W01-C01-T2-R" or "M9-W01-C01-T2-G" or "M9-W01-C01-T2-V" => "done", _ => "not-ready" });
     foreach (var entry in actual.Where(pair => pair.Key.StartsWith("M8-", StringComparison.Ordinal)))
