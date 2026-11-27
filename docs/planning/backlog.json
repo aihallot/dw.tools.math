@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.182",
+  "plan_version": "0.1.183",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10082,7 +10082,8 @@
         "tools/dw.tools.math.nuget-preflight/Program.cs",
         "docs/planning/decisions/m10-production-cutover-green-closure-rs414.md",
         "docs/planning/decisions/m10-production-cutover-verification-rs415.md",
-        "docs/engineering/VerifyM10ProductionCutoverEvidence.cs"
+        "docs/engineering/VerifyM10ProductionCutoverEvidence.cs",
+        "docs/planning/decisions/m10-production-cutover-closure-rs416.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red",
@@ -10122,14 +10123,14 @@
               "id": "M10-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Independently qualify and document production sdk and framework cutover.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             }
           ]
         }
       ],
       "refinement": "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.",
-      "readiness": "RS414 durable GREEN closure; independent delivered cutover verification pending durable RS415 result."
+      "readiness": "RS415 durable independent production Verification; native C02 closure and C03 readiness pending durable RS416 result."
     },
     {
       "id": "M10-W01-C03",
