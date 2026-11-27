@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.183",
+  "plan_version": "0.1.184",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10011,7 +10011,7 @@
       "title": "Production SDK and framework cutover",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M10-W01-C01",
         "M11-W01-C04"
@@ -10091,15 +10091,19 @@
         "dotnet run --file docs/engineering/ProbeM10ProductionCutover.cs -- --check",
         "dotnet run --file docs/engineering/VerifyM10ProductionCutoverEvidence.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS416/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M10-W01-C02-T1",
           "title": "Migrate actual production and maintained build graph",
           "behavior": "Controlled actual SDK/TFM/language switch with exact build and semantic regression evidence.",
           "test_case": "Reject net10 production fallback, stale lock targets, failed analyzers, behavior changes and unintended historical fixture drift.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS416/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M10-W01-C02-T1-R",
@@ -10123,14 +10127,16 @@
               "id": "M10-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Independently qualify and document production sdk and framework cutover.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS416/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.",
-      "readiness": "RS415 durable independent production Verification; native C02 closure and C03 readiness pending durable RS416 result."
+      "readiness": "RS416 durable C02 closure."
     },
     {
       "id": "M10-W01-C03",
@@ -10140,7 +10146,7 @@
       "title": "Post-cutover qualification and delivery readiness",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M10-W01-C02"
       ],
@@ -10168,8 +10174,17 @@
       "proposed_commands": [
         "dotnet test dw.tools.math.slnx -c Release --no-build --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "global.json",
+        "Directory.Build.props",
+        "dw.tools.math.slnx",
+        "docs/engineering/m10-post-cutover-certification-red-rs417.json",
+        "docs/engineering/ProbeM10PostCutoverCertificationRed.cs",
+        "docs/planning/decisions/m10-post-cutover-certification-red-rs417.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10177,14 +10192,14 @@
           "title": "Verify migrated graph and independent consumers",
           "behavior": "Prove migrated source and fresh isolated candidate graph with finite regression, platform and consumer evidence.",
           "test_case": "Refuse floating dependencies, project-reference substitutes, changed immutable archives, unproved platform support and unsupported semantic equivalence.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C03-T1-R",
               "title": "RED",
               "description": "Falsify post-cutover qualification and delivery readiness with independent bounded negative controls.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10203,7 +10218,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
+      "readiness": "RS416 durable C02 closure; C03 RED activation pending durable RS417 result."
     },
     {
       "id": "M11-W01-C01",
