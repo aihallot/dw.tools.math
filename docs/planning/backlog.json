@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.177",
+  "plan_version": "0.1.178",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9896,7 +9896,7 @@
       "title": "Cutover readiness and rollback baseline",
       "kind": "spike",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M8-W02-C02",
         "M9-W01-C01"
@@ -9956,15 +9956,19 @@
         "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --rollback",
         "dotnet run --file docs/engineering/VerifyM10CutoverReadiness.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS410/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M10-W01-C01-T1",
           "title": "Qualify cutover readiness",
           "behavior": "Reconcile real current source graph, isolated target graph, fragile tests and recovery baseline before production cutover.",
           "test_case": "Reject missing projects, incompatible SDK or lock closure and unsupported rollback or source-compatibility claims.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS410/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M10-W01-C01-T1-R",
@@ -9988,14 +9992,16 @@
               "id": "M10-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Independently qualify and document cutover readiness and rollback baseline.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS410/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
-      "readiness": "RS409 durable independent Verification; native C01 closure and C02 RED readiness pending durable RS410 result."
+      "readiness": "RS410 durable C01 closure."
     },
     {
       "id": "M10-W01-C02",
@@ -10005,7 +10011,7 @@
       "title": "Production SDK and framework cutover",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M10-W01-C01",
         "M11-W01-C04"
@@ -10036,8 +10042,20 @@
         "dotnet restore dw.tools.math.slnx --locked-mode",
         "dotnet build dw.tools.math.slnx -c Release --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "dw.tools.math.slnx",
+        "NuGet.config",
+        "docs/engineering/m10-cutover-readiness-verification-rs409.json",
+        "docs/engineering/VerifyM10ProductionCutover.cs",
+        "docs/planning/decisions/m10-production-cutover-red-rs411.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red",
+        "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --target"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10045,14 +10063,14 @@
           "title": "Migrate actual production and maintained build graph",
           "behavior": "Controlled actual SDK/TFM/language switch with exact build and semantic regression evidence.",
           "test_case": "Reject net10 production fallback, stale lock targets, failed analyzers, behavior changes and unintended historical fixture drift.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C02-T1-R",
               "title": "RED",
               "description": "Falsify production sdk and framework cutover with independent bounded negative controls.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10071,7 +10089,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.",
+      "readiness": "RS410 durable C01 closure; actual production cutover RED activation pending durable result."
     },
     {
       "id": "M10-W01-C03",
