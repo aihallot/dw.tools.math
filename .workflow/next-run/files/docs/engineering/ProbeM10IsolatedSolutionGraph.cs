@@ -4,8 +4,9 @@ using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] is not ("--check" or "--focused")) throw new ArgumentException("Expected --check or --focused.");
+if (args.Length != 1 || args[0] is not ("--check" or "--focused" or "--tools")) throw new ArgumentException("Expected --check, --focused or --tools.");
 var focused = args[0] == "--focused";
+var tools = args[0] == "--tools";
 static void Need(bool ok, string message) { if (!ok) throw new InvalidDataException("M10 isolated graph: " + message); }
 static string Hash(string path) => Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
 var repository = Path.GetFullPath(".");
@@ -30,7 +31,16 @@ Need(solution.Length == 24 && solution.Count(x => x.StartsWith("src/projects/", 
 var tracked = Run(repository, "git", 30000, "ls-files", "--", "src/projects", "tests/projects")
     .Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 Need(tracked.Length == 287 && tracked.All(x => !x.Split('/').Any(part => part is "." or ".." or "bin" or "obj")), "Tracked source graph differs.");
-var inputs = tracked.Concat(new[] { "global.json", "Directory.Build.props", "Directory.Packages.props", "NuGet.config", "dw.tools.math.slnx" })
+var toolInputs = new[] {
+    "tools/dw.tools.math.discovery-bindings/Program.cs",
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+    "tools/dw.tools.math.nuget-preflight/Program.cs",
+    "tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj",
+    "tools/dw.tools.math.nuget-preflight/Directory.Packages.props",
+    "docs/discovery/agent-surface-candidates.json",
+    "docs/discovery/qualification/m8-selected-clr-bindings.json"
+};
+var inputs = tracked.Concat(tools ? toolInputs : Array.Empty<string>()).Concat(new[] { "global.json", "Directory.Build.props", "Directory.Packages.props", "NuGet.config", "dw.tools.math.slnx" })
     .Distinct(StringComparer.Ordinal).OrderBy(x => x, StringComparer.Ordinal).ToArray();
 var originalHashes = inputs.ToDictionary(x => x, Hash, StringComparer.Ordinal);
 var work = Path.Combine(repository, "build", "artifacts", "m10-rs403-isolated-solution", Guid.NewGuid().ToString("N"));
@@ -77,6 +87,60 @@ try
         locks.Add(relativeLock, Hash(lockPath));
     }
     Need(Run(work, "dotnet", 30000, "--version").Trim() == "11.0.100", "Isolated SDK mismatch.");
+    if (tools)
+    {
+        var discovery = toolInputs[1];
+        var preflight = toolInputs[3];
+        var xml = XDocument.Load(Path.Combine(work, discovery));
+        var target = xml.Descendants("TargetFramework").Single();
+        Need(target.Value == "net10.0", "Discovery baseline target differs.");
+        target.Value = "net11.0";
+        xml.Save(Path.Combine(work, discovery));
+        var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL");
+        Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) && Directory.Exists(feed), "Missing qualified NUGET_LOCAL feed.");
+        var archive = Path.Combine(feed!, "dw.tools.nuget.20260.20261026.1010.nupkg");
+        const string archiveSha = "60836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf";
+        Need(File.Exists(archive) && Hash(archive) == archiveSha, "Shared package archive identity differs.");
+        foreach (var project in new[] { discovery, preflight })
+        {
+            var id = Path.GetFileNameWithoutExtension(project);
+            var restored = project == discovery
+                ? Run(work, "dotnet", 480000, "restore", project, "--configfile", "NuGet.config", "--packages", Path.Combine(work, "packages"))
+                : Run(work, "dotnet", 480000, "restore", project, "--configfile", "NuGet.config", "--source", feed!, "--source", "https://api.nuget.org/v3/index.json", "--packages", Path.Combine(work, "packages"));
+            Console.WriteLine(restored);
+            Console.WriteLine(Run(work, "dotnet", 480000, "build", project, "-c", "Release", "--no-restore"));
+            var assets = Path.Combine(work, "build", "artifacts", "obj", id, "project.assets.json");
+            var targets = JsonNode.Parse(File.ReadAllText(assets))!["targets"]!.AsObject();
+            Need(targets.Count == 1 && targets["net11.0"] is JsonObject, "Tool restored wrong target: " + id);
+            var dll = Path.Combine(work, "build", "artifacts", "bin", id, "Release", "net11.0", id + ".dll");
+            Need(File.Exists(dll), "Missing compiled tool: " + id);
+            if (project == discovery)
+            {
+                var receipt = Path.Combine(work, toolInputs[6]);
+                var expected = JsonNode.Parse(File.ReadAllText(receipt));
+                var output = Run(work, "dotnet", 120000, dll, "--write");
+                Need(output.Contains("M8-DISCOVERY-BINDINGS|selected=4|fingerprints=4|brokerReady=0|mode=--write", StringComparison.Ordinal) &&
+                    JsonNode.DeepEquals(expected, JsonNode.Parse(File.ReadAllText(receipt))), "Discovery binding semantics drifted.");
+                Console.WriteLine(output);
+            }
+            else
+            {
+                Need(targets["net11.0"]!.AsObject().Any(x => x.Key.Equals("Dw.Tools.NuGet/20260.20261026.1010", StringComparison.OrdinalIgnoreCase)), "Shared package resolution differs.");
+                var core = Path.Combine(Path.GetDirectoryName(dll)!, "dw.tools.nuget.dll");
+                Need(File.Exists(core) && Hash(core) == "b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61", "Dependency assembly identity differs.");
+                var output = Run(work, "dotnet", 120000, dll, "--self-test");
+                Need(output.Contains("MATH-NUGET-F1-SELFTEST|PASS|5", StringComparison.Ordinal), "NuGet self-test marker differs.");
+                Console.WriteLine(output);
+                Console.WriteLine("MATH-RS405-NUGET-DEPENDENCY|version=20260.20261026.1010|archiveSha256=" + Hash(archive) + "|dllSha256=" + Hash(core) + "|PASS");
+            }
+            Console.WriteLine("MATH-RS405-TOOL|path=" + project + "|target=net11.0|dllSha256=" + Hash(dll) + "|PASS");
+        }
+        Need(Hash(archive) == archiveSha, "Shared package changed.");
+        Need(locks.All(x => Hash(Path.Combine(work, x.Key)) == x.Value), "Tool restore changed solution locks.");
+        Need(originalHashes.All(x => Hash(x.Key) == x.Value), "Original repository input changed.");
+        Console.WriteLine("MATH-RS405-TOOLS|sdk=11.0.100|tfm=net11.0|tools=2|bindings=4|selfTests=5|inspect=false|publication=false|PASS");
+        return;
+    }
     var restore = Run(work, "dotnet", 480000, "restore", "dw.tools.math.slnx", "--locked-mode", "--configfile", "NuGet.config",
         "--packages", Path.Combine(work, "packages"));
     Console.WriteLine(restore);

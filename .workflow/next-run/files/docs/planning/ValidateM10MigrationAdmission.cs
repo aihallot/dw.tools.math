@@ -217,3 +217,27 @@ foreach (var line in compiledRows)
 Need(compiledRows.Length == 24 && compiledPaths.SetEquals(projects) && File.Exists("docs/planning/decisions/m10-isolated-fragile-tests-rs404.md"),
     "RS403 isolated project roster or next qualification material differs.");
 Console.WriteLine("MATH-RS404-BASELINE|RS403=PASS|projects=24|warning=0|error=0|productionMigration=false|PASS");
+
+var focusedReport = Read(".aura/workflow/reports/RS404/attempt-001.json");
+var focusedProof = Read(".workflow/runs/RS404/preparation-proof.json");
+string[] focusedPreparationIds = ["math-rs404-isolated-graph-evidence", "diff-check"];
+Need((string?)focusedReport["runId"] == "RS404" && (string?)focusedReport["outcome"] == "succeeded" &&
+    (int?)focusedReport["attempt"] == 1 && (string?)focusedReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)focusedReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)focusedReport["priorInvocationFailures"]?["count"] == 0 &&
+    focusedReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    focusedReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)focusedProof["sourceCommit"] == "a30c17037d92e298cdeaf5aee2fa67f44cb28eb2" &&
+    (bool?)focusedProof["payloadCompiled"] == true && (int?)focusedProof["rehearsedValidationCount"] == 2 &&
+    focusedProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(focusedPreparationIds) &&
+    focusedReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(focusedPreparationIds),
+    "RS404 durable evidence differs.");
+var focusedValidation = focusedReport["validations"]!.AsArray().Single()!;
+Need((string?)focusedValidation["Id"] == "math-rs404-isolated-fragile-tests" && (int?)focusedValidation["ExitCode"] == 0 &&
+    (bool?)focusedValidation["TimedOut"] == false && (bool?)focusedValidation["Cancelled"] == false, "RS404 validation differs.");
+var focusedOutput = (string)focusedValidation["StandardOutput"]!;
+Need(focusedOutput.Contains("MATH-RS404-FOCUSED-TOTAL|sdk=11.0.100|tfm=net11.0|classes=8|passed=35|failed=0|PASS", StringComparison.Ordinal) &&
+    focusedOutput.Contains("classes=3|passed=9|failed=0|trxSha256=42e7d981c83f22de1d745933c1a9506e54aca5f395aa558e7eb2176ddb4e6d12|PASS", StringComparison.Ordinal) &&
+    focusedOutput.Contains("classes=5|passed=26|failed=0|trxSha256=9786ae5384a4d21dbdccc4fec677087bd1f57b03fb0cebbb57b96fbaacc5e3b6|PASS", StringComparison.Ordinal) &&
+    File.Exists("docs/planning/decisions/m10-isolated-maintained-tools-rs405.md"), "RS404 coverage or next material differs.");
+Console.WriteLine("MATH-RS405-BASELINE|RS404=PASS|classes=8|passed=35|productionMigration=false|PASS");

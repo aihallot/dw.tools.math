@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "id": "RS405",
+  "title": "Qualify isolated net11 maintained tool build and bounded behavior",
+  "commitMessage": "test: qualify isolated net11 maintained tools",
+  "timeoutSeconds": 3000,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Corroborate RS404 and qualify two isolated maintained tool builds and bounded behavior.",
+    "value": "Record four stable discovery bindings and five NuGet self-tests against the exact existing private dependency. Production unchanged.",
+    "debtChanges": [
+      "Qualify maintained tool compilation and bounded behavior on net11."
+    ],
+    "nextAction": "Qualify NuGet inspector target assumptions and rollback before closing GREEN.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-maintained-tools-rs405.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+      "sourcePath": "files/docs/engineering/ProbeM10IsolatedSolutionGraph.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m10-isolated-maintained-tools-rs405.md",
+      "sourcePath": "files/docs/planning/decisions/m10-isolated-maintained-tools-rs405.md"
+    },
+    {
+      "path": "docs/planning/ValidateM10MigrationAdmission.cs",
+      "sourcePath": "files/docs/planning/ValidateM10MigrationAdmission.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.81"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/validations/0/Id",
+      "expectedValue": "math-rs404-isolated-fragile-tests"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS404/attempt-001.json",
+      "jsonPointer": "/validations/0/ExitCode",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS404/preparation-proof.json",
+      "jsonPointer": "/payloadCompiled",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS404/preparation-proof.json",
+      "jsonPointer": "/rehearsedValidationCount",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": "M10-W01-C01-T1-G"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.174"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "10.0.401"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/0/tasks/0/subtasks/1/state",
+      "expectedValue": "in-progress"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/1/state",
+      "expectedValue": "not-ready"
+    }
+  ],
+  "validations": [
+    {
+      "id": "math-rs405-focused-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "math-rs405-isolated-maintained-tools",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--tools"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 2100,
+      "packs": []
+    }
+  ]
+}
