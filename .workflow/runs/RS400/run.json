@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "id": "RS400",
+  "title": "Activate M10 cutover-readiness RED and verify rollback input inventory",
+  "state": "prepared",
+  "commitMessage": "test: establish M10 cutover readiness RED",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M10",
+    "M10-W01",
+    "M10-W01-C01",
+    "M10-W01-C01-T1",
+    "M10-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Reconcile post-M11 readiness and activate bounded cutover RED.",
+    "value": "Verify 123 project identities, 24 mandatory solution projects, conservative outside-solution dispositions and 28 rollback input identities; reject nine adverse controls without target migration or unsupported qualification.",
+    "debtChanges": [
+      "Activate M10 C01 RED.",
+      "Record initial dispositions and rollback source identities with independent negative controls.",
+      "Correct the retry-0 preselection refusal by declaring the actual C01 readiness files, commands and refinement before rendering; preserve the RED contract and failure evidence."
+    ],
+    "nextAction": "Review durable RED, then close RED and ready GREEN; resolve tool/fixture compatibility and qualify actual isolated target restore, fragile tests and rollback.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/engineering/m10-cutover-readiness-red-rs400.json",
+    "docs/engineering/ProbeM10CutoverReadinessRed.cs",
+    "docs/planning/decisions/m10-cutover-readiness-red-rs400.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md"
+  ],
+  "validations": [
+    {
+      "id": "math-rs400-m10-cutover-readiness-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10CutoverReadinessRed.cs",
+        "--",
+        "--red"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-m11-canonical-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-m10-red-activation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-m9-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs400-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
