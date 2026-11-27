@@ -1,6 +1,6 @@
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS405", 2, "test: qualify isolated net11 maintained tools", "0.1.81", 1, 0, 1, false);
+p.Workflow.RequirePriorSuccess("RS405", 2, "test: qualify isolated net11 maintained tools", "0.1.81", 1, 0, 1, false, true, 1);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "in-progress");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-V", "not-ready");
 p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
