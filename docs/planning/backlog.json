@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.178",
+  "plan_version": "0.1.179",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10011,7 +10011,7 @@
       "title": "Production SDK and framework cutover",
       "kind": "code",
       "size": "M",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [
         "M10-W01-C01",
         "M11-W01-C04"
@@ -10050,7 +10050,8 @@
         "NuGet.config",
         "docs/engineering/m10-cutover-readiness-verification-rs409.json",
         "docs/engineering/VerifyM10ProductionCutover.cs",
-        "docs/planning/decisions/m10-production-cutover-red-rs411.md"
+        "docs/planning/decisions/m10-production-cutover-red-rs411.md",
+        "docs/planning/decisions/m10-production-cutover-red-closure-rs412.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red",
@@ -10063,14 +10064,14 @@
           "title": "Migrate actual production and maintained build graph",
           "behavior": "Controlled actual SDK/TFM/language switch with exact build and semantic regression evidence.",
           "test_case": "Reject net10 production fallback, stale lock targets, failed analyzers, behavior changes and unintended historical fixture drift.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C02-T1-R",
               "title": "RED",
               "description": "Falsify production sdk and framework cutover with independent bounded negative controls.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
@@ -10091,7 +10092,7 @@
         }
       ],
       "refinement": "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.",
-      "readiness": "RS410 durable C01 closure; actual production cutover RED activation pending durable result."
+      "readiness": "RS411 durable production RED activation; native RED closure and GREEN readiness pending durable RS412 result."
     },
     {
       "id": "M10-W01-C03",
