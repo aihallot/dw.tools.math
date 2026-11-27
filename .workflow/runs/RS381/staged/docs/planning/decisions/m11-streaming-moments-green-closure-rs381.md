@@ -1,0 +1,9 @@
+# RS381 - Close streaming moments GREEN and ready independent verification
+
+RS380 succeeded first-pass at attempt 001, result 538464da6d63a53873bc8647aa8d0a2740db2742. Its actual executor is stable DWF 0.1.80, assembly SHA256 b7eec1950dbd71e727b173d8695569d2c3dc5b933c41edf89c4787e56317b2fb, matching independently certified framework RS1242. Historical RS379 remains 0.1.78. Twelve successful preparation validations include the unchanged million-observation GREEN oracle, checkpoint replay, atomic refusal and batch witnesses, focused maintained tests and locked Statistics regression. Do not invent per-test execution statistics.
+
+Reconcile canonical GREEN activation from RS380 in backlog 0.1.154, close only the native GREEN leaf and ready verification. Canonical GREEN remains in_progress until RS381 completion is durable. The source and tests remain unchanged. Validate current M11 evidence, native/canonical projection, M10 gate and changed version-pin consumers structurally; do not rerun numeric campaigns or full test suites for this closure.
+
+The repository manifest was observed at guidance 0.31 after RS380. This ordinary direct request has no product dependency on a specific guidance version and does not pin or mutate workflow-managed guidance. Let the stable driver perform its applicable automatic convergence to 0.32; corrections and delivery take precedence under the generic contract. No framework changes. The packaged engineering-guidance references were consulted remotely; local installation was not performed or asserted.
+
+Next independently qualify varied small-variance sequences, multiple checkpoint boundaries, bitwise same-runtime state and atomic refusal recovery, without replaying the entire Statistics suite. Source qualification only; no package publication, downstream adoption, merge, wire codec or production cutover.
