@@ -47,6 +47,7 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
     chunk["readiness"] = "RS410 durable C01 closure.";
     next["files"] = p.Json.StringArray("global.json", "Directory.Build.props", "Directory.Packages.props", "dw.tools.math.slnx", "NuGet.config", "docs/engineering/m10-cutover-readiness-verification-rs409.json", "docs/engineering/VerifyM10ProductionCutover.cs", "docs/planning/decisions/m10-production-cutover-red-rs411.md");
     next["commands"] = p.Json.StringArray("dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red", "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --target");
+    next["refinement"] = "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.";
     next["readiness"] = "RS410 durable C01 closure; actual production cutover RED activation pending durable result.";
     doc["plan_version"] = "0.1.178";
 });
