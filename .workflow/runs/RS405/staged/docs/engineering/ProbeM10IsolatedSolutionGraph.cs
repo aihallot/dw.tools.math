@@ -101,12 +101,22 @@ try
         var archive = Path.Combine(feed!, "dw.tools.nuget.20260.20261026.1010.nupkg");
         const string archiveSha = "60836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf";
         Need(File.Exists(archive) && Hash(archive) == archiveSha, "Shared package archive identity differs.");
+        // RS405 attempt 001: explicit --source HTTPS was treated as a Windows local path (NU1301).
+        // Preserve the existing NuGet.org source and add the private source in a disposable XML config.
+        var privateConfig = Path.Combine(work, "NuGet.maintained-tools.config");
+        var config = XDocument.Load(Path.Combine(work, "NuGet.config"));
+        var sources = config.Root!.Element("packageSources")!;
+        Need(sources.Elements("add").Count() == 1 &&
+            (string?)sources.Elements("add").Single().Attribute("value") == "https://api.nuget.org/v3/index.json",
+            "Baseline NuGet sources differ.");
+        sources.Add(new XElement("add", new XAttribute("key", "math-private-local"), new XAttribute("value", feed!)));
+        config.Save(privateConfig);
         foreach (var project in new[] { discovery, preflight })
         {
             var id = Path.GetFileNameWithoutExtension(project);
             var restored = project == discovery
                 ? Run(work, "dotnet", 480000, "restore", project, "--configfile", "NuGet.config", "--packages", Path.Combine(work, "packages"))
-                : Run(work, "dotnet", 480000, "restore", project, "--configfile", "NuGet.config", "--source", feed!, "--source", "https://api.nuget.org/v3/index.json", "--packages", Path.Combine(work, "packages"));
+                : Run(work, "dotnet", 480000, "restore", project, "--configfile", privateConfig, "--packages", Path.Combine(work, "packages"));
             Console.WriteLine(restored);
             Console.WriteLine(Run(work, "dotnet", 480000, "build", project, "-c", "Release", "--no-restore"));
             var assets = Path.Combine(work, "build", "artifacts", "obj", id, "project.assets.json");
