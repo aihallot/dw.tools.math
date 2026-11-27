@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "id": "RS427",
+  "title": "Close M10 controlled production framework cutover work package",
+  "commitMessage": "chore: close M10 migration work package",
+  "timeoutSeconds": 3600,
+  "projectNodes": [
+    "M10-W01"
+  ],
+  "contribution": {
+    "summary": "Reconcile durable RS426 C03 closure and close native M10-W01.",
+    "value": "Corroborate exact phase closure lineage, preserve certification and rollback evidence, and close the three-phase migration work package.",
+    "debtChanges": [
+      "Reconcile canonical C03 completion.",
+      "Close native M10 migration work package."
+    ],
+    "nextAction": "Reconcile durable work package closure and close the G-M10 native milestone.",
+    "achievements": [
+      {
+        "projectNode": "M10-W01",
+        "achievement": "C01 readiness, C02 actual SDK 11.0.100/net11.0/C# 15 migration and C03 independent post-cutover certification are durably complete, with all nine subtasks, six technical gates, rollback and archive preservation; publication remains unauthorized."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m10-work-package-closure-rs427.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/planning/ValidateNativeDwfAdoption.cs",
+      "sourcePath": "files/docs/planning/ValidateNativeDwfAdoption.cs"
+    },
+    {
+      "path": "docs/planning/ValidateM10MigrationAdmission.cs",
+      "sourcePath": "files/docs/planning/ValidateM10MigrationAdmission.cs"
+    },
+    {
+      "path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+      "sourcePath": "files/docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+    },
+    {
+      "path": "docs/planning/ValidateAssessaM9Admission.cs",
+      "sourcePath": "files/docs/planning/ValidateAssessaM9Admission.cs"
+    },
+    {
+      "path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+      "sourcePath": "files/docs/engineering/ValidateM9AssessaPublishedHandoff.cs"
+    },
+    {
+      "path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+      "sourcePath": "files/docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"
+    },
+    {
+      "path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+      "sourcePath": "files/docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"
+    },
+    {
+      "path": "README.md",
+      "sourcePath": "files/README.md"
+    },
+    {
+      "path": "docs/planning/decisions/m10-work-package-closure-rs427.md",
+      "sourcePath": "files/docs/planning/decisions/m10-work-package-closure-rs427.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS426/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS426/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS426/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS426/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": false
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS426/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.81"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS426/preparation-proof.json",
+      "jsonPointer": "/payloadCompiled",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS426/preparation-proof.json",
+      "jsonPointer": "/rehearsedValidationCount",
+      "expectedValue": 12
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.193"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "11.0.100"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/2/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/2/tasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/2/tasks/0/subtasks/0/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/2/tasks/0/subtasks/1/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/phases/2/tasks/0/subtasks/2/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/workPackages/0/state",
+      "expectedValue": "in-progress"
+    }
+  ],
+  "validations": [
+    {
+      "id": "math-rs427-certification-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10PostCutoverCertificationRed.cs",
+        "--",
+        "--red"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-actual-target",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM10ProductionCutover.cs",
+        "--",
+        "--target"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-m11-canonical-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-m10-work-package-closure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-m9-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "math-rs427-independent-production-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM10ProductionCutoverEvidence.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    }
+  ]
+}
