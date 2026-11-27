@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "RS405",
+  "title": "Qualify isolated net11 maintained tool build and bounded behavior",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated net11 maintained tools",
+  "timeoutSeconds": 3000,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Corroborate RS404 and qualify two isolated maintained tool builds and bounded behavior.",
+    "value": "Record four stable discovery bindings and five NuGet self-tests against the exact existing private dependency. Production unchanged.",
+    "debtChanges": [
+      "Qualify maintained tool compilation and bounded behavior on net11."
+    ],
+    "nextAction": "Qualify NuGet inspector target assumptions and rollback before closing GREEN.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-maintained-tools-rs405.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs405-focused-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs405-isolated-maintained-tools",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--tools"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 2100
+    }
+  ]
+}
