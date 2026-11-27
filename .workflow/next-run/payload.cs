@@ -2,12 +2,13 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS386", 1, "feat: implement bounded larger-sample quantile evaluation", "0.1.80", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS387", 1, "chore: close quantile GREEN and ready verification", "0.1.80", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M11-W01-C02", "done");
 p.ProjectPlan.RequireNodeState("M11-W01-C03-T1", "in-progress");
 p.ProjectPlan.RequireNodeState("M11-W01-C03-T1-R", "done");
+p.ProjectPlan.RequireNodeState("M11-W01-C03-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.159"), JsonValue.Create("0.1.160"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.160"), JsonValue.Create("0.1.161"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/backlog.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
@@ -17,7 +18,8 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-larger-sample-quantiles-green-closure-rs387.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-larger-sample-quantiles-verification-rs388.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("tests/projects/dw.tools.math.statistics.tests/M11LargerSampleQuantilesVerificationTests.cs"));
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
     FileName = "dotnet", WorkingDirectory = p.RepositoryRoot, UseShellExecute = false,
@@ -33,6 +35,5 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ConvergeNodeToDone("M11-W01-C03-T1-G");
-p.ProjectPlan.TransitionNode("M11-W01-C03-T1-V", "not-ready", "ready");
+p.ProjectPlan.ActivateReadyContinuation("M11-W01-C03-T1-V");
 return p.Complete();
