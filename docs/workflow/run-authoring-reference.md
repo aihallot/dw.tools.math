@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.run-authoring-reference"
-documentVersion: 12
+documentVersion: 13
 kind: "guidance"
 title: "Run Authoring Reference"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV029Draft.cs#RunAuthoringReference"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV032Draft.cs#RunAuthoringReference"
 ---
 # Run Authoring Reference
 
@@ -143,7 +143,8 @@ Prefer `payload.Json.EditObject(...)` for ordinary semantic object mutation inst
 - Working directories already exist and timeouts are bounded.
 - Validation classification is `preflight`, `structural`, `focused-preparation`, `focused`, `integrated-preparation`, `integrated`, `full-preparation`, or `full`.
 - `preflight`, `structural`, `full-preparation`, and `full` declare no packs. `focused-preparation`, `focused`, `integrated-preparation`, and `integrated` declare named packs.
-- A run may declare an ordered validation ladder. Test-profile entries must strictly widen scope: focused < integrated < full; preparation variants share the same breadth as their post-attempt counterpart.
+- A run may declare an ordered validation ladder. Test-profile breadth must be nondecreasing: focused < integrated < full; preparation variants share the same breadth as their post-attempt counterpart. Independent focused or integrated checks may repeat at equal breadth with distinct IDs and truthful arguments and packs. At most one full certification (including full-preparation) is allowed.
+- Prefer consolidation only when checks are genuinely equivalent or naturally form one coherent command. Do not relabel checks as structural or integrated merely to bypass the ladder. In planned mode the final explicit profile must still satisfy required coverage; earlier checks do not substitute for that coverage. No automatic deduplication or effect-phase conversion is implied.
 - Preparation-safe test profiles (`focused-preparation`, `integrated-preparation`, `full-preparation`) must precede post-attempt profiles.
 - In `planned` mode, when current-run `mutationPaths` produce a narrower differential plan than an explicitly broader certification profile, the workflow applies differential-first ordering by prepending the repository-rendered differential selection. The broader certification remains mandatory.
 - Bounded replay of targeted tests inside a later broader certification is intentional: fail fast on the highest-probability current-change surface before paying for broader certification without sacrificing the broader gate.

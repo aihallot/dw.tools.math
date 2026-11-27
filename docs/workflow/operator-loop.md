@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.operator-loop"
-documentVersion: 21
+documentVersion: 22
 kind: "guidance"
 title: "Operator Loop"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV031Draft.cs#OperatorLoop"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV032Draft.cs#OperatorLoop"
 ---
 # Operator Loop
 
@@ -79,7 +79,7 @@ The executable, workflow schema, and repository guidance have independent versio
 
 On a clean repository, use the normal `dwf run next` command for automatic convergence of an exact supported historical pack. `dwf guidance upgrade` remains an explicit maintenance command; it is not a routine prerequisite.
 
-The supported 0.31 upgrade contract upgrades exact embedded guidance 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29 or 0.30 directly to 0.31. Unknown, divergent, partial or newer guidance is not overwritten or downgraded. Automatic convergence takes place after remote authority refresh in an eligible clean ordinary workspace. Corrections, selected or pending runs, pending delivery and self-replacement take precedence.
+The supported 0.32 upgrade contract upgrades exact embedded guidance 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.30 or 0.31 directly to 0.32. Unknown, divergent, partial or newer guidance is not overwritten or downgraded. Automatic convergence takes place after remote authority refresh in an eligible clean ordinary workspace. Corrections, selected or pending runs, pending delivery and self-replacement take precedence.
 
 An eligible ordinary direct committed request is preserved and freshly prepared against the new authority. Specialized requests and explicit guidance dependencies defer optional convergence. Preserve legitimate guidance pins; when the migrated authority requires request review, revise the committed request before retrying rather than replaying the old request.
 

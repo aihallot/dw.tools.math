@@ -1,13 +1,13 @@
 ---
 schemaVersion: 1
 documentId: "dw.tools.workflow.guidance.agent-playbook"
-documentVersion: 14
+documentVersion: 15
 kind: "guidance"
 title: "Agent Playbook"
 owner: "dw.tools.workflow"
 status: "generated"
 managedBy: "dw.tools.workflow/guidance-pack-v2"
-sourceOfTruth: "src/dw.tools.workflow/GuidancePackV031Draft.cs#AgentPlaybook"
+sourceOfTruth: "src/dw.tools.workflow/GuidancePackV032Draft.cs#AgentPlaybook"
 ---
 # Agent Playbook
 
@@ -187,8 +187,8 @@ Classify the actual repository as greenfield, existing unmanaged or legacy befor
 
 - Inspect the affected source and tests; reuse known-good SDK operations. Put source-only facts in preparation preconditions and accept the exact baseline or target in payload guards for facts the payload changes, including lifecycle transitions.
 - Reconcile committed staged source paths, generated paths, mutation paths and project scope; do not stage redundant copies of tracked tests.
-- Check contribution field lengths and uniqueness, including one achievement per completed node; put detailed rationale in staged evidence rather than `debtChanges`.
-- Use the smallest sufficient validation scope. If multiple test profiles are genuinely required, they must strictly widen; do not default to the full suite.
+- Check contribution field lengths and uniqueness, including one achievement per completed node (including every completed parent); reconcile the actual plan transitions with `contribution.achievements`. Put detailed rationale in staged evidence rather than `debtChanges`.
+- Use the smallest sufficient validation scope. Prefer one coherent check when equivalent; retain independent focused or integrated checks at the same breadth when they provide distinct diagnostics. Never relabel checks merely to satisfy a ladder, narrow successive profiles, repeat full certification or default to the full suite. Preparation-safe checks precede post-attempt checks; planned final coverage is still mandatory.
 - Reread the published request and every referenced staged file at the committed tip; preserve failure truth and return only the authorized run-next command.
 
 See [Payload Authoring](payload-authoring.md) and [Run Authoring Reference](run-authoring-reference.md) for the detailed contracts.
