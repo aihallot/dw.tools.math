@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "id": "RS426",
+  "title": "Close independently verified M10 certification phase",
+  "state": "prepared",
+  "commitMessage": "chore: close verified M10 post-cutover certification phase",
+  "timeoutSeconds": 3600,
+  "projectNodes": [
+    "M10-W01-C03-T1-V",
+    "M10-W01-C03-T1",
+    "M10-W01-C03"
+  ],
+  "contribution": {
+    "summary": "Reconcile corrected RS425 independent Verification and close native C03.",
+    "value": "Bind the independently verified six gates, exact archive and rollback evidence, and one allocated failure lineage without replaying validation campaigns.",
+    "debtChanges": [
+      "Reconcile canonical Verification activation.",
+      "Close native C03 with durable independent evidence."
+    ],
+    "nextAction": "Reconcile C03 closure and close native M10 work package.",
+    "achievements": [
+      {
+        "projectNode": "M10-W01-C03-T1-V",
+        "achievement": "RS425 attempt 002 independently verified all six gates, five delivered reports and thirteen physical archives, DLLs and producer locks after one allocated CS8620 correction."
+      },
+      {
+        "projectNode": "M10-W01-C03-T1",
+        "achievement": "The migrated graph and exact locked consumers on Windows and Linux/WSL have durable RED, GREEN and independent Verification evidence."
+      },
+      {
+        "projectNode": "M10-W01-C03",
+        "achievement": "All six bounded post-cutover certification gates independently qualify; rollback, historical archive preservation and unpublished candidate identity are evidenced. Publication and downstream adoption remain unauthorized."
+      }
+    ]
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m10-post-cutover-certification-closure-rs426.md",
+    "docs/engineering/m10-post-cutover-certification-verification-rs426.json"
+  ],
+  "validations": [
+    {
+      "id": "math-rs426-certification-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10PostCutoverCertificationRed.cs",
+        "--",
+        "--red"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-actual-target",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM10ProductionCutover.cs",
+        "--",
+        "--target"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-m11-canonical-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-m10-c03-closure",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-m9-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs426-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs426-independent-production-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM10ProductionCutoverEvidence.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    }
+  ]
+}
