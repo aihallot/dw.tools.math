@@ -2,11 +2,11 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS420", 1, "test: qualify thirteen isolated net11 package candidates", "0.1.81", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS421", 1, "test: qualify exact source-free Windows consumers", "0.1.81", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M11", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.187"), JsonValue.Create("0.1.188"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.188"), JsonValue.Create("0.1.189"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM10MigrationAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
@@ -14,9 +14,8 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10PostCutoverLockedConsumers.cs"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/m10-post-cutover-candidate-identities-rs420.json"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-linux-consumers-rs422.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10PostCutoverWslConsumers.cs"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
@@ -31,14 +30,14 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
         throw new InvalidOperationException("Unexpected C03 GREEN activation baseline.");
     green["status"] = "in_progress";
     var files = chunk["files"]!.AsArray().Select(x => (string)x!).ToArray();
-    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md", "docs/engineering/ProbeM10PostCutoverLockedConsumers.cs", "docs/engineering/m10-post-cutover-candidate-identities-rs420.json" })
+    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-linux-consumers-rs422.md", "docs/engineering/ProbeM10PostCutoverWslConsumers.cs" })
         if (!files.Contains(path, StringComparer.Ordinal)) files = files.Append(path).ToArray();
     chunk["files"] = p.Json.StringArray(files);
-    const string command = "dotnet run --file docs/engineering/ProbeM10PostCutoverLockedConsumers.cs -- --check";
+    const string command = "dotnet run --file docs/engineering/ProbeM10PostCutoverWslConsumers.cs -- --check";
     var commands = chunk["commands"]!.AsArray().Select(x => (string)x!).ToArray();
     if (!commands.Contains(command, StringComparer.Ordinal)) chunk["commands"] = p.Json.StringArray(commands.Append(command).ToArray());
-    chunk["readiness"] = "RS420 durable candidate qualification; GREEN active, independent Windows consumers pending RS421.";
-    doc["plan_version"] = "0.1.188";
+    chunk["readiness"] = "RS421 durable Windows consumer qualification; GREEN active, independent Linux consumers pending RS422.";
+    doc["plan_version"] = "0.1.189";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {

@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.188" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.189" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -657,3 +657,28 @@ Need((string?)candidatesReport["outcome"] == "succeeded" && (int?)candidatesRepo
         "|sharedArchives=12|lockedRestore=PASS|publication=false|reservation=false|PASS", StringComparison.Ordinal) &&
     File.Exists("docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md"), "RS420 durable candidate evidence differs.");
 Console.WriteLine("MATH-RS421-CANDIDATE-RECONCILIATION|RS420=PASS|packages=13|edges=16|publication=false|PASS");
+
+var windowsConsumerReport = Read(".aura/workflow/reports/RS421/attempt-001.json");
+var windowsConsumerProof = Read(".workflow/runs/RS421/preparation-proof.json");
+var windowsConsumerValidation = windowsConsumerReport["validations"]!.AsArray().Single(x => (string?)x?["Id"] == "math-rs421-windows-locked-consumers")!;
+var windowsConsumerOutput = (string)windowsConsumerValidation["StandardOutput"]!;
+Need((string?)windowsConsumerReport["outcome"] == "succeeded" &&
+    (int?)windowsConsumerReport["attempt"] == 1 && (string?)windowsConsumerReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)windowsConsumerReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)windowsConsumerReport["priorInvocationFailures"]?["count"] == 0 &&
+    windowsConsumerReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    windowsConsumerReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)windowsConsumerProof["sourceCommit"] == "b51839e36a12750c21206b2e6cd9153aa8eba0cc" &&
+    (bool?)windowsConsumerProof["payloadCompiled"] == true && (int?)windowsConsumerProof["rehearsedValidationCount"] == 11 &&
+    windowsConsumerProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(
+        windowsConsumerReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    (int?)windowsConsumerValidation["ExitCode"] == 0 &&
+    windowsConsumerOutput.Contains("MATH-M10-CONSUMER|mode=numeric|sdk=11.0.100|rid=win-x64|packages=2|lockSha256=6f578c5d787dc9e2f32431627f557cb8635b56d14427912e3a26295b07b373ca|sourceFree=true|PASS", StringComparison.Ordinal) &&
+    windowsConsumerOutput.Contains("MATH-M10-CONSUMER|mode=broad|sdk=11.0.100|rid=win-x64|packages=12|lockSha256=bcdefcc66a1a71b0557306172e4b65b29a2ab803a3fea1d64c90789402214d22|sourceFree=true|PASS", StringComparison.Ordinal) &&
+    windowsConsumerOutput.Contains("MATH-M10-LOCKED-CONSUMERS|sdk=11.0.100|rid=win-x64|tfm=net11.0|consumers=2|packages=13|rebuild=false|publication=false|PASS", StringComparison.Ordinal) &&
+    candidateRows.All(x => windowsConsumerOutput.Contains("MATH-M10-LOADED|id=" + (string?)x?["id"] +
+        "|sha256=" + (string?)x?["dllSha256"] + "|PASS", StringComparison.Ordinal)) &&
+    windowsConsumerOutput.Contains("MATH-RS270-BOUNDED-PACKAGE|PASS|12", StringComparison.Ordinal) &&
+    windowsConsumerOutput.Contains("MATH-M10-BROAD-SEMANTICS|PASS", StringComparison.Ordinal) &&
+    File.Exists("docs/planning/decisions/m10-post-cutover-linux-consumers-rs422.md"), "RS421 durable Windows consumer evidence differs.");
+Console.WriteLine("MATH-RS422-WINDOWS-RECONCILIATION|RS421=PASS|consumers=2|packages=13|rid=win-x64|publication=false|PASS");
