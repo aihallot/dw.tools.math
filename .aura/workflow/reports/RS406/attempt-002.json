@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS406",
+  "attempt": 2,
+  "outcome": "succeeded",
+  "correctionMode": true,
+  "correctionSourceAttempt": 1,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-27T18:14:42.2124967+00:00",
+  "completedAtUtc": "2026-11-27T18:15:00.1959435+00:00",
+  "durationMilliseconds": 17983,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.81",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 2,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 1,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261127T181002Z-f04a16ca27e826cc",
+      "run-next-20261127T181135Z-cc0b237bf640489f"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261127T181002Z-f04a16ca27e826cc",
+        "runId": "RS406",
+        "scope": "preselection-rs406",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs406/run-next-20261127T181002Z-f04a16ca27e826cc"
+      },
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261127T181135Z-cc0b237bf640489f",
+        "runId": "RS406",
+        "scope": "rs406",
+        "outcome": "failed",
+        "publicationOutcome": "attempt-failed",
+        "failureStage": "validation math-rs406-isolated-nuget-inspect",
+        "failureClassification": "attempt-failed",
+        "attemptAllocated": true,
+        "attempt": 1,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/rs406/run-next-20261127T181135Z-cc0b237bf640489f"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS406/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 3600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-c899bf0bea9246a8bb38e6854a06fb85\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 3600000,
+      "DurationMilliseconds": 405,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS405/attempt-002.json run=RS405 attempt=2 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-G state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM10IsolatedSolutionGraph.cs bytes=22863\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md bytes=3559\r\n[files.replace-from-staged] NOCHANGE path=docs/planning/ValidateM10MigrationAdmission.cs staged content already installed\r\n[payload] OK operations=7 changed=2 no-change=1 verified=4 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS406/attempt-002.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS405/attempt-002.json",
+        "Status": 0,
+        "Summary": "run=RS405 attempt=2 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "bb376a661b580fbb2f24fe6cf86f0d48d9b764221e8a2d67dcb302014f3aed4e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-G state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "57d79c69181d99ea15bbd10d132544a313059a5dcf28c306557a476aaeb8035b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "57d79c69181d99ea15bbd10d132544a313059a5dcf28c306557a476aaeb8035b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "57d79c69181d99ea15bbd10d132544a313059a5dcf28c306557a476aaeb8035b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "Status": 1,
+        "Summary": "bytes=22863",
+        "Details": null,
+        "BeforeSha256": "4bffa105fc777b4429432b8ea6e777408cb6aa575b11d9ced0280353e0dec104",
+        "AfterSha256": "0315133082ecd9dc7534e2897ad500849e099487efb18609b1edae5dfd679396",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md",
+        "Status": 1,
+        "Summary": "bytes=3559",
+        "Details": null,
+        "BeforeSha256": "671f9fd89ee73c8b5334d40351134682362a970bd624c9386201d86a9aa5f9e7",
+        "AfterSha256": "f7e703f0584a8253d1fd44ed198062a343b27a8fb6406068574440ef0d6332c0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 2,
+        "Summary": "staged content already installed",
+        "Details": null,
+        "BeforeSha256": "e1c9d436e5843f509d9de1db137fd0da70bbfd049aff5f6678fe56bfe53471e5",
+        "AfterSha256": "e1c9d436e5843f509d9de1db137fd0da70bbfd049aff5f6678fe56bfe53471e5",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "run-preparation-gate",
+    "mode": "executed",
+    "durationMilliseconds": 17187,
+    "parsedPowerShellFiles": 0,
+    "payloadCompiled": true,
+    "predictedChangedPaths": [
+      "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+      "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md"
+    ],
+    "validations": [
+      {
+        "id": "math-rs406-maintained-tool-evidence",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [
+    {
+      "Id": "math-rs406-isolated-nuget-inspect",
+      "classification": "focused",
+      "packs": [],
+      "FileName": "dotnet",
+      "Arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--inspect"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2700000,
+      "DurationMilliseconds": 17342,
+      "StandardOutput": "[dwf-validation] strategy=declared-authority stdoutPresent=true stderrPresent=false nugetDiagnosticObserved=false compilerOrMsbuildDiagnosticObserved=false Process status: timedOut=false cancelled=false exitCode=0 workflowExitCode=0 terminationAttempted=false terminationErrorPresent=false timeoutMilliseconds=2700000 durationMilliseconds=17342\r\nMATH-RS406-SDK|context=production|policy=10.0.401/latestPatch|observed=10.0.404\r\nMATH-RS406-CANDIDATE|sourceSha256=f79b6917884841673d5523296a64f9298e0c0a8e0ee06ac7003730e8dd8cee6e|production=false\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\81bfb66947764743aec7941b3a220827\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj (in 119 ms).\r\n\r\n  dw.tools.math.nuget-preflight -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\81bfb66947764743aec7941b3a220827\\build\\artifacts\\bin\\dw.tools.math.nuget-preflight\\Release\\net11.0\\dw.tools.math.nuget-preflight.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.01\r\n\r\nMATH-NUGET-F1-SELFTEST|PASS|5\r\n\r\nMATH-RS405-NUGET-DEPENDENCY|version=20260.20261026.1010|archiveSha256=60836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf|dllSha256=b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61|PASS\r\n{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022status\u0022: \u0022f1-source-and-feed-inventory-qualified-not-published\u0022,\r\n  \u0022feedSource\u0022: \u0022NUGET_LOCAL\u0022,\r\n  \u0022inspectionScope\u0022: \u0022thirteen-Math-package-id-prefixes-top-level-only\u0022,\r\n  \u0022repositoryTool\u0022: \u0022Dw.Tools.NuGet\u0022,\r\n  \u0022repositoryPackageVersion\u0022: \u002220260.20261026.1010\u0022,\r\n  \u0022repositoryPackageSha256\u0022: \u002260836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf\u0022,\r\n  \u0022loadedLibrarySha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022inspectedArchives\u0022: 12,\r\n  \u0022inventorySha256\u0022: \u002259745df76410837faee83cac4118755dc13d4a253fec7ed0206abf9ece9e5d4a\u0022,\r\n  \u0022observedDate\u0022: \u00222026-11-27\u0022,\r\n  \u0022msbuildPropertyQueries\u0022: 13,\r\n  \u0022packageCount\u0022: 13,\r\n  \u0022versionsReserved\u0022: false,\r\n  \u0022feedPublished\u0022: false,\r\n  \u0022packages\u0022: [\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities/dw.quantities.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261102.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d\u0022,\r\n          \u0022Bytes\u0022: 14747\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities.expression\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities.expression/dw.quantities.expression.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261102.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae\u0022,\r\n          \u0022Bytes\u0022: 13951\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities.standard\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities.standard/dw.quantities.standard.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.quantities.expression\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261103.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75\u0022,\r\n          \u0022Bytes\u0022: 13604\r\n        },\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261110.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022766e756e402ced1303a3b86d3faef39cfb1f40d00e34121288cc97b372968e6d\u0022,\r\n          \u0022Bytes\u0022: 14269\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.analysis\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.1.0-preview.6\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.1.0-preview.6\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261104.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d3e937efbe3fe9524a4146de655f867e965ac1322910cf45f2c060f0b915a3cf\u0022,\r\n          \u0022Bytes\u0022: 27831\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.codecs\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.0.0-preview.8\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.0.0-preview.8\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261107.1001\u0022,\r\n          \u0022Sha256\u0022: \u002200392fbeddebceb70286b11377aeab120bef0e3ef45f9b12dc2ba878918f8e35\u0022,\r\n          \u0022Bytes\u0022: 35096\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.composition\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261107.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022b0624cb1835f66fef41ff763da065a400f1709f65808315e28e3247aa2a4228f\u0022,\r\n          \u0022Bytes\u0022: 17101\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.distribution\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.0.0-preview.4\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.0.0-preview.4\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.tools.math.codecs\u0022,\r\n        \u0022dw.tools.math.composition\u0022,\r\n        \u0022dw.tools.math.ir\u0022,\r\n        \u0022dw.tools.math.numerics\u0022,\r\n        \u0022dw.tools.math.symbolics\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.foundation\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.1.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.1.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261105.1001\u0022,\r\n          \u0022Sha256\u0022: \u00220fc5499e40593d2e2c01b5d8228c3f731d7df9d54050200906e53faa33569f94\u0022,\r\n          \u0022Bytes\u0022: 3863\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.ir\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261104.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480\u0022,\r\n          \u0022Bytes\u0022: 21926\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.numerics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.4.0-preview.4\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.4.0-preview.4\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.scientific\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.1.0-preview.14\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.1.0-preview.14\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261105.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f\u0022,\r\n          \u0022Bytes\u0022: 37265\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.statistics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.4.0-preview.6\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.4.0-preview.6\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261106.1001\u0022,\r\n          \u0022Sha256\u0022: \u00229232edaedf57f5f67530905398648fa240141146cb55eed14e7910d54717e4f8\u0022,\r\n          \u0022Bytes\u0022: 17451\r\n        },\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261120.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1\u0022,\r\n          \u0022Bytes\u0022: 17461\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.symbolics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.5.0-preview.10\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.5.0-preview.10\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net11.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    }\r\n  ]\r\n}\r\n\r\nMATH-RS406-INSPECT|target=net11.0|packages=13|queries=13|reserved=false|published=false|PASS\r\nMATH-RS406-SDK|context=isolated-baseline|expected=10.0.404|observed=10.0.404\r\n{\r\n  \u0022schemaVersion\u0022: 1,\r\n  \u0022status\u0022: \u0022f1-source-and-feed-inventory-qualified-not-published\u0022,\r\n  \u0022feedSource\u0022: \u0022NUGET_LOCAL\u0022,\r\n  \u0022inspectionScope\u0022: \u0022thirteen-Math-package-id-prefixes-top-level-only\u0022,\r\n  \u0022repositoryTool\u0022: \u0022Dw.Tools.NuGet\u0022,\r\n  \u0022repositoryPackageVersion\u0022: \u002220260.20261026.1010\u0022,\r\n  \u0022repositoryPackageSha256\u0022: \u002260836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf\u0022,\r\n  \u0022loadedLibrarySha256\u0022: \u0022b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61\u0022,\r\n  \u0022inspectedArchives\u0022: 12,\r\n  \u0022inventorySha256\u0022: \u002259745df76410837faee83cac4118755dc13d4a253fec7ed0206abf9ece9e5d4a\u0022,\r\n  \u0022observedDate\u0022: \u00222026-11-27\u0022,\r\n  \u0022msbuildPropertyQueries\u0022: 13,\r\n  \u0022packageCount\u0022: 13,\r\n  \u0022versionsReserved\u0022: false,\r\n  \u0022feedPublished\u0022: false,\r\n  \u0022packages\u0022: [\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities/dw.quantities.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261102.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d\u0022,\r\n          \u0022Bytes\u0022: 14747\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities.expression\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities.expression/dw.quantities.expression.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261102.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae\u0022,\r\n          \u0022Bytes\u0022: 13951\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.quantities.standard\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.quantities.standard/dw.quantities.standard.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.2.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.quantities.expression\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261103.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75\u0022,\r\n          \u0022Bytes\u0022: 13604\r\n        },\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261110.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022766e756e402ced1303a3b86d3faef39cfb1f40d00e34121288cc97b372968e6d\u0022,\r\n          \u0022Bytes\u0022: 14269\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.analysis\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.1.0-preview.6\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.1.0-preview.6\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261104.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d3e937efbe3fe9524a4146de655f867e965ac1322910cf45f2c060f0b915a3cf\u0022,\r\n          \u0022Bytes\u0022: 27831\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.codecs\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.0.0-preview.8\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.0.0-preview.8\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261107.1001\u0022,\r\n          \u0022Sha256\u0022: \u002200392fbeddebceb70286b11377aeab120bef0e3ef45f9b12dc2ba878918f8e35\u0022,\r\n          \u0022Bytes\u0022: 35096\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.composition\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261107.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022b0624cb1835f66fef41ff763da065a400f1709f65808315e28e3247aa2a4228f\u0022,\r\n          \u0022Bytes\u0022: 17101\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.distribution\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.0.0-preview.4\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.0.0-preview.4\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022,\r\n        \u0022dw.tools.math.codecs\u0022,\r\n        \u0022dw.tools.math.composition\u0022,\r\n        \u0022dw.tools.math.ir\u0022,\r\n        \u0022dw.tools.math.numerics\u0022,\r\n        \u0022dw.tools.math.symbolics\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.foundation\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.1.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.1.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261105.1001\u0022,\r\n          \u0022Sha256\u0022: \u00220fc5499e40593d2e2c01b5d8228c3f731d7df9d54050200906e53faa33569f94\u0022,\r\n          \u0022Bytes\u0022: 3863\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.ir\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.3.0-preview.1\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261104.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480\u0022,\r\n          \u0022Bytes\u0022: 21926\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.numerics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.4.0-preview.4\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.4.0-preview.4\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.scientific\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00221.1.0-preview.14\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00221.1.0-preview.14\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261105.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f\u0022,\r\n          \u0022Bytes\u0022: 37265\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.statistics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.4.0-preview.6\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.4.0-preview.6\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.quantities\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: [\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261106.1001\u0022,\r\n          \u0022Sha256\u0022: \u00229232edaedf57f5f67530905398648fa240141146cb55eed14e7910d54717e4f8\u0022,\r\n          \u0022Bytes\u0022: 17451\r\n        },\r\n        {\r\n          \u0022Version\u0022: \u002220260.20261120.1001\u0022,\r\n          \u0022Sha256\u0022: \u0022feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1\u0022,\r\n          \u0022Bytes\u0022: 17461\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \u0022packageId\u0022: \u0022dw.tools.math.symbolics\u0022,\r\n      \u0022sourceProject\u0022: \u0022src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj\u0022,\r\n      \u0022historicalSourceVersion\u0022: \u00220.5.0-preview.10\u0022,\r\n      \u0022effectivePackageVersion\u0022: \u00220.5.0-preview.10\u0022,\r\n      \u0022effectiveTargetFramework\u0022: \u0022net10.0\u0022,\r\n      \u0022effectivePackable\u0022: \u0022true\u0022,\r\n      \u0022effectiveLicenseExpression\u0022: \u0022\u0022,\r\n      \u0022candidateVersionPreview\u0022: \u002220260.20261127.1001\u0022,\r\n      \u0022candidateIsReserved\u0022: false,\r\n      \u0022projectReferences\u0022: [\r\n        \u0022dw.tools.math.ir\u0022\r\n      ],\r\n      \u0022externalPackageReferences\u0022: [],\r\n      \u0022historicalArchives\u0022: [],\r\n      \u0022calendarArchives\u0022: []\r\n    }\r\n  ]\r\n}\r\n\r\nMATH-RS406-INSPECT|target=net10.0|packages=13|queries=13|reserved=false|published=false|PASS\r\nMATH-RS406-NEGATIVE|mixedFrameworkLanguage=REFUSED|PASS\r\nMATH-RS405-TOOL|path=tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj|target=net11.0|dllSha256=64b6ff6471ed731972cb974141aea5ff9d1fed69995e0948476d8206f78b1cf5|PASS\r\nMATH-RS406-INSPECTOR|buildSdk=11.0.100|targets=2|packagesPerTarget=13|sourceParity=PASS|negative=PASS|production=false|publication=false|PASS\r\n",
+      "StandardError": ""
+    }
+  ],
+  "invocationId": "run-next-20261127T181408Z-0eb210f8828b2083",
+  "commandMode": "run-next-auto-correction",
+  "authorityBaselineCommit": "095f23109169f7b47734225f5590472bcf1eae07",
+  "invocationStartedAtUtc": "2026-11-27T18:14:08.7117126+00:00",
+  "invocationDurationMilliseconds": 51484,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS406",
+      "title": "Qualify isolated NuGet preflight inspection on both framework targets",
+      "projectNodes": [
+        "M10-W01-C01-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Corroborate corrected RS405 and qualify the copied inspector target policy.",
+      "value": "Inspect 13 actual Math package projects per target, preserve package identities, and refuse a mixed target/language pair.",
+      "debtChanges": [
+        "Qualify the inspector before production cutover."
+      ],
+      "nextAction": "Qualify rollback before closing GREEN; apply the inspector adaptation at cutover.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md"
+      ],
+      "validations": [
+        {
+          "id": "math-rs406-maintained-tool-evidence",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs406-isolated-nuget-inspect",
+          "classification": "focused",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 2,
+      "failedAttempts": 1,
+      "successfulAttempt": 2,
+      "classificationCompleteness": "partial"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M10-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C01-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS406",
+    "attempt": 2,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS406",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "095f23109169f7b47734225f5590472bcf1eae07",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "6e488975368acd54767f00149f6b9f2223b7971277a3503d269e4eba60035fd5"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "test: qualify isolated net11 NuGet inspector",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

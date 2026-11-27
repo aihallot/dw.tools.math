@@ -1,0 +1,17 @@
+# RS406 - Qualify the isolated NuGet inspector target policy
+
+RS405 succeeded at attempt 002 under DWF 0.1.81 after one allocated failure. Result 5141d5db91463388e721cf1c749fa7b8494d5e48; failure 3125737ab0e95425b0b69f7e2f51a5d114e48ba6; correction 1f6b42b43eb8225372f05a73262bc28cfb0f0001. Preserve the exact corrected lineage and the disposable XML source configuration.
+
+Reuse the isolated graph and private dependency verification with --inspect. Apply the bounded candidate source change only to the copied preflight tool: derive the expected target from the central framework/language pair, admit only net10.0/C#14 or net11.0/C#15, and continue requiring each evaluated project to match the selected target. Build the candidate under SDK 11.0.100, run its existing five self-tests, then execute real read-only --inspect against the isolated net11 and original net10 central inputs (the actual stable SDK selected by the unchanged 10.0.401/latestPatch policy for the latter MSBuild evaluations). Require 13 distinct package identities and 13 effective property queries per target, unreserved valid calendar proposals, identical source metadata/dependencies across targets, and rejection of a mixed framework/language pair. Keep actual feed reads bounded and retain observed JSON in validation output; do not reserve versions or publish.
+
+Production source and historical qualification receipts are unchanged. Apply the qualified source adaptation during the later controlled cutover, not as an untracked production retarget. Rollback qualification remains separate; GREEN stays open.
+
+## Preselection correction
+
+RS406 invocation run-next-20261127T181002Z-f04a16ca27e826cc was refused before allocation: the RS405 prior-success guard omitted its actual correction mode and source attempt. Evidence: https://github.com/aihallot/dw.tools.math/commit/6b63466bdd42696cbb00400d5dd2ad2b8e852d52. Declare correctionMode=true and correctionSourceAttempt=1 explicitly, retaining all other lineage checks and validation scope. No attempt or source mutation occurred.
+
+## Incident review after two failed invocations
+
+The first invocation was refused before allocation because the prior-success guard omitted RS405 correction provenance; this is already repaired. The second invocation allocated attempt 001, compiled the candidate inspector, verified the shared dependency and passed the real thirteen-project net11 inspection, then refused the baseline SDK equality assertion. Evidence: https://github.com/aihallot/dw.tools.math/commit/831eb6bf413533aafa4f5c6ae4b2a37c772f0d26. No result commit or publication occurred. The report does not expose the actual baseline SDK version, so a specific installed patch cannot be inferred.
+
+The production global.json explicitly permits latestPatch in the stable 10.0.4xx feature band. Observe its actual selected SDK before the isolated work; verify the policy and admissible feature band, then require exact equality between the production observation and the restored isolated baseline. Emit both observations before checking equality. Keep the exact isolated 11.0.100 pin, candidate source adaptation, both 13-project inspections, identity/dependency parity, negative mixed-pair check, original input and lock preservation, and no-publication boundary. Re-reviewed request, payload, retained mutation paths, prior-success lineage, source and runtime commands, result assertions and correction re-entry. No new run or validation profile is introduced. The next invocation is retry 2 with one allocated attempt retained.
