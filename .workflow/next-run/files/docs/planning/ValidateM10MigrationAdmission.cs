@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.187" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.188" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -623,3 +623,37 @@ Need((string?)regressionReport["runId"] == "RS419" && (string?)regressionReport[
     regressionOutput.Split('\n').Count(x => x.StartsWith("MATH-RS419-FULL-PROJECT|", StringComparison.Ordinal)) == 11 &&
     File.Exists("docs/planning/decisions/m10-post-cutover-package-candidates-rs420.md"), "RS419 durable regression differs.");
 Console.WriteLine("MATH-RS420-REGRESSION-RECONCILIATION|RS419=PASS|fullPassed=2722|green=in-progress|publication=false|PASS");
+
+var candidatesReport = Read(".aura/workflow/reports/RS420/attempt-001.json");
+var candidatesProof = Read(".workflow/runs/RS420/preparation-proof.json");
+var candidateIdentity = Read("docs/engineering/m10-post-cutover-candidate-identities-rs420.json");
+var candidateValidation = candidatesReport["validations"]!.AsArray().Single(x => (string?)x?["Id"] == "math-rs420-package-candidates")!;
+var candidateOutput = (string)candidateValidation["StandardOutput"]!;
+var candidateRows = candidateIdentity["packages"]!.AsArray();
+const string candidateVersion = "20260.20261127.1001-rs420";
+Need((string?)candidatesReport["outcome"] == "succeeded" && (int?)candidatesReport["attempt"] == 1 &&
+    (string?)candidatesReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)candidatesReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)candidatesReport["priorInvocationFailures"]?["count"] == 0 &&
+    candidatesReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    candidatesReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)candidatesProof["sourceCommit"] == "6682019bdfaa1f23e33e3c2cbc7b8b9359e2a63a" &&
+    (bool?)candidatesProof["payloadCompiled"] == true && (int?)candidatesProof["rehearsedValidationCount"] == 11 &&
+    candidatesProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(
+        candidatesReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    (int?)candidateValidation["ExitCode"] == 0 &&
+    (string?)candidateIdentity["sourceResult"] == "bbd0c13e7a9ea414e54b7752bdd1911fcc02f051" &&
+    (string?)candidateIdentity["relativeRoot"] == "build/artifacts/m10-rs420-595b0dfe58da" &&
+    (string?)candidateIdentity["version"] == candidateVersion &&
+    (bool?)candidateIdentity["publication"] == false && (bool?)candidateIdentity["reservation"] == false &&
+    candidateRows.Count == 13 && candidateRows.Select(x => (string?)x?["id"]).Distinct(StringComparer.Ordinal).Count() == 13 &&
+    candidateRows.Sum(x => x!["dependencies"]!.AsArray().Count) == 16 &&
+    candidateOutput.Split('\n').Count(x => x.StartsWith("MATH-RS420-ARCHIVE|", StringComparison.Ordinal)) == 13 &&
+    candidateRows.All(x => candidateOutput.Contains("MATH-RS420-ARCHIVE|id=" + (string?)x?["id"] +
+        "|version=" + candidateVersion + "|tfm=net11.0|archiveSha256=" + (string?)x?["archiveSha256"] +
+        "|dllSha256=" + (string?)x?["dllSha256"] + "|lockSha256=" + (string?)x?["lockSha256"] +
+        "|deps=" + string.Join(",", x!["dependencies"]!.AsArray().Select(y => (string?)y)) + "|PASS", StringComparison.Ordinal)) &&
+    candidateOutput.Contains("|sdk=11.0.100|tfm=net11.0|packages=13|edges=16|version=" + candidateVersion +
+        "|sharedArchives=12|lockedRestore=PASS|publication=false|reservation=false|PASS", StringComparison.Ordinal) &&
+    File.Exists("docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md"), "RS420 durable candidate evidence differs.");
+Console.WriteLine("MATH-RS421-CANDIDATE-RECONCILIATION|RS420=PASS|packages=13|edges=16|publication=false|PASS");

@@ -2,11 +2,11 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS419", 1, "test: qualify M10 post-cutover solution regression", "0.1.81", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS420", 1, "test: qualify thirteen isolated net11 package candidates", "0.1.81", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M11", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.186"), JsonValue.Create("0.1.187"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.187"), JsonValue.Create("0.1.188"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM10MigrationAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
@@ -14,8 +14,9 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-package-candidates-rs420.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10PostCutoverPackageCandidates.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10PostCutoverLockedConsumers.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/m10-post-cutover-candidate-identities-rs420.json"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
@@ -23,22 +24,21 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
     var task = Find(chunk, "tasks", "M10-W01-C03-T1");
     var red = Find(task, "subtasks", "M10-W01-C03-T1-R");
     var green = Find(task, "subtasks", "M10-W01-C03-T1-G");
-    var target = (string?)doc["plan_version"] == "0.1.187";
     if ((string?)chunk["status"] != "in_progress" || (string?)task["status"] != "in_progress" ||
         (string?)red["status"] != "done" || red["evidence"]!.AsArray().Count != 1 ||
         (string?)red["evidence"]![0] != ".aura/workflow/reports/RS418/attempt-001.json" ||
-        (string?)green["status"] != (target ? "in_progress" : "ready") || green["evidence"]!.AsArray().Count != 0)
+        (string?)green["status"] != "in_progress" || green["evidence"]!.AsArray().Count != 0)
         throw new InvalidOperationException("Unexpected C03 GREEN activation baseline.");
     green["status"] = "in_progress";
     var files = chunk["files"]!.AsArray().Select(x => (string)x!).ToArray();
-    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-package-candidates-rs420.md", "docs/engineering/ProbeM10PostCutoverPackageCandidates.cs" })
+    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md", "docs/engineering/ProbeM10PostCutoverLockedConsumers.cs", "docs/engineering/m10-post-cutover-candidate-identities-rs420.json" })
         if (!files.Contains(path, StringComparer.Ordinal)) files = files.Append(path).ToArray();
     chunk["files"] = p.Json.StringArray(files);
-    const string command = "dotnet run --file docs/engineering/ProbeM10PostCutoverPackageCandidates.cs -- --check";
+    const string command = "dotnet run --file docs/engineering/ProbeM10PostCutoverLockedConsumers.cs -- --check";
     var commands = chunk["commands"]!.AsArray().Select(x => (string)x!).ToArray();
     if (!commands.Contains(command, StringComparer.Ordinal)) chunk["commands"] = p.Json.StringArray(commands.Append(command).ToArray());
-    chunk["readiness"] = "RS419 durable full regression; GREEN active, candidate qualification pending RS420.";
-    doc["plan_version"] = "0.1.187";
+    chunk["readiness"] = "RS420 durable candidate qualification; GREEN active, independent Windows consumers pending RS421.";
+    doc["plan_version"] = "0.1.188";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
