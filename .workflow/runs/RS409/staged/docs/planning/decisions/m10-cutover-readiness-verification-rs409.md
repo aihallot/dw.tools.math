@@ -1,0 +1,7 @@
+# RS409 - Independently verify M10 cutover readiness
+
+RS408 succeeded first-pass at attempt 001 under DWF 0.1.81, result 6ee011ca551c696918a020f5abf1f8ac5df0527a, with nine preparation validations and exact GREEN done/Verification ready transitions. Reconcile GREEN completion in canonical 0.1.176 and activate native Verification only.
+
+Independently cross-check RED inventory, project dispositions, actual solution membership, rollback report roster, current historical project Git blob identities, baseline lock targets and the qualified inspector candidate digest. The bounded cutover contract records exactly 28 intended SDK/framework/lock/tool input changes, 30 rollback inputs and 97 historical projects outside the maintained 26-project scope. Nine negative controls reject wrong baseline, target, scope, mutation set, retained set, historical coverage and identity, candidate identity, and premature publication claims. Historical reproduction requires the appropriate historical checkout, not a promise that every fixture works with new central defaults; the recorded baseline commit provides a pre-cutover snapshot, not new qualification of each fixture.
+
+This verification is independent evidence/contract checking, not a repeated target build campaign. Production cutover and Linux/WSL certification remain outside scope. Verification stays in progress pending durable RS409 closure evidence.
