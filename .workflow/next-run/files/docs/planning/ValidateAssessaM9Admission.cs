@@ -7,7 +7,7 @@ var plan = JsonNode.Parse(File.ReadAllText(".aura/workflow/plan/project.json"))!
 void Need(bool ok, string reason) { if (!ok) throw new InvalidOperationException(reason); }
 JsonObject Record(JsonArray source, string id) =>
     source.Select(x => x!.AsObject()).Single(x => x["id"]!.GetValue<string>() == id);
-Need(backlog["plan_version"]!.GetValue<string>() == "0.1.177", "Unexpected backlog version.");
+Need(backlog["plan_version"]!.GetValue<string>() == "0.1.178", "Unexpected backlog version.");
 var releases = backlog["releases"]!.AsArray();
 var release = Record(releases, "M9");
 Need(release["status"]!.GetValue<string>() == "done" && release["evidence"]!.AsArray().Count == 1 &&

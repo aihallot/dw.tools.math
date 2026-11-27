@@ -2,11 +2,11 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS409", 1, "test: verify M10 cutover readiness contract", "0.1.81", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS410", 1, "chore: close M10 readiness and ready production cutover RED", "0.1.81", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M11", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.176"), JsonValue.Create("0.1.177"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.177"), JsonValue.Create("0.1.178"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM10MigrationAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
@@ -15,7 +15,8 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-cutover-readiness-closure-rs410.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-production-cutover-red-rs411.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/VerifyM10ProductionCutover.cs"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
@@ -23,15 +24,31 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
     var task = Find(chunk, "tasks", "M10-W01-C01-T1");
     var green = Find(task, "subtasks", "M10-W01-C01-T1-G");
     var verification = Find(task, "subtasks", "M10-W01-C01-T1-V");
-    var target = (string?)doc["plan_version"] == "0.1.177";
-    if ((string?)green["status"] != "done" ||
-        (string?)verification["status"] != (target ? "in_progress" : "ready") ||
-        verification["evidence"]!.AsArray().Count != 0)
-        throw new InvalidOperationException("Unexpected M10 Verification activation baseline.");
-    verification["status"] = "in_progress";
-    chunk["files"] = p.Json.StringArray("global.json", "Directory.Build.props", "Directory.Packages.props", "dw.tools.math.slnx", "docs/engineering/m10-post-m11-project-inventory-rs399.json", "docs/engineering/m10-cutover-readiness-red-rs400.json", "docs/engineering/ProbeM10CutoverReadinessRed.cs", "docs/engineering/InspectM8Net11SourceBaseline.cs", "docs/engineering/InspectM8Net11PackageGraph.cs", "docs/engineering/InspectM10ProjectDispositions.cs", "docs/engineering/m10-project-dispositions-rs402.json", "docs/engineering/ProbeM10IsolatedSolutionGraph.cs", "docs/planning/decisions/m10-cutover-readiness-green-closure-rs408.md", "docs/planning/decisions/m10-cutover-readiness-verification-rs409.md", "docs/engineering/VerifyM10CutoverReadiness.cs", "docs/engineering/m10-cutover-readiness-verification-rs409.json", "docs/planning/decisions/m10-cutover-readiness-closure-rs410.md");
-    chunk["readiness"] = "RS409 durable independent Verification; native C01 closure and C02 RED readiness pending durable RS410 result.";
-    doc["plan_version"] = "0.1.177";
+    var next = Find(doc, "chunks", "M10-W01-C02");
+    var nextTask = Find(next, "tasks", "M10-W01-C02-T1");
+    var red = Find(nextTask, "subtasks", "M10-W01-C02-T1-R");
+    var target = (string?)doc["plan_version"] == "0.1.178";
+    const string evidencePath = ".aura/workflow/reports/RS410/attempt-001.json";
+    foreach (var node in new[] { chunk, task, verification })
+    {
+        var evidence = node["evidence"]!.AsArray();
+        if ((string?)node["status"] != (target ? "done" : "in_progress") ||
+            (target ? evidence.Count != 1 || (string?)evidence[0] != evidencePath : evidence.Count != 0))
+            throw new InvalidOperationException("Unexpected C01 closure baseline.");
+        node["status"] = "done";
+        node["evidence"] = p.Json.StringArray(evidencePath);
+    }
+    foreach (var node in new[] { next, nextTask, red })
+    {
+        if ((string?)node["status"] != (target ? "ready" : "planned") || node["evidence"]!.AsArray().Count != 0)
+            throw new InvalidOperationException("Unexpected C02 readiness baseline.");
+        node["status"] = "ready";
+    }
+    chunk["readiness"] = "RS410 durable C01 closure.";
+    next["files"] = p.Json.StringArray("global.json", "Directory.Build.props", "Directory.Packages.props", "dw.tools.math.slnx", "NuGet.config", "docs/engineering/m10-cutover-readiness-verification-rs409.json", "docs/engineering/VerifyM10ProductionCutover.cs", "docs/planning/decisions/m10-production-cutover-red-rs411.md");
+    next["commands"] = p.Json.StringArray("dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red", "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --target");
+    next["readiness"] = "RS410 durable C01 closure; actual production cutover RED activation pending durable result.";
+    doc["plan_version"] = "0.1.178";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
@@ -48,10 +65,7 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ConvergeNodeToDone("M10-W01-C01-T1-V");
-p.ProjectPlan.ConvergeNodeToDone("M10-W01-C01-T1");
-p.ProjectPlan.ConvergeNodeToDone("M10-W01-C01");
-p.ProjectPlan.TransitionNode("M10-W01-C02", "not-ready", "ready");
-p.ProjectPlan.TransitionNode("M10-W01-C02-T1", "not-ready", "ready");
-p.ProjectPlan.TransitionNode("M10-W01-C02-T1-R", "not-ready", "ready");
+p.ProjectPlan.TransitionNode("M10-W01-C02", "ready", "in-progress");
+p.ProjectPlan.TransitionNode("M10-W01-C02-T1", "ready", "in-progress");
+p.ProjectPlan.TransitionNode("M10-W01-C02-T1-R", "ready", "in-progress");
 return p.Complete();
