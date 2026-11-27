@@ -1,0 +1,7 @@
+# RS389 - Close verified quantiles and ready package candidate qualification
+
+RS388 succeeded first-pass at allocated attempt 001 under DWF 0.1.80, result 5dcbe633d7567d4a983d18ce7eb64eb3ff8aa05c. Ten preparation validations succeeded, including the complementary maintained quantile tests; the mutation boundary is clean.
+
+Corroborate the durable result and reconcile canonical verification activation into backlog 0.1.162. Close native verification, task and phase and ready only the next candidate qualification RED lineage. Canonical completion and next readiness are reconciled after the durable RS389 result, following the RS383 closure precedent.
+
+The three admitted numeric capabilities now have bounded source qualification evidence. Quantile limits are 1000000 finite binary64 observations and 8192 exact rational observations, with historical 4096 count and 4096-bit exact operand/intermediate bounds preserved. No new package or binary consumer is qualified by this run. C04 must qualify distinct immutable net10.0 Quantities and Statistics candidates, exact dependency closure, package-only locked Windows net10/net11 consumers, actual archive and DLL hashes, and rollback evidence. Publication requires separate authorization. No Linux/all-RID or Decision adoption claim, sibling mutation or production target change is admitted. M10 cutover remains gated by M11 C04. Reuse successful product checks; structural validation only.

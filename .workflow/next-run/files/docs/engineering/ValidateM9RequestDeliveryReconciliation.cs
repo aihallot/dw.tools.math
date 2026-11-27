@@ -45,7 +45,7 @@ foreach(var item in new[]
         "Durable result differs: "+item.Run);
 }
 using var backlog=JsonDocument.Parse(File.ReadAllText("docs/planning/backlog.json"));
-Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.161" &&
+Need(backlog.RootElement.GetProperty("plan_version").GetString()=="0.1.162" &&
     backlog.RootElement.GetProperty("releases").EnumerateArray()
         .Single(x=>x.GetProperty("id").GetString()=="M9")
         .GetProperty("status").GetString()=="done",
