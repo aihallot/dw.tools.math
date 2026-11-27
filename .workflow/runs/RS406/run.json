@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "RS406",
+  "title": "Qualify isolated NuGet preflight inspection on both framework targets",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated net11 NuGet inspector",
+  "timeoutSeconds": 3600,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Corroborate corrected RS405 and qualify the copied inspector target policy.",
+    "value": "Inspect 13 actual Math package projects per target, preserve package identities, and refuse a mixed target/language pair.",
+    "debtChanges": [
+      "Qualify the inspector before production cutover."
+    ],
+    "nextAction": "Qualify rollback before closing GREEN; apply the inspector adaptation at cutover.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs406-maintained-tool-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs406-isolated-nuget-inspect",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--inspect"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 2700
+    }
+  ]
+}
