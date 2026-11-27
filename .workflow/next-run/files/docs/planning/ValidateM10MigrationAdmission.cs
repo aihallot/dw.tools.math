@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.190" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.191" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in-progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in-progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "in-progress", _ => "not-ready" })) &&
+Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in-progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in-progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "done", "M10-W01-C03-T1-V" => "ready", _ => "not-ready" })) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -708,3 +708,73 @@ Need((string?)linuxConsumerReport["outcome"] == "succeeded" &&
         "|sha256=" + (string?)x?["dllSha256"] + "|PASS", StringComparison.Ordinal)) &&
     File.Exists("docs/planning/decisions/m10-post-cutover-rollback-rs423.md"), "RS422 durable Linux consumer evidence differs.");
 Console.WriteLine("MATH-RS423-LINUX-RECONCILIATION|RS422=PASS|consumers=2|packages=13|rid=linux-x64|publication=false|PASS");
+
+var rs424RollbackReport = Read(".aura/workflow/reports/RS423/attempt-001.json");
+var rs424RollbackProof = Read(".workflow/runs/RS423/preparation-proof.json");
+var rs424RollbackValidation = rs424RollbackReport["validations"]!.AsArray().Single(x => (string?)x?["Id"] == "math-rs423-archive-preservation-rollback")!;
+var rs424RollbackOutput = (string)rs424RollbackValidation["StandardOutput"]!;
+var rs424OriginalOutput = (string)Read(".aura/workflow/reports/RS407/attempt-001.json")["validations"]![0]!["StandardOutput"]!;
+string[] Rs424Rows(string value, string prefix) => value.Split('\n', StringSplitOptions.RemoveEmptyEntries)
+    .Select(x => x.TrimEnd('\r')).Where(x => x.StartsWith(prefix, StringComparison.Ordinal))
+    .Select(x => x[prefix.Length..]).OrderBy(x => x, StringComparer.Ordinal).ToArray();
+var rs424Restored = Rs424Rows(rs424RollbackOutput, "MATH-RS423-RESTORED|");
+var rs424ProjectRows = Rs424Rows(rs424RollbackOutput, "MATH-RS423-PROJECT|");
+var rs424SharedRows = Rs424Rows(rs424RollbackOutput, "MATH-RS423-SHARED|");
+var rs424SolutionPaths = XDocument.Load("dw.tools.math.slnx").Descendants("Project")
+    .Select(x => (string)x.Attribute("Path")!).ToHashSet(StringComparer.Ordinal);
+Need((string?)rs424RollbackReport["outcome"] == "succeeded" &&
+    (int?)rs424RollbackReport["attempt"] == 1 && (string?)rs424RollbackReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)rs424RollbackReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)rs424RollbackReport["priorInvocationFailures"]?["count"] == 0 &&
+    rs424RollbackReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    rs424RollbackReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)rs424RollbackProof["sourceCommit"] == "e386ebe62cbf51c38440847ee4b3abaae5c8124c" &&
+    (bool?)rs424RollbackProof["payloadCompiled"] == true && (int?)rs424RollbackProof["rehearsedValidationCount"] == 12 &&
+    rs424RollbackProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(
+        rs424RollbackReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    (int?)rs424RollbackValidation["ExitCode"] == 0 &&
+    rs424Restored.Length == 30 && rs424Restored.SequenceEqual(Rs424Rows(rs424OriginalOutput, "MATH-RS407-RESTORED|")) &&
+    rs424ProjectRows.Length == 24 && rs424SolutionPaths.SetEquals(rs424ProjectRows.Select(x => x.Split('|')[0]["path=".Length..])) &&
+    rs424ProjectRows.All(x => x.Contains("|target=net10.0|dllSha256=", StringComparison.Ordinal) && x.EndsWith("|PASS", StringComparison.Ordinal)) &&
+    rs424SharedRows.Length == 12 &&
+    rs424RollbackOutput.Contains("MATH-RS423-SMOKE|sdk=10.0.404|tfm=net10.0|passed=9|trxSha256=b9dbf4b79d7717fce4f574cf86316fd7cc51e3bee513a484f017cafe38bc6221|PASS", StringComparison.Ordinal) &&
+    rs424RollbackOutput.Contains("MATH-RS423-ROLLBACK|sdk=10.0.404|tfm=net10.0|restored=30|projects=24|smoke=9|candidateArchives=13|sharedArchives=12|lockedRestore=PASS|build=PASS|production=net11.0|publication=false|PASS", StringComparison.Ordinal),
+    "RS423 durable rollback evidence differs.");
+var rs424Green = Read("docs/engineering/m10-post-cutover-certification-green-rs424.json");
+var rs424Red = Read("docs/engineering/m10-post-cutover-certification-red-rs417.json");
+var rs424Gates = rs424Green["requiredGates"]!.AsArray();
+var rs424ExpectedRuns = new[] { new[] { "RS419" }, new[] { "RS420" }, new[] { "RS421", "RS422" }, new[] { "RS421" }, new[] { "RS422" }, new[] { "RS423" } };
+var rs424RunIds = new[] { "RS419", "RS420", "RS421", "RS422", "RS423" };
+var rs424ResultIds = new[] { "b08d70ffb5ea2796f57220576d079b5d9d1ff0ab", "bbd0c13e7a9ea414e54b7752bdd1911fcc02f051", "771fbdb008ab399d308870c4553357a9ef857ec8", "cdee34fd08326bfc47efd5a3199d437471be9ef1", "95d2a061d40c5eeb78b0cd565a237fa5a7beb123" };
+var rs424ValidationIds = new[] { "math-rs419-full-regression-after-fragile", "math-rs420-package-candidates", "math-rs421-windows-locked-consumers", "math-rs422-linux-wsl-locked-consumers", "math-rs423-archive-preservation-rollback" };
+Need((int?)rs424Green["schemaVersion"] == 1 && (string?)rs424Green["status"] == "green-evidence-qualified-verification-pending" &&
+    (string?)rs424Green["sourceCommit"] == (string?)rs424Red["sourceCommit"] &&
+    JsonNode.DeepEquals(rs424Green["target"], rs424Red["target"]) &&
+    (string?)rs424Green["redContract"] == "docs/engineering/m10-post-cutover-certification-red-rs417.json" &&
+    (string?)rs424Green["candidateIdentities"] == "docs/engineering/m10-post-cutover-candidate-identities-rs420.json" &&
+    (bool?)rs424Green["qualified"] == false && (bool?)rs424Green["independentVerificationQualified"] == false &&
+    (bool?)rs424Green["publication"] == false && (bool?)rs424Green["reservation"] == false &&
+    rs424Gates.Count == 6 && rs424Gates.Select(x => (string?)x?["id"]).SequenceEqual(
+        rs424Red["requiredGates"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    rs424Red["requiredGates"]!.AsArray().All(x => (bool?)x?["qualified"] == false && x!["evidence"]!.AsArray().Count == 0),
+    "GREEN/RED gate boundary differs.");
+for (var i = 0; i < rs424Gates.Count; i++)
+{
+    var gate = rs424Gates[i]!;
+    var evidence = gate["evidence"]!.AsArray();
+    Need((bool?)gate["qualified"] == true && evidence.Select(x => (string?)x?["run"]).SequenceEqual(rs424ExpectedRuns[i]), "GREEN gate evidence roster differs.");
+    foreach (var entry in evidence)
+    {
+        var run = (string)entry!["run"]!;
+        var k = Array.IndexOf(rs424RunIds, run);
+        Need(k >= 0 && (string?)entry["resultCommit"] == rs424ResultIds[k] &&
+            (string?)entry["report"] == ".aura/workflow/reports/" + run + "/attempt-001.json" &&
+            (string?)entry["validation"] == rs424ValidationIds[k], "GREEN evidence identity differs.");
+    }
+}
+var rs424Shared = rs424Green["sharedArchives"]!.AsArray();
+Need(rs424Shared.Count == 12 && rs424Shared.Select(x => (string?)x?["file"]).Distinct(StringComparer.Ordinal).Count() == 12 &&
+    rs424Shared.All(x => rs424SharedRows.Any(row => row.EndsWith("\\" + (string?)x?["file"] + "|sha256=" + (string?)x?["sha256"] + "|PASS", StringComparison.Ordinal))),
+    "GREEN shared archive identities differ.");
+Need(File.Exists("docs/planning/decisions/m10-post-cutover-green-closure-rs424.md"), "GREEN closure decision missing.");
+Console.WriteLine("MATH-RS424-GREEN-CLOSURE|gates=6|regression=2722|packages=13|windows=PASS|linux=PASS|rollback=PASS|verification=ready|publication=false|PASS");

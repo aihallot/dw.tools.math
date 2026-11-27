@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "status": "green-evidence-qualified-verification-pending",
+  "sourceCommit": "4fe239713d1edbdc15c445e989e40dd338ba19be",
+  "redContract": "docs/engineering/m10-post-cutover-certification-red-rs417.json",
+  "candidateIdentities": "docs/engineering/m10-post-cutover-candidate-identities-rs420.json",
+  "target": {
+    "sdk": "11.0.100",
+    "tfm": "net11.0",
+    "language": "15.0"
+  },
+  "requiredGates": [
+    {
+      "id": "full-solution-regression",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS419",
+          "resultCommit": "b08d70ffb5ea2796f57220576d079b5d9d1ff0ab",
+          "report": ".aura/workflow/reports/RS419/attempt-001.json",
+          "validation": "math-rs419-full-regression-after-fragile"
+        }
+      ]
+    },
+    {
+      "id": "fresh-net11-candidate-archives",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS420",
+          "resultCommit": "bbd0c13e7a9ea414e54b7752bdd1911fcc02f051",
+          "report": ".aura/workflow/reports/RS420/attempt-001.json",
+          "validation": "math-rs420-package-candidates"
+        }
+      ]
+    },
+    {
+      "id": "source-free-locked-consumers",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS421",
+          "resultCommit": "771fbdb008ab399d308870c4553357a9ef857ec8",
+          "report": ".aura/workflow/reports/RS421/attempt-001.json",
+          "validation": "math-rs421-windows-locked-consumers"
+        },
+        {
+          "run": "RS422",
+          "resultCommit": "cdee34fd08326bfc47efd5a3199d437471be9ef1",
+          "report": ".aura/workflow/reports/RS422/attempt-001.json",
+          "validation": "math-rs422-linux-wsl-locked-consumers"
+        }
+      ]
+    },
+    {
+      "id": "windows-runtime",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS421",
+          "resultCommit": "771fbdb008ab399d308870c4553357a9ef857ec8",
+          "report": ".aura/workflow/reports/RS421/attempt-001.json",
+          "validation": "math-rs421-windows-locked-consumers"
+        }
+      ]
+    },
+    {
+      "id": "linux-wsl-runtime",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS422",
+          "resultCommit": "cdee34fd08326bfc47efd5a3199d437471be9ef1",
+          "report": ".aura/workflow/reports/RS422/attempt-001.json",
+          "validation": "math-rs422-linux-wsl-locked-consumers"
+        }
+      ]
+    },
+    {
+      "id": "archive-preservation-and-rollback",
+      "qualified": true,
+      "evidence": [
+        {
+          "run": "RS423",
+          "resultCommit": "95d2a061d40c5eeb78b0cd565a237fa5a7beb123",
+          "report": ".aura/workflow/reports/RS423/attempt-001.json",
+          "validation": "math-rs423-archive-preservation-rollback"
+        }
+      ]
+    }
+  ],
+  "sharedArchives": [
+    {
+      "file": "dw.quantities.20260.20261102.1001.nupkg",
+      "sha256": "e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d"
+    },
+    {
+      "file": "dw.quantities.expression.20260.20261102.1001.nupkg",
+      "sha256": "d4eda8b7704093cc908056c3d998662931060e7ebf8e4a98b8057e6dab2cecae"
+    },
+    {
+      "file": "dw.quantities.standard.20260.20261103.1001.nupkg",
+      "sha256": "c600644b960b164f0f48c4088924d9d31b9b73c9e3d973e86d088c080a809b75"
+    },
+    {
+      "file": "dw.quantities.standard.20260.20261110.1001.nupkg",
+      "sha256": "766e756e402ced1303a3b86d3faef39cfb1f40d00e34121288cc97b372968e6d"
+    },
+    {
+      "file": "dw.tools.math.analysis.20260.20261104.1001.nupkg",
+      "sha256": "d3e937efbe3fe9524a4146de655f867e965ac1322910cf45f2c060f0b915a3cf"
+    },
+    {
+      "file": "dw.tools.math.codecs.20260.20261107.1001.nupkg",
+      "sha256": "00392fbeddebceb70286b11377aeab120bef0e3ef45f9b12dc2ba878918f8e35"
+    },
+    {
+      "file": "dw.tools.math.composition.20260.20261107.1001.nupkg",
+      "sha256": "b0624cb1835f66fef41ff763da065a400f1709f65808315e28e3247aa2a4228f"
+    },
+    {
+      "file": "dw.tools.math.foundation.20260.20261105.1001.nupkg",
+      "sha256": "0fc5499e40593d2e2c01b5d8228c3f731d7df9d54050200906e53faa33569f94"
+    },
+    {
+      "file": "dw.tools.math.ir.20260.20261104.1001.nupkg",
+      "sha256": "d2f9d5bc185b5260cdf2e01e295ebe3bf39e2c73c8ca9296fddd07b72586e480"
+    },
+    {
+      "file": "dw.tools.math.scientific.20260.20261105.1001.nupkg",
+      "sha256": "233b88ecb4b322d84f03ac218d6f668a5aa4fb23dc1904a8ebbe757d7381d36f"
+    },
+    {
+      "file": "dw.tools.math.statistics.20260.20261106.1001.nupkg",
+      "sha256": "9232edaedf57f5f67530905398648fa240141146cb55eed14e7910d54717e4f8"
+    },
+    {
+      "file": "dw.tools.math.statistics.20260.20261120.1001.nupkg",
+      "sha256": "feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1"
+    }
+  ],
+  "independentVerificationQualified": false,
+  "qualified": false,
+  "publication": false,
+  "reservation": false
+}

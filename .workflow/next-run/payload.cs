@@ -2,11 +2,12 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS422", 1, "test: qualify exact source-free Linux WSL consumers", "0.1.81", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS423", 1, "test: qualify post-cutover archive preservation and isolated rollback", "0.1.81", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M11", "done");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.189"), JsonValue.Create("0.1.190"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.190"), JsonValue.Create("0.1.191"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM10MigrationAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateAssessaM9Admission.cs"));
@@ -14,8 +15,8 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-rollback-rs423.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10PostCutoverRollback.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-post-cutover-green-closure-rs424.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/m10-post-cutover-certification-green-rs424.json"));
 p.Json.EditObject("docs/planning/backlog.json", doc =>
 {
     JsonNode Find(JsonNode parent, string key, string id) => parent[key]!.AsArray().Single(x => (string?)x?["id"] == id)!;
@@ -30,14 +31,11 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
         throw new InvalidOperationException("Unexpected C03 GREEN activation baseline.");
     green["status"] = "in_progress";
     var files = chunk["files"]!.AsArray().Select(x => (string)x!).ToArray();
-    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-rollback-rs423.md", "docs/engineering/ProbeM10PostCutoverRollback.cs" })
+    foreach (var path in new[] { "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md", "docs/engineering/m10-post-cutover-certification-green-rs424.json" })
         if (!files.Contains(path, StringComparer.Ordinal)) files = files.Append(path).ToArray();
     chunk["files"] = p.Json.StringArray(files);
-    const string command = "dotnet run --file docs/engineering/ProbeM10PostCutoverRollback.cs -- --check";
-    var commands = chunk["commands"]!.AsArray().Select(x => (string)x!).ToArray();
-    if (!commands.Contains(command, StringComparer.Ordinal)) chunk["commands"] = p.Json.StringArray(commands.Append(command).ToArray());
-    chunk["readiness"] = "RS422 durable Linux consumer qualification; GREEN active, post-cutover rollback pending RS423.";
-    doc["plan_version"] = "0.1.190";
+    chunk["readiness"] = "RS419–RS423 durable evidence qualifies six technical gates; native GREEN closure and Verification readiness pending durable RS424 result.";
+    doc["plan_version"] = "0.1.191";
 });
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
@@ -55,5 +53,6 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
 p.ProjectPlan.RequireNodeState("M10-W01-C03-T1-R", "done");
-p.ProjectPlan.RequireNodeState("M10-W01-C03-T1-G", "in-progress");
+p.ProjectPlan.ConvergeNodeToDone("M10-W01-C03-T1-G");
+p.ProjectPlan.TransitionNode("M10-W01-C03-T1-V", "not-ready", "ready");
 return p.Complete();
