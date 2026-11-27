@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.186" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.187" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -24,7 +24,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in_progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in_progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "ready", _ => "planned" }) && ((string?)x["id"] switch { "M10-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json", "M10-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS408/attempt-001.json", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS410/attempt-001.json", "M10-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS412/attempt-001.json", "M10-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS414/attempt-001.json", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS416/attempt-001.json", "M10-W01-C03-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS418/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
+Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in_progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in_progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "in_progress", _ => "planned" }) && ((string?)x["id"] switch { "M10-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json", "M10-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS408/attempt-001.json", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS410/attempt-001.json", "M10-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS412/attempt-001.json", "M10-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS414/attempt-001.json", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS416/attempt-001.json", "M10-W01-C03-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS418/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
 var native = new List<JsonNode>();
 void Walk(JsonNode node)
@@ -601,3 +601,25 @@ Need((string?)certificationClosureReport["runId"] == "RS418" && (string?)certifi
     certificationClosureReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(certificationClosureIds) &&
     File.Exists("docs/planning/decisions/m10-post-cutover-regression-rs419.md"), "RS418 durable certification RED closure differs.");
 Console.WriteLine("MATH-RS419-CERTIFICATION-GREEN-ACTIVATION|RS418=PASS|red=done|green=in-progress|publication=false|PASS");
+
+var regressionReport = Read(".aura/workflow/reports/RS419/attempt-001.json");
+var regressionProof = Read(".workflow/runs/RS419/preparation-proof.json");
+var regressionMoves = regressionReport["progress"]!["transitions"]!.AsArray();
+var regression = regressionReport["validations"]!.AsArray().Single(x => (string?)x?["Id"] == "math-rs419-full-regression-after-fragile")!;
+var regressionOutput = (string)regression["StandardOutput"]!;
+Need((string?)regressionReport["runId"] == "RS419" && (string?)regressionReport["outcome"] == "succeeded" &&
+    (int?)regressionReport["attempt"] == 1 && (string?)regressionReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)regressionReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)regressionReport["priorInvocationFailures"]?["count"] == 0 &&
+    regressionReport["boundaryViolations"]!.AsArray().Count == 0 && regressionMoves.Count == 1 &&
+    (string?)regressionMoves[0]!["id"] == "M10-W01-C03-T1-G" &&
+    (string?)regressionMoves[0]!["beforeState"] == "ready" && (string?)regressionMoves[0]!["afterState"] == "in-progress" &&
+    (string?)regressionProof["sourceCommit"] == "de62f4721af19db206f0e504293f19f45f7adefa" &&
+    (bool?)regressionProof["payloadCompiled"] == true && (int?)regressionProof["rehearsedValidationCount"] == 11 &&
+    regressionProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(
+        regressionReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    (int?)regression["ExitCode"] == 0 &&
+    regressionOutput.Contains("MATH-RS419-REGRESSION|sdk=11.0.100|rid=win-x64|tfm=net11.0|projects=24|focused=35|testProjects=11|fullPassed=2722|failed=0|lockedRestore=PASS|build=PASS|publication=false|PASS", StringComparison.Ordinal) &&
+    regressionOutput.Split('\n').Count(x => x.StartsWith("MATH-RS419-FULL-PROJECT|", StringComparison.Ordinal)) == 11 &&
+    File.Exists("docs/planning/decisions/m10-post-cutover-package-candidates-rs420.md"), "RS419 durable regression differs.");
+Console.WriteLine("MATH-RS420-REGRESSION-RECONCILIATION|RS419=PASS|fullPassed=2722|green=in-progress|publication=false|PASS");
