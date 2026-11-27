@@ -2,12 +2,13 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS390", 1, "test: establish numeric package candidate RED", "0.1.80", 0, 0, 0, true);
+p.Workflow.RequirePriorSuccess("RS391", 1, "chore: close package candidate RED and ready GREEN", "0.1.80", 0, 0, 0, true);
 p.ProjectPlan.RequireNodeState("M11-W01-C03", "done");
 p.ProjectPlan.RequireNodeState("M11-W01-C04-T1", "in-progress");
+p.ProjectPlan.RequireNodeState("M11-W01-C04-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M11-W01-C04-T1-V", "not-ready");
 p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.163"), JsonValue.Create("0.1.164"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.164"), JsonValue.Create("0.1.165"));
 p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.32"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/backlog.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
@@ -18,7 +19,9 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-numeric-package-candidate-green-rs392.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM11NumericPackageCandidateGreen.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/fixtures/M11NumericPackageConsumer.cs"));
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
     FileName = "dotnet", WorkingDirectory = p.RepositoryRoot, UseShellExecute = false,
@@ -34,6 +37,5 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ConvergeNodeToDone("M11-W01-C04-T1-R");
-p.ProjectPlan.TransitionNode("M11-W01-C04-T1-G", "not-ready", "ready");
+p.ProjectPlan.ActivateReadyContinuation("M11-W01-C04-T1-G");
 return p.Complete();
