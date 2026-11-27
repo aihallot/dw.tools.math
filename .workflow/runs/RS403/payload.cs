@@ -1,0 +1,10 @@
+using Dw.Tools.Workflow.Payloads;
+var p = PayloadContext.Create();
+p.Workflow.RequirePriorSuccess("RS402", 1, "docs: classify M10 migration projects and activate GREEN", "0.1.81", 1, 1, 0, false);
+p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "in-progress");
+p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-V", "not-ready");
+p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ProbeM10IsolatedSolutionGraph.cs"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m10-isolated-solution-graph-rs403.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM10MigrationAdmission.cs"));
+return p.Complete();

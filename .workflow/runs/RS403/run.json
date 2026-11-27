@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "RS403",
+  "title": "Qualify actual isolated .NET 11 solution locked restore and Release build",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated net11 solution graph",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Qualify isolated actual solution graph under SDK 11 and C# 15.",
+    "value": "Retain actual 24 projects, source, warning policy and dependency lock contents; independently restore and build with production unchanged. Preserve corrected RS402 history.",
+    "debtChanges": [
+      "Establish actual isolated target graph and record exact locked restore and assembly evidence."
+    ],
+    "nextAction": "Qualify maintained tool dependencies, targeted fragile tests and rollback; keep GREEN open.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-solution-graph-rs403.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs403-project-dispositions",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM10ProjectDispositions.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs403-m10-disposition-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs403-isolated-net11-solution",
+      "classification": "integrated",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1200
+    }
+  ]
+}
