@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "id": "RS382",
+  "title": "Independently verify delivered streaming moments and checkpoint boundaries",
+  "state": "prepared",
+  "commitMessage": "test: verify streaming moments numerical and replay boundaries",
+  "timeoutSeconds": 3000,
+  "projectNodes": [
+    "M11-W01-C02-T1-V"
+  ],
+  "contribution": {
+    "summary": "Reconcile durable moments GREEN closure and activate independent verification of the delivered accumulator.",
+    "value": "Add four focused maintained-project tests for independent integer moment references at varied dyadic offsets, six checkpoint boundaries with bitwise state comparisons, second-moment overflow and recovery, and negative-zero singleton replay. Reuse existing million-observation and regression evidence; preserve production source, old packages and M10 gate.",
+    "debtChanges": [
+      "Reconcile GREEN completion from RS381.",
+      "Add independent numerical and bitwise replay evidence without altering the accumulator.",
+      "Keep package and consumer qualification pending."
+    ],
+    "nextAction": "Corroborate durable verification evidence and close the streaming moments task and phase before larger-sample quantiles.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/decisions/m11-streaming-moments-verification-rs382.md",
+    "tests/projects/dw.tools.math.statistics.tests/M11StreamingMomentsVerificationTests.cs",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md"
+  ],
+  "validations": [
+    {
+      "id": "math-rs382-m11-moments-verification-activation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-m10-readiness-preserved",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-m9-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs382-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs382-streaming-moments-independent-boundaries",
+      "classification": "focused-preparation",
+      "fileName": "dotnet",
+      "arguments": [
+        "test",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "-c",
+        "Release",
+        "-p:RestoreLockedMode=true",
+        "--filter",
+        "FullyQualifiedName~M11StreamingMomentsVerificationTests"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 420,
+      "packs": [
+        "contract",
+        "boundary",
+        "replay"
+      ]
+    }
+  ]
+}
