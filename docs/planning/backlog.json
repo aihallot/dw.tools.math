@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.180",
+  "plan_version": "0.1.181",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10079,7 +10079,8 @@
         "tests/projects/dw.tools.math.statistics.tests/packages.lock.json",
         "tests/projects/dw.tools.math.symbolics.tests/packages.lock.json",
         "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
-        "tools/dw.tools.math.nuget-preflight/Program.cs"
+        "tools/dw.tools.math.nuget-preflight/Program.cs",
+        "docs/planning/decisions/m10-production-cutover-green-closure-rs414.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --red",
@@ -10109,7 +10110,7 @@
               "id": "M10-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum changes needed for production sdk and framework cutover.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
@@ -10123,7 +10124,7 @@
         }
       ],
       "refinement": "Reuse the RS409 qualified cutover scope and RS407 rollback baseline; establish RED against the exact production graph, then apply only the 28 qualified SDK, framework, lock and tool input changes with locked restore and targeted tests before independent verification.",
-      "readiness": "RS412 durable RED closure; actual production cutover and GREEN activation pending durable RS413 result."
+      "readiness": "RS413 durable actual production net11/C#15 cutover; native GREEN closure and Verification readiness pending durable RS414 result."
     },
     {
       "id": "M10-W01-C03",
