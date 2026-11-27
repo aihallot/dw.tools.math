@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.171" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.172" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -24,7 +24,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == "planned" && x["evidence"]!.AsArray().Count == 0) &&
+Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
 var native = new List<JsonNode>();
 void Walk(JsonNode node)
@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "not-ready")) &&
+Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "in-progress" : "not-ready")) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -74,7 +74,7 @@ Need((string?)admissionReport["runId"] == "RS367" && (string?)admissionReport["o
     admissionIds.SequenceEqual(expectedAdmissionIds, StringComparer.Ordinal) &&
     admissionProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(admissionIds, StringComparer.Ordinal),
     "Durable RS367 admission evidence or refusal lineage differs.");
-Console.WriteLine("MATH-RS368-M10-READINESS|RS367=corrected|priorRefusals=2|nativeReady=5|remainingNotReady=12|sourceProjects=13|testProjects=11|migrationExecuted=false|publication=false|PASS");
+Console.WriteLine("MATH-RS368-M10-READINESS|RS367=corrected|priorRefusals=2|historicalNativeReady=5|remainingNotReady=12|sourceProjects=13|testProjects=11|migrationExecuted=false|publication=false|PASS");
 
 var postM11Report = Read(".aura/workflow/reports/RS398/attempt-001.json");
 var postM11Proof = Read(".workflow/runs/RS398/preparation-proof.json");
@@ -115,4 +115,4 @@ foreach (var path in observedProjects)
     Console.WriteLine("MATH-RS399-PROJECT|path=" + path + "|tfm=" + Values("TargetFramework") + "|tfms=" + Values("TargetFrameworks") + "|lang=" + Values("LangVersion") + "|lock=" + File.Exists(Path.Combine(Path.GetDirectoryName(path)!, "packages.lock.json")));
 }
 Need(File.Exists("docs/planning/decisions/m10-post-m11-baseline-refresh-rs399.md"), "Post-M11 baseline decision missing.");
-Console.WriteLine("MATH-RS399-M10-BASELINE-REFRESH|projects=123|m11Done=22|classification=pending|migration=false|publication=false|PASS");
+Console.WriteLine("MATH-RS399-M10-BASELINE-REFRESH|projects=123|m11Done=22|classification=red-initial|migration=false|publication=false|PASS");

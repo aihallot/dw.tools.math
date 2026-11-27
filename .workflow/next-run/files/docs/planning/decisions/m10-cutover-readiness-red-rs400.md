@@ -1,0 +1,7 @@
+# RS400 - Activate M10 cutover-readiness RED
+
+RS399 succeeded first-pass at attempt 001 under DWF 0.1.81, result 22600cbca33e5e04c6d42f54ea93e75494823583, with six structural preparation validations and no native movement. Reconcile the five-node canonical readiness path and activate native C01 RED only.
+
+The 123-project ledger distinguishes 13 production libraries and 11 solution tests (mandatory cutover scope), 40 tools requiring individual review, and 59 other projects to preserve pending explicit compatibility decisions (49 consumers, 7 provider probes, 2 historical documentation fixtures, 1 sample). This is a conservative initial disposition, not a claim that every outside-solution project is obsolete or already compatible. Inherited defaults can affect these projects even without editing their files. The GREEN plan must resolve each tool and historical fixture, including source references and inherited defaults, before cutover.
+
+Capture exact Git blob identities for all projects and 28 rollback inputs (central build policy, solution and 24 lockfiles). Verify actual inventory and solution membership and exercise nine negative controls. RED refuses readiness promotion without target restore, fragile tests, resolved classification and rollback proof. Git object identities are a source baseline, not an executed rollback. Do not retarget production, restore a target graph, publish or alter sibling repositories.
