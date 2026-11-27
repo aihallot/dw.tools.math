@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.167" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.168" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -36,9 +36,9 @@ bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringCompa
 var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
-    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" => "in_progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" or "M11-W01-C02-T1-G" or "M11-W01-C02-T1-V" => "done", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-R" or "M11-W01-C03-T1-G" or "M11-W01-C03-T1-V" => "done", "M11-W01-C04" or "M11-W01-C04-T1" => "in_progress", "M11-W01-C04-T1-R" => "done", "M11-W01-C04-T1-G" => "done", "M11-W01-C04-T1-V" => "ready", _ => "planned" }) &&
+    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" => "in_progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" or "M11-W01-C02-T1-G" or "M11-W01-C02-T1-V" => "done", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-R" or "M11-W01-C03-T1-G" or "M11-W01-C03-T1-V" => "done", "M11-W01-C04" or "M11-W01-C04-T1" => "in_progress", "M11-W01-C04-T1-R" => "done", "M11-W01-C04-T1-G" => "done", "M11-W01-C04-T1-V" => "in_progress", _ => "planned" }) &&
         (Id(x) switch { "M11-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS373/attempt-001.json", "M11-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS375/attempt-001.json", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS377/attempt-001.json", "M11-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS379/attempt-001.json", "M11-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS381/attempt-001.json", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS383/attempt-001.json", "M11-W01-C03-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS385/attempt-001.json", "M11-W01-C03-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS387/attempt-001.json", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS389/attempt-001.json", "M11-W01-C04-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS391/attempt-001.json", "M11-W01-C04-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS393/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
-    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" => "in-progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" or "M11-W01-C02-T1-G" or "M11-W01-C02-T1-V" => "done", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-R" or "M11-W01-C03-T1-G" or "M11-W01-C03-T1-V" => "done", "M11-W01-C04" or "M11-W01-C04-T1" => "in-progress", "M11-W01-C04-T1-R" => "done", "M11-W01-C04-T1-G" => "done", "M11-W01-C04-T1-V" => "in-progress", _ => "not-ready" })) &&
+    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" => "in-progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" or "M11-W01-C02-T1-R" or "M11-W01-C02-T1-G" or "M11-W01-C02-T1-V" => "done", "M11-W01-C03" or "M11-W01-C03-T1" or "M11-W01-C03-T1-R" or "M11-W01-C03-T1-G" or "M11-W01-C03-T1-V" => "done", "M11-W01-C04" or "M11-W01-C04-T1" or "M11-W01-C04-T1-R" or "M11-W01-C04-T1-G" or "M11-W01-C04-T1-V" => "done", _ => "not-ready" })) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
     "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
@@ -458,4 +458,45 @@ Need((string?)candidateClosureReport["runId"] == "RS393" && (string?)candidateCl
     (bool?)candidateClosureProof["payloadCompiled"] == true && (int?)candidateClosureProof["rehearsedValidationCount"] == 9,
     "RS393 durable candidate GREEN closure differs.");
 Need(File.Exists("docs/planning/decisions/m11-numeric-package-candidate-verification-rs394.md") && File.Exists("docs/engineering/VerifyM11NumericPackageCandidates.cs"), "Candidate verification material missing.");
-Console.WriteLine("MATH-RS394-M11-CANDIDATE-VERIFY|green=done|verify=in-progress|cutoverGate=M11-W01-C04|publication=false|PASS");
+var candidateVerifyReport = Read(".aura/workflow/reports/RS394/attempt-001.json");
+var candidateVerifyProof = Read(".workflow/runs/RS394/preparation-proof.json");
+string[] candidateVerifyPrepIds = ["math-rs394-m11-candidate-verification-activation", "math-rs394-native-roadmap-parity", "math-rs394-m10-readiness-preserved", "math-rs394-m9-admission", "math-rs394-published-handoff", "math-rs394-request-reconciliation", "math-rs394-m8-evidence-frontier", "math-rs394-planning-render-check", "diff-check"];
+Need((string?)candidateVerifyReport["runId"] == "RS394" && (string?)candidateVerifyReport["outcome"] == "succeeded" &&
+    (int?)candidateVerifyReport["attempt"] == 1 && (bool?)candidateVerifyReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)candidateVerifyReport["priorInvocationFailures"]?["count"] == 0 &&
+    (string?)candidateVerifyReport["executor"]?["toolVersion"] == "0.1.80" &&
+    (string?)candidateVerifyReport["executor"]?["assemblySha256"] == "b7eec1950dbd71e727b173d8695569d2c3dc5b933c41edf89c4787e56317b2fb" &&
+    candidateVerifyReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    candidateVerifyReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)candidateVerifyReport["progress"]!["transitions"]![0]!["id"] == "M11-W01-C04-T1-V" &&
+    (string?)candidateVerifyReport["progress"]!["transitions"]![0]!["beforeState"] == "ready" &&
+    (string?)candidateVerifyReport["progress"]!["transitions"]![0]!["afterState"] == "in-progress" &&
+    candidateVerifyReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)candidateVerifyProof["sourceCommit"] == "6ea3cd7c692f6a147d1fe2a2846e29977f7ae171" &&
+    (bool?)candidateVerifyProof["payloadCompiled"] == true && (int?)candidateVerifyProof["rehearsedValidationCount"] == 9 &&
+    Strings(candidateVerifyProof, "preparationValidationIds").SequenceEqual(candidateVerifyPrepIds) &&
+    candidateVerifyReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(candidateVerifyPrepIds),
+    "RS394 durable independent candidate verification differs.");
+var candidateVerifyBinary = candidateVerifyReport["validations"]!.AsArray().Single();
+Need((string?)candidateVerifyBinary?["Id"] == "math-rs394-exact-candidate-readback-and-rollback" &&
+    (int?)candidateVerifyBinary?["ExitCode"] == 0 && (bool?)candidateVerifyBinary?["TimedOut"] == false &&
+    (bool?)candidateVerifyBinary?["Cancelled"] == false, "RS394 binary verification differs.");
+var candidateVerifyOutput = (string?)candidateVerifyBinary?["StandardOutput"] ?? "";
+string[] candidateVerifyMarkers = [
+    "MATH-RS394-READBACK|id=dw.quantities|version=20260.20261127.1001|archiveSha256=1795d4c74ac29f20930b4caacb9ca99ee397520ffefe7d16350c869c43a8b30d|dllSha256=e28cf245a30f341c0ddf06291fb2a7f7b51d2983b63c3015246fff56940762ed|PASS",
+    "MATH-RS394-READBACK|id=dw.tools.math.statistics|version=20260.20261127.1002|archiveSha256=cd29b2d8592f65e158f7401f363cc7903fbe69b18b28f787ad3f30d0d0d9bdc8|dllSha256=134de3c802ecdf1d51b7430152e11416c794a555a8c2938c519064078526a0f3|PASS",
+    "MATH-RS394-READBACK|id=dw.quantities|version=20260.20261102.1001|archiveSha256=e8ab26619c72e0f683088ca5e3af1b5c02a01e5ad0793b0bde620ec6eafcf81d|dllSha256=c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4|PASS",
+    "MATH-RS394-READBACK|id=dw.tools.math.statistics|version=20260.20261120.1001|archiveSha256=feb2d133760aa9468260ab103ec44ff28cd7db79160613fc1d8ac7cd76312ce1|dllSha256=684e8d5f35e53d4c38e9d02479539de3dfb8ac677535d0acfc8d9236509631ea|PASS",
+    "MATH-RS394-CONSUMER|mode=candidate|tfm=net10.0|sdk=10.0.404|lockSha256=cb140f47caa53088d16189fe7692adfde477eab56a37b92349fec8ceedb67498|statisticsDll=134de3c802ecdf1d51b7430152e11416c794a555a8c2938c519064078526a0f3|quantitiesDll=e28cf245a30f341c0ddf06291fb2a7f7b51d2983b63c3015246fff56940762ed|PASS",
+    "MATH-RS394-CONSUMER|mode=candidate|tfm=net11.0|sdk=11.0.100|lockSha256=944ed2abe6502ae1b33d9b935eb625b97b82d8bdbea1d690bde76c160bf1e66b|statisticsDll=134de3c802ecdf1d51b7430152e11416c794a555a8c2938c519064078526a0f3|quantitiesDll=e28cf245a30f341c0ddf06291fb2a7f7b51d2983b63c3015246fff56940762ed|PASS",
+    "MATH-RS394-CONSUMER|mode=rollback|tfm=net10.0|sdk=10.0.404|lockSha256=d6a5a88982d1996a2f7861591427079cfef156beea30b3419a89f977d3099379|statisticsDll=684e8d5f35e53d4c38e9d02479539de3dfb8ac677535d0acfc8d9236509631ea|quantitiesDll=c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4|PASS",
+    "MATH-RS394-CONSUMER|mode=rollback|tfm=net11.0|sdk=11.0.100|lockSha256=4748bfc203a394cb0b1af60439576646504f9ac5eead4c18b30cb92abb2ed921|statisticsDll=684e8d5f35e53d4c38e9d02479539de3dfb8ac677535d0acfc8d9236509631ea|quantitiesDll=c7c729bfb97c295a23c5b84760326166bc4f9a876b8d602eee68b71a1ab9f8b4|PASS",
+    "MATH-RS394-VERIFY|archives=4|consumers=4|candidate=PASS|rollbackRecipe=PASS|rebuild=false|publication=false|PASS"
+];
+Need(candidateVerifyMarkers.All(x => candidateVerifyOutput.Contains(x, StringComparison.Ordinal)) &&
+    candidateVerifyOutput.Split("MATH-RS270-BOUNDED-PACKAGE|PASS|12", StringSplitOptions.None).Length == 5 &&
+    candidateVerifyOutput.Split("MATH-RS394-ROLLBACK-SURFACE|PASS", StringSplitOptions.None).Length == 3 &&
+    candidateVerifyOutput.Split("MATH-M11-BINARY|quantitiesDll=e28cf245a30f341c0ddf06291fb2a7f7b51d2983b63c3015246fff56940762ed|scale=PASS|moments=PASS|quantiles=PASS|legacy=PASS|PASS", StringSplitOptions.None).Length == 3,
+    "RS394 measured independent readback and rollback evidence differs.");
+Need(File.Exists("docs/planning/decisions/m11-numeric-package-candidate-closure-rs395.md"), "Candidate closure decision missing.");
+Console.WriteLine("MATH-RS395-M11-CANDIDATE-CLOSURE|verify=done|task=done|phase=done|m10Refresh=pending|publication=false|PASS");
