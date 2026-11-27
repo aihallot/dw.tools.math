@@ -2,12 +2,14 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS394", 1, "test: verify numeric package candidates and historical rollback", "0.1.80", 0, 0, 0, true);
-p.ProjectPlan.RequireNodeState("M11-W01-C04-T1-R", "done");
-p.ProjectPlan.RequireNodeState("M11-W01-C04-T1-G", "done");
+p.Workflow.RequirePriorSuccess("RS395", 1, "chore: close verified numeric package candidate phase", "0.1.80", 0, 0, 0, true);
+p.ProjectPlan.RequireNodeState("M11-W01-C01", "done");
+p.ProjectPlan.RequireNodeState("M11-W01-C02", "done");
 p.ProjectPlan.RequireNodeState("M11-W01-C03", "done");
+p.ProjectPlan.RequireNodeState("M11-W01-C04", "done");
+p.ProjectPlan.RequireNodeState("M11", "in-progress");
 p.ProjectPlan.RequireNodeState("M10-W01-C02", "not-ready");
-p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.167"), JsonValue.Create("0.1.168"));
+p.Require.JsonValueBaselineOrTarget("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.168"), JsonValue.Create("0.1.169"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/backlog.json"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateNativeDwfAdoption.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"));
@@ -17,7 +19,7 @@ p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/Val
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/ValidateM9RequestDeliveryReconciliation.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs"));
 p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("README.md"));
-p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-numeric-package-candidate-closure-rs395.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/planning/decisions/m11-numeric-work-package-closure-rs396.md"));
 using (var process = new Process { StartInfo = new ProcessStartInfo
 {
     FileName = "dotnet", WorkingDirectory = p.RepositoryRoot, UseShellExecute = false,
@@ -33,7 +35,5 @@ using (var process = new Process { StartInfo = new ProcessStartInfo
     Console.WriteLine(output);
     if (process.ExitCode != 0) throw new InvalidOperationException("Renderer failed: " + output);
 }
-p.ProjectPlan.ConvergeNodeToDone("M11-W01-C04-T1-V");
-p.ProjectPlan.ConvergeNodeToDone("M11-W01-C04-T1");
-p.ProjectPlan.ConvergeNodeToDone("M11-W01-C04");
+p.ProjectPlan.ConvergeNodeToDone("M11-W01");
 return p.Complete();
