@@ -29,8 +29,10 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
             throw new InvalidOperationException("Unexpected C02 RED activation baseline.");
         node["status"] = "in_progress";
     }
-    var files = chunk["files"]!.AsArray();
-    if (!files.Any(x => (string?)x == "docs/planning/decisions/m10-production-cutover-red-closure-rs412.md")) files.Add("docs/planning/decisions/m10-production-cutover-red-closure-rs412.md");
+    const string closurePath = "docs/planning/decisions/m10-production-cutover-red-closure-rs412.md";
+    var files = chunk["files"]!.AsArray().Select(x => (string)x!).ToArray();
+    if (!files.Contains(closurePath, StringComparer.Ordinal))
+        chunk["files"] = p.Json.StringArray(files.Append(closurePath).ToArray());
     chunk["readiness"] = "RS411 durable production RED activation; native RED closure and GREEN readiness pending durable RS412 result.";
     doc["plan_version"] = "0.1.179";
 });
