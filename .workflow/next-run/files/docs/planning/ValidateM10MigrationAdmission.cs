@@ -241,3 +241,28 @@ Need(focusedOutput.Contains("MATH-RS404-FOCUSED-TOTAL|sdk=11.0.100|tfm=net11.0|c
     focusedOutput.Contains("classes=5|passed=26|failed=0|trxSha256=9786ae5384a4d21dbdccc4fec677087bd1f57b03fb0cebbb57b96fbaacc5e3b6|PASS", StringComparison.Ordinal) &&
     File.Exists("docs/planning/decisions/m10-isolated-maintained-tools-rs405.md"), "RS404 coverage or next material differs.");
 Console.WriteLine("MATH-RS405-BASELINE|RS404=PASS|classes=8|passed=35|productionMigration=false|PASS");
+
+var toolsReport = Read(".aura/workflow/reports/RS405/attempt-002.json");
+var toolsProof = Read(".workflow/runs/RS405/preparation-proof.json");
+string[] toolsPreparationIds = ["math-rs405-focused-evidence", "diff-check"];
+var toolsFailures = toolsReport["priorInvocationFailures"]!;
+Need((string?)toolsReport["runId"] == "RS405" && (string?)toolsReport["outcome"] == "succeeded" &&
+    (int?)toolsReport["attempt"] == 2 && (string?)toolsReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)toolsReport["correctionMode"] == true && (int?)toolsReport["correctionSourceAttempt"] == 1 &&
+    (int?)toolsFailures["count"] == 1 && (int?)toolsFailures["allocatedAttemptFailureCount"] == 1 &&
+    (int?)toolsFailures["preparationFailureCount"] == 0 && (bool?)toolsFailures["firstPassSucceeded"] == false &&
+    (string?)toolsFailures["invocationIds"]![0] == "run-next-20261127T180439Z-bd74d7744d6bc85f" &&
+    toolsReport["boundaryViolations"]!.AsArray().Count == 0 && toolsReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)toolsProof["sourceCommit"] == "d216de9bb94f3fb2751af4d5834c4205dfa20bf4" &&
+    (bool?)toolsProof["payloadCompiled"] == true && (int?)toolsProof["rehearsedValidationCount"] == 2 &&
+    toolsProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(toolsPreparationIds) &&
+    toolsReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(toolsPreparationIds),
+    "RS405 corrected maintained-tool evidence differs.");
+var toolsValidation = toolsReport["validations"]!.AsArray().Single()!;
+Need((string?)toolsValidation["Id"] == "math-rs405-isolated-maintained-tools" && (int?)toolsValidation["ExitCode"] == 0 &&
+    (bool?)toolsValidation["TimedOut"] == false && (bool?)toolsValidation["Cancelled"] == false, "RS405 validation differs.");
+var toolsOutput = (string)toolsValidation["StandardOutput"]!;
+Need(toolsOutput.Contains("MATH-RS405-TOOLS|sdk=11.0.100|tfm=net11.0|tools=2|bindings=4|selfTests=5|inspect=false|publication=false|PASS", StringComparison.Ordinal) &&
+    toolsOutput.Contains("MATH-RS405-NUGET-DEPENDENCY|version=20260.20261026.1010|archiveSha256=60836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf|dllSha256=b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61|PASS", StringComparison.Ordinal) &&
+    File.Exists("docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md"), "RS405 tool scope or next material differs.");
+Console.WriteLine("MATH-RS406-BASELINE|RS405=PASS|corrected=true|tools=2|productionMigration=false|PASS");
