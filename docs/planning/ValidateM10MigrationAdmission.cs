@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.189" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.190" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -682,3 +682,29 @@ Need((string?)windowsConsumerReport["outcome"] == "succeeded" &&
     windowsConsumerOutput.Contains("MATH-M10-BROAD-SEMANTICS|PASS", StringComparison.Ordinal) &&
     File.Exists("docs/planning/decisions/m10-post-cutover-linux-consumers-rs422.md"), "RS421 durable Windows consumer evidence differs.");
 Console.WriteLine("MATH-RS422-WINDOWS-RECONCILIATION|RS421=PASS|consumers=2|packages=13|rid=win-x64|publication=false|PASS");
+
+var linuxConsumerReport = Read(".aura/workflow/reports/RS422/attempt-001.json");
+var linuxConsumerProof = Read(".workflow/runs/RS422/preparation-proof.json");
+var linuxConsumerValidation = linuxConsumerReport["validations"]!.AsArray().Single(x => (string?)x?["Id"] == "math-rs422-linux-wsl-locked-consumers")!;
+var linuxConsumerOutput = (string)linuxConsumerValidation["StandardOutput"]!;
+Need((string?)linuxConsumerReport["outcome"] == "succeeded" &&
+    (int?)linuxConsumerReport["attempt"] == 1 && (string?)linuxConsumerReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)linuxConsumerReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)linuxConsumerReport["priorInvocationFailures"]?["count"] == 0 &&
+    linuxConsumerReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    linuxConsumerReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)linuxConsumerProof["sourceCommit"] == "75da72ba8084aeae3c9691ece86c5c8a0a55bc8f" &&
+    (bool?)linuxConsumerProof["payloadCompiled"] == true && (int?)linuxConsumerProof["rehearsedValidationCount"] == 11 &&
+    linuxConsumerProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(
+        linuxConsumerReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"])) &&
+    (int?)linuxConsumerValidation["ExitCode"] == 0 &&
+    linuxConsumerOutput.Contains("MATH-RS422-WSL-HOST|kernel=Linux|machine=x86_64|sdk=11.0.100|PASS", StringComparison.Ordinal) &&
+    linuxConsumerOutput.Contains("VERSION_ID=\"24.04\"", StringComparison.Ordinal) &&
+    linuxConsumerOutput.Contains("ID=ubuntu", StringComparison.Ordinal) &&
+    linuxConsumerOutput.Contains("MATH-M10-CONSUMER|mode=numeric|sdk=11.0.100|rid=linux-x64|packages=2|lockSha256=ddce6234a9fcf08924edd7f53a746db3d89bcc1df14d9c7032f650d4d6bb79b1|sourceFree=true|PASS", StringComparison.Ordinal) &&
+    linuxConsumerOutput.Contains("MATH-M10-CONSUMER|mode=broad|sdk=11.0.100|rid=linux-x64|packages=12|lockSha256=035d4e864f5f3473b4190ccaeb35223d71a2f39358b147e01985ba9cb6b9b7e2|sourceFree=true|PASS", StringComparison.Ordinal) &&
+    linuxConsumerOutput.Contains("MATH-RS422-WSL-CONSUMERS|sdk=11.0.100|rid=linux-x64|packages=13|consumers=2|recipe=RS421|publication=false|PASS", StringComparison.Ordinal) &&
+    candidateRows.All(x => linuxConsumerOutput.Contains("MATH-M10-LOADED|id=" + (string?)x?["id"] +
+        "|sha256=" + (string?)x?["dllSha256"] + "|PASS", StringComparison.Ordinal)) &&
+    File.Exists("docs/planning/decisions/m10-post-cutover-rollback-rs423.md"), "RS422 durable Linux consumer evidence differs.");
+Console.WriteLine("MATH-RS423-LINUX-RECONCILIATION|RS422=PASS|consumers=2|packages=13|rid=linux-x64|publication=false|PASS");
