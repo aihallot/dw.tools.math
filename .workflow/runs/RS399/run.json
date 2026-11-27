@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "RS399",
+  "title": "Refresh M10 cutover inventory after durable M11 closure",
+  "state": "prepared",
+  "commitMessage": "docs: refresh post-M11 production migration baseline",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M10",
+    "M10-W01-C01-T1-R"
+  ],
+  "contribution": {
+    "summary": "Refresh M10 readiness inventory after RS398 reconciliation.",
+    "value": "Corroborate M11 completion and current production graph, stable SDK availability and exact project inventory before RED classification. No native progress or production change.",
+    "debtChanges": [
+      "Refresh the M10 baseline after M11.",
+      "Enumerate current project membership and explicit overrides."
+    ],
+    "nextAction": "Prepare C01 RED with maintained versus historical classification and negative cutover/rollback controls.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/m10-post-m11-project-inventory-rs399.json",
+    "docs/planning/decisions/m10-post-m11-baseline-refresh-rs399.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs399-post-m11-baseline-and-project-inventory",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs399-actual-sdk11-inventory",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11SourceBaseline.cs",
+        "--",
+        "--check-sdk11"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs399-actual-production-dependency-graph",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs399-m11-canonical-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs399-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
