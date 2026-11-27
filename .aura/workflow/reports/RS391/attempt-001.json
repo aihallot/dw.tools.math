@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS391",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-27T13:35:19.0403881+00:00",
+  "completedAtUtc": "2026-11-27T13:35:20.6255289+00:00",
+  "durationMilliseconds": 1585,
+  "projectNodes": [
+    "M11-W01-C04-T1-R",
+    "M11-W01-C04-T1-G"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md",
+    "docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.80",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "b7eec1950dbd71e727b173d8695569d2c3dc5b933c41edf89c4787e56317b2fb"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS391/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2400,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-d58379fe9d534552a67f71be80af1866\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2400000,
+      "DurationMilliseconds": 1319,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS390/attempt-001.json run=RS390 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C03 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1 state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[require.json-value-equals] VERIFIED path=docs/workflow/manifest.json pointer=/guidanceVersion\r\n[files.replace-from-staged] CHANGED path=docs/planning/backlog.json bytes=573817\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=14541\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM11NumericSubsidiarityAdmission.cs bytes=40143\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=6439\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=43404\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3343\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67823\r\n[files.replace-from-staged] CHANGED path=README.md bytes=8716\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md bytes=1430\r\nplanning valid: 0.1.164 | 70 chunks | 6fac1ede927fc4cabe3fd23f31b516764b7c8eb6bf0aeaea67d5fc6692ceac89 | mode --write\r\n\n\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1-G not-ready-\u003Eready\r\n[payload] OK operations=19 changed=12 no-change=0 verified=7 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS391/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS390/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS390 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "2019568b04c6a3bbce4fbb0ce5d67dffa48f3ed1825291f47b470110d33aec44",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C03 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "374b291158832b8a3d35c7c15f01601262a70d1049260352ed0dbb927d56622b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C04-T1 state=in-progress",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "374b291158832b8a3d35c7c15f01601262a70d1049260352ed0dbb927d56622b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C04-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "374b291158832b8a3d35c7c15f01601262a70d1049260352ed0dbb927d56622b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "374b291158832b8a3d35c7c15f01601262a70d1049260352ed0dbb927d56622b",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-equals",
+        "Path": "docs/workflow/manifest.json",
+        "Status": 0,
+        "Summary": "pointer=/guidanceVersion",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "bytes=573817",
+        "Details": null,
+        "BeforeSha256": "db37afc88a32290f356009b9a4e73f8092122054d0f6c1793de12916c65e65da",
+        "AfterSha256": "6fac1ede927fc4cabe3fd23f31b516764b7c8eb6bf0aeaea67d5fc6692ceac89",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=14541",
+        "Details": null,
+        "BeforeSha256": "d7df2cf5ac001cd872d41c9ca1779c69757d397c7cc94a2a7c8f00f67e1cd7ba",
+        "AfterSha256": "29e7abd4df1e39c73dfbd85039fac57ec3d26ee8e02e8850296421ee5bbe55f7",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=40143",
+        "Details": null,
+        "BeforeSha256": "78491fcfb806161ee0118babfc7187486afe65bac9a7b4123c035beb834bbee4",
+        "AfterSha256": "aad5cbdccf4fc83a2764354f73719f9ee74ddcb4211003e895be0f706079f5b1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=6439",
+        "Details": null,
+        "BeforeSha256": "a81be43a58bc3f38d8b5fc6c9f0077005b287193112308c58f61a596e16560be",
+        "AfterSha256": "eb1920d3d313f853bcb53bee9975fc64831330b40dbc0fde2ff94dd4e976a6c4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=43404",
+        "Details": null,
+        "BeforeSha256": "e97e5ad376c89db550ad69472a78223d81dba93621ba276a05384ddc5193751e",
+        "AfterSha256": "f137a4f23fe6c70d903b3f909447ba259d878140d2312805337ae616bb373f1c",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "a132593aeb5e6f4d4ef6d0a40e00366aa54dde561b63f98735113dff0ef68843",
+        "AfterSha256": "1d8af4cb33b447da894f98651d441c6c1b33a5e85f3ed6c4f13e8582e41c1597",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3343",
+        "Details": null,
+        "BeforeSha256": "182ed56c74b9f4897cd8c945a1e067a114f4738926ce1b729e0f476e1056bfac",
+        "AfterSha256": "f095457e56886426ce46ea92c8d1240b4a769c9ef24f227fa54df27e4b0fa6ed",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67823",
+        "Details": null,
+        "BeforeSha256": "c436f8b0e6964f8edf1e0cf8905571f6b7bdcf82e3b204a661f770af8944ef28",
+        "AfterSha256": "5bf115f1d17c241048cfa14749e58dd0240dc3a7578bb8087e7766db1c997de6",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=8716",
+        "Details": null,
+        "BeforeSha256": "dc7b5dd7dacbbbda4a92226c45ea1d8c9fc1f1f3756272cbf7ff89980371e62e",
+        "AfterSha256": "0103ef8bcdd4822302d9a2500959eff0e0ec585b732dd5b5d8cfd511e4097527",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md",
+        "Status": 1,
+        "Summary": "bytes=1430",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "c8915f2675380f033301afd786ad95d91fdee615fee52087b9c0c047f9dfc47f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C04-T1-R in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "374b291158832b8a3d35c7c15f01601262a70d1049260352ed0dbb927d56622b",
+        "AfterSha256": "08ccfafc966b60528c585f452a95075e780f2e51f8239f5e1e51676a55933597",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C04-T1-G not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "08ccfafc966b60528c585f452a95075e780f2e51f8239f5e1e51676a55933597",
+        "AfterSha256": "3796543ff41596d7dfc682158099f2f264862bf7d1ff25adec9651e67cb7d436",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs391-m11-candidate-red-closure",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-native-roadmap-parity",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-m10-readiness-preserved",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-m9-admission",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs391-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261127T133327Z-da38c693652521c0",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "6cd83f9d2ef8a322c340bd8a85b75579963e4715",
+  "invocationStartedAtUtc": "2026-11-27T13:33:27.1236987+00:00",
+  "invocationDurationMilliseconds": 113501,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS391",
+      "title": "Close physical numeric package RED and ready candidate GREEN",
+      "projectNodes": [
+        "M11-W01-C04-T1-R",
+        "M11-W01-C04-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Close physical immutable numeric package candidate RED and ready GREEN.",
+      "value": "Corroborate RS390 first-pass evidence and ten preparation validations, including physical old archive and DLL hashes, historical dependency and missing M11 API metadata. Preserve production source, historical identities and the M10 cutover gate without repeating RED.",
+      "debtChanges": [
+        "Reconcile RS390 canonical RED activation.",
+        "Close RED and ready isolated two-package candidate GREEN."
+      ],
+      "nextAction": "Produce and qualify two fresh isolated immutable candidates with exact dependency closure and locked package-only consumers.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M11-W01-C04-T1-R",
+          "achievement": "RS390 independently read and hashed both historical archives and embedded DLLs, confirmed their exact historical dependency and established missing M11 API surfaces through PE metadata. RS391 corroborates the durable RED evidence."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m11-numeric-package-candidate-red-closure-rs391.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M11.md"
+      ],
+      "validations": [
+        {
+          "id": "math-rs391-m11-candidate-red-closure",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-native-roadmap-parity",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-m10-readiness-preserved",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-m9-admission",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs391-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M11-W01-C04-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C04-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M11-W01-C04-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS390 independently read and hashed both historical archives and embedded DLLs, confirmed their exact historical dependency and established missing M11 API surfaces through PE metadata. RS391 corroborates the durable RED evidence."
+      },
+      {
+        "id": "M11-W01-C04-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M11-W01-C04-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS390 independently read and hashed both historical archives and embedded DLLs, confirmed their exact historical dependency and established missing M11 API surfaces through PE metadata. RS391 corroborates the durable RED evidence."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS391",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS391",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "6cd83f9d2ef8a322c340bd8a85b75579963e4715",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "cb98d03ce1b0c8765d326e6b97919b8112513696c9d56a6b7dfaea84bb1dad93"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: close package candidate RED and ready GREEN",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
