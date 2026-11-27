@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.164",
+  "plan_version": "0.1.165",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10432,10 +10432,14 @@
         "docs/engineering/ProbeM11NumericPackageCandidateRed.cs",
         "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
         "docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs",
-        "docs/distribution/m9-statistics-physical-private-publication-readback.md"
+        "docs/distribution/m9-statistics-physical-private-publication-readback.md",
+        "docs/engineering/ProbeM11NumericPackageCandidateGreen.cs",
+        "docs/engineering/fixtures/M11NumericPackageConsumer.cs",
+        "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs"
       ],
       "commands": [
-        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateRed.cs -- --check"
+        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateRed.cs -- --check",
+        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateGreen.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -10451,14 +10455,16 @@
               "id": "M11-W01-C04-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS391/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C04-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10472,7 +10478,7 @@
         }
       ],
       "refinement": "Reuse the existing source-to-package and source-free consumer qualification recipes with two fresh immutable net10.0 candidates. First inspect the old physical archives and demonstrate missing M11 API surfaces; GREEN must produce exact dependency closure and isolated locked net10/net11 consumers without publishing.",
-      "readiness": "RS390 durable physical package RED; native RED closure and isolated immutable candidate GREEN readiness pending durable result."
+      "readiness": "RS391 durable RED closure; activate isolated candidate GREEN with actual archive, dependency and locked Windows consumer observations."
     }
   ],
   "requirements": [
