@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "RS407",
+  "title": "Qualify actual isolated M10 rollback",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated net10 rollback",
+  "timeoutSeconds": 3600,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Corroborate corrected RS406 and execute an actual isolated target-to-baseline rollback.",
+    "value": "Restore 30 exact inputs, rebuild 24 baseline projects, and execute three Quantities smoke classes without touching production.",
+    "debtChanges": [
+      "Qualify the source and configuration rollback."
+    ],
+    "nextAction": "Reconcile readiness evidence and close GREEN.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-rollback-rs407.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs407-inspector-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs407-isolated-rollback",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--rollback"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 3000
+    }
+  ]
+}
