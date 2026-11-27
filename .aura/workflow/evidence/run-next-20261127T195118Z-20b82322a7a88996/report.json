@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "invocationId": "run-next-20261127T195118Z-20b82322a7a88996",
+  "runId": "RS412",
+  "commandMode": "run-next",
+  "outcome": "failed",
+  "failureStage": "pre-attempt",
+  "failureClassification": "workflow-refusal",
+  "attemptAllocated": false,
+  "authorityBaselineCommit": "2a15f2a66bde87c7c54eac8c44bccca982e3bee0",
+  "startedAtUtc": "2026-11-27T19:51:18.7769118\u002B00:00",
+  "completedAtUtc": "2026-11-27T19:51:38.2241445\u002B00:00",
+  "durationMilliseconds": 19447,
+  "workingTreeChanged": false,
+  "changedPaths": [],
+  "error": "Run preparation gate RS412 failed before attempt allocation. classification=payload-compilation. The pending C# payload failed compilation preflight before attempt allocation. No attempt was started, no payload was executed, and no repository mutation was authorized.\r\nProcess status: timedOut=false cancelled=false exitCode=1 workflowExitCode=1 terminationAttempted=false terminationErrorPresent=false timeoutMilliseconds=300000 durationMilliseconds=4312\r\nStandard output:\r\n  Determining projects to restore...\r\n  Restored E:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-4f3bb6acb64a4f84a41d12e1661126ba\\repository\\.workflow\\runs\\RS412\\payload.cs.csproj (in 490 ms).\r\nE:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-4f3bb6acb64a4f84a41d12e1661126ba\\repository\\.workflow\\runs\\RS412\\payload.cs(33,111): error IL2026: Using member \u0027System.Text.Json.Nodes.JsonArray.Add\u003CT\u003E(T)\u0027 which has \u0027RequiresUnreferencedCodeAttribute\u0027 can break functionality when trimming application code. Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed.\r\nE:\\data.temp\\fhallot.temp\\dw-tools-workflow-disposable-run-4f3bb6acb64a4f84a41d12e1661126ba\\repository\\.workflow\\runs\\RS412\\payload.cs(33,111): error IL3050: Using member \u0027System.Text.Json.Nodes.JsonArray.Add\u003CT\u003E(T)\u0027 which has \u0027RequiresDynamicCodeAttribute\u0027 can break functionality when AOT compiling. Creating JsonValue instances with non-primitive types requires generating code at runtime.\r\nStandard error:\r\n\u003Cempty\u003E\r\nPayload SDK AOT-safe JSON array hint:\r\n  Avoid JsonArray.Add\u003CT\u003E(T) for payload-authored arrays; it can trigger IL2026/IL3050 under the strict compilation gate.\r\n  JsonArray Json.StringArray(String[] values)\r\n  JsonArray Json.Array(JsonNode[] nodes) The source repository remains unchanged and no durable attempt was created.",
+  "errorOriginalBytes": 1922,
+  "errorSha256": "6401e4dd76884c34204a62cdcf9726eb2b66d27a7e6b32cb982566e2fe4acc2a",
+  "errorTruncated": false,
+  "safeNextAction": "dwf run next",
+  "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs412/run-next-20261127T195118Z-20b82322a7a88996",
+  "preselectionProducerEventAnchor": {
+    "schemaVersion": 1,
+    "kind": "local-prospective-producer-event-anchor",
+    "captureStatus": "captured",
+    "runId": "RS412",
+    "invocationId": "run-next-20261127T195118Z-20b82322a7a88996",
+    "sourceHead": "2a15f2a66bde87c7c54eac8c44bccca982e3bee0",
+    "committedRequestSha256": "10481db06d831aa302a3f8c5d28c70802e4b616c36e30bedddde52652f4975d8",
+    "events": [
+      {
+        "file": "0001.json",
+        "sha256": "0ca3199aa110b041e4aa21da44b3567f7cd17ca635e3f8233d669ee815424794",
+        "directory": "."
+      },
+      {
+        "file": "0002.json",
+        "sha256": "eace3c939b4f507a4e2153175549d1f9a4a2ba244824ca20668eaf2db678c6e9",
+        "directory": "staged"
+      },
+      {
+        "file": "0003.json",
+        "sha256": "c3a30de1a961b42824ff4c4636872f8355d9094728e0fee8eadb2e222b7092d1",
+        "directory": "staged/docs"
+      },
+      {
+        "file": "0004.json",
+        "sha256": "a06ff8a5b75aec482eee728c034efa6ad606af6e310cd9595d0cc55beec3cd07",
+        "directory": "staged/docs/discovery"
+      },
+      {
+        "file": "0005.json",
+        "sha256": "145aff267e268fb29ab5e0f8edaa12316c35bdef21e5f6a678b6f6cf2885e010",
+        "directory": "staged/docs/discovery/qualification"
+      },
+      {
+        "file": "0006.json",
+        "sha256": "9f27901753c5856309ea18b0cf0e6ae42db33dbf4f87c7c111dfd62be984f00f",
+        "directory": "staged/docs/engineering"
+      },
+      {
+        "file": "0007.json",
+        "sha256": "041283d6bd21cf7037c3dd9337baca0f0b27981f8486238527d99aba6dc736b9",
+        "directory": "staged/docs/planning"
+      },
+      {
+        "file": "0008.json",
+        "sha256": "6083c009fc7e1dd4a477aa918c547386c370a89981f951608f2f8a82cf89da51",
+        "directory": "staged/docs/planning/decisions"
+      }
+    ],
+    "producerOriginIndependentlyAuthenticated": false,
+    "quarantineAuthorized": false
+  }
+}
