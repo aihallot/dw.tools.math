@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "id": "RS411",
+  "title": "Establish actual M10 production cutover RED",
+  "state": "prepared",
+  "commitMessage": "test: establish M10 production cutover RED",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M10-W01-C02",
+    "M10-W01-C02-T1",
+    "M10-W01-C02-T1-R"
+  ],
+  "contribution": {
+    "summary": "Reconcile C01 closure and activate actual production cutover RED.",
+    "value": "Establish the exact 28-input target contract, 97 historical identities and seven targeted refusal controls against unchanged production.",
+    "debtChanges": [
+      "Reconcile durable C01 closure.",
+      "Establish the production cutover guard."
+    ],
+    "nextAction": "Corroborate durable RED evidence and ready GREEN.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/decisions/m10-production-cutover-red-rs411.md",
+    "docs/engineering/VerifyM10ProductionCutover.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs411-production-red",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM10ProductionCutover.cs",
+        "--",
+        "--red"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-m11-canonical-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-m10-cutover-red-activation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-m9-admission",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateAssessaM9Admission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-published-handoff",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-request-reconciliation",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-m8-evidence-frontier",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs411-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
