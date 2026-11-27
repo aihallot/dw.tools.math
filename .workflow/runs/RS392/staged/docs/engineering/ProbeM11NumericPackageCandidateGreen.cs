@@ -65,6 +65,17 @@ foreach (string id in new[] { Q, S })
     sourceHashes.Add(sourceProject, Hash(sourceProject));
     var project = XDocument.Load(sourceProject);
     project.Descendants("Version").Single().Value = id == Q ? Qv : Sv;
+    // Calendar NuGet versions are not valid CLR assembly/file versions.
+    // Preserve the established candidate recipe's separate binary identity.
+    var properties = project.Descendants("Version").Single().Parent!;
+    foreach (var name in new[] { "AssemblyVersion", "FileVersion" })
+    {
+        var existing = project.Descendants(name).SingleOrDefault();
+        if (existing is null)
+            properties.Add(new XElement(name, "1.0.0.0"));
+        else
+            existing.Value = "1.0.0.0";
+    }
     if (id == S)
     {
         var reference = project.Descendants("ProjectReference").Single();
