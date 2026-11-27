@@ -1,0 +1,7 @@
+# RS394 - Verify exact candidate archives and historical rollback
+
+RS393 succeeded first-pass under DWF 0.1.80, result dce05ecc96278a720f6d90194e1c321a86c5dea1. Reconcile GREEN closure into backlog 0.1.167 and activate verification.
+
+Read the exact RS392 attempt-002 candidate feed at build/artifacts/m11-candidates-1aa0ad9d4f7e/feed; refuse missing or changed archives instead of rebuilding. Independently inspect all four archive and embedded DLL SHA-256 values and exact dependencies. Copy candidate and historical pairs into separate fresh private feeds, then restore package-only consumers with isolated caches and a locked second restore under Windows net10 and net11. Candidate consumers reuse the qualified M9 and M11 fixtures. Historical rollback consumers use the M9 fixture plus rational golden and loaded Quantities hash checks and verify absence of new M11 surfaces. This qualifies a rollback recipe through fresh consumer resolution, not an in-place rollback of production installations. Rehash all originals and copies and refuse unexpected shared-feed publication.
+
+Use post-attempt focused validation to preserve actual readback, lock and loaded binary markers in the durable report. No pack, no publication, no new package identity, no production target change, no Linux/all-RID or downstream adoption claim. M10 remains gated until the durable C04 closure and refreshed cutover baseline.

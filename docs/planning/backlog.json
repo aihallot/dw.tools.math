@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.166",
+  "plan_version": "0.1.167",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10435,11 +10435,13 @@
         "docs/distribution/m9-statistics-physical-private-publication-readback.md",
         "docs/engineering/ProbeM11NumericPackageCandidateGreen.cs",
         "docs/engineering/fixtures/M11NumericPackageConsumer.cs",
-        "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs"
+        "docs/engineering/fixtures/M9BoundedCandidateNet11Consumer.cs",
+        "docs/engineering/VerifyM11NumericPackageCandidates.cs"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateRed.cs -- --check",
-        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateGreen.cs -- --check"
+        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateGreen.cs -- --check",
+        "dotnet run --file docs/engineering/VerifyM11NumericPackageCandidates.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -10464,21 +10466,23 @@
               "id": "M11-W01-C04-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS393/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C04-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]
         }
       ],
       "refinement": "Reuse the existing source-to-package and source-free consumer qualification recipes with two fresh immutable net10.0 candidates. First inspect the old physical archives and demonstrate missing M11 API surfaces; GREEN must produce exact dependency closure and isolated locked net10/net11 consumers without publishing.",
-      "readiness": "RS392 durable isolated package GREEN after one allocated correction; native GREEN closure and independent exact-archive readback/rollback readiness pending durable result."
+      "readiness": "RS393 durable GREEN closure; activate independent readback of exact RS392 candidate archives and historical pair rollback with locked Windows consumers."
     }
   ],
   "requirements": [
