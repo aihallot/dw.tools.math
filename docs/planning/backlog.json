@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.175",
+  "plan_version": "0.1.176",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9938,7 +9938,10 @@
         "docs/engineering/InspectM10ProjectDispositions.cs",
         "docs/engineering/m10-project-dispositions-rs402.json",
         "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
-        "docs/planning/decisions/m10-cutover-readiness-green-closure-rs408.md"
+        "docs/planning/decisions/m10-cutover-readiness-green-closure-rs408.md",
+        "docs/planning/decisions/m10-cutover-readiness-verification-rs409.md",
+        "docs/engineering/VerifyM10CutoverReadiness.cs",
+        "docs/engineering/m10-cutover-readiness-verification-rs409.json"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10CutoverReadinessRed.cs -- --red",
@@ -9949,7 +9952,8 @@
         "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --focused",
         "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --tools",
         "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --inspect",
-        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --rollback"
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --rollback",
+        "dotnet run --file docs/engineering/VerifyM10CutoverReadiness.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -9974,21 +9978,23 @@
               "id": "M10-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum changes needed for cutover readiness and rollback baseline.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS408/attempt-001.json"
+              ]
             },
             {
               "id": "M10-W01-C01-T1-V",
               "title": "Verify and document",
               "description": "Independently qualify and document cutover readiness and rollback baseline.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]
         }
       ],
       "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
-      "readiness": "RS402 durable GREEN activation; RS403\u2013RS407 isolated graph, tests, tools, inspector and rollback qualified; native GREEN closure and Verification readiness pending durable result."
+      "readiness": "RS408 durable GREEN closure; independent cutover contract verification and native Verification activation pending durable result."
     },
     {
       "id": "M10-W01-C02",
