@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.173",
+  "plan_version": "0.1.174",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9934,12 +9934,15 @@
         "docs/engineering/m10-cutover-readiness-red-rs400.json",
         "docs/engineering/ProbeM10CutoverReadinessRed.cs",
         "docs/engineering/InspectM8Net11SourceBaseline.cs",
-        "docs/engineering/InspectM8Net11PackageGraph.cs"
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "docs/engineering/InspectM10ProjectDispositions.cs",
+        "docs/engineering/m10-project-dispositions-rs402.json"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10CutoverReadinessRed.cs -- --red",
         "dotnet run --file docs/engineering/InspectM8Net11SourceBaseline.cs -- --check-sdk11",
-        "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check"
+        "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check",
+        "dotnet run --file docs/engineering/InspectM10ProjectDispositions.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -9955,14 +9958,16 @@
               "id": "M10-W01-C01-T1-R",
               "title": "RED",
               "description": "Falsify cutover readiness and rollback baseline with independent bounded negative controls.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS401/attempt-001.json"
+              ]
             },
             {
               "id": "M10-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum changes needed for cutover readiness and rollback baseline.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -9976,7 +9981,7 @@
         }
       ],
       "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
-      "readiness": "RS400 durable corrected RED activation; native RED closure and GREEN readiness pending durable result."
+      "readiness": "RS401 durable RED closure; GREEN activation and project dispositions pending durable result."
     },
     {
       "id": "M10-W01-C02",

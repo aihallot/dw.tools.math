@@ -1,0 +1,545 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS402",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-27T17:11:43.6612285+00:00",
+  "completedAtUtc": "2026-11-27T17:11:51.0607645+00:00",
+  "durationMilliseconds": 7399,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/engineering/m10-project-dispositions-rs402.json",
+    "docs/engineering/InspectM10ProjectDispositions.cs",
+    "docs/planning/decisions/m10-green-project-dispositions-rs402.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/engineering/InspectM10ProjectDispositions.cs",
+    "docs/engineering/m10-project-dispositions-rs402.json",
+    "docs/planning/decisions/m10-green-project-dispositions-rs402.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.81",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 1,
+    "preparationFailureCount": 1,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": true,
+    "firstPassSucceeded": false,
+    "invocationIds": [
+      "run-next-20261127T170741Z-b336ddbaff581a31"
+    ],
+    "failures": [
+      {
+        "schemaVersion": 1,
+        "invocationId": "run-next-20261127T170741Z-b336ddbaff581a31",
+        "runId": "RS402",
+        "scope": "preselection-rs402",
+        "outcome": "failed",
+        "publicationOutcome": "preparation-failed",
+        "failureStage": "pre-attempt",
+        "failureClassification": "workflow-refusal",
+        "attemptAllocated": false,
+        "attempt": null,
+        "boundaryViolations": [],
+        "evidencePublicationReference": "refs/heads/workflow/evidence/preselection-rs402/run-next-20261127T170741Z-b336ddbaff581a31"
+      }
+    ]
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS402/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2400,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-ce6981a001c44844a51eb3827e8ba768\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2400000,
+      "DurationMilliseconds": 7218,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS401/attempt-001.json run=RS401 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11 state=done\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[files.replace-from-staged] CHANGED path=docs/engineering/InspectM10ProjectDispositions.cs bytes=7890\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m10-green-project-dispositions-rs402.md bytes=2107\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=14602\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=15482\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM11NumericSubsidiarityAdmission.cs bytes=61024\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=43404\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3343\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67823\r\n[files.replace-from-staged] CHANGED path=README.md bytes=9314\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\nMATH-RS402-DISPOSITIONS|projects=123|solution=24|maintainedTools=2|versionedTools=38|qualification=false|PASS\r\n\n\r\nplanning valid: 0.1.174 | 70 chunks | d3de7dd82821b4ee015462900ea357a73e945351a5b725e34696fefdd29cfa87 | mode --write\r\n\n\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-G ready-\u003Ein-progress\r\n[payload] OK operations=18 changed=12 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS402/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS401/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS401 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e6bfc47cb833268947ae5f40433516e4ad6b9159a77648f47e1929066f5f313e",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d217bcdd7fc35e3d73278ccd722c83835162de721ff555f5022d25d0bfc1ffa6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-V state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d217bcdd7fc35e3d73278ccd722c83835162de721ff555f5022d25d0bfc1ffa6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d217bcdd7fc35e3d73278ccd722c83835162de721ff555f5022d25d0bfc1ffa6",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "d217bcdd7fc35e3d73278ccd722c83835162de721ff555f5022d25d0bfc1ffa6",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/InspectM10ProjectDispositions.cs",
+        "Status": 1,
+        "Summary": "bytes=7890",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "e6d60a60cc34d74c0ed8a4c63cd47cf3651dd141add94292b3fc97c47f97b1fe",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m10-green-project-dispositions-rs402.md",
+        "Status": 1,
+        "Summary": "bytes=2107",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "f2e6a26661bef57403c8fa21096e04db4d18c464cee2cce9b462ae20f88f0ccb",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=14602",
+        "Details": null,
+        "BeforeSha256": "1ba2211885db4c5cd9bf174385fdc4c93fe9c1651280f3df7c514dc65c662da2",
+        "AfterSha256": "6250cdb6543abdfbc40eae9146e14d54cfa1cc7fef7437e5f3ada58ec6177ef9",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=15482",
+        "Details": null,
+        "BeforeSha256": "44bc2efc1c9683bb2f07d998c2db90fb90627cbc0f20b4676e3055d3f53a947e",
+        "AfterSha256": "572ec0fa72776e733cf7f1f10097c74286679a0fedc83eaa2b170fc3de243ca4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=61024",
+        "Details": null,
+        "BeforeSha256": "6f5bc4e0ff533326d1b195e8ec63cc40806adb11440446b057570d1c5ec0c5b9",
+        "AfterSha256": "63ba65b90e457c82623e4587164d60977bb7edfb59373b7f0d0542b4d46e68dc",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=43404",
+        "Details": null,
+        "BeforeSha256": "58e528eda0e2a58bb23aee5bfaa5a8e1356a930c984605f897bde4e54b481e97",
+        "AfterSha256": "f45113a38b7c59409c9c2383e2cae769a36db9b787eabe6b47972ef267203f54",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "5100c649dbee50360e2d34737d56fd0e9ba3f8aec9303c27dfb449c41ccf0c45",
+        "AfterSha256": "bab4fd445d9aaa068155fee8197f512cdeaba5ff9fd697b5d5e9a934447a2048",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3343",
+        "Details": null,
+        "BeforeSha256": "aca87ae8791b553a0a68f374ddd51740037257b19f4af2da92b62a162cb5bd02",
+        "AfterSha256": "94ef73b86d503487724f78e6094a31862a671f2d2ae21cb9e481e822bfcce6bf",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67823",
+        "Details": null,
+        "BeforeSha256": "ba60c17fd08a741cabbb80d8a3b1ff397949c15e82c50f5d92557b83e340ccbc",
+        "AfterSha256": "19e0ef4e38de1709897a3b12115bb7b09fda1e0481c2031e5c484ae7f0e408c5",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=9314",
+        "Details": null,
+        "BeforeSha256": "7496a54528d037d548c4dc050bca7c6013c36d588de3c3ad7e19120a03754469",
+        "AfterSha256": "5d29b29519ab5dbae57040c69a42117682d9d011b45960f6c478929e286e9fa3",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "a04ae92e3cbe3cbce86b2c49704267bf2e4a243f5c01ddc8b099f4121769aeba",
+        "AfterSha256": "d3de7dd82821b4ee015462900ea357a73e945351a5b725e34696fefdd29cfa87",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M10-W01-C01-T1-G ready-\u003Ein-progress",
+        "Details": null,
+        "BeforeSha256": "d217bcdd7fc35e3d73278ccd722c83835162de721ff555f5022d25d0bfc1ffa6",
+        "AfterSha256": "57d79c69181d99ea15bbd10d132544a313059a5dcf28c306557a476aaeb8035b",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs402-project-dispositions",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-m11-canonical-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-native-roadmap-parity",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-m10-green-activation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-m9-admission",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs402-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261127T171003Z-0063fcc1f68e2627",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "4146a5cff95c3b7f9bd46e4af13629f08ac65431",
+  "invocationStartedAtUtc": "2026-11-27T17:10:03.7987888+00:00",
+  "invocationDurationMilliseconds": 107261,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS402",
+      "title": "Activate M10 readiness GREEN and record actual project dispositions",
+      "projectNodes": [
+        "M10-W01-C01-T1-G"
+      ]
+    },
+    "declared": {
+      "summary": "Reconcile RS401 RED closure, activate GREEN and produce project disposition ledger.",
+      "value": "Record actual project XML and conservative individual migration or reproduction dispositions for all 123 projects. Preserve historical package recipes and current production source. No compatibility certification.",
+      "debtChanges": [
+        "Reconcile durable RED closure and GREEN readiness.",
+        "Record exact project dispositions and metadata for isolated target qualification.",
+        "Correct retry-0 preselection refusal using full semantic JSON equality and explicit first-difference diagnostics; preserve all project observations."
+      ],
+      "nextAction": "Qualify actual isolated net11 solution restore and maintained tools, then targeted fragile tests and rollback.",
+      "backlogItems": null,
+      "achievements": [],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/engineering/InspectM10ProjectDispositions.cs",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/engineering/m10-project-dispositions-rs402.json",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m10-green-project-dispositions-rs402.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M10.md"
+      ],
+      "validations": [
+        {
+          "id": "math-rs402-project-dispositions",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-m11-canonical-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-native-roadmap-parity",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-m10-green-activation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-m9-admission",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs402-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M10-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C01-T1",
+        "state": "in-progress",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M10-W01-C01-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C01-T1",
+        "beforeState": "ready",
+        "afterState": "in-progress",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS402",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS402",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "4146a5cff95c3b7f9bd46e4af13629f08ac65431",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "07b720edbf9d6bfce0a3e8e3a09f6fa978fc9e4a6b31b694dce371df04a2852a"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "docs: classify M10 migration projects and activate GREEN",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
