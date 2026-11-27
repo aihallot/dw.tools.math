@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.168",
+  "plan_version": "0.1.169",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10397,7 +10397,7 @@
       "title": "Additive numeric package and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M11-W01-C01",
         "M11-W01-C02",
@@ -10443,15 +10443,19 @@
         "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateGreen.cs -- --check",
         "dotnet run --file docs/engineering/VerifyM11NumericPackageCandidates.cs -- --check"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS395/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M11-W01-C04-T1",
           "title": "Additive numeric package and consumer qualification",
           "behavior": "Qualify distinct immutable net10.0 Quantities and Statistics candidates with exact dependency closure and independent locked Windows net10/net11 consumers; record rollback and actual platform scope.",
           "test_case": "Focused new contracts and historical golden oracles pass; independently obtain and hash actual candidate archives and loaded DLLs, validate exact dependencies, package-only consumers and rollback recipe without changing previous archives.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS395/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M11-W01-C04-T1-R",
@@ -10475,14 +10479,16 @@
               "id": "M11-W01-C04-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS395/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "Reuse the existing source-to-package and source-free consumer qualification recipes with two fresh immutable net10.0 candidates. First inspect the old physical archives and demonstrate missing M11 API surfaces; GREEN must produce exact dependency closure and isolated locked net10/net11 consumers without publishing.",
-      "readiness": "RS394 durable independent physical readback and historical rollback recipe; native C04 verification, task and phase closure pending durable result."
+      "readiness": "RS395 durable phase closure; all four numeric phases qualified; work package closure pending durable result."
     }
   ],
   "requirements": [
