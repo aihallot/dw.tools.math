@@ -1,0 +1,7 @@
+# RS413 - Apply the actual M10 production cutover
+
+RS412 succeeded at allocated attempt 001 under DWF 0.1.81, result 94c8913f32eb6d63a7dd8c61b151aa064d6acf5b, after one preselection compilation refusal and no allocated failures. Reconcile native RED closure into canonical backlog 0.1.180 and activate GREEN.
+
+Apply exactly the 28 product inputs qualified by RS409 and RS411: SDK 11.0.100 pinned with rollForward disable, central net11.0/C# 15, the 24 unchanged lock dependency graphs with only their target key retargeted, discovery tool target, and the RS406 inspector source adaptation. Preserve the 97 historical project identities, the retained central package and solution authorities, NuGet configuration and warnings-as-errors. Historical fixtures retain their original checkout-based reproduction boundary. Do not reinterpret historical rollback hashes as hashes of the new production state; retained inputs still match, the new target guard checks every changed input.
+
+The structural target guard must pass. The focused local probe performs real locked restore with a fresh ignored cache, Release build of all 24 solution projects, 35 targeted numerical tests, both maintained tools, four discovery bindings, five preflight self-tests and a read-only 13-project inspector run against production. No full suite or new package publication; post-cutover qualification and independent Verification remain pending. The ignored restore cache is retained for actual build assets. No repository execution is performed during remote preparation.

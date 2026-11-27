@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.179" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.180" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -53,9 +53,9 @@ Need(Strings(C("M11-W01-C04"), "depends_on").SequenceEqual(deps) &&
     Strings(C("M10-W01-C02"), "depends_on").SequenceEqual(new[] { "M10-W01-C01", "M11-W01-C04" }) &&
     Strings(N("M10-W01-C02"), "dependsOn").SequenceEqual(new[] { "M10-W01-C01", "M11-W01-C04" }),
     "Candidate qualification or cutover gate differs.");
-Need((string?)Read("global.json")["sdk"]?["version"] == "10.0.401" &&
-    XDocument.Load("Directory.Build.props").Descendants("TargetFramework").Single().Value == "net10.0" &&
-    XDocument.Load("Directory.Build.props").Descendants("LangVersion").Single().Value == "14.0", "Production baseline changed.");
+Need((string?)Read("global.json")["sdk"]?["version"] == "11.0.100" &&
+    XDocument.Load("Directory.Build.props").Descendants("TargetFramework").Single().Value == "net11.0" &&
+    XDocument.Load("Directory.Build.props").Descendants("LangVersion").Single().Value == "15.0", "Current production cutover target differs.");
 Need(File.Exists("docs/planning/evidence/decision-numeric-source-inventory-rs369.md") &&
     File.Exists("docs/planning/decisions/m11-decision-numeric-subsidiarity-admission-rs370.md"), "Consultation evidence absent.");
 var admissionReport = Read(".aura/workflow/reports/RS370/attempt-001.json");
