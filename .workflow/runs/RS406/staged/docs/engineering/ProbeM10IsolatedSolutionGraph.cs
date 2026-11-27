@@ -25,6 +25,21 @@ string Run(string cwd, string executable, int timeout, params string[] arguments
     if (process.ExitCode != 0) throw new InvalidOperationException(executable + " " + string.Join(" ", arguments) + " failed:\n" + output + "\n" + error);
     return output;
 }
+// Observe the actual baseline SDK selected by the production latestPatch policy.
+var baselineSdk = "";
+if (inspect)
+{
+    var baselinePolicy = JsonNode.Parse(File.ReadAllText(Path.Combine(repository, "global.json")))!["sdk"]!;
+    Need((string?)baselinePolicy["version"] == "10.0.401" &&
+        (string?)baselinePolicy["rollForward"] == "latestPatch" &&
+        (bool?)baselinePolicy["allowPrerelease"] == false, "Original baseline SDK policy differs.");
+    baselineSdk = Run(repository, "dotnet", 30000, "--version").Trim();
+    Console.WriteLine("MATH-RS406-SDK|context=production|policy=10.0.401/latestPatch|observed=" + baselineSdk);
+    Need(Version.TryParse(baselineSdk, out var baselineVersion) &&
+        baselineVersion.Major == 10 && baselineVersion.Minor == 0 &&
+        baselineVersion.Build >= 401 && baselineVersion.Build < 500 &&
+        baselineVersion.Revision == -1, "Production SDK is outside its stable 10.0.4xx feature band: " + baselineSdk);
+}
 var solution = XDocument.Load("dw.tools.math.slnx").Descendants("Project")
     .Select(x => ((string)x.Attribute("Path")!).Replace('\\', '/')).OrderBy(x => x, StringComparer.Ordinal).ToArray();
 Need(solution.Length == 24 && solution.Count(x => x.StartsWith("src/projects/", StringComparison.Ordinal)) == 13 &&
@@ -203,7 +218,9 @@ try
                     {
                         File.Copy(Path.Combine(repository, "Directory.Build.props"), propsPath, true);
                         File.Copy(Path.Combine(repository, "global.json"), sdkPath, true);
-                        Need(Run(work, "dotnet", 30000, "--version").Trim() == "10.0.401", "Baseline inspection SDK differs.");
+                        var isolatedBaselineSdk = Run(work, "dotnet", 30000, "--version").Trim();
+                        Console.WriteLine("MATH-RS406-SDK|context=isolated-baseline|expected=" + baselineSdk + "|observed=" + isolatedBaselineSdk);
+                        Need(isolatedBaselineSdk == baselineSdk, "Baseline inspection SDK differs: expected " + baselineSdk + ", observed " + isolatedBaselineSdk);
                         var net10 = Inspect("net10.0");
                         Need(JsonNode.DeepEquals(net10, net11), "Cross-target package identity or dependency drift.");
                         var invalid = XDocument.Load(propsPath);
