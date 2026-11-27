@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS405",
+  "attempt": 1,
+  "outcome": "failed",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": ".aura/workflow/local/corrections/RS405.json",
+  "startedAtUtc": "2026-11-27T18:05:17.8213859\u002B00:00",
+  "completedAtUtc": "2026-11-27T18:05:29.1625385\u002B00:00",
+  "durationMilliseconds": 11341,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-maintained-tools-rs405.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "changedPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/decisions/m10-isolated-maintained-tools-rs405.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.81",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": false,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS405/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 3000,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-fbf959def1a44ed7bb5c79450e5a479e\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 3000000,
+      "DurationMilliseconds": 379,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS404/attempt-001.json run=RS404 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-G state=in-progress\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-V state=not-ready\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ProbeM10IsolatedSolutionGraph.cs bytes=14889\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m10-isolated-maintained-tools-rs405.md bytes=1350\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=22999\r\n[payload] OK operations=7 changed=3 no-change=0 verified=4 artifacts=0\r\n",
+      "StandardError": "",
+      "StandardOutputOriginalBytes": 878,
+      "StandardOutputSha256": "1601de15fe67acabe3a5e3a0dae479afe840004793eb701c6a701dd99afd20ec",
+      "StandardOutputTruncated": false,
+      "StandardErrorOriginalBytes": 0,
+      "StandardErrorSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "StandardErrorTruncated": false
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/local/reports/RS405/attempt-001.md",
+    "ArtifactRootPath": ".aura/workflow/local/reports/RS405/attempt-001-artifacts"
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs405-focused-evidence",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [
+    {
+      "Id": "math-rs405-isolated-maintained-tools",
+      "classification": "focused",
+      "packs": [],
+      "FileName": "dotnet",
+      "Arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--tools"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": -532462766,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2100000,
+      "DurationMilliseconds": 10733,
+      "StandardOutput": "[dwf-validation] strategy=declared-authority stdoutPresent=true stderrPresent=true nugetDiagnosticObserved=true compilerOrMsbuildDiagnosticObserved=false Process status: timedOut=false cancelled=false exitCode=-532462766 workflowExitCode=-532462766 terminationAttempted=false terminationErrorPresent=false timeoutMilliseconds=2100000 durationMilliseconds=10733\r\n  Determining projects to restore...\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\src\\projects\\dw.quantities\\dw.quantities.csproj (in 2 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\src\\projects\\dw.tools.math.ir\\dw.tools.math.ir.csproj (in 2 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\src\\projects\\dw.tools.math.composition\\dw.tools.math.composition.csproj (in 2 ms).\r\n  Restored D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.discovery-bindings\\dw.tools.math.discovery-bindings.csproj (in 3 ms).\r\n\r\n  dw.quantities -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\build\\artifacts\\bin\\dw.quantities\\Release\\net11.0\\dw.quantities.dll\r\n  dw.tools.math.ir -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\build\\artifacts\\bin\\dw.tools.math.ir\\Release\\net11.0\\dw.tools.math.ir.dll\r\n  dw.tools.math.composition -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\build\\artifacts\\bin\\dw.tools.math.composition\\Release\\net11.0\\dw.tools.math.composition.dll\r\n  dw.tools.math.discovery-bindings -\u003E D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\build\\artifacts\\bin\\dw.tools.math.discovery-bindings\\Release\\net11.0\\dw.tools.math.discovery-bindings.dll\r\n\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.66\r\n\r\nM8-DISCOVERY-BINDINGS|selected=4|fingerprints=4|brokerReady=0|mode=--write\r\n\r\nMATH-RS405-TOOL|path=tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj|target=net11.0|dllSha256=067f5b0d0fa7d4d6eab762426a66c84d014effe76f7017fd57cef5e18d2cbb98|PASS\r\n",
+      "StandardError": "Unhandled exception. System.InvalidOperationException: dotnet restore tools/dw.tools.math.nuget-preflight/dw.tools.math.nuget-preflight.csproj --configfile NuGet.config --source I:\\nuget.local --source https://api.nuget.org/v3/index.json --packages D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\packages failed:\n  Determining projects to restore...\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\nD:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj : error NU1301: The local source \u0027D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\https:\\api.nuget.org\\v3\\index.json\u0027 doesn\u0027t exist.\r\n  Failed to restore D:\\data.dev\\github\\ai@hallot.net\\dw.tools.math\\build\\artifacts\\m10-rs403-isolated-solution\\d6364feae2dc487c8b231b118743c965\\tools\\dw.tools.math.nuget-preflight\\dw.tools.math.nuget-preflight.csproj (in 147 ms).\r\n\n\r\n   at Program.\u003C\u003CMain\u003E$\u003Eg__Run|0_2(String cwd, String executable, Int32 timeout, String[] arguments)\r\n   at Program.\u003CMain\u003E$(String[] args)\r\n",
+      "StandardOutputOriginalBytes": 2551,
+      "StandardOutputSha256": "0cee9d3e5037b8f96679239ab10b9f44cfa2cd6797a3564e16cbb51e3b4bc94d",
+      "StandardOutputTruncated": false,
+      "StandardErrorOriginalBytes": 7003,
+      "StandardErrorSha256": "6aa31c4e0be296a53d12c88327dd7d50cb2e0e3927d459769364519085b1862e",
+      "StandardErrorTruncated": false
+    }
+  ],
+  "invocationId": "run-next-20261127T180439Z-bd74d7744d6bc85f",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "02fbc860539c644de81779a5e332149bd0178db1",
+  "invocationStartedAtUtc": "2026-11-27T18:04:39.4252852\u002B00:00",
+  "invocationDurationMilliseconds": 49737,
+  "git": {
+    "commitMessage": null,
+    "commitEligible": false,
+    "deliveryIntent": "none",
+    "deliveryStateAtReportWrite": "not-applicable"
+  },
+  "attemptAllocated": true,
+  "failureStage": "validation math-rs405-isolated-maintained-tools",
+  "failureClassification": "attempt-failed",
+  "localDiagnosticReport": ".aura/workflow/local/reports/RS405/attempt-001.json",
+  "safeNextAction": "dwf run next",
+  "evidencePublicationReference": "refs/heads/workflow/evidence/rs405/run-next-20261127T180439Z-bd74d7744d6bc85f"
+}
