@@ -4,7 +4,8 @@ using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] != "--check") throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || args[0] is not ("--check" or "--focused")) throw new ArgumentException("Expected --check or --focused.");
+var focused = args[0] == "--focused";
 static void Need(bool ok, string message) { if (!ok) throw new InvalidDataException("M10 isolated graph: " + message); }
 static string Hash(string path) => Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
 var repository = Path.GetFullPath(".");
@@ -93,9 +94,47 @@ try
         Need(File.Exists(dll), "Missing compiled solution assembly: " + project);
         Console.WriteLine("MATH-RS403-PROJECT|path=" + project + "|target=net11.0|lockSha256=" + locks[project[..project.LastIndexOf('/')] + "/packages.lock.json"] + "|dllSha256=" + Hash(dll));
     }
+    if (focused)
+    {
+        var groups = new[]
+        {
+            (Project: "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+                Classes: new[] { "M11ExactInt64ScalingTests", "M11ExactInt64ScalingVerificationTests", "M1W01C01BudgetTests" }, Minimum: 9),
+            (Project: "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+                Classes: new[] { "M11StreamingMomentsTests", "M11StreamingMomentsVerificationTests",
+                    "M11LargerSampleQuantilesTests", "M11LargerSampleQuantilesVerificationTests",
+                    "M9W01C01BoundedSamplingTests" }, Minimum: 26)
+        };
+        var totalPassed = 0;
+        foreach (var group in groups)
+        {
+            var resultDirectory = Path.Combine(work, "test-results", Path.GetFileNameWithoutExtension(group.Project));
+            Directory.CreateDirectory(resultDirectory);
+            var filter = string.Join("|", group.Classes.Select(x => "FullyQualifiedName~" + x + "."));
+            var output = Run(work, "dotnet", 480000, "test", group.Project, "-c", "Release", "--no-build", "--no-restore",
+                "--filter", filter, "--results-directory", resultDirectory, "--logger", "trx;LogFileName=focused.trx");
+            Console.WriteLine(output);
+            var trxPath = Path.Combine(resultDirectory, "focused.trx");
+            var trx = XDocument.Load(trxPath);
+            var counters = trx.Descendants().Single(x => x.Name.LocalName == "Counters");
+            int Count(string name) => (int?)counters.Attribute(name) ?? throw new InvalidDataException("Missing TRX counter: " + name);
+            var tests = trx.Descendants().Where(x => x.Name.LocalName == "UnitTest").ToDictionary(x => (string)x.Attribute("id")!,
+                x => (string)x.Elements().Single(e => e.Name.LocalName == "TestMethod").Attribute("className")!, StringComparer.OrdinalIgnoreCase);
+            var results = trx.Descendants().Where(x => x.Name.LocalName == "UnitTestResult").ToArray();
+            var actualClasses = results.Select(x => tests[(string)x.Attribute("testId")!].Split('.').Last()).ToHashSet(StringComparer.Ordinal);
+            Need(actualClasses.SetEquals(group.Classes), "Focused test class coverage differs: " + group.Project);
+            Need(Count("total") >= group.Minimum && Count("passed") == Count("total") &&
+                Count("failed") == 0 && results.Length == Count("total") &&
+                results.All(x => (string?)x.Attribute("outcome") == "Passed"), "Focused test result differs: " + group.Project);
+            totalPassed += Count("passed");
+            Console.WriteLine("MATH-RS404-FOCUSED|project=" + group.Project + "|classes=" + group.Classes.Length +
+                "|passed=" + Count("passed") + "|failed=0|trxSha256=" + Hash(trxPath) + "|PASS");
+        }
+        Console.WriteLine("MATH-RS404-FOCUSED-TOTAL|sdk=11.0.100|tfm=net11.0|classes=8|passed=" + totalPassed + "|failed=0|PASS");
+    }
     Need(locks.All(x => Hash(Path.Combine(work, x.Key)) == x.Value), "Build changed locked dependencies.");
     Need(originalHashes.All(x => Hash(x.Key) == x.Value), "Original repository input changed.");
-    Console.WriteLine("MATH-RS403-ISOLATED|sdk=11.0.100|tfm=net11.0|lang=15.0|projects=24|lockedRestore=PASS|build=PASS|tests=false|tools=false|rollback=false|publication=false|PASS");
+    Console.WriteLine("MATH-RS403-ISOLATED|sdk=11.0.100|tfm=net11.0|lang=15.0|projects=24|lockedRestore=PASS|build=PASS|tests=" + (focused ? "focused" : "false") + "|tools=false|rollback=false|publication=false|PASS");
 }
 finally
 {

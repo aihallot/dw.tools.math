@@ -182,3 +182,38 @@ Need((string?)dispositionsReport["runId"] == "RS402" && (string?)dispositionsRep
     dispositionsReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(dispositionIds),
     "RS402 durable corrected disposition evidence differs.");
 Need(File.Exists("docs/planning/decisions/m10-isolated-solution-graph-rs403.md") && File.Exists("docs/engineering/ProbeM10IsolatedSolutionGraph.cs"), "Isolated graph material absent.");
+
+var isolatedReport = Read(".aura/workflow/reports/RS403/attempt-001.json");
+var isolatedProof = Read(".workflow/runs/RS403/preparation-proof.json");
+string[] isolatedPreparationIds = ["math-rs403-project-dispositions", "math-rs403-m10-disposition-evidence", "diff-check"];
+Need((string?)isolatedReport["runId"] == "RS403" && (string?)isolatedReport["outcome"] == "succeeded" &&
+    (int?)isolatedReport["attempt"] == 1 && (string?)isolatedReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)isolatedReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)isolatedReport["priorInvocationFailures"]?["count"] == 0 &&
+    isolatedReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    isolatedReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)isolatedProof["sourceCommit"] == "63bf41477ae5b634a10af34a7202e4f3abded0c4" &&
+    (bool?)isolatedProof["payloadCompiled"] == true && (int?)isolatedProof["rehearsedValidationCount"] == 3 &&
+    isolatedProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(isolatedPreparationIds) &&
+    isolatedReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(isolatedPreparationIds),
+    "RS403 isolated graph durable evidence differs.");
+var isolatedValidation = isolatedReport["validations"]!.AsArray().Single()!;
+Need((string?)isolatedValidation["Id"] == "math-rs403-isolated-net11-solution" && (int?)isolatedValidation["ExitCode"] == 0 &&
+    (bool?)isolatedValidation["TimedOut"] == false && (bool?)isolatedValidation["Cancelled"] == false,
+    "RS403 integrated validation differs.");
+var isolatedOutput = (string)isolatedValidation["StandardOutput"]!;
+Need(isolatedOutput.Contains("MATH-RS403-ISOLATED|sdk=11.0.100|tfm=net11.0|lang=15.0|projects=24|lockedRestore=PASS|build=PASS|tests=false|tools=false|rollback=false|publication=false|PASS", StringComparison.Ordinal) &&
+    isolatedOutput.Contains("0 Warning(s)", StringComparison.Ordinal) && isolatedOutput.Contains("0 Error(s)", StringComparison.Ordinal),
+    "RS403 graph result marker differs.");
+var compiledRows = isolatedOutput.Split('\n').Select(x => x.TrimEnd('\r'))
+    .Where(x => x.StartsWith("MATH-RS403-PROJECT|", StringComparison.Ordinal)).ToArray();
+var compiledPaths = new HashSet<string>(StringComparer.Ordinal);
+foreach (var line in compiledRows)
+{
+    var match = System.Text.RegularExpressions.Regex.Match(line,
+        @"^MATH-RS403-PROJECT\|path=(.+)\|target=net11\.0\|lockSha256=[0-9a-f]{64}\|dllSha256=[0-9a-f]{64}$");
+    Need(match.Success && compiledPaths.Add(match.Groups[1].Value), "Invalid or duplicate isolated project evidence.");
+}
+Need(compiledRows.Length == 24 && compiledPaths.SetEquals(projects) && File.Exists("docs/planning/decisions/m10-isolated-fragile-tests-rs404.md"),
+    "RS403 isolated project roster or next qualification material differs.");
+Console.WriteLine("MATH-RS404-BASELINE|RS403=PASS|projects=24|warning=0|error=0|productionMigration=false|PASS");
