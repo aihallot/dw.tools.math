@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.171",
+  "plan_version": "0.1.172",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -269,7 +269,7 @@
       "version": "1.5.0-preview",
       "title": "Production .NET 11 and C# 15 migration",
       "outcome": "Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries.",
-      "status": "planned",
+      "status": "ready",
       "gate": "G-M10",
       "required_chunks": [
         "M10-W01-C01",
@@ -682,7 +682,7 @@
       "id": "M10-W01",
       "release": "M10",
       "title": "Controlled production framework cutover",
-      "status": "planned",
+      "status": "ready",
       "paths": [
         "global.json",
         "Directory.Build.props",
@@ -9896,7 +9896,7 @@
       "title": "Cutover readiness and rollback baseline",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M8-W02-C02",
         "M9-W01-C01"
@@ -9925,8 +9925,22 @@
         "dotnet --version",
         "dotnet restore dw.tools.math.slnx --locked-mode"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "dw.tools.math.slnx",
+        "docs/engineering/m10-post-m11-project-inventory-rs399.json",
+        "docs/engineering/m10-cutover-readiness-red-rs400.json",
+        "docs/engineering/ProbeM10CutoverReadinessRed.cs",
+        "docs/engineering/InspectM8Net11SourceBaseline.cs",
+        "docs/engineering/InspectM8Net11PackageGraph.cs"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM10CutoverReadinessRed.cs -- --red",
+        "dotnet run --file docs/engineering/InspectM8Net11SourceBaseline.cs -- --check-sdk11",
+        "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -9934,14 +9948,14 @@
           "title": "Qualify cutover readiness",
           "behavior": "Reconcile real current source graph, isolated target graph, fragile tests and recovery baseline before production cutover.",
           "test_case": "Reject missing projects, incompatible SDK or lock closure and unsupported rollback or source-compatibility claims.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C01-T1-R",
               "title": "RED",
               "description": "Falsify cutover readiness and rollback baseline with independent bounded negative controls.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -9960,7 +9974,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
+      "readiness": "RS399 durable post-M11 inventory; native RED activation and bounded falsification pending durable result."
     },
     {
       "id": "M10-W01-C02",
