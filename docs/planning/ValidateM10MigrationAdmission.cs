@@ -266,3 +266,30 @@ Need(toolsOutput.Contains("MATH-RS405-TOOLS|sdk=11.0.100|tfm=net11.0|tools=2|bin
     toolsOutput.Contains("MATH-RS405-NUGET-DEPENDENCY|version=20260.20261026.1010|archiveSha256=60836cc1feb3b468f8e9c991059458d79f3f575789da5a7a81042327427972bf|dllSha256=b16d2e96f45862fbb0feb11d85b58d4a3a452555cd06444e3d6d53285de9bb61|PASS", StringComparison.Ordinal) &&
     File.Exists("docs/planning/decisions/m10-isolated-preflight-inspect-rs406.md"), "RS405 tool scope or next material differs.");
 Console.WriteLine("MATH-RS406-BASELINE|RS405=PASS|corrected=true|tools=2|productionMigration=false|PASS");
+
+var inspectorReport = Read(".aura/workflow/reports/RS406/attempt-002.json");
+var inspectorProof = Read(".workflow/runs/RS406/preparation-proof.json");
+string[] inspectorPreparationIds = ["math-rs406-maintained-tool-evidence", "diff-check"];
+var inspectorFailures = inspectorReport["priorInvocationFailures"]!;
+Need((string?)inspectorReport["runId"] == "RS406" && (string?)inspectorReport["outcome"] == "succeeded" &&
+    (int?)inspectorReport["attempt"] == 2 && (string?)inspectorReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)inspectorReport["correctionMode"] == true && (int?)inspectorReport["correctionSourceAttempt"] == 1 &&
+    (int?)inspectorFailures["count"] == 2 && (int?)inspectorFailures["allocatedAttemptFailureCount"] == 1 &&
+    (int?)inspectorFailures["preparationFailureCount"] == 1 && (bool?)inspectorFailures["firstPassSucceeded"] == false &&
+    inspectorFailures["invocationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(new[] {
+        "run-next-20261127T181002Z-f04a16ca27e826cc", "run-next-20261127T181135Z-cc0b237bf640489f" }) &&
+    inspectorReport["boundaryViolations"]!.AsArray().Count == 0 && inspectorReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)inspectorProof["sourceCommit"] == "b08e8a4bc60dc6c193e7a59e066bda038047fd5b" &&
+    (bool?)inspectorProof["payloadCompiled"] == true && (int?)inspectorProof["rehearsedValidationCount"] == 2 &&
+    inspectorProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(inspectorPreparationIds) &&
+    inspectorReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(inspectorPreparationIds),
+    "RS406 corrected inspector evidence differs.");
+var inspectorValidation = inspectorReport["validations"]!.AsArray().Single()!;
+Need((string?)inspectorValidation["Id"] == "math-rs406-isolated-nuget-inspect" && (int?)inspectorValidation["ExitCode"] == 0 &&
+    (bool?)inspectorValidation["TimedOut"] == false && (bool?)inspectorValidation["Cancelled"] == false, "RS406 validation differs.");
+var inspectorOutput = (string)inspectorValidation["StandardOutput"]!;
+Need(inspectorOutput.Contains("MATH-RS406-INSPECTOR|buildSdk=11.0.100|targets=2|packagesPerTarget=13|sourceParity=PASS|negative=PASS|production=false|publication=false|PASS", StringComparison.Ordinal) &&
+    inspectorOutput.Contains("MATH-RS406-SDK|context=isolated-baseline|expected=10.0.404|observed=10.0.404", StringComparison.Ordinal) &&
+    inspectorOutput.Contains("MATH-RS406-CANDIDATE|sourceSha256=f79b6917884841673d5523296a64f9298e0c0a8e0ee06ac7003730e8dd8cee6e|production=false", StringComparison.Ordinal) &&
+    File.Exists("docs/planning/decisions/m10-isolated-rollback-rs407.md"), "RS406 inspector scope or next material differs.");
+Console.WriteLine("MATH-RS407-BASELINE|RS406=PASS|corrected=true|targets=2|productionMigration=false|PASS");
