@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "RS404",
+  "title": "Qualify focused fragile mathematical tests on isolated actual net11 graph",
+  "state": "prepared",
+  "commitMessage": "test: qualify isolated net11 fragile numerical contracts",
+  "timeoutSeconds": 2400,
+  "projectNodes": [
+    "M10-W01-C01-T1-G"
+  ],
+  "contribution": {
+    "summary": "Corroborate RS403 and run eight selected fragile numerical test classes under isolated net11.",
+    "value": "Reuse actual locked solution graph and record nonzero exact class coverage, pass counts and TRX identities for M9/M11 and historical rational budgets. Production unchanged.",
+    "debtChanges": [
+      "Qualify fragile numerical behavior on the target SDK."
+    ],
+    "nextAction": "Qualify two maintained tools and rollback before closing GREEN.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 420
+  },
+  "mutationPaths": [
+    "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+    "docs/planning/decisions/m10-isolated-fragile-tests-rs404.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs404-isolated-graph-evidence",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateM10MigrationAdmission.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs404-isolated-fragile-tests",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "--",
+        "--focused"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 1500
+    }
+  ]
+}
