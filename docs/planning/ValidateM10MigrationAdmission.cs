@@ -163,3 +163,22 @@ Need((string?)redClosureReport["runId"] == "RS401" && (string?)redClosureReport[
     "RS401 durable RED closure differs.");
 Need(File.Exists("docs/planning/decisions/m10-green-project-dispositions-rs402.md") && File.Exists("docs/engineering/m10-project-dispositions-rs402.json"), "GREEN disposition material absent.");
 Console.WriteLine("MATH-RS402-M10-GREEN-ACTIVATION|nativeGreen=in-progress|targetRestore=pending|rollback=pending|publication=false|PASS");
+
+var dispositionsReport = Read(".aura/workflow/reports/RS402/attempt-001.json");
+var dispositionsProof = Read(".workflow/runs/RS402/preparation-proof.json");
+string[] dispositionIds = ["math-rs402-project-dispositions","math-rs402-m11-canonical-reconciliation","math-rs402-native-roadmap-parity","math-rs402-m10-green-activation","math-rs402-m9-admission","math-rs402-published-handoff","math-rs402-request-reconciliation","math-rs402-m8-evidence-frontier","math-rs402-planning-render-check","diff-check"];
+var dispositionFailures = dispositionsReport["priorInvocationFailures"]!;
+Need((string?)dispositionsReport["runId"] == "RS402" && (string?)dispositionsReport["outcome"] == "succeeded" &&
+    (int?)dispositionsReport["attempt"] == 1 && (string?)dispositionsReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (int?)dispositionFailures["count"] == 1 && (int?)dispositionFailures["preparationFailureCount"] == 1 &&
+    (int?)dispositionFailures["allocatedAttemptFailureCount"] == 0 && (bool?)dispositionFailures["firstPassSucceeded"] == false &&
+    (string?)dispositionFailures["invocationIds"]![0] == "run-next-20261127T170741Z-b336ddbaff581a31" &&
+    dispositionsReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    dispositionsReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)dispositionsReport["progress"]!["transitions"]![0]!["id"] == "M10-W01-C01-T1-G" &&
+    (string?)dispositionsProof["sourceCommit"] == "30f83f468f100d465c9f13952fc5a4e6ad34db3c" &&
+    (bool?)dispositionsProof["payloadCompiled"] == true && (int?)dispositionsProof["rehearsedValidationCount"] == 10 &&
+    dispositionsProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(dispositionIds) &&
+    dispositionsReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(dispositionIds),
+    "RS402 durable corrected disposition evidence differs.");
+Need(File.Exists("docs/planning/decisions/m10-isolated-solution-graph-rs403.md") && File.Exists("docs/engineering/ProbeM10IsolatedSolutionGraph.cs"), "Isolated graph material absent.");
