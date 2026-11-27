@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.162",
+  "plan_version": "0.1.163",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10304,7 +10304,7 @@
       "title": "Explicit larger-sample quantile evaluation",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C02"
       ],
@@ -10342,15 +10342,19 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~Quantile",
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11LargerSampleQuantilesVerificationTests"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS389/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M11-W01-C03-T1",
           "title": "Explicit larger-sample quantile evaluation",
           "behavior": "Extend existing Type7 and NearestRank engine through an additive explicit observation budget; keep exact rational and finite binary64 paths distinct.",
           "test_case": "Independent oracle checks sizes 1, 4096, 4097 and one million finite observations, ties, extremes, endpoints and budget/refusal behavior. Existing overloads retain the 4096 limit and historical outputs.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS389/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M11-W01-C03-T1-R",
@@ -10374,14 +10378,16 @@
               "id": "M11-W01-C03-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS389/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "Reuse the existing Type7 and NearestRank algorithms. Add explicit maxObservations overloads bounded to 1000000 finite binary64 or 8192 exact rational samples; retain the 4096 default and 4096-bit exact operand/intermediate budget. No approximation.",
-      "readiness": "RS388 durable independent quantile verification; native source closure and candidate qualification readiness pending durable result."
+      "readiness": "RS389 durable source phase closure; quantile source-qualified, package and independent consumer qualification deferred to C04."
     },
     {
       "id": "M11-W01-C04",
@@ -10391,7 +10397,7 @@
       "title": "Additive numeric package and consumer qualification",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M11-W01-C01",
         "M11-W01-C02",
@@ -10420,8 +10426,17 @@
       "proposed_commands": [
         "dotnet test dw.tools.math.slnx --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "src/projects/dw.quantities/dw.quantities.csproj",
+        "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+        "docs/engineering/ProbeM11NumericPackageCandidateRed.cs",
+        "docs/engineering/ProbeM9StatisticsBoundedNugetCandidate.cs",
+        "docs/engineering/ProbeM9Net11BoundedCandidateConsumer.cs",
+        "docs/distribution/m9-statistics-physical-private-publication-readback.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM11NumericPackageCandidateRed.cs -- --check"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10429,14 +10444,14 @@
           "title": "Additive numeric package and consumer qualification",
           "behavior": "Qualify distinct immutable net10.0 Quantities and Statistics candidates with exact dependency closure and independent locked Windows net10/net11 consumers; record rollback and actual platform scope.",
           "test_case": "Focused new contracts and historical golden oracles pass; independently obtain and hash actual candidate archives and loaded DLLs, validate exact dependencies, package-only consumers and rollback recipe without changing previous archives.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M11-W01-C04-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10455,7 +10470,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Reuse the existing source-to-package and source-free consumer qualification recipes with two fresh immutable net10.0 candidates. First inspect the old physical archives and demonstrate missing M11 API surfaces; GREEN must produce exact dependency closure and isolated locked net10/net11 consumers without publishing.",
+      "readiness": "RS389 durable readiness; activate RED with physical published archive, embedded DLL, dependency identity and missing API checks."
     }
   ],
   "requirements": [
