@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.184",
+  "plan_version": "0.1.185",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10146,7 +10146,7 @@
       "title": "Post-cutover qualification and delivery readiness",
       "kind": "code",
       "size": "M",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [
         "M10-W01-C02"
       ],
@@ -10180,7 +10180,8 @@
         "dw.tools.math.slnx",
         "docs/engineering/m10-post-cutover-certification-red-rs417.json",
         "docs/engineering/ProbeM10PostCutoverCertificationRed.cs",
-        "docs/planning/decisions/m10-post-cutover-certification-red-rs417.md"
+        "docs/planning/decisions/m10-post-cutover-certification-red-rs417.md",
+        "docs/planning/decisions/m10-post-cutover-certification-red-closure-rs418.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red"
@@ -10192,14 +10193,14 @@
           "title": "Verify migrated graph and independent consumers",
           "behavior": "Prove migrated source and fresh isolated candidate graph with finite regression, platform and consumer evidence.",
           "test_case": "Refuse floating dependencies, project-reference substitutes, changed immutable archives, unproved platform support and unsupported semantic equivalence.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C03-T1-R",
               "title": "RED",
               "description": "Falsify post-cutover qualification and delivery readiness with independent bounded negative controls.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
@@ -10220,7 +10221,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS416 durable C02 closure; C03 RED activation pending durable RS417 result."
+      "readiness": "RS417 durable certification RED activation; native RED closure and GREEN readiness pending durable RS418 result."
     },
     {
       "id": "M11-W01-C01",
