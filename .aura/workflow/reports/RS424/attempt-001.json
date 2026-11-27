@@ -1,0 +1,591 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS424",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-27T22:13:53.0968459+00:00",
+  "completedAtUtc": "2026-11-27T22:13:54.558368+00:00",
+  "durationMilliseconds": 1461,
+  "projectNodes": [
+    "M10-W01-C03-T1-G",
+    "M10-W01-C03-T1-V"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M10.md",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md",
+    "docs/engineering/m10-post-cutover-certification-green-rs424.json"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/engineering/m10-post-cutover-certification-green-rs424.json",
+    "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.81",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS424/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 3600,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-fbfc6dfc59d1485395d1fea7dc4e03a3\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 3600000,
+      "DurationMilliseconds": 1113,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS423/attempt-001.json run=RS423 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C01-T1-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11 state=done\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=14863\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=82025\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM11NumericSubsidiarityAdmission.cs bytes=61038\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=43404\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3343\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67823\r\n[files.replace-from-staged] CHANGED path=README.md bytes=11140\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m10-post-cutover-green-closure-rs424.md bytes=1043\r\n[files.replace-from-staged] CHANGED path=docs/engineering/m10-post-cutover-certification-green-rs424.json bytes=4895\r\n[json.edit-object] CHANGED path=docs/planning/backlog.json semantic object updated\r\nplanning valid: 0.1.191 | 70 chunks | 64cb7c3ac09cf4b496bbdb8f626aa0049f86555fbc3b89b96f75c1fa23458c48 | mode --write\r\n\n\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C03-T1-R state=done\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M10-W01-C03-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M10-W01-C03-T1-V not-ready-\u003Eready\r\n[payload] OK operations=19 changed=13 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS424/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS423/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS423 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "7a6f56cc6dad3ec163b4c32f3074958cf40a33232474dca390fa1fad1633ffab",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fc36eb686c31067b4ed1f7028de97ad5902ed9f312c4b95d50e674fd72c1597f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C01-T1-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fc36eb686c31067b4ed1f7028de97ad5902ed9f312c4b95d50e674fd72c1597f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fc36eb686c31067b4ed1f7028de97ad5902ed9f312c4b95d50e674fd72c1597f",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=14863",
+        "Details": null,
+        "BeforeSha256": "ceab937025250cfd9eed2c9113b485102ab8ab66ad4983a432cc2b8583ea10b4",
+        "AfterSha256": "132b5d76fff8b5ea8b70c840d92e52cbe8a308ff75dfc7080cf14df9929812c4",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=82025",
+        "Details": null,
+        "BeforeSha256": "9589a66507a223fbcce71ac38252d5ac91ca88799e759c8badbb0b9d6253dda0",
+        "AfterSha256": "aac10c0ff988e975ee487e3b1f2d11a8d2c0193b5fe1724622ed8700758d4cb0",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=61038",
+        "Details": null,
+        "BeforeSha256": "aa69883a2d34d406406a87bf51121725c18c0fc47a09c70f8114cd2ab6f07762",
+        "AfterSha256": "e636def8bfd52c8ea0b0a7ce83134761e9fd0edbb90ee07c243194d9c449a04b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=43404",
+        "Details": null,
+        "BeforeSha256": "562f3d44d22f3d736f942f1c0d91f603e58edd99a220ad3d58d35dadc40a683c",
+        "AfterSha256": "2f1b54d7148f6cbbf228e17afa7d783861087cce0afdcd9dd0bd8cf1318c751b",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "8a1f4538224275af38ef7a09876248e7db060db7d4536cdde84408624d83c4a0",
+        "AfterSha256": "258d97feddd4b61c9f9b3e4d9c6d29393829cdcc16ceefe4b83f8a27bd1c0c15",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3343",
+        "Details": null,
+        "BeforeSha256": "490eaef33e68ecf5f28fb40e780395e97ea54e1f6b4b41b4b42823b3d6b8c792",
+        "AfterSha256": "3f2bd8d8ef5616129d86fc189922326a98c0a4f097b6d50899d87730a3a5fa1f",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67823",
+        "Details": null,
+        "BeforeSha256": "e92dd1bb2fc1fc5dbfd5748b379feb039cd70296677d59678beb9515d1ef8066",
+        "AfterSha256": "c3b48d4b0fe6cec780fe6b4fcf85564a5f8d1cf994897872c8c85907644d687a",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=11140",
+        "Details": null,
+        "BeforeSha256": "ee1be7067d6e2486965fd3a6a387e6bf68e29f8c4fbbad13ad4bdd0a65c7d935",
+        "AfterSha256": "dfcbe22bb733eca588dbc7f379d8b38951cfdea596c0367c386ed3bc02ef6485",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md",
+        "Status": 1,
+        "Summary": "bytes=1043",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "0f5c6885df9493332513c3b69280231a0ff3026935b6cf6e2744cd1fbf4dd2e7",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/m10-post-cutover-certification-green-rs424.json",
+        "Status": 1,
+        "Summary": "bytes=4895",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8599bf97fcce0cc5800ab07799e15c2e853213700259c3019bb0035d05fa3a4d",
+        "Artifacts": null
+      },
+      {
+        "Area": "json",
+        "Operation": "edit-object",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "semantic object updated",
+        "Details": null,
+        "BeforeSha256": "da87b78fbd8f05dbd13638e676ccf16565c058a4050b315008af3df9c39b1ea8",
+        "AfterSha256": "64cb7c3ac09cf4b496bbdb8f626aa0049f86555fbc3b89b96f75c1fa23458c48",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C03-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "fc36eb686c31067b4ed1f7028de97ad5902ed9f312c4b95d50e674fd72c1597f",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M10-W01-C03-T1-G in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "fc36eb686c31067b4ed1f7028de97ad5902ed9f312c4b95d50e674fd72c1597f",
+        "AfterSha256": "4a85567db6bc5646b8468617bf63efc27d207f9ceeab262848ad51b0bc7c6887",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M10-W01-C03-T1-V not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "4a85567db6bc5646b8468617bf63efc27d207f9ceeab262848ad51b0bc7c6887",
+        "AfterSha256": "7fd6d8970077b61d19d617a0bae7c8513043e3cc08bf938b76d8c2d1eedb0bf6",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs424-certification-red",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-actual-target",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-m11-canonical-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-native-roadmap-parity",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-m10-green-closure",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-m9-admission",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs424-independent-production-evidence",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261127T221117Z-020bdeb9d8bb8389",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "12ebc8c724b25d8c5fc4974027dc231ab54b6444",
+  "invocationStartedAtUtc": "2026-11-27T22:11:17.5153197+00:00",
+  "invocationDurationMilliseconds": 157043,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS424",
+      "title": "Close post-cutover certification GREEN and ready Verification",
+      "projectNodes": [
+        "M10-W01-C03-T1-G",
+        "M10-W01-C03-T1-V"
+      ]
+    },
+    "declared": {
+      "summary": "Corroborate six delivered post-cutover technical gates and close native GREEN.",
+      "value": "Bind RS419\u2013RS423 to a separate GREEN ledger, corroborate exact rollback and shared archive evidence, preserve RED and ready independent Verification without repeating expensive validation.",
+      "debtChanges": [
+        "Reconcile durable post-cutover rollback evidence.",
+        "Close native GREEN and ready Verification."
+      ],
+      "nextAction": "Reconcile durable GREEN closure and independently verify the six certification gates.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M10-W01-C03-T1-G",
+          "achievement": "RS419\u2013RS423 qualified 2,722 regression tests, thirteen isolated net11 packages, exact locked Windows/Linux consumers, and a 30-input isolated rollback with 24 net10 builds, nine smoke tests and archive preservation; RS424 corroborates the six gate records."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/engineering/m10-post-cutover-certification-green-rs424.json",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json"
+      ],
+      "validations": [
+        {
+          "id": "math-rs424-certification-red",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-actual-target",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-m11-canonical-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-native-roadmap-parity",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-m10-green-closure",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-m9-admission",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs424-independent-production-evidence",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M10-W01-C03-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C03-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M10-W01-C03-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M10-W01-C03-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M10-W01-C03-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C03-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS419\u2013RS423 qualified 2,722 regression tests, thirteen isolated net11 packages, exact locked Windows/Linux consumers, and a 30-input isolated rollback with 24 net10 builds, nine smoke tests and archive preservation; RS424 corroborates the six gate records."
+      },
+      {
+        "id": "M10-W01-C03-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M10-W01-C03-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M10-W01-C03-T1-G",
+        "objective": "GREEN",
+        "kind": "subtask",
+        "parentId": "M10-W01-C03-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS419\u2013RS423 qualified 2,722 regression tests, thirteen isolated net11 packages, exact locked Windows/Linux consumers, and a 30-input isolated rollback with 24 net10 builds, nine smoke tests and archive preservation; RS424 corroborates the six gate records."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS424",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS424",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "12ebc8c724b25d8c5fc4974027dc231ab54b6444",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "1aded636918a8f5d70672f08f1c1ff6146fcd9b91ca462b60dfdc46195dd8b60"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: close M10 certification GREEN and ready Verification",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}

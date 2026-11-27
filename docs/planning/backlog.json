@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.190",
+  "plan_version": "0.1.191",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10192,7 +10192,9 @@
         "docs/planning/decisions/m10-post-cutover-linux-consumers-rs422.md",
         "docs/engineering/ProbeM10PostCutoverWslConsumers.cs",
         "docs/planning/decisions/m10-post-cutover-rollback-rs423.md",
-        "docs/engineering/ProbeM10PostCutoverRollback.cs"
+        "docs/engineering/ProbeM10PostCutoverRollback.cs",
+        "docs/planning/decisions/m10-post-cutover-green-closure-rs424.md",
+        "docs/engineering/m10-post-cutover-certification-green-rs424.json"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red",
@@ -10239,7 +10241,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS422 durable Linux consumer qualification; GREEN active, post-cutover rollback pending RS423."
+      "readiness": "RS419\u2013RS423 durable evidence qualifies six technical gates; native GREEN closure and Verification readiness pending durable RS424 result."
     },
     {
       "id": "M11-W01-C01",
