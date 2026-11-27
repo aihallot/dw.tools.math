@@ -33,6 +33,9 @@ p.Json.EditObject("docs/planning/backlog.json", doc =>
             throw new InvalidOperationException("Unexpected M10 readiness baseline.");
         node["status"] = "ready";
     }
+    chunk["files"] = p.Json.StringArray("global.json", "Directory.Build.props", "Directory.Packages.props", "dw.tools.math.slnx", "docs/engineering/m10-post-m11-project-inventory-rs399.json", "docs/engineering/m10-cutover-readiness-red-rs400.json", "docs/engineering/ProbeM10CutoverReadinessRed.cs", "docs/engineering/InspectM8Net11SourceBaseline.cs", "docs/engineering/InspectM8Net11PackageGraph.cs");
+    chunk["commands"] = p.Json.StringArray("dotnet run --file docs/engineering/ProbeM10CutoverReadinessRed.cs -- --red", "dotnet run --file docs/engineering/InspectM8Net11SourceBaseline.cs -- --check-sdk11", "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check");
+    chunk["refinement"] = "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.";
     chunk["readiness"] = "RS399 durable post-M11 inventory; native RED activation and bounded falsification pending durable result.";
     doc["plan_version"] = "0.1.172";
 });
