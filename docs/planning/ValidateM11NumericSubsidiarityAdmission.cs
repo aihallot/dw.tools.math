@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.153" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.154" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -36,9 +36,9 @@ bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringCompa
 var c11 = canonical.Where(IsM11).ToArray();
 var n11 = native.Where(IsM11).ToArray();
 Need(canonical.Count == 636 && native.Count == 630 && c11.Length == 22 && n11.Length == 22 &&
-    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" => "in_progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" => "in_progress", "M11-W01-C02-T1-R" => "done", "M11-W01-C02-T1-G" => "ready", _ => "planned" }) &&
+    c11.All(x => (string?)x["status"] == (Id(x) switch { "M11" or "M11-W01" => "in_progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" => "in_progress", "M11-W01-C02-T1-R" => "done", "M11-W01-C02-T1-G" => "in_progress", _ => "planned" }) &&
         (Id(x) switch { "M11-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS373/attempt-001.json", "M11-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS375/attempt-001.json", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS377/attempt-001.json", "M11-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS379/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
-    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" => "in-progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" => "in-progress", "M11-W01-C02-T1-R" => "done", "M11-W01-C02-T1-G" => "in-progress", _ => "not-ready" })) &&
+    n11.All(x => (string?)x["state"] == (Id(x) switch { "M11" or "M11-W01" => "in-progress", "M11-W01-C01" or "M11-W01-C01-T1" or "M11-W01-C01-T1-R" or "M11-W01-C01-T1-G" or "M11-W01-C01-T1-V" => "done", "M11-W01-C02" or "M11-W01-C02-T1" => "in-progress", "M11-W01-C02-T1-R" => "done", "M11-W01-C02-T1-G" => "done", "M11-W01-C02-T1-V" => "ready", _ => "not-ready" })) &&
     c11.Select(Id).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(n11.Select(Id).OrderBy(x => x, StringComparer.Ordinal)),
     "New scope roster or readiness frontier differs.");
 Need(canonical.Count(x => !IsM10(x) && !IsM11(x) && (string?)x["status"] == "done") == 597 &&
@@ -197,4 +197,27 @@ Need((string?)momentsRedClosureReport["runId"] == "RS379" && (string?)momentsRed
     (bool?)momentsRedClosureProof["payloadCompiled"] == true && (int?)momentsRedClosureProof["rehearsedValidationCount"] == 9,
     "RS379 durable moments RED closure differs.");
 Need(File.Exists("docs/planning/decisions/m11-streaming-moments-green-rs380.md"), "Moments GREEN decision missing.");
-Console.WriteLine("MATH-RS380-M11-MOMENTS-GREEN|red=done|green=in-progress|canonicalClosureReconciled=true|cutoverGate=M11-W01-C04|publication=false|PASS");
+var momentsGreenReport = Read(".aura/workflow/reports/RS380/attempt-001.json");
+var momentsGreenProof = Read(".workflow/runs/RS380/preparation-proof.json");
+string[] momentsGreenIds = [
+    "math-rs380-streaming-moments-independent-green", "math-rs380-streaming-moments-focused-maintained-tests",
+    "math-rs380-statistics-locked-regression", "math-rs380-m11-moments-green-activation", "math-rs380-native-roadmap-parity",
+    "math-rs380-m10-readiness-preserved", "math-rs380-m9-admission", "math-rs380-published-handoff",
+    "math-rs380-request-reconciliation", "math-rs380-m8-evidence-frontier", "math-rs380-planning-render-check", "diff-check"
+];
+Need((string?)momentsGreenReport["runId"] == "RS380" && (string?)momentsGreenReport["outcome"] == "succeeded" &&
+    (int?)momentsGreenReport["attempt"] == 1 && (bool?)momentsGreenReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (string?)momentsGreenReport["executor"]?["toolVersion"] == "0.1.80" &&
+    (string?)momentsGreenReport["executor"]?["assemblySha256"] == "b7eec1950dbd71e727b173d8695569d2c3dc5b933c41edf89c4787e56317b2fb" &&
+    momentsGreenReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    momentsGreenReport["progress"]!["transitions"]!.AsArray().Count == 1 &&
+    (string?)momentsGreenReport["progress"]!["transitions"]![0]!["id"] == "M11-W01-C02-T1-G" &&
+    (string?)momentsGreenReport["progress"]!["transitions"]![0]!["afterState"] == "in-progress" &&
+    momentsGreenReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)momentsGreenProof["sourceCommit"] == "79f54d76cb2684f32f8da4788080641dc637958f" &&
+    (bool?)momentsGreenProof["payloadCompiled"] == true && (int?)momentsGreenProof["rehearsedValidationCount"] == 12 &&
+    Strings(momentsGreenProof, "preparationValidationIds").SequenceEqual(momentsGreenIds) &&
+    momentsGreenReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(momentsGreenIds),
+    "RS380 durable GREEN qualification differs.");
+Need(File.Exists("docs/planning/decisions/m11-streaming-moments-green-closure-rs381.md"), "Moments GREEN closure decision missing.");
+Console.WriteLine("MATH-RS381-M11-MOMENTS-GREEN-CLOSURE|green=done|verify=ready|canonicalActivationReconciled=true|cutoverGate=M11-W01-C04|publication=false|PASS");
