@@ -90,6 +90,33 @@ var serialized = JsonSerializer.Serialize(new { schemaVersion = 1, sourceCommit 
     limits = new[] { "Historical checkouts are required for preserved fixtures whose inherited defaults would otherwise change.",
         "Individual target compatibility, isolated restore, fragile tests and actual rollback are not established by this inventory.",
         "No publication is authorized." } }, new JsonSerializerOptions { WriteIndented = true }) + "\n";
-if (args[0] == "--write") File.WriteAllText(Output, serialized);
-else Need(File.ReadAllText(Output).Replace("\r\n", "\n", StringComparison.Ordinal) == serialized, "Disposition ledger differs from observed project files.");
+if (args[0] == "--write")
+    File.WriteAllText(Output, serialized.Replace("\r\n", "\n", StringComparison.Ordinal));
+else
+{
+    var actual = JsonNode.Parse(File.ReadAllText(Output));
+    var expected = JsonNode.Parse(serialized);
+    if (!JsonNode.DeepEquals(actual, expected))
+    {
+        var actualRows = actual?["projects"] as JsonArray;
+        var expectedRows = expected?["projects"] as JsonArray;
+        if (actualRows is not null && expectedRows is not null && actualRows.Count == expectedRows.Count)
+        {
+            for (var i = 0; i < expectedRows.Count; i++)
+            {
+                if (JsonNode.DeepEquals(actualRows[i], expectedRows[i])) continue;
+                var expectedRow = expectedRows[i]!.AsObject();
+                var actualRow = actualRows[i] as JsonObject;
+                var fields = expectedRow.Select(x => x.Key)
+                    .Concat(actualRow?.Select(x => x.Key) ?? Enumerable.Empty<string>())
+                    .Distinct(StringComparer.Ordinal)
+                    .Where(key => actualRow is null || !actualRow.ContainsKey(key) || !expectedRow.ContainsKey(key) ||
+                        !JsonNode.DeepEquals(actualRow[key], expectedRow[key]));
+                throw new InvalidDataException("M10 dispositions: Project ledger differs at row " + i +
+                    ", path=" + (string?)expectedRow["path"] + ", fields=" + string.Join(",", fields));
+            }
+        }
+        throw new InvalidDataException("M10 dispositions: Ledger envelope, counts or project roster differs.");
+    }
+}
 Console.WriteLine("MATH-RS402-DISPOSITIONS|projects=123|solution=24|maintainedTools=2|versionedTools=38|qualification=false|PASS");
