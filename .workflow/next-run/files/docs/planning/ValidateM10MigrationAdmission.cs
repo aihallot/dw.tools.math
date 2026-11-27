@@ -75,3 +75,44 @@ Need((string?)admissionReport["runId"] == "RS367" && (string?)admissionReport["o
     admissionProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(admissionIds, StringComparer.Ordinal),
     "Durable RS367 admission evidence or refusal lineage differs.");
 Console.WriteLine("MATH-RS368-M10-READINESS|RS367=corrected|priorRefusals=2|nativeReady=5|remainingNotReady=12|sourceProjects=13|testProjects=11|migrationExecuted=false|publication=false|PASS");
+
+var postM11Report = Read(".aura/workflow/reports/RS398/attempt-001.json");
+var postM11Proof = Read(".workflow/runs/RS398/preparation-proof.json");
+string[] postM11Ids = ["math-rs398-m11-canonical-reconciliation","math-rs398-native-roadmap-parity","math-rs398-m10-readiness-preserved","math-rs398-m9-admission","math-rs398-published-handoff","math-rs398-request-reconciliation","math-rs398-m8-evidence-frontier","math-rs398-planning-render-check","diff-check"];
+Need((string?)postM11Report["runId"] == "RS398" && (string?)postM11Report["outcome"] == "succeeded" &&
+    (int?)postM11Report["attempt"] == 1 && (bool?)postM11Report["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)postM11Report["priorInvocationFailures"]?["count"] == 0 &&
+    (string?)postM11Report["executor"]?["toolVersion"] == "0.1.81" &&
+    (string?)postM11Report["executor"]?["assemblySha256"] == "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a" &&
+    postM11Report["boundaryViolations"]!.AsArray().Count == 0 &&
+    postM11Report["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    postM11Report["progress"]!["completions"]!.AsArray().Count == 0 &&
+    (string?)postM11Proof["sourceCommit"] == "b94ca692048192af9a2faf7afb26a407e738f49c" &&
+    (bool?)postM11Proof["payloadCompiled"] == true && (int?)postM11Proof["rehearsedValidationCount"] == 9 &&
+    postM11Proof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(postM11Ids) &&
+    postM11Report["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(postM11Ids),
+    "RS398 durable canonical reconciliation differs.");
+Need(canonical.Count(x => ((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)) == 22 &&
+    canonical.Where(x => ((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done") &&
+    native.Count(x => ((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)) == 22 &&
+    native.Where(x => ((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"),
+    "M11 completion differs.");
+var inventory = Read("docs/engineering/m10-post-m11-project-inventory-rs399.json");
+var expectedProjects = inventory["projects"]!.AsArray().Select(x => (string)x!).ToArray();
+var observedProjects = new[] { "src", "tests", "tools", "samples", "docs" }
+    .SelectMany(root => Directory.EnumerateFiles(root, "*.csproj", SearchOption.AllDirectories))
+    .Select(path => path.Replace('\\', '/'))
+    .Where(path => !path.Split('/').Any(part => part is "bin" or "obj" or "build" or ".git"))
+    .OrderBy(path => path, StringComparer.Ordinal).ToArray();
+Need((string?)inventory["sourceCommit"] == "1b68b26493f248815a7964f8b7d5481bfd2fb7a6" &&
+    (string?)inventory["status"] == "inventory-only-classification-pending" &&
+    expectedProjects.Length == 123 && observedProjects.SequenceEqual(expectedProjects, StringComparer.Ordinal),
+    "Post-M11 project inventory differs.");
+foreach (var path in observedProjects)
+{
+    var xml = XDocument.Load(path);
+    string Values(string name) => string.Join(",", xml.Descendants().Where(x => x.Name.LocalName == name).Select(x => x.Value.Trim()));
+    Console.WriteLine("MATH-RS399-PROJECT|path=" + path + "|tfm=" + Values("TargetFramework") + "|tfms=" + Values("TargetFrameworks") + "|lang=" + Values("LangVersion") + "|lock=" + File.Exists(Path.Combine(Path.GetDirectoryName(path)!, "packages.lock.json")));
+}
+Need(File.Exists("docs/planning/decisions/m10-post-m11-baseline-refresh-rs399.md"), "Post-M11 baseline decision missing.");
+Console.WriteLine("MATH-RS399-M10-BASELINE-REFRESH|projects=123|m11Done=22|classification=pending|migration=false|publication=false|PASS");
