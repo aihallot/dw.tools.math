@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.156",
+  "plan_version": "0.1.157",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10209,7 +10209,7 @@
       "title": "Resumable finite streaming moments",
       "kind": "code",
       "size": "M",
-      "status": "in_progress",
+      "status": "done",
       "depends_on": [
         "M3-W02-C01"
       ],
@@ -10249,15 +10249,19 @@
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMoments",
         "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMomentsVerificationTests"
       ],
-      "evidence": [],
+      "evidence": [
+        ".aura/workflow/reports/RS383/attempt-001.json"
+      ],
       "tasks": [
         {
           "id": "M11-W01-C02-T1",
           "title": "Resumable finite streaming moments",
           "behavior": "Qualify provider-free incremental mean and population/sample variance with constant-size state, explicit finite precision and budgets, validated versioned checkpoint and replay.",
           "test_case": "At least one million observations, independent reference oracles for large offsets and small variance, empty/singleton/constant data, refusal atomicity, budget exhaustion and interrupted versus uninterrupted replay.",
-          "status": "in_progress",
-          "evidence": [],
+          "status": "done",
+          "evidence": [
+            ".aura/workflow/reports/RS383/attempt-001.json"
+          ],
           "subtasks": [
             {
               "id": "M11-W01-C02-T1-R",
@@ -10281,14 +10285,16 @@
               "id": "M11-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS383/attempt-001.json"
+              ]
             }
           ]
         }
       ],
       "refinement": "Additive resumable finite binary64 moments with explicit budget, shifted Welford candidate, immutable structural checkpoint and independent exact closed-form reference; no change to existing bounded batch contracts.",
-      "readiness": "RS382 durable independent verification succeeded after one pre-attempt metadata refusal; native moments closure and larger-sample quantile RED readiness pending durable result."
+      "readiness": "RS383 durable source phase closure; streaming moments source-qualified, package and independent consumer qualification deferred to C04."
     },
     {
       "id": "M11-W01-C03",
@@ -10298,7 +10304,7 @@
       "title": "Explicit larger-sample quantile evaluation",
       "kind": "code",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [
         "M3-W02-C02"
       ],
@@ -10320,8 +10326,18 @@
       "proposed_commands": [
         "dotnet test dw.tools.math.slnx --no-restore"
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "src/projects/dw.tools.math.statistics/QuantileStatistics64.cs",
+        "src/projects/dw.tools.math.statistics/DescriptiveStatistics64.cs",
+        "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+        "docs/engineering/ProbeM11LargerSampleQuantilesRed.cs",
+        "docs/engineering/fixtures/M11LargerSampleQuantilesOracle.cs"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/ProbeM11LargerSampleQuantilesRed.cs -- --red",
+        "dotnet run --file docs/engineering/ProbeM11LargerSampleQuantilesRed.cs -- --green",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11LargerSampleQuantiles"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -10329,14 +10345,14 @@
           "title": "Explicit larger-sample quantile evaluation",
           "behavior": "Extend existing Type7 and NearestRank engine through an additive explicit observation budget; keep exact rational and finite binary64 paths distinct.",
           "test_case": "Independent oracle checks sizes 1, 4096, 4097 and one million finite observations, ties, extremes, endpoints and budget/refusal behavior. Existing overloads retain the 4096 limit and historical outputs.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M11-W01-C03-T1-R",
               "title": "RED",
               "description": "Establish an independent executable falsification of the admitted contract and document existing API reuse.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10355,7 +10371,9 @@
             }
           ]
         }
-      ]
+      ],
+      "refinement": "Reuse existing exact rational and finite binary64 Type7 and NearestRank algorithms through additive explicit observation-budget overloads; preserve the default 4096 bound and exact operand-bit budget. Qualify separate explicit ceilings before GREEN.",
+      "readiness": "RS383 durable quantile RED readiness; activate RED with a compiled independent reference and legacy boundary refusal."
     },
     {
       "id": "M11-W01-C04",
