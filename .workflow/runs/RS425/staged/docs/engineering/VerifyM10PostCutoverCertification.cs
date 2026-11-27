@@ -135,7 +135,7 @@ Need(!string.IsNullOrWhiteSpace(shared) && Path.IsPathFullyQualified(shared) && 
 var historical = green["sharedArchives"]!.AsArray().ToDictionary(x => (string)x!["file"]!,x => (string)x!["sha256"]!,StringComparer.OrdinalIgnoreCase);
 var physical = Directory.EnumerateFiles(shared!,"*.nupkg",SearchOption.AllDirectories)
     .Where(x => packages.Keys.Any(id => Path.GetFileName(x).StartsWith(id+".",StringComparison.OrdinalIgnoreCase))).ToArray();
-Need(historical.Count == 12 && physical.Length == 12 && historical.Keys.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(physical.Select(Path.GetFileName)) &&
+Need(historical.Count == 12 && physical.Length == 12 && historical.Keys.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(physical.Select(x => Path.GetFileName(x) ?? throw new InvalidDataException("Shared archive filename missing."))) &&
     physical.All(x => Hash(x) == historical[Path.GetFileName(x)]),"Shared archive preservation or publication boundary differs.");
 var restored = Rows(outputs["RS423"],"MATH-RS423-RESTORED|").Select(Fields).ToDictionary(x => x["path"],x => x["sha256"],StringComparer.Ordinal);
 var prior = Read(".aura/workflow/reports/RS407/attempt-001.json");
