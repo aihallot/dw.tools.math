@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.174" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.175" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -24,7 +24,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in_progress", "M10-W01-C01-T1-R" => "done", "M10-W01-C01-T1-G" => "ready", _ => "planned" }) && ((string?)x["id"] == "M10-W01-C01-T1-R" ? x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json" : x["evidence"]!.AsArray().Count == 0)) &&
+Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in_progress", "M10-W01-C01-T1-R" => "done", "M10-W01-C01-T1-G" => "in_progress", _ => "planned" }) && ((string?)x["id"] == "M10-W01-C01-T1-R" ? x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json" : x["evidence"]!.AsArray().Count == 0)) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
 var native = new List<JsonNode>();
 void Walk(JsonNode node)
@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in-progress", "M10-W01-C01-T1-R" => "done", "M10-W01-C01-T1-G" => "in-progress", _ => "not-ready" })) &&
+Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in-progress", "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" => "done", "M10-W01-C01-T1-V" => "ready", _ => "not-ready" })) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -293,3 +293,48 @@ Need(inspectorOutput.Contains("MATH-RS406-INSPECTOR|buildSdk=11.0.100|targets=2|
     inspectorOutput.Contains("MATH-RS406-CANDIDATE|sourceSha256=f79b6917884841673d5523296a64f9298e0c0a8e0ee06ac7003730e8dd8cee6e|production=false", StringComparison.Ordinal) &&
     File.Exists("docs/planning/decisions/m10-isolated-rollback-rs407.md"), "RS406 inspector scope or next material differs.");
 Console.WriteLine("MATH-RS407-BASELINE|RS406=PASS|corrected=true|targets=2|productionMigration=false|PASS");
+
+var rollbackReport = Read(".aura/workflow/reports/RS407/attempt-001.json");
+var rollbackProof = Read(".workflow/runs/RS407/preparation-proof.json");
+string[] rollbackPreparationIds = ["math-rs407-inspector-evidence", "diff-check"];
+Need((string?)rollbackReport["runId"] == "RS407" && (string?)rollbackReport["outcome"] == "succeeded" &&
+    (int?)rollbackReport["attempt"] == 1 && (string?)rollbackReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (bool?)rollbackReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    (int?)rollbackReport["priorInvocationFailures"]?["count"] == 0 &&
+    rollbackReport["boundaryViolations"]!.AsArray().Count == 0 && rollbackReport["progress"]!["transitions"]!.AsArray().Count == 0 &&
+    (string?)rollbackProof["sourceCommit"] == "0eb5baca1007d2043531fb79543bedb92d3a0fc2" &&
+    (bool?)rollbackProof["payloadCompiled"] == true && (int?)rollbackProof["rehearsedValidationCount"] == 2 &&
+    rollbackProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(rollbackPreparationIds) &&
+    rollbackReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(rollbackPreparationIds),
+    "RS407 durable rollback evidence differs.");
+var rollbackValidation = rollbackReport["validations"]!.AsArray().Single()!;
+Need((string?)rollbackValidation["Id"] == "math-rs407-isolated-rollback" && (int?)rollbackValidation["ExitCode"] == 0 &&
+    (bool?)rollbackValidation["TimedOut"] == false && (bool?)rollbackValidation["Cancelled"] == false, "RS407 validation differs.");
+var rollbackOutput = (string)rollbackValidation["StandardOutput"]!;
+Need(rollbackOutput.Contains("MATH-RS407-ROLLBACK|sdk=10.0.404|tfm=net10.0|restored=30|projects=24|lockedRestore=PASS|build=PASS|smoke=PASS|production=false|publication=false|PASS", StringComparison.Ordinal) &&
+    rollbackOutput.Contains("MATH-RS407-TARGET|sdk=11.0.100|projects=24|changedInputs=28|PASS", StringComparison.Ordinal) &&
+    rollbackOutput.Contains("MATH-RS407-SMOKE|sdk=10.0.404|tfm=net10.0|classes=3|passed=9|failed=0|PASS", StringComparison.Ordinal) &&
+    rollbackOutput.Contains("trxSha256=caf98e894b15c8fbba861b782af8af6a64ee44ae04772bd0994ca64b8b5ce98d|PASS", StringComparison.Ordinal),
+    "RS407 rollback scope differs.");
+var restoredPaths = redLedger["rollbackInputs"]!.AsArray().Select(x => (string)x!["path"]!).Concat(new[] {
+    "tools/dw.tools.math.discovery-bindings/dw.tools.math.discovery-bindings.csproj",
+    "tools/dw.tools.math.nuget-preflight/Program.cs" }).ToHashSet(StringComparer.Ordinal);
+var restoredRows = rollbackOutput.Split('\n').Select(x => x.TrimEnd('\r')).Where(x => x.StartsWith("MATH-RS407-RESTORED|", StringComparison.Ordinal)).ToArray();
+var restoredObserved = new HashSet<string>(StringComparer.Ordinal);
+foreach (var line in restoredRows)
+{
+    var match = System.Text.RegularExpressions.Regex.Match(line, @"^MATH-RS407-RESTORED\|path=(.+)\|sha256=([0-9a-f]{64})\|PASS$");
+    Need(match.Success && restoredObserved.Add(match.Groups[1].Value), "Invalid or duplicate rollback row.");
+    var bytes = File.ReadAllBytes(match.Groups[1].Value);
+    Need(Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(bytes)) == match.Groups[2].Value, "Current rollback input differs: " + match.Groups[1].Value);
+}
+var restoredProjects = rollbackOutput.Split('\n').Select(x => x.TrimEnd('\r')).Where(x => x.StartsWith("MATH-RS407-PROJECT|", StringComparison.Ordinal)).ToArray();
+var restoredProjectPaths = new HashSet<string>(StringComparer.Ordinal);
+foreach (var line in restoredProjects)
+{
+    var match = System.Text.RegularExpressions.Regex.Match(line, @"^MATH-RS407-PROJECT\|path=(.+)\|target=net10\.0\|dllSha256=[0-9a-f]{64}\|PASS$");
+    Need(match.Success && restoredProjectPaths.Add(match.Groups[1].Value), "Invalid or duplicate rollback project row.");
+}
+Need(restoredRows.Length == 30 && restoredObserved.SetEquals(restoredPaths) && restoredProjects.Length == 24 &&
+    restoredProjectPaths.SetEquals(projects) && File.Exists("docs/planning/decisions/m10-cutover-readiness-green-closure-rs408.md"), "Rollback coverage or closure decision differs.");
+Console.WriteLine("MATH-RS408-GREEN-CLOSURE|RS402-RS407=PASS|restored=30|projects=24|nativeGreen=done|verification=ready|production=false|publication=false|PASS");

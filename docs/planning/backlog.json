@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.174",
+  "plan_version": "0.1.175",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -9936,13 +9936,20 @@
         "docs/engineering/InspectM8Net11SourceBaseline.cs",
         "docs/engineering/InspectM8Net11PackageGraph.cs",
         "docs/engineering/InspectM10ProjectDispositions.cs",
-        "docs/engineering/m10-project-dispositions-rs402.json"
+        "docs/engineering/m10-project-dispositions-rs402.json",
+        "docs/engineering/ProbeM10IsolatedSolutionGraph.cs",
+        "docs/planning/decisions/m10-cutover-readiness-green-closure-rs408.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10CutoverReadinessRed.cs -- --red",
         "dotnet run --file docs/engineering/InspectM8Net11SourceBaseline.cs -- --check-sdk11",
         "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check",
-        "dotnet run --file docs/engineering/InspectM10ProjectDispositions.cs -- --check"
+        "dotnet run --file docs/engineering/InspectM10ProjectDispositions.cs -- --check",
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --check",
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --focused",
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --tools",
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --inspect",
+        "dotnet run --file docs/engineering/ProbeM10IsolatedSolutionGraph.cs -- --rollback"
       ],
       "evidence": [],
       "tasks": [
@@ -9967,7 +9974,7 @@
               "id": "M10-W01-C01-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum changes needed for cutover readiness and rollback baseline.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
@@ -9981,7 +9988,7 @@
         }
       ],
       "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
-      "readiness": "RS401 durable RED closure; GREEN activation and project dispositions pending durable result."
+      "readiness": "RS402 durable GREEN activation; RS403\u2013RS407 isolated graph, tests, tools, inspector and rollback qualified; native GREEN closure and Verification readiness pending durable result."
     },
     {
       "id": "M10-W01-C02",
