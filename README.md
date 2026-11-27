@@ -4,7 +4,7 @@ Independent .NET 10 mathematical computation and representation libraries for ap
 
 ## Current status — completed M0–M9; M10 readiness and M11 numeric subsidiarity
 
-M0–M9 remain complete. Canonical backlog `0.1.158` adds the [M11 numeric subsidiarity scope](docs/planning/versions/M11.md); M10 readiness remains intact, and actual production cutover depends on M11 candidate qualification. Streaming moments source qualification closed in RS383; larger-sample quantile RED was established in RS384; RS385 closes RED and readies the additive GREEN. No new package publication or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
+M0–M9 remain complete. Canonical backlog `0.1.159` adds the [M11 numeric subsidiarity scope](docs/planning/versions/M11.md); M10 readiness remains intact, and actual production cutover depends on M11 candidate qualification. Streaming moments source qualification closed in RS383; larger-sample quantile RED closed in RS385; RS386 implements additive explicitly bounded quantile overloads. No new package publication or production cutover has occurred. The owner authorized prospective migration to .NET 11/C# 15. See the [M10 roadmap](docs/planning/versions/M10.md) and [admission decision](docs/planning/decisions/m10-production-net11-migration-admission-rs367.md).
 
 ### Completed M0–M9 checkpoint — RS366 (2026-11-26)
 
