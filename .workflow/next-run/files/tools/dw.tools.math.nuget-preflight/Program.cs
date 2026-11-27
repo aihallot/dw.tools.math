@@ -91,12 +91,12 @@ internal static partial class Program
     {
         var root = Path.GetFullPath(repositoryRoot);
         Need(Directory.Exists(Path.Combine(root, "src", "projects")), "missing source project root");
-        var central = XDocument.Load(Path.Combine(root, "Directory.Build.props"));
-var framework = central.Descendants("TargetFramework").Single().Value;
-var language = central.Descendants("LangVersion").Single().Value;
-Need((framework, language) is ("net10.0", "14.0") or ("net11.0", "15.0"),
-    "unqualified central framework/language pair");
-var sources = LoadSources(root);
+            var central = XDocument.Load(Path.Combine(root, "Directory.Build.props"));
+    var framework = central.Descendants("TargetFramework").Single().Value;
+    var language = central.Descendants("LangVersion").Single().Value;
+    Need((framework, language) is ("net10.0", "14.0") or ("net11.0", "15.0"),
+        "unqualified central framework/language pair");
+    var sources = LoadSources(root);
         Need(sources.Length == 13, "exactly thirteen qualified Math libraries are expected");
         var ids = sources.Select(p => p.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
         Need(ids.Count == 13, "duplicate Math package id");
