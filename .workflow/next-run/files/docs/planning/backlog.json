@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.154",
+  "plan_version": "0.1.155",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10240,12 +10240,14 @@
         "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
         "docs/engineering/ProbeM11StreamingMomentsRed.cs",
         "docs/engineering/fixtures/M11StreamingMomentsOracle.cs",
-        "tests/projects/dw.tools.math.statistics.tests/M11StreamingMomentsTests.cs"
+        "tests/projects/dw.tools.math.statistics.tests/M11StreamingMomentsTests.cs",
+        "tests/projects/dw.tools.math.statistics.tests/M11StreamingMomentsVerificationTests.cs"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM11StreamingMomentsRed.cs -- --red",
         "dotnet run --file docs/engineering/ProbeM11StreamingMomentsRed.cs -- --green",
-        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMoments"
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMoments",
+        "dotnet test tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj -c Release -p:RestoreLockedMode=true --filter FullyQualifiedName~M11StreamingMomentsVerificationTests"
       ],
       "evidence": [],
       "tasks": [
@@ -10270,21 +10272,23 @@
               "id": "M11-W01-C02-T1-G",
               "title": "GREEN",
               "description": "Implement or qualify only the minimum admitted contract.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS381/attempt-001.json"
+              ]
             },
             {
               "id": "M11-W01-C02-T1-V",
               "title": "Verify and document",
               "description": "Independently verify the result, historical compatibility and explicit limitations.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             }
           ]
         }
       ],
       "refinement": "Additive resumable finite binary64 moments with explicit budget, shifted Welford candidate, immutable structural checkpoint and independent exact closed-form reference; no change to existing bounded batch contracts.",
-      "readiness": "RS380 durable GREEN activation and independent million-observation/checkpoint oracle plus maintained Statistics qualification; GREEN closure and verification readiness pending durable result."
+      "readiness": "RS381 durable GREEN closure and verification readiness; independently verify varied dyadic moments, multiple checkpoint boundaries and atomic arithmetic refusal recovery."
     },
     {
       "id": "M11-W01-C03",
