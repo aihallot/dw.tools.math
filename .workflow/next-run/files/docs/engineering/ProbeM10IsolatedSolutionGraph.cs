@@ -4,10 +4,11 @@ using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] is not ("--check" or "--focused" or "--tools" or "--inspect")) throw new ArgumentException("Expected --check, --focused, --tools or --inspect.");
+if (args.Length != 1 || args[0] is not ("--check" or "--focused" or "--tools" or "--inspect" or "--rollback")) throw new ArgumentException("Expected --check, --focused, --tools, --inspect or --rollback.");
 var focused = args[0] == "--focused";
 var inspect = args[0] == "--inspect";
 var tools = args[0] == "--tools" || inspect;
+var rollback = args[0] == "--rollback";
 static void Need(bool ok, string message) { if (!ok) throw new InvalidDataException("M10 isolated graph: " + message); }
 static string Hash(string path) => Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
 var repository = Path.GetFullPath(".");
@@ -25,6 +26,21 @@ string Run(string cwd, string executable, int timeout, params string[] arguments
     if (process.ExitCode != 0) throw new InvalidOperationException(executable + " " + string.Join(" ", arguments) + " failed:\n" + output + "\n" + error);
     return output;
 }
+// Observe the actual baseline SDK selected by the production latestPatch policy.
+var baselineSdk = "";
+if (inspect || rollback)
+{
+    var baselinePolicy = JsonNode.Parse(File.ReadAllText(Path.Combine(repository, "global.json")))!["sdk"]!;
+    Need((string?)baselinePolicy["version"] == "10.0.401" &&
+        (string?)baselinePolicy["rollForward"] == "latestPatch" &&
+        (bool?)baselinePolicy["allowPrerelease"] == false, "Original baseline SDK policy differs.");
+    baselineSdk = Run(repository, "dotnet", 30000, "--version").Trim();
+    Console.WriteLine("MATH-RS406-SDK|context=production|policy=10.0.401/latestPatch|observed=" + baselineSdk);
+    Need(Version.TryParse(baselineSdk, out var baselineVersion) &&
+        baselineVersion.Major == 10 && baselineVersion.Minor == 0 &&
+        baselineVersion.Build >= 401 && baselineVersion.Build < 500 &&
+        baselineVersion.Revision == -1, "Production SDK is outside its stable 10.0.4xx feature band: " + baselineSdk);
+}
 var solution = XDocument.Load("dw.tools.math.slnx").Descendants("Project")
     .Select(x => ((string)x.Attribute("Path")!).Replace('\\', '/')).OrderBy(x => x, StringComparer.Ordinal).ToArray();
 Need(solution.Length == 24 && solution.Count(x => x.StartsWith("src/projects/", StringComparison.Ordinal)) == 13 &&
@@ -41,7 +57,7 @@ var toolInputs = new[] {
     "docs/discovery/agent-surface-candidates.json",
     "docs/discovery/qualification/m8-selected-clr-bindings.json"
 };
-var inputs = tracked.Concat(tools ? toolInputs : Array.Empty<string>()).Concat(new[] { "global.json", "Directory.Build.props", "Directory.Packages.props", "NuGet.config", "dw.tools.math.slnx" })
+var inputs = tracked.Concat(tools || rollback ? toolInputs : Array.Empty<string>()).Concat(new[] { "global.json", "Directory.Build.props", "Directory.Packages.props", "NuGet.config", "dw.tools.math.slnx" })
     .Distinct(StringComparer.Ordinal).OrderBy(x => x, StringComparer.Ordinal).ToArray();
 var originalHashes = inputs.ToDictionary(x => x, Hash, StringComparer.Ordinal);
 var work = Path.Combine(repository, "build", "artifacts", "m10-rs403-isolated-solution", Guid.NewGuid().ToString("N"));
@@ -54,6 +70,36 @@ try
         Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
         File.Copy(relative, destination, false);
         Need(Hash(destination) == originalHashes[relative], "Source copy differs: " + relative);
+    }
+    var rollbackPaths = new List<string>();
+    var snapshot = Path.Combine(work, "rollback-originals");
+    if (rollback)
+    {
+        var ledger = JsonNode.Parse(File.ReadAllText("docs/engineering/m10-cutover-readiness-red-rs400.json"))!;
+        var rows = ledger["rollbackInputs"]!.AsArray();
+        var expected = new[] { "global.json", "Directory.Build.props", "Directory.Packages.props", "dw.tools.math.slnx" }
+            .Concat(solution.Select(p => p[..p.LastIndexOf('/')] + "/packages.lock.json")).ToHashSet(StringComparer.Ordinal);
+        Need(rows.Count == 28 && expected.SetEquals(rows.Select(x => (string)x!["path"]!)), "Rollback ledger roster differs.");
+        foreach (var row in rows)
+        {
+            var path = (string)row!["path"]!;
+            var blob = (string)row["blob"]!;
+            Need(Run(repository, "git", 30000, "rev-parse", "HEAD:" + path).Trim() == blob &&
+                Run(repository, "git", 30000, "hash-object", "--path=" + path, path).Trim() == blob,
+                "Rollback baseline Git identity differs: " + path);
+            rollbackPaths.Add(path);
+        }
+        rollbackPaths.Add(toolInputs[1]);
+        rollbackPaths.Add(toolInputs[2]);
+        Need(rollbackPaths.Distinct(StringComparer.Ordinal).Count() == 30, "Rollback path roster differs.");
+        foreach (var path in rollbackPaths)
+        {
+            var saved = Path.Combine(snapshot, path);
+            Directory.CreateDirectory(Path.GetDirectoryName(saved)!);
+            File.Copy(Path.Combine(work, path), saved);
+            Need(Hash(saved) == originalHashes[path], "Rollback snapshot differs: " + path);
+        }
+        Console.WriteLine("MATH-RS407-SNAPSHOT|ledger=28|toolInputs=2|files=30|PASS");
     }
     var sdkPath = Path.Combine(work, "global.json");
     var sdk = JsonNode.Parse(File.ReadAllText(sdkPath))!.AsObject();
@@ -88,15 +134,41 @@ try
         locks.Add(relativeLock, Hash(lockPath));
     }
     Need(Run(work, "dotnet", 30000, "--version").Trim() == "11.0.100", "Isolated SDK mismatch.");
+    if (tools || rollback)
+    {
+        var discoveryProject = toolInputs[1];
+        var xml = XDocument.Load(Path.Combine(work, discoveryProject));
+        var target = xml.Descendants("TargetFramework").Single();
+        Need(target.Value == "net10.0", "Discovery baseline target differs.");
+        target.Value = "net11.0";
+        xml.Save(Path.Combine(work, discoveryProject));
+    }
+    if (inspect || rollback)
+    {
+        // Qualify the proposed production change without altering the original tool.
+        var sourcePath = Path.Combine(work, toolInputs[2]);
+        var source = File.ReadAllText(sourcePath);
+        const string anchor = "var sources = LoadSources(root);";
+        const string oldTarget = "properties[\"TargetFramework\"] == \"net10.0\"";
+        const string targetPolicy = """
+            var central = XDocument.Load(Path.Combine(root, "Directory.Build.props"));
+            var framework = central.Descendants("TargetFramework").Single().Value;
+            var language = central.Descendants("LangVersion").Single().Value;
+            Need((framework, language) is ("net10.0", "14.0") or ("net11.0", "15.0"),
+                "unqualified central framework/language pair");
+            var sources = LoadSources(root);
+        """;
+        Need(source.Split(anchor, StringSplitOptions.None).Length == 2 &&
+            source.Split(oldTarget, StringSplitOptions.None).Length == 2, "Inspector source anchors differ.");
+        source = source.Replace(anchor, targetPolicy, StringComparison.Ordinal)
+            .Replace(oldTarget, "properties[\"TargetFramework\"] == framework", StringComparison.Ordinal);
+        File.WriteAllText(sourcePath, source);
+        Console.WriteLine("MATH-RS406-CANDIDATE|sourceSha256=" + Hash(sourcePath) + "|production=false");
+    }
     if (tools)
     {
         var discovery = toolInputs[1];
         var preflight = toolInputs[3];
-        var xml = XDocument.Load(Path.Combine(work, discovery));
-        var target = xml.Descendants("TargetFramework").Single();
-        Need(target.Value == "net10.0", "Discovery baseline target differs.");
-        target.Value = "net11.0";
-        xml.Save(Path.Combine(work, discovery));
         var feed = Environment.GetEnvironmentVariable("NUGET_LOCAL");
         Need(!string.IsNullOrWhiteSpace(feed) && Path.IsPathFullyQualified(feed) && Directory.Exists(feed), "Missing qualified NUGET_LOCAL feed.");
         var archive = Path.Combine(feed!, "dw.tools.nuget.20260.20261026.1010.nupkg");
@@ -112,28 +184,6 @@ try
             "Baseline NuGet sources differ.");
         sources.Add(new XElement("add", new XAttribute("key", "math-private-local"), new XAttribute("value", feed!)));
         config.Save(privateConfig);
-        if (inspect)
-        {
-            // Qualify the proposed production change without altering the original tool.
-            var sourcePath = Path.Combine(work, toolInputs[2]);
-            var source = File.ReadAllText(sourcePath);
-            const string anchor = "var sources = LoadSources(root);";
-            const string oldTarget = "properties[\"TargetFramework\"] == \"net10.0\"";
-            const string targetPolicy = """
-                var central = XDocument.Load(Path.Combine(root, "Directory.Build.props"));
-                var framework = central.Descendants("TargetFramework").Single().Value;
-                var language = central.Descendants("LangVersion").Single().Value;
-                Need((framework, language) is ("net10.0", "14.0") or ("net11.0", "15.0"),
-                    "unqualified central framework/language pair");
-                var sources = LoadSources(root);
-            """;
-            Need(source.Split(anchor, StringSplitOptions.None).Length == 2 &&
-                source.Split(oldTarget, StringSplitOptions.None).Length == 2, "Inspector source anchors differ.");
-            source = source.Replace(anchor, targetPolicy, StringComparison.Ordinal)
-                .Replace(oldTarget, "properties[\"TargetFramework\"] == framework", StringComparison.Ordinal);
-            File.WriteAllText(sourcePath, source);
-            Console.WriteLine("MATH-RS406-CANDIDATE|sourceSha256=" + Hash(sourcePath) + "|production=false");
-        }
         foreach (var project in inspect ? new[] { preflight } : new[] { discovery, preflight })
         {
             var id = Path.GetFileNameWithoutExtension(project);
@@ -203,7 +253,9 @@ try
                     {
                         File.Copy(Path.Combine(repository, "Directory.Build.props"), propsPath, true);
                         File.Copy(Path.Combine(repository, "global.json"), sdkPath, true);
-                        Need(Run(work, "dotnet", 30000, "--version").Trim() == "10.0.401", "Baseline inspection SDK differs.");
+                        var isolatedBaselineSdk = Run(work, "dotnet", 30000, "--version").Trim();
+                        Console.WriteLine("MATH-RS406-SDK|context=isolated-baseline|expected=" + baselineSdk + "|observed=" + isolatedBaselineSdk);
+                        Need(isolatedBaselineSdk == baselineSdk, "Baseline inspection SDK differs: expected " + baselineSdk + ", observed " + isolatedBaselineSdk);
                         var net10 = Inspect("net10.0");
                         Need(JsonNode.DeepEquals(net10, net11), "Cross-target package identity or dependency drift.");
                         var invalid = XDocument.Load(propsPath);
@@ -251,7 +303,41 @@ try
         Need(File.Exists(dll), "Missing compiled solution assembly: " + project);
         Console.WriteLine("MATH-RS403-PROJECT|path=" + project + "|target=net11.0|lockSha256=" + locks[project[..project.LastIndexOf('/')] + "/packages.lock.json"] + "|dllSha256=" + Hash(dll));
     }
-    if (focused)
+    if (rollback)
+    {
+        Need(locks.All(x => Hash(Path.Combine(work, x.Key)) == x.Value), "Target build changed locks.");
+        var changed = rollbackPaths.Where(path => Hash(Path.Combine(work, path)) != originalHashes[path]).ToHashSet(StringComparer.Ordinal);
+        var expectedChanged = locks.Keys.Concat(new[] { "global.json", "Directory.Build.props", toolInputs[1], toolInputs[2] }).ToHashSet(StringComparer.Ordinal);
+        Need(changed.SetEquals(expectedChanged) && changed.Count == 28, "Target rollback delta differs.");
+        Console.WriteLine("MATH-RS407-TARGET|sdk=11.0.100|projects=24|changedInputs=28|PASS");
+        foreach (var path in rollbackPaths)
+        {
+            var saved = Path.Combine(snapshot, path);
+            Need(Hash(saved) == originalHashes[path], "Saved rollback input changed: " + path);
+            File.Copy(saved, Path.Combine(work, path), true);
+            Need(Hash(Path.Combine(work, path)) == originalHashes[path], "Restored input differs: " + path);
+            Console.WriteLine("MATH-RS407-RESTORED|path=" + path + "|sha256=" + Hash(Path.Combine(work, path)) + "|PASS");
+        }
+        Need(inputs.All(path => Hash(Path.Combine(work, path)) == originalHashes[path]), "Rollback did not restore all copied inputs.");
+        var restoredSdk = Run(work, "dotnet", 30000, "--version").Trim();
+        Need(restoredSdk == baselineSdk, "Rollback SDK differs: expected " + baselineSdk + ", observed " + restoredSdk);
+        Directory.Delete(Path.Combine(work, "build", "artifacts"), true);
+        Console.WriteLine(Run(work, "dotnet", 480000, "restore", "dw.tools.math.slnx", "--locked-mode", "--configfile", "NuGet.config",
+            "--packages", Path.Combine(work, "packages-rollback")));
+        Console.WriteLine(Run(work, "dotnet", 480000, "build", "dw.tools.math.slnx", "-c", "Release", "--no-restore"));
+        foreach (var project in solution)
+        {
+            var id = Path.GetFileNameWithoutExtension(project);
+            var assets = Path.Combine(work, "build", "artifacts", "obj", id, "project.assets.json");
+            var targets = JsonNode.Parse(File.ReadAllText(assets))!["targets"]!.AsObject();
+            Need(targets.Count > 0 && targets.All(x => x.Key == "net10.0" || x.Key.StartsWith("net10.0/", StringComparison.Ordinal)),
+                "Rollback restored wrong target: " + project);
+            var dll = Path.Combine(work, "build", "artifacts", "bin", id, "Release", "net10.0", id + ".dll");
+            Need(File.Exists(dll), "Rollback compiled assembly missing: " + project);
+            Console.WriteLine("MATH-RS407-PROJECT|path=" + project + "|target=net10.0|dllSha256=" + Hash(dll) + "|PASS");
+        }
+    }
+    if (focused || rollback)
     {
         var groups = new[]
         {
@@ -263,7 +349,7 @@ try
                     "M9W01C01BoundedSamplingTests" }, Minimum: 26)
         };
         var totalPassed = 0;
-        foreach (var group in groups)
+        foreach (var group in rollback ? groups.Take(1) : groups)
         {
             var resultDirectory = Path.Combine(work, "test-results", Path.GetFileNameWithoutExtension(group.Project));
             Directory.CreateDirectory(resultDirectory);
@@ -287,7 +373,16 @@ try
             Console.WriteLine("MATH-RS404-FOCUSED|project=" + group.Project + "|classes=" + group.Classes.Length +
                 "|passed=" + Count("passed") + "|failed=0|trxSha256=" + Hash(trxPath) + "|PASS");
         }
-        Console.WriteLine("MATH-RS404-FOCUSED-TOTAL|sdk=11.0.100|tfm=net11.0|classes=8|passed=" + totalPassed + "|failed=0|PASS");
+        Console.WriteLine(rollback
+            ? "MATH-RS407-SMOKE|sdk=" + baselineSdk + "|tfm=net10.0|classes=3|passed=" + totalPassed + "|failed=0|PASS"
+            : "MATH-RS404-FOCUSED-TOTAL|sdk=11.0.100|tfm=net11.0|classes=8|passed=" + totalPassed + "|failed=0|PASS");
+    }
+    if (rollback)
+    {
+        Need(inputs.All(path => Hash(Path.Combine(work, path)) == originalHashes[path]), "Restored input changed during baseline build or tests.");
+        Need(originalHashes.All(x => Hash(x.Key) == x.Value), "Original repository input changed.");
+        Console.WriteLine("MATH-RS407-ROLLBACK|sdk=" + baselineSdk + "|tfm=net10.0|restored=30|projects=24|lockedRestore=PASS|build=PASS|smoke=PASS|production=false|publication=false|PASS");
+        return;
     }
     Need(locks.All(x => Hash(Path.Combine(work, x.Key)) == x.Value), "Build changed locked dependencies.");
     Need(originalHashes.All(x => Hash(x.Key) == x.Value), "Original repository input changed.");
