@@ -1,0 +1,7 @@
+# RS391 - Close physical numeric package RED and ready candidate GREEN
+
+RS390 succeeded at first pass, allocated attempt 001, under DWF 0.1.80. Result: bd90de5a4e1cfbcc83bc20b9b745404a8f244726. Its ten preparation validations include physical readback of the historical Quantities and Statistics archives, embedded DLL SHA-256 checks, exact historical dependency validation and independent PE metadata checks demonstrating the absence of the three new M11 API surfaces. The mutation boundary is clean.
+
+Reconcile canonical activation into backlog 0.1.164, close only the native RED leaf and ready GREEN. Preserve the established RED probe, production source, old immutable packages and M10 cutover gate. Reuse durable RED evidence rather than repeat physical reads; this closure requires structural checks only.
+
+GREEN must reuse existing packaging and consumer qualification patterns for distinct fresh net10.0 Quantities and Statistics candidates, with an exact candidate dependency, isolated package-only locked Windows net10/net11 consumers, actual archive and loaded DLL hashes, and focused new-contract and historical golden checks. Candidate version identities must be checked against the original feed before any candidate build; no overwrite, publication, production target change, sibling mutation or downstream adoption is authorized. Rollback and independent candidate readback remain required before M11 C04 closure.
