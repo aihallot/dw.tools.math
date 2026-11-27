@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.172" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.173" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -24,7 +24,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "ready" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
+Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "in_progress" : "planned") && x["evidence"]!.AsArray().Count == 0) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
 var native = new List<JsonNode>();
 void Walk(JsonNode node)
@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] is "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" ? "in-progress" : "not-ready")) &&
+Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" or "M10-W01-C01" or "M10-W01-C01-T1" => "in-progress", "M10-W01-C01-T1-R" => "done", "M10-W01-C01-T1-G" => "ready", _ => "not-ready" })) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -116,3 +116,31 @@ foreach (var path in observedProjects)
 }
 Need(File.Exists("docs/planning/decisions/m10-post-m11-baseline-refresh-rs399.md"), "Post-M11 baseline decision missing.");
 Console.WriteLine("MATH-RS399-M10-BASELINE-REFRESH|projects=123|m11Done=22|classification=red-initial|migration=false|publication=false|PASS");
+
+var redReport = Read(".aura/workflow/reports/RS400/attempt-001.json");
+var redProof = Read(".workflow/runs/RS400/preparation-proof.json");
+string[] redIds = ["math-rs400-m10-cutover-readiness-red","math-rs400-m11-canonical-reconciliation","math-rs400-native-roadmap-parity","math-rs400-m10-red-activation","math-rs400-m9-admission","math-rs400-published-handoff","math-rs400-request-reconciliation","math-rs400-m8-evidence-frontier","math-rs400-planning-render-check","diff-check"];
+string[] redActivation = ["M10", "M10-W01", "M10-W01-C01", "M10-W01-C01-T1", "M10-W01-C01-T1-R"];
+var redFailures = redReport["priorInvocationFailures"]!;
+Need((string?)redReport["runId"] == "RS400" && (string?)redReport["outcome"] == "succeeded" &&
+    (int?)redReport["attempt"] == 1 && (string?)redReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (string?)redReport["executor"]?["assemblySha256"] == "f6e91746d8ec3ba2ea3d0586658749c440814080499832cfd6256805e054320a" &&
+    (int?)redFailures["count"] == 1 && (int?)redFailures["preparationFailureCount"] == 1 &&
+    (int?)redFailures["allocatedAttemptFailureCount"] == 0 && (bool?)redFailures["firstPassSucceeded"] == false &&
+    (string?)redFailures["invocationIds"]![0] == "run-next-20261127T165304Z-254039219c9272aa" &&
+    redReport["boundaryViolations"]!.AsArray().Count == 0 &&
+    redReport["progress"]!["completions"]!.AsArray().Count == 0 &&
+    redReport["progress"]!["transitions"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(redActivation) &&
+    redReport["progress"]!["transitions"]!.AsArray().All(x => (string?)x?["beforeState"] == "ready" && (string?)x?["afterState"] == "in-progress") &&
+    (string?)redProof["sourceCommit"] == "2d165e6b3c48169505d48f70e0a214bc41cb9515" &&
+    (bool?)redProof["payloadCompiled"] == true && (int?)redProof["rehearsedValidationCount"] == 10 &&
+    redProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(redIds) &&
+    redReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(redIds),
+    "RS400 durable corrected RED evidence differs.");
+var redLedger = Read("docs/engineering/m10-cutover-readiness-red-rs400.json");
+Need((string?)redLedger["status"] == "red-unqualified" && redLedger["projects"]!.AsArray().Count == 123 &&
+    redLedger["rollbackInputs"]!.AsArray().Count == 28 &&
+    new[] { "targetRestoreVerified", "targetTestsVerified", "rollbackVerified", "classificationResolved" }
+        .All(key => (bool?)redLedger["readiness"]?[key] == false) &&
+    File.Exists("docs/planning/decisions/m10-cutover-readiness-red-closure-rs401.md"), "RED scope or unresolved qualification boundary differs.");
+Console.WriteLine("MATH-RS401-M10-RED-CLOSURE|priorRefusals=1|allocatedFailures=0|projects=123|rollbackInputs=28|nativeRed=done|green=ready|migration=false|PASS");

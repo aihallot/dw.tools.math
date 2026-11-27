@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.172",
+  "plan_version": "0.1.173",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -269,7 +269,7 @@
       "version": "1.5.0-preview",
       "title": "Production .NET 11 and C# 15 migration",
       "outcome": "Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries.",
-      "status": "ready",
+      "status": "in_progress",
       "gate": "G-M10",
       "required_chunks": [
         "M10-W01-C01",
@@ -682,7 +682,7 @@
       "id": "M10-W01",
       "release": "M10",
       "title": "Controlled production framework cutover",
-      "status": "ready",
+      "status": "in_progress",
       "paths": [
         "global.json",
         "Directory.Build.props",
@@ -9896,7 +9896,7 @@
       "title": "Cutover readiness and rollback baseline",
       "kind": "spike",
       "size": "M",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [
         "M8-W02-C02",
         "M9-W01-C01"
@@ -9948,14 +9948,14 @@
           "title": "Qualify cutover readiness",
           "behavior": "Reconcile real current source graph, isolated target graph, fragile tests and recovery baseline before production cutover.",
           "test_case": "Reject missing projects, incompatible SDK or lock closure and unsupported rollback or source-compatibility claims.",
-          "status": "ready",
+          "status": "in_progress",
           "evidence": [],
           "subtasks": [
             {
               "id": "M10-W01-C01-T1-R",
               "title": "RED",
               "description": "Falsify cutover readiness and rollback baseline with independent bounded negative controls.",
-              "status": "ready",
+              "status": "in_progress",
               "evidence": []
             },
             {
@@ -9976,7 +9976,7 @@
         }
       ],
       "refinement": "Use the post-M11 inventory and existing SDK/dependency inspectors; establish RED with exact project and rollback input identities and negative controls before qualifying the isolated target graph.",
-      "readiness": "RS399 durable post-M11 inventory; native RED activation and bounded falsification pending durable result."
+      "readiness": "RS400 durable corrected RED activation; native RED closure and GREEN readiness pending durable result."
     },
     {
       "id": "M10-W01-C02",
