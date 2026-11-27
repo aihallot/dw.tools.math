@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.187",
+  "plan_version": "0.1.188",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10185,12 +10185,16 @@
         "docs/planning/decisions/m10-post-cutover-regression-rs419.md",
         "docs/engineering/ProbeM10PostCutoverRegression.cs",
         "docs/planning/decisions/m10-post-cutover-package-candidates-rs420.md",
-        "docs/engineering/ProbeM10PostCutoverPackageCandidates.cs"
+        "docs/engineering/ProbeM10PostCutoverPackageCandidates.cs",
+        "docs/planning/decisions/m10-post-cutover-windows-consumers-rs421.md",
+        "docs/engineering/ProbeM10PostCutoverLockedConsumers.cs",
+        "docs/engineering/m10-post-cutover-candidate-identities-rs420.json"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red",
         "dotnet run --file docs/engineering/ProbeM10PostCutoverRegression.cs -- --check",
-        "dotnet run --file docs/engineering/ProbeM10PostCutoverPackageCandidates.cs -- --check"
+        "dotnet run --file docs/engineering/ProbeM10PostCutoverPackageCandidates.cs -- --check",
+        "dotnet run --file docs/engineering/ProbeM10PostCutoverLockedConsumers.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -10229,7 +10233,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS419 durable full regression; GREEN active, candidate qualification pending RS420."
+      "readiness": "RS420 durable candidate qualification; GREEN active, independent Windows consumers pending RS421."
     },
     {
       "id": "M11-W01-C01",
