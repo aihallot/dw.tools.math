@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "runId": "RS389",
+  "attempt": 1,
+  "outcome": "succeeded",
+  "correctionMode": false,
+  "correctionSourceAttempt": null,
+  "correctionReceiptPath": null,
+  "startedAtUtc": "2026-11-27T13:25:45.9787561+00:00",
+  "completedAtUtc": "2026-11-27T13:25:47.5612623+00:00",
+  "durationMilliseconds": 1582,
+  "projectNodes": [
+    "M11-W01-C03-T1-V",
+    "M11-W01-C03-T1",
+    "M11-W01-C03",
+    "M11-W01-C04",
+    "M11-W01-C04-T1",
+    "M11-W01-C04-T1-R"
+  ],
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/backlog.json",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "README.md",
+    "docs/planning/decisions/m11-larger-sample-quantiles-source-closure-rs389.md",
+    "docs/planning/README.md",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md"
+  ],
+  "changedPaths": [
+    ".aura/workflow/plan/project.json",
+    "README.md",
+    "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+    "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+    "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+    "docs/planning/README.md",
+    "docs/planning/ValidateAssessaM9Admission.cs",
+    "docs/planning/ValidateM10MigrationAdmission.cs",
+    "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+    "docs/planning/ValidateNativeDwfAdoption.cs",
+    "docs/planning/backlog.json",
+    "docs/planning/dwf-map.json",
+    "docs/planning/planning-validation.json",
+    "docs/planning/versions/M11.md",
+    "docs/planning/decisions/m11-larger-sample-quantiles-source-closure-rs389.md"
+  ],
+  "boundaryViolations": [],
+  "executor": {
+    "toolVersion": "0.1.80",
+    "assemblyName": "dw.tools.workflow",
+    "assemblySha256": "b7eec1950dbd71e727b173d8695569d2c3dc5b933c41edf89c4787e56317b2fb"
+  },
+  "priorInvocationFailures": {
+    "source": "delivered-local-evidence-receipts",
+    "correlation": "durable-report-run-id-with-scope-prefilter",
+    "count": 0,
+    "preparationFailureCount": 0,
+    "allocatedAttemptFailureCount": 0,
+    "mutationBoundaryFailureCount": 0,
+    "internalErrorCount": 0,
+    "preparationCorrectionRequired": false,
+    "firstPassSucceeded": true,
+    "invocationIds": [],
+    "failures": []
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": ".workflow/runs/RS389/payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 2400,
+    "process": {
+      "FileName": "dotnet",
+      "Arguments": [
+        "E:\\data.temp\\fhallot.temp\\dw-tools-workflow-payload-preflight-1732051caf474700a02d61b762724efd\\payload.dll"
+      ],
+      "workingDirectory": ".",
+      "ExitCode": 0,
+      "TimedOut": false,
+      "Cancelled": false,
+      "ProcessTreeTerminationAttempted": false,
+      "TerminationError": null,
+      "TimeoutMilliseconds": 2400000,
+      "DurationMilliseconds": 1340,
+      "StandardOutput": "[workflow.require-prior-success] VERIFIED path=.aura/workflow/reports/RS388/attempt-001.json run=RS388 attempt=1 lineage=exact\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C03-T1-R state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C03-T1-G state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M11-W01-C02 state=done\r\n[project-plan.require-node-state] VERIFIED path=.aura/workflow/plan/project.json node=M10-W01-C02 state=not-ready\r\n[require.json-value-baseline-or-target] VERIFIED path=docs/planning/backlog.json pointer=/plan_version state=baseline\r\n[files.replace-from-staged] CHANGED path=docs/planning/backlog.json bytes=572594\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateNativeDwfAdoption.cs bytes=14496\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM11NumericSubsidiarityAdmission.cs bytes=36083\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateM10MigrationAdmission.cs bytes=6439\r\n[files.replace-from-staged] CHANGED path=docs/planning/ValidateAssessaM9Admission.cs bytes=43404\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9AssessaPublishedHandoff.cs bytes=5241\r\n[files.replace-from-staged] CHANGED path=docs/engineering/ValidateM9RequestDeliveryReconciliation.cs bytes=3343\r\n[files.replace-from-staged] CHANGED path=docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs bytes=67823\r\n[files.replace-from-staged] CHANGED path=README.md bytes=8634\r\n[files.replace-from-staged] CHANGED path=docs/planning/decisions/m11-larger-sample-quantiles-source-closure-rs389.md bytes=1443\r\nplanning valid: 0.1.162 | 70 chunks | 25cf83b7e420aa3966a50c3a5f2327e6b188c217fa41674801c4c12fc6180829 | mode --write\r\n\n\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C03-T1-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C03-T1 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.converge-node-to-done] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C03 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C04 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1 not-ready-\u003Eready\r\n[project-plan.transition-node] CHANGED path=.aura/workflow/plan/project.json node=M11-W01-C04-T1-R not-ready-\u003Eready\r\n[payload] OK operations=22 changed=16 no-change=0 verified=6 artifacts=0\r\n",
+      "StandardError": ""
+    }
+  },
+  "payloadObservation": {
+    "MarkdownReportPath": ".aura/workflow/reports/RS389/attempt-001.md",
+    "ArtifactRootPath": null,
+    "Operations": [
+      {
+        "Area": "workflow",
+        "Operation": "require-prior-success",
+        "Path": ".aura/workflow/reports/RS388/attempt-001.json",
+        "Status": 0,
+        "Summary": "run=RS388 attempt=1 lineage=exact",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "22c028982b0a21ed512430ac7c8dd2e188ed37f2801e53dbe36b337288fe191b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C03-T1-R state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8945b0bab0d74f7df9627c244a553cca5710be0612a07a63fca329ef7a66670c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C03-T1-G state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8945b0bab0d74f7df9627c244a553cca5710be0612a07a63fca329ef7a66670c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M11-W01-C02 state=done",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8945b0bab0d74f7df9627c244a553cca5710be0612a07a63fca329ef7a66670c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "require-node-state",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 0,
+        "Summary": "node=M10-W01-C02 state=not-ready",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8945b0bab0d74f7df9627c244a553cca5710be0612a07a63fca329ef7a66670c",
+        "Artifacts": null
+      },
+      {
+        "Area": "require",
+        "Operation": "json-value-baseline-or-target",
+        "Path": "docs/planning/backlog.json",
+        "Status": 0,
+        "Summary": "pointer=/plan_version state=baseline",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": null,
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/backlog.json",
+        "Status": 1,
+        "Summary": "bytes=572594",
+        "Details": null,
+        "BeforeSha256": "f118a1763727d2f66a7c1cc19e3ae454e4aa5eba5f1b8feb277650b6dc826da4",
+        "AfterSha256": "25cf83b7e420aa3966a50c3a5f2327e6b188c217fa41674801c4c12fc6180829",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateNativeDwfAdoption.cs",
+        "Status": 1,
+        "Summary": "bytes=14496",
+        "Details": null,
+        "BeforeSha256": "3c473fb7a52db5b8476be485c6a49ae93b91ef72b21b659ac70bf2ed2317a171",
+        "AfterSha256": "aeea555bde816d5074e39cd05f138ecbb4ed8b2d61107b459d00d5bd13807f96",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=36083",
+        "Details": null,
+        "BeforeSha256": "86c72be89d25b6574ca986ff19235cc91c7e554958c974d3e662ef8cfe8dad2c",
+        "AfterSha256": "7eebbc514ae15742b6d3380e799dbc8e1c49a0ddf1b50b5bfee256a995598735",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateM10MigrationAdmission.cs",
+        "Status": 1,
+        "Summary": "bytes=6439",
+        "Details": null,
+        "BeforeSha256": "7dbc043c124289ffef378329ef47fe44d7ab977fbe6ccc3e5a75d9cf925286b1",
+        "AfterSha256": "5a7633e9749027f7981ecec36532f1d2f91b62b33ddc54e0d498047c7589bcb1",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/ValidateAssessaM9Admission.cs",
+        "Status": 1,
+        "Summary": "bytes=43404",
+        "Details": null,
+        "BeforeSha256": "0682ec6bdd6714424cd6b2d97aa811eada7861469365f0c0f3811909b98dcc36",
+        "AfterSha256": "e27dde0be1bc10ddc00976e227dcae3cfca6a268fc5a91f6eea704dedf9c7f34",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "Status": 1,
+        "Summary": "bytes=5241",
+        "Details": null,
+        "BeforeSha256": "1f0d24ea9748cc4377a2e8536495d5b5628febe3d5c6a0613d108489e04fdb7d",
+        "AfterSha256": "8706e96c37cbfec1750c03d7b197313d70d95976bdce9a5a3d2c0281867c1246",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "Status": 1,
+        "Summary": "bytes=3343",
+        "Details": null,
+        "BeforeSha256": "47677883cc51be619f577df7052e88a2d2bd231e4bbb9784385c9760949ee9ff",
+        "AfterSha256": "a8fad5405071e3a1875f99e5f6094739b979a6bce6daec5f4c00f5bc3a909309",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "Status": 1,
+        "Summary": "bytes=67823",
+        "Details": null,
+        "BeforeSha256": "d8ad40db43f6142389288d11b02b6e452dc78db249a650ad5dc0c149f3552d66",
+        "AfterSha256": "23d0f06a469dcbafebb1788dd568603bad0861127879ef6ffa5fbb7aae945b56",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "README.md",
+        "Status": 1,
+        "Summary": "bytes=8634",
+        "Details": null,
+        "BeforeSha256": "6007e66cc03136dbbb65fb5d897507728877b6981c4d04936d811e3a27c34256",
+        "AfterSha256": "742a571382c63d5c052ee92c88720c996b4098799a948015286f609fcae83dba",
+        "Artifacts": null
+      },
+      {
+        "Area": "files",
+        "Operation": "replace-from-staged",
+        "Path": "docs/planning/decisions/m11-larger-sample-quantiles-source-closure-rs389.md",
+        "Status": 1,
+        "Summary": "bytes=1443",
+        "Details": null,
+        "BeforeSha256": null,
+        "AfterSha256": "8c1e670cb4aaaac103ef678799e84cb4967dcc3c95db84997147ad9fc24268b7",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C03-T1-V in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "8945b0bab0d74f7df9627c244a553cca5710be0612a07a63fca329ef7a66670c",
+        "AfterSha256": "98e6167a2915030ffb645b7d840a08c4c0d28843d3c0d0dbbd07dd6453ed31aa",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C03-T1 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "98e6167a2915030ffb645b7d840a08c4c0d28843d3c0d0dbbd07dd6453ed31aa",
+        "AfterSha256": "f10669ca7d90dff1f7e061e2444739dbe25facdc1e9b61af065d43756f8bf931",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "converge-node-to-done",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C03 in-progress-\u003Eimplemented-\u003Evalidated-\u003Edone",
+        "Details": null,
+        "BeforeSha256": "f10669ca7d90dff1f7e061e2444739dbe25facdc1e9b61af065d43756f8bf931",
+        "AfterSha256": "e4052e2a813d07c3a4003d6f0821429ff2751d20a5db8b6b79f37e520becb30c",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C04 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "e4052e2a813d07c3a4003d6f0821429ff2751d20a5db8b6b79f37e520becb30c",
+        "AfterSha256": "3e9edd9919cf4f369c2bb63dee265056680df542654929861228f64e6bd7da6b",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C04-T1 not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "3e9edd9919cf4f369c2bb63dee265056680df542654929861228f64e6bd7da6b",
+        "AfterSha256": "6fbab33940d51730da215e3014e9c25b837e07298789f0b26e1e8c5d0e6a974d",
+        "Artifacts": null
+      },
+      {
+        "Area": "project-plan",
+        "Operation": "transition-node",
+        "Path": ".aura/workflow/plan/project.json",
+        "Status": 1,
+        "Summary": "node=M11-W01-C04-T1-R not-ready-\u003Eready",
+        "Details": null,
+        "BeforeSha256": "6fbab33940d51730da215e3014e9c25b837e07298789f0b26e1e8c5d0e6a974d",
+        "AfterSha256": "6cba6d467f0b80c2fdfcc4409a61862402d655308d69c82559b9e3a6f6cbf11e",
+        "Artifacts": null
+      }
+    ]
+  },
+  "preparationValidationEvidence": {
+    "source": "final-topology-proof-and-selection-lock",
+    "mode": "reused",
+    "durationMilliseconds": null,
+    "parsedPowerShellFiles": null,
+    "payloadCompiled": null,
+    "predictedChangedPaths": [],
+    "validations": [
+      {
+        "id": "math-rs389-m11-quantiles-source-closure",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-native-roadmap-parity",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-m10-readiness-preserved",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-m9-admission",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-published-handoff",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-request-reconciliation",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-m8-evidence-frontier",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "math-rs389-planning-render-check",
+        "classification": "structural",
+        "packs": []
+      },
+      {
+        "id": "diff-check",
+        "classification": "structural",
+        "packs": []
+      }
+    ]
+  },
+  "validations": [],
+  "invocationId": "run-next-20261127T132413Z-71612752655ccc0b",
+  "commandMode": "run-next",
+  "authorityBaselineCommit": "eea19c7cd4d558ff63dac3d2fe9f1ec3c172e5e0",
+  "invocationStartedAtUtc": "2026-11-27T13:24:13.3864386+00:00",
+  "invocationDurationMilliseconds": 94174,
+  "contribution": {
+    "schemaVersion": 1,
+    "declarationStatus": "declared",
+    "objective": {
+      "runId": "RS389",
+      "title": "Close verified quantiles and ready package candidate qualification",
+      "projectNodes": [
+        "M11-W01-C03-T1-V",
+        "M11-W01-C03-T1",
+        "M11-W01-C03",
+        "M11-W01-C04",
+        "M11-W01-C04-T1",
+        "M11-W01-C04-T1-R"
+      ]
+    },
+    "declared": {
+      "summary": "Close the independently verified quantile source scope and ready candidate qualification RED.",
+      "value": "Corroborate RS388 first-pass success and ten preparation validations; close native verification, task and phase without repeating product tests. Preserve existing package identities, production target and M10 cutover gate.",
+      "debtChanges": [
+        "Reconcile RS388 canonical verification activation.",
+        "Close bounded quantile source qualification and ready candidate RED."
+      ],
+      "nextAction": "Reconcile durable source closure and establish the immutable package and independent consumer candidate RED.",
+      "backlogItems": null,
+      "achievements": [
+        {
+          "projectNode": "M11-W01-C03-T1-V",
+          "achievement": "RS388 independently verified nonuniform repeated samples, exact rational probabilities, interpolation delta refusal and enumerator disposal; RS389 corroborates the durable result."
+        },
+        {
+          "projectNode": "M11-W01-C03-T1",
+          "achievement": "The larger-sample quantile source task has durable RED, GREEN and independent verification evidence from RS384\u2013RS388."
+        },
+        {
+          "projectNode": "M11-W01-C03",
+          "achievement": "The quantile phase meets its bounded source acceptance with million-observation, exact-rational, legacy compatibility and resource/refusal evidence; package qualification remains pending."
+        }
+      ],
+      "strategicReview": null
+    },
+    "observed": {
+      "changedPaths": [
+        ".aura/workflow/plan/project.json",
+        "README.md",
+        "docs/discovery/qualification/ValidateM8W01EvidenceFrontier.cs",
+        "docs/engineering/ValidateM9AssessaPublishedHandoff.cs",
+        "docs/engineering/ValidateM9RequestDeliveryReconciliation.cs",
+        "docs/planning/README.md",
+        "docs/planning/ValidateAssessaM9Admission.cs",
+        "docs/planning/ValidateM10MigrationAdmission.cs",
+        "docs/planning/ValidateM11NumericSubsidiarityAdmission.cs",
+        "docs/planning/ValidateNativeDwfAdoption.cs",
+        "docs/planning/backlog.json",
+        "docs/planning/decisions/m11-larger-sample-quantiles-source-closure-rs389.md",
+        "docs/planning/dwf-map.json",
+        "docs/planning/planning-validation.json",
+        "docs/planning/versions/M11.md"
+      ],
+      "validations": [
+        {
+          "id": "math-rs389-m11-quantiles-source-closure",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-native-roadmap-parity",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-m10-readiness-preserved",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-m9-admission",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-published-handoff",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-request-reconciliation",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-m8-evidence-frontier",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "math-rs389-planning-render-check",
+          "classification": "structural",
+          "packs": []
+        },
+        {
+          "id": "diff-check",
+          "classification": "structural",
+          "packs": []
+        }
+      ],
+      "mutationBoundaryClean": true
+    },
+    "correction": {
+      "totalAttempts": 1,
+      "failedAttempts": 0,
+      "successfulAttempt": 1,
+      "classificationCompleteness": "not-applicable"
+    }
+  },
+  "progress": {
+    "scope": [
+      {
+        "id": "M11-W01-C03-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M11-W01-C03-T1",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C03-T1",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "task",
+        "parentId": "M11-W01-C03",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C03",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "phase",
+        "parentId": "M11-W01",
+        "state": "done",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C04",
+        "objective": "Additive numeric package and consumer qualification",
+        "kind": "phase",
+        "parentId": "M11-W01",
+        "state": "ready",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C04-T1",
+        "objective": "Additive numeric package and consumer qualification",
+        "kind": "task",
+        "parentId": "M11-W01-C04",
+        "state": "ready",
+        "completionCondition": null
+      },
+      {
+        "id": "M11-W01-C04-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "state": "ready",
+        "completionCondition": null
+      }
+    ],
+    "transitions": [
+      {
+        "id": "M11-W01-C03",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "phase",
+        "parentId": "M11-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "The quantile phase meets its bounded source acceptance with million-observation, exact-rational, legacy compatibility and resource/refusal evidence; package qualification remains pending."
+      },
+      {
+        "id": "M11-W01-C03-T1",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "task",
+        "parentId": "M11-W01-C03",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "The larger-sample quantile source task has durable RED, GREEN and independent verification evidence from RS384\u2013RS388."
+      },
+      {
+        "id": "M11-W01-C03-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M11-W01-C03-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS388 independently verified nonuniform repeated samples, exact rational probabilities, interpolation delta refusal and enumerator disposal; RS389 corroborates the durable result."
+      },
+      {
+        "id": "M11-W01-C04",
+        "objective": "Additive numeric package and consumer qualification",
+        "kind": "phase",
+        "parentId": "M11-W01",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M11-W01-C04-T1",
+        "objective": "Additive numeric package and consumer qualification",
+        "kind": "task",
+        "parentId": "M11-W01-C04",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      },
+      {
+        "id": "M11-W01-C04-T1-R",
+        "objective": "RED",
+        "kind": "subtask",
+        "parentId": "M11-W01-C04-T1",
+        "beforeState": "not-ready",
+        "afterState": "ready",
+        "completionCondition": null,
+        "completed": false,
+        "achievement": null
+      }
+    ],
+    "completions": [
+      {
+        "id": "M11-W01-C03",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "phase",
+        "parentId": "M11-W01",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "The quantile phase meets its bounded source acceptance with million-observation, exact-rational, legacy compatibility and resource/refusal evidence; package qualification remains pending."
+      },
+      {
+        "id": "M11-W01-C03-T1",
+        "objective": "Explicit larger-sample quantile evaluation",
+        "kind": "task",
+        "parentId": "M11-W01-C03",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "The larger-sample quantile source task has durable RED, GREEN and independent verification evidence from RS384\u2013RS388."
+      },
+      {
+        "id": "M11-W01-C03-T1-V",
+        "objective": "Verify and document",
+        "kind": "subtask",
+        "parentId": "M11-W01-C03-T1",
+        "beforeState": "in-progress",
+        "afterState": "done",
+        "completionCondition": null,
+        "completed": true,
+        "achievement": "RS388 independently verified nonuniform repeated samples, exact rational probabilities, interpolation delta refusal and enumerator disposal; RS389 corroborates the durable result."
+      }
+    ],
+    "strategic": {
+      "scope": [],
+      "movements": [],
+      "hasMovement": false
+    },
+    "strategicReview": {
+      "assessments": [],
+      "anyReviewRequired": false
+    }
+  },
+  "delivery": {
+    "schemaVersion": 1,
+    "runId": "RS389",
+    "attempt": 1,
+    "plan": {
+      "schemaVersion": 1,
+      "runId": "RS389",
+      "mode": "direct",
+      "targetBranch": "main",
+      "baseCommit": "eea19c7cd4d558ff63dac3d2fe9f1ec3c172e5e0",
+      "executionBranch": "main",
+      "publicationRemote": "origin",
+      "publicationReference": "refs/heads/main",
+      "identity": "f7c29427fd37cac7c46663288cb39c9d294b3466d4848dce52fdbedf90c8757f"
+    },
+    "technicalOutcome": "succeeded",
+    "deliveryStateAtReportWrite": "pending-post-report-commit-and-external-observation"
+  },
+  "git": {
+    "commitMessage": "chore: close verified quantiles and ready package candidate RED",
+    "commitEligible": true,
+    "deliveryIntent": "push-current-branch-to-configured-upstream",
+    "deliveryStateAtReportWrite": "pending-external-observation"
+  }
+}
