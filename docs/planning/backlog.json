@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.185",
+  "plan_version": "0.1.186",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -10181,10 +10181,13 @@
         "docs/engineering/m10-post-cutover-certification-red-rs417.json",
         "docs/engineering/ProbeM10PostCutoverCertificationRed.cs",
         "docs/planning/decisions/m10-post-cutover-certification-red-rs417.md",
-        "docs/planning/decisions/m10-post-cutover-certification-red-closure-rs418.md"
+        "docs/planning/decisions/m10-post-cutover-certification-red-closure-rs418.md",
+        "docs/planning/decisions/m10-post-cutover-regression-rs419.md",
+        "docs/engineering/ProbeM10PostCutoverRegression.cs"
       ],
       "commands": [
-        "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red"
+        "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red",
+        "dotnet run --file docs/engineering/ProbeM10PostCutoverRegression.cs -- --check"
       ],
       "evidence": [],
       "tasks": [
@@ -10200,14 +10203,16 @@
               "id": "M10-W01-C03-T1-R",
               "title": "RED",
               "description": "Falsify post-cutover qualification and delivery readiness with independent bounded negative controls.",
-              "status": "in_progress",
-              "evidence": []
+              "status": "done",
+              "evidence": [
+                ".aura/workflow/reports/RS418/attempt-001.json"
+              ]
             },
             {
               "id": "M10-W01-C03-T1-G",
               "title": "GREEN",
               "description": "Implement the minimum changes needed for post-cutover qualification and delivery readiness.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -10221,7 +10226,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS417 durable certification RED activation; native RED closure and GREEN readiness pending durable RS418 result."
+      "readiness": "RS418 durable RED closure; native GREEN activation and bounded full regression pending durable RS419 result."
     },
     {
       "id": "M11-W01-C01",

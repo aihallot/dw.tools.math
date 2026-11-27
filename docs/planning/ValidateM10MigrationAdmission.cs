@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.185" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.186" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -24,7 +24,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in_progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" or "M10-W01-C03-T1-R" => "in_progress", _ => "planned" }) && ((string?)x["id"] switch { "M10-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json", "M10-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS408/attempt-001.json", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS410/attempt-001.json", "M10-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS412/attempt-001.json", "M10-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS414/attempt-001.json", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS416/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
+Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in_progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in_progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "ready", _ => "planned" }) && ((string?)x["id"] switch { "M10-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json", "M10-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS408/attempt-001.json", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS410/attempt-001.json", "M10-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS412/attempt-001.json", "M10-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS414/attempt-001.json", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS416/attempt-001.json", "M10-W01-C03-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS418/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
 var native = new List<JsonNode>();
 void Walk(JsonNode node)
@@ -35,7 +35,7 @@ void Walk(JsonNode node)
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
-Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in-progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in-progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "ready", _ => "not-ready" })) &&
+Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "in-progress", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" => "in-progress", "M10-W01-C03-T1-R" => "done", "M10-W01-C03-T1-G" => "in-progress", _ => "not-ready" })) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
 Need(current.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal).SequenceEqual(
     newNative.Select(x => (string?)x["id"]).OrderBy(x => x, StringComparer.Ordinal), StringComparer.Ordinal), "M10 roster mismatch.");
@@ -580,3 +580,24 @@ Need((string?)certificationRedReport["runId"] == "RS417" && (string?)certificati
     certificationRedReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(certificationRedIds) &&
     File.Exists("docs/planning/decisions/m10-post-cutover-certification-red-closure-rs418.md"), "RS417 durable certification RED activation differs.");
 Console.WriteLine("MATH-RS418-CERTIFICATION-RED-CLOSURE|RS417=PASS|red=done|green=ready|qualified=false|publication=false|PASS");
+
+var certificationClosureReport = Read(".aura/workflow/reports/RS418/attempt-001.json");
+var certificationClosureProof = Read(".workflow/runs/RS418/preparation-proof.json");
+string[] certificationClosureIds = ["math-rs418-certification-red", "math-rs418-actual-target", "math-rs418-m11-canonical-reconciliation", "math-rs418-native-roadmap-parity", "math-rs418-m10-certification-red-closure", "math-rs418-m9-admission", "math-rs418-published-handoff", "math-rs418-request-reconciliation", "math-rs418-m8-evidence-frontier", "math-rs418-planning-render-check", "diff-check"];
+var certificationClosureMoves = certificationClosureReport["progress"]!["transitions"]!.AsArray();
+Need((string?)certificationClosureReport["runId"] == "RS418" && (string?)certificationClosureReport["outcome"] == "succeeded" &&
+    (int?)certificationClosureReport["attempt"] == 1 && (string?)certificationClosureReport["executor"]?["toolVersion"] == "0.1.81" &&
+    (int?)certificationClosureReport["priorInvocationFailures"]?["count"] == 0 &&
+    (bool?)certificationClosureReport["priorInvocationFailures"]?["firstPassSucceeded"] == true &&
+    certificationClosureReport["boundaryViolations"]!.AsArray().Count == 0 && certificationClosureMoves.Count == 2 &&
+    (string?)certificationClosureMoves[0]!["id"] == "M10-W01-C03-T1-R" &&
+    (string?)certificationClosureMoves[0]!["beforeState"] == "in-progress" && (string?)certificationClosureMoves[0]!["afterState"] == "done" &&
+    (string?)certificationClosureMoves[1]!["id"] == "M10-W01-C03-T1-G" &&
+    (string?)certificationClosureMoves[1]!["beforeState"] == "not-ready" && (string?)certificationClosureMoves[1]!["afterState"] == "ready" &&
+    certificationClosureReport["progress"]!["completions"]!.AsArray().Count == 1 &&
+    (string?)certificationClosureProof["sourceCommit"] == "ea13f73525c87ab024ba0d9cc51d13f6f31cfe1f" &&
+    (bool?)certificationClosureProof["payloadCompiled"] == true && (int?)certificationClosureProof["rehearsedValidationCount"] == 11 &&
+    certificationClosureProof["preparationValidationIds"]!.AsArray().Select(x => (string?)x).SequenceEqual(certificationClosureIds) &&
+    certificationClosureReport["preparationValidationEvidence"]!["validations"]!.AsArray().Select(x => (string?)x?["id"]).SequenceEqual(certificationClosureIds) &&
+    File.Exists("docs/planning/decisions/m10-post-cutover-regression-rs419.md"), "RS418 durable certification RED closure differs.");
+Console.WriteLine("MATH-RS419-CERTIFICATION-GREEN-ACTIVATION|RS418=PASS|red=done|green=in-progress|publication=false|PASS");
