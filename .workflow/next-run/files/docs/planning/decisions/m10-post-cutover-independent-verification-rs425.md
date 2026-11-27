@@ -1,0 +1,5 @@
+# M10 independent post-cutover verification (RS425)
+
+RS424 closed native GREEN first-pass and readied Verification. RS425 reconciles GREEN completion into canonical backlog 0.1.192 and activates Verification. The independent verifier binds the immutable RED, GREEN and candidate ledgers to their delivered Git revisions, checks five durable result reports, recomputes the regression project/count and rollback identity rosters, and reads back all thirteen physical candidate archives, nuspecs, DLLs and producer lock hashes. It compares exact source dependency edges, both platform consumer identities and the twelve shared archive hashes. Existing independent production verification remains mandatory.
+
+The verifier is read-only and uses actual local artifact bytes. No full suite, package rebuild, platform replay or rollback is repeated; no live rollback, reservation, publication, ABI or downstream adoption claim is authorized. Only the durable RS425 result can qualify independent Verification; GREEN ledger remains immutable and final closure is a later controlled transition.
