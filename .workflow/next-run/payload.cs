@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using Dw.Tools.Workflow.Payloads;
 var p = PayloadContext.Create();
-p.Workflow.RequirePriorSuccess("RS425", 2, "test: independently verify M10 post-cutover certification", "0.1.81", 1, 0, 1, false);
+p.Workflow.RequirePriorSuccess("RS425", 2, "test: independently verify M10 post-cutover certification", "0.1.81", 1, 0, 1, false, expectedCorrectionMode: true, expectedCorrectionSourceAttempt: 1);
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-R", "done");
 p.ProjectPlan.RequireNodeState("M10-W01-C01-T1-G", "done");
 p.ProjectPlan.RequireNodeState("M11", "done");
