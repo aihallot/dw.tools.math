@@ -21,20 +21,33 @@ public static class QuantileStatistics64
 {
     public const int MaximumObservations = DescriptiveStatistics64.MaximumObservations;
     public const int MaximumExactOperandBits = DescriptiveStatistics64.MaximumExactOperandBits;
+    public const int MaximumFiniteObservations = 1_000_000;
+    public const int MaximumExactObservations = 8_192;
 
     /// <summary>
     /// Type-7 linearly interpolates at (n-1)*p; nearest-rank returns sorted
     /// max(1, ceiling(n*p)), using the first observation for p=0.
     /// </summary>
     public static double Evaluate(
-        IEnumerable<double> observations, double probability, QuantileConvention64 convention)
+        IEnumerable<double> observations, double probability, QuantileConvention64 convention) =>
+        Evaluate(observations, probability, convention, MaximumObservations);
+
+    /// <summary>
+    /// Evaluates the same finite binary64 quantile with an explicit observation
+    /// budget from 1 through MaximumFiniteObservations. The sample is materialized
+    /// and sorted; no approximate sketch or overflow fallback is used.
+    /// </summary>
+    public static double Evaluate(
+        IEnumerable<double> observations, double probability, QuantileConvention64 convention,
+        int maxObservations)
     {
         ArgumentNullException.ThrowIfNull(observations);
         if (!double.IsFinite(probability) || probability < 0d || probability > 1d)
             throw new ArgumentOutOfRangeException(nameof(probability));
         RequireConvention(convention);
-        var sorted = observations.Take(MaximumObservations + 1).ToArray();
-        RequireCount(sorted.Length);
+        RequireObservationBudget(maxObservations, MaximumFiniteObservations);
+        var sorted = observations.Take(maxObservations + 1).ToArray();
+        RequireCount(sorted.Length, maxObservations);
         foreach (var value in sorted)
             DescriptiveStatistics64.RequireFinite(value);
         Array.Sort(sorted);
@@ -66,15 +79,26 @@ public static class QuantileStatistics64
     /// </summary>
     public static ExactRational EvaluateExact(
         IEnumerable<ExactRational> observations, ExactRational probability,
-        QuantileConvention64 convention)
+        QuantileConvention64 convention) =>
+        EvaluateExact(observations, probability, convention, MaximumObservations);
+
+    /// <summary>
+    /// Evaluates the same exact rational quantile with an explicit observation
+    /// budget from 1 through MaximumExactObservations. The existing operand and
+    /// intermediate bit limits remain in force.
+    /// </summary>
+    public static ExactRational EvaluateExact(
+        IEnumerable<ExactRational> observations, ExactRational probability,
+        QuantileConvention64 convention, int maxObservations)
     {
         ArgumentNullException.ThrowIfNull(observations);
         RequireExactBudget(probability);
         if (probability < ExactRational.Zero || probability > ExactRational.One)
             throw new ArgumentOutOfRangeException(nameof(probability));
         RequireConvention(convention);
-        var sorted = observations.Take(MaximumObservations + 1).ToArray();
-        RequireCount(sorted.Length);
+        RequireObservationBudget(maxObservations, MaximumExactObservations);
+        var sorted = observations.Take(maxObservations + 1).ToArray();
+        RequireCount(sorted.Length, maxObservations);
         foreach (var value in sorted)
             RequireExactBudget(value);
         Array.Sort(sorted);
@@ -111,13 +135,19 @@ public static class QuantileStatistics64
             throw new ArgumentOutOfRangeException(nameof(convention));
     }
 
-    private static void RequireCount(int count)
+    private static void RequireObservationBudget(int maxObservations, int ceiling)
+    {
+        if (maxObservations < 1 || maxObservations > ceiling)
+            throw new ArgumentOutOfRangeException(nameof(maxObservations));
+    }
+
+    private static void RequireCount(int count, int maxObservations)
     {
         if (count == 0)
             throw new ArgumentException("At least one observation is required.");
-        if (count > MaximumObservations)
+        if (count > maxObservations)
             throw new ArgumentOutOfRangeException(nameof(count),
-                "Quantiles admit at most 4096 observations.");
+                FormattableString.Invariant($"Quantiles admit at most {maxObservations} observations."));
     }
 
     private static void RequireExactBudget(ExactRational value)
