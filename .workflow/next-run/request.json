@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "id": "RS433",
+  "title": "Record conditional M11 private promotion authorization and observe installed calendar policy",
+  "commitMessage": "docs: qualify authorized M11 delayed-promotion policy",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M11"
+  ],
+  "contribution": {
+    "summary": "Record the owner's explicit conditional authorization for both exact M11 archives and observe actual installed DWF 0.1.81 calendar policy against NUGET_LOCAL.",
+    "value": "Reuse existing archive and rollback verification. The installed read-only planner must observe both layouts and exact version history on the versions' encoded date. Report each exact candidate match or blocker, including nonzero observations, without allocating, publishing, rebuilding or numerically requalifying either package. Preserve M11 completion and the M12 readiness frontier.",
+    "debtChanges": [
+      "Record owner authorization without treating it as a release receipt.",
+      "Use the installed planner instead of duplicating or bypassing calendar and mixed-layout policy.",
+      "Treat a successfully recorded BLOCKED verdict as a completed observation, not permission to publish either package."
+    ],
+    "nextAction": "If both previews match, qualify the supported publisher in a disposable feed using exact original bytes; otherwise retain the blocker and prepare an upstream coordination request or scoped deferral. Keep actual private mutation gated by the recorded owner conditions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 120
+  },
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+    "docs/planning/decisions/m11-private-publication-authorization.md"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+      "sourcePath": "files/docs/engineering/VerifyM11NumericPackageCandidates.cs"
+    },
+    {
+      "path": "docs/planning/decisions/m11-private-publication-authorization.md",
+      "sourcePath": "files/docs/planning/decisions/m11-private-publication-authorization.md"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS432/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS432/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS432/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.81"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS432/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS432/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS432/preparation-proof.json",
+      "jsonPointer": "/payloadCompiled",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".workflow/runs/RS432/preparation-proof.json",
+      "jsonPointer": "/rehearsedValidationCount",
+      "expectedValue": 2
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.197"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.32"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "11.0.100"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/11/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/12/workPackages/0/phases/0/tasks/0/subtasks/0/state",
+      "expectedValue": "ready"
+    }
+  ],
+  "validations": [
+    {
+      "id": "math-rs433-native-readiness-preserved",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateMath20Admission.cs",
+        "--",
+        "--m12-ready"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "math-rs433-exact-promotion-calendar-policy",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+        "--",
+        "--promotion-policy-check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": [
+        "contract",
+        "boundary",
+        "package"
+      ]
+    }
+  ]
+}
