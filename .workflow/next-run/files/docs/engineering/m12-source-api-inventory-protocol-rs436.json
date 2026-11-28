@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "kind": "math-source-api-inventory-protocol",
+  "status": "specified-not-observed",
+  "sourceCommit": "155d0d9aa2c3b2237c5a2b30e44a504a710cc366",
+  "sdk": "11.0.100",
+  "targetFramework": "net11.0",
+  "languageVersion": "15.0",
+  "configuration": "Release",
+  "counts": {
+    "productionProjects": 13,
+    "testProjects": 11,
+    "maintainedProjects": 24,
+    "productionCs": 88,
+    "testCs": 151,
+    "historicalConsumerProjects": 49,
+    "trackedProjectsOutsideWorkflow": 123
+  },
+  "maintainedProjects": [
+    "src/projects/dw.quantities.expression/dw.quantities.expression.csproj",
+    "src/projects/dw.quantities.standard/dw.quantities.standard.csproj",
+    "src/projects/dw.quantities/dw.quantities.csproj",
+    "src/projects/dw.tools.math.analysis/dw.tools.math.analysis.csproj",
+    "src/projects/dw.tools.math.codecs/dw.tools.math.codecs.csproj",
+    "src/projects/dw.tools.math.composition/dw.tools.math.composition.csproj",
+    "src/projects/dw.tools.math.distribution/dw.tools.math.distribution.csproj",
+    "src/projects/dw.tools.math.foundation/dw.tools.math.foundation.csproj",
+    "src/projects/dw.tools.math.ir/dw.tools.math.ir.csproj",
+    "src/projects/dw.tools.math.numerics/dw.tools.math.numerics.csproj",
+    "src/projects/dw.tools.math.scientific/dw.tools.math.scientific.csproj",
+    "src/projects/dw.tools.math.statistics/dw.tools.math.statistics.csproj",
+    "src/projects/dw.tools.math.symbolics/dw.tools.math.symbolics.csproj",
+    "tests/projects/dw.quantities.tests/dw.quantities.tests.csproj",
+    "tests/projects/dw.tools.math.analysis.tests/dw.tools.math.analysis.tests.csproj",
+    "tests/projects/dw.tools.math.codecs.tests/dw.tools.math.codecs.tests.csproj",
+    "tests/projects/dw.tools.math.composition.tests/dw.tools.math.composition.tests.csproj",
+    "tests/projects/dw.tools.math.distribution.tests/dw.tools.math.distribution.tests.csproj",
+    "tests/projects/dw.tools.math.foundation.tests/dw.tools.math.foundation.tests.csproj",
+    "tests/projects/dw.tools.math.ir.tests/dw.tools.math.ir.tests.csproj",
+    "tests/projects/dw.tools.math.numerics.tests/dw.tools.math.numerics.tests.csproj",
+    "tests/projects/dw.tools.math.scientific.tests/dw.tools.math.scientific.tests.csproj",
+    "tests/projects/dw.tools.math.statistics.tests/dw.tools.math.statistics.tests.csproj",
+    "tests/projects/dw.tools.math.symbolics.tests/dw.tools.math.symbolics.tests.csproj"
+  ],
+  "trackedInputs": {
+    "roots": [
+      "src/projects/",
+      "tests/projects/",
+      "tests/consumers/",
+      "tools/",
+      "docs/engineering/",
+      "docs/discovery/qualification/"
+    ],
+    "rootFiles": [
+      "dw.tools.math.slnx",
+      "global.json",
+      "Directory.Build.props",
+      "Directory.Packages.props",
+      "NuGet.config"
+    ],
+    "excludePrefixes": [
+      ".workflow/",
+      ".aura/",
+      "build/",
+      "publish/"
+    ],
+    "excludeDirectoryNames": [
+      "bin",
+      "obj"
+    ],
+    "sourceIdentity": "Git tree at sourceCommit; reconcile tracked source and evaluated inputs to the pin; exclude only explicitly admitted inventory helper and documentation changes. Never infer from an untracked directory scan."
+  },
+  "observation": {
+    "implementation": "docs/engineering/InspectM12SourceApiInventory.cs",
+    "implementationStatus": "not-yet-implemented-or-qualified",
+    "reportPath": "docs/engineering/m12-source-api-inventory-observation.json",
+    "commands": [
+      [
+        "dotnet",
+        "--version"
+      ],
+      [
+        "dotnet",
+        "run",
+        "--file",
+        "docs/engineering/InspectM12SourceApiInventory.cs",
+        "--",
+        "--self-test"
+      ],
+      [
+        "dotnet",
+        "restore",
+        "dw.tools.math.slnx",
+        "--locked-mode"
+      ],
+      [
+        "dotnet",
+        "build",
+        "dw.tools.math.slnx",
+        "-c",
+        "Release",
+        "--no-restore",
+        "--no-incremental"
+      ],
+      [
+        "dotnet",
+        "run",
+        "--file",
+        "docs/engineering/InspectM12SourceApiInventory.cs",
+        "--",
+        "--observe",
+        "155d0d9aa2c3b2237c5a2b30e44a504a710cc366",
+        "docs/engineering/m12-source-api-inventory-observation.json"
+      ]
+    ],
+    "perProjectEvaluation": [
+      "dotnet",
+      "msbuild",
+      "<maintained-project>",
+      "-p:Configuration=Release",
+      "-getProperty:TargetFramework,LangVersion,AssemblyName,TargetPath,PackageId,IsPackable",
+      "-getItem:ProjectReference,PackageReference,Compile"
+    ],
+    "existingCorroboration": [
+      [
+        "dotnet",
+        "run",
+        "--file",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "--",
+        "--check"
+      ],
+      [
+        "dotnet",
+        "run",
+        "--file",
+        "docs/engineering/InspectM8W02TestCoverage.cs",
+        "--",
+        "--check"
+      ]
+    ],
+    "buildPolicy": "One locked restore and non-incremental Release solution build unless independently pinned retained assemblies cover all 13 libraries; no test, pack, publication, feed mutation or NuGet Audit suppression. Refuse SDK, lock or source drift.",
+    "metadataPolicy": "Use PEReader/MetadataReader or proven metadata-only equivalent. Never load or invoke scanned assemblies. Enumerate externally visible declared types and members; account for generics, nested types, accessors, forwarding, inheritance and unsupported shapes separately. No silent omissions."
+  },
+  "reportContract": {
+    "requiredRootFields": [
+      "schemaVersion",
+      "sourceCommit",
+      "sdk",
+      "targetFramework",
+      "configuration",
+      "trackedRoster",
+      "projects",
+      "assemblies",
+      "apiMembers",
+      "historicalEvidence",
+      "toolDispositions",
+      "negativeControls",
+      "limits",
+      "status"
+    ],
+    "projectFields": [
+      "path",
+      "kind",
+      "targetFramework",
+      "langVersion",
+      "assemblyName",
+      "targetPath",
+      "packageId",
+      "isPackable",
+      "lockSha256",
+      "projectReferences",
+      "packageReferences",
+      "compileInputs"
+    ],
+    "assemblyFields": [
+      "projectPath",
+      "assemblyName",
+      "assemblyVersion",
+      "targetFramework",
+      "sha256",
+      "byteCount",
+      "mvid",
+      "metadataStatus"
+    ],
+    "memberFields": [
+      "assemblyName",
+      "declaringType",
+      "kind",
+      "name",
+      "visibility",
+      "genericArity",
+      "signatureHex",
+      "signatureKey",
+      "disposition"
+    ],
+    "statusValues": [
+      "complete-bounded",
+      "blocked",
+      "incomplete"
+    ],
+    "identity": "Assembly identity + declaring metadata type (nested name and arity) + member kind/name + ECMA-335 signature bytes and generic context. Raw signature keys are scoped to the assembly evidence, not stable cross-build agent capability IDs."
+  },
+  "negativeControls": [
+    "missing-maintained-project",
+    "duplicate-project-or-member-key",
+    "source-or-assembly-digest-drift",
+    "unsupported-or-malformed-metadata",
+    "nonpublic-member-excluded",
+    "overloads-distinct"
+  ],
+  "limits": {
+    "maxMaintainedProjects": 24,
+    "maxProductionAssemblies": 13,
+    "maxTrackedProjects": 123,
+    "maxMetadataRows": 100000,
+    "maxAssemblyBytes": 67108864,
+    "maxReportBytes": 16777216,
+    "maxMsbuildSecondsPerProject": 30,
+    "maxRestoreSeconds": 180,
+    "maxBuildSeconds": 300,
+    "maxObservationSeconds": 1200
+  },
+  "nonClaims": [
+    "no code coverage",
+    "no benchmark or optimization",
+    "no private-feed or package promotion",
+    "no new Discovery or AURA admission",
+    "no execution of historical consumer projects"
+  ]
+}

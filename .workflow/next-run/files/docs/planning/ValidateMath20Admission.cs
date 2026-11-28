@@ -57,6 +57,66 @@ static IEnumerable<JsonNode> Walk(JsonNode n)
             foreach(var x in children)
                 foreach(var d in Walk(x!)) yield return d;
 }
+if (args is ["--m12-question-complete"])
+{
+    const string pin = "155d0d9aa2c3b2237c5a2b30e44a504a710cc366";
+    const string decisionPath = "docs/planning/decisions/m12-source-api-evidence-inventory-protocol-rs436.md";
+    const string protocolPath = "docs/engineering/m12-source-api-inventory-protocol-rs436.json";
+    var expectedCanonical = AtBaseline(pin, "docs/planning/backlog.json");
+    Need(S(expectedCanonical, "plan_version") == "0.1.198", "RS435 canonical pin.");
+    string[] activeIds = ["M12", "M12-W01", "M12-W01-C01", "M12-W01-C01-T1", "M12-W01-C01-T1-A"];
+    var ids = activeIds.ToHashSet(StringComparer.Ordinal);
+    var active = Canonical(expectedCanonical).Where(x => ids.Contains(S(x,"id"))).ToArray();
+    Need(active.Length == ids.Count && active.All(x => S(x,"status") == "ready" && x["evidence"]!.AsArray().Count == 0), "RS435 canonical readiness frontier.");
+    foreach (var node in active) node["status"] = "in_progress";
+    var inventory = active.Single(x => S(x,"id") == "M12-W01-C01");
+    inventory["files"]!.AsArray().Add(JsonValue.Create(decisionPath));
+    inventory["files"]!.AsArray().Add(JsonValue.Create(protocolPath));
+    inventory["refinement"] = "RS435 durable activation reconciled. RS436 specifies pinned source, project, metadata and evidence observation with an exact roster, independent negative controls and resource limits. Observation must qualify or reuse the missing metadata reader and gather real evidence before modernization.";
+    inventory["readiness"] = "RS435 delivered five native Question activation transitions; RS436 reconciles those statuses as in_progress and targets native Question closure and Observation readiness. Canonical closure and Observation readiness await durable RS436 evidence.";
+    expectedCanonical["plan_version"] = "0.1.199";
+    Exact(expectedCanonical, Read("docs/planning/backlog.json"), "RS436 canonical delta differs from pinned RS435.");
+    var expectedNative = AtBaseline(pin, ".aura/workflow/plan/project.json");
+    var nativeNodes = Objects(expectedNative, "milestones").SelectMany(Walk).ToArray();
+    Need(nativeNodes.Length == 949, "Native roster.");
+    var question = nativeNodes.Single(x => S(x,"id") == "M12-W01-C01-T1-A");
+    var observation = nativeNodes.Single(x => S(x,"id") == "M12-W01-C01-T1-B");
+    Need(S(question,"state") == "in-progress" && S(observation,"state") == "not-ready", "RS435 native baseline.");
+    question["state"] = "done";
+    observation["state"] = "ready";
+    Exact(expectedNative, Read(".aura/workflow/plan/project.json"), "Only Question closure and Observation readiness are admitted.");
+    var prior = Read(".aura/workflow/reports/RS435/attempt-001.json");
+    var priorProof = Read(".workflow/runs/RS435/preparation-proof.json");
+    var transitions = prior["progress"]!["transitions"]!.AsArray();
+    Need(S(prior,"runId") == "RS435" && S(prior,"outcome") == "succeeded" && (int?)prior["attempt"] == 1 &&
+        S(prior["executor"]!,"toolVersion") == "0.1.81" && (bool?)prior["priorInvocationFailures"]!["firstPassSucceeded"] == true &&
+        (int?)prior["priorInvocationFailures"]!["count"] == 0 && prior["boundaryViolations"]!.AsArray().Count == 0 &&
+        transitions.Count == ids.Count && transitions.Select(x => S(x!,"id")).ToHashSet(StringComparer.Ordinal).SetEquals(ids) &&
+        transitions.All(x => S(x!,"beforeState") == "ready" && S(x!,"afterState") == "in-progress" && (bool?)x!["completed"] == false) &&
+        (bool?)priorProof["payloadCompiled"] == true && (int?)priorProof["rehearsedValidationCount"] == 10, "RS435 durable activation evidence differs.");
+    var recipe = Read(protocolPath);
+    Need((int?)recipe["schemaVersion"] == 1 && S(recipe,"status") == "specified-not-observed" &&
+        S(recipe,"sourceCommit") == pin && S(recipe,"sdk") == "11.0.100" &&
+        S(recipe,"targetFramework") == "net11.0" && S(recipe,"languageVersion") == "15.0", "Protocol pin.");
+    var projectRoster = System.Xml.Linq.XDocument.Load("dw.tools.math.slnx").Descendants("Project").Select(x => (string)x.Attribute("Path")!).ToArray();
+    var recordedRoster = recipe["maintainedProjects"]!.AsArray().Select(x => (string)x!).ToArray();
+    Need(projectRoster.Length == 24 && recordedRoster.Length == 24 && projectRoster.Distinct(StringComparer.Ordinal).Count() == 24 &&
+        projectRoster.ToHashSet(StringComparer.Ordinal).SetEquals(recordedRoster) && projectRoster.Count(x => x.StartsWith("src/projects/", StringComparison.Ordinal)) == 13 &&
+        projectRoster.Count(x => x.StartsWith("tests/projects/", StringComparison.Ordinal)) == 11 &&
+        projectRoster.All(x => File.Exists(x) && File.Exists(Path.Combine(Path.GetDirectoryName(x)!, "packages.lock.json"))), "Maintained project roster or locks.");
+    var controlIds = recipe["negativeControls"]!.AsArray().Select(x => (string)x!).ToArray();
+    Need(controlIds.Length == 6 && controlIds.ToHashSet(StringComparer.Ordinal).SetEquals(new[] { "missing-maintained-project", "duplicate-project-or-member-key", "source-or-assembly-digest-drift", "unsupported-or-malformed-metadata", "nonpublic-member-excluded", "overloads-distinct" }), "Independent control specification.");
+    var observationSpec = recipe["observation"]!;
+    var reportFields = recipe["reportContract"]!["requiredRootFields"]!.AsArray().Select(x => (string)x!).ToArray();
+    Need(S(observationSpec,"implementationStatus") == "not-yet-implemented-or-qualified" &&
+        S(observationSpec,"implementation") == "docs/engineering/InspectM12SourceApiInventory.cs" && S(observationSpec,"reportPath") == "docs/engineering/m12-source-api-inventory-observation.json" &&
+        observationSpec["commands"]!.AsArray().Count == 5 &&
+        (int?)recipe["limits"]!["maxObservationSeconds"] == 1200 &&
+        reportFields.Length == 14 && reportFields.ToHashSet(StringComparer.Ordinal).SetEquals(new[] { "schemaVersion", "sourceCommit", "sdk", "targetFramework", "configuration", "trackedRoster", "projects", "assemblies", "apiMembers", "historicalEvidence", "toolDispositions", "negativeControls", "limits", "status" }) &&
+        File.Exists(decisionPath), "Observation recipe or bounds missing.");
+    Console.WriteLine("MATH-RS436-M12-QUESTION|canonicalActive=5|nativeQuestion=done|nativeObservation=ready|maintainedProjects=24|controlsSpecified=6|observed=false|PASS");
+    return;
+}
 if (args.Length > 1 || (args.Length == 1 && args[0] is not ("--m12-ready" or "--m12-question-active")))
     throw new ArgumentException("Expected historical admission, --m12-ready or --m12-question-active.");
 var readiness = args.Length == 1;

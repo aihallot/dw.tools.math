@@ -13,7 +13,7 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.198" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.199" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
 static bool HistoricalId(string id) => new[] { "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11" }.Contains(id.Split('-')[0], StringComparer.Ordinal);
 // Historical qualification is scoped to M0–M11; the independent admission validator checks the complete new plan.
 var canonical = new List<JsonNode>();

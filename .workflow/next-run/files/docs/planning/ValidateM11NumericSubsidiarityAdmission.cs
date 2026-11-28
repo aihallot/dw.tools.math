@@ -14,7 +14,7 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.198" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.199" && (string?)b["status"] == "in_progress", "Canonical version differs.");
 static bool HistoricalId(string id) => new[] { "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11" }.Contains(id.Split('-')[0], StringComparer.Ordinal);
 // Historical qualification is scoped to M0–M11; the independent admission validator checks the complete new plan.
 var canonical = new List<JsonNode>();
