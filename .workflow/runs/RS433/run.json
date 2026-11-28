@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "RS433",
+  "title": "Record conditional M11 private promotion authorization and observe installed calendar policy",
+  "state": "prepared",
+  "commitMessage": "docs: qualify authorized M11 delayed-promotion policy",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M11"
+  ],
+  "contribution": {
+    "summary": "Record the owner\u0027s explicit conditional authorization for both exact M11 archives and observe actual installed DWF 0.1.81 calendar policy against NUGET_LOCAL.",
+    "value": "Reuse existing archive and rollback verification. The installed read-only planner must observe both layouts and exact version history on the versions\u0027 encoded date. Report each exact candidate match or blocker, including nonzero observations, without allocating, publishing, rebuilding or numerically requalifying either package. Preserve M11 completion and the M12 readiness frontier.",
+    "debtChanges": [
+      "Record owner authorization without treating it as a release receipt.",
+      "Use the installed planner instead of duplicating or bypassing calendar and mixed-layout policy.",
+      "Treat a successfully recorded BLOCKED verdict as a completed observation, not permission to publish either package."
+    ],
+    "nextAction": "If both previews match, qualify the supported publisher in a disposable feed using exact original bytes; otherwise retain the blocker and prepare an upstream coordination request or scoped deferral. Keep actual private mutation gated by the recorded owner conditions.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 120
+  },
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+    "docs/planning/decisions/m11-private-publication-authorization.md"
+  ],
+  "validations": [
+    {
+      "id": "math-rs433-native-readiness-preserved",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateMath20Admission.cs",
+        "--",
+        "--m12-ready"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs433-exact-promotion-calendar-policy",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+        "--",
+        "--promotion-policy-check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 300,
+      "packs": [
+        "contract",
+        "boundary",
+        "package"
+      ]
+    }
+  ]
+}
