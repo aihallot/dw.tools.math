@@ -5,9 +5,10 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] is not ("--check" or "--prepublication-check"))
-    throw new ArgumentException("Expected --check or --prepublication-check.");
-var prepublication = args[0] == "--prepublication-check";
+if (args.Length != 1 || args[0] is not ("--check" or "--prepublication-check" or "--promotion-policy-check"))
+    throw new ArgumentException("Expected --check, --prepublication-check or --promotion-policy-check.");
+var promotionPolicy = args[0] == "--promotion-policy-check";
+var prepublication = args[0] == "--prepublication-check" || promotionPolicy;
 if (!OperatingSystem.IsWindows())
     throw new PlatformNotSupportedException("Windows verification only.");
 
@@ -71,7 +72,83 @@ if (prepublication)
     }
     Need(packages.All(item => Hash(item.Path) == item.Sha), "Original or rollback archive changed.");
     CheckUnpublished();
-    Console.WriteLine("MATH-RS432-PREPUBLICATION|exactArchives=4|rightsAttested=true|canonicalTargetsAbsent=true|publication=false|rebuild=false|numericRequalification=false|fullFeedPolicyCheck=pending|ownerPublicationApproval=pending|PASS");
+    if (!promotionPolicy)
+    {
+        Console.WriteLine("MATH-RS432-PREPUBLICATION|exactArchives=4|rightsAttested=true|canonicalTargetsAbsent=true|publication=false|rebuild=false|numericRequalification=false|fullFeedPolicyCheck=pending|ownerPublicationApproval=pending|PASS");
+        return;
+    }
+    const string approval = "docs/planning/decisions/m11-private-publication-authorization.md";
+    Need(File.Exists(approval), "Owner authorization record missing.");
+    var ownerDecision = File.ReadAllText(approval);
+    Need(ownerDecision.Contains("APPROVED-CONDITIONAL", StringComparison.Ordinal) &&
+        ownerDecision.Contains(Qv, StringComparison.Ordinal) && ownerDecision.Contains(Sv, StringComparison.Ordinal) &&
+        ownerDecision.Contains(packages[0].Sha, StringComparison.Ordinal) &&
+        ownerDecision.Contains(packages[1].Sha, StringComparison.Ordinal), "Owner authorization identity differs.");
+    string NormalizeDirectory(string path) => Path.TrimEndingDirectorySeparator(Path.GetFullPath(path));
+    var selectedFeed = NormalizeDirectory(shared!);
+    var originalFeed = NormalizeDirectory(candidateFeed);
+    Need(!string.Equals(selectedFeed, originalFeed, StringComparison.OrdinalIgnoreCase) &&
+        !selectedFeed.StartsWith(originalFeed + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase) &&
+        !originalFeed.StartsWith(selectedFeed + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase),
+        "Shared and candidate feed paths must be distinct.");
+    var cache = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
+    if (!string.IsNullOrWhiteSpace(cache))
+        Need(Path.IsPathFullyQualified(cache) &&
+            !string.Equals(selectedFeed, NormalizeDirectory(cache), StringComparison.OrdinalIgnoreCase),
+            "Shared feed must not be the package cache.");
+    // Invoke the installed stable product's documented read-only planner, not a copied
+    // calendar implementation, newer source candidate, or publication command.
+    var stable = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "dw.tools.workflow", "bin", "dwf.exe");
+    Need(File.Exists(stable), "Installed stable dwf.exe not found at documented channel path.");
+    var version = ObserveDwf(stable, "version");
+    Need(version.ExitCode == 0 && Lines(version.Output).FirstOrDefault() == "dw.tools.workflow 0.1.81",
+        "Installed read-only planner is not the expected DWF 0.1.81.");
+    Console.WriteLine("MATH-RS433-PLANNER|tool=dwf|version=0.1.81|sha256=" + Hash(stable) + "|PASS");
+    const string date = "2026-11-27";
+    const string prefix = "Candidate preview (informational only): ";
+    var allowed = true;
+    foreach (var item in packages.Take(2))
+    {
+        var observed = ObserveDwf(stable, "nuget", "plan", item.Id, "--date", date, "--feed", selectedFeed);
+        Console.WriteLine("MATH-RS433-PREVIEW-BEGIN|id=" + item.Id + "|requested=" + item.Version);
+        Console.WriteLine(observed.Output);
+        if (!string.IsNullOrWhiteSpace(observed.Error))
+            Console.WriteLine(observed.Error);
+        if (observed.ExitCode != 0)
+        {
+            // A nonzero observation is never evidence of admissibility, whether
+            // caused by calendar policy, malformed history or unavailable access.
+            Console.WriteLine("MATH-RS433-POLICY|id=" + item.Id + "|requested=" + item.Version +
+                "|exitCode=" + observed.ExitCode + "|result=BLOCKED-OBSERVATION");
+            allowed = false;
+            continue;
+        }
+        var lines = Lines(observed.Output);
+        Need(lines.Contains("NuGet calendar preview: read-only", StringComparer.Ordinal) &&
+            lines.Contains("PackageId: " + item.Id, StringComparer.Ordinal) &&
+            lines.Contains("Date: " + date, StringComparer.Ordinal) &&
+            lines.Contains("Feed: " + selectedFeed, StringComparer.OrdinalIgnoreCase) &&
+            lines.Contains("No package published; no version reserved; normalized aliases not merged.", StringComparer.Ordinal),
+            "Unexpected planner response; cannot infer admission.");
+        var candidates = lines.Where(line => line.StartsWith(prefix, StringComparison.Ordinal)).ToArray();
+        var blocked = lines.Contains("Candidate preview: none (blocked)", StringComparer.Ordinal);
+        Need(blocked ? candidates.Length == 0 : candidates.Length == 1, "Ambiguous planner result.");
+        var candidate = blocked ? "none" : candidates[0][prefix.Length..];
+        var eligible = !blocked && lines.Contains("Preview blockers: 0", StringComparer.Ordinal) &&
+            string.Equals(candidate, item.Version, StringComparison.Ordinal);
+        allowed &= eligible;
+        Console.WriteLine("MATH-RS433-POLICY|id=" + item.Id + "|requested=" + item.Version +
+            "|preview=" + candidate + "|result=" + (eligible ? "EXACT-CANDIDATE" : "BLOCKED"));
+    }
+    Need(packages.All(item => Hash(item.Path) == item.Sha), "Original or rollback archive changed.");
+    CheckUnpublished();
+    foreach (var item in packages.Take(2))
+        Need(!Directory.Exists(Path.Combine(selectedFeed,item.Id,item.Version)) &&
+            !File.Exists(Path.Combine(selectedFeed,item.Id,item.Version)), "Hierarchical target appeared during observation.");
+    Console.WriteLine("MATH-RS433-PROMOTION-POLICY|date=" + date + "|verdict=" +
+        (allowed ? "POLICY-PREVIEW-MATCH" : "BLOCKED") +
+        "|ownerApproval=conditional|publication=false|rebuild=false|rehearsal=pending|PASS");
     return;
 }
 var root = Path.GetFullPath(Path.Combine("build","artifacts","m11-verify-" + Guid.NewGuid().ToString("N")[..12]));
@@ -198,4 +275,26 @@ static string Run(string dir, params string[] arguments)
     if (arguments[0] == "run") Console.WriteLine(output);
     if (!string.IsNullOrWhiteSpace(errors)) Console.WriteLine(errors);
     return output;
+}
+
+static string[] Lines(string text) => text.Split('\n', StringSplitOptions.RemoveEmptyEntries)
+    .Select(line => line.TrimEnd('\r')).ToArray();
+
+static (int ExitCode, string Output, string Error) ObserveDwf(string executable, params string[] arguments)
+{
+    var info = new ProcessStartInfo(executable)
+    {
+        WorkingDirectory = Directory.GetCurrentDirectory(), UseShellExecute = false,
+        RedirectStandardOutput = true, RedirectStandardError = true
+    };
+    foreach (var argument in arguments) info.ArgumentList.Add(argument);
+    using var process = Process.Start(info) ?? throw new InvalidOperationException("Stable dwf unavailable.");
+    var stdout = process.StandardOutput.ReadToEndAsync();
+    var stderr = process.StandardError.ReadToEndAsync();
+    if (!process.WaitForExit(60000))
+    {
+        process.Kill(entireProcessTree: true);
+        throw new TimeoutException("Read-only DWF policy observation timed out.");
+    }
+    return (process.ExitCode, stdout.GetAwaiter().GetResult(), stderr.GetAwaiter().GetResult());
 }
