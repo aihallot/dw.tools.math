@@ -1,0 +1,17 @@
+using System.Text.Json.Nodes;
+using Dw.Tools.Workflow.Payloads;
+var p = PayloadContext.Create();
+p.Workflow.RequirePriorSuccess("RS433", 1, "docs: qualify authorized M11 delayed-promotion policy", "0.1.81", 0, 0, 0, true, expectedCorrectionMode: false, expectedCorrectionSourceAttempt: null);
+p.ProjectPlan.RequireNodeState("M10", "done");
+p.ProjectPlan.RequireNodeState("M11", "done");
+p.ProjectPlan.RequireNodeState("M12-W01-C01-T1-A", "ready");
+p.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.197"));
+p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.32"));
+p.Require.TextOccursExactly(".aura/workflow/reports/RS433/attempt-001.json", "MATH-RS433-POLICY|id=dw.quantities|requested=20260.20261127.1001|preview=20260.20261127.1001|result=EXACT-CANDIDATE", 1);
+p.Require.TextOccursExactly(".aura/workflow/reports/RS433/attempt-001.json", "MATH-RS433-POLICY|id=dw.tools.math.statistics|requested=20260.20261127.1002|preview=20260.20261127.1001|result=BLOCKED", 1);
+p.Require.TextOccursExactly(".aura/workflow/reports/RS433/attempt-001.json", "MATH-RS433-PROMOTION-POLICY|date=2026-11-27|verdict=BLOCKED|ownerApproval=conditional|publication=false|rebuild=false|rehearsal=pending|PASS", 1);
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/m11-private-promotion-blocked-rs433.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/requests/MATH-XR-007-dwf-nuget-exact-candidate-promotion.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/coordination/requests/README.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/m11-private-publication-proposal.md"));
+return p.Complete();
