@@ -1,0 +1,12 @@
+using System.Text.Json.Nodes;
+using Dw.Tools.Workflow.Payloads;
+var p = PayloadContext.Create();
+p.Workflow.RequirePriorSuccess("RS431", 1, "chore: ready M12 source and API inventory", "0.1.81", 0, 0, 0, true, expectedCorrectionMode: false, expectedCorrectionSourceAttempt: null);
+p.ProjectPlan.RequireNodeState("M10", "done");
+p.ProjectPlan.RequireNodeState("M11", "done");
+p.ProjectPlan.RequireNodeState("M12-W01-C01-T1-A", "ready");
+p.Require.JsonValueEquals("docs/planning/backlog.json", "/plan_version", JsonValue.Create("0.1.197"));
+p.Require.JsonValueEquals("docs/workflow/manifest.json", "/guidanceVersion", JsonValue.Create("0.32"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/distribution/m11-private-publication-proposal.md"));
+p.Files.ReplaceFromStagedMirror(PayloadPath.RepositoryFile("docs/engineering/VerifyM11NumericPackageCandidates.cs"));
+return p.Complete();

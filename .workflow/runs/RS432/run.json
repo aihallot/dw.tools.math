@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "RS432",
+  "title": "Record the M11 private distribution proposal and verify exact original archive intake",
+  "state": "prepared",
+  "commitMessage": "docs: qualify M11 private distribution intake without publication",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M11"
+  ],
+  "contribution": {
+    "summary": "Record Decision\u0027s private distribution request and observe the exact original M11 candidate and historical rollback archives without mutation or reconstruction.",
+    "value": "Preserve the M0-M11 completed plan and M12 ready inventory path. Reuse the RS394 exact archive/DLL/nuspec checks in a separate read-only mode, check the canonical target positions and owner redistribution attestation; do not repeat numerical consumers. The proposal requests explicit approval for the exact two candidate identities and records the remaining full feed/version-policy, guarded publisher rehearsal and physical readback gates. No package publication, reservation, production adoption or plan transition.",
+    "debtChanges": [
+      "Reuse the qualified M11 verifier rather than duplicating archive inspection logic.",
+      "Distinguish M11 net10 legacy archive promotion from new net11 source production and calendar version allocation.",
+      "Require independently supported exact-archive promotion, owner approval, collision refusal and partial-pair recovery; no ordinary publisher guard bypass."
+    ],
+    "nextAction": "After durable intake evidence, obtain or record explicit operator authorization and qualify only the supported exact-archive promotion route. If blocked or declined, retain the disposition and reconcile M12 readiness before resuming Math 2.0.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 120
+  },
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    "docs/distribution/m11-private-publication-proposal.md",
+    "docs/engineering/VerifyM11NumericPackageCandidates.cs"
+  ],
+  "validations": [
+    {
+      "id": "math-rs432-native-readiness-preserved",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateMath20Admission.cs",
+        "--",
+        "--m12-ready"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    },
+    {
+      "id": "math-rs432-exact-archive-intake-no-publication",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+        "--",
+        "--prepublication-check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": [
+        "contract",
+        "boundary",
+        "package"
+      ]
+    }
+  ]
+}
