@@ -5,8 +5,9 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Xml.Linq;
 
-if (args.Length != 1 || args[0] != "--check")
-    throw new ArgumentException("Expected --check.");
+if (args.Length != 1 || args[0] is not ("--check" or "--prepublication-check"))
+    throw new ArgumentException("Expected --check or --prepublication-check.");
+var prepublication = args[0] == "--prepublication-check";
 if (!OperatingSystem.IsWindows())
     throw new PlatformNotSupportedException("Windows verification only.");
 
@@ -47,6 +48,31 @@ foreach (var item in packages)
     using var dll = zip.Entries.Single(e => e.FullName == "lib/net10.0/" + item.Id + ".dll").Open();
     Need(Convert.ToHexStringLower(SHA256.HashData(dll)) == item.Dll, "Embedded DLL differs.");
     Console.WriteLine("MATH-RS394-READBACK|id=" + item.Id + "|version=" + item.Version + "|archiveSha256=" + item.Sha + "|dllSha256=" + item.Dll + "|PASS");
+}
+if (prepublication)
+{
+    // Reuse the exact RS394 archive, embedded DLL and dependency inspection above.
+    // This is a point-in-time, read-only intake check, not a release-policy engine.
+    using var attestation = JsonDocument.Parse(File.ReadAllText(
+        "docs/planning/evidence/M0-W02-C01-owner-rights-attestation.json"));
+    var authorization = attestation.RootElement.GetProperty("authorization");
+    Need(authorization.GetProperty("package_from_dw_tools_math").GetBoolean() &&
+        authorization.GetProperty("redistribute_from_dw_tools_math").GetBoolean(),
+        "Owner packaging/redistribution attestation differs.");
+    foreach (var item in packages.Take(2))
+    {
+        var flat = Archive(shared!, item.Id, item.Version);
+        var versionDirectory = Path.Combine(shared!, item.Id, item.Version);
+        Need(!File.Exists(flat) && !Directory.Exists(flat) &&
+            !File.Exists(versionDirectory) && !Directory.Exists(versionDirectory),
+            "Existing canonical flat or hierarchical target; stop without mutation: " + item.Id);
+        Console.WriteLine("MATH-RS432-TARGET|id=" + item.Id + "|version=" + item.Version +
+            "|canonicalFlatAbsent=true|canonicalHierarchicalAbsent=true|PASS");
+    }
+    Need(packages.All(item => Hash(item.Path) == item.Sha), "Original or rollback archive changed.");
+    CheckUnpublished();
+    Console.WriteLine("MATH-RS432-PREPUBLICATION|exactArchives=4|rightsAttested=true|canonicalTargetsAbsent=true|publication=false|rebuild=false|numericRequalification=false|fullFeedPolicyCheck=pending|ownerPublicationApproval=pending|PASS");
+    return;
 }
 var root = Path.GetFullPath(Path.Combine("build","artifacts","m11-verify-" + Guid.NewGuid().ToString("N")[..12]));
 Directory.CreateDirectory(root);
