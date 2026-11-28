@@ -286,7 +286,7 @@ static void CheckLinks(string repo)
             if (!File.Exists(target) && !Directory.Exists(target) &&
                 Path.GetRelativePath(repo,file).Replace('\\','/') == "docs/planning/math-2.0/audit-original.fr.md" &&
                 link == "assets/c8f26ea81a6b23939026.png" &&
-                Hash(File.ReadAllBytes(file)) == "c0968488df8ecf89dc913f03b5c92c58c8bb6a81dfb11cd2ccdb271f07602272")
+                Hash(Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(File.ReadAllBytes(file)).Replace("\r\n","\n",StringComparison.Ordinal))) == "c0968488df8ecf89dc913f03b5c92c58c8bb6a81dfb11cd2ccdb271f07602272")
                 continue;
             R(File.Exists(target)||Directory.Exists(target),"Broken local link "+link+" in "+Path.GetRelativePath(repo,file));
         }

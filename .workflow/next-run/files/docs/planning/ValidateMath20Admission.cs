@@ -12,15 +12,16 @@ static void Need(bool condition, string message)
     if (!condition) throw new InvalidDataException("MATH-2.0-ADMISSION: " + message);
 }
 static JsonObject Read(string path) => JsonNode.Parse(File.ReadAllText(path))!.AsObject();
-static JsonObject AtBaseline(string path)
+static JsonObject AtBaseline(string commit, string path)
 {
     using var process = new Process { StartInfo = new ProcessStartInfo
     {
         FileName = "git", UseShellExecute = false, RedirectStandardOutput = true,
-        RedirectStandardError = true, WorkingDirectory = Directory.GetCurrentDirectory()
+        RedirectStandardError = true, StandardOutputEncoding = System.Text.Encoding.UTF8,
+        WorkingDirectory = Directory.GetCurrentDirectory()
     }};
     process.StartInfo.ArgumentList.Add("show");
-    process.StartInfo.ArgumentList.Add(Baseline + ":" + path);
+    process.StartInfo.ArgumentList.Add(commit + ":" + path);
     Need(process.Start(), "Could not read pinned historical Git object.");
     var stdout = process.StandardOutput.ReadToEndAsync();
     var stderr = process.StandardError.ReadToEndAsync();
@@ -56,8 +57,8 @@ static IEnumerable<JsonNode> Walk(JsonNode n)
             foreach(var x in children)
                 foreach(var d in Walk(x!)) yield return d;
 }
-var old=AtBaseline("docs/planning/backlog.json");
-var oldNative=AtBaseline(".aura/workflow/plan/project.json");
+var old=AtBaseline(Baseline, "docs/planning/backlog.json");
+var oldNative=AtBaseline(Baseline, ".aura/workflow/plan/project.json");
 var current=Read("docs/planning/backlog.json");
 var native=Read(".aura/workflow/plan/project.json");
 var proposal=Read(Proposal);
@@ -88,7 +89,7 @@ Need(newC.Select(x=>S(x,"id")).ToHashSet(StringComparer.Ordinal).SetEquals(newN.
 Need(c.Select(x=>S(x,"id")).Distinct(StringComparer.OrdinalIgnoreCase).Count()==c.Length && n.Select(x=>S(x,"id")).Distinct(StringComparer.OrdinalIgnoreCase).Count()==n.Length,"Duplicate node.");
 Need(oldCIds.Except(oldNIds).OrderBy(x=>x,StringComparer.Ordinal).SequenceEqual(c.Select(x=>S(x,"id")).Except(n.Select(x=>S(x,"id"))).OrderBy(x=>x,StringComparer.Ordinal)),"Historical omissions changed.");
 Need(proposal["releases"]!.AsArray().Count==9 && proposal["work_packages"]!.AsArray().Count==15 && proposal["chunks"]!.AsArray().Count==59 && proposal["requirements"]!.AsArray().Count==59,"Admitted scope roster.");
-Need(Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Audit))).ToLowerInvariant()=="c0968488df8ecf89dc913f03b5c92c58c8bb6a81dfb11cd2ccdb271f07602272","Audit byte identity.");
+Need(Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(Audit)).Replace("\r\n","\n",StringComparison.Ordinal)))).ToLowerInvariant()=="c0968488df8ecf89dc913f03b5c92c58c8bb6a81dfb11cd2ccdb271f07602272","Audit byte identity.");
 Need(File.Exists("docs/planning/math-2.0/discovery-generation.md") && File.Exists("docs/planning/math-2.0/roadmap.md"),"Missing source documents.");
 var rs429=Read(".aura/workflow/reports/RS429/attempt-001.json");
 Need(S(rs429,"outcome")=="succeeded" && (int?)rs429["attempt"]==1 && (bool?)rs429["priorInvocationFailures"]?["firstPassSucceeded"]==true && (int?)rs429["priorInvocationFailures"]?["count"]==0 && S(rs429["executor"]!,"toolVersion")=="0.1.81" && rs429["boundaryViolations"]!.AsArray().Count==0,"RS429 evidence.");
