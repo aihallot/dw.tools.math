@@ -57,9 +57,10 @@ static IEnumerable<JsonNode> Walk(JsonNode n)
             foreach(var x in children)
                 foreach(var d in Walk(x!)) yield return d;
 }
-if (args.Length > 1 || (args.Length == 1 && args[0] != "--m12-ready"))
-    throw new ArgumentException("Expected no arguments for historical admission or --m12-ready for RS431 readiness.");
+if (args.Length > 1 || (args.Length == 1 && args[0] is not ("--m12-ready" or "--m12-question-active")))
+    throw new ArgumentException("Expected historical admission, --m12-ready or --m12-question-active.");
 var readiness = args.Length == 1;
+var questionActive = args.Length == 1 && args[0] == "--m12-question-active";
 var readyIds = new HashSet<string>(StringComparer.Ordinal) { "M12", "M12-W01", "M12-W01-C01", "M12-W01-C01-T1", "M12-W01-C01-T1-A" };
 var old=AtBaseline(Baseline, "docs/planning/backlog.json");
 var oldNative=AtBaseline(Baseline, ".aura/workflow/plan/project.json");
@@ -67,10 +68,22 @@ var current=Read("docs/planning/backlog.json");
 var native=Read(".aura/workflow/plan/project.json");
 var proposal=Read(Proposal);
 Need(S(old,"plan_version")=="0.1.196" && S(old,"status")=="done","Historical version.");
-Need(S(current,"plan_version")=="0.1.197" && S(current,"status")=="in_progress","Target version.");
+Need(S(current,"plan_version")==(questionActive ? "0.1.198" : "0.1.197") && S(current,"status")=="in_progress","Target version.");
 Need(S(proposal["baseline"]!,"commit")==Baseline && S(proposal,"target_plan_version")=="0.1.197","Proposal identity.");
+var expectedNewCanonical=proposal.DeepClone().AsObject();
+if (questionActive)
+{
+    var projected=Canonical(expectedNewCanonical).Where(x=>readyIds.Contains(S(x,"id"))).ToArray();
+    Need(projected.Length==readyIds.Count && projected.All(x=>S(x,"status")=="planned" && x["evidence"]!.AsArray().Count==0),"Canonical readiness baseline differs.");
+    foreach(var item in projected) item["status"]="ready";
+    var inventory=projected.Single(x=>S(x,"id")=="M12-W01-C01");
+    inventory["files"]=new JsonArray(JsonValue.Create("dw.tools.math.slnx"), JsonValue.Create("global.json"), JsonValue.Create("Directory.Build.props"), JsonValue.Create("Directory.Packages.props"), JsonValue.Create("NuGet.config"), JsonValue.Create("docs/engineering/m10-cutover-readiness-verification-rs409.json"), JsonValue.Create("docs/engineering/VerifyM10ProductionCutover.cs"), JsonValue.Create("docs/engineering/InspectM10ProjectDispositions.cs"), JsonValue.Create("docs/engineering/InspectM8Net11PackageGraph.cs"), JsonValue.Create("docs/engineering/InspectM8W02TestCoverage.cs"), JsonValue.Create("docs/engineering/InspectM8Net11NumericApiSignals.cs"), JsonValue.Create("tools/dw.tools.math.discovery-bindings/Program.cs"), JsonValue.Create("tools/dw.tools.math.nuget-preflight/Program.cs"), JsonValue.Create("docs/discovery/qualification/GenerateM8MathSkill.cs"), JsonValue.Create("docs/planning/decisions/m12-source-api-evidence-inventory-question-rs435.md"));
+    inventory["commands"]=new JsonArray(JsonValue.Create("dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --target"), JsonValue.Create("dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check"), JsonValue.Create("dotnet run --file docs/engineering/InspectM8W02TestCoverage.cs -- --check"), JsonValue.Create("dotnet run --file docs/engineering/InspectM8Net11NumericApiSignals.cs -- --check"), JsonValue.Create("dotnet run --file docs/planning/ValidatePlan.cs -- --check"));
+    inventory["refinement"]="Reconcile the exact RS431 readiness evidence; activate only the Question chain. Reuse historical M10 cutover/roster receipts, current source graph and project-reference inspectors; distinguish lexical signals, declared test references, actual code coverage, selected CLR fingerprints and a complete metadata-only inventory. Specify bounded observation outputs and negative oracles before any new helper or locked build.";
+    inventory["readiness"]="RS431 delivered five native readiness transitions; RS435 projects those five statuses as ready and requests native Question activation. Observation and Decision remain unstarted. No new inventory execution or benchmark claim.";
+}
 foreach(var key in new[]{"releases","work_packages","chunks","requirements","source_coverage"})
-    CheckAppend(old[key]!.AsArray(),proposal[key]!.AsArray(),current[key]!.AsArray(),key);
+    CheckAppend(old[key]!.AsArray(),expectedNewCanonical[key]!.AsArray(),current[key]!.AsArray(),key);
 foreach(var key in old.Select(x=>x.Key).Except(new[]{"releases","work_packages","chunks","requirements","source_coverage","plan_version","status"}))
     Exact(old[key],current[key],"Changed historical authority "+key);
 Need(current.Select(x=>x.Key).ToHashSet(StringComparer.Ordinal).SetEquals(old.Select(x=>x.Key)),"Canonical root fields.");
@@ -82,7 +95,7 @@ if (readiness)
 {
     var candidates = expectedNewNative.SelectMany(x=>Walk(x!)).Where(x=>readyIds.Contains(S(x,"id"))).ToArray();
     Need(candidates.Length==readyIds.Count && candidates.All(x=>S(x,"state")=="not-ready"),"Readiness baseline differs.");
-    foreach (var candidate in candidates) candidate["state"]="ready";
+    foreach (var candidate in candidates) candidate["state"]=questionActive ? "in-progress" : "ready";
 }
 CheckAppend(oldNative["milestones"]!.AsArray(),expectedNewNative,native["milestones"]!.AsArray(),"milestones");
 var oldC=Canonical(old).ToArray();
@@ -95,7 +108,7 @@ var oldCIds=oldC.Select(x=>S(x,"id")).ToHashSet(StringComparer.Ordinal);
 var oldNIds=oldN.Select(x=>S(x,"id")).ToHashSet(StringComparer.Ordinal);
 var newC=c.Where(x=>!oldCIds.Contains(S(x,"id"))).ToArray();
 var newN=n.Where(x=>!oldNIds.Contains(S(x,"id"))).ToArray();
-Need(newC.Length==319 && newN.Length==319 && newC.All(x=>S(x,"status")=="planned" && x["evidence"]!.AsArray().Count==0) && newN.All(x=>S(x,"state")== (readiness && readyIds.Contains(S(x,"id")) ? "ready" : "not-ready")),"New scope must match the exact readiness frontier.");
+Need(newC.Length==319 && newN.Length==319 && newC.All(x=>S(x,"status")== (questionActive && readyIds.Contains(S(x,"id")) ? "ready" : "planned") && x["evidence"]!.AsArray().Count==0) && newN.All(x=>S(x,"state")== (readiness && readyIds.Contains(S(x,"id")) ? (questionActive ? "in-progress" : "ready") : "not-ready")),"New scope must match the exact readiness frontier.");
 Need(newC.Select(x=>S(x,"id")).ToHashSet(StringComparer.Ordinal).SetEquals(newN.Select(x=>S(x,"id"))),"New ID parity.");
 Need(c.Select(x=>S(x,"id")).Distinct(StringComparer.OrdinalIgnoreCase).Count()==c.Length && n.Select(x=>S(x,"id")).Distinct(StringComparer.OrdinalIgnoreCase).Count()==n.Length,"Duplicate node.");
 Need(oldCIds.Except(oldNIds).OrderBy(x=>x,StringComparer.Ordinal).SequenceEqual(c.Select(x=>S(x,"id")).Except(n.Select(x=>S(x,"id"))).OrderBy(x=>x,StringComparer.Ordinal)),"Historical omissions changed.");
@@ -107,12 +120,29 @@ Need(S(rs429,"outcome")=="succeeded" && (int?)rs429["attempt"]==1 && (bool?)rs42
 if (readiness)
 {
     const string admitted = "3805e8b69416081a9030371917f9586f167b09b6";
-    Exact(AtBaseline(admitted,"docs/planning/backlog.json"),current,"Canonical readiness reconciliation must await durable native evidence.");
+    if (!questionActive)
+        Exact(AtBaseline(admitted,"docs/planning/backlog.json"),current,"Canonical readiness reconciliation must await durable native evidence.");
     var rs430=Read(".aura/workflow/reports/RS430/attempt-001.json");
     var proof=Read(".workflow/runs/RS430/preparation-proof.json");
     Need(S(rs430,"outcome")=="succeeded" && (int?)rs430["attempt"]==1 && (bool?)rs430["priorInvocationFailures"]?["firstPassSucceeded"]==true && (int?)rs430["priorInvocationFailures"]?["count"]==0 && S(rs430["executor"]!,"toolVersion")=="0.1.81" && rs430["boundaryViolations"]!.AsArray().Count==0 && rs430["progress"]!["transitions"]!.AsArray().Count==0 && (bool?)proof["payloadCompiled"]==true && (int?)proof["rehearsedValidationCount"]==10,"RS430 durable admission differs.");
     Need(File.Exists("docs/planning/decisions/m12-source-api-evidence-inventory-readiness-rs431.md"),"Missing inventory scope decision.");
-    Console.WriteLine("MATH-RS431-M12-READINESS|ready=5|newNativeNotReady=314|historicalDone=630|canonicalPlan=0.1.197|publication=false|PASS");
+    if (questionActive)
+    {
+        var rs431=Read(".aura/workflow/reports/RS431/attempt-001.json");
+        var moves=rs431["progress"]!["transitions"]!.AsArray();
+        Need(S(rs431,"runId")=="RS431" && S(rs431,"outcome")=="succeeded" &&
+            (int?)rs431["attempt"]==1 && (bool?)rs431["priorInvocationFailures"]?["firstPassSucceeded"]==true &&
+            (int?)rs431["priorInvocationFailures"]?["count"]==0 &&
+            S(rs431["executor"]!,"toolVersion")=="0.1.81" &&
+            rs431["boundaryViolations"]!.AsArray().Count==0 && moves.Count==readyIds.Count &&
+            moves.Select(x=>S(x!,"id")).ToHashSet(StringComparer.Ordinal).SetEquals(readyIds) &&
+            moves.All(x=>S(x!,"beforeState")=="not-ready" && S(x!,"afterState")=="ready" && (bool?)x!["completed"]==false),
+            "RS431 durable readiness transition differs.");
+        Need(File.Exists("docs/planning/decisions/m12-source-api-evidence-inventory-question-rs435.md"),"Question scope record missing.");
+        Console.WriteLine("MATH-RS435-M12-QUESTION|canonicalReady=5|nativeActive=5|newNativeNotReady=314|historicalDone=630|canonicalPlan=0.1.198|publication=false|PASS");
+    }
+    else
+        Console.WriteLine("MATH-RS431-M12-READINESS|ready=5|newNativeNotReady=314|historicalDone=630|canonicalPlan=0.1.197|publication=false|PASS");
 }
 else
     Console.WriteLine("MATH-RS430-ADMISSION|oldCanonicalDone=636|oldNativeDone=630|newPlanned=319|newNativeNotReady=319|phases=59|publication=false|PASS");

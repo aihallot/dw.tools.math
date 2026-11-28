@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.197. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.198. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -20,7 +20,7 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 | [M9](versions/M9.md) | 1.4.0-preview | Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers. | done |
 | [M10](versions/M10.md) | 1.5.0-preview | Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries. | done |
 | [M11](versions/M11.md) | 1.6.0-preview | Provide admitted generic exact Int64 scaling, resumable finite moments and larger-budget quantiles with compatibility-preserving candidate qualification before the actual M10 cutover. | done |
-| [M12](versions/M12.md) | 1.7.0-preview | Establish a measured net11/C# 15 baseline and deliver evidence-driven additive modernization without semantic regressions. | planned |
+| [M12](versions/M12.md) | 1.7.0-preview | Establish a measured net11/C# 15 baseline and deliver evidence-driven additive modernization without semantic regressions. | ready |
 | [M13](versions/M13.md) | 1.8.0-preview | Generate a complete admitted, compact, deterministic hierarchical Math skill from safe introspection, explicit semantics and resources; qualify invocation surfaces independently. | planned |
 | [M14](versions/M14.md) | 1.9.0-preview | Deliver provider-neutral explicit temporal semantics, representations, zone-aware calendars and configurable academic/fiscal/business policies. | planned |
 | [M15](versions/M15.md) | 1.10.0-preview | Add semantic quantity kinds and compiler-checked physical quantities over the existing exact/dynamic core. | planned |
