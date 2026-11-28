@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.194",
+  "plan_version": "0.1.195",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -682,7 +682,7 @@
       "id": "M10-W01",
       "release": "M10",
       "title": "Controlled production framework cutover",
-      "status": "in_progress",
+      "status": "done",
       "paths": [
         "global.json",
         "Directory.Build.props",
@@ -695,7 +695,9 @@
         "docs/engineering"
       ],
       "path_policy": "Audit actual source graph and historical fixtures before changing central defaults; preserve immutable package versions and historical probes.",
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS427/attempt-001.json"
+      ]
     },
     {
       "id": "M11-W01",
@@ -10199,7 +10201,8 @@
         "docs/engineering/VerifyM10PostCutoverCertification.cs",
         "docs/planning/decisions/m10-post-cutover-certification-closure-rs426.md",
         "docs/engineering/m10-post-cutover-certification-verification-rs426.json",
-        "docs/planning/decisions/m10-work-package-closure-rs427.md"
+        "docs/planning/decisions/m10-work-package-closure-rs427.md",
+        "docs/planning/decisions/m10-milestone-closure-rs428.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red",
@@ -10255,7 +10258,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS426 durable C03 closure after one preselection correction; native work package closure pending durable RS427 result."
+      "readiness": "RS427 durable work package closure; G-M10 native milestone closure pending durable RS428 result."
     },
     {
       "id": "M11-W01-C01",
