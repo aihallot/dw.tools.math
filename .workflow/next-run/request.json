@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "id": "RS432",
+  "title": "Record the M11 private distribution proposal and verify exact original archive intake",
+  "commitMessage": "docs: qualify M11 private distribution intake without publication",
+  "timeoutSeconds": 900,
+  "projectNodes": [
+    "M11"
+  ],
+  "contribution": {
+    "summary": "Record Decision's private distribution request and observe the exact original M11 candidate and historical rollback archives without mutation or reconstruction.",
+    "value": "Preserve the M0-M11 completed plan and M12 ready inventory path. Reuse the RS394 exact archive/DLL/nuspec checks in a separate read-only mode, check the canonical target positions and owner redistribution attestation; do not repeat numerical consumers. The proposal requests explicit approval for the exact two candidate identities and records the remaining full feed/version-policy, guarded publisher rehearsal and physical readback gates. No package publication, reservation, production adoption or plan transition.",
+    "debtChanges": [
+      "Reuse the qualified M11 verifier rather than duplicating archive inspection logic.",
+      "Distinguish M11 net10 legacy archive promotion from new net11 source production and calendar version allocation.",
+      "Require independently supported exact-archive promotion, owner approval, collision refusal and partial-pair recovery; no ordinary publisher guard bypass."
+    ],
+    "nextAction": "After durable intake evidence, obtain or record explicit operator authorization and qualify only the supported exact-archive promotion route. If blocked or declined, retain the disposition and reconcile M12 readiness before resuming Math 2.0.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "sourcePath": "payload.cs",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 120
+  },
+  "mutationPaths": [
+    ".aura/workflow/state.json",
+    "docs/distribution/m11-private-publication-proposal.md",
+    "docs/engineering/VerifyM11NumericPackageCandidates.cs"
+  ],
+  "stagedFiles": [
+    {
+      "path": "docs/distribution/m11-private-publication-proposal.md",
+      "sourcePath": "files/docs/distribution/m11-private-publication-proposal.md"
+    },
+    {
+      "path": "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+      "sourcePath": "files/docs/engineering/VerifyM11NumericPackageCandidates.cs"
+    }
+  ],
+  "preconditions": [
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS431/attempt-001.json",
+      "jsonPointer": "/outcome",
+      "expectedValue": "succeeded"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS431/attempt-001.json",
+      "jsonPointer": "/attempt",
+      "expectedValue": 1
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS431/attempt-001.json",
+      "jsonPointer": "/executor/toolVersion",
+      "expectedValue": "0.1.81"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS431/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/count",
+      "expectedValue": 0
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/reports/RS431/attempt-001.json",
+      "jsonPointer": "/priorInvocationFailures/firstPassSucceeded",
+      "expectedValue": true
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/pendingRun",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeMilestone",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeWorkPackage",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activePhase",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeTask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/state.json",
+      "jsonPointer": "/activeSubtask",
+      "expectedValue": null
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/planning/backlog.json",
+      "jsonPointer": "/plan_version",
+      "expectedValue": "0.1.197"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "docs/workflow/manifest.json",
+      "jsonPointer": "/guidanceVersion",
+      "expectedValue": "0.32"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": "global.json",
+      "jsonPointer": "/sdk/version",
+      "expectedValue": "11.0.100"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/10/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/11/state",
+      "expectedValue": "done"
+    },
+    {
+      "kind": "json-value",
+      "repositoryPath": ".aura/workflow/plan/project.json",
+      "jsonPointer": "/milestones/12/workPackages/0/phases/0/tasks/0/subtasks/0/state",
+      "expectedValue": "ready"
+    }
+  ],
+  "validations": [
+    {
+      "id": "math-rs432-native-readiness-preserved",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateMath20Admission.cs",
+        "--",
+        "--m12-ready"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": []
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120,
+      "packs": []
+    },
+    {
+      "id": "math-rs432-exact-archive-intake-no-publication",
+      "classification": "focused",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/engineering/VerifyM11NumericPackageCandidates.cs",
+        "--",
+        "--prepublication-check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240,
+      "packs": [
+        "contract",
+        "boundary",
+        "package"
+      ]
+    }
+  ]
+}
