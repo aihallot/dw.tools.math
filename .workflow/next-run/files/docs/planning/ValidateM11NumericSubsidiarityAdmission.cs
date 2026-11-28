@@ -14,7 +14,9 @@ Need((string?)report["outcome"] == "succeeded" && (int?)report["attempt"] == 1 &
     report["progress"]!["transitions"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 5,
     "RS369 durable source inventory evidence differs.");
-Need((string?)b["plan_version"] == "0.1.196" && (string?)b["status"] == "done", "Canonical version differs.");
+Need((string?)b["plan_version"] == "0.1.197" && (string?)b["status"] == "in_progress", "Canonical version differs.");
+static bool HistoricalId(string id) => new[] { "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11" }.Contains(id.Split('-')[0], StringComparer.Ordinal);
+// Historical qualification is scoped to M0–M11; the independent admission validator checks the complete new plan.
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(b[key]!.AsArray().Select(x => x!));
@@ -23,6 +25,7 @@ foreach (var task in chunk!["tasks"]!.AsArray()) {
     canonical.Add(task!);
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
+canonical.RemoveAll(x => !HistoricalId((string)x["id"]!));
 var native = new List<JsonNode>();
 void Walk(JsonNode node) {
     native.Add(node);
@@ -30,6 +33,7 @@ void Walk(JsonNode node) {
         if (node[key] is JsonArray children) foreach (var child in children) Walk(child!);
 }
 foreach (var milestone in p["milestones"]!.AsArray()) Walk(milestone!);
+native.RemoveAll(x => !HistoricalId((string)x["id"]!));
 string Id(JsonNode x) => (string)x["id"]!;
 bool IsM11(JsonNode x) => Id(x) == "M11" || Id(x).StartsWith("M11-", StringComparison.Ordinal);
 bool IsM10(JsonNode x) => Id(x) == "M10" || Id(x).StartsWith("M10-", StringComparison.Ordinal);
