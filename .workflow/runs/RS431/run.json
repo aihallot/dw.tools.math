@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "RS431",
+  "title": "Ready the M12 source, API and evidence inventory Question path",
+  "state": "prepared",
+  "commitMessage": "chore: ready M12 source and API inventory",
+  "timeoutSeconds": 1200,
+  "projectNodes": [
+    "M12",
+    "M12-W01",
+    "M12-W01-C01",
+    "M12-W01-C01-T1",
+    "M12-W01-C01-T1-A"
+  ],
+  "contribution": {
+    "summary": "Ready the exact five-node M12 inventory path and refine the investigation boundary after durable RS430 admission.",
+    "value": "Preserve all M0-M11 historical completions and canonical 0.1.197. Make only M12-W01-C01-T1-A and its ancestors ready; retain 314 other new native nodes not-ready. Pin actual solution/SDK, existing M10 inventory and M8 Discovery tools as reuse anchors, and distinguish source/binary, historical fixtures and currently observed evidence. No source change, test rerun, benchmark, API admission, publication or completion.",
+    "debtChanges": [
+      "Refine the inventory scope before executing any build or implementing another inspector.",
+      "Reuse the exact admission validator with a separate readiness mode; retain the historical strict check.",
+      "Canonical readiness reconciliation follows durable native transition evidence."
+    ],
+    "nextAction": "Activate and refine the Question leaf, reconciling canonical readiness and specifying exact reusable inventory commands, paths and independent acceptance before Observation.",
+    "achievements": []
+  },
+  "delivery": {
+    "mode": "direct"
+  },
+  "payload": {
+    "kind": "csharp-file",
+    "path": "payload.cs",
+    "workingDirectory": ".",
+    "timeoutSeconds": 180
+  },
+  "mutationPaths": [
+    ".aura/workflow/plan/project.json",
+    ".aura/workflow/state.json",
+    "docs/planning/ValidateMath20Admission.cs",
+    "docs/planning/decisions/m12-source-api-evidence-inventory-readiness-rs431.md"
+  ],
+  "validations": [
+    {
+      "id": "math-rs431-m12-inventory-readiness",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateMath20Admission.cs",
+        "--",
+        "--m12-ready"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs431-native-roadmap-parity",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidateNativeDwfAdoption.cs"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "math-rs431-planning-render-check",
+      "classification": "structural",
+      "fileName": "dotnet",
+      "arguments": [
+        "run",
+        "--file",
+        "docs/planning/ValidatePlan.cs",
+        "--",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 240
+    },
+    {
+      "id": "diff-check",
+      "classification": "structural",
+      "fileName": "git",
+      "arguments": [
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "workingDirectory": ".",
+      "timeoutSeconds": 120
+    }
+  ]
+}
