@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.195",
+  "plan_version": "0.1.196",
   "product": "dw.tools.math",
-  "status": "in_progress",
+  "status": "done",
   "baseline": {
     "date": "2026-10-07",
     "repository": "aihallot/dw.tools.math",
@@ -269,7 +269,7 @@
       "version": "1.5.0-preview",
       "title": "Production .NET 11 and C# 15 migration",
       "outcome": "Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries.",
-      "status": "in_progress",
+      "status": "done",
       "gate": "G-M10",
       "required_chunks": [
         "M10-W01-C01",
@@ -280,7 +280,9 @@
         "M8",
         "M9"
       ],
-      "evidence": []
+      "evidence": [
+        ".aura/workflow/reports/RS428/attempt-001.json"
+      ]
     },
     {
       "id": "M11",
@@ -10202,7 +10204,8 @@
         "docs/planning/decisions/m10-post-cutover-certification-closure-rs426.md",
         "docs/engineering/m10-post-cutover-certification-verification-rs426.json",
         "docs/planning/decisions/m10-work-package-closure-rs427.md",
-        "docs/planning/decisions/m10-milestone-closure-rs428.md"
+        "docs/planning/decisions/m10-milestone-closure-rs428.md",
+        "docs/planning/decisions/m10-final-canonical-reconciliation-rs429.md"
       ],
       "commands": [
         "dotnet run --file docs/engineering/ProbeM10PostCutoverCertificationRed.cs -- --red",
@@ -10258,7 +10261,7 @@
         }
       ],
       "refinement": "Qualify full regression after targeted tests, fresh unpublished net11 candidates, exact source-free locked consumers, Windows and Linux/WSL runtime, archive preservation and rollback in bounded evidence slices; retain the RED contract.",
-      "readiness": "RS427 durable work package closure; G-M10 native milestone closure pending durable RS428 result."
+      "readiness": "RS428 durable G-M10 closure; bounded roadmap complete, no publication or new scope authorized."
     },
     {
       "id": "M11-W01-C01",
