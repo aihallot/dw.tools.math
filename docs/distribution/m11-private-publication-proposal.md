@@ -1,5 +1,7 @@
 # M11 — Decision private distribution proposal
 
+**Subsequent disposition:** the owner conditionally authorized the two exact identities in [the authorization record](../planning/decisions/m11-private-publication-authorization.md). RS433 delivered a **BLOCKED** policy observation; see [current disposition](m11-private-promotion-blocked-rs433.md). This original proposal is retained for provenance and does not authorize publication.
+
 Verdict: **APPROVAL-REQUIRED**. Strategy accepted in principle, not publication or production dependency adoption. RS432 is a read-only intake check and documentation delivery. No permission to publish is granted by this record.
 
 ## Authorities and bounded evidence
