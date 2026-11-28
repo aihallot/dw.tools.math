@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plan_version": "0.1.197",
+  "plan_version": "0.1.198",
   "product": "dw.tools.math",
   "status": "in_progress",
   "baseline": {
@@ -310,7 +310,7 @@
       "version": "1.7.0-preview",
       "title": "Measured modernization and technical consolidation",
       "outcome": "Establish a measured net11/C# 15 baseline and deliver evidence-driven additive modernization without semantic regressions.",
-      "status": "planned",
+      "status": "ready",
       "gate": "G-M12",
       "required_chunks": [
         "M12-W01-C01",
@@ -917,7 +917,7 @@
       "id": "M12-W01",
       "release": "M12",
       "title": "Engineering baseline and compatibility",
-      "status": "planned",
+      "status": "ready",
       "paths": [
         "docs/engineering",
         "docs/planning",
@@ -11058,7 +11058,7 @@
       "title": "Current source, API and evidence inventory",
       "kind": "spike",
       "size": "M",
-      "status": "planned",
+      "status": "ready",
       "depends_on": [],
       "external_dependencies": [],
       "requirements": [
@@ -11083,8 +11083,30 @@
         "dotnet run --file docs/planning/ValidatePlan.cs -- --check",
         "Targeted C# qualification command to refine against actual source and runner before ready."
       ],
-      "files": [],
-      "commands": [],
+      "files": [
+        "dw.tools.math.slnx",
+        "global.json",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "NuGet.config",
+        "docs/engineering/m10-cutover-readiness-verification-rs409.json",
+        "docs/engineering/VerifyM10ProductionCutover.cs",
+        "docs/engineering/InspectM10ProjectDispositions.cs",
+        "docs/engineering/InspectM8Net11PackageGraph.cs",
+        "docs/engineering/InspectM8W02TestCoverage.cs",
+        "docs/engineering/InspectM8Net11NumericApiSignals.cs",
+        "tools/dw.tools.math.discovery-bindings/Program.cs",
+        "tools/dw.tools.math.nuget-preflight/Program.cs",
+        "docs/discovery/qualification/GenerateM8MathSkill.cs",
+        "docs/planning/decisions/m12-source-api-evidence-inventory-question-rs435.md"
+      ],
+      "commands": [
+        "dotnet run --file docs/engineering/VerifyM10ProductionCutover.cs -- --target",
+        "dotnet run --file docs/engineering/InspectM8Net11PackageGraph.cs -- --check",
+        "dotnet run --file docs/engineering/InspectM8W02TestCoverage.cs -- --check",
+        "dotnet run --file docs/engineering/InspectM8Net11NumericApiSignals.cs -- --check",
+        "dotnet run --file docs/planning/ValidatePlan.cs -- --check"
+      ],
       "evidence": [],
       "tasks": [
         {
@@ -11092,14 +11114,14 @@
           "title": "Current source, API and evidence inventory",
           "behavior": "Pin source and package inventory, all 13 libraries, 24 maintained projects, historical consumers and existing API/qualification owners; distinguish current facts from RS429 audit claims.",
           "test_case": "Reconcile public API and project/dependency roster to pinned assemblies and source; identify existing reusable tools, stale documentation and live vs historical validators; no new test/coverage claims without evidence.",
-          "status": "planned",
+          "status": "ready",
           "evidence": [],
           "subtasks": [
             {
               "id": "M12-W01-C01-T1-A",
               "title": "Question",
               "description": "Pin scope, authorities, alternatives, reusable components and independent decision criteria.",
-              "status": "planned",
+              "status": "ready",
               "evidence": []
             },
             {
@@ -11119,7 +11141,8 @@
           ]
         }
       ],
-      "readiness": "Planned only. Refine the exact existing API, source/test mutation paths, independent oracle, actual command, cost, failure behavior and any large-block split before readiness."
+      "readiness": "RS431 delivered five native readiness transitions; RS435 projects those five statuses as ready and requests native Question activation. Observation and Decision remain unstarted. No new inventory execution or benchmark claim.",
+      "refinement": "Reconcile the exact RS431 readiness evidence; activate only the Question chain. Reuse historical M10 cutover/roster receipts, current source graph and project-reference inspectors; distinguish lexical signals, declared test references, actual code coverage, selected CLR fingerprints and a complete metadata-only inventory. Specify bounded observation outputs and negative oracles before any new helper or locked build."
     },
     {
       "id": "M12-W01-C02",
