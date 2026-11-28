@@ -13,7 +13,9 @@ Need((string?)report["outcome"] == "succeeded" && (string?)report["runId"] == "R
     report["boundaryViolations"]!.AsArray().Count == 0 &&
     (bool?)proof["payloadCompiled"] == true && (int?)proof["rehearsedValidationCount"] == 8 &&
     (string?)proof["sourceCommit"] == "1da26eb38c68afaabce9b2e38b18bdbb1756e624", "Durable RS366 evidence differs.");
-Need((string?)backlog["plan_version"] == "0.1.196" && (string?)backlog["status"] == "done", "Aggregate target differs.");
+Need((string?)backlog["plan_version"] == "0.1.197" && (string?)backlog["status"] == "in_progress", "Aggregate target differs.");
+static bool HistoricalId(string id) => new[] { "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11" }.Contains(id.Split('-')[0], StringComparer.Ordinal);
+// Historical qualification is scoped to M0–M11; the independent admission validator checks the complete new plan.
 var canonical = new List<JsonNode>();
 foreach (var key in new[] { "releases", "work_packages", "chunks" })
     canonical.AddRange(backlog[key]!.AsArray().Select(x => x!));
@@ -23,6 +25,7 @@ foreach (var task in chunk!["tasks"]!.AsArray())
     canonical.Add(task!);
     canonical.AddRange(task!["subtasks"]!.AsArray().Select(x => x!));
 }
+canonical.RemoveAll(x => !HistoricalId((string)x["id"]!));
 var current = canonical.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
 Need(canonical.Count == 636 && current.Length == 17 && current.All(x => (string?)x["status"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "done", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" or "M10-W01-C03-T1-R" or "M10-W01-C03-T1-G" or "M10-W01-C03-T1-V" => "done", _ => "planned" }) && ((string?)x["id"] switch { "M10-W01-C01-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS401/attempt-001.json", "M10-W01-C01-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS408/attempt-001.json", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS410/attempt-001.json", "M10-W01-C02-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS412/attempt-001.json", "M10-W01-C02-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS414/attempt-001.json", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS416/attempt-001.json", "M10-W01-C03-T1-R" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS418/attempt-001.json", "M10-W01-C03-T1-G" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS424/attempt-001.json", "M10-W01-C03" or "M10-W01-C03-T1" or "M10-W01-C03-T1-V" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS426/attempt-001.json", "M10-W01" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS427/attempt-001.json", "M10" => x["evidence"]!.AsArray().Count == 1 && (string?)x["evidence"]![0] == ".aura/workflow/reports/RS428/attempt-001.json", _ => x["evidence"]!.AsArray().Count == 0 })) &&
     canonical.Except(current).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["status"] == "done"), "Canonical admission or prior completion differs.");
@@ -34,6 +37,7 @@ void Walk(JsonNode node)
         if (node[key] is JsonArray children) foreach (var child in children) Walk(child!);
 }
 foreach (var milestone in plan["milestones"]!.AsArray()) Walk(milestone!);
+native.RemoveAll(x => !HistoricalId((string)x["id"]!));
 var newNative = native.Where(x => ((string)x["id"]!).StartsWith("M10", StringComparison.Ordinal)).ToArray();
 Need(native.Count == 630 && newNative.Length == 17 && newNative.All(x => (string?)x["state"] == ((string?)x["id"] switch { "M10" or "M10-W01" => "done", "M10-W01-C01" or "M10-W01-C01-T1" or "M10-W01-C01-T1-R" or "M10-W01-C01-T1-G" or "M10-W01-C01-T1-V" => "done", "M10-W01-C02" or "M10-W01-C02-T1" or "M10-W01-C02-T1-R" or "M10-W01-C02-T1-G" or "M10-W01-C02-T1-V" => "done", "M10-W01-C03" or "M10-W01-C03-T1" or "M10-W01-C03-T1-R" or "M10-W01-C03-T1-G" or "M10-W01-C03-T1-V" => "done", _ => "not-ready" })) &&
     native.Except(newNative).Where(x => !((string)x["id"]!).StartsWith("M11", StringComparison.Ordinal)).All(x => (string?)x["state"] == "done"), "Native admission or prior completion differs.");
@@ -924,6 +928,6 @@ Need((string?)rs429Report["runId"] == "RS428" && (string?)rs429Report["outcome"]
     File.Exists("docs/planning/decisions/m10-final-canonical-reconciliation-rs429.md"), "RS428 durable native milestone closure differs.");
 Need(canonical.Count == 636 && canonical.All(x => (string?)x["status"] == "done") &&
     native.Count == 630 && native.All(x => (string?)x["state"] == "done") &&
-    backlog["releases"]!.AsArray().Count == 12 && plan["milestones"]!.AsArray().Count == 12,
+    backlog["releases"]!.AsArray().Count(x => HistoricalId((string)x!["id"]!)) == 12 && plan["milestones"]!.AsArray().Count(x => HistoricalId((string)x!["id"]!)) == 12,
     "Completed roadmap parity differs.");
 Console.WriteLine("MATH-RS429-FINAL-RECONCILIATION|nativeDone=630|canonicalDone=636|milestones=12|historicalOmissions=6|gate=G-M10|RS428=PASS|publication=false|PASS");

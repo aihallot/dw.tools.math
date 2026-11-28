@@ -222,6 +222,7 @@ static Dictionary<string,string> Render(JsonObject p)
     foreach(var r in rs)index.Append($"| [{S(r,"id")}](versions/{S(r,"id")}.md) | {S(r,"version")} | {S(r,"outcome")} | {S(r,"status")} |\n");
     index.Append("\nM1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.\n\n");
     index.Append("- [Architecture](architecture.md) and [inventory](existing-code-inventory.md)\n- [Coverage](coverage.md), [sources](sources.md), and [qualification](testing-and-quality.md)\n- [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)\n- [Resource policy](resource-cost-policy.md)\n\n");
+    index.Append("- [Math 2.0 audit and roadmap](math-2.0/roadmap.md), [original audit](math-2.0/audit-original.fr.md), and [hierarchical Discovery specification](math-2.0/discovery-generation.md)\n\n");
     index.Append($"Scope: {rs.Length} releases, {wps.Length} work packages, {cs.Length} chunks, {cs.Sum(c=>A(c,"tasks").Count)} tasks, {cs.Sum(c=>Objects(c,"tasks").Sum(t=>A(t,"subtasks").Count))} subtasks, {A(p,"requirements").Count} requirements.\n\n");
     index.Append("Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.\n\n");
     index.Append("Functional dependencies, no agent fan-out. Refine files/commands before ready; split L blocks; do not create empty product packages in advance.\n");
@@ -280,6 +281,13 @@ static void CheckLinks(string repo)
             var link=match.Groups[1].Value.Trim('<','>').Split('#')[0];
             if(link.Length==0||Uri.TryCreate(link,UriKind.Absolute,out _))continue;
             var target=Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file)!,Uri.UnescapeDataString(link)));
+            // Verbatim owner-supplied export contains exactly one unplaced image reference whose bytes were not supplied.
+            // Preserve the archive byte-for-byte; do not suppress any other broken link.
+            if (!File.Exists(target) && !Directory.Exists(target) &&
+                Path.GetRelativePath(repo,file).Replace('\\','/') == "docs/planning/math-2.0/audit-original.fr.md" &&
+                link == "assets/c8f26ea81a6b23939026.png" &&
+                Hash(Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(File.ReadAllBytes(file)).Replace("\r\n","\n",StringComparison.Ordinal))) == "c0968488df8ecf89dc913f03b5c92c58c8bb6a81dfb11cd2ccdb271f07602272")
+                continue;
             R(File.Exists(target)||Directory.Exists(target),"Broken local link "+link+" in "+Path.GetRelativePath(repo,file));
         }
 }

@@ -2,7 +2,7 @@
 
 **Objective:** extract the AURA mathematical core, then build an independent, typed, qualified platform.
 
-Product plan 0.1.196. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
+Product plan 0.1.197. States come from the [canonical backlog](backlog.json). No documentation status proves a product capability.
 
 Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps these levels to milestone/workPackage/phase/task/subtask.
 
@@ -20,6 +20,15 @@ Hierarchy: **release -> work package -> chunk -> task -> subtask**. DWF maps the
 | [M9](versions/M9.md) | 1.4.0-preview | Deliver an independently qualified generic noncryptographic bounded integer draw contract for external Math consumers. | done |
 | [M10](versions/M10.md) | 1.5.0-preview | Migrate the actual Math production source and maintained build graph to SDK 11.0.100, net11.0 and C# 15 with evidence-backed compatibility and rollback boundaries. | done |
 | [M11](versions/M11.md) | 1.6.0-preview | Provide admitted generic exact Int64 scaling, resumable finite moments and larger-budget quantiles with compatibility-preserving candidate qualification before the actual M10 cutover. | done |
+| [M12](versions/M12.md) | 1.7.0-preview | Establish a measured net11/C# 15 baseline and deliver evidence-driven additive modernization without semantic regressions. | planned |
+| [M13](versions/M13.md) | 1.8.0-preview | Generate a complete admitted, compact, deterministic hierarchical Math skill from safe introspection, explicit semantics and resources; qualify invocation surfaces independently. | planned |
+| [M14](versions/M14.md) | 1.9.0-preview | Deliver provider-neutral explicit temporal semantics, representations, zone-aware calendars and configurable academic/fiscal/business policies. | planned |
+| [M15](versions/M15.md) | 1.10.0-preview | Add semantic quantity kinds and compiler-checked physical quantities over the existing exact/dynamic core. | planned |
+| [M16](versions/M16.md) | 1.11.0-preview | Deliver bounded, discoverable typed scientific laws with assumptions, units, domains, measurement policies and independent scientific oracles. | planned |
+| [M17](versions/M17.md) | 1.12.0-preview | Extend reproducible statistics, finite stochastic primitives and calendar-aware signal/time-series operations without importing decision policy. | planned |
+| [M18](versions/M18.md) | 1.13.0-preview | Qualify scalable numeric representations and bounded advanced linear algebra, tensors and interval/precision engines. | planned |
+| [M19](versions/M19.md) | 1.14.0-preview | Deliver bounded pure compute graphs, differentiable operations, mathematical explanation and visualization models, keeping orchestration and education policy external. | planned |
+| [M20](versions/M20.md) | 2.0.0 | Qualify the exact supported 2.0 product graph, reproducible packages and skill, compatibility and rollback; separate any publication or downstream adoption. | planned |
 
 M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical. M7 spikes may conclude with deferral: their decisions are not delivered functions. Target versions are indicative, not dates or authorization to execute the whole program.
 
@@ -28,7 +37,9 @@ M1 delivers the exact core early; 1.0 follows the M5 numerical/symbolic vertical
 - [Coordination](cross-repository-coordination.md) and [DWF handoff](implementation-handoff.md)
 - [Resource policy](resource-cost-policy.md)
 
-Scope: 12 releases, 22 work packages, 70 chunks, 133 tasks, 399 subtasks, 123 requirements.
+- [Math 2.0 audit and roadmap](math-2.0/roadmap.md), [original audit](math-2.0/audit-original.fr.md), and [hierarchical Discovery specification](math-2.0/discovery-generation.md)
+
+Scope: 21 releases, 37 work packages, 129 chunks, 192 tasks, 576 subtasks, 182 requirements.
 
 Verify: dotnet run --file docs/planning/ValidatePlan.cs -- --check. Regenerate after editing with -- --write, exclusively outside preparation-safe validation. Self-tests: -- --self-test.
 

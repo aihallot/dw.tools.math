@@ -27,6 +27,16 @@ Backlog projection. Coverage means planned responsibility, not acquired qualific
 | ASSSESSA-EG-A-01 | Assessa EG-A-01 generic bounded integer PRNG requirement | M9-W01-C01 |
 | USER-M10-PRODUCTION-NET11 | Owner-approved production .NET 11 and C# 15 migration | M10-W01-C01, M10-W01-C02, M10-W01-C03 |
 | DECISION-D7-NUMERIC-SUBSIDIARITY | Decision D7-W01-C02 operator-delivered numeric subsidiarity | M11-W01-C01, M11-W01-C02, M11-W01-C03, M11-W01-C04 |
+| MATH2-PERFORMANCE | Audit sections 1–3 and 9: measured .NET modernization and maintenance | M12-W01-C01, M12-W01-C02, M12-W01-C03, M12-W02-C01, M12-W02-C02, M12-W02-C03, M12-W02-C04 |
+| MATH2-DISCOVERY | Audit section 4 and owner request: attribute-driven hierarchical skill | M13-W01-C01, M13-W01-C02, M13-W01-C03, M13-W01-C04, M13-W02-C01, M13-W02-C02, M13-W02-C03, M13-W02-C04, M13-W02-C05 |
+| MATH2-TEMPORAL | Audit section 5: temporal representation, zones, calendar and academic years | M14-W01-C01, M14-W01-C02, M14-W01-C03, M14-W01-C04, M14-W02-C01, M14-W02-C02, M14-W02-C03, M14-W02-C04 |
+| MATH2-TYPED-QUANTITY | Audit section 6: dynamic/static quantity semantics and catalogs | M15-W01-C01, M15-W01-C02, M15-W01-C03, M15-W01-C04 |
+| MATH2-SCIENCE | Audit sections 6–7: physical laws, chemistry, electricity and measurement | M16-W01-C01, M16-W01-C02, M16-W01-C03, M16-W01-C04, M16-W02-C01, M16-W02-C02, M16-W02-C03, M16-W02-C04 |
+| MATH2-STATISTICS | Audit section 7: advanced statistics, processes, series and signals | M17-W01-C01, M17-W01-C02, M17-W01-C03, M17-W01-C04, M17-W02-C01, M17-W02-C02, M17-W02-C03 |
+| MATH2-NUMERICS | Audit section 7: advanced precision, tensors and linear algebra | M18-W01-C01, M18-W01-C02, M18-W01-C03, M18-W01-C04, M18-W01-C05 |
+| MATH2-COMPOSITION | Audit section 7: DAG, differentiation and mathematical models | M19-W01-C01, M19-W01-C02, M19-W01-C03, M19-W02-C01, M19-W02-C02, M19-W02-C03 |
+| MATH2-RELEASE | Audit sections 8–10: qualification and distribution | M20-W01-C01, M20-W01-C02, M20-W01-C03, M20-W01-C04, M20-W01-C05 |
+| MATH2-OWNER-HIERARCHICAL-SKILL | Owner addition: automatically generate optimal hierarchical skill from introspection and attributes with authored resources | M13-W01-C01, M13-W01-C02, M13-W01-C03, M13-W01-C04, M13-W02-C01, M13-W02-C02, M13-W02-C03, M13-W02-C04, M13-W02-C05 |
 
 ## V1 framing criteria
 

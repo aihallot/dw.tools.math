@@ -17,7 +17,8 @@ try
     var expected = BuildExpected(backlog);
     var actual = BuildActual(plan);
 
-    Require(expected.Count == 630, $"Expected product projection count changed: {expected.Count}.");
+    var historicalIds = new HashSet<string>(new[] { "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11" }, StringComparer.Ordinal);
+    Require(expected.Keys.Count(id => historicalIds.Contains(id.Split('-')[0])) == 630, "Historical product projection count changed.");
     Require(actual.Count == expected.Count, $"Native DWF node count {actual.Count} differs from expected {expected.Count}.");
 
     foreach (var pair in expected)
